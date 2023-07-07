@@ -173,8 +173,9 @@ class IOHandler:
         """
         self.__pre_scan_i2c_bus()
 
-        if self.__is_i2c_device_available(_i2c_device_def) is False:
-            return None
+        if self.__is_i2c_slot_available(_i2c_device_def) is False:
+           print("Warning, I2C device: " + _i2c_device_def.get_name() + " is not found I2C bus: " + str(_i2c_device_def.get_i2c_bus_nr()) + " @ address: " + str(_i2c_device_def.get_i2c_device_address()) )
+           return None
 
         i2c_bus = self.__get_i2c_bus(_i2c_device_def.get_i2c_bus_nr() )
         i2c_handler = i2c_bus.get_i2c_handler()
@@ -332,8 +333,8 @@ class IOHandler:
     #--------------------------------------------------------------------------------------
 
     def io_shutdown(self) ->None:
-        """
-        shutsdown IO
+        """@
+        shuts down the IO
 
         @return: None
         """
@@ -343,19 +344,39 @@ class IOHandler:
     # --------------------------------------------------------------------------------------
     # --------------------------------------------------------------------------------------
     # --------------------------------------------------------------------------------------
-
-    def __is_i2c_device_available(self, _to_be_checked:I2CDeviceDef) -> bool:
+    def __is_i2c_slot_available(self, _to_be_checked:I2CDeviceDef) -> bool:
         """!
-        @param _to_be_checked: I2CDeviceDef to be checked
-        @return bool:, true if availble
+        Check if I2C is detected on the bus (list was generated with
+
+        @param _to_be_checked: I2CDeviceDef to be checked i2c_scan
+        @return bool:, true if available
         """
 
         if self.__i2c_bus_is_scanned is False:  # there should always be scanned
-            return True
+            raise Exception("Fatal error, an I2C scan should always be done, before checking if an device is available")
+
+        if len(self.__detected_i2c_devices) is not 0:
+            for i2c_device_from_list in self.__detected_i2c_devices:
+                available_device:I2CDevice = i2c_device_from_list
+                if _to_be_checked.get_i2c_bus_nr() is available_device.get_i2c_bus_nr() and _to_be_checked.get_i2c_device_address() is available_device.get_i2c_device_address():
+                    return True
+
+        return False
+
+    # --------------------------------------------------------------------------------------
+    # --------------------------------------------------------------------------------------
+    # --------------------------------------------------------------------------------------
+
+    def is_i2c_device_available(self, _to_be_checked:I2CDeviceDef) -> bool:
+        """!
+        @param _to_be_checked: I2CDeviceDef to be checked
+        @return bool:, true if available
+        """
 
         if len(self.__used_i2c_devices) is not 0:
-            for i2c_device_from_list in self.__detected_i2c_devices:
-                if i2c_device_from_list.get_i2c_bus_nr() is _to_be_checked.get_i2c_bus_nr() and i2c_device_from_list.get_i2c_device_address is _to_be_checked.get_i2c_device_address():
+            for i2c_device_from_list in self.__used_i2c_devices:
+                available_device:I2CDevice = i2c_device_from_list
+                if _to_be_checked.get_i2c_bus_nr() is available_device.get_i2c_bus_nr() and _to_be_checked.get_i2c_device_address() is available_device.get_i2c_device_address():
                     return True
 
         return False

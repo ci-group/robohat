@@ -28,6 +28,7 @@ ALARM_PERMITTED = False                             # sound an alarm when a syst
 ALARM_TIMEOUT_IN_SEC = 300                          # timeout between alarm
 INIT_BEEP_PERMITTED = False                         # beep when started
 
+
 ACCU_INTERVAL_TIME_IN_SECONDS = 1
 ACCU_VOLTAGE_WHEN_FULL = 12.6
 ACCU_VOLTAGE_TO_LOW_THRESHOLD = 11.06
@@ -71,15 +72,15 @@ LEDGREEN_GPO_DEF = GPODef("led_green", 6)           # definition of the multicol
 LEDBLUE_GPO_DEF = GPODef("led_blue", 26)            # definition of the multicolor LED, the BLUE part, GPIO nr
 STATUSLED_DEF = MultiColorLedDef("statusled", LEDRED_GPO_DEF, LEDGREEN_GPO_DEF, LEDBLUE_GPO_DEF)    # definition of the multicolor LED
 
-MINIMU9_LIS3MDL_I2C_DEF = I2CDeviceDef("IMU_1_I2C", 5, 0x1e)                    # definition of the IMU, LLS3MDL part, i2c bus5, address 0x1e
-MINIMU9_LSM6DS33_I2C_DEF = I2CDeviceDef("IMU_2_I2C", 5, 0x6b)                   # definition of the IMU, LSM6DS33 part, i2c bus5, address 0x6b
+MINIMU9_LIS3MDL_I2C_DEF = I2CDeviceDef("IMU_LIS3MDL", 5, 0x1e)                    # definition of the IMU, LLS3MDL part, i2c bus5, address 0x1e
+MINIMU9_LSM6DS33_I2C_DEF = I2CDeviceDef("IMU_LSMDS33", 5, 0x6b)                   # definition of the IMU, LSM6DS33 part, i2c bus5, address 0x6b
 IMU_DEF = IMUDef("IMU", MINIMU9_LIS3MDL_I2C_DEF, MINIMU9_LSM6DS33_I2C_DEF)      # definition of the IMU
 
-HATADC_I2C_DEF = I2CDeviceDef("hatadc_i2c", 5, 0x34)                            # definition of the TOPBOARD adc (is also used for power monitor) i2c bus5, address 0x34
+HATADC_I2C_DEF = I2CDeviceDef("hatadc", 5, 0x34)                            # definition of the TOPBOARD adc (is also used for power monitor) i2c bus5, address 0x34
 
 POWERSHUTDOWN_GPO_DEF = GPODef("shutdown", 27)                                  # definition of the shutdown GPIO pin
 
-IOEXPANDER_I2C_DEF = I2CDeviceDef("ioexpander_i2c", 1, 0x20)          # i2c bus1, address 0x2
+IOEXPANDER_I2C_DEF = I2CDeviceDef("ioexpander", 1, 0x20)          # i2c bus1, address 0x2
 IOEXPANDER_INTERUPT_SETTINGS = [
     McpInitStruct(0, GpioDirection.GPIO_INPUT, InterruptTypes.INT_RISING),
     McpInitStruct(1, GpioDirection.GPIO_INPUT, InterruptTypes.INT_RISING),

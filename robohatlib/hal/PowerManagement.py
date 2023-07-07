@@ -186,8 +186,8 @@ class PowerManagement:
                 self.__accu_capacity_ok = True
 
         else:
-            self.__accu_percentage_capacity = -1
-            print("no detection of accu capacity")
+            if self.__battery_check_started is False:
+                self.__accu_percentage_capacity = -1
 
         if self.__battery_check_started is False:
             self.__battery_check_started = True
