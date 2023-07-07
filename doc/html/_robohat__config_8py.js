@@ -1,5 +1,10 @@
 var _robohat__config_8py =
 [
+    [ "ACCU_INTERVAL_TIME_IN_SECONDS", "_robohat__config_8py.html#af85aaeb71d89d6474ffd5b6cef821cec", null ],
+    [ "ACCU_VOLTAGE_ADC_MULTIPLIER", "_robohat__config_8py.html#aa6fe52244a15915be93749ca9911a2c0", null ],
+    [ "ACCU_VOLTAGE_TO_LOW_THRESHOLD", "_robohat__config_8py.html#a070cb4cf2f1798158b9b5af7b52425e5", null ],
+    [ "ACCU_VOLTAGE_TO_PERCENTAGE_ARRAY", "_robohat__config_8py.html#a7f678d13bfa3bca447e7f58d890b4211", null ],
+    [ "ACCU_VOLTAGE_WHEN_FULL", "_robohat__config_8py.html#ae2619b03ea7181055ad33d8fa66aa3e3", null ],
     [ "ALARM_PERMITTED", "_robohat__config_8py.html#a45751ddbb84fb3c799332c12773d4aa8", null ],
     [ "ALARM_TIMEOUT_IN_SEC", "_robohat__config_8py.html#adfa1cafba7a9b700fa6cc3104c2ec38c", null ],
     [ "BUZZER_DEF", "_robohat__config_8py.html#a98a67b4d4544e499bd160b58c5c5bce5", null ],

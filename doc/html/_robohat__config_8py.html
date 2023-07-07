@@ -24,7 +24,6 @@
 <table cellspacing="0" cellpadding="0">
  <tbody>
  <tr id="projectrow">
-  <td id="projectlogo"><img alt="Logo" src="VU_logo_RGB-01.png"/></td>
   <td id="projectalign">
    <div id="projectname">Robohat<span id="projectnumber">&#160;2022282301</span>
    </div>
@@ -112,7 +111,17 @@ Variables</h2></td></tr>
 <tr class="separator:adfa1cafba7a9b700fa6cc3104c2ec38c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7edd28e09e6bc80f113a11d4d6bbb72c"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_robohat__config.html#a7edd28e09e6bc80f113a11d4d6bbb72c">Robohat_config.INIT_BEEP_PERMITTED</a> = False</td></tr>
 <tr class="separator:a7edd28e09e6bc80f113a11d4d6bbb72c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a98a67b4d4544e499bd160b58c5c5bce5"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_robohat__config.html#a98a67b4d4544e499bd160b58c5c5bce5">Robohat_config.BUZZER_DEF</a> = BuzzerDef(&quot;buzzer1&quot;, 18, 1000, 50)</td></tr>
+<tr class="memitem:af85aaeb71d89d6474ffd5b6cef821cec"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_robohat__config.html#af85aaeb71d89d6474ffd5b6cef821cec">Robohat_config.ACCU_INTERVAL_TIME_IN_SECONDS</a> = 1</td></tr>
+<tr class="separator:af85aaeb71d89d6474ffd5b6cef821cec"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae2619b03ea7181055ad33d8fa66aa3e3"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_robohat__config.html#ae2619b03ea7181055ad33d8fa66aa3e3">Robohat_config.ACCU_VOLTAGE_WHEN_FULL</a> = 12.6</td></tr>
+<tr class="separator:ae2619b03ea7181055ad33d8fa66aa3e3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a070cb4cf2f1798158b9b5af7b52425e5"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_robohat__config.html#a070cb4cf2f1798158b9b5af7b52425e5">Robohat_config.ACCU_VOLTAGE_TO_LOW_THRESHOLD</a> = 11.06</td></tr>
+<tr class="separator:a070cb4cf2f1798158b9b5af7b52425e5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa6fe52244a15915be93749ca9911a2c0"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_robohat__config.html#aa6fe52244a15915be93749ca9911a2c0">Robohat_config.ACCU_VOLTAGE_ADC_MULTIPLIER</a> = 4.3</td></tr>
+<tr class="separator:aa6fe52244a15915be93749ca9911a2c0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7f678d13bfa3bca447e7f58d890b4211"><td class="memItemLeft" align="right" valign="top">list&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_robohat__config.html#a7f678d13bfa3bca447e7f58d890b4211">Robohat_config.ACCU_VOLTAGE_TO_PERCENTAGE_ARRAY</a></td></tr>
+<tr class="separator:a7f678d13bfa3bca447e7f58d890b4211"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a98a67b4d4544e499bd160b58c5c5bce5"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_robohat__config.html#a98a67b4d4544e499bd160b58c5c5bce5">Robohat_config.BUZZER_DEF</a> = BuzzerDef(&quot;buzzer&quot;, 18, 1000, 50)</td></tr>
 <tr class="separator:a98a67b4d4544e499bd160b58c5c5bce5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:abb02060e2a931afc3560e1b7b3789765"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_robohat__config.html#abb02060e2a931afc3560e1b7b3789765">Robohat_config.SERIAL_DEF</a> = SerialDef(&quot;debug_port&quot;, 1)</td></tr>
 <tr class="separator:abb02060e2a931afc3560e1b7b3789765"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -130,10 +139,16 @@ Variables</h2></td></tr>
 <tr class="separator:a322dfe8b508a1d268fc3e374e7f8a485"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8eb4e5d22045700f8e771a3501fa0f0c"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_robohat__config.html#a8eb4e5d22045700f8e771a3501fa0f0c">Robohat_config.IMU_DEF</a> = IMUDef(&quot;IMU&quot;, <a class="el" href="namespace_robohat__config.html#a01768e1d18ac35f936db836f5acdc2bd">MINIMU9_LIS3MDL_I2C_DEF</a>, <a class="el" href="namespace_robohat__config.html#a322dfe8b508a1d268fc3e374e7f8a485">MINIMU9_LSM6DS33_I2C_DEF</a>)</td></tr>
 <tr class="separator:a8eb4e5d22045700f8e771a3501fa0f0c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae12a3d4fe4dd1c47b177e4a52359ad46"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_robohat__config.html#ae12a3d4fe4dd1c47b177e4a52359ad46">Robohat_config.HATADC_I2C_DEF</a> = I2CDeviceDef(&quot;HATADC_I2C&quot;, 5, 0x34)</td></tr>
+<tr class="memitem:ae12a3d4fe4dd1c47b177e4a52359ad46"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_robohat__config.html#ae12a3d4fe4dd1c47b177e4a52359ad46">Robohat_config.HATADC_I2C_DEF</a> = I2CDeviceDef(&quot;hatadc_i2c&quot;, 5, 0x34)</td></tr>
 <tr class="separator:ae12a3d4fe4dd1c47b177e4a52359ad46"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab3bbe94717b9db09734be264a10a2f3a"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_robohat__config.html#ab3bbe94717b9db09734be264a10a2f3a">Robohat_config.POWERSHUTDOWN_GPO_DEF</a> = GPODef(&quot;shutdown&quot;, 27)</td></tr>
 <tr class="separator:ab3bbe94717b9db09734be264a10a2f3a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa30de453592b91139a5bb4357620ffac"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_robohat__config.html#aa30de453592b91139a5bb4357620ffac">Robohat_config.IOEXPANDER_I2C_DEF</a> = I2CDeviceDef(&quot;ioexpander_i2c&quot;, 1, 0x20)</td></tr>
+<tr class="separator:aa30de453592b91139a5bb4357620ffac"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adc47956a228b651e535c3e4bef9402e4"><td class="memItemLeft" align="right" valign="top">list&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_robohat__config.html#adc47956a228b651e535c3e4bef9402e4">Robohat_config.IOEXPANDER_INTERUPT_SETTINGS</a></td></tr>
+<tr class="separator:adc47956a228b651e535c3e4bef9402e4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7a9f449d409dd8df062f77ca78f139ca"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_robohat__config.html#a7a9f449d409dd8df062f77ca78f139ca">Robohat_config.IO_EXPANDER_DEF</a> = IOExpanderDef(&quot;ioexpander&quot;, <a class="el" href="namespace_robohat__config.html#aa30de453592b91139a5bb4357620ffac">IOEXPANDER_I2C_DEF</a>, 24, <a class="el" href="namespace_robohat__config.html#adc47956a228b651e535c3e4bef9402e4">IOEXPANDER_INTERUPT_SETTINGS</a>)</td></tr>
+<tr class="separator:a7a9f449d409dd8df062f77ca78f139ca"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae3b4abf8b75c1747c92fc5c2e3eb58b8"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_robohat__config.html#ae3b4abf8b75c1747c92fc5c2e3eb58b8">Robohat_config.SERVOASSEMBLY_1_I2C_BUS</a> = 1</td></tr>
 <tr class="separator:ae3b4abf8b75c1747c92fc5c2e3eb58b8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:abbaf7067949b0c283a2f88d193e7be99"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_robohat__config.html#abbaf7067949b0c283a2f88d193e7be99">Robohat_config.SERVOASSEMBLY_1_SPI_BUS</a> = 0</td></tr>
@@ -144,12 +159,6 @@ Variables</h2></td></tr>
 <tr class="separator:a89cec2da47b86d13c57406da20e31647"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a227e47c59a9ce7f7a4c3a3d86209921c"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_robohat__config.html#a227e47c59a9ce7f7a4c3a3d86209921c">Robohat_config.SERVOASSEMBLY_COMMON_GPI</a> = 4</td></tr>
 <tr class="separator:a227e47c59a9ce7f7a4c3a3d86209921c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa30de453592b91139a5bb4357620ffac"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_robohat__config.html#aa30de453592b91139a5bb4357620ffac">Robohat_config.IOEXPANDER_I2C_DEF</a> = I2CDeviceDef(&quot;IOEXPANDER_I2C&quot;, 1, 0x20)</td></tr>
-<tr class="separator:aa30de453592b91139a5bb4357620ffac"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:adc47956a228b651e535c3e4bef9402e4"><td class="memItemLeft" align="right" valign="top">list&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_robohat__config.html#adc47956a228b651e535c3e4bef9402e4">Robohat_config.IOEXPANDER_INTERUPT_SETTINGS</a></td></tr>
-<tr class="separator:adc47956a228b651e535c3e4bef9402e4"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7a9f449d409dd8df062f77ca78f139ca"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_robohat__config.html#a7a9f449d409dd8df062f77ca78f139ca">Robohat_config.IO_EXPANDER_DEF</a> = IOExpanderDef(&quot;ioexpander&quot;, <a class="el" href="namespace_robohat__config.html#aa30de453592b91139a5bb4357620ffac">IOEXPANDER_I2C_DEF</a>, 24, <a class="el" href="namespace_robohat__config.html#adc47956a228b651e535c3e4bef9402e4">IOEXPANDER_INTERUPT_SETTINGS</a>)</td></tr>
-<tr class="separator:a7a9f449d409dd8df062f77ca78f139ca"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad92282613c14ab227e1ed6e595210e37"><td class="memItemLeft" align="right" valign="top">list&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_robohat__config.html#ad92282613c14ab227e1ed6e595210e37">Robohat_config.SERVOASSEMBLY_INTERUPT_SETTINGS</a></td></tr>
 <tr class="separator:ad92282613c14ab227e1ed6e595210e37"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0e252b618769e21eb5d494b67918ad30"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_robohat__config.html#a0e252b618769e21eb5d494b67918ad30">Robohat_config.I2C1_DEF</a> = I2CBusDef(&quot;main_i2c&quot;, 1, 3, 2, 100000)</td></tr>
@@ -158,11 +167,11 @@ Variables</h2></td></tr>
 <tr class="separator:ab12f52428e55225130ea7a9436b47223"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1fc3568fcb51c2e758f7c978ac5392b5"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_robohat__config.html#a1fc3568fcb51c2e758f7c978ac5392b5">Robohat_config.I2C6_DEF</a> = I2CBusDef(&quot;unknown&quot;, 6, 23, 22, 100000)</td></tr>
 <tr class="separator:a1fc3568fcb51c2e758f7c978ac5392b5"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a4329ce49c4be55e37267023e5008ef12"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_robohat__config.html#a4329ce49c4be55e37267023e5008ef12">Robohat_config.SPI0_DEF</a> = SPI_Bus_Definition(&quot;spi_bus_0&quot;, 0, 11, 10, 9)</td></tr>
+<tr class="memitem:a4329ce49c4be55e37267023e5008ef12"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_robohat__config.html#a4329ce49c4be55e37267023e5008ef12">Robohat_config.SPI0_DEF</a> = SPIBusDef(&quot;spi_bus_0&quot;, 0, 11, 10, 9)</td></tr>
 <tr class="separator:a4329ce49c4be55e37267023e5008ef12"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:acf631153e70123bcf6e6b12629f55de5"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_robohat__config.html#acf631153e70123bcf6e6b12629f55de5">Robohat_config.SPI1_DEF</a> = SPI_Bus_Definition(&quot;spi_bus_1&quot;, 1, 21, 20, 19)</td></tr>
+<tr class="memitem:acf631153e70123bcf6e6b12629f55de5"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_robohat__config.html#acf631153e70123bcf6e6b12629f55de5">Robohat_config.SPI1_DEF</a> = SPIBusDef(&quot;spi_bus_1&quot;, 1, 21, 20, 19)</td></tr>
 <tr class="separator:acf631153e70123bcf6e6b12629f55de5"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7a4acbd8996227c01b565ad7d4ca9dfc"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_robohat__config.html#a7a4acbd8996227c01b565ad7d4ca9dfc">Robohat_config.SPI2_DEF</a> = SPI_Bus_Definition(&quot;spi_bus_2&quot;, 2, 42, 41, 40)</td></tr>
+<tr class="memitem:a7a4acbd8996227c01b565ad7d4ca9dfc"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_robohat__config.html#a7a4acbd8996227c01b565ad7d4ca9dfc">Robohat_config.SPI2_DEF</a> = SPIBusDef(&quot;spi_bus_2&quot;, 2, 42, 41, 40)</td></tr>
 <tr class="separator:a7a4acbd8996227c01b565ad7d4ca9dfc"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 </div><!-- contents -->
@@ -171,7 +180,7 @@ Variables</h2></td></tr>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="dir_6acad4b402f028c1c46568e28ff279c9.html">robohatlib</a></li><li class="navelem"><a class="el" href="_robohat__config_8py.html">Robohat_config.py</a></li>
-    <li class="footer">Generated on Tue Jul 4 2023 16:35:39 for Robohat by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.7 </li>
+    <li class="footer">Generated on Fri Jul 7 2023 11:48:45 for Robohat by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.7 </li>
   </ul>
 </div>
 </body>

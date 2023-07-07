@@ -16,12 +16,12 @@ var class_robohat_1_1_robohat =
     [ "get_hat_adc_readout_multiple_channels", "class_robohat_1_1_robohat.html#a199855228453bb7f20bbd979b5f11374", null ],
     [ "get_hat_adc_readout_single_channel", "class_robohat_1_1_robohat.html#a399cbd66dabf7cd6872e5395b2dd635a", null ],
     [ "get_io_expander_input", "class_robohat_1_1_robohat.html#a3fd5e1d6f910f769384802d2c309c29f", null ],
-    [ "get_is_servo_connected", "class_robohat_1_1_robohat.html#ae69512afa80b2af21fa71ac3f4ef04c4", null ],
     [ "get_lib_builddate", "class_robohat_1_1_robohat.html#ab1ea31f80bab612e1cc2470e651940db", null ],
     [ "get_lib_version", "class_robohat_1_1_robohat.html#aa304587ef960f785dbe1605d134a88b1", null ],
     [ "get_magnetic_fields", "class_robohat_1_1_robohat.html#a7e033631d992a2cb21b8d631b11b8847", null ],
     [ "get_servo_adc_readout_single_channel", "class_robohat_1_1_robohat.html#a524d2702f336935b4bd65c467742ea90", null ],
     [ "get_servo_angle", "class_robohat_1_1_robohat.html#a69653a5ff63691145aacede5dd446216", null ],
+    [ "get_servo_is_connected", "class_robohat_1_1_robohat.html#a39b197d94ef1d53960865bd5756642c8", null ],
     [ "get_servos_adc_readout_multiple_channels", "class_robohat_1_1_robohat.html#af907f49b7351b640031b5cef0b595cf6", null ],
     [ "get_servos_angles", "class_robohat_1_1_robohat.html#a6485990f7bd043e7c330d75e11deff57", null ],
     [ "init", "class_robohat_1_1_robohat.html#a726c77fb9ff04911df0ea9a5e9a80d57", null ],
@@ -34,5 +34,6 @@ var class_robohat_1_1_robohat =
     [ "set_servos_angles", "class_robohat_1_1_robohat.html#a8502d86fe4e75c63b5cfb6dd1e5dbc6f", null ],
     [ "turn_led_off", "class_robohat_1_1_robohat.html#ad20f33d920985552b372f52dc7761177", null ],
     [ "turn_led_on", "class_robohat_1_1_robohat.html#a7e97193aaffde3a33961dbef937b0d07", null ],
-    [ "_io_expander_int_callback", "class_robohat_1_1_robohat.html#ad8c2ef1ea187cfad6ccec9242f26186a", null ]
+    [ "_io_expander_int_callback", "class_robohat_1_1_robohat.html#ad8c2ef1ea187cfad6ccec9242f26186a", null ],
+    [ "_io_servo_assembly_callback", "class_robohat_1_1_robohat.html#a3c4531edcbab32b8564c1be7f5cb8ed1", null ]
 ];
