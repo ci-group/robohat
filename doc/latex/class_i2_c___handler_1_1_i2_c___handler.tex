@@ -1,0 +1,91 @@
+\doxysection{I2\+C\+\_\+\+Handler.\+I2\+C\+\_\+\+Handler Class Reference}
+\hypertarget{class_i2_c___handler_1_1_i2_c___handler}{}\label{class_i2_c___handler_1_1_i2_c___handler}\index{I2C\_Handler.I2C\_Handler@{I2C\_Handler.I2C\_Handler}}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{class_i2_c___handler_1_1_i2_c___handler_a9e97c5b77d258fa402bdfb7e55de307e}\label{class_i2_c___handler_1_1_i2_c___handler_a9e97c5b77d258fa402bdfb7e55de307e} 
+{\bfseries \+\_\+\+\_\+init\+\_\+\+\_\+} (self, \+\_\+busnr)
+\item 
+\Hypertarget{class_i2_c___handler_1_1_i2_c___handler_a77843442e8f4ecec099863ccece6f402}\label{class_i2_c___handler_1_1_i2_c___handler_a77843442e8f4ecec099863ccece6f402} 
+{\bfseries \+\_\+\+\_\+enter\+\_\+\+\_\+} (self)
+\item 
+\Hypertarget{class_i2_c___handler_1_1_i2_c___handler_a82789a90697eef065a9462d601a446a2}\label{class_i2_c___handler_1_1_i2_c___handler_a82789a90697eef065a9462d601a446a2} 
+{\bfseries \+\_\+\+\_\+exit\+\_\+\+\_\+} (self, exc\+\_\+type, exc\+\_\+value, traceback)
+\item 
+\mbox{[}$\,$\mbox{]} \mbox{\hyperlink{class_i2_c___handler_1_1_i2_c___handler_a150ca686d56cd02d1ec84563e6a0ed46}{scan}} (self)
+\item 
+None \mbox{\hyperlink{class_i2_c___handler_1_1_i2_c___handler_a466346f97f475b64cd93c12e1821efb3}{writeto}} (self, address, buffer, \texorpdfstring{$\ast$}{*}start=0, end=None, stop=True)
+\item 
+None \mbox{\hyperlink{class_i2_c___handler_1_1_i2_c___handler_acaf9c64aa5e86af5ba5b2908183e6d06}{readfrom\+\_\+into}} (self, address, buffer, \texorpdfstring{$\ast$}{*}start=0, end=None, stop=True)
+\item 
+None \mbox{\hyperlink{class_i2_c___handler_1_1_i2_c___handler_af4c46dcb1655376b2bc636aeeecafb23}{writeto\+\_\+then\+\_\+readfrom}} (self, address, buffer\+\_\+out, buffer\+\_\+in, \texorpdfstring{$\ast$}{*}out\+\_\+start=0, out\+\_\+end=None, in\+\_\+start=0, in\+\_\+end=None, stop=False)
+\item 
+bool \mbox{\hyperlink{class_i2_c___handler_1_1_i2_c___handler_ac3290f11aa938214a35d3b381e2cce3d}{try\+\_\+lock}} (self)
+\item 
+None \mbox{\hyperlink{class_i2_c___handler_1_1_i2_c___handler_a808d57f50817432d91470aa621b91811}{unlock}} (self)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{class_i2_c___handler_1_1_i2_c___handler_aa6abd9a60eaa75d88f0a8778520a6815}\label{class_i2_c___handler_1_1_i2_c___handler_aa6abd9a60eaa75d88f0a8778520a6815} 
+{\bfseries \+\_\+i2c\+\_\+bus}
+\item 
+\Hypertarget{class_i2_c___handler_1_1_i2_c___handler_a278ae9db2a05197d06ff0d7320044bf1}\label{class_i2_c___handler_1_1_i2_c___handler_a278ae9db2a05197d06ff0d7320044bf1} 
+{\bfseries \+\_\+locked}
+\item 
+\Hypertarget{class_i2_c___handler_1_1_i2_c___handler_a327d30a9a31cba41a79390a10aff4c5e}\label{class_i2_c___handler_1_1_i2_c___handler_a327d30a9a31cba41a79390a10aff4c5e} 
+{\bfseries \+\_\+lock}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_i2_c___handler_1_1_i2_c___handler_acaf9c64aa5e86af5ba5b2908183e6d06}\label{class_i2_c___handler_1_1_i2_c___handler_acaf9c64aa5e86af5ba5b2908183e6d06} 
+\index{I2C\_Handler.I2C\_Handler@{I2C\_Handler.I2C\_Handler}!readfrom\_into@{readfrom\_into}}
+\index{readfrom\_into@{readfrom\_into}!I2C\_Handler.I2C\_Handler@{I2C\_Handler.I2C\_Handler}}
+\doxysubsubsection{\texorpdfstring{readfrom\_into()}{readfrom\_into()}}
+{\footnotesize\ttfamily  None I2\+C\+\_\+\+Handler.\+I2\+C\+\_\+\+Handler.\+readfrom\+\_\+into (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{}]{address,  }\item[{}]{buffer,  }\item[{\texorpdfstring{$\ast$}{*}}]{start = {\ttfamily 0},  }\item[{}]{end = {\ttfamily None},  }\item[{}]{stop = {\ttfamily True} }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Read data from an address and into the buffer\end{DoxyVerb}
+ \Hypertarget{class_i2_c___handler_1_1_i2_c___handler_a150ca686d56cd02d1ec84563e6a0ed46}\label{class_i2_c___handler_1_1_i2_c___handler_a150ca686d56cd02d1ec84563e6a0ed46} 
+\index{I2C\_Handler.I2C\_Handler@{I2C\_Handler.I2C\_Handler}!scan@{scan}}
+\index{scan@{scan}!I2C\_Handler.I2C\_Handler@{I2C\_Handler.I2C\_Handler}}
+\doxysubsubsection{\texorpdfstring{scan()}{scan()}}
+{\footnotesize\ttfamily  \mbox{[}$\,$\mbox{]} I2\+C\+\_\+\+Handler.\+I2\+C\+\_\+\+Handler.\+scan (\begin{DoxyParamCaption}\item[{}]{self }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Try to read a byte from each address, if you get an OSError
+it means the device isnt there\end{DoxyVerb}
+ \Hypertarget{class_i2_c___handler_1_1_i2_c___handler_ac3290f11aa938214a35d3b381e2cce3d}\label{class_i2_c___handler_1_1_i2_c___handler_ac3290f11aa938214a35d3b381e2cce3d} 
+\index{I2C\_Handler.I2C\_Handler@{I2C\_Handler.I2C\_Handler}!try\_lock@{try\_lock}}
+\index{try\_lock@{try\_lock}!I2C\_Handler.I2C\_Handler@{I2C\_Handler.I2C\_Handler}}
+\doxysubsubsection{\texorpdfstring{try\_lock()}{try\_lock()}}
+{\footnotesize\ttfamily  bool I2\+C\+\_\+\+Handler.\+I2\+C\+\_\+\+Handler.\+try\+\_\+lock (\begin{DoxyParamCaption}\item[{}]{self }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Attempt to grab the lock. Return True on success, False if the lock is already taken.\end{DoxyVerb}
+ \Hypertarget{class_i2_c___handler_1_1_i2_c___handler_a808d57f50817432d91470aa621b91811}\label{class_i2_c___handler_1_1_i2_c___handler_a808d57f50817432d91470aa621b91811} 
+\index{I2C\_Handler.I2C\_Handler@{I2C\_Handler.I2C\_Handler}!unlock@{unlock}}
+\index{unlock@{unlock}!I2C\_Handler.I2C\_Handler@{I2C\_Handler.I2C\_Handler}}
+\doxysubsubsection{\texorpdfstring{unlock()}{unlock()}}
+{\footnotesize\ttfamily  None I2\+C\+\_\+\+Handler.\+I2\+C\+\_\+\+Handler.\+unlock (\begin{DoxyParamCaption}\item[{}]{self }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Release the lock so others may use the resource.\end{DoxyVerb}
+ \Hypertarget{class_i2_c___handler_1_1_i2_c___handler_a466346f97f475b64cd93c12e1821efb3}\label{class_i2_c___handler_1_1_i2_c___handler_a466346f97f475b64cd93c12e1821efb3} 
+\index{I2C\_Handler.I2C\_Handler@{I2C\_Handler.I2C\_Handler}!writeto@{writeto}}
+\index{writeto@{writeto}!I2C\_Handler.I2C\_Handler@{I2C\_Handler.I2C\_Handler}}
+\doxysubsubsection{\texorpdfstring{writeto()}{writeto()}}
+{\footnotesize\ttfamily  None I2\+C\+\_\+\+Handler.\+I2\+C\+\_\+\+Handler.\+writeto (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{}]{address,  }\item[{}]{buffer,  }\item[{\texorpdfstring{$\ast$}{*}}]{start = {\ttfamily 0},  }\item[{}]{end = {\ttfamily None},  }\item[{}]{stop = {\ttfamily True} }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Write data from the buffer to an address\end{DoxyVerb}
+ \Hypertarget{class_i2_c___handler_1_1_i2_c___handler_af4c46dcb1655376b2bc636aeeecafb23}\label{class_i2_c___handler_1_1_i2_c___handler_af4c46dcb1655376b2bc636aeeecafb23} 
+\index{I2C\_Handler.I2C\_Handler@{I2C\_Handler.I2C\_Handler}!writeto\_then\_readfrom@{writeto\_then\_readfrom}}
+\index{writeto\_then\_readfrom@{writeto\_then\_readfrom}!I2C\_Handler.I2C\_Handler@{I2C\_Handler.I2C\_Handler}}
+\doxysubsubsection{\texorpdfstring{writeto\_then\_readfrom()}{writeto\_then\_readfrom()}}
+{\footnotesize\ttfamily  None I2\+C\+\_\+\+Handler.\+I2\+C\+\_\+\+Handler.\+writeto\+\_\+then\+\_\+readfrom (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{}]{address,  }\item[{}]{buffer\+\_\+out,  }\item[{}]{buffer\+\_\+in,  }\item[{\texorpdfstring{$\ast$}{*}}]{out\+\_\+start = {\ttfamily 0},  }\item[{}]{out\+\_\+end = {\ttfamily None},  }\item[{}]{in\+\_\+start = {\ttfamily 0},  }\item[{}]{in\+\_\+end = {\ttfamily None},  }\item[{}]{stop = {\ttfamily False} }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Write data from buffer_out to an address and then
+read data from an address and into buffer_in
+\end{DoxyVerb}
+ 
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+robohatlib/driver\+\_\+ll/i2c/I2\+C\+\_\+\+Handler.\+py\end{DoxyCompactItemize}

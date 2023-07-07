@@ -1,0 +1,53 @@
+\doxysection{MAX11137.\+MAX11137 Class Reference}
+\hypertarget{class_m_a_x11137_1_1_m_a_x11137}{}\label{class_m_a_x11137_1_1_m_a_x11137}\index{MAX11137.MAX11137@{MAX11137.MAX11137}}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{class_m_a_x11137_1_1_m_a_x11137_a1764af056b12298eaf1df01de502621a}\label{class_m_a_x11137_1_1_m_a_x11137_a1764af056b12298eaf1df01de502621a} 
+{\bfseries \+\_\+\+\_\+init\+\_\+\+\_\+} (self, \+\_\+spidevice)
+\item 
+\Hypertarget{class_m_a_x11137_1_1_m_a_x11137_aef8beedd147fa79260dd9a768f530dbc}\label{class_m_a_x11137_1_1_m_a_x11137_aef8beedd147fa79260dd9a768f530dbc} 
+{\bfseries init\+\_\+adc} (self)
+\item 
+\Hypertarget{class_m_a_x11137_1_1_m_a_x11137_a0deafec37f2422c7f85aeee16867b0a6}\label{class_m_a_x11137_1_1_m_a_x11137_a0deafec37f2422c7f85aeee16867b0a6} 
+{\bfseries reset\+\_\+adc} (self)
+\item 
+float \mbox{\hyperlink{class_m_a_x11137_1_1_m_a_x11137_ab0250bdc1d03a8e4f0eaee7aa5f69193}{get\+\_\+readout\+\_\+adc\+\_\+servo\+\_\+nr}} (self, int \+\_\+servo\+\_\+nr)
+\begin{DoxyCompactList}\small\item\em Get voltage of the potentiometer of the connected servo in vol. \end{DoxyCompactList}\item 
+\mbox{[}$\,$\mbox{]} \mbox{\hyperlink{class_m_a_x11137_1_1_m_a_x11137_a8358f722ed657fa07e9cd4a190a6f43d}{get\+\_\+readout\+\_\+adc\+\_\+mutiplechannels}} (self)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_m_a_x11137_1_1_m_a_x11137_a8358f722ed657fa07e9cd4a190a6f43d}\label{class_m_a_x11137_1_1_m_a_x11137_a8358f722ed657fa07e9cd4a190a6f43d} 
+\index{MAX11137.MAX11137@{MAX11137.MAX11137}!get\_readout\_adc\_mutiplechannels@{get\_readout\_adc\_mutiplechannels}}
+\index{get\_readout\_adc\_mutiplechannels@{get\_readout\_adc\_mutiplechannels}!MAX11137.MAX11137@{MAX11137.MAX11137}}
+\doxysubsubsection{\texorpdfstring{get\_readout\_adc\_mutiplechannels()}{get\_readout\_adc\_mutiplechannels()}}
+{\footnotesize\ttfamily  \mbox{[}$\,$\mbox{]} MAX11137.\+MAX11137.\+get\+\_\+readout\+\_\+adc\+\_\+mutiplechannels (\begin{DoxyParamCaption}\item[{}]{self }\end{DoxyParamCaption})}
+
+\begin{DoxyReturn}{Returns}
+voltages of the potentiometer of all the servos in volt 
+\end{DoxyReturn}
+\Hypertarget{class_m_a_x11137_1_1_m_a_x11137_ab0250bdc1d03a8e4f0eaee7aa5f69193}\label{class_m_a_x11137_1_1_m_a_x11137_ab0250bdc1d03a8e4f0eaee7aa5f69193} 
+\index{MAX11137.MAX11137@{MAX11137.MAX11137}!get\_readout\_adc\_servo\_nr@{get\_readout\_adc\_servo\_nr}}
+\index{get\_readout\_adc\_servo\_nr@{get\_readout\_adc\_servo\_nr}!MAX11137.MAX11137@{MAX11137.MAX11137}}
+\doxysubsubsection{\texorpdfstring{get\_readout\_adc\_servo\_nr()}{get\_readout\_adc\_servo\_nr()}}
+{\footnotesize\ttfamily  float MAX11137.\+MAX11137.\+get\+\_\+readout\+\_\+adc\+\_\+servo\+\_\+nr (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{int}]{\+\_\+servo\+\_\+nr }\end{DoxyParamCaption})}
+
+
+
+Get voltage of the potentiometer of the connected servo in vol. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em \+\_\+servo\+\_\+nr} & The servo nr wanted (starts at 1)\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+voltage of the potentiometer of the connected servo in volt 
+\end{DoxyReturn}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+robohatlib/drivers/MAX11137.\+py\end{DoxyCompactItemize}

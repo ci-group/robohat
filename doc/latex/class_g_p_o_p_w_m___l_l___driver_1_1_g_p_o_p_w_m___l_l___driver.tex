@@ -1,0 +1,260 @@
+\doxysection{GPOPWM\+\_\+\+LL\+\_\+\+Driver.\+GPOPWM\+\_\+\+LL\+\_\+\+Driver Class Reference}
+\hypertarget{class_g_p_o_p_w_m___l_l___driver_1_1_g_p_o_p_w_m___l_l___driver}{}\label{class_g_p_o_p_w_m___l_l___driver_1_1_g_p_o_p_w_m___l_l___driver}\index{GPOPWM\_LL\_Driver.GPOPWM\_LL\_Driver@{GPOPWM\_LL\_Driver.GPOPWM\_LL\_Driver}}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_g_p_o_p_w_m___l_l___driver_1_1_g_p_o_p_w_m___l_l___driver_afe342714e2211e3d5f3ab193d3ec47b3}{\+\_\+\+\_\+init\+\_\+\+\_\+}} (self, \+\_\+gpo\+\_\+pwm\+\_\+definition)
+\item 
+None \mbox{\hyperlink{class_g_p_o_p_w_m___l_l___driver_1_1_g_p_o_p_w_m___l_l___driver_a245b9090a5956a69b5be8075ceeed9b1}{do\+\_\+pwm}} (self, int \+\_\+freq, int \+\_\+duty\+\_\+cycle, int \+\_\+sleep\+\_\+time)
+\begin{DoxyCompactList}\small\item\em PWM for while, depending on the sleep time. \end{DoxyCompactList}\item 
+None \mbox{\hyperlink{class_g_p_o_p_w_m___l_l___driver_1_1_g_p_o_p_w_m___l_l___driver_aeadbb0d3bb2e4951aebdcd55f9d86a33}{do\+\_\+random\+\_\+freq}} (self)
+\begin{DoxyCompactList}\small\item\em Do a random PWM. \end{DoxyCompactList}\item 
+None \mbox{\hyperlink{class_g_p_o_p_w_m___l_l___driver_1_1_g_p_o_p_w_m___l_l___driver_ae460bf41c47148402bb589ebb83cdeba}{do\+\_\+ramp\+\_\+freq}} (self, int \+\_\+start\+\_\+freq, int \+\_\+stop\+\_\+freq, int \+\_\+step\+\_\+size)
+\begin{DoxyCompactList}\small\item\em Ramp PWM. \end{DoxyCompactList}\item 
+None \mbox{\hyperlink{class_g_p_o_p_w_m___l_l___driver_1_1_g_p_o_p_w_m___l_l___driver_a5fde71723534b88d589c216652585277}{do\+\_\+single\+\_\+freq}} (self, int \+\_\+freq)
+\begin{DoxyCompactList}\small\item\em PWM at a requested frequency. \end{DoxyCompactList}\item 
+None \mbox{\hyperlink{class_g_p_o_p_w_m___l_l___driver_1_1_g_p_o_p_w_m___l_l___driver_a05fe7cee48e0859f3f5b2357c6011727}{set\+\_\+dutycycle}} (self, int \+\_\+dutycylce)
+\begin{DoxyCompactList}\small\item\em Sets duty cycle. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{class_g_p_o_p_w_m___l_l___driver_1_1_g_p_o_p_w_m___l_l___driver_a91f56e04e281a9a75a9f7b8615033cd4}{get\+\_\+dutycycle}} (self)
+\begin{DoxyCompactList}\small\item\em Get current duty cycle. \end{DoxyCompactList}\item 
+None \mbox{\hyperlink{class_g_p_o_p_w_m___l_l___driver_1_1_g_p_o_p_w_m___l_l___driver_ac22b0878d421065916c1114c76e66480}{set\+\_\+freq}} (self, int \+\_\+freq)
+\begin{DoxyCompactList}\small\item\em Set currents frequency. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{class_g_p_o_p_w_m___l_l___driver_1_1_g_p_o_p_w_m___l_l___driver_a09e357b11b3bcbf117eba47e2d9a97b1}{get\+\_\+freq}} (self)
+\begin{DoxyCompactList}\small\item\em Gives current frequency. \end{DoxyCompactList}\item 
+str \mbox{\hyperlink{class_g_p_o_p_w_m___l_l___driver_1_1_g_p_o_p_w_m___l_l___driver_ab2c6f551f93d53cf8e0cc651dbf67122}{get\+\_\+name}} (self)
+\begin{DoxyCompactList}\small\item\em Gives name of driver. \end{DoxyCompactList}\item 
+None \mbox{\hyperlink{class_g_p_o_p_w_m___l_l___driver_1_1_g_p_o_p_w_m___l_l___driver_abaf32e3901c6bbd2b97062ca8946533a}{allocate}} (self, int \+\_\+duty\+\_\+cycle)
+\item 
+None \mbox{\hyperlink{class_g_p_o_p_w_m___l_l___driver_1_1_g_p_o_p_w_m___l_l___driver_a49a344a62c9263162a022184cc183580}{release}} (self)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+None \mbox{\hyperlink{class_g_p_o_p_w_m___l_l___driver_1_1_g_p_o_p_w_m___l_l___driver_ab98793c4e8ef0dd6bd147a9075a1d4dd}{\+\_\+start}} (self)
+\begin{DoxyCompactList}\small\item\em Starts the PWM generation, dutycycle 0. \end{DoxyCompactList}\item 
+None \mbox{\hyperlink{class_g_p_o_p_w_m___l_l___driver_1_1_g_p_o_p_w_m___l_l___driver_a3a573d5079b2b773852c883d321c0289}{\+\_\+stop}} (self)
+\begin{DoxyCompactList}\small\item\em Stops the PWM generation. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{class_g_p_o_p_w_m___l_l___driver_1_1_g_p_o_p_w_m___l_l___driver_a1be7f0303e32f8d9721e281788e0643e}\label{class_g_p_o_p_w_m___l_l___driver_1_1_g_p_o_p_w_m___l_l___driver_a1be7f0303e32f8d9721e281788e0643e} 
+{\bfseries \+\_\+gpo\+\_\+pwm\+\_\+definition}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{class_g_p_o_p_w_m___l_l___driver_1_1_g_p_o_p_w_m___l_l___driver_afe342714e2211e3d5f3ab193d3ec47b3}\label{class_g_p_o_p_w_m___l_l___driver_1_1_g_p_o_p_w_m___l_l___driver_afe342714e2211e3d5f3ab193d3ec47b3} 
+\index{GPOPWM\_LL\_Driver.GPOPWM\_LL\_Driver@{GPOPWM\_LL\_Driver.GPOPWM\_LL\_Driver}!\_\_init\_\_@{\_\_init\_\_}}
+\index{\_\_init\_\_@{\_\_init\_\_}!GPOPWM\_LL\_Driver.GPOPWM\_LL\_Driver@{GPOPWM\_LL\_Driver.GPOPWM\_LL\_Driver}}
+\doxysubsubsection{\texorpdfstring{\_\_init\_\_()}{\_\_init\_\_()}}
+{\footnotesize\ttfamily GPOPWM\+\_\+\+LL\+\_\+\+Driver.\+GPOPWM\+\_\+\+LL\+\_\+\+Driver.\+\_\+\+\_\+init\+\_\+\+\_\+ (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{}]{\+\_\+gpo\+\_\+pwm\+\_\+definition }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}@param _gpo_pwm_definition: definition for the PWM
+\end{DoxyVerb}
+ 
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_g_p_o_p_w_m___l_l___driver_1_1_g_p_o_p_w_m___l_l___driver_ab98793c4e8ef0dd6bd147a9075a1d4dd}\label{class_g_p_o_p_w_m___l_l___driver_1_1_g_p_o_p_w_m___l_l___driver_ab98793c4e8ef0dd6bd147a9075a1d4dd} 
+\index{GPOPWM\_LL\_Driver.GPOPWM\_LL\_Driver@{GPOPWM\_LL\_Driver.GPOPWM\_LL\_Driver}!\_start@{\_start}}
+\index{\_start@{\_start}!GPOPWM\_LL\_Driver.GPOPWM\_LL\_Driver@{GPOPWM\_LL\_Driver.GPOPWM\_LL\_Driver}}
+\doxysubsubsection{\texorpdfstring{\_start()}{\_start()}}
+{\footnotesize\ttfamily  None GPOPWM\+\_\+\+LL\+\_\+\+Driver.\+GPOPWM\+\_\+\+LL\+\_\+\+Driver.\+\_\+start (\begin{DoxyParamCaption}\item[{}]{self }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Starts the PWM generation, dutycycle 0. 
+
+\begin{DoxyReturn}{Returns}
+\+: Nome 
+\end{DoxyReturn}
+\Hypertarget{class_g_p_o_p_w_m___l_l___driver_1_1_g_p_o_p_w_m___l_l___driver_a3a573d5079b2b773852c883d321c0289}\label{class_g_p_o_p_w_m___l_l___driver_1_1_g_p_o_p_w_m___l_l___driver_a3a573d5079b2b773852c883d321c0289} 
+\index{GPOPWM\_LL\_Driver.GPOPWM\_LL\_Driver@{GPOPWM\_LL\_Driver.GPOPWM\_LL\_Driver}!\_stop@{\_stop}}
+\index{\_stop@{\_stop}!GPOPWM\_LL\_Driver.GPOPWM\_LL\_Driver@{GPOPWM\_LL\_Driver.GPOPWM\_LL\_Driver}}
+\doxysubsubsection{\texorpdfstring{\_stop()}{\_stop()}}
+{\footnotesize\ttfamily  None GPOPWM\+\_\+\+LL\+\_\+\+Driver.\+GPOPWM\+\_\+\+LL\+\_\+\+Driver.\+\_\+stop (\begin{DoxyParamCaption}\item[{}]{self }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Stops the PWM generation. 
+
+\begin{DoxyReturn}{Returns}
+\+: Nome 
+\end{DoxyReturn}
+\Hypertarget{class_g_p_o_p_w_m___l_l___driver_1_1_g_p_o_p_w_m___l_l___driver_abaf32e3901c6bbd2b97062ca8946533a}\label{class_g_p_o_p_w_m___l_l___driver_1_1_g_p_o_p_w_m___l_l___driver_abaf32e3901c6bbd2b97062ca8946533a} 
+\index{GPOPWM\_LL\_Driver.GPOPWM\_LL\_Driver@{GPOPWM\_LL\_Driver.GPOPWM\_LL\_Driver}!allocate@{allocate}}
+\index{allocate@{allocate}!GPOPWM\_LL\_Driver.GPOPWM\_LL\_Driver@{GPOPWM\_LL\_Driver.GPOPWM\_LL\_Driver}}
+\doxysubsubsection{\texorpdfstring{allocate()}{allocate()}}
+{\footnotesize\ttfamily  None GPOPWM\+\_\+\+LL\+\_\+\+Driver.\+GPOPWM\+\_\+\+LL\+\_\+\+Driver.\+allocate (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{int}]{\+\_\+duty\+\_\+cycle }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Starts PWM
+
+@param _duty_cycle initial duty cycle
+@return: None
+\end{DoxyVerb}
+ \Hypertarget{class_g_p_o_p_w_m___l_l___driver_1_1_g_p_o_p_w_m___l_l___driver_a245b9090a5956a69b5be8075ceeed9b1}\label{class_g_p_o_p_w_m___l_l___driver_1_1_g_p_o_p_w_m___l_l___driver_a245b9090a5956a69b5be8075ceeed9b1} 
+\index{GPOPWM\_LL\_Driver.GPOPWM\_LL\_Driver@{GPOPWM\_LL\_Driver.GPOPWM\_LL\_Driver}!do\_pwm@{do\_pwm}}
+\index{do\_pwm@{do\_pwm}!GPOPWM\_LL\_Driver.GPOPWM\_LL\_Driver@{GPOPWM\_LL\_Driver.GPOPWM\_LL\_Driver}}
+\doxysubsubsection{\texorpdfstring{do\_pwm()}{do\_pwm()}}
+{\footnotesize\ttfamily  None GPOPWM\+\_\+\+LL\+\_\+\+Driver.\+GPOPWM\+\_\+\+LL\+\_\+\+Driver.\+do\+\_\+pwm (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{int}]{\+\_\+freq,  }\item[{int}]{\+\_\+duty\+\_\+cycle,  }\item[{int}]{\+\_\+sleep\+\_\+time }\end{DoxyParamCaption})}
+
+
+
+PWM for while, depending on the sleep time. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em \+\_\+freq} & start frequency \\
+\hline
+{\em \+\_\+duty\+\_\+cycle} & stop frequency \\
+\hline
+{\em \+\_\+sleep\+\_\+time} & step size. (Should be positive)\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+None 
+\end{DoxyReturn}
+\Hypertarget{class_g_p_o_p_w_m___l_l___driver_1_1_g_p_o_p_w_m___l_l___driver_ae460bf41c47148402bb589ebb83cdeba}\label{class_g_p_o_p_w_m___l_l___driver_1_1_g_p_o_p_w_m___l_l___driver_ae460bf41c47148402bb589ebb83cdeba} 
+\index{GPOPWM\_LL\_Driver.GPOPWM\_LL\_Driver@{GPOPWM\_LL\_Driver.GPOPWM\_LL\_Driver}!do\_ramp\_freq@{do\_ramp\_freq}}
+\index{do\_ramp\_freq@{do\_ramp\_freq}!GPOPWM\_LL\_Driver.GPOPWM\_LL\_Driver@{GPOPWM\_LL\_Driver.GPOPWM\_LL\_Driver}}
+\doxysubsubsection{\texorpdfstring{do\_ramp\_freq()}{do\_ramp\_freq()}}
+{\footnotesize\ttfamily  None GPOPWM\+\_\+\+LL\+\_\+\+Driver.\+GPOPWM\+\_\+\+LL\+\_\+\+Driver.\+do\+\_\+ramp\+\_\+freq (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{int}]{\+\_\+start\+\_\+freq,  }\item[{int}]{\+\_\+stop\+\_\+freq,  }\item[{int}]{\+\_\+step\+\_\+size }\end{DoxyParamCaption})}
+
+
+
+Ramp PWM. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em \+\_\+start\+\_\+freq} & start frequency \\
+\hline
+{\em \+\_\+stop\+\_\+freq} & stop frequency \\
+\hline
+{\em \+\_\+step\+\_\+size} & step size. (Should be positive)\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+None 
+\end{DoxyReturn}
+\Hypertarget{class_g_p_o_p_w_m___l_l___driver_1_1_g_p_o_p_w_m___l_l___driver_aeadbb0d3bb2e4951aebdcd55f9d86a33}\label{class_g_p_o_p_w_m___l_l___driver_1_1_g_p_o_p_w_m___l_l___driver_aeadbb0d3bb2e4951aebdcd55f9d86a33} 
+\index{GPOPWM\_LL\_Driver.GPOPWM\_LL\_Driver@{GPOPWM\_LL\_Driver.GPOPWM\_LL\_Driver}!do\_random\_freq@{do\_random\_freq}}
+\index{do\_random\_freq@{do\_random\_freq}!GPOPWM\_LL\_Driver.GPOPWM\_LL\_Driver@{GPOPWM\_LL\_Driver.GPOPWM\_LL\_Driver}}
+\doxysubsubsection{\texorpdfstring{do\_random\_freq()}{do\_random\_freq()}}
+{\footnotesize\ttfamily  None GPOPWM\+\_\+\+LL\+\_\+\+Driver.\+GPOPWM\+\_\+\+LL\+\_\+\+Driver.\+do\+\_\+random\+\_\+freq (\begin{DoxyParamCaption}\item[{}]{self }\end{DoxyParamCaption})}
+
+
+
+Do a random PWM. 
+
+\begin{DoxyReturn}{Returns}
+None 
+\end{DoxyReturn}
+\Hypertarget{class_g_p_o_p_w_m___l_l___driver_1_1_g_p_o_p_w_m___l_l___driver_a5fde71723534b88d589c216652585277}\label{class_g_p_o_p_w_m___l_l___driver_1_1_g_p_o_p_w_m___l_l___driver_a5fde71723534b88d589c216652585277} 
+\index{GPOPWM\_LL\_Driver.GPOPWM\_LL\_Driver@{GPOPWM\_LL\_Driver.GPOPWM\_LL\_Driver}!do\_single\_freq@{do\_single\_freq}}
+\index{do\_single\_freq@{do\_single\_freq}!GPOPWM\_LL\_Driver.GPOPWM\_LL\_Driver@{GPOPWM\_LL\_Driver.GPOPWM\_LL\_Driver}}
+\doxysubsubsection{\texorpdfstring{do\_single\_freq()}{do\_single\_freq()}}
+{\footnotesize\ttfamily  None GPOPWM\+\_\+\+LL\+\_\+\+Driver.\+GPOPWM\+\_\+\+LL\+\_\+\+Driver.\+do\+\_\+single\+\_\+freq (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{int}]{\+\_\+freq }\end{DoxyParamCaption})}
+
+
+
+PWM at a requested frequency. 
+
+Has to be released when finished
+
+
+\begin{DoxyParams}{Parameters}
+{\em \+\_\+freq} & start frequency\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+None 
+\end{DoxyReturn}
+\Hypertarget{class_g_p_o_p_w_m___l_l___driver_1_1_g_p_o_p_w_m___l_l___driver_a91f56e04e281a9a75a9f7b8615033cd4}\label{class_g_p_o_p_w_m___l_l___driver_1_1_g_p_o_p_w_m___l_l___driver_a91f56e04e281a9a75a9f7b8615033cd4} 
+\index{GPOPWM\_LL\_Driver.GPOPWM\_LL\_Driver@{GPOPWM\_LL\_Driver.GPOPWM\_LL\_Driver}!get\_dutycycle@{get\_dutycycle}}
+\index{get\_dutycycle@{get\_dutycycle}!GPOPWM\_LL\_Driver.GPOPWM\_LL\_Driver@{GPOPWM\_LL\_Driver.GPOPWM\_LL\_Driver}}
+\doxysubsubsection{\texorpdfstring{get\_dutycycle()}{get\_dutycycle()}}
+{\footnotesize\ttfamily  int GPOPWM\+\_\+\+LL\+\_\+\+Driver.\+GPOPWM\+\_\+\+LL\+\_\+\+Driver.\+get\+\_\+dutycycle (\begin{DoxyParamCaption}\item[{}]{self }\end{DoxyParamCaption})}
+
+
+
+Get current duty cycle. 
+
+\begin{DoxyReturn}{Returns}
+duty cycle 
+\end{DoxyReturn}
+\Hypertarget{class_g_p_o_p_w_m___l_l___driver_1_1_g_p_o_p_w_m___l_l___driver_a09e357b11b3bcbf117eba47e2d9a97b1}\label{class_g_p_o_p_w_m___l_l___driver_1_1_g_p_o_p_w_m___l_l___driver_a09e357b11b3bcbf117eba47e2d9a97b1} 
+\index{GPOPWM\_LL\_Driver.GPOPWM\_LL\_Driver@{GPOPWM\_LL\_Driver.GPOPWM\_LL\_Driver}!get\_freq@{get\_freq}}
+\index{get\_freq@{get\_freq}!GPOPWM\_LL\_Driver.GPOPWM\_LL\_Driver@{GPOPWM\_LL\_Driver.GPOPWM\_LL\_Driver}}
+\doxysubsubsection{\texorpdfstring{get\_freq()}{get\_freq()}}
+{\footnotesize\ttfamily  int GPOPWM\+\_\+\+LL\+\_\+\+Driver.\+GPOPWM\+\_\+\+LL\+\_\+\+Driver.\+get\+\_\+freq (\begin{DoxyParamCaption}\item[{}]{self }\end{DoxyParamCaption})}
+
+
+
+Gives current frequency. 
+
+\begin{DoxyReturn}{Returns}
+\+: frequency 
+\end{DoxyReturn}
+\Hypertarget{class_g_p_o_p_w_m___l_l___driver_1_1_g_p_o_p_w_m___l_l___driver_ab2c6f551f93d53cf8e0cc651dbf67122}\label{class_g_p_o_p_w_m___l_l___driver_1_1_g_p_o_p_w_m___l_l___driver_ab2c6f551f93d53cf8e0cc651dbf67122} 
+\index{GPOPWM\_LL\_Driver.GPOPWM\_LL\_Driver@{GPOPWM\_LL\_Driver.GPOPWM\_LL\_Driver}!get\_name@{get\_name}}
+\index{get\_name@{get\_name}!GPOPWM\_LL\_Driver.GPOPWM\_LL\_Driver@{GPOPWM\_LL\_Driver.GPOPWM\_LL\_Driver}}
+\doxysubsubsection{\texorpdfstring{get\_name()}{get\_name()}}
+{\footnotesize\ttfamily  str GPOPWM\+\_\+\+LL\+\_\+\+Driver.\+GPOPWM\+\_\+\+LL\+\_\+\+Driver.\+get\+\_\+name (\begin{DoxyParamCaption}\item[{}]{self }\end{DoxyParamCaption})}
+
+
+
+Gives name of driver. 
+
+\begin{DoxyReturn}{Returns}
+\+: str name of driver 
+\end{DoxyReturn}
+\Hypertarget{class_g_p_o_p_w_m___l_l___driver_1_1_g_p_o_p_w_m___l_l___driver_a49a344a62c9263162a022184cc183580}\label{class_g_p_o_p_w_m___l_l___driver_1_1_g_p_o_p_w_m___l_l___driver_a49a344a62c9263162a022184cc183580} 
+\index{GPOPWM\_LL\_Driver.GPOPWM\_LL\_Driver@{GPOPWM\_LL\_Driver.GPOPWM\_LL\_Driver}!release@{release}}
+\index{release@{release}!GPOPWM\_LL\_Driver.GPOPWM\_LL\_Driver@{GPOPWM\_LL\_Driver.GPOPWM\_LL\_Driver}}
+\doxysubsubsection{\texorpdfstring{release()}{release()}}
+{\footnotesize\ttfamily  None GPOPWM\+\_\+\+LL\+\_\+\+Driver.\+GPOPWM\+\_\+\+LL\+\_\+\+Driver.\+release (\begin{DoxyParamCaption}\item[{}]{self }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Releases PWM
+
+@return: None
+\end{DoxyVerb}
+ \Hypertarget{class_g_p_o_p_w_m___l_l___driver_1_1_g_p_o_p_w_m___l_l___driver_a05fe7cee48e0859f3f5b2357c6011727}\label{class_g_p_o_p_w_m___l_l___driver_1_1_g_p_o_p_w_m___l_l___driver_a05fe7cee48e0859f3f5b2357c6011727} 
+\index{GPOPWM\_LL\_Driver.GPOPWM\_LL\_Driver@{GPOPWM\_LL\_Driver.GPOPWM\_LL\_Driver}!set\_dutycycle@{set\_dutycycle}}
+\index{set\_dutycycle@{set\_dutycycle}!GPOPWM\_LL\_Driver.GPOPWM\_LL\_Driver@{GPOPWM\_LL\_Driver.GPOPWM\_LL\_Driver}}
+\doxysubsubsection{\texorpdfstring{set\_dutycycle()}{set\_dutycycle()}}
+{\footnotesize\ttfamily  None GPOPWM\+\_\+\+LL\+\_\+\+Driver.\+GPOPWM\+\_\+\+LL\+\_\+\+Driver.\+set\+\_\+dutycycle (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{int}]{\+\_\+dutycylce }\end{DoxyParamCaption})}
+
+
+
+Sets duty cycle. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em \+\_\+dutycylce} & wanted duty cycle\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+None 
+\end{DoxyReturn}
+\Hypertarget{class_g_p_o_p_w_m___l_l___driver_1_1_g_p_o_p_w_m___l_l___driver_ac22b0878d421065916c1114c76e66480}\label{class_g_p_o_p_w_m___l_l___driver_1_1_g_p_o_p_w_m___l_l___driver_ac22b0878d421065916c1114c76e66480} 
+\index{GPOPWM\_LL\_Driver.GPOPWM\_LL\_Driver@{GPOPWM\_LL\_Driver.GPOPWM\_LL\_Driver}!set\_freq@{set\_freq}}
+\index{set\_freq@{set\_freq}!GPOPWM\_LL\_Driver.GPOPWM\_LL\_Driver@{GPOPWM\_LL\_Driver.GPOPWM\_LL\_Driver}}
+\doxysubsubsection{\texorpdfstring{set\_freq()}{set\_freq()}}
+{\footnotesize\ttfamily  None GPOPWM\+\_\+\+LL\+\_\+\+Driver.\+GPOPWM\+\_\+\+LL\+\_\+\+Driver.\+set\+\_\+freq (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{int}]{\+\_\+freq }\end{DoxyParamCaption})}
+
+
+
+Set currents frequency. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em \+\_\+freq} & frequency in Hz \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+\+: None 
+\end{DoxyReturn}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+robohatlib/driver\+\_\+ll/GPOPWM\+\_\+\+LL\+\_\+\+Driver.\+py\end{DoxyCompactItemize}

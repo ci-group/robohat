@@ -1,0 +1,243 @@
+\doxysection{smbus.\+SMBus Class Reference}
+\hypertarget{classsmbus_1_1_s_m_bus}{}\label{classsmbus_1_1_s_m_bus}\index{smbus.SMBus@{smbus.SMBus}}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classsmbus_1_1_s_m_bus_af2fd6aeb08a340ff1b32eb88d0b73b58}{\+\_\+\+\_\+init\+\_\+\+\_\+}} (self, bus=None)
+\item 
+\mbox{\hyperlink{classsmbus_1_1_s_m_bus_a0e2b6e7671c4b5bee1c649d534e04203}{\+\_\+\+\_\+del\+\_\+\+\_\+}} (self)
+\item 
+\mbox{\hyperlink{classsmbus_1_1_s_m_bus_a6f18d9a3119d56b0e3f6423aae5c4600}{\+\_\+\+\_\+enter\+\_\+\+\_\+}} (self)
+\item 
+\mbox{\hyperlink{classsmbus_1_1_s_m_bus_a8db065e8c5a309ec726d25d293719ae3}{\+\_\+\+\_\+exit\+\_\+\+\_\+}} (self, exc\+\_\+type, exc\+\_\+val, exc\+\_\+tb)
+\item 
+\mbox{\hyperlink{classsmbus_1_1_s_m_bus_af1e29cecb33337db493b1c4659d6e6ce}{open}} (self, bus)
+\item 
+\mbox{\hyperlink{classsmbus_1_1_s_m_bus_a21499f73fcb5c6e7af12d6e066ea5958}{close}} (self)
+\item 
+\mbox{\hyperlink{classsmbus_1_1_s_m_bus_a8b9788958cd7b142987082fc6ea652b8}{read\+\_\+byte}} (self, addr)
+\item 
+\mbox{\hyperlink{classsmbus_1_1_s_m_bus_ad1c2604b4f460cd010b779c0f4479c82}{read\+\_\+bytes}} (self, addr, number)
+\item 
+\mbox{\hyperlink{classsmbus_1_1_s_m_bus_a3b4b635baac8379a7a157e2317dcea6c}{read\+\_\+byte\+\_\+data}} (self, addr, cmd)
+\item 
+\mbox{\hyperlink{classsmbus_1_1_s_m_bus_acabf43b8e80c28a64b0ff2096f303cff}{read\+\_\+word\+\_\+data}} (self, addr, cmd)
+\item 
+\mbox{\hyperlink{classsmbus_1_1_s_m_bus_a28872b5b72165e96dc49f224813f5345}{read\+\_\+block\+\_\+data}} (self, addr, cmd)
+\item 
+\mbox{\hyperlink{classsmbus_1_1_s_m_bus_ae2a53f19acdee501af854e917402f9ae}{read\+\_\+i2c\+\_\+block\+\_\+data}} (self, addr, cmd, length=32)
+\item 
+\mbox{\hyperlink{classsmbus_1_1_s_m_bus_a0a5f7a0aeef599166e4a4246db6f6354}{write\+\_\+quick}} (self, addr)
+\item 
+\mbox{\hyperlink{classsmbus_1_1_s_m_bus_a6a4e4b534aed9ed3be26d3408c219d7b}{write\+\_\+byte}} (self, addr, val)
+\item 
+\mbox{\hyperlink{classsmbus_1_1_s_m_bus_a927b8f69b7c9251cf224cf1d1a2dcd2f}{write\+\_\+bytes}} (self, addr, buf)
+\item 
+\mbox{\hyperlink{classsmbus_1_1_s_m_bus_a56952d4d56250fa7da82ddfa2e316a4a}{write\+\_\+byte\+\_\+data}} (self, addr, cmd, val)
+\item 
+\mbox{\hyperlink{classsmbus_1_1_s_m_bus_a1731ba6e13ff27096277b0aa96b3c4fe}{write\+\_\+word\+\_\+data}} (self, addr, cmd, val)
+\item 
+\mbox{\hyperlink{classsmbus_1_1_s_m_bus_a1f1a3cb1e91e49a4abbd0601e988ac7d}{write\+\_\+block\+\_\+data}} (self, addr, cmd, vals)
+\item 
+\mbox{\hyperlink{classsmbus_1_1_s_m_bus_a1c738b8ab14753ba126cb5f6c4c7f202}{write\+\_\+i2c\+\_\+block\+\_\+data}} (self, addr, cmd, vals)
+\item 
+\mbox{\hyperlink{classsmbus_1_1_s_m_bus_a591237383303fdfa0d8fc53a26af5bf2}{process\+\_\+call}} (self, addr, cmd, val)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classsmbus_1_1_s_m_bus_a3b33f336884c73215a4f16b6f3bb17ed}{\+\_\+select\+\_\+device}} (self, addr)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{classsmbus_1_1_s_m_bus_ae3ec131215bf5bcc16eb0d32fd554ca1}\label{classsmbus_1_1_s_m_bus_ae3ec131215bf5bcc16eb0d32fd554ca1} 
+{\bfseries \+\_\+device}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\begin{DoxyVerb}I2C interface that mimics the Python SMBus API but is implemented with
+pure Python calls to ioctl and direct /dev/i2c device access.
+\end{DoxyVerb}
+ 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classsmbus_1_1_s_m_bus_af2fd6aeb08a340ff1b32eb88d0b73b58}\label{classsmbus_1_1_s_m_bus_af2fd6aeb08a340ff1b32eb88d0b73b58} 
+\index{smbus.SMBus@{smbus.SMBus}!\_\_init\_\_@{\_\_init\_\_}}
+\index{\_\_init\_\_@{\_\_init\_\_}!smbus.SMBus@{smbus.SMBus}}
+\doxysubsubsection{\texorpdfstring{\_\_init\_\_()}{\_\_init\_\_()}}
+{\footnotesize\ttfamily smbus.\+SMBus.\+\_\+\+\_\+init\+\_\+\+\_\+ (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{}]{bus = {\ttfamily None} }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Create a new smbus instance.  Bus is an optional parameter that
+specifies the I2C bus number to use, for example 1 would use device
+/dev/i2c-1.  If bus is not specified then the open function should be
+called to open the bus.
+\end{DoxyVerb}
+ \Hypertarget{classsmbus_1_1_s_m_bus_a0e2b6e7671c4b5bee1c649d534e04203}\label{classsmbus_1_1_s_m_bus_a0e2b6e7671c4b5bee1c649d534e04203} 
+\index{smbus.SMBus@{smbus.SMBus}!\_\_del\_\_@{\_\_del\_\_}}
+\index{\_\_del\_\_@{\_\_del\_\_}!smbus.SMBus@{smbus.SMBus}}
+\doxysubsubsection{\texorpdfstring{\_\_del\_\_()}{\_\_del\_\_()}}
+{\footnotesize\ttfamily smbus.\+SMBus.\+\_\+\+\_\+del\+\_\+\+\_\+ (\begin{DoxyParamCaption}\item[{}]{self }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Clean up any resources used by the SMBus instance.\end{DoxyVerb}
+ 
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classsmbus_1_1_s_m_bus_a6f18d9a3119d56b0e3f6423aae5c4600}\label{classsmbus_1_1_s_m_bus_a6f18d9a3119d56b0e3f6423aae5c4600} 
+\index{smbus.SMBus@{smbus.SMBus}!\_\_enter\_\_@{\_\_enter\_\_}}
+\index{\_\_enter\_\_@{\_\_enter\_\_}!smbus.SMBus@{smbus.SMBus}}
+\doxysubsubsection{\texorpdfstring{\_\_enter\_\_()}{\_\_enter\_\_()}}
+{\footnotesize\ttfamily smbus.\+SMBus.\+\_\+\+\_\+enter\+\_\+\+\_\+ (\begin{DoxyParamCaption}\item[{}]{self }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Context manager enter function.\end{DoxyVerb}
+ \Hypertarget{classsmbus_1_1_s_m_bus_a8db065e8c5a309ec726d25d293719ae3}\label{classsmbus_1_1_s_m_bus_a8db065e8c5a309ec726d25d293719ae3} 
+\index{smbus.SMBus@{smbus.SMBus}!\_\_exit\_\_@{\_\_exit\_\_}}
+\index{\_\_exit\_\_@{\_\_exit\_\_}!smbus.SMBus@{smbus.SMBus}}
+\doxysubsubsection{\texorpdfstring{\_\_exit\_\_()}{\_\_exit\_\_()}}
+{\footnotesize\ttfamily smbus.\+SMBus.\+\_\+\+\_\+exit\+\_\+\+\_\+ (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{}]{exc\+\_\+type,  }\item[{}]{exc\+\_\+val,  }\item[{}]{exc\+\_\+tb }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Context manager exit function, ensures resources are cleaned up.\end{DoxyVerb}
+ \Hypertarget{classsmbus_1_1_s_m_bus_a3b33f336884c73215a4f16b6f3bb17ed}\label{classsmbus_1_1_s_m_bus_a3b33f336884c73215a4f16b6f3bb17ed} 
+\index{smbus.SMBus@{smbus.SMBus}!\_select\_device@{\_select\_device}}
+\index{\_select\_device@{\_select\_device}!smbus.SMBus@{smbus.SMBus}}
+\doxysubsubsection{\texorpdfstring{\_select\_device()}{\_select\_device()}}
+{\footnotesize\ttfamily smbus.\+SMBus.\+\_\+select\+\_\+device (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{}]{addr }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+\begin{DoxyVerb}Set the address of the device to communicate with on the I2C bus.\end{DoxyVerb}
+ \Hypertarget{classsmbus_1_1_s_m_bus_a21499f73fcb5c6e7af12d6e066ea5958}\label{classsmbus_1_1_s_m_bus_a21499f73fcb5c6e7af12d6e066ea5958} 
+\index{smbus.SMBus@{smbus.SMBus}!close@{close}}
+\index{close@{close}!smbus.SMBus@{smbus.SMBus}}
+\doxysubsubsection{\texorpdfstring{close()}{close()}}
+{\footnotesize\ttfamily smbus.\+SMBus.\+close (\begin{DoxyParamCaption}\item[{}]{self }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Close the smbus connection.  You cannot make any other function
+calls on the bus unless open is called!\end{DoxyVerb}
+ \Hypertarget{classsmbus_1_1_s_m_bus_af1e29cecb33337db493b1c4659d6e6ce}\label{classsmbus_1_1_s_m_bus_af1e29cecb33337db493b1c4659d6e6ce} 
+\index{smbus.SMBus@{smbus.SMBus}!open@{open}}
+\index{open@{open}!smbus.SMBus@{smbus.SMBus}}
+\doxysubsubsection{\texorpdfstring{open()}{open()}}
+{\footnotesize\ttfamily smbus.\+SMBus.\+open (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{}]{bus }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Open the smbus interface on the specified bus.\end{DoxyVerb}
+ \Hypertarget{classsmbus_1_1_s_m_bus_a591237383303fdfa0d8fc53a26af5bf2}\label{classsmbus_1_1_s_m_bus_a591237383303fdfa0d8fc53a26af5bf2} 
+\index{smbus.SMBus@{smbus.SMBus}!process\_call@{process\_call}}
+\index{process\_call@{process\_call}!smbus.SMBus@{smbus.SMBus}}
+\doxysubsubsection{\texorpdfstring{process\_call()}{process\_call()}}
+{\footnotesize\ttfamily smbus.\+SMBus.\+process\+\_\+call (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{}]{addr,  }\item[{}]{cmd,  }\item[{}]{val }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Perform a smbus process call by writing a word (2 byte) value to
+the specified register of the device, and then reading a word of response
+data (which is returned).
+\end{DoxyVerb}
+ \Hypertarget{classsmbus_1_1_s_m_bus_a28872b5b72165e96dc49f224813f5345}\label{classsmbus_1_1_s_m_bus_a28872b5b72165e96dc49f224813f5345} 
+\index{smbus.SMBus@{smbus.SMBus}!read\_block\_data@{read\_block\_data}}
+\index{read\_block\_data@{read\_block\_data}!smbus.SMBus@{smbus.SMBus}}
+\doxysubsubsection{\texorpdfstring{read\_block\_data()}{read\_block\_data()}}
+{\footnotesize\ttfamily smbus.\+SMBus.\+read\+\_\+block\+\_\+data (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{}]{addr,  }\item[{}]{cmd }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Perform a block read from the specified cmd register of the device.
+The amount of data read is determined by the first byte send back by
+the device.  Data is returned as a bytearray.
+\end{DoxyVerb}
+ \Hypertarget{classsmbus_1_1_s_m_bus_a8b9788958cd7b142987082fc6ea652b8}\label{classsmbus_1_1_s_m_bus_a8b9788958cd7b142987082fc6ea652b8} 
+\index{smbus.SMBus@{smbus.SMBus}!read\_byte@{read\_byte}}
+\index{read\_byte@{read\_byte}!smbus.SMBus@{smbus.SMBus}}
+\doxysubsubsection{\texorpdfstring{read\_byte()}{read\_byte()}}
+{\footnotesize\ttfamily smbus.\+SMBus.\+read\+\_\+byte (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{}]{addr }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Read a single byte from the specified device.\end{DoxyVerb}
+ \Hypertarget{classsmbus_1_1_s_m_bus_a3b4b635baac8379a7a157e2317dcea6c}\label{classsmbus_1_1_s_m_bus_a3b4b635baac8379a7a157e2317dcea6c} 
+\index{smbus.SMBus@{smbus.SMBus}!read\_byte\_data@{read\_byte\_data}}
+\index{read\_byte\_data@{read\_byte\_data}!smbus.SMBus@{smbus.SMBus}}
+\doxysubsubsection{\texorpdfstring{read\_byte\_data()}{read\_byte\_data()}}
+{\footnotesize\ttfamily smbus.\+SMBus.\+read\+\_\+byte\+\_\+data (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{}]{addr,  }\item[{}]{cmd }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Read a single byte from the specified cmd register of the device.\end{DoxyVerb}
+ \Hypertarget{classsmbus_1_1_s_m_bus_ad1c2604b4f460cd010b779c0f4479c82}\label{classsmbus_1_1_s_m_bus_ad1c2604b4f460cd010b779c0f4479c82} 
+\index{smbus.SMBus@{smbus.SMBus}!read\_bytes@{read\_bytes}}
+\index{read\_bytes@{read\_bytes}!smbus.SMBus@{smbus.SMBus}}
+\doxysubsubsection{\texorpdfstring{read\_bytes()}{read\_bytes()}}
+{\footnotesize\ttfamily smbus.\+SMBus.\+read\+\_\+bytes (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{}]{addr,  }\item[{}]{number }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Read many bytes from the specified device.\end{DoxyVerb}
+ \Hypertarget{classsmbus_1_1_s_m_bus_ae2a53f19acdee501af854e917402f9ae}\label{classsmbus_1_1_s_m_bus_ae2a53f19acdee501af854e917402f9ae} 
+\index{smbus.SMBus@{smbus.SMBus}!read\_i2c\_block\_data@{read\_i2c\_block\_data}}
+\index{read\_i2c\_block\_data@{read\_i2c\_block\_data}!smbus.SMBus@{smbus.SMBus}}
+\doxysubsubsection{\texorpdfstring{read\_i2c\_block\_data()}{read\_i2c\_block\_data()}}
+{\footnotesize\ttfamily smbus.\+SMBus.\+read\+\_\+i2c\+\_\+block\+\_\+data (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{}]{addr,  }\item[{}]{cmd,  }\item[{}]{length = {\ttfamily 32} }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Perform a read from the specified cmd register of device.  Length number
+of bytes (default of 32) will be read and returned as a bytearray.
+\end{DoxyVerb}
+ \Hypertarget{classsmbus_1_1_s_m_bus_acabf43b8e80c28a64b0ff2096f303cff}\label{classsmbus_1_1_s_m_bus_acabf43b8e80c28a64b0ff2096f303cff} 
+\index{smbus.SMBus@{smbus.SMBus}!read\_word\_data@{read\_word\_data}}
+\index{read\_word\_data@{read\_word\_data}!smbus.SMBus@{smbus.SMBus}}
+\doxysubsubsection{\texorpdfstring{read\_word\_data()}{read\_word\_data()}}
+{\footnotesize\ttfamily smbus.\+SMBus.\+read\+\_\+word\+\_\+data (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{}]{addr,  }\item[{}]{cmd }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Read a word (2 bytes) from the specified cmd register of the device.
+Note that this will interpret data using the endianness of the processor
+running Python (typically little endian)!
+\end{DoxyVerb}
+ \Hypertarget{classsmbus_1_1_s_m_bus_a1f1a3cb1e91e49a4abbd0601e988ac7d}\label{classsmbus_1_1_s_m_bus_a1f1a3cb1e91e49a4abbd0601e988ac7d} 
+\index{smbus.SMBus@{smbus.SMBus}!write\_block\_data@{write\_block\_data}}
+\index{write\_block\_data@{write\_block\_data}!smbus.SMBus@{smbus.SMBus}}
+\doxysubsubsection{\texorpdfstring{write\_block\_data()}{write\_block\_data()}}
+{\footnotesize\ttfamily smbus.\+SMBus.\+write\+\_\+block\+\_\+data (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{}]{addr,  }\item[{}]{cmd,  }\item[{}]{vals }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Write a block of data to the specified cmd register of the device.
+The amount of data to write should be the first byte inside the vals
+string/bytearray and that count of bytes of data to write should follow
+it.
+\end{DoxyVerb}
+ \Hypertarget{classsmbus_1_1_s_m_bus_a6a4e4b534aed9ed3be26d3408c219d7b}\label{classsmbus_1_1_s_m_bus_a6a4e4b534aed9ed3be26d3408c219d7b} 
+\index{smbus.SMBus@{smbus.SMBus}!write\_byte@{write\_byte}}
+\index{write\_byte@{write\_byte}!smbus.SMBus@{smbus.SMBus}}
+\doxysubsubsection{\texorpdfstring{write\_byte()}{write\_byte()}}
+{\footnotesize\ttfamily smbus.\+SMBus.\+write\+\_\+byte (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{}]{addr,  }\item[{}]{val }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Write a single byte to the specified device.\end{DoxyVerb}
+ \Hypertarget{classsmbus_1_1_s_m_bus_a56952d4d56250fa7da82ddfa2e316a4a}\label{classsmbus_1_1_s_m_bus_a56952d4d56250fa7da82ddfa2e316a4a} 
+\index{smbus.SMBus@{smbus.SMBus}!write\_byte\_data@{write\_byte\_data}}
+\index{write\_byte\_data@{write\_byte\_data}!smbus.SMBus@{smbus.SMBus}}
+\doxysubsubsection{\texorpdfstring{write\_byte\_data()}{write\_byte\_data()}}
+{\footnotesize\ttfamily smbus.\+SMBus.\+write\+\_\+byte\+\_\+data (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{}]{addr,  }\item[{}]{cmd,  }\item[{}]{val }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Write a byte of data to the specified cmd register of the device.\end{DoxyVerb}
+ \Hypertarget{classsmbus_1_1_s_m_bus_a927b8f69b7c9251cf224cf1d1a2dcd2f}\label{classsmbus_1_1_s_m_bus_a927b8f69b7c9251cf224cf1d1a2dcd2f} 
+\index{smbus.SMBus@{smbus.SMBus}!write\_bytes@{write\_bytes}}
+\index{write\_bytes@{write\_bytes}!smbus.SMBus@{smbus.SMBus}}
+\doxysubsubsection{\texorpdfstring{write\_bytes()}{write\_bytes()}}
+{\footnotesize\ttfamily smbus.\+SMBus.\+write\+\_\+bytes (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{}]{addr,  }\item[{}]{buf }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Write many bytes to the specified device. buf is a bytearray\end{DoxyVerb}
+ \Hypertarget{classsmbus_1_1_s_m_bus_a1c738b8ab14753ba126cb5f6c4c7f202}\label{classsmbus_1_1_s_m_bus_a1c738b8ab14753ba126cb5f6c4c7f202} 
+\index{smbus.SMBus@{smbus.SMBus}!write\_i2c\_block\_data@{write\_i2c\_block\_data}}
+\index{write\_i2c\_block\_data@{write\_i2c\_block\_data}!smbus.SMBus@{smbus.SMBus}}
+\doxysubsubsection{\texorpdfstring{write\_i2c\_block\_data()}{write\_i2c\_block\_data()}}
+{\footnotesize\ttfamily smbus.\+SMBus.\+write\+\_\+i2c\+\_\+block\+\_\+data (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{}]{addr,  }\item[{}]{cmd,  }\item[{}]{vals }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Write a buffer of data to the specified cmd register of the device.\end{DoxyVerb}
+ \Hypertarget{classsmbus_1_1_s_m_bus_a0a5f7a0aeef599166e4a4246db6f6354}\label{classsmbus_1_1_s_m_bus_a0a5f7a0aeef599166e4a4246db6f6354} 
+\index{smbus.SMBus@{smbus.SMBus}!write\_quick@{write\_quick}}
+\index{write\_quick@{write\_quick}!smbus.SMBus@{smbus.SMBus}}
+\doxysubsubsection{\texorpdfstring{write\_quick()}{write\_quick()}}
+{\footnotesize\ttfamily smbus.\+SMBus.\+write\+\_\+quick (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{}]{addr }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Write a single byte to the specified device.\end{DoxyVerb}
+ \Hypertarget{classsmbus_1_1_s_m_bus_a1731ba6e13ff27096277b0aa96b3c4fe}\label{classsmbus_1_1_s_m_bus_a1731ba6e13ff27096277b0aa96b3c4fe} 
+\index{smbus.SMBus@{smbus.SMBus}!write\_word\_data@{write\_word\_data}}
+\index{write\_word\_data@{write\_word\_data}!smbus.SMBus@{smbus.SMBus}}
+\doxysubsubsection{\texorpdfstring{write\_word\_data()}{write\_word\_data()}}
+{\footnotesize\ttfamily smbus.\+SMBus.\+write\+\_\+word\+\_\+data (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{}]{addr,  }\item[{}]{cmd,  }\item[{}]{val }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Write a word (2 bytes) of data to the specified cmd register of the
+device.  Note that this will write the data in the endianness of the
+processor running Python (typically little endian)!
+\end{DoxyVerb}
+ 
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+robohatlib/driver\+\_\+ll/i2c/smbus.\+py\end{DoxyCompactItemize}

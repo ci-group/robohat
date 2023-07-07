@@ -1,0 +1,97 @@
+\doxysection{smbus Namespace Reference}
+\hypertarget{namespacesmbus}{}\label{namespacesmbus}\index{smbus@{smbus}}
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{classsmbus_1_1i2c__msg}{i2c\+\_\+msg}}
+\item 
+class \mbox{\hyperlink{classsmbus_1_1i2c__rdwr__ioctl__data}{i2c\+\_\+rdwr\+\_\+ioctl\+\_\+data}}
+\item 
+class \mbox{\hyperlink{classsmbus_1_1_s_m_bus}{SMBus}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{namespacesmbus_a59d95fc7b1cf35575c0dedbc8db848cd}{make\+\_\+i2c\+\_\+rdwr\+\_\+data}} (messages)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{namespacesmbus_a80b403aaea48a31d52e62f6ac7932dde}\label{namespacesmbus_a80b403aaea48a31d52e62f6ac7932dde} 
+int {\bfseries I2\+C\+\_\+\+M\+\_\+\+TEN} = 0x0010
+\item 
+\Hypertarget{namespacesmbus_a9462b04bcb4b226980cf5531db76a266}\label{namespacesmbus_a9462b04bcb4b226980cf5531db76a266} 
+int {\bfseries I2\+C\+\_\+\+M\+\_\+\+RD} = 0x0001
+\item 
+\Hypertarget{namespacesmbus_af7d98a7cf27b528709f55eb7011a5e8c}\label{namespacesmbus_af7d98a7cf27b528709f55eb7011a5e8c} 
+int {\bfseries I2\+C\+\_\+\+M\+\_\+\+STOP} = 0x8000
+\item 
+\Hypertarget{namespacesmbus_a59906661dbc7dbe607cac84cf9668fe0}\label{namespacesmbus_a59906661dbc7dbe607cac84cf9668fe0} 
+int {\bfseries I2\+C\+\_\+\+M\+\_\+\+NOSTART} = 0x4000
+\item 
+\Hypertarget{namespacesmbus_a7b5ea43648c4a475f1af421383bdb62d}\label{namespacesmbus_a7b5ea43648c4a475f1af421383bdb62d} 
+int {\bfseries I2\+C\+\_\+\+M\+\_\+\+REV\+\_\+\+DIR\+\_\+\+ADDR} = 0x2000
+\item 
+\Hypertarget{namespacesmbus_a430d4d4797a16d601b655b9c42756c5d}\label{namespacesmbus_a430d4d4797a16d601b655b9c42756c5d} 
+int {\bfseries I2\+C\+\_\+\+M\+\_\+\+IGNORE\+\_\+\+NAK} = 0x1000
+\item 
+\Hypertarget{namespacesmbus_a39d008bc47b66791873c77f214e2833f}\label{namespacesmbus_a39d008bc47b66791873c77f214e2833f} 
+int {\bfseries I2\+C\+\_\+\+M\+\_\+\+NO\+\_\+\+RD\+\_\+\+ACK} = 0x0800
+\item 
+\Hypertarget{namespacesmbus_aa10f2551949e09c41a7049d80773afe0}\label{namespacesmbus_aa10f2551949e09c41a7049d80773afe0} 
+int {\bfseries I2\+C\+\_\+\+M\+\_\+\+RECV\+\_\+\+LEN} = 0x0400
+\item 
+\Hypertarget{namespacesmbus_af5fbb5d4be088a0c83f877279b7c93c1}\label{namespacesmbus_af5fbb5d4be088a0c83f877279b7c93c1} 
+int {\bfseries I2\+C\+\_\+\+SLAVE} = 0x0703
+\item 
+\Hypertarget{namespacesmbus_adf15485746b0ecc545082024012813c2}\label{namespacesmbus_adf15485746b0ecc545082024012813c2} 
+int {\bfseries I2\+C\+\_\+\+SLAVE\+\_\+\+FORCE} = 0x0706
+\item 
+\Hypertarget{namespacesmbus_aafe2ed8a418c99cd91967465cfdd5e48}\label{namespacesmbus_aafe2ed8a418c99cd91967465cfdd5e48} 
+int {\bfseries I2\+C\+\_\+\+TENBIT} = 0x0704
+\item 
+\Hypertarget{namespacesmbus_a072aeb24535c10afd2d0ce93bcf8d277}\label{namespacesmbus_a072aeb24535c10afd2d0ce93bcf8d277} 
+int {\bfseries I2\+C\+\_\+\+FUNCS} = 0x0705
+\item 
+\Hypertarget{namespacesmbus_af47e1df2f5b5e965e510af5e2643780d}\label{namespacesmbus_af47e1df2f5b5e965e510af5e2643780d} 
+int {\bfseries I2\+C\+\_\+\+RDWR} = 0x0707
+\item 
+\Hypertarget{namespacesmbus_a1c36fdfe9db9d604d8950248d9139b3d}\label{namespacesmbus_a1c36fdfe9db9d604d8950248d9139b3d} 
+int {\bfseries I2\+C\+\_\+\+PEC} = 0x0708
+\item 
+\Hypertarget{namespacesmbus_a8c68540248e4d41e69bb7d7dda52e225}\label{namespacesmbus_a8c68540248e4d41e69bb7d7dda52e225} 
+int {\bfseries I2\+C\+\_\+\+SMBUS} = 0x0720
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\begin{DoxyVerb}`Adafruit_PureIO.smbus`
+================================================================================
+
+Pure python (i.e. no native extensions) access to Linux IO I2C interface that mimics the
+Python SMBus API.
+
+* Author(s): Tony DiCola, Lady Ada, Melissa LeBlanc-Williams
+
+Implementation Notes
+--------------------
+
+**Software and Dependencies:**
+
+* Linux and Python 3.5 or Higher\end{DoxyVerb}
+ 
+
+\doxysubsection{Function Documentation}
+\Hypertarget{namespacesmbus_a59d95fc7b1cf35575c0dedbc8db848cd}\label{namespacesmbus_a59d95fc7b1cf35575c0dedbc8db848cd} 
+\index{smbus@{smbus}!make\_i2c\_rdwr\_data@{make\_i2c\_rdwr\_data}}
+\index{make\_i2c\_rdwr\_data@{make\_i2c\_rdwr\_data}!smbus@{smbus}}
+\doxysubsubsection{\texorpdfstring{make\_i2c\_rdwr\_data()}{make\_i2c\_rdwr\_data()}}
+{\footnotesize\ttfamily smbus.\+make\+\_\+i2c\+\_\+rdwr\+\_\+data (\begin{DoxyParamCaption}\item[{}]{messages }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Utility function to create and return an i2c_rdwr_ioctl_data structure
+populated with a list of specified I2C messages.  The messages parameter
+should be a list of tuples which represent the individual I2C messages to
+send in this transaction.  Tuples should contain 4 elements: address value,
+flags value, buffer length, ctypes c_uint8 pointer to buffer.
+\end{DoxyVerb}
+ 

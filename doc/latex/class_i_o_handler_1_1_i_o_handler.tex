@@ -1,0 +1,251 @@
+\doxysection{IOHandler.\+IOHandler Class Reference}
+\hypertarget{class_i_o_handler_1_1_i_o_handler}{}\label{class_i_o_handler_1_1_i_o_handler}\index{IOHandler.IOHandler@{IOHandler.IOHandler}}
+
+
+In this class all low level IO checking and handling are done.  
+
+
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_i_o_handler_1_1_i_o_handler_ae32733efe13aab9d9bff5a170deec35e}{\+\_\+\+\_\+init\+\_\+\+\_\+}} (self)
+\begin{DoxyCompactList}\small\item\em The IO\+\_\+\+Handler base class initializer. \end{DoxyCompactList}\item 
+None \mbox{\hyperlink{class_i_o_handler_1_1_i_o_handler_a42372b24bf0af41d4203809dbe83538d}{init\+\_\+io}} (self)
+\item 
+None \mbox{\hyperlink{class_i_o_handler_1_1_i_o_handler_a866b31448d4e4a35ee142747fe3a3d16}{scan\+\_\+i2c\+\_\+bus}} (self)
+\begin{DoxyCompactList}\small\item\em Scans all the I2C bussed available on the Robohat hardware. \end{DoxyCompactList}\item 
+I2\+CDevice \mbox{\hyperlink{class_i_o_handler_1_1_i_o_handler_a9ef3b21d83fd76b92d68892596940270}{get\+\_\+i2c\+\_\+device}} (self, I2\+C\+\_\+\+Device\+\_\+\+Definition \+\_\+i2c\+\_\+device\+\_\+def)
+\begin{DoxyCompactList}\small\item\em allocates the I2C device, when available on the I2C bus (so should be seen in the scan). \end{DoxyCompactList}\item 
+SPI\+\_\+\+Device \mbox{\hyperlink{class_i_o_handler_1_1_i_o_handler_a2d0ef8e26ab19ca4d954e36555086569}{get\+\_\+spi\+\_\+device}} (self, \+\_\+spi\+\_\+device\+\_\+def)
+\begin{DoxyCompactList}\small\item\em Get SPI device. \end{DoxyCompactList}\item 
+GPI\+\_\+\+LL\+\_\+\+Driver \mbox{\hyperlink{class_i_o_handler_1_1_i_o_handler_ab93396a9dfaa11da59b9780921c45b65}{get\+\_\+gpi}} (self, \+\_\+gpi\+\_\+definition)
+\begin{DoxyCompactList}\small\item\em get GPI (general purpose input) \end{DoxyCompactList}\item 
+GPO\+\_\+\+LL\+\_\+\+Driver \mbox{\hyperlink{class_i_o_handler_1_1_i_o_handler_acf3213d9b1cd06619c761911dae49186}{get\+\_\+gpo}} (self, \+\_\+gpo\+\_\+definition)
+\begin{DoxyCompactList}\small\item\em get GPO (general purpose output) \end{DoxyCompactList}\item 
+GP\+\_\+interrupt \mbox{\hyperlink{class_i_o_handler_1_1_i_o_handler_aea46c9f0e8d2fd62fe7e120676ff3cdd}{register\+\_\+interrupt}} (self, \+\_\+gpi\+\_\+interruptdefinition)
+\begin{DoxyCompactList}\small\item\em registers interrupt \end{DoxyCompactList}\item 
+GPOPWM\+\_\+\+LL\+\_\+\+Driver \mbox{\hyperlink{class_i_o_handler_1_1_i_o_handler_af77428f64f5d782514bbc58103ff6ebe}{get\+\_\+pwm}} (self, \+\_\+gpopwm\+\_\+definition)
+\begin{DoxyCompactList}\small\item\em Get PWM. \end{DoxyCompactList}\item 
+Led\+\_\+driver \mbox{\hyperlink{class_i_o_handler_1_1_i_o_handler_a77bcb3111a695737ea0ff96995553cf5}{get\+\_\+led\+\_\+driver}} (self, \+\_\+led\+\_\+def)
+\begin{DoxyCompactList}\small\item\em Get LED driver. \end{DoxyCompactList}\item 
+Buzzer\+\_\+driver \mbox{\hyperlink{class_i_o_handler_1_1_i_o_handler_aed3127cadcfbc20bbdf9437bea0949ed}{get\+\_\+buzzer\+\_\+driver}} (self, Buzzer\+Def \+\_\+buzzer\+\_\+def)
+\begin{DoxyCompactList}\small\item\em Get Buzzer driver. \end{DoxyCompactList}\item 
+None \mbox{\hyperlink{class_i_o_handler_1_1_i_o_handler_a69b727bff55f19cc57cfe3a2c805c064}{io\+\_\+shutdown}} (self)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Static Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{class_i_o_handler_1_1_i_o_handler_a257548a11ac5b797e69e2729dc025df5}\label{class_i_o_handler_1_1_i_o_handler_a257548a11ac5b797e69e2729dc025df5} 
+bool {\bfseries IO\+\_\+\+FAILED} = False
+\item 
+\Hypertarget{class_i_o_handler_1_1_i_o_handler_af84637be1a3496627123f579b710a2c2}\label{class_i_o_handler_1_1_i_o_handler_af84637be1a3496627123f579b710a2c2} 
+bool {\bfseries IO\+\_\+\+OK} = True
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+In this class all low level IO checking and handling are done. 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{class_i_o_handler_1_1_i_o_handler_ae32733efe13aab9d9bff5a170deec35e}\label{class_i_o_handler_1_1_i_o_handler_ae32733efe13aab9d9bff5a170deec35e} 
+\index{IOHandler.IOHandler@{IOHandler.IOHandler}!\_\_init\_\_@{\_\_init\_\_}}
+\index{\_\_init\_\_@{\_\_init\_\_}!IOHandler.IOHandler@{IOHandler.IOHandler}}
+\doxysubsubsection{\texorpdfstring{\_\_init\_\_()}{\_\_init\_\_()}}
+{\footnotesize\ttfamily IOHandler.\+IOHandler.\+\_\+\+\_\+init\+\_\+\+\_\+ (\begin{DoxyParamCaption}\item[{}]{self }\end{DoxyParamCaption})}
+
+
+
+The IO\+\_\+\+Handler base class initializer. 
+
+\begin{DoxyReturn}{Returns}
+\+: An instance of the IO\+\_\+\+Handler class 
+\end{DoxyReturn}
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_i_o_handler_1_1_i_o_handler_aed3127cadcfbc20bbdf9437bea0949ed}\label{class_i_o_handler_1_1_i_o_handler_aed3127cadcfbc20bbdf9437bea0949ed} 
+\index{IOHandler.IOHandler@{IOHandler.IOHandler}!get\_buzzer\_driver@{get\_buzzer\_driver}}
+\index{get\_buzzer\_driver@{get\_buzzer\_driver}!IOHandler.IOHandler@{IOHandler.IOHandler}}
+\doxysubsubsection{\texorpdfstring{get\_buzzer\_driver()}{get\_buzzer\_driver()}}
+{\footnotesize\ttfamily  Buzzer\+\_\+driver IOHandler.\+IOHandler.\+get\+\_\+buzzer\+\_\+driver (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{Buzzer\+Def}]{\+\_\+buzzer\+\_\+def }\end{DoxyParamCaption})}
+
+
+
+Get Buzzer driver. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em \+\_\+buzzer\+\_\+def} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+\+: Buzzer\+\_\+driver 
+\end{DoxyReturn}
+\Hypertarget{class_i_o_handler_1_1_i_o_handler_ab93396a9dfaa11da59b9780921c45b65}\label{class_i_o_handler_1_1_i_o_handler_ab93396a9dfaa11da59b9780921c45b65} 
+\index{IOHandler.IOHandler@{IOHandler.IOHandler}!get\_gpi@{get\_gpi}}
+\index{get\_gpi@{get\_gpi}!IOHandler.IOHandler@{IOHandler.IOHandler}}
+\doxysubsubsection{\texorpdfstring{get\_gpi()}{get\_gpi()}}
+{\footnotesize\ttfamily  GPI\+\_\+\+LL\+\_\+\+Driver IOHandler.\+IOHandler.\+get\+\_\+gpi (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{}]{\+\_\+gpi\+\_\+definition }\end{DoxyParamCaption})}
+
+
+
+get GPI (general purpose input) 
+
+
+\begin{DoxyParams}{Parameters}
+{\em \+\_\+gpi\+\_\+definition} & gpi definition \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+\+: GPI\+\_\+\+LL\+\_\+\+Driver 
+\end{DoxyReturn}
+\Hypertarget{class_i_o_handler_1_1_i_o_handler_acf3213d9b1cd06619c761911dae49186}\label{class_i_o_handler_1_1_i_o_handler_acf3213d9b1cd06619c761911dae49186} 
+\index{IOHandler.IOHandler@{IOHandler.IOHandler}!get\_gpo@{get\_gpo}}
+\index{get\_gpo@{get\_gpo}!IOHandler.IOHandler@{IOHandler.IOHandler}}
+\doxysubsubsection{\texorpdfstring{get\_gpo()}{get\_gpo()}}
+{\footnotesize\ttfamily  GPO\+\_\+\+LL\+\_\+\+Driver IOHandler.\+IOHandler.\+get\+\_\+gpo (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{}]{\+\_\+gpo\+\_\+definition }\end{DoxyParamCaption})}
+
+
+
+get GPO (general purpose output) 
+
+
+\begin{DoxyParams}{Parameters}
+{\em \+\_\+gpo\+\_\+definition} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+\+: GPO\+\_\+\+LL\+\_\+\+Driver 
+\end{DoxyReturn}
+\Hypertarget{class_i_o_handler_1_1_i_o_handler_a9ef3b21d83fd76b92d68892596940270}\label{class_i_o_handler_1_1_i_o_handler_a9ef3b21d83fd76b92d68892596940270} 
+\index{IOHandler.IOHandler@{IOHandler.IOHandler}!get\_i2c\_device@{get\_i2c\_device}}
+\index{get\_i2c\_device@{get\_i2c\_device}!IOHandler.IOHandler@{IOHandler.IOHandler}}
+\doxysubsubsection{\texorpdfstring{get\_i2c\_device()}{get\_i2c\_device()}}
+{\footnotesize\ttfamily  I2\+CDevice IOHandler.\+IOHandler.\+get\+\_\+i2c\+\_\+device (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{I2\+C\+\_\+\+Device\+\_\+\+Definition}]{\+\_\+i2c\+\_\+device\+\_\+def }\end{DoxyParamCaption})}
+
+
+
+allocates the I2C device, when available on the I2C bus (so should be seen in the scan). 
+
+
+\begin{DoxyParams}{Parameters}
+{\em \+\_\+i2c\+\_\+device\+\_\+def} & configuration of the I2C device. such as\+: I2\+C\+\_\+\+Device\+\_\+\+Definition(\"{}\+IOEXPANDER\+\_\+\+I2\+C\"{}, 1, 0x20) ), See class I2\+C\+\_\+\+Device\+\_\+\+Definition \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+\+: I2\+C\+\_\+\+Device 
+\end{DoxyReturn}
+\Hypertarget{class_i_o_handler_1_1_i_o_handler_a77bcb3111a695737ea0ff96995553cf5}\label{class_i_o_handler_1_1_i_o_handler_a77bcb3111a695737ea0ff96995553cf5} 
+\index{IOHandler.IOHandler@{IOHandler.IOHandler}!get\_led\_driver@{get\_led\_driver}}
+\index{get\_led\_driver@{get\_led\_driver}!IOHandler.IOHandler@{IOHandler.IOHandler}}
+\doxysubsubsection{\texorpdfstring{get\_led\_driver()}{get\_led\_driver()}}
+{\footnotesize\ttfamily  Led\+\_\+driver IOHandler.\+IOHandler.\+get\+\_\+led\+\_\+driver (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{}]{\+\_\+led\+\_\+def }\end{DoxyParamCaption})}
+
+
+
+Get LED driver. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em \+\_\+led\+\_\+def} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+\+: Led 
+\end{DoxyReturn}
+\Hypertarget{class_i_o_handler_1_1_i_o_handler_af77428f64f5d782514bbc58103ff6ebe}\label{class_i_o_handler_1_1_i_o_handler_af77428f64f5d782514bbc58103ff6ebe} 
+\index{IOHandler.IOHandler@{IOHandler.IOHandler}!get\_pwm@{get\_pwm}}
+\index{get\_pwm@{get\_pwm}!IOHandler.IOHandler@{IOHandler.IOHandler}}
+\doxysubsubsection{\texorpdfstring{get\_pwm()}{get\_pwm()}}
+{\footnotesize\ttfamily  GPOPWM\+\_\+\+LL\+\_\+\+Driver IOHandler.\+IOHandler.\+get\+\_\+pwm (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{}]{\+\_\+gpopwm\+\_\+definition }\end{DoxyParamCaption})}
+
+
+
+Get PWM. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em \+\_\+gpopwm\+\_\+definition} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+\+: GPOPWM\+\_\+\+LL\+\_\+\+Driver @raises\+: Exception 
+\end{DoxyReturn}
+\Hypertarget{class_i_o_handler_1_1_i_o_handler_a2d0ef8e26ab19ca4d954e36555086569}\label{class_i_o_handler_1_1_i_o_handler_a2d0ef8e26ab19ca4d954e36555086569} 
+\index{IOHandler.IOHandler@{IOHandler.IOHandler}!get\_spi\_device@{get\_spi\_device}}
+\index{get\_spi\_device@{get\_spi\_device}!IOHandler.IOHandler@{IOHandler.IOHandler}}
+\doxysubsubsection{\texorpdfstring{get\_spi\_device()}{get\_spi\_device()}}
+{\footnotesize\ttfamily  SPI\+\_\+\+Device IOHandler.\+IOHandler.\+get\+\_\+spi\+\_\+device (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{}]{\+\_\+spi\+\_\+device\+\_\+def }\end{DoxyParamCaption})}
+
+
+
+Get SPI device. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em \+\_\+spi\+\_\+device\+\_\+def} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+\+: SPI\+\_\+\+Device 
+\end{DoxyReturn}
+\Hypertarget{class_i_o_handler_1_1_i_o_handler_a42372b24bf0af41d4203809dbe83538d}\label{class_i_o_handler_1_1_i_o_handler_a42372b24bf0af41d4203809dbe83538d} 
+\index{IOHandler.IOHandler@{IOHandler.IOHandler}!init\_io@{init\_io}}
+\index{init\_io@{init\_io}!IOHandler.IOHandler@{IOHandler.IOHandler}}
+\doxysubsubsection{\texorpdfstring{init\_io()}{init\_io()}}
+{\footnotesize\ttfamily  None IOHandler.\+IOHandler.\+init\+\_\+io (\begin{DoxyParamCaption}\item[{}]{self }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Initializes the IO
+
+Implemented for future use
+
+~@return: None
+\end{DoxyVerb}
+ \Hypertarget{class_i_o_handler_1_1_i_o_handler_a69b727bff55f19cc57cfe3a2c805c064}\label{class_i_o_handler_1_1_i_o_handler_a69b727bff55f19cc57cfe3a2c805c064} 
+\index{IOHandler.IOHandler@{IOHandler.IOHandler}!io\_shutdown@{io\_shutdown}}
+\index{io\_shutdown@{io\_shutdown}!IOHandler.IOHandler@{IOHandler.IOHandler}}
+\doxysubsubsection{\texorpdfstring{io\_shutdown()}{io\_shutdown()}}
+{\footnotesize\ttfamily None IOHandler.\+IOHandler.\+io\+\_\+shutdown (\begin{DoxyParamCaption}\item[{}]{self }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}shutsdown IO
+
+@return: None
+\end{DoxyVerb}
+ \Hypertarget{class_i_o_handler_1_1_i_o_handler_aea46c9f0e8d2fd62fe7e120676ff3cdd}\label{class_i_o_handler_1_1_i_o_handler_aea46c9f0e8d2fd62fe7e120676ff3cdd} 
+\index{IOHandler.IOHandler@{IOHandler.IOHandler}!register\_interrupt@{register\_interrupt}}
+\index{register\_interrupt@{register\_interrupt}!IOHandler.IOHandler@{IOHandler.IOHandler}}
+\doxysubsubsection{\texorpdfstring{register\_interrupt()}{register\_interrupt()}}
+{\footnotesize\ttfamily  GP\+\_\+interrupt IOHandler.\+IOHandler.\+register\+\_\+interrupt (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{}]{\+\_\+gpi\+\_\+interruptdefinition }\end{DoxyParamCaption})}
+
+
+
+registers interrupt 
+
+
+\begin{DoxyParams}{Parameters}
+{\em \+\_\+gpi\+\_\+interruptdefinition} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+\+: GP\+\_\+interrupt 
+\end{DoxyReturn}
+\Hypertarget{class_i_o_handler_1_1_i_o_handler_a866b31448d4e4a35ee142747fe3a3d16}\label{class_i_o_handler_1_1_i_o_handler_a866b31448d4e4a35ee142747fe3a3d16} 
+\index{IOHandler.IOHandler@{IOHandler.IOHandler}!scan\_i2c\_bus@{scan\_i2c\_bus}}
+\index{scan\_i2c\_bus@{scan\_i2c\_bus}!IOHandler.IOHandler@{IOHandler.IOHandler}}
+\doxysubsubsection{\texorpdfstring{scan\_i2c\_bus()}{scan\_i2c\_bus()}}
+{\footnotesize\ttfamily  None IOHandler.\+IOHandler.\+scan\+\_\+i2c\+\_\+bus (\begin{DoxyParamCaption}\item[{}]{self }\end{DoxyParamCaption})}
+
+
+
+Scans all the I2C bussed available on the Robohat hardware. 
+
+Displays found I2C devices onto console The found devices will be stored in a list. This list will be used when an I2C device is allocated. When the device is allocated and not in this list, an error will occur
+
+\begin{DoxyReturn}{Returns}
+\+: None 
+\end{DoxyReturn}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+robohatlib/driver\+\_\+ll/IOHandler.\+py\end{DoxyCompactItemize}

@@ -1,0 +1,112 @@
+\doxysection{Buzzer\+\_\+driver.\+Buzzer\+\_\+driver Class Reference}
+\hypertarget{class_buzzer__driver_1_1_buzzer__driver}{}\label{class_buzzer__driver_1_1_buzzer__driver}\index{Buzzer\_driver.Buzzer\_driver@{Buzzer\_driver.Buzzer\_driver}}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{class_buzzer__driver_1_1_buzzer__driver_a64a6df5a88a743d16fca66bc3e0ac866}\label{class_buzzer__driver_1_1_buzzer__driver_a64a6df5a88a743d16fca66bc3e0ac866} 
+{\bfseries \+\_\+\+\_\+init\+\_\+\+\_\+} (self, \+\_\+pwm\+\_\+ll\+\_\+driver)
+\item 
+None \mbox{\hyperlink{class_buzzer__driver_1_1_buzzer__driver_ac318a739a63729e33b852ef1116fb262}{init\+\_\+buzzer}} (self, \+\_\+init\+\_\+beep\+\_\+permitted)
+\item 
+None \mbox{\hyperlink{class_buzzer__driver_1_1_buzzer__driver_a6c681b2eef8d020f68fd1b00883ddfaa}{random\+\_\+buzzer}} (self)
+\begin{DoxyCompactList}\small\item\em Generates a random sound. \end{DoxyCompactList}\item 
+None \mbox{\hyperlink{class_buzzer__driver_1_1_buzzer__driver_ab52194d4f28a1c0902fa33ffda84ddf7}{do\+\_\+buzzer\+\_\+slowwoop}} (self)
+\begin{DoxyCompactList}\small\item\em Generates a sound from 2000Hz to 50Hz. \end{DoxyCompactList}\item 
+None \mbox{\hyperlink{class_buzzer__driver_1_1_buzzer__driver_ad5a7f00558170aa574c8f42b00c6c408}{do\+\_\+buzzer\+\_\+beep}} (self)
+\begin{DoxyCompactList}\small\item\em Short beep of the buzzer. \end{DoxyCompactList}\item 
+None \mbox{\hyperlink{class_buzzer__driver_1_1_buzzer__driver_a719b2ff444a54515edf124cae241bf67}{do\+\_\+buzzer\+\_\+freq}} (self, int \+\_\+beep\+\_\+freq)
+\begin{DoxyCompactList}\small\item\em Beeps the buzzer at a requested frequency, has to be released or set to 0. \end{DoxyCompactList}\item 
+\Hypertarget{class_buzzer__driver_1_1_buzzer__driver_acc0deafad79f2350d5fd6c242a63f151}\label{class_buzzer__driver_1_1_buzzer__driver_acc0deafad79f2350d5fd6c242a63f151} 
+None {\bfseries do\+\_\+alarm\+\_\+buzzer} (self)
+\item 
+None \mbox{\hyperlink{class_buzzer__driver_1_1_buzzer__driver_a5d188eee7536f04552376b01dabf7fdf}{buzzer\+\_\+release}} (self)
+\begin{DoxyCompactList}\small\item\em Releases buzzer. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_buzzer__driver_1_1_buzzer__driver_a5d188eee7536f04552376b01dabf7fdf}\label{class_buzzer__driver_1_1_buzzer__driver_a5d188eee7536f04552376b01dabf7fdf} 
+\index{Buzzer\_driver.Buzzer\_driver@{Buzzer\_driver.Buzzer\_driver}!buzzer\_release@{buzzer\_release}}
+\index{buzzer\_release@{buzzer\_release}!Buzzer\_driver.Buzzer\_driver@{Buzzer\_driver.Buzzer\_driver}}
+\doxysubsubsection{\texorpdfstring{buzzer\_release()}{buzzer\_release()}}
+{\footnotesize\ttfamily  None Buzzer\+\_\+driver.\+Buzzer\+\_\+driver.\+buzzer\+\_\+release (\begin{DoxyParamCaption}\item[{}]{self }\end{DoxyParamCaption})}
+
+
+
+Releases buzzer. 
+
+\begin{DoxyReturn}{Returns}
+\+: none 
+\end{DoxyReturn}
+\Hypertarget{class_buzzer__driver_1_1_buzzer__driver_ad5a7f00558170aa574c8f42b00c6c408}\label{class_buzzer__driver_1_1_buzzer__driver_ad5a7f00558170aa574c8f42b00c6c408} 
+\index{Buzzer\_driver.Buzzer\_driver@{Buzzer\_driver.Buzzer\_driver}!do\_buzzer\_beep@{do\_buzzer\_beep}}
+\index{do\_buzzer\_beep@{do\_buzzer\_beep}!Buzzer\_driver.Buzzer\_driver@{Buzzer\_driver.Buzzer\_driver}}
+\doxysubsubsection{\texorpdfstring{do\_buzzer\_beep()}{do\_buzzer\_beep()}}
+{\footnotesize\ttfamily  None Buzzer\+\_\+driver.\+Buzzer\+\_\+driver.\+do\+\_\+buzzer\+\_\+beep (\begin{DoxyParamCaption}\item[{}]{self }\end{DoxyParamCaption})}
+
+
+
+Short beep of the buzzer. 
+
+\begin{DoxyReturn}{Returns}
+None 
+\end{DoxyReturn}
+\Hypertarget{class_buzzer__driver_1_1_buzzer__driver_a719b2ff444a54515edf124cae241bf67}\label{class_buzzer__driver_1_1_buzzer__driver_a719b2ff444a54515edf124cae241bf67} 
+\index{Buzzer\_driver.Buzzer\_driver@{Buzzer\_driver.Buzzer\_driver}!do\_buzzer\_freq@{do\_buzzer\_freq}}
+\index{do\_buzzer\_freq@{do\_buzzer\_freq}!Buzzer\_driver.Buzzer\_driver@{Buzzer\_driver.Buzzer\_driver}}
+\doxysubsubsection{\texorpdfstring{do\_buzzer\_freq()}{do\_buzzer\_freq()}}
+{\footnotesize\ttfamily  None Buzzer\+\_\+driver.\+Buzzer\+\_\+driver.\+do\+\_\+buzzer\+\_\+freq (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{int}]{\+\_\+beep\+\_\+freq }\end{DoxyParamCaption})}
+
+
+
+Beeps the buzzer at a requested frequency, has to be released or set to 0. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em \+\_\+beep\+\_\+freq} & wanted frequency in Hz \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+None 
+\end{DoxyReturn}
+\Hypertarget{class_buzzer__driver_1_1_buzzer__driver_ab52194d4f28a1c0902fa33ffda84ddf7}\label{class_buzzer__driver_1_1_buzzer__driver_ab52194d4f28a1c0902fa33ffda84ddf7} 
+\index{Buzzer\_driver.Buzzer\_driver@{Buzzer\_driver.Buzzer\_driver}!do\_buzzer\_slowwoop@{do\_buzzer\_slowwoop}}
+\index{do\_buzzer\_slowwoop@{do\_buzzer\_slowwoop}!Buzzer\_driver.Buzzer\_driver@{Buzzer\_driver.Buzzer\_driver}}
+\doxysubsubsection{\texorpdfstring{do\_buzzer\_slowwoop()}{do\_buzzer\_slowwoop()}}
+{\footnotesize\ttfamily  None Buzzer\+\_\+driver.\+Buzzer\+\_\+driver.\+do\+\_\+buzzer\+\_\+slowwoop (\begin{DoxyParamCaption}\item[{}]{self }\end{DoxyParamCaption})}
+
+
+
+Generates a sound from 2000Hz to 50Hz. 
+
+\begin{DoxyReturn}{Returns}
+None 
+\end{DoxyReturn}
+\Hypertarget{class_buzzer__driver_1_1_buzzer__driver_ac318a739a63729e33b852ef1116fb262}\label{class_buzzer__driver_1_1_buzzer__driver_ac318a739a63729e33b852ef1116fb262} 
+\index{Buzzer\_driver.Buzzer\_driver@{Buzzer\_driver.Buzzer\_driver}!init\_buzzer@{init\_buzzer}}
+\index{init\_buzzer@{init\_buzzer}!Buzzer\_driver.Buzzer\_driver@{Buzzer\_driver.Buzzer\_driver}}
+\doxysubsubsection{\texorpdfstring{init\_buzzer()}{init\_buzzer()}}
+{\footnotesize\ttfamily  None Buzzer\+\_\+driver.\+Buzzer\+\_\+driver.\+init\+\_\+buzzer (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{}]{\+\_\+init\+\_\+beep\+\_\+permitted }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Inits the buzzer,
+
+:param _init_beep_permitted: bool, if True, a small beep will sound after init
+:return: None
+\end{DoxyVerb}
+ \Hypertarget{class_buzzer__driver_1_1_buzzer__driver_a6c681b2eef8d020f68fd1b00883ddfaa}\label{class_buzzer__driver_1_1_buzzer__driver_a6c681b2eef8d020f68fd1b00883ddfaa} 
+\index{Buzzer\_driver.Buzzer\_driver@{Buzzer\_driver.Buzzer\_driver}!random\_buzzer@{random\_buzzer}}
+\index{random\_buzzer@{random\_buzzer}!Buzzer\_driver.Buzzer\_driver@{Buzzer\_driver.Buzzer\_driver}}
+\doxysubsubsection{\texorpdfstring{random\_buzzer()}{random\_buzzer()}}
+{\footnotesize\ttfamily  None Buzzer\+\_\+driver.\+Buzzer\+\_\+driver.\+random\+\_\+buzzer (\begin{DoxyParamCaption}\item[{}]{self }\end{DoxyParamCaption})}
+
+
+
+Generates a random sound. 
+
+\begin{DoxyReturn}{Returns}
+None 
+\end{DoxyReturn}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+robohatlib/drivers/Buzzer\+\_\+driver.\+py\end{DoxyCompactItemize}

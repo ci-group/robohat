@@ -1,0 +1,15 @@
+
+
+
+0.0.2 (04-07-23)
+	added this history file
+	updated documentation
+    Buzzer will release its PWM channel when done
+	SERVOASSEMBLY_?_PWMPLUG to a constant PWM plug (PWMPLUG_P3 or PWMPLUG_P4) instead of CS 
+    FPI_LL_Interrupt, type in edge type
+    accu divider to 4.3
+    set_servos_angles spit array bug. detect if array if big enough
+    bug in single readout of servo ADC
+
+0.0.1   (20-06-23)
+	alpha release

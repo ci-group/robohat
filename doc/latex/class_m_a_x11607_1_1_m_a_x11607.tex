@@ -1,0 +1,54 @@
+\doxysection{MAX11607.\+MAX11607 Class Reference}
+\hypertarget{class_m_a_x11607_1_1_m_a_x11607}{}\label{class_m_a_x11607_1_1_m_a_x11607}\index{MAX11607.MAX11607@{MAX11607.MAX11607}}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{class_m_a_x11607_1_1_m_a_x11607_a365ed213838619ed521560ff6508d277}\label{class_m_a_x11607_1_1_m_a_x11607_a365ed213838619ed521560ff6508d277} 
+{\bfseries \+\_\+\+\_\+init\+\_\+\+\_\+} (self, \+\_\+i2cdevice)
+\item 
+\Hypertarget{class_m_a_x11607_1_1_m_a_x11607_a68dd702f813069da564d956367811f5a}\label{class_m_a_x11607_1_1_m_a_x11607_a68dd702f813069da564d956367811f5a} 
+{\bfseries init\+\_\+adc} (self)
+\item 
+float \mbox{\hyperlink{class_m_a_x11607_1_1_m_a_x11607_ae9310ef3216fd60e20912ec72c41d3c1}{get\+\_\+voltage\+\_\+readout\+\_\+channel}} (self, \+\_\+channel\+\_\+nr)
+\begin{DoxyCompactList}\small\item\em Get analog value of a channel from the HAT adc. \end{DoxyCompactList}\item 
+\mbox{[}$\,$\mbox{]} \mbox{\hyperlink{class_m_a_x11607_1_1_m_a_x11607_aee2fdaf71eef0856b53715ed008cd52e}{get\+\_\+readout\+\_\+hatadc\+\_\+mutiplechannels}} (self)
+\begin{DoxyCompactList}\small\item\em Get analog values of the HAT adc. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_m_a_x11607_1_1_m_a_x11607_aee2fdaf71eef0856b53715ed008cd52e}\label{class_m_a_x11607_1_1_m_a_x11607_aee2fdaf71eef0856b53715ed008cd52e} 
+\index{MAX11607.MAX11607@{MAX11607.MAX11607}!get\_readout\_hatadc\_mutiplechannels@{get\_readout\_hatadc\_mutiplechannels}}
+\index{get\_readout\_hatadc\_mutiplechannels@{get\_readout\_hatadc\_mutiplechannels}!MAX11607.MAX11607@{MAX11607.MAX11607}}
+\doxysubsubsection{\texorpdfstring{get\_readout\_hatadc\_mutiplechannels()}{get\_readout\_hatadc\_mutiplechannels()}}
+{\footnotesize\ttfamily  \mbox{[}$\,$\mbox{]} MAX11607.\+MAX11607.\+get\+\_\+readout\+\_\+hatadc\+\_\+mutiplechannels (\begin{DoxyParamCaption}\item[{}]{self }\end{DoxyParamCaption})}
+
+
+
+Get analog values of the HAT adc. 
+
+\begin{DoxyReturn}{Returns}
+analog voltage in a array 
+\end{DoxyReturn}
+\Hypertarget{class_m_a_x11607_1_1_m_a_x11607_ae9310ef3216fd60e20912ec72c41d3c1}\label{class_m_a_x11607_1_1_m_a_x11607_ae9310ef3216fd60e20912ec72c41d3c1} 
+\index{MAX11607.MAX11607@{MAX11607.MAX11607}!get\_voltage\_readout\_channel@{get\_voltage\_readout\_channel}}
+\index{get\_voltage\_readout\_channel@{get\_voltage\_readout\_channel}!MAX11607.MAX11607@{MAX11607.MAX11607}}
+\doxysubsubsection{\texorpdfstring{get\_voltage\_readout\_channel()}{get\_voltage\_readout\_channel()}}
+{\footnotesize\ttfamily  float MAX11607.\+MAX11607.\+get\+\_\+voltage\+\_\+readout\+\_\+channel (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{}]{\+\_\+channel\+\_\+nr }\end{DoxyParamCaption})}
+
+
+
+Get analog value of a channel from the HAT adc. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em \+\_\+channel\+\_\+nr} & The channel nr wanted (starts at 1, so 1 is AI0)\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+analog voltage 
+\end{DoxyReturn}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+robohatlib/drivers/MAX11607.\+py\end{DoxyCompactItemize}

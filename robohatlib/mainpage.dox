@@ -1,0 +1,145 @@
+/**
+\mainpage Main page
+
+<h1>Robohat library</h1>
+
+Version: 0.0.2
+
+A little example of using the Robohat library
+
+\code
+    robohat = Robohat(main_config.servoassembly_1_config, main_config.servoassembly_2_config, main_config.TOPBOARD_IOEXANDER_SW)
+    robohat.scan_i2c_bus()
+    robohat.init(main_config.SERVOBOARD_1_DATAS_ARRAY, main_config.SERVOBOARD_2_DATAS_ARRAY)
+
+    robohat.set_led_color(Color.GREEN)
+
+    for i in range(1,1800, 1):
+        angle = i / 10.0
+        robohat.set_servos_angles([angle, angle, angle, angle, angle, angle, angle, angle, angle, angle, angle, angle, angle, angle, angle, angle])
+        print("-->" + str(robohat.get_servo_angle(1)) + " °")
+        time.sleep(1)
+
+    robohat.set_led_color(Color.RED)
+    for i in range(1800,1, -1):
+        angle = i / 10.0
+        robohat.set_servos_angles([angle, angle, angle, angle, angle, angle, angle, angle, angle, angle, angle, angle, angle, angle, angle, angle])
+        print("-->" + str(robohat.get_servo_angle(1)) + " °")
+        time.sleep(1)
+
+\endcode <I>example sourcecode</I>
+
+<BR>
+The Startpoint of the RoboHat Library is the Robohat class
+<BR>
+
+<h1>Robohat constructor</h1>
+
+<BR>
+The Robohat constructor, consist out of 3 parameters, 2 ServoAssemblyConfigs and a Switch value
+<BR>
+
+\code
+robohat = Robohat(SERVOASSEMBLY_1_CONFIG, SERVOASSEMBLY_2_CONFIG, TOPBOARD_IO_SWITCH)
+\endcode <I>Robohat constructor</I>
+
+<TABLE class="par">
+<TR><TH>SERVOASSEMBLY_1_CONFIG</TH>                     <TH>configuration of first servo assembly (ServoAssemblyConfig) </TH> </TR>
+<TR><TH>SERVOASSEMBLY_2_CONFIG</TH>                     <TH>configuration of second servo assembly (ServoAssemblyConfig) </TH> </TR>
+<TR><TH>TOPBOARD_IO_SWITCH</TH>                         <TH>IO Expander switch value (int) </TH> </TR>
+</TABLE>
+
+<BR>
+The servo assembly is the PCB to which the servos are connected
+\image html servo_assembly.jpg the servo assembly PCB
+
+<h1>ServoAssemblyConfig</h1>
+
+A ServoAssemblyConfig consist out of 4 parameters.
+
+\code
+servoassembly_1_config = ServoAssemblyConfig(SERVOASSEMBLY_1_NAME, SERVOASSEMBLY_1_SW1_PWM_ADDRESS,SERVOASSEMBLY_1_SW2_POWER_GOOD_ADDRESS, SERVOASSEMBLY_1_PWMPLUG)
+\endcode <I>ServoAssemblyConfig constructor</I>
+
+<TABLE class="par">
+<TR><TH>SERVOASSEMBLY_1_NAME</TH>                   <TH>for your own reference </TH> </TR>
+<TR><TH>SERVOASSEMBLY_1_SW1_PWM_ADDRESS</TH>        <TH>SW1, switch value for the PWM address (default 0 or 1)  </TH> </TR>
+<TR><TH>SERVOASSEMBLY_1_SW2_POWER_GOOD_ADDRESS</TH> <TH>SW2, switch value for the POWER GOOD address (default 0 or 1, but the same as SW1) </TH> </TR>
+<TR><TH>SERVOASSEMBLY_1_PWMPLUG</TH>                <TH>cable connected to P3 or P4 of the topboard</TH> </TR>
+</TABLE>
+
+
+\image html assemblyboards_dipswitch.png settings of the switch on a servo assembly and its value
+
+<BR>
+
+<h1>IO Expander switch value</h1>
+
+The last parameter of the robohat constructor, is the 'topboard_io_switch' value. Default its value 7.<BR>
+This value determines the The I2C-address of the IOexpander (MCP23008) of the topboard.<BR>
+The IO-pins can be accessed by plug J2 of the topboard<BR>
+
+\image html topboard_bottom.jpg the bottom of the topboard
+\image html topboard_dipswitch.png settings of the switch on the topboard and its value
+
+<BR>
+
+<h1>I2C-scan</h1>
+After the constructor, an I2C-scan can be done by issuing :
+<BR>
+
+\code
+robohat.scan_i2c_bus()
+\endcode <I>Scanning for i2c-devices</I>
+
+<BR>
+This is not mandatory, but easy for debugging
+<BR>
+
+<h1>robohat.init</h1>
+Before we have some action, we have to initialize the robohat class<BR>
+This will also give the parameters to each servo.<BR>
+<BR>
+
+\code
+robohat.init(main_config.SERVOBOARD_1_DATAS_ARRAY, main_config.SERVOBOARD_2_DATAS_ARRAY)
+\endcode <I>initializing robohat</I>
+
+<BR>
+    The parameters consist of 2 arrays of ServoData
+
+\code
+SERVOBOARD_1_DATAS_ARRAY = [
+                 ServoData(1, 500, 2500, 180, 0, 72.2058435743876, -22.8429203374794),
+                 ...
+                 ...
+\endcode <I>section of the servoboard config array</I>
+
+<h1>ServoData</h1>
+
+<TABLE class="par">
+<TR><TH>SERVO_NR</TH>                   <TH>servo nr of connected servo </TH> </TR>
+<TR><TH>MIN_TIME</TH>                   <TH>time of minimal angle of the servo in uS (example: 500 uS)  </TH> </TR>
+<TR><TH>MAX_TIME</TH>                   <TH>time of maximal angle of the servo in uS (example: 2500 uS)  </TH> </TR>
+<TR><TH>RUNNING_DEGREE</TH>             <TH>range of the servo (example: 180)  </TH> </TR>
+<TR><TH>OFFSET_DEGREE</TH>              <TH>offset of the angle (nearly always: 0)  </TH> </TR>
+<TR><TH>FORMULA_A</TH>                  <TH>first parameter of formula, servo measure-voltage to angle   </TH> </TR>
+<TR><TH>FORMULA_B</TH>                  <TH>second parameter of formula, servo measure-voltage to angle  </TH> </TR>
+</TABLE>
+
+\image html graph_voltage_to_angle.png servo voltage to angle
+
+After initialisation the servos position can be altered
+
+<h1>set_servos_angles</h1>
+
+with the function 'set_servos_angles' you set all the angles of the 16 servos
+
+/code
+        robohat.set_servos_angles([angle, angle, angle, angle, angle, angle, angle, angle, angle, angle, angle, angle, angle, angle, angle, angle])
+/endcode  <I>Setting the servos to an angle</I>
+
+
+
+*/
+    

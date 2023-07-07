@@ -1,0 +1,95 @@
+\doxysection{Robohat\+\_\+config.\+py}
+\hypertarget{_robohat__config_8py_source}{}\label{_robohat__config_8py_source}\index{robohatlib/Robohat\_config.py@{robohatlib/Robohat\_config.py}}
+\mbox{\hyperlink{_robohat__config_8py}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{_robohat__config_8py_source_l00001}\mbox{\hyperlink{namespace_robohat__config}{00001}}\ \textcolor{comment}{\#!/usr/bin/env\ python}}
+\DoxyCodeLine{\Hypertarget{_robohat__config_8py_source_l00002}00002\ }
+\DoxyCodeLine{\Hypertarget{_robohat__config_8py_source_l00003}00003\ \textcolor{keywordflow}{try}:}
+\DoxyCodeLine{\Hypertarget{_robohat__config_8py_source_l00004}00004\ \ \ \ \ \textcolor{keyword}{from}\ robohatlib.driver\_ll.i2c.I2CDeviceDef\ \textcolor{keyword}{import}\ I2CDeviceDef}
+\DoxyCodeLine{\Hypertarget{_robohat__config_8py_source_l00005}00005\ \ \ \ \ \textcolor{keyword}{from}\ robohatlib.drivers.datastructs.McpInitStruct\ \textcolor{keyword}{import}\ McpInitStruct}
+\DoxyCodeLine{\Hypertarget{_robohat__config_8py_source_l00006}00006\ \ \ \ \ \textcolor{keyword}{from}\ robohatlib.driver\_ll.constants.InterruptTypes\ \textcolor{keyword}{import}\ InterruptTypes}
+\DoxyCodeLine{\Hypertarget{_robohat__config_8py_source_l00007}00007\ \ \ \ \ \textcolor{keyword}{from}\ robohatlib.driver\_ll.constants.GPIO\_Direction\ \textcolor{keyword}{import}\ GpioDirection}
+\DoxyCodeLine{\Hypertarget{_robohat__config_8py_source_l00008}00008\ \ \ \ \ \textcolor{keyword}{from}\ robohatlib.driver\_ll.i2c.I2CBusDef\ \textcolor{keyword}{import}\ I2CBusDef}
+\DoxyCodeLine{\Hypertarget{_robohat__config_8py_source_l00009}00009\ \ \ \ \ \textcolor{keyword}{from}\ robohatlib.driver\_ll.spi.SPI\_Bus\_Definition\ \textcolor{keyword}{import}\ SPI\_Bus\_Definition}
+\DoxyCodeLine{\Hypertarget{_robohat__config_8py_source_l00010}00010\ \ \ \ \ \textcolor{keyword}{from}\ robohatlib.driver\_ll.definitions.GPODef\ \textcolor{keyword}{import}\ GPODef}
+\DoxyCodeLine{\Hypertarget{_robohat__config_8py_source_l00011}00011\ \ \ \ \ \textcolor{keyword}{from}\ robohatlib.driver\_ll.definitions.MultiColorLedDef\ \textcolor{keyword}{import}\ MultiColorLedDef}
+\DoxyCodeLine{\Hypertarget{_robohat__config_8py_source_l00012}00012\ \ \ \ \ \textcolor{keyword}{from}\ robohatlib.hal.definitions.BuzzerDef\ \textcolor{keyword}{import}\ BuzzerDef}
+\DoxyCodeLine{\Hypertarget{_robohat__config_8py_source_l00013}00013\ \ \ \ \ \textcolor{keyword}{from}\ robohatlib.driver\_ll.definitions.SerialDef\ \textcolor{keyword}{import}\ SerialDef}
+\DoxyCodeLine{\Hypertarget{_robohat__config_8py_source_l00014}00014\ \ \ \ \ \textcolor{keyword}{from}\ robohatlib.hal.definitions.IMUDef\ \textcolor{keyword}{import}\ IMUDef}
+\DoxyCodeLine{\Hypertarget{_robohat__config_8py_source_l00015}00015\ \ \ \ \ \textcolor{keyword}{from}\ robohatlib.driver\_ll.definitions.IOExpanderDef\ \textcolor{keyword}{import}\ IOExpanderDef}
+\DoxyCodeLine{\Hypertarget{_robohat__config_8py_source_l00016}00016\ \textcolor{keywordflow}{except}\ ImportError:}
+\DoxyCodeLine{\Hypertarget{_robohat__config_8py_source_l00017}00017\ \ \ \ \ \textcolor{keywordflow}{raise}\ ImportError(\textcolor{stringliteral}{"{}Failed\ to\ import\ needed\ dependencies\ for\ the\ Robohat\_config"{}})}
+\DoxyCodeLine{\Hypertarget{_robohat__config_8py_source_l00018}00018\ }
+\DoxyCodeLine{\Hypertarget{_robohat__config_8py_source_l00019}\mbox{\hyperlink{namespace_robohat__config_a45751ddbb84fb3c799332c12773d4aa8}{00019}}\ ALARM\_PERMITTED\ =\ \textcolor{keyword}{False}}
+\DoxyCodeLine{\Hypertarget{_robohat__config_8py_source_l00020}\mbox{\hyperlink{namespace_robohat__config_adfa1cafba7a9b700fa6cc3104c2ec38c}{00020}}\ ALARM\_TIMEOUT\_IN\_SEC\ =\ 300}
+\DoxyCodeLine{\Hypertarget{_robohat__config_8py_source_l00021}\mbox{\hyperlink{namespace_robohat__config_a7edd28e09e6bc80f113a11d4d6bbb72c}{00021}}\ INIT\_BEEP\_PERMITTED\ =\ \textcolor{keyword}{False}}
+\DoxyCodeLine{\Hypertarget{_robohat__config_8py_source_l00022}00022\ }
+\DoxyCodeLine{\Hypertarget{_robohat__config_8py_source_l00023}00023\ \textcolor{comment}{\#-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/settings\ of\ peripherals\ which\ are\ not\ user\ selectable}}
+\DoxyCodeLine{\Hypertarget{_robohat__config_8py_source_l00024}00024\ }
+\DoxyCodeLine{\Hypertarget{_robohat__config_8py_source_l00025}\mbox{\hyperlink{namespace_robohat__config_a98a67b4d4544e499bd160b58c5c5bce5}{00025}}\ BUZZER\_DEF\ =\ BuzzerDef(\textcolor{stringliteral}{"{}buzzer1"{}},\ 18,\ 1000,\ 50)}
+\DoxyCodeLine{\Hypertarget{_robohat__config_8py_source_l00026}\mbox{\hyperlink{namespace_robohat__config_abb02060e2a931afc3560e1b7b3789765}{00026}}\ SERIAL\_DEF\ =\ SerialDef(\textcolor{stringliteral}{"{}debug\_port"{}},\ 1)}
+\DoxyCodeLine{\Hypertarget{_robohat__config_8py_source_l00027}00027\ }
+\DoxyCodeLine{\Hypertarget{_robohat__config_8py_source_l00028}\mbox{\hyperlink{namespace_robohat__config_af1986d651d4ca8ba49183c497fc5d112}{00028}}\ LEDRED\_GPO\_DEF\ =\ GPODef(\textcolor{stringliteral}{"{}led\_red"{}},\ 5)}
+\DoxyCodeLine{\Hypertarget{_robohat__config_8py_source_l00029}\mbox{\hyperlink{namespace_robohat__config_a08e550ee9ca3cbec402845af2cc02e7b}{00029}}\ LEDGREEN\_GPO\_DEF\ =\ GPODef(\textcolor{stringliteral}{"{}led\_green"{}},\ 6)}
+\DoxyCodeLine{\Hypertarget{_robohat__config_8py_source_l00030}\mbox{\hyperlink{namespace_robohat__config_a01b327c668f08b83e988ac270a8183e6}{00030}}\ LEDBLUE\_GPO\_DEF\ =\ GPODef(\textcolor{stringliteral}{"{}led\_blue"{}},\ 26)}
+\DoxyCodeLine{\Hypertarget{_robohat__config_8py_source_l00031}\mbox{\hyperlink{namespace_robohat__config_afe49396710e821ca9c764cdfbdaed4d9}{00031}}\ STATUSLED\_DEF\ =\ MultiColorLedDef(\textcolor{stringliteral}{"{}statusled"{}},\ LEDRED\_GPO\_DEF,\ LEDGREEN\_GPO\_DEF,\ LEDBLUE\_GPO\_DEF)}
+\DoxyCodeLine{\Hypertarget{_robohat__config_8py_source_l00032}00032\ }
+\DoxyCodeLine{\Hypertarget{_robohat__config_8py_source_l00033}00033\ }
+\DoxyCodeLine{\Hypertarget{_robohat__config_8py_source_l00034}\mbox{\hyperlink{namespace_robohat__config_a01768e1d18ac35f936db836f5acdc2bd}{00034}}\ MINIMU9\_LIS3MDL\_I2C\_DEF\ =\ I2CDeviceDef(\textcolor{stringliteral}{"{}IMU\_1\_I2C"{}},\ 5,\ 0x1e)\ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ i2c\ bus5,\ address\ 0x1e}}
+\DoxyCodeLine{\Hypertarget{_robohat__config_8py_source_l00035}\mbox{\hyperlink{namespace_robohat__config_a322dfe8b508a1d268fc3e374e7f8a485}{00035}}\ MINIMU9\_LSM6DS33\_I2C\_DEF\ =\ I2CDeviceDef(\textcolor{stringliteral}{"{}IMU\_2\_I2C"{}},\ 5,\ 0x6b)\ \ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ i2c\ bus5,\ address\ 0x6b}}
+\DoxyCodeLine{\Hypertarget{_robohat__config_8py_source_l00036}\mbox{\hyperlink{namespace_robohat__config_a8eb4e5d22045700f8e771a3501fa0f0c}{00036}}\ IMU\_DEF\ =\ IMUDef(\textcolor{stringliteral}{"{}IMU"{}},\ MINIMU9\_LIS3MDL\_I2C\_DEF,\ MINIMU9\_LSM6DS33\_I2C\_DEF)}
+\DoxyCodeLine{\Hypertarget{_robohat__config_8py_source_l00037}00037\ }
+\DoxyCodeLine{\Hypertarget{_robohat__config_8py_source_l00038}00038\ }
+\DoxyCodeLine{\Hypertarget{_robohat__config_8py_source_l00039}\mbox{\hyperlink{namespace_robohat__config_ae12a3d4fe4dd1c47b177e4a52359ad46}{00039}}\ HATADC\_I2C\_DEF\ =\ I2CDeviceDef(\textcolor{stringliteral}{"{}HATADC\_I2C"{}},\ 5,\ 0x34)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ i2c\ bus5,\ address\ 0x34}}
+\DoxyCodeLine{\Hypertarget{_robohat__config_8py_source_l00040}00040\ }
+\DoxyCodeLine{\Hypertarget{_robohat__config_8py_source_l00041}00041\ }
+\DoxyCodeLine{\Hypertarget{_robohat__config_8py_source_l00042}\mbox{\hyperlink{namespace_robohat__config_ab3bbe94717b9db09734be264a10a2f3a}{00042}}\ POWERSHUTDOWN\_GPO\_DEF\ =\ GPODef(\textcolor{stringliteral}{"{}shutdown"{}},\ 27)}
+\DoxyCodeLine{\Hypertarget{_robohat__config_8py_source_l00043}00043\ }
+\DoxyCodeLine{\Hypertarget{_robohat__config_8py_source_l00044}00044\ \textcolor{comment}{\#-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{\Hypertarget{_robohat__config_8py_source_l00045}00045\ }
+\DoxyCodeLine{\Hypertarget{_robohat__config_8py_source_l00046}\mbox{\hyperlink{namespace_robohat__config_ae3b4abf8b75c1747c92fc5c2e3eb58b8}{00046}}\ SERVOASSEMBLY\_1\_I2C\_BUS\ =\ 1}
+\DoxyCodeLine{\Hypertarget{_robohat__config_8py_source_l00047}\mbox{\hyperlink{namespace_robohat__config_abbaf7067949b0c283a2f88d193e7be99}{00047}}\ SERVOASSEMBLY\_1\_SPI\_BUS\ =\ 0}
+\DoxyCodeLine{\Hypertarget{_robohat__config_8py_source_l00048}00048\ }
+\DoxyCodeLine{\Hypertarget{_robohat__config_8py_source_l00049}\mbox{\hyperlink{namespace_robohat__config_affe28fac1297be7670ba73abbe156287}{00049}}\ SERVOASSEMBLY\_2\_I2C\_BUS\ =\ 1}
+\DoxyCodeLine{\Hypertarget{_robohat__config_8py_source_l00050}\mbox{\hyperlink{namespace_robohat__config_a89cec2da47b86d13c57406da20e31647}{00050}}\ SERVOASSEMBLY\_2\_SPI\_BUS\ =\ 0}
+\DoxyCodeLine{\Hypertarget{_robohat__config_8py_source_l00051}00051\ }
+\DoxyCodeLine{\Hypertarget{_robohat__config_8py_source_l00052}\mbox{\hyperlink{namespace_robohat__config_a227e47c59a9ce7f7a4c3a3d86209921c}{00052}}\ SERVOASSEMBLY\_COMMON\_GPI\ =\ 4}
+\DoxyCodeLine{\Hypertarget{_robohat__config_8py_source_l00053}00053\ }
+\DoxyCodeLine{\Hypertarget{_robohat__config_8py_source_l00054}00054\ \textcolor{comment}{\#-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{\Hypertarget{_robohat__config_8py_source_l00055}00055\ }
+\DoxyCodeLine{\Hypertarget{_robohat__config_8py_source_l00056}\mbox{\hyperlink{namespace_robohat__config_aa30de453592b91139a5bb4357620ffac}{00056}}\ IOEXPANDER\_I2C\_DEF\ =\ I2CDeviceDef(\textcolor{stringliteral}{"{}IOEXPANDER\_I2C"{}},\ 1,\ 0x20)\ \ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ i2c\ bus1,\ address\ 0x2}}
+\DoxyCodeLine{\Hypertarget{_robohat__config_8py_source_l00057}\mbox{\hyperlink{namespace_robohat__config_adc47956a228b651e535c3e4bef9402e4}{00057}}\ IOEXPANDER\_INTERUPT\_SETTINGS\ =\ [}
+\DoxyCodeLine{\Hypertarget{_robohat__config_8py_source_l00058}00058\ \ \ \ \ McpInitStruct(0,\ GpioDirection.GPIO\_INPUT,\ InterruptTypes.INT\_RISING),}
+\DoxyCodeLine{\Hypertarget{_robohat__config_8py_source_l00059}00059\ \ \ \ \ McpInitStruct(1,\ GpioDirection.GPIO\_INPUT,\ InterruptTypes.INT\_RISING),}
+\DoxyCodeLine{\Hypertarget{_robohat__config_8py_source_l00060}00060\ \ \ \ \ McpInitStruct(2,\ GpioDirection.GPIO\_INPUT,\ InterruptTypes.INT\_RISING),}
+\DoxyCodeLine{\Hypertarget{_robohat__config_8py_source_l00061}00061\ \ \ \ \ McpInitStruct(3,\ GpioDirection.GPIO\_INPUT,\ InterruptTypes.INT\_RISING),}
+\DoxyCodeLine{\Hypertarget{_robohat__config_8py_source_l00062}00062\ \ \ \ \ McpInitStruct(4,\ GpioDirection.GPIO\_INPUT,\ InterruptTypes.INT\_RISING),}
+\DoxyCodeLine{\Hypertarget{_robohat__config_8py_source_l00063}00063\ \ \ \ \ McpInitStruct(5,\ GpioDirection.GPIO\_INPUT,\ InterruptTypes.INT\_RISING),}
+\DoxyCodeLine{\Hypertarget{_robohat__config_8py_source_l00064}00064\ \ \ \ \ McpInitStruct(6,\ GpioDirection.GPIO\_INPUT,\ InterruptTypes.INT\_RISING),}
+\DoxyCodeLine{\Hypertarget{_robohat__config_8py_source_l00065}00065\ \ \ \ \ McpInitStruct(7,\ GpioDirection.GPIO\_INPUT,\ InterruptTypes.INT\_RISING),}
+\DoxyCodeLine{\Hypertarget{_robohat__config_8py_source_l00066}00066\ \ \ \ \ ]}
+\DoxyCodeLine{\Hypertarget{_robohat__config_8py_source_l00067}00067\ }
+\DoxyCodeLine{\Hypertarget{_robohat__config_8py_source_l00068}\mbox{\hyperlink{namespace_robohat__config_a7a9f449d409dd8df062f77ca78f139ca}{00068}}\ IO\_EXPANDER\_DEF\ =\ IOExpanderDef(\textcolor{stringliteral}{"{}ioexpander"{}},\ IOEXPANDER\_I2C\_DEF,\ 24,\ IOEXPANDER\_INTERUPT\_SETTINGS)}
+\DoxyCodeLine{\Hypertarget{_robohat__config_8py_source_l00069}00069\ }
+\DoxyCodeLine{\Hypertarget{_robohat__config_8py_source_l00070}00070\ }
+\DoxyCodeLine{\Hypertarget{_robohat__config_8py_source_l00071}\mbox{\hyperlink{namespace_robohat__config_ad92282613c14ab227e1ed6e595210e37}{00071}}\ SERVOASSEMBLY\_INTERUPT\_SETTINGS\ =\ [}
+\DoxyCodeLine{\Hypertarget{_robohat__config_8py_source_l00072}00072\ \ \ \ \ McpInitStruct(0,\ GpioDirection.GPIO\_INPUT,\ InterruptTypes.INT\_RISING),}
+\DoxyCodeLine{\Hypertarget{_robohat__config_8py_source_l00073}00073\ \ \ \ \ McpInitStruct(1,\ GpioDirection.GPIO\_INPUT,\ InterruptTypes.INT\_RISING),}
+\DoxyCodeLine{\Hypertarget{_robohat__config_8py_source_l00074}00074\ \ \ \ \ McpInitStruct(2,\ GpioDirection.GPIO\_INPUT,\ InterruptTypes.INT\_RISING),}
+\DoxyCodeLine{\Hypertarget{_robohat__config_8py_source_l00075}00075\ \ \ \ \ McpInitStruct(3,\ GpioDirection.GPIO\_INPUT,\ InterruptTypes.INT\_RISING),}
+\DoxyCodeLine{\Hypertarget{_robohat__config_8py_source_l00076}00076\ \ \ \ \ McpInitStruct(4,\ GpioDirection.GPIO\_INPUT,\ InterruptTypes.INT\_RISING),}
+\DoxyCodeLine{\Hypertarget{_robohat__config_8py_source_l00077}00077\ \ \ \ \ McpInitStruct(5,\ GpioDirection.GPIO\_INPUT,\ InterruptTypes.INT\_RISING),}
+\DoxyCodeLine{\Hypertarget{_robohat__config_8py_source_l00078}00078\ \ \ \ \ McpInitStruct(6,\ GpioDirection.GPIO\_INPUT,\ InterruptTypes.INT\_RISING),}
+\DoxyCodeLine{\Hypertarget{_robohat__config_8py_source_l00079}00079\ \ \ \ \ McpInitStruct(7,\ GpioDirection.GPIO\_INPUT,\ InterruptTypes.INT\_RISING),}
+\DoxyCodeLine{\Hypertarget{_robohat__config_8py_source_l00080}00080\ \ \ \ \ ]}
+\DoxyCodeLine{\Hypertarget{_robohat__config_8py_source_l00081}00081\ }
+\DoxyCodeLine{\Hypertarget{_robohat__config_8py_source_l00082}00082\ }
+\DoxyCodeLine{\Hypertarget{_robohat__config_8py_source_l00083}\mbox{\hyperlink{namespace_robohat__config_a0e252b618769e21eb5d494b67918ad30}{00083}}\ I2C1\_DEF\ =\ I2CBusDef(\textcolor{stringliteral}{"{}main\_i2c"{}},\ 1,\ 3,\ 2,\ 100000)}
+\DoxyCodeLine{\Hypertarget{_robohat__config_8py_source_l00084}\mbox{\hyperlink{namespace_robohat__config_ab12f52428e55225130ea7a9436b47223}{00084}}\ I2C5\_DEF\ =\ I2CBusDef(\textcolor{stringliteral}{"{}hat\_adc"{}},\ 5,\ 13,\ 12,\ 100000)}
+\DoxyCodeLine{\Hypertarget{_robohat__config_8py_source_l00085}\mbox{\hyperlink{namespace_robohat__config_a1fc3568fcb51c2e758f7c978ac5392b5}{00085}}\ I2C6\_DEF\ =\ I2CBusDef(\textcolor{stringliteral}{"{}unknown"{}},\ 6,\ 23,\ 22,\ 100000)}
+\DoxyCodeLine{\Hypertarget{_robohat__config_8py_source_l00086}00086\ }
+\DoxyCodeLine{\Hypertarget{_robohat__config_8py_source_l00087}\mbox{\hyperlink{namespace_robohat__config_a4329ce49c4be55e37267023e5008ef12}{00087}}\ SPI0\_DEF\ =\ SPI\_Bus\_Definition(\textcolor{stringliteral}{"{}spi\_bus\_0"{}},\ 0,\ 11,\ 10,\ 9)}
+\DoxyCodeLine{\Hypertarget{_robohat__config_8py_source_l00088}\mbox{\hyperlink{namespace_robohat__config_acf631153e70123bcf6e6b12629f55de5}{00088}}\ SPI1\_DEF\ =\ SPI\_Bus\_Definition(\textcolor{stringliteral}{"{}spi\_bus\_1"{}},\ 1,\ 21,\ 20,\ 19)}
+\DoxyCodeLine{\Hypertarget{_robohat__config_8py_source_l00089}\mbox{\hyperlink{namespace_robohat__config_a7a4acbd8996227c01b565ad7d4ca9dfc}{00089}}\ SPI2\_DEF\ =\ SPI\_Bus\_Definition(\textcolor{stringliteral}{"{}spi\_bus\_2"{}},\ 2,\ 42,\ 41,\ 40)}
+
+\end{DoxyCode}

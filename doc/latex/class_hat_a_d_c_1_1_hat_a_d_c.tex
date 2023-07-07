@@ -1,0 +1,88 @@
+\doxysection{Hat\+ADC.\+Hat\+ADC Class Reference}
+\hypertarget{class_hat_a_d_c_1_1_hat_a_d_c}{}\label{class_hat_a_d_c_1_1_hat_a_d_c}\index{HatADC.HatADC@{HatADC.HatADC}}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+None \mbox{\hyperlink{class_hat_a_d_c_1_1_hat_a_d_c_aff997329d16ba57f6c8ff830f3215032}{\+\_\+\+\_\+init\+\_\+\+\_\+}} (self, \+\_\+iomanager, \+\_\+hat\+\_\+adc\+\_\+i2c\+\_\+def)
+\item 
+None \mbox{\hyperlink{class_hat_a_d_c_1_1_hat_a_d_c_afad4ea6b4f446eb2979e54f7423dba15}{init\+\_\+hatadc}} (self)
+\item 
+float \mbox{\hyperlink{class_hat_a_d_c_1_1_hat_a_d_c_aff0e741953eb63e272fdd23502dfaed4}{get\+\_\+voltage\+\_\+readout\+\_\+hatadc\+\_\+channel}} (self, int \+\_\+channel\+\_\+nr)
+\begin{DoxyCompactList}\small\item\em Get analog value of a channel from the HAT adc. \end{DoxyCompactList}\item 
+\mbox{[}$\,$\mbox{]} \mbox{\hyperlink{class_hat_a_d_c_1_1_hat_a_d_c_aa8984c283883afbfea24cb238ffdb58a}{get\+\_\+voltage\+\_\+readout\+\_\+hatadc\+\_\+mutiplechannels}} (self)
+\begin{DoxyCompactList}\small\item\em Get analog values of all channel from the HAT adc. \end{DoxyCompactList}\item 
+float \mbox{\hyperlink{class_hat_a_d_c_1_1_hat_a_d_c_a52d7736ad95be3b1c36f66c2b1e14bae}{get\+\_\+voltage\+\_\+of\+\_\+accu}} (self)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\begin{DoxyVerb}\end{DoxyVerb}
+ 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{class_hat_a_d_c_1_1_hat_a_d_c_aff997329d16ba57f6c8ff830f3215032}\label{class_hat_a_d_c_1_1_hat_a_d_c_aff997329d16ba57f6c8ff830f3215032} 
+\index{HatADC.HatADC@{HatADC.HatADC}!\_\_init\_\_@{\_\_init\_\_}}
+\index{\_\_init\_\_@{\_\_init\_\_}!HatADC.HatADC@{HatADC.HatADC}}
+\doxysubsubsection{\texorpdfstring{\_\_init\_\_()}{\_\_init\_\_()}}
+{\footnotesize\ttfamily  None Hat\+ADC.\+Hat\+ADC.\+\_\+\+\_\+init\+\_\+\+\_\+ (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{}]{\+\_\+iomanager,  }\item[{}]{\+\_\+hat\+\_\+adc\+\_\+i2c\+\_\+def }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}:param _iomanager:
+:param _hat_adc_i2c_def:
+\end{DoxyVerb}
+ 
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_hat_a_d_c_1_1_hat_a_d_c_a52d7736ad95be3b1c36f66c2b1e14bae}\label{class_hat_a_d_c_1_1_hat_a_d_c_a52d7736ad95be3b1c36f66c2b1e14bae} 
+\index{HatADC.HatADC@{HatADC.HatADC}!get\_voltage\_of\_accu@{get\_voltage\_of\_accu}}
+\index{get\_voltage\_of\_accu@{get\_voltage\_of\_accu}!HatADC.HatADC@{HatADC.HatADC}}
+\doxysubsubsection{\texorpdfstring{get\_voltage\_of\_accu()}{get\_voltage\_of\_accu()}}
+{\footnotesize\ttfamily  float Hat\+ADC.\+Hat\+ADC.\+get\+\_\+voltage\+\_\+of\+\_\+accu (\begin{DoxyParamCaption}\item[{}]{self }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}:return float:
+\end{DoxyVerb}
+ \Hypertarget{class_hat_a_d_c_1_1_hat_a_d_c_aff0e741953eb63e272fdd23502dfaed4}\label{class_hat_a_d_c_1_1_hat_a_d_c_aff0e741953eb63e272fdd23502dfaed4} 
+\index{HatADC.HatADC@{HatADC.HatADC}!get\_voltage\_readout\_hatadc\_channel@{get\_voltage\_readout\_hatadc\_channel}}
+\index{get\_voltage\_readout\_hatadc\_channel@{get\_voltage\_readout\_hatadc\_channel}!HatADC.HatADC@{HatADC.HatADC}}
+\doxysubsubsection{\texorpdfstring{get\_voltage\_readout\_hatadc\_channel()}{get\_voltage\_readout\_hatadc\_channel()}}
+{\footnotesize\ttfamily  float Hat\+ADC.\+Hat\+ADC.\+get\+\_\+voltage\+\_\+readout\+\_\+hatadc\+\_\+channel (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{int}]{\+\_\+channel\+\_\+nr }\end{DoxyParamCaption})}
+
+
+
+Get analog value of a channel from the HAT adc. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em \+\_\+channel\+\_\+nr} & The channel nr wanted (starts at 1, so 1 is AI0)\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+analog voltage 
+\end{DoxyReturn}
+\Hypertarget{class_hat_a_d_c_1_1_hat_a_d_c_aa8984c283883afbfea24cb238ffdb58a}\label{class_hat_a_d_c_1_1_hat_a_d_c_aa8984c283883afbfea24cb238ffdb58a} 
+\index{HatADC.HatADC@{HatADC.HatADC}!get\_voltage\_readout\_hatadc\_mutiplechannels@{get\_voltage\_readout\_hatadc\_mutiplechannels}}
+\index{get\_voltage\_readout\_hatadc\_mutiplechannels@{get\_voltage\_readout\_hatadc\_mutiplechannels}!HatADC.HatADC@{HatADC.HatADC}}
+\doxysubsubsection{\texorpdfstring{get\_voltage\_readout\_hatadc\_mutiplechannels()}{get\_voltage\_readout\_hatadc\_mutiplechannels()}}
+{\footnotesize\ttfamily  \mbox{[}$\,$\mbox{]} Hat\+ADC.\+Hat\+ADC.\+get\+\_\+voltage\+\_\+readout\+\_\+hatadc\+\_\+mutiplechannels (\begin{DoxyParamCaption}\item[{}]{self }\end{DoxyParamCaption})}
+
+
+
+Get analog values of all channel from the HAT adc. 
+
+\begin{DoxyReturn}{Returns}
+array of analog voltage 
+\end{DoxyReturn}
+\Hypertarget{class_hat_a_d_c_1_1_hat_a_d_c_afad4ea6b4f446eb2979e54f7423dba15}\label{class_hat_a_d_c_1_1_hat_a_d_c_afad4ea6b4f446eb2979e54f7423dba15} 
+\index{HatADC.HatADC@{HatADC.HatADC}!init\_hatadc@{init\_hatadc}}
+\index{init\_hatadc@{init\_hatadc}!HatADC.HatADC@{HatADC.HatADC}}
+\doxysubsubsection{\texorpdfstring{init\_hatadc()}{init\_hatadc()}}
+{\footnotesize\ttfamily  None Hat\+ADC.\+Hat\+ADC.\+init\+\_\+hatadc (\begin{DoxyParamCaption}\item[{}]{self }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Initializes the HAR Adc
+
+@return None
+\end{DoxyVerb}
+ 
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+robohatlib/hal/Hat\+ADC.\+py\end{DoxyCompactItemize}

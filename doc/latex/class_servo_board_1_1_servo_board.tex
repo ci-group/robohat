@@ -1,0 +1,114 @@
+\doxysection{Servo\+Board.\+Servo\+Board Class Reference}
+\hypertarget{class_servo_board_1_1_servo_board}{}\label{class_servo_board_1_1_servo_board}\index{ServoBoard.ServoBoard@{ServoBoard.ServoBoard}}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{class_servo_board_1_1_servo_board_ae3e7cefd5ee2b9fedc1432d4d91ec268}\label{class_servo_board_1_1_servo_board_ae3e7cefd5ee2b9fedc1432d4d91ec268} 
+{\bfseries \+\_\+\+\_\+init\+\_\+\+\_\+} (self, i2c\+\_\+device\+\_\+servo, \+\_\+spi\+\_\+device\+\_\+servo\+\_\+adc)
+\item 
+\Hypertarget{class_servo_board_1_1_servo_board_a6ce6e244064f4a251fa2a22f61982d9e}\label{class_servo_board_1_1_servo_board_a6ce6e244064f4a251fa2a22f61982d9e} 
+{\bfseries init\+\_\+servo\+\_\+board} (self, \+\_\+servo\+\_\+datas\+\_\+array)
+\item 
+\Hypertarget{class_servo_board_1_1_servo_board_a4b92026fc2fc8fb617d44f286dd06e8c}\label{class_servo_board_1_1_servo_board_a4b92026fc2fc8fb617d44f286dd06e8c} 
+None {\bfseries set\+\_\+servo\+\_\+angle} (self, int \+\_\+servo\+\_\+nr, float \+\_\+wanted\+\_\+angle)
+\item 
+float \mbox{\hyperlink{class_servo_board_1_1_servo_board_a41ced24bc5c7a2dd44915a225cab13c1}{get\+\_\+servo\+\_\+angle}} (self, int \+\_\+servo\+\_\+nr)
+\begin{DoxyCompactList}\small\item\em Get angle of connected servo in degree. \end{DoxyCompactList}\item 
+\Hypertarget{class_servo_board_1_1_servo_board_a4336752b4d6e39efe472e093379149ed}\label{class_servo_board_1_1_servo_board_a4336752b4d6e39efe472e093379149ed} 
+None {\bfseries set\+\_\+all\+\_\+servos\+\_\+angle} (self, \+\_\+wanted\+\_\+angles)
+\item 
+\mbox{[}$\,$\mbox{]} \mbox{\hyperlink{class_servo_board_1_1_servo_board_a284d90a1c10c2af21817cd3a27ee431b}{get\+\_\+all\+\_\+servos\+\_\+angle}} (self)
+\item 
+float \mbox{\hyperlink{class_servo_board_1_1_servo_board_ad8c5e5d619e14d6040044946fda445cd}{get\+\_\+readout\+\_\+adc\+\_\+single\+\_\+channel}} (self, int \+\_\+servo\+\_\+nr)
+\begin{DoxyCompactList}\small\item\em Get voltage of the potentiometer of the connected servo in vol. \end{DoxyCompactList}\item 
+\mbox{[}$\,$\mbox{]} \mbox{\hyperlink{class_servo_board_1_1_servo_board_a69ae171a0fe9f1b2475c20a2fdb05a6d}{get\+\_\+readout\+\_\+adc\+\_\+multiple\+\_\+channels}} (self)
+\item 
+\Hypertarget{class_servo_board_1_1_servo_board_afb08463b65144af97c40a83a915eb947}\label{class_servo_board_1_1_servo_board_afb08463b65144af97c40a83a915eb947} 
+{\bfseries change\+\_\+servo\+\_\+parameters} (self, \+\_\+servo\+\_\+channel, \+\_\+min\+\_\+time, \+\_\+max\+\_\+time, \+\_\+running\+\_\+degree, \+\_\+offset\+\_\+degree, \+\_\+min\+\_\+degree\+\_\+voltage\+\_\+adc, \+\_\+max\+\_\+degree\+\_\+voltage\+\_\+adc)
+\item 
+\Hypertarget{class_servo_board_1_1_servo_board_a38342ceb3065f72e14529bad5306b432}\label{class_servo_board_1_1_servo_board_a38342ceb3065f72e14529bad5306b432} 
+{\bfseries reset\+\_\+adc} (self)
+\item 
+bool \mbox{\hyperlink{class_servo_board_1_1_servo_board_af4b91b06cf4ba8fa4514e9376e977dd1}{get\+\_\+hardware\+\_\+angle\+\_\+according\+\_\+to\+\_\+readout\+\_\+at\+\_\+init}} (self)
+\item 
+None \mbox{\hyperlink{class_servo_board_1_1_servo_board_a2790587e318aec96b5be353afe7f00f4}{set\+\_\+hardware\+\_\+angle\+\_\+according\+\_\+to\+\_\+readout\+\_\+at\+\_\+init}} (self, \+\_\+enable)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_servo_board_1_1_servo_board_a284d90a1c10c2af21817cd3a27ee431b}\label{class_servo_board_1_1_servo_board_a284d90a1c10c2af21817cd3a27ee431b} 
+\index{ServoBoard.ServoBoard@{ServoBoard.ServoBoard}!get\_all\_servos\_angle@{get\_all\_servos\_angle}}
+\index{get\_all\_servos\_angle@{get\_all\_servos\_angle}!ServoBoard.ServoBoard@{ServoBoard.ServoBoard}}
+\doxysubsubsection{\texorpdfstring{get\_all\_servos\_angle()}{get\_all\_servos\_angle()}}
+{\footnotesize\ttfamily  \mbox{[}$\,$\mbox{]} Servo\+Board.\+Servo\+Board.\+get\+\_\+all\+\_\+servos\+\_\+angle (\begin{DoxyParamCaption}\item[{}]{self }\end{DoxyParamCaption})}
+
+\begin{DoxyReturn}{Returns}
+angles of servos in degree 
+\end{DoxyReturn}
+\Hypertarget{class_servo_board_1_1_servo_board_af4b91b06cf4ba8fa4514e9376e977dd1}\label{class_servo_board_1_1_servo_board_af4b91b06cf4ba8fa4514e9376e977dd1} 
+\index{ServoBoard.ServoBoard@{ServoBoard.ServoBoard}!get\_hardware\_angle\_according\_to\_readout\_at\_init@{get\_hardware\_angle\_according\_to\_readout\_at\_init}}
+\index{get\_hardware\_angle\_according\_to\_readout\_at\_init@{get\_hardware\_angle\_according\_to\_readout\_at\_init}!ServoBoard.ServoBoard@{ServoBoard.ServoBoard}}
+\doxysubsubsection{\texorpdfstring{get\_hardware\_angle\_according\_to\_readout\_at\_init()}{get\_hardware\_angle\_according\_to\_readout\_at\_init()}}
+{\footnotesize\ttfamily  bool Servo\+Board.\+Servo\+Board.\+get\+\_\+hardware\+\_\+angle\+\_\+according\+\_\+to\+\_\+readout\+\_\+at\+\_\+init (\begin{DoxyParamCaption}\item[{}]{self }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}:return: bool
+\end{DoxyVerb}
+ \Hypertarget{class_servo_board_1_1_servo_board_a69ae171a0fe9f1b2475c20a2fdb05a6d}\label{class_servo_board_1_1_servo_board_a69ae171a0fe9f1b2475c20a2fdb05a6d} 
+\index{ServoBoard.ServoBoard@{ServoBoard.ServoBoard}!get\_readout\_adc\_multiple\_channels@{get\_readout\_adc\_multiple\_channels}}
+\index{get\_readout\_adc\_multiple\_channels@{get\_readout\_adc\_multiple\_channels}!ServoBoard.ServoBoard@{ServoBoard.ServoBoard}}
+\doxysubsubsection{\texorpdfstring{get\_readout\_adc\_multiple\_channels()}{get\_readout\_adc\_multiple\_channels()}}
+{\footnotesize\ttfamily  \mbox{[}$\,$\mbox{]} Servo\+Board.\+Servo\+Board.\+get\+\_\+readout\+\_\+adc\+\_\+multiple\+\_\+channels (\begin{DoxyParamCaption}\item[{}]{self }\end{DoxyParamCaption})}
+
+\begin{DoxyReturn}{Returns}
+voltages of the potentiometer of all the servos in volt 
+\end{DoxyReturn}
+\Hypertarget{class_servo_board_1_1_servo_board_ad8c5e5d619e14d6040044946fda445cd}\label{class_servo_board_1_1_servo_board_ad8c5e5d619e14d6040044946fda445cd} 
+\index{ServoBoard.ServoBoard@{ServoBoard.ServoBoard}!get\_readout\_adc\_single\_channel@{get\_readout\_adc\_single\_channel}}
+\index{get\_readout\_adc\_single\_channel@{get\_readout\_adc\_single\_channel}!ServoBoard.ServoBoard@{ServoBoard.ServoBoard}}
+\doxysubsubsection{\texorpdfstring{get\_readout\_adc\_single\_channel()}{get\_readout\_adc\_single\_channel()}}
+{\footnotesize\ttfamily  float Servo\+Board.\+Servo\+Board.\+get\+\_\+readout\+\_\+adc\+\_\+single\+\_\+channel (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{int}]{\+\_\+servo\+\_\+nr }\end{DoxyParamCaption})}
+
+
+
+Get voltage of the potentiometer of the connected servo in vol. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em \+\_\+servo\+\_\+nr} & The servo nr wanted (starts at 1)\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+voltage of the potentiometer of the connected servo in volt 
+\end{DoxyReturn}
+\Hypertarget{class_servo_board_1_1_servo_board_a41ced24bc5c7a2dd44915a225cab13c1}\label{class_servo_board_1_1_servo_board_a41ced24bc5c7a2dd44915a225cab13c1} 
+\index{ServoBoard.ServoBoard@{ServoBoard.ServoBoard}!get\_servo\_angle@{get\_servo\_angle}}
+\index{get\_servo\_angle@{get\_servo\_angle}!ServoBoard.ServoBoard@{ServoBoard.ServoBoard}}
+\doxysubsubsection{\texorpdfstring{get\_servo\_angle()}{get\_servo\_angle()}}
+{\footnotesize\ttfamily  float Servo\+Board.\+Servo\+Board.\+get\+\_\+servo\+\_\+angle (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{int}]{\+\_\+servo\+\_\+nr }\end{DoxyParamCaption})}
+
+
+
+Get angle of connected servo in degree. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em \+\_\+servo\+\_\+nr} & The servo nr wanted (starts at 1) \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+angle of connected servo in degree 
+\end{DoxyReturn}
+\Hypertarget{class_servo_board_1_1_servo_board_a2790587e318aec96b5be353afe7f00f4}\label{class_servo_board_1_1_servo_board_a2790587e318aec96b5be353afe7f00f4} 
+\index{ServoBoard.ServoBoard@{ServoBoard.ServoBoard}!set\_hardware\_angle\_according\_to\_readout\_at\_init@{set\_hardware\_angle\_according\_to\_readout\_at\_init}}
+\index{set\_hardware\_angle\_according\_to\_readout\_at\_init@{set\_hardware\_angle\_according\_to\_readout\_at\_init}!ServoBoard.ServoBoard@{ServoBoard.ServoBoard}}
+\doxysubsubsection{\texorpdfstring{set\_hardware\_angle\_according\_to\_readout\_at\_init()}{set\_hardware\_angle\_according\_to\_readout\_at\_init()}}
+{\footnotesize\ttfamily  None Servo\+Board.\+Servo\+Board.\+set\+\_\+hardware\+\_\+angle\+\_\+according\+\_\+to\+\_\+readout\+\_\+at\+\_\+init (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{}]{\+\_\+enable }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}:param _enable:
+:return:
+\end{DoxyVerb}
+ 
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+robohatlib/hal/assemblyboard/servo/Servo\+Board.\+py\end{DoxyCompactItemize}
