@@ -46,6 +46,7 @@ class PowerManagement:
         self.__counter_prevent_startup_power_fail = 0
 
         self.__battery_check_started = False
+        self.__to_low_already_display = False
 
     # --------------------------------------------------------------------------------------
     # --------------------------------------------------------------------------------------
@@ -161,7 +162,7 @@ class PowerManagement:
         if self.__counter_prevent_startup_power_fail < ACCU_CHECK_SIZE_OF_WINDOW:
             return
 
-        self.__counter_prevent_startup_power_fail = Robohat_config.ACCU_CHECK_SIZE_OF_WINDOW    # prevent overrun
+        self.__counter_prevent_startup_power_fail = ACCU_CHECK_SIZE_OF_WINDOW    # prevent overrun
 
         self.__accu_voltage = statistics.median(map(float, self.__raw_accu_voltages_array)) # create median
 
@@ -172,9 +173,12 @@ class PowerManagement:
 
                 if self.__signaling_device is not None:
                     self.__signaling_device.signal_system_alarm()
-                print("accu capacity to low, only {0:3.2f} %".format(self.__accu_percentage_capacity))
 
-            elif self.__accu_capacity_ok is False and self.__accu_voltage > Robohat_config.ACCU_VOLTAGE_TO_LOW_THRESHOLD + (Robohat_config.ACCU_VOLTAGE_TO_LOW_THRESHOLD * 0.02):
+                if Robohat_config.ACCU_LOG_DISPLAY_WHEN_TO_LOW is True or self.__to_low_already_display is False:
+                    print("accu capacity to low, only {0:3.2f} %".format(self.__accu_percentage_capacity))
+                    self.__to_low_already_display = True
+
+            elif self.__accu_capacity_ok is False or self.__accu_voltage > Robohat_config.ACCU_VOLTAGE_TO_LOW_THRESHOLD + (Robohat_config.ACCU_VOLTAGE_TO_LOW_THRESHOLD * 0.02):
                 self.__accu_capacity_ok = True
 
         else:
@@ -184,10 +188,17 @@ class PowerManagement:
         if self.__battery_check_started is False:
             self.__battery_check_started = True
 
+            print("***********************************")
             print("accu monitor active")
             print("accu voltage: {0:2.2f} V".format(self.__accu_voltage))
             print("accu percentage: {0:3.2f} %".format(self.__accu_percentage_capacity))
-            print("accu is OK: " + str(self.__accu_capacity_ok))
+
+            if self.__accu_capacity_ok is True:
+                print("accu is OK")
+            else:
+                print("accu has a to low capacity")
+            print("***********************************")
+
 
     # --------------------------------------------------------------------------------------
     # --------------------------------------------------------------------------------------

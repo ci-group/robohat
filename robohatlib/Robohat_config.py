@@ -32,6 +32,7 @@ ACCU_INTERVAL_TIME_IN_SECONDS = 1
 ACCU_VOLTAGE_WHEN_FULL = 12.6
 ACCU_VOLTAGE_TO_LOW_THRESHOLD = 11.06
 ACCU_VOLTAGE_ADC_MULTIPLIER = 4.3                   # aangepast 4-7-23, was 8.0
+ACCU_LOG_DISPLAY_WHEN_TO_LOW = False
 
 # Voltage to percentage array... depending on accu used
 ACCU_VOLTAGE_TO_PERCENTAGE_ARRAY =  [
