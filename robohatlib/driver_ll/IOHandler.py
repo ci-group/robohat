@@ -68,28 +68,34 @@ class IOHandler:
         self.__available_spi_buses = []
         self.__used_spi_devices = []
 
-        self.scan_i2c_bus()
 
     #--------------------------------------------------------------------------------------
     #--------------------------------------------------------------------------------------
     #--------------------------------------------------------------------------------------
 
     def init_io(self) -> None:
-        """
+        """!
         Initializes the IO
 
-        Implemented for future use
-
-        ~@return: None
+        @return: None
         """
 
-        print("init IOHANDLER")
-
     #--------------------------------------------------------------------------------------
     #--------------------------------------------------------------------------------------
     #--------------------------------------------------------------------------------------
 
-    #todo add address found in combination claimed devices !!
+    def __pre_scan_i2c_bus(self) -> None:
+        """!
+        Does a I2C bus scam, at init
+
+        @return: None
+        """
+
+        if self.__i2c_bus_is_scanned == False:
+            self.scan_i2c_bus()
+            self.__i2c_bus_is_scanned = True
+
+    #--------------------------------------------------------------------------------------
 
     def scan_i2c_bus(self) -> None:
         """!
@@ -100,7 +106,7 @@ class IOHandler:
         @return: None
         """
  
-        print("Scanning all I2C busses....")
+        print("\nScanning all I2C busses....")
 
         found = False
 
@@ -158,21 +164,20 @@ class IOHandler:
     #--------------------------------------------------------------------------------------
     #--------------------------------------------------------------------------------------
 
-    #todo... check if device is found on bus
-
-    def get_i2c_device(self, _i2c_device_def: I2CDeviceDef) -> I2CDevice:
+    def get_i2c_device(self, _i2c_device_def: I2CDeviceDef) -> I2CDevice | None:
         """!
         allocates the I2C device, when available on the I2C bus (so should be seen in the scan).
 
         @param _i2c_device_def: configuration of the I2C device. such as: I2C_Device_Definition("IOEXPANDER_I2C", 1, 0x20) ), See class I2C_Device_Definition
         @return: I2C_Device
         """
-        
-        #if self.__is_i2c_device_available(_i2c_device_def) is False:
-        #     raise Exception("I2C device not available on i2c-bus")
+        self.__pre_scan_i2c_bus()
+
+        if self.__is_i2c_device_available(_i2c_device_def) is False:
+            return None
 
         i2c_bus = self.__get_i2c_bus(_i2c_device_def.get_i2c_bus_nr() )
-        i2c_hw_bus = i2c_bus.get_i2c_handler()
+        i2c_handler = i2c_bus.get_i2c_handler()
 
         if len(self.__used_i2c_devices) is not 0:
             for i2c_device_from_list in self.__used_i2c_devices:
@@ -181,7 +186,7 @@ class IOHandler:
                     #print("Device already claimed")
                     raise Exception("I2C device already claimed")
 
-        i2c_device = I2CDevice(_i2c_device_def.get_name() + "_i2c", i2c_hw_bus, _i2c_device_def.get_i2c_bus_nr(), _i2c_device_def.get_i2c_device_address())
+        i2c_device = I2CDevice(_i2c_device_def.get_name() + "_i2c", i2c_handler, _i2c_device_def.get_i2c_bus_nr(), _i2c_device_def.get_i2c_device_address())
         self.__used_i2c_devices.append(i2c_device)
         print("I2C device registered: " + _i2c_device_def.get_name() + " -> i2c_bus:" + str(_i2c_device_def.get_i2c_bus_nr()) + ", address: " + hex(_i2c_device_def.get_i2c_device_address()))
         return i2c_device

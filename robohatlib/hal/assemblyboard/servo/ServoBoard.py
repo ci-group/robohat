@@ -24,8 +24,8 @@ class ServoBoard:
     #--------------------------------------------------------------------------------------
     #--------------------------------------------------------------------------------------
 
-    def init_servo_board(self, _servo_datas_array):
-        #print("init servopwm and servo adc")
+    def init_servo_board(self, _servo_datas_array: []):
+
         self.__servo_datas_array = _servo_datas_array
         self.__pwm.init_pca9685()
         self.__servo_adc.init_adc()

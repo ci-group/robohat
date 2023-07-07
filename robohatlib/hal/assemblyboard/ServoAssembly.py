@@ -22,7 +22,10 @@ class ServoAssembly:
         spi_def_adc = SPIDeviceDef(_servo_config.get_name(), _spi_bus_nr, _servo_config.get_cs_adc_angle_readout())
         spi_device_adc = _iomanager.get_spi_device(spi_def_adc)
 
-        self.__servo_board = ServoBoard(i2c_device_pwm, spi_device_adc)
+        if i2c_device_pwm is not None and spi_device_adc is not None:
+            self.__servo_board = ServoBoard(i2c_device_pwm, spi_device_adc)
+        else:
+            self.__servo_board = None
         # ----------------------------
 
         # ----------------------------
@@ -32,21 +35,22 @@ class ServoAssembly:
         i2c_def_power_monitor = I2CDeviceDef(_servo_config.get_name() + "_I2C", _i2c_bus_nr, BASE_ADDRESS_MCP23008, _servo_config.get_sw2_power_good_address())
         i2c_device_power_monitor = _iomanager.get_i2c_device(i2c_def_power_monitor)
 
-        self.__power_monitor_and_io = POWERMONITORANDIO(i2c_device_power_monitor, _mcp_interrupt_definition)
+        if i2c_device_power_monitor is not None:
+            self.__power_monitor_and_io = POWERMONITORANDIO(i2c_device_power_monitor, _mcp_interrupt_definition)
+        else:
+            self.__power_monitor_and_io = None
         # ----------------------------
 
 
-    def init_servo_assembly(self, _servo_datas_array):
+    def init_servo_assembly(self, _servo_datas_array: []):
         """
         Initializes servo assembly
 
         @param _servo_datas_array:
         :return:
         """
-        print("init_servoassembly")
-        self.__servo_board.init_servo_board(_servo_datas_array)
-        #self.__powermonitorandio.init_powermonitor()
-
+        if  self.__servo_board is not None:
+            self.__servo_board.init_servo_board(_servo_datas_array)
 
     #--------------------------------------------------------------------------------------
 
@@ -59,16 +63,19 @@ class ServoAssembly:
 
         @return angle of connected servo in degree
         """
-        self.__servo_board.set_servo_angle(_servo_nr, _wanted_angle)
+        if self.__servo_board is not None:
+            self.__servo_board.set_servo_angle(_servo_nr, _wanted_angle)
 
     def get_servo_angle(self, _servo_nr: int) -> float:
         """!
         Get angle of connected servo in degree
 
         @param _servo_nr The servo nr wanted (starts at 1)
-        @return angle of connected servo in degree
+        @return angle of connected servo in degree, or 0 when not available
         """
-        return self.__servo_board.get_servo_angle(_servo_nr)
+        if self.__servo_board is not None:
+            return self.__servo_board.get_servo_angle(_servo_nr)
+        return 0
 
     # --------------------------------------------------------------------------------------
 
@@ -86,8 +93,9 @@ class ServoAssembly:
         """!
         @return angles of servos in degree
         """
-
-        return self.__servo_board.get_all_servos_angle()
+        if self.__servo_board is not None:
+            return self.__servo_board.get_all_servos_angle()
+        return []
 
     # --------------------------------------------------------------------------------------
 
@@ -96,15 +104,19 @@ class ServoAssembly:
         Get voltage of the potentiometer of the connected servo in vol
 
         @param _servo_nr The servo nr wanted (starts at 1)
-        @return voltage of connected servo in volt
+        @return voltage of connected servo in volt or 0 when not available
         """
-        return self.__servo_board.get_servo_readout_adc_single_channel(_servo_nr)
+        if self.__servo_board is not None:
+            return self.__servo_board.get_servo_readout_adc_single_channel(_servo_nr)
+        return 0
 
     def get_adc_readout_multiple_channels(self) -> []:
         """!
         @return voltages of the potentiometer of all the servos in volt
         """
-        return self.__servo_board.get_readout_adc_multiple_channels()
+        if self.__servo_board is not None:
+            return self.__servo_board.get_readout_adc_multiple_channels()
+        return []
 
     # --------------------------------------------------------------------------------------
     def get_servo_is_connected(self, _servo_nr: int) -> bool:
@@ -114,13 +126,14 @@ class ServoAssembly:
         @param _servo_nr The servo nr
         @return: Returns False when not connected
         """
-        return self.__servo_board.get_servo_is_connected(_servo_nr)
+        if self.__servo_board is not None:
+            return self.__servo_board.get_servo_is_connected(_servo_nr)
+        return False
 
     # --------------------------------------------------------------------------------------
 
     def get_name(self) -> str:
         return self.__servo_config.get_name()
-
     # --------------------------------------------------------------------------------------
 
     def get_sw1_pwm_address(self) -> int:

@@ -23,43 +23,55 @@ class HatADC:
         """
 
         i2c_device = _iomanager.get_i2c_device(_hat_adc_i2c_def)
-        self.__hatadc = MAX11607(i2c_device)
+        if i2c_device is not None:
+            self.__hat_adc = MAX11607(i2c_device)
+        self.__hat_adc = None
 
     # init all adcs --------------------------------------------------------------------------------------
-    def init_hatadc(self) -> None:
+    def init_hat_adc(self) -> None:
         """!
-        Initializes the HAR Adc
+        Initializes the HAT Adc
 
         @return None
         """
-        self.__hatadc.init_adc()
+
+        if self.__hat_adc is not None:
+            self.__hat_adc.init_adc()
 
     # begin, hat adc functions --------------------------------------------------------------------------------------
-    def get_voltage_readout_hatadc_channel(self, _channel_nr: int) -> float:
+    def get_voltage_readout_hat_adc_channel(self, _channel_nr: int) -> float:
         """!
         Get analog value of a channel from the HAT adc
 
         @param _channel_nr The channel nr wanted (starts at 1, so 1 is AI0)
 
-        @return analog voltage
+        @return analog voltage, or 0.0 when not available
         """
-        return self.__hatadc.get_voltage_readout_channel(_channel_nr)
+        if self.__hat_adc is not None:
+            return self.__hat_adc.get_voltage_readout_channel(_channel_nr)
+        return 0.0
 
     def get_voltage_readout_hatadc_mutiplechannels(self) -> []:
         """!
         Get analog values of all channel from the HAT adc
 
-        @return array of analog voltage
+        @return array of analog voltage or None when not available
         """
-        return self.__hatadc.get_readout_hatadc_mutiplechannels()
+        if self.__hat_adc is not None:
+            return self.__hat_adc.get_readout_hatadc_mutiplechannels()
+        return []
+
     # end, hat adc functions --------------------------------------------------------------------------------------
 
     def get_voltage_of_accu(self) -> float:
+        """!
+        Get voltage on pin4, which the accu is connected to
+        @return float: voltage of accu or 0.0 when not available
         """
-        :return float:
-        """
-        return self.__hatadc.get_voltage_readout_channel(4)
 
+        if self.__hat_adc is not None:
+            return self.__hat_adc.get_voltage_readout_channel(4)
+        return 0.0
 
 
 

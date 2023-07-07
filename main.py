@@ -19,8 +19,6 @@ def main():
     print("################################################")
 
     robohat = Robohat(main_config.servoassembly_1_config, main_config.servoassembly_2_config, main_config.TOPBOARD_IOEXANDER_SW)
-
-    robohat.scan_i2c_bus()
     robohat.init(main_config.SERVOBOARD_1_DATAS_ARRAY, main_config.SERVOBOARD_2_DATAS_ARRAY)
 
     #robohat.set_direction_ioexpander(0, EXPANDERDIR.OUTPUT)
@@ -57,11 +55,11 @@ def main():
         # for i in range(1,1800, 1):
         #     angle:float = i / 10.0
         #     robohat.set_servos_angles([angle, angle, angle, angle, angle, angle, angle, angle, angle, angle, angle, angle, angle, angle, angle, angle])
-        # #print("-->" + str(robohat.get_servo_adc_readout_single_channels(1)) + " V," + str(robohat.get_servo_adc_readout_single_channels(16)) + " V")
+        # # #print("-->" + str(robohat.get_servo_adc_readout_single_channels(1)) + " V," + str(robohat.get_servo_adc_readout_single_channels(16)) + " V")
         #     print("-->" + str(robohat.get_servo_angle(1)) + " °," + str(robohat.get_servo_angle(16)) + " °")
         time.sleep(1)
-        #
-        #robohat.set_led_color(Color.RED)
+
+        # robohat.set_led_color(Color.RED)
         # for i in range(1800,1, -1):
         #     angle:float = i / 10.0
         #     robohat.set_servos_angles([angle, angle, angle, angle, angle, angle, angle, angle, angle, angle, angle, angle, angle, angle, angle, angle])

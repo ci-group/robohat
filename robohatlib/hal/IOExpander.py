@@ -24,11 +24,14 @@ class IOExpander:
         i2c_device_definition.set_i2c_offset_address(_sw_io_expander)
         i2c_device = _iohandler.get_i2c_device(i2c_device_definition)
 
-        if _io_expander_def.get_callback_function() is not None:
-            gpi_interrupt_definition = GPIInterruptDef.from_mcp23008_interrupt_definition(_io_expander_def)
-            _iohandler.register_interrupt(gpi_interrupt_definition)
+        if i2c_device is not None:
+            if _io_expander_def.get_callback_function() is not None:
+                gpi_interrupt_definition = GPIInterruptDef.from_mcp23008_interrupt_definition(_io_expander_def)
+                _iohandler.register_interrupt(gpi_interrupt_definition)
 
-        self.__expander = MCP23008(i2c_device, _io_expander_def)
+            self.__expander = MCP23008(i2c_device, _io_expander_def)
+        else:
+            self.__expander = None
 
     #--------------------------------------------------------------------------------------
     def init_io_expander(self) -> None:
@@ -40,7 +43,8 @@ class IOExpander:
         @return -> None:
         """
 
-        self.__expander.init_MCP23008()
+        if self.__expander is not None:
+            self.__expander.init_MCP23008()
 
     #--------------------------------------------------------------------------------------
     def set_direction_io_expander(self, _io_nr:int, _direction: ExpanderDir) -> None:
@@ -49,13 +53,13 @@ class IOExpander:
         @param _direction:     ExpanderDir.OUTPUT or  ExpanderDir.INPUT = 1
         @return: None
         """
-
-        self.__check_if_expander_io_is_availble(_io_nr)
-        if  _direction is ExpanderDir.OUTPUT:
-            wanted_pin_value = 0
-        else:
-            wanted_pin_value = 1
-        self.__expander.set_pin_direction(_io_nr, wanted_pin_value)
+        if self.__expander is not None:
+            self.__check_if_expander_io_is_availble(_io_nr)
+            if  _direction is ExpanderDir.OUTPUT:
+                wanted_pin_value = 0
+            else:
+                wanted_pin_value = 1
+            self.__expander.set_pin_direction(_io_nr, wanted_pin_value)
 
     #--------------------------------------------------------------------------------------
 
@@ -71,14 +75,15 @@ class IOExpander:
         @return None
         """
 
-        self.__check_if_expander_io_is_availble(_io_nr)
+        if self.__expander is not None:
+            self.__check_if_expander_io_is_availble(_io_nr)
 
-        wanted_pin_value = 0
-
-        if  _status is ExpanderStatus.LOW:
             wanted_pin_value = 0
 
-        self.__expander.set_pin_data(_io_nr, wanted_pin_value)
+            if  _status is ExpanderStatus.LOW:
+                wanted_pin_value = 0
+
+            self.__expander.set_pin_data(_io_nr, wanted_pin_value)
 
     #--------------------------------------------------------------------------------------
 
@@ -90,11 +95,13 @@ class IOExpander:
 
         @param _io_nr io nr
 
-        @return status of the pin
+        @return status of the pin or 0 when not available
         """
+        if self.__expander is not None:
+            self.__check_if_expander_io_is_availble(_io_nr)
+            return self.__expander.get_pin_data(_io_nr)
 
-        self.__check_if_expander_io_is_availble(_io_nr)
-        return self.__expander.get_pin_data(_io_nr)
+        return 0
 
     #--------------------------------------------------------------------------------------
 
@@ -104,7 +111,8 @@ class IOExpander:
 
         @param _io_nr: pint n of the GPIO
         @return: Nome
-        @:raises exception when not availble
+        @:raises exception when not available
         """
-        if _io_nr not in range(0, 8):
+
+        if self.__expander is None or _io_nr not in range(0, 8):
             raise ValueError("only io0 till io7 are available")

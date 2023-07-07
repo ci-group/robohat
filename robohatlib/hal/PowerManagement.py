@@ -39,7 +39,7 @@ class PowerManagement:
         self.__accu_percentage_capacity = 0
         self.__accu_voltage = 0
         self.__accu_capacity_ok = False
-        self.__raw_accu_voltages_array = [12.6] * ACCU_CHECK_SIZE_OF_WINDOW
+        self.__raw_accu_voltages_array = [12.6] * ACCU_CHECK_SIZE_OF_WINDOW     # fills array with default value: 12.6
 
         self.__signaling_device = None
         self.__shutdown_in_progress = False
@@ -58,7 +58,9 @@ class PowerManagement:
         """
 
         self.__timerIsRunning = True
-        self.__start_timer_power_management()
+
+        if self.__adc_hat is not None:
+            self.__start_timer_power_management()
 
     # --------------------------------------------------------------------------------------
     # --------------------------------------------------------------------------------------
@@ -88,8 +90,10 @@ class PowerManagement:
     def timer_callback(self) -> None:
         """!
         The actual timer function. Retrieves the voltage of the accu and puts it in the fiter function. Restarts the timer
+        Timer will not restart when ADC is not availble
         @return: None
         """
+
         adc_accu_voltage = self.__adc_hat.get_voltage_of_accu()
         calculated_accu_voltage = adc_accu_voltage * Robohat_config.ACCU_VOLTAGE_ADC_MULTIPLIER
         self.__insert_power_voltage(calculated_accu_voltage)

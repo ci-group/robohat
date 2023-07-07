@@ -105,7 +105,7 @@ class Robohat:
         self.__imu.init_imu()
         self.__io_expander.init_io_expander()
 
-        self.__hatAdc.init_hatadc()
+        self.__hatAdc.init_hat_adc()
         self.__powerManagement.init_power_management()
 
         self.__servo_assembly_1.init_servo_assembly(_servo_board_1_datas_array)
@@ -361,7 +361,7 @@ class Robohat:
         @return analog voltage
         """
 
-        return self.__hatAdc.get_voltage_readout_hatadc_channel(_channel_nr)
+        return self.__hatAdc.get_voltage_readout_hat_adc_channel(_channel_nr)
 
     # ------------------------------------------------------------------------------------------
 
