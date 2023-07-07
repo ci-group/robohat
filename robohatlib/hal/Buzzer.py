@@ -18,7 +18,7 @@ class Buzzer:
 
         @return: none
         """
-        self.__buzzer_driver =_io_handler.get_buzzer_driver(_buzzer_def)
+        self.__buzzer_driver = _io_handler.get_buzzer_driver(_buzzer_def)
         self.__last_time_error = 0
 
     # init buzzer -------------------------------------------------------------------------------------

@@ -1,9 +1,10 @@
-#import serial
+# import serial
+
+# todo not implemented
 
 class Serial:
-    #__serialname = ""
-    #__serialchannel = 0
-
+    # __serialname = ""
+    # __serialchannel = 0
 
     def __init__(self, _iomanager, _serial_def):
         self.__iomanager = _iomanager
@@ -17,7 +18,7 @@ class Serial:
 
         @return None
         """
-        #print("init Serial")
+        # print("init Serial")
         # ser = serial.Serial(
         #     port='/dev/ttyS0',  # Replace ttyS0 with ttyAM0 for Pi1,Pi2,Pi0
         #     baudrate=9600,

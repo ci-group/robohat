@@ -1,12 +1,15 @@
-
+#!/usr/bin/env python
+"""!
+This file consists of the Constants of the Robohat lib
+do not alter
+"""
 
 ROBOHAT_LIB_VERSION_STR = "0.0.2"               # version nr of library
 ROBOHAT_BUILDDATE_STR = "20230620"              # build date of library
 
-DEBUG = False
+DEBUG = False                                   # by changing this value to TRUE, more debug msg will be printed on the console
 
-#constantes of hardware, do not alter
-PWMPLUG_P3 = 0
-PWMPLUG_P4 = 1
+PWMPLUG_P3 = 0                                  # a constant by the ID of an assembly board can be determined
+PWMPLUG_P4 = 1                                  # a constant by the ID of an assembly board can be determined
 
 

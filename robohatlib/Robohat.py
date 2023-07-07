@@ -1,4 +1,3 @@
-
 try:
     from robohatlib import Robohat_config
     from robohatlib import Robohat_constants
@@ -36,7 +35,9 @@ except ImportError:
     print("Failed to import needed dependencies for the Robohat class")
     raise
 
-#--------------------------------------------------------------------------------------
+
+# --------------------------------------------------------------------------------------
+
 
 class Robohat:
     """!
@@ -46,10 +47,10 @@ class Robohat:
     __servo_assembly_1 = None
     __servo_assembly_2 = None
 
-#--------------------------------------------------------------------------------------
-# constructor Robohat
+    # --------------------------------------------------------------------------------------
+    # constructor Robohat
 
-    def __init__(self, _servo_assembly_1_config: ServoAssemblyConfig, _servo_assembly_2_config: ServoAssemblyConfig, _sw_io_expander:int=7):
+    def __init__(self, _servo_assembly_1_config: ServoAssemblyConfig, _servo_assembly_2_config: ServoAssemblyConfig, _sw_io_expander: int = 7):
         """!
         The Robohat base class initializer.
 
@@ -60,7 +61,6 @@ class Robohat:
         @return An instance of the Robohat class
         """
         print("Starting Robohat lib: " + Robohat_constants.ROBOHAT_LIB_VERSION_STR + "\n")
-
 
         self.__io = IOHandler()
         self.__serial = Serial(self.__io, Robohat_config.SERIAL_DEF)
@@ -77,11 +77,15 @@ class Robohat:
         self.__powerManagement = PowerManagement(self.__io, self.__hatAdc, Robohat_config.POWERSHUTDOWN_GPO_DEF)
         self.__powerManagement.add_signaling_device(self.__buzzer)
 
-        servo_assembly_interrupt_def = MCPInterruptDef("servo_assembly_int", Robohat_config.SERVOASSEMBLY_COMMON_GPI, self._io_servo_assembly_callback)
-        self.__servo_assembly_1 = ServoAssembly(self.__io, _servo_assembly_1_config, Robohat_config.SERVOASSEMBLY_1_I2C_BUS, Robohat_config.SERVOASSEMBLY_1_SPI_BUS, servo_assembly_interrupt_def)
+        servo_assembly_interrupt_def = MCPInterruptDef("servo_assembly_int", Robohat_config.SERVOASSEMBLY_COMMON_GPI,
+                                                       self._io_servo_assembly_callback)
+        self.__servo_assembly_1 = ServoAssembly(self.__io, _servo_assembly_1_config,
+                                                Robohat_config.SERVOASSEMBLY_1_I2C_BUS,
+                                                Robohat_config.SERVOASSEMBLY_1_SPI_BUS, servo_assembly_interrupt_def)
         # self.__servo_assembly_2 = ServoAssembly(self.__io, _servo_assembly_2_config, Robohat_config.SERVOASSEMBLY_2_I2C_BUS, Robohat_config.SERVOASSEMBLY_2_SPI_BUS, servoAssembly_interrupt_def)
 
     # --------------------------------------------------------------------------------------
+
     def init(self, _servo_board_1_datas_array: [], _servo_board_2_datas_array: []) -> None:
         """!
         Initializes the Robohat
@@ -106,8 +110,8 @@ class Robohat:
 
         self.__servo_assembly_1.init_servo_assembly(_servo_board_1_datas_array)
 
-
     # begin I2C functions ---------------------------------------------------------------------------------
+
     def scan_i2c_bus(self) -> None:
         """!
         Scans all the available I2C busses on the Robohat hardware
@@ -118,9 +122,11 @@ class Robohat:
         """
 
         self.__io.scan_i2c_bus()
+
     # end I2C functions ---------------------------------------------------------------------------------
 
-    # begin BUZZER functions ---------------------------------------------------------------------------------
+    # begin BUZZER functions -----------------------------------------------------------------------------
+
     def do_buzzer_random(self) -> None:
         """!
         Generates a random sound
@@ -183,6 +189,7 @@ class Robohat:
         @return None
         """
         self.__led.turn_led_on()
+
     # end LED functions ------------------------------------------------------------------------------------
 
     # begin Servo functions --------------------------------------------------------------------------------------
@@ -219,8 +226,8 @@ class Robohat:
         @return angle of connected servo in degree
         """
 
-        servo_assembly = self.__get_servo_assembly_depending_servo_nr(_servo_nr)        # the assembly depending on servo_nr
-        servo_nr = self.__get_servo_nr_depending_assembly(_servo_nr)                    # servo nr of the servo of the assembly
+        servo_assembly = self.__get_servo_assembly_depending_servo_nr(_servo_nr)  # the assembly depending on servo_nr
+        servo_nr = self.__get_servo_nr_depending_assembly(_servo_nr)  # servo nr of the servo of the assembly
         return servo_assembly.get_servo_adc_readout_single_channel(servo_nr)
 
     def get_servo_angle(self, _servo_nr: int) -> float:
@@ -231,10 +238,9 @@ class Robohat:
         @return angle of connected servo in degree
         """
 
-        servo_assembly = self.__get_servo_assembly_depending_servo_nr(_servo_nr)        # the assembly depending on servo_nr
-        servo_nr = self.__get_servo_nr_depending_assembly(_servo_nr)                    # servo nr of the servo of the assembly
+        servo_assembly = self.__get_servo_assembly_depending_servo_nr(_servo_nr)  # the assembly depending on servo_nr
+        servo_nr = self.__get_servo_nr_depending_assembly(_servo_nr)  # servo nr of the servo of the assembly
         return servo_assembly.get_servo_angle(servo_nr)
-
 
     def set_servo_angle(self, _servo_nr: int, _angle: float) -> None:
         """!
@@ -250,7 +256,7 @@ class Robohat:
         servo_nr = self.__get_servo_nr_depending_assembly(_servo_nr)
         return servo_assembly.set_servo_angle(servo_nr, _angle)
 
-    #------------------------------------------------------------------------------------------
+    # ------------------------------------------------------------------------------------------
     def get_servos_adc_readout_multiple_channels(self) -> []:
         """!
         Get voltages of the potentiometer of all the servos in volt
@@ -266,7 +272,6 @@ class Robohat:
             return_data = data_assembly1
 
         return return_data
-
 
     def get_servos_angles(self) -> []:
         """!
@@ -286,7 +291,7 @@ class Robohat:
 
         return return_data
 
-    #------------------------------------------------------------------------------------------
+    # ------------------------------------------------------------------------------------------
 
     def set_servos_angles(self, _angles_array: []) -> None:
         """!
@@ -306,7 +311,7 @@ class Robohat:
 
         return None
 
-    #------------------------------------------------------------------------------------------
+    # ------------------------------------------------------------------------------------------
 
     def __get_servo_nr_depending_assembly(self, _servo_nr: int) -> int:
         """!
@@ -323,7 +328,6 @@ class Robohat:
             return _servo_nr - 16
         else:
             raise Exception("Requested servo nr is not available")
-
 
     def __get_servo_assembly_depending_servo_nr(self, _servo_nr: int) -> ServoAssembly:
         """!
@@ -358,7 +362,8 @@ class Robohat:
         """
 
         return self.__hatAdc.get_voltage_readout_hatadc_channel(_channel_nr)
-    #------------------------------------------------------------------------------------------
+
+    # ------------------------------------------------------------------------------------------
 
     def get_hat_adc_readout_multiple_channels(self) -> []:
         """!
@@ -367,6 +372,7 @@ class Robohat:
         @return analog voltage in an array
         """
         return self.__hatAdc.get_voltage_readout_hatadc_mutiplechannels()
+
     # end HAT ADC functions --------------------------------------------------------------------------------------
 
     # begin IO_EXPANDER functions ---------------------------------------------------------------------------------
@@ -433,11 +439,10 @@ class Robohat:
         @return a tuple of the guro values x,y,z
         """
         return self.__imu.get_gyro()
+
     # end IMU functions ------------------------------------------------------------------------------------
 
     # begin Power management functions ---------------------------------------------------------------------------------
-
-
     def get_accu_percentage_capacity(self) -> int:
         """!
         Get capacity of accu in percentage
@@ -497,7 +502,6 @@ class Robohat:
         return Robohat_constants.ROBOHAT_BUILDDATE_STR
 
     # End Library functions ---------------------------------------------------------------------------------
-
 
     # ------------------------------------------------------------------------------------
     # ------------------------------------------------------------------------------------
