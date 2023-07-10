@@ -223,67 +223,86 @@ class Robohat:
         Get angle of connected servo in degree
 
         @param _servo_nr The servo nr wanted (starts at 1)
-        @return angle of connected servo in degree
+        @return angle of connected servo in degree, or 0.0 when not available
         """
 
         servo_assembly = self.__get_servo_assembly_depending_servo_nr(_servo_nr)  # the assembly depending on servo_nr
-        servo_nr = self.__get_servo_nr_depending_assembly(_servo_nr)  # servo nr of the servo of the assembly
-        return servo_assembly.get_servo_adc_readout_single_channel(servo_nr)
+
+        if servo_assembly is not None:
+            servo_nr = self.__get_servo_nr_depending_assembly(_servo_nr)  # servo nr of the servo of the assembly
+            return servo_assembly.get_servo_adc_readout_single_channel(servo_nr)
+        return 0.0
 
     def get_servo_angle(self, _servo_nr: int) -> float:
         """!
         Get angle of connected servo in degree
 
         @param _servo_nr The servo nr wanted (starts at 1)
-        @return angle of connected servo in degree
+        @return angle of connected servo in degree or 0.0 when not available
         """
 
         servo_assembly = self.__get_servo_assembly_depending_servo_nr(_servo_nr)  # the assembly depending on servo_nr
-        servo_nr = self.__get_servo_nr_depending_assembly(_servo_nr)  # servo nr of the servo of the assembly
-        return servo_assembly.get_servo_angle(servo_nr)
+
+        if servo_assembly is not None:
+            servo_nr = self.__get_servo_nr_depending_assembly(_servo_nr)  # servo nr of the servo of the assembly
+            return servo_assembly.get_servo_angle(servo_nr)
+        return 0.0
 
     def set_servo_angle(self, _servo_nr: int, _angle: float) -> None:
         """!
-        Set the angle of connected servo in degree
+        Set the angle of connected servo in degree, does nothing when not avaible
 
         @param _servo_nr The servo nr wanted (starts at 1)
         @param _angle wanted angle
 
-        @return angle of connected servo in degree
+        @return None
         """
 
         servo_assembly = self.__get_servo_assembly_depending_servo_nr(_servo_nr)
-        servo_nr = self.__get_servo_nr_depending_assembly(_servo_nr)
-        return servo_assembly.set_servo_angle(servo_nr, _angle)
+
+        if servo_assembly is not None:
+            servo_nr = self.__get_servo_nr_depending_assembly(_servo_nr)
+            return servo_assembly.set_servo_angle(servo_nr, _angle)
 
     # ------------------------------------------------------------------------------------------
     def get_servos_adc_readout_multiple_channels(self) -> []:
         """!
         Get voltages of the potentiometer of all the servos in volt
-
+        @Raise when ADC is not available
         @return voltages of the potentiometer of all the servos in volt
         """
-        data_assembly1 = self.__servo_assembly_1.get_adc_readout_multiple_channels()
 
-        if self.__servo_assembly_2 is not None:
+        return_data = []
+
+        if self.__servo_assembly_1 is not None and self.__servo_assembly_2 is None:     # only assembly 1
+            data_assembly1 = self.__servo_assembly_1.get_adc_readout_multiple_channels()
+            return_data = data_assembly1
+        elif self.__servo_assembly_1 is None and self.__servo_assembly_2 is not None:       # only assembly 2
+            data_assembly2 = self.__servo_assembly_2.get_adc_readout_multiple_channels()
+            return_data = data_assembly2
+        elif self.__servo_assembly_1 is not None and self.__servo_assembly_2 is not None:
+            data_assembly1 = self.__servo_assembly_1.get_adc_readout_multiple_channels()
             data_assembly2 = self.__servo_assembly_2.get_adc_readout_multiple_channels()
             return_data = data_assembly1 + data_assembly2
         else:
-            return_data = data_assembly1
+            raise "Requested ADC data, but assembly boards aren't available"
 
         return return_data
+
+    # ------------------------------------------------------------------------------------------
 
     def get_servos_angles(self) -> []:
         """!
         Get an array of the angles of all the servos
 
-        @return angles of servos in degree
+        @return angles of servos in degree. Returns an empty array when not available
         """
 
         return_data = []
 
-        data_assembly1 = self.__servo_assembly_1.get_all_servos_angle()
-        return_data.append(data_assembly1)
+        if self.__servo_assembly_1 is not None:
+            data_assembly1 = self.__servo_assembly_1.get_all_servos_angle()
+            return_data.append(data_assembly1)
 
         if self.__servo_assembly_2 is not None:
             data_assembly2 = self.__servo_assembly_2.get_all_servos_angle()
@@ -299,11 +318,12 @@ class Robohat:
 
         @param _angles_array array of the angles
 
-        @return angle of connected servo in degree
+        @return None
         """
 
-        angles_array1 = _angles_array[0:17]
-        self.__servo_assembly_1.set_all_servos_angle(angles_array1)
+        if self.__servo_assembly_1 is not None:
+            angles_array1 = _angles_array[0:17]
+            self.__servo_assembly_1.set_all_servos_angle(angles_array1)
 
         if self.__servo_assembly_2 is not None and len(_angles_array) >= 32:
             angles_array2 = _angles_array[16:33]
@@ -337,6 +357,21 @@ class Robohat:
 
         if self.__servo_assembly_2 is not None:
             self.__servo_assembly_2.wake()
+
+    # ------------------------------------------------------------------------------------------
+
+    def are_servos_sleeping(self) -> bool:
+        """
+        Get if Servos are sleeping
+        @:return: (bool) returns True when servos are sleeping
+        """
+        if self.__servo_assembly_1 is not None:
+            return self.__servo_assembly_1.is_servo_sleeping()
+        elif self.__servo_assembly_2 is not None:
+            return self.__servo_assembly_2.is_servo_sleeping()
+
+        return True
+
     # ------------------------------------------------------------------------------------------
 
     def __get_servo_nr_depending_assembly(self, _servo_nr: int) -> int:

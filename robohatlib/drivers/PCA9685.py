@@ -49,16 +49,13 @@ class PCA9685:
     # --------------------------------------------------------------------------------------
     # --------------------------------------------------------------------------------------
 
-    def __init__(self, _i2cdevice):
-        self.__i2cdevice = _i2cdevice
+    def __init__(self, _i2c_device):
+        self.__i2c_device = _i2c_device
 
     # --------------------------------------------------------------------------------------
     def init_pca9685(self):
-        print("init pca9685")
-
-        print("--------------------------------------")
         self.__do_idle()
-        self.__do_invert_and_setDriverToPushPull()
+        self.__do_invert_and_set_driver_to_pushpull()
         self.__do_idle()
         self.__set_pwm_freq(50)
 
@@ -76,12 +73,12 @@ class PCA9685:
         on_tick_bytes = on_ticks.to_bytes(2, 'little')
         off_tick_bytes = off_ticks.to_bytes(2, 'little')
 
-        self.__i2cdevice.i2c_write_bytes(bytes([LED0_ON_L_ADDRESS + (4 * _channel), on_tick_bytes[0], on_tick_bytes[1], off_tick_bytes[0], off_tick_bytes[1]]))
+        self.__i2c_device.i2c_write_bytes(bytes([LED0_ON_L_ADDRESS + (4 * _channel), on_tick_bytes[0], on_tick_bytes[1], off_tick_bytes[0], off_tick_bytes[1]]))
 
     # --------------------------------------------------------------------------------------
     def set_on_time_allchannels(self, _wantedtimes_us):
 
-        datatosend = bytes([LED0_ON_L_ADDRESS])
+        data_to_send = bytes([LED0_ON_L_ADDRESS])
 
         for i in range(0, 16):
             actual_ticks_on = self.__convert_timeUs_to_tick(_wantedtimes_us[i])
@@ -93,11 +90,11 @@ class PCA9685:
             on_tick_bytes = on_ticks.to_bytes(2, 'little')
             off_tick_bytes = off_ticks.to_bytes(2, 'little')
 
-            datatosend = datatosend + bytes([on_tick_bytes[0], on_tick_bytes[1], off_tick_bytes[0], off_tick_bytes[1]])
+            data_to_send = data_to_send + bytes([on_tick_bytes[0], on_tick_bytes[1], off_tick_bytes[0], off_tick_bytes[1]])
 
 
         #print(datatosend)
-        self.__i2cdevice.i2c_write_bytes( datatosend)
+        self.__i2c_device.i2c_write_bytes(data_to_send)
 
     # --------------------------------------------------------------------------------------
     def sleep(self) -> None:
@@ -129,8 +126,8 @@ class PCA9685:
         :return: True or False
         :rtype: bool
         """
-        regval = self.__read(MODE1_ADDRESS)
-        if RoboUtil.checkbit(regval, MODE1_SLEEP_BITNR):
+        reg_val = self.__read(MODE1_ADDRESS)
+        if RoboUtil.checkbit(reg_val, MODE1_SLEEP_BITNR):
             return True
         else:
             return False
@@ -147,19 +144,19 @@ class PCA9685:
         if _freq < 40 or _freq > 1000:
             raise ValueError('set_pwm_freq: freq out of range')
 
-        scaleval = 25000000.0               # 25MHz
-        scaleval = scaleval / 4096.0        # 12-bit
-        scaleval = scaleval / float(_freq)
-        scaleval = scaleval - 1
-        prescale = math.floor(scaleval + 0.5)
-        prescale = prescale + _calibration
+        scale_val = 25000000.0               # 25MHz
+        scale_val = scale_val / 4096.0        # 12-bit
+        scale_val = scale_val / float(_freq)
+        scale_val = scale_val - 1
+        pre_scale = math.floor(scale_val + 0.5)
+        pre_scale = pre_scale + _calibration
 
-        print("scaleval: " + str(scaleval) + " Freq: " + str(_freq) + "Hz Prescaler: " + str(prescale))
+        print("scaleval: " + str(scale_val) + " Freq: " + str(_freq) + "Hz Prescaler: " + str(pre_scale))
 
         self.__freq = _freq
 
         self.sleep()
-        self.__write(PRE_SCALE_ADDRESS, int(prescale))
+        self.__write(PRE_SCALE_ADDRESS, int(pre_scale))
         self.wake()
 
     def __convert_timeUs_to_tick(self, _time_wanted_us):
@@ -167,23 +164,24 @@ class PCA9685:
         actual_ticks = int(_time_wanted_us / time_per_tick)
         return actual_ticks
 
-    def __do_invert_and_setDriverToPushPull(self):
-        oldmode = self.__read(MODE2_ADDRESS)
-        newmode = oldmode | (1 << MODE2_INVRT_BITNR)
-        newmode = newmode | (1 << MODE2_OUTDRV_BITNR)
-        self.__write(MODE2_ADDRESS, newmode)
+    def __do_invert_and_set_driver_to_pushpull(self):
+        old_mode = self.__read(MODE2_ADDRESS)
+        new_mode = old_mode | (1 << MODE2_INVRT_BITNR)
+        new_mode = new_mode | (1 << MODE2_OUTDRV_BITNR)
+        self.__write(MODE2_ADDRESS, new_mode)
 
+    # --------------------------------------------------------------------------------------
     def __do_idle(self):
         self.__write(0x00, 0x00)
 
     # --------------------------------------------------------------------------------------
     def __write(self, reg, value):
-        self.__i2cdevice.i2c_write_bytes(bytes([reg, value]))
+        self.__i2c_device.i2c_write_bytes(bytes([reg, value]))
 
     # --------------------------------------------------------------------------------------
     def __read(self, reg):
         return_value_array = bytearray(2)
-        self.__i2cdevice.write_to_then_read_from(bytes([0x00, reg]), return_value_array)
+        self.__i2c_device.write_to_then_read_from(bytes([0x00, reg]), return_value_array)
         return return_value_array[0]
 
     # --------------------------------------------------------------------------------------

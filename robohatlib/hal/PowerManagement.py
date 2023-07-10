@@ -200,7 +200,7 @@ class PowerManagement:
             if self.__accu_capacity_ok is True:
                 print("accu is OK")
             else:
-                print("accu has a to low capacity")
+                print("accu has a too low capacity")
             print("***********************************")
 
 

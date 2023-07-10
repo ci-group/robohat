@@ -147,3 +147,12 @@ class ServoBoard:
         self.__pwm.wake()
 
     #--------------------------------------------------------------------------------------
+
+    def is_servo_sleeping(self) -> bool:
+        """
+        Get if Servos are sleeping
+        @:return: (bool) returns True when servos are sleeping
+        """
+        return self.__pwm.is_sleeping()
+
+    #--------------------------------------------------------------------------------------

@@ -108,7 +108,7 @@ class ServoAssembly:
         """
         if self.__servo_board is not None:
             return self.__servo_board.get_servo_readout_adc_single_channel(_servo_nr)
-        return 0
+        return 0.0
 
     def get_adc_readout_multiple_channels(self) -> []:
         """!
@@ -146,10 +146,18 @@ class ServoAssembly:
         """!
         Wake the device from its sleep state
 
-
         @:return: None
         """
         self.__servo_board.wake()
+
+    # --------------------------------------------------------------------------------------
+
+    def is_servo_sleeping(self) -> bool:
+        """
+        Get if Servos are sleeping
+        @:return: (bool) returns True when servos are sleeping
+        """
+        return self.__servo_board.is_servo_sleeping()
 
     # --------------------------------------------------------------------------------------
 
