@@ -106,8 +106,6 @@ class IOHandler:
  
         print("\nScanning all I2C busses....")
 
-        found = False
-
         # I2C bus 0 not available
 
         print("####################")
@@ -153,7 +151,7 @@ class IOHandler:
             print("No I2C_device found on this bus")
         print("####################\n")
 
-        # # no deinit, the busses will be used, so no need to deinit them
+        # # no deinit, the buses will be used, so no need to deinit them
         # #i2c1.deinit()
         # #i2c5.deinit()
         # #i2c6.deinit()
@@ -166,7 +164,7 @@ class IOHandler:
         """!
         allocates the I2C device, when available on the I2C bus (so should be seen in the scan).
 
-        @param _i2c_device_def: configuration of the I2C device. such as: I2C_Device_Definition("IOEXPANDER_I2C", 1, 0x20) ), See class I2C_Device_Definition
+        @param _i2c_device_def: configuration of the I2C device. such as: I2C_Device_Definition("io_expander_i2c", 1, 0x20) ), See class I2C_Device_Definition
         @return: I2C_Device
         """
         self.__pre_scan_i2c_bus()
@@ -205,16 +203,16 @@ class IOHandler:
         spi_bus_nr = _spi_device_def.get_spi_bus_nr()
         spi_cs = _spi_device_def.get_spi_cs_nr()
 
-        self.__check_spi_bus(spi_bus_nr)                    # will fail when bus has cpnflict with a gpio pin...
+        self.__check_spi_bus(spi_bus_nr)                    # will fail when bus has conflict with a gpio pin...
 
         if self.__add_gpio_if_not_already_used_or_give_error(spi_cs, _spi_device_def.get_name()) is IOStatus.IO_FAILED:
             raise Exception("Unable to claim SPI "+ str(spi_bus_nr) + ", CS-pin: '" + str(spi_cs) + "', pin is already in use")
 
         if len(self.__used_spi_devices) is not 0:
-            for _deviceinlist in self.__used_spi_devices:
-                if _deviceinlist.get_spi_bus_nr() is spi_bus_nr and _deviceinlist.get_spi_cs() is spi_cs:
+            for _device_in_list in self.__used_spi_devices:
+                if _device_in_list.get_spi_bus_nr() is spi_bus_nr and _device_in_list.get_spi_cs() is spi_cs:
                     print("SPI device already claimed!!: SPI-bus: " + spi_bus_nr + " cs:" + str(spi_cs))
-                    return _deviceinlist
+                    return _device_in_list
 
         spi_bus = spidev.SpiDev()
         spi_bus.open(_spi_device_def.get_spi_bus_nr(), _spi_device_def.get_spi_cs_nr())    #_spi_bus_nr, _spi_cs_nr)
@@ -319,7 +317,7 @@ class IOHandler:
         """
 
         gpo_pwm_def = GPOPWMDef(_buzzer_def.get_name(), _buzzer_def.get_gpo_pin_nr(), _buzzer_def.get_freq(), _buzzer_def.get_duty_cycle())
-        gpo_pwm_ll_driver = self.get_pwm(gpo_pwm_def)            # gpopwm_def had the same functions of _buzzer_def
+        gpo_pwm_ll_driver = self.get_pwm(gpo_pwm_def)
         return Buzzer_driver(gpo_pwm_ll_driver)
 
     #--------------------------------------------------------------------------------------
@@ -327,7 +325,7 @@ class IOHandler:
     #--------------------------------------------------------------------------------------
 
     def io_shutdown(self) ->None:
-        """@
+        """!
         shuts down the IO
 
         @return: None
@@ -340,7 +338,7 @@ class IOHandler:
     # --------------------------------------------------------------------------------------
     def __is_i2c_slot_available(self, _to_be_checked:I2CDeviceDef) -> bool:
         """!
-        Check if I2C is detected on the bus (list was generated with scanI2C
+        Check if I2C is detected on the bus (list was generated with scanI2C)
 
         @param _to_be_checked: I2CDeviceDef to be checked i2c_scan
         @return bool:, true if available
@@ -474,8 +472,8 @@ class IOHandler:
         @return: None
         """
         if len(self.__available_spi_buses) is not 0:
-            for spibusnr_already_checked in self.__available_spi_buses:
-                if spibusnr_already_checked is _spi_bus_nr:
+            for spi_bus_nr_already_checked in self.__available_spi_buses:
+                if spi_bus_nr_already_checked is _spi_bus_nr:
                     print("SPI already checked!!: " + str(_spi_bus_nr))
                     return
 
@@ -507,7 +505,6 @@ class IOHandler:
         @param _name:
         @return: IOStatus
         """
-        #print("checking gpio: " + str(_gpionnr) )
 
         if len(self.__used_gpio) is 0:
             self.__used_gpio.append(_gpio_nr)
