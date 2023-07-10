@@ -80,7 +80,7 @@ HATADC_I2C_DEF = I2CDeviceDef("hatadc", 5, 0x34)                            # de
 
 POWERSHUTDOWN_GPO_DEF = GPODef("shutdown", 27)                                  # definition of the shutdown GPIO pin
 
-IOEXPANDER_I2C_DEF = I2CDeviceDef("ioexpander", 1, 0x20)          # i2c bus1, address 0x2
+IOEXPANDER_I2C_DEF = I2CDeviceDef("io_expander", 1, 0x20)          # i2c bus1, address 0x2
 IOEXPANDER_INTERRUPT_SETTINGS = [
     McpInitStruct(0, GpioDirection.GPIO_INPUT, InterruptTypes.INT_RISING),
     McpInitStruct(1, GpioDirection.GPIO_INPUT, InterruptTypes.INT_RISING),
@@ -92,7 +92,7 @@ IOEXPANDER_INTERRUPT_SETTINGS = [
     McpInitStruct(7, GpioDirection.GPIO_INPUT, InterruptTypes.INT_RISING),
     ]
 
-IO_EXPANDER_DEF = IOExpanderDef("ioexpander", IOEXPANDER_I2C_DEF, 24, IOEXPANDER_INTERRUPT_SETTINGS)
+IO_EXPANDER_DEF = IOExpanderDef("io_expander", IOEXPANDER_I2C_DEF, 24, IOEXPANDER_INTERRUPT_SETTINGS)
 
 # -------------------
 """!
@@ -104,7 +104,8 @@ SERVOASSEMBLY_1_SPI_BUS = 0
 SERVOASSEMBLY_2_I2C_BUS = 1
 SERVOASSEMBLY_2_SPI_BUS = 0
 
-SERVOASSEMBLY_COMMON_GPI = 4
+#SERVOASSEMBLY_COMMON_GPI = 4
+SERVOASSEMBLY_I2C_DEF = I2CDeviceDef("io_expander", 1, 0x20)          # i2c bus1, address 0x2
 
 SERVOASSEMBLY_INTERUPT_SETTINGS = [
     McpInitStruct(0, GpioDirection.GPIO_INPUT, InterruptTypes.INT_RISING),
@@ -116,6 +117,8 @@ SERVOASSEMBLY_INTERUPT_SETTINGS = [
     McpInitStruct(6, GpioDirection.GPIO_INPUT, InterruptTypes.INT_RISING),
     McpInitStruct(7, GpioDirection.GPIO_INPUT, InterruptTypes.INT_RISING),
     ]
+
+SERVOASSEMBLY_EXPANDER_DEF = IOExpanderDef("power_monitor_expander", SERVOASSEMBLY_I2C_DEF, 4, SERVOASSEMBLY_INTERUPT_SETTINGS)
 
 """!
 I2C definitions

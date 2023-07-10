@@ -1,4 +1,6 @@
 
+#todo corect PowerMonitorAndIO
+
 try:
     from robohatlib.drivers.MCP23008 import MCP23008
 except ImportError:
@@ -9,6 +11,7 @@ try:
     from robohatlib.hal.datastructure.ExpanderDirection import ExpanderDir
     from robohatlib.driver_ll.definitions.MCPInterruptDef import MCPInterruptDef
     from robohatlib.driver_ll.i2c.I2CDevice import I2CDevice
+    from robohatlib.driver_ll.definitions.InterruptCallbackHolder import InterruptCallbackHolder
 
     from robohatlib import Robohat_config
 except ImportError:
@@ -17,9 +20,29 @@ except ImportError:
 
 class PowerMonitorAndIO:
     def __init__(self, _i2c_device: I2CDevice):
-        servo_assembly_interrupt_def = MCPInterruptDef("servo_assembly_int", Robohat_config.SERVOASSEMBLY_COMMON_GPI, self._io_servo_assembly_callback)
-        self.__io_device = MCP23008(_i2c_device, servo_assembly_interrupt_def)
-        self.__signaling_device = None
+        self.__io_device = None
+        # #new
+        # io_expander_def = Robohat_config.SERVOASSEMBLY_EXPANDER_DEF
+        #
+        #
+        # # at the default interrupt definition there are 2 callback added. one for the trigger, the second for the interrupt reset
+        # callbackholder = InterruptCallbackHolder("powermonitorandio_callback_holder", self._io_expander_int_callback, self._io_expander_int_reset_routine, 250)
+        # io_expander_def.set_callbackholder(callbackholder)
+        #
+        #
+        # # i2c_device_definition = _io_expander_def.get_i2c_device_definition()
+        # # i2c_device_definition.set_i2c_offset_address(_sw_io_expander)
+        # # i2c_device = _iohandler.get_i2c_device(i2c_device_definition)
+        #
+        # # if i2c_device is not None:
+        # #     if io_expander_def.get_callbackholder() is not None:
+        # #         gpi_interrupt_definition = GPIInterruptDef(io_expander_def.get_name(), io_expander_def.get_gpio_pin(), InterruptTypes.INT_BOTH, io_expander_def.get_callbackholder() )
+        # #         _iohandler.register_interrupt(gpi_interrupt_definition)
+        #
+        #
+        # #servo_assembly_interrupt_def = MCPInterruptDef("servo_assembly_int", Robohat_config.SERVOASSEMBLY_COMMON_GPI, self._io_servo_assembly_callback)
+        # self.__io_device = MCP23008(_i2c_device, io_expander_def)
+        # self.__signaling_device = None
 
     # --------------------------------------------------------------------------------------
     # --------------------------------------------------------------------------------------
@@ -49,6 +72,9 @@ class PowerMonitorAndIO:
         @return none
         """
 
+        if self.__io_device is None:
+            return
+
         if self.__check_if_expander_io_is_availble(_io_nr) is True:
             if _direction is ExpanderDir.OUTPUT:
                 wanted_pin_value = 0
@@ -64,6 +90,9 @@ class PowerMonitorAndIO:
         @:param _io_nr: io nr
         @:return none
         """
+        if self.__io_device is None:
+            return
+
         if self.__check_if_expander_io_is_availble(_io_nr) is True:
             self.__io_device.set_pin_data(_io_nr, _bool_value)
         else:
@@ -77,6 +106,10 @@ class PowerMonitorAndIO:
 
         @return none
         """
+
+        if self.__io_device is None:
+            return 0
+
         if self.__check_if_expander_io_is_availble(_io_nr) is True:
             return self.__io_device.get_pin_data(_io_nr)
         return 0
@@ -119,4 +152,26 @@ class PowerMonitorAndIO:
         return False
 
     # --------------------------------------------------------------------------------------
+    #todo alarma to user !
+    def _io_expander_int_callback(self, _gpi_nr: int) -> None:
+        """!
+        Just a test callback, should be removed in the future
 
+        @param _gpi_nr (int) mr of the callback gpio pin
+        @return None
+        """
+        print("DCDC _io_expander_int_callback by: " + str(_gpi_nr))
+
+    def _io_expander_int_reset_routine(self, _gpi_nr: int) -> None:
+        """!
+        This routine will be called to reset the interrupt handler of the MCP23008
+        @param _gpi_nr: IO nr of the caller
+        @return: None
+        """
+        if self.__io_device is None:
+            return
+
+        if self.__io_device is not None:
+            self.__io_device.reset_interrupts()
+
+    # --------------------------------------------------------------------------------------
