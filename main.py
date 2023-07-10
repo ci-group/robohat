@@ -51,28 +51,28 @@ def main():
         #robohat.set_ouput_ioexpander(0, EXPANDERSTATUS.LOW)
         #robohat.set_ouput_ioexpander(1, EXPANDERSTATUS.LOW)
 
-        #robohat.set_led_color(Color.GREEN)
-        for i in range(1,1800, 1):
-            angle:float = i / 10.0
-            robohat.set_servos_angles([angle, angle, angle, angle, angle, angle, angle, angle, angle, angle, angle, angle, angle, angle, angle, angle])
-        # #print("-->" + str(robohat.get_servo_adc_readout_single_channels(1)) + " V," + str(robohat.get_servo_adc_readout_single_channels(16)) + " V")
-            print("-->" + str(robohat.get_servo_angle(1)) + " °," + str(robohat.get_servo_angle(16)) + " °")
-
+        robohat.set_led_color(Color.GREEN)
+        # for i in range(1,1800, 1):
+        #     angle:float = i / 10.0
+        #     robohat.set_servos_angles([angle, angle, angle, angle, angle, angle, angle, angle, angle, angle, angle, angle, angle, angle, angle, angle])
+        # # #print("-->" + str(robohat.get_servo_adc_readout_single_channels(1)) + " V," + str(robohat.get_servo_adc_readout_single_channels(16)) + " V")
+        #     print("-->" + str(robohat.get_servo_angle(1)) + " °," + str(robohat.get_servo_angle(16)) + " °")
+        #
         time.sleep(5)
-        robohat.put_servos_to_sleep()
-        time.sleep(5)
-        robohat.wakeup_servos()
-
+        # robohat.put_servos_to_sleep()
+        # time.sleep(5)
+        # robohat.wakeup_servos()
+        #
         robohat.set_led_color(Color.RED)
-        for i in range(1800,1, -1):
-            angle:float = i / 10.0
-            robohat.set_servos_angles([angle, angle, angle, angle, angle, angle, angle, angle, angle, angle, angle, angle, angle, angle, angle, angle])
-            print("-->" + str(robohat.get_servo_angle(1)) + " °" + str(robohat.get_servo_angle(16)) + " °")
-
+        # for i in range(1800,1, -1):
+        #     angle:float = i / 10.0
+        #     robohat.set_servos_angles([angle, angle, angle, angle, angle, angle, angle, angle, angle, angle, angle, angle, angle, angle, angle, angle])
+        #     print("-->" + str(robohat.get_servo_angle(1)) + " °" + str(robohat.get_servo_angle(16)) + " °")
+        #
         time.sleep(5)
-        robohat.put_servos_to_sleep()
-        time.sleep(5)
-        robohat.wakeup_servos()
+        # robohat.put_servos_to_sleep()
+        # time.sleep(5)
+        # robohat.wakeup_servos()
 
         #robohat.do_shutdown()
 

@@ -99,18 +99,18 @@ class GPI_LL_Interrupt:
     # --------------------------------------------------------------------------------------
     # --------------------------------------------------------------------------------------
 
-    def __callback_function(self) -> None:
+    def __callback_function(self, _pin_nr) -> None:
         """!
         The actual interrupt callback, which executes all the callback stored in an array
         @return: None
         """
-        print("callback")
+        print("callback " + str(_pin_nr))
         if len(self.__registered_callbacks) is 0:
             return
 
         for callback_out_of_list in self.__registered_callbacks:
             print("Execution callback")
-            callback_out_of_list()
+            callback_out_of_list(_pin_nr)
 
     # --------------------------------------------------------------------------------------
     # --------------------------------------------------------------------------------------
