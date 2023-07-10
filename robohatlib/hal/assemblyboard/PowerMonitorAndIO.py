@@ -7,13 +7,19 @@ except ImportError:
 
 try:
     from robohatlib.hal.datastructure.ExpanderDirection import ExpanderDir
+    from robohatlib.driver_ll.definitions.MCPInterruptDef import MCPInterruptDef
+    from robohatlib.driver_ll.i2c.I2CDevice import I2CDevice
+
+    from robohatlib import Robohat_config
 except ImportError:
     print("Failed to resolve dependencies for PowerMonitorAndIO")
     raise
 
 class PowerMonitorAndIO:
-    def __init__(self, _i2c_device, _mcp_interrupt_definition=None):
-        self.__iodevice = MCP23008(_i2c_device, _mcp_interrupt_definition)
+    def __init__(self, _i2c_device: I2CDevice):
+        servo_assembly_interrupt_def = MCPInterruptDef("servo_assembly_int", Robohat_config.SERVOASSEMBLY_COMMON_GPI, self._io_servo_assembly_callback)
+        self.__io_device = MCP23008(_i2c_device, servo_assembly_interrupt_def)
+        self.__signaling_device = None
 
     # --------------------------------------------------------------------------------------
     # --------------------------------------------------------------------------------------
@@ -28,7 +34,7 @@ class PowerMonitorAndIO:
 
     # --------------------------------------------------------------------------------------
 
-    def is_power_good(self, _powerchannel) -> bool:
+    def is_power_good(self, _power_channel: int) -> bool:
         return True
 
     # --------------------------------------------------------------------------------------
@@ -43,12 +49,12 @@ class PowerMonitorAndIO:
         @return none
         """
 
-        if self.__checkifexpanderioisavailble(_io_nr) is True:
+        if self.__check_if_expander_io_is_availble(_io_nr) is True:
             if _direction is ExpanderDir.OUTPUT:
                 wanted_pin_value = 0
             else:
                 wanted_pin_value = 1
-            self.__iodevice.set_pin_direction(_io_nr, wanted_pin_value)
+            self.__io_device.set_pin_direction(_io_nr, wanted_pin_value)
         else:
             print("io pin not available for user")
     # --------------------------------------------------------------------------------------
@@ -58,8 +64,8 @@ class PowerMonitorAndIO:
         @:param _io_nr: io nr
         @:return none
         """
-        if self.__checkifexpanderioisavailble(_io_nr) is True:
-            self.__iodevice.set_pin_data(_io_nr, _bool_value)
+        if self.__check_if_expander_io_is_availble(_io_nr) is True:
+            self.__io_device.set_pin_data(_io_nr, _bool_value)
         else:
             print("io pin not available for user")
 
@@ -71,15 +77,40 @@ class PowerMonitorAndIO:
 
         @return none
         """
-        if self.__checkifexpanderioisavailble(_io_nr) is True:
-            return self.__iodevice.get_pin_data(_io_nr)
+        if self.__check_if_expander_io_is_availble(_io_nr) is True:
+            return self.__io_device.get_pin_data(_io_nr)
         return 0
 
     # --------------------------------------------------------------------------------------
-
-    def __checkifexpanderioisavailble(self, _io_nr:int) -> bool:
+    def add_signaling_device(self, _signaling_device) -> None:
         """!
-        Checks if IO nr is avaible for the user (the 0-3 are reserved for power monitor!!
+        Adds device which will alarms the user
+        @param _signaling_device:
+        @return: Nome
+        """
+        self.__signaling_device = _signaling_device
+    # --------------------------------------------------------------------------------------
+
+    def _io_servo_assembly_callback(self, _gpi_nr):
+        """!
+        Alarms the user when an DC/DC converter shuts down
+
+        @param _gpi_nr: mr of the callback gpio pin
+
+        @return None
+        """
+
+        print("_io_servo_assembly_callback by: " + str(_gpi_nr))
+
+        if self.__signaling_device is not None:
+            self.__signaling_device.signal_system_alarm()
+
+    # --------------------------------------------------------------------------------------
+
+
+    def __check_if_expander_io_is_availble(self, _io_nr:int) -> bool:
+        """!
+        Checks if IO nr is available for the user (the 0-3 are reserved for power monitor!!
         @param _io_nr: io nr
         @return: True is IO is available, False is not
         """
@@ -88,3 +119,4 @@ class PowerMonitorAndIO:
         return False
 
     # --------------------------------------------------------------------------------------
+

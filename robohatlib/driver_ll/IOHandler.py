@@ -7,14 +7,13 @@ try:
     from robohatlib.driver_ll.GPOPWM_LL_Driver import GPOPWM_LL_Driver
     from robohatlib.driver_ll.GPI_LL_Interrupt import GP_interrupt
 
-    from robohatlib.driver_ll.i2c.I2CDevice import I2CDevice
-    from robohatlib.driver_ll.i2c.I2CDeviceDef import I2CDeviceDef
-
     from robohatlib.driver_ll.definitions.GPIDef import GPIDef
     from robohatlib.driver_ll.definitions.GPODef import GPODef
     from robohatlib.driver_ll.definitions.GPOPWMDef import GPOPWMDef
     from robohatlib.driver_ll.definitions.GPIInterruptDef import GPIInterruptDef
 
+    from robohatlib.driver_ll.i2c.I2CDevice import I2CDevice
+    from robohatlib.driver_ll.i2c.I2CDeviceDef import I2CDeviceDef
     from robohatlib.driver_ll.i2c.I2CBus import I2CBus
     from robohatlib.driver_ll.i2c.I2CHandler import I2CHandler
 
@@ -51,7 +50,6 @@ class IOHandler:
     """!
     In this class all low level IO checking and handling are done
     """
-
 
     def __init__(self):
         """!
@@ -309,9 +307,9 @@ class IOHandler:
         @return: Led
         """
 
-        gpodef = GPODef(_led_def.get_name(), _led_def.get_gpo_pin_nr())
+        gpo_def = GPODef(_led_def.get_name(), _led_def.get_gpo_pin_nr())
 
-        gpo_ll_driver = self.get_gpo(gpodef)                  # gpo_def had the same functions of led_def
+        gpo_ll_driver = self.get_gpo(gpo_def)                  # gpo_def had the same functions of led_def
         return Led_driver(gpo_ll_driver)
 
     #--------------------------------------------------------------------------------------
@@ -324,9 +322,9 @@ class IOHandler:
         @return: Buzzer_driver
         """
 
-        gpopwmdef = GPOPWMDef(_buzzer_def.get_name(), _buzzer_def.get_gpo_pin_nr(), _buzzer_def.get_freq(), _buzzer_def.get_duty_cycle())
-        gpopwm_ll_driver = self.get_pwm(gpopwmdef)            # gpopwm_def had the same functions of _buzzer_def
-        return Buzzer_driver(gpopwm_ll_driver)
+        gpo_pwm_def = GPOPWMDef(_buzzer_def.get_name(), _buzzer_def.get_gpo_pin_nr(), _buzzer_def.get_freq(), _buzzer_def.get_duty_cycle())
+        gpo_pwm_ll_driver = self.get_pwm(gpo_pwm_def)            # gpopwm_def had the same functions of _buzzer_def
+        return Buzzer_driver(gpo_pwm_ll_driver)
 
     #--------------------------------------------------------------------------------------
     #--------------------------------------------------------------------------------------
@@ -386,13 +384,13 @@ class IOHandler:
     #--------------------------------------------------------------------------------------
 
     def __allocate_i2c_handler(self, _i2c_bus_nr:int, _scl_pin:int, _sda_pin:int, _freq:int=100000) -> I2CHandler:
-        """
-        :param _i2c_bus_nr:
-        :param _scl_pin:
-        :param _sda_pin:
-        :param _freq:
-        :return: I2C_Handler
-        :raises: Exception
+        """!
+        @param _i2c_bus_nr:
+        @param _scl_pin:
+        @param _sda_pin:
+        @param _freq:
+        @return: I2C_Handler
+        @raises: Exception
         """
         if self.__add_gio_if_not_already_used_or_give_error(_scl_pin, "scl") is IOStatus.IO_FAILED:
             raise Exception("Unable to claim I2C "+ str(_i2c_bus_nr) + ", SCL-pin: '" + str(_scl_pin) + "', pin is already in use")
@@ -409,10 +407,10 @@ class IOHandler:
     #--------------------------------------------------------------------------------------
 
     def __claim_i2c_bus(self, _i2c_bus_nr:int) -> I2CBus:
-        """
-        :param _i2c_bus_nr:
-        :return: I2C_Bus
-        :raises: Exception
+        """!
+        @param _i2c_bus_nr:
+        @return: I2C_Bus
+        @raises: Exception
         """
         if _i2c_bus_nr is 1:
             def_i = Robohat_config.I2C1_DEF

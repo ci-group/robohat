@@ -8,7 +8,7 @@ try:
     from robohatlib.driver_ll.i2c.I2CDeviceDef import I2CDeviceDef
     from robohatlib.driver_ll.constants.InterruptTypes import InterruptTypes
     from robohatlib.driver_ll.constants.GPIO_Direction import GpioDirection
-    from robohatlib.driver_ll.definitions.MCPInterruptDef import MCPInterruptDef
+
 
     from robohatlib.hal.PowerManagement import PowerManagement
     from robohatlib.hal.Serial import Serial
@@ -75,10 +75,14 @@ class Robohat:
         self.__powerManagement = PowerManagement(self.__io, self.__hatAdc, Robohat_config.POWERSHUTDOWN_GPO_DEF)
         self.__powerManagement.add_signaling_device(self.__buzzer)
 
-        servo_assembly_interrupt_def = MCPInterruptDef("servo_assembly_int", Robohat_config.SERVOASSEMBLY_COMMON_GPI,self._io_servo_assembly_callback)
+
         self.__servo_assembly_1 = ServoAssembly(self.__io, _servo_assembly_1_config,
                                                 Robohat_config.SERVOASSEMBLY_1_I2C_BUS,
-                                                Robohat_config.SERVOASSEMBLY_1_SPI_BUS, servo_assembly_interrupt_def)
+                                                Robohat_config.SERVOASSEMBLY_1_SPI_BUS
+                                                )
+
+        self.__servo_assembly_1.add_signaling_device(self.__buzzer)
+
 
         # self.__servo_assembly_2 = ServoAssembly(self.__io, _servo_assembly_2_config, Robohat_config.SERVOASSEMBLY_2_I2C_BUS, Robohat_config.SERVOASSEMBLY_2_SPI_BUS, servoAssembly_interrupt_def)
 
@@ -106,7 +110,11 @@ class Robohat:
         self.__hatAdc.init_hat_adc()
         self.__powerManagement.init_power_management()
 
-        self.__servo_assembly_1.init_servo_assembly(_servo_board_1_datas_array)
+        if self.__servo_assembly_1 is not None:
+            self.__servo_assembly_1.init_servo_assembly(_servo_board_1_datas_array)
+
+        if self.__servo_assembly_2 is not None:
+            self.__servo_assembly_2.init_servo_assembly(_servo_board_1_datas_array)
 
     # begin I2C functions ---------------------------------------------------------------------------------
 
@@ -558,7 +566,7 @@ class Robohat:
 
         @return str, version build date of library, such as 20231225
         """
-        return Robohat_constants.ROBOHAT_BUILDDATE_STR
+        return Robohat_constants.ROBOHAT_BUILD_DATE_STR
 
     # End Library functions ---------------------------------------------------------------------------------
 

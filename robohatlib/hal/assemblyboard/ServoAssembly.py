@@ -1,9 +1,16 @@
-from robohatlib.hal.assemblyboard.servo.ServoBoard import ServoBoard
-from robohatlib.hal.assemblyboard.PowerMonitorAndIO import PowerMonitorAndIO
-from robohatlib.driver_ll.definitions.GPIInterruptDef import GPIInterruptDef
+try:
+    from robohatlib.hal.assemblyboard.servo.ServoBoard import ServoBoard
+    from robohatlib.hal.assemblyboard.PowerMonitorAndIO import PowerMonitorAndIO
+    from robohatlib.driver_ll.definitions.GPIInterruptDef import GPIInterruptDef
+    from robohatlib.hal.assemblyboard.ServoAssemblyConfig import ServoAssemblyConfig
+    from robohatlib.driver_ll.IOHandler import IOHandler
 
-from robohatlib.driver_ll.i2c.I2CDeviceDef import I2CDeviceDef
-from robohatlib.driver_ll.spi.SPIDeviceDef import SPIDeviceDef
+    from robohatlib.driver_ll.i2c.I2CDeviceDef import I2CDeviceDef
+    from robohatlib.driver_ll.spi.SPIDeviceDef import SPIDeviceDef
+except ImportError:
+    print("Failed to resolve dependencies for ServoAssembly")
+    raise
+
 
 
 BASE_ADDRESS_MCP23008 = 0x20
@@ -11,16 +18,24 @@ BASE_ADDRESS_PCA9685 = 0x40
 
 class ServoAssembly:
 
-    def __init__(self, _iomanager, _servo_config, _i2c_bus_nr, _spi_bus_nr, _mcp_interrupt_definition = None):
+    def __init__(self, _io_handler: IOHandler, _servo_config: ServoAssemblyConfig, _i2c_bus_nr: int, _spi_bus_nr: int):
+        """!
+        @param _io_handler
+        @param _servo_config
+        @param _i2c_bus_nr
+        @param _spi_bus_nr
+
+        @return: none
+        """
 
         self.__servo_config = _servo_config
 
         #----------------------------
         i2c_def_pwm = I2CDeviceDef(_servo_config.get_name(), _i2c_bus_nr, BASE_ADDRESS_PCA9685, _servo_config.get_sw1_pwm_address())
-        i2c_device_pwm = _iomanager.get_i2c_device(i2c_def_pwm)
+        i2c_device_pwm = _io_handler.get_i2c_device(i2c_def_pwm)
 
         spi_def_adc = SPIDeviceDef(_servo_config.get_name(), _spi_bus_nr, _servo_config.get_cs_adc_angle_readout())
-        spi_device_adc = _iomanager.get_spi_device(spi_def_adc)
+        spi_device_adc = _io_handler.get_spi_device(spi_def_adc)
 
         if i2c_device_pwm is not None and spi_device_adc is not None:
             self.__servo_board = ServoBoard(i2c_device_pwm, spi_device_adc)
@@ -28,26 +43,22 @@ class ServoAssembly:
             self.__servo_board = None
         # ----------------------------
 
-        # ----------------------------
-        gpi_interrupt_definition = GPIInterruptDef.from_mcp23008_interrupt_definition(_mcp_interrupt_definition)
-        _iomanager.register_interrupt(gpi_interrupt_definition)
-
-        i2c_def_power_monitor = I2CDeviceDef(_servo_config.get_name() + "_I2C", _i2c_bus_nr, BASE_ADDRESS_MCP23008, _servo_config.get_sw2_power_good_address())
-        i2c_device_power_monitor = _iomanager.get_i2c_device(i2c_def_power_monitor)
+        i2c_def_power_monitor = I2CDeviceDef(_servo_config.get_name() + "power_monitor", _i2c_bus_nr, BASE_ADDRESS_MCP23008, _servo_config.get_sw2_power_good_address())
+        i2c_device_power_monitor = _io_handler.get_i2c_device(i2c_def_power_monitor)
 
         if i2c_device_power_monitor is not None:
-            self.__power_monitor_and_io = PowerMonitorAndIO(i2c_device_power_monitor, _mcp_interrupt_definition)
+            self.__power_monitor_and_io = PowerMonitorAndIO(i2c_device_power_monitor)
         else:
             self.__power_monitor_and_io = None
         # ----------------------------
 
 
-    def init_servo_assembly(self, _servo_datas_array: []):
-        """
+    def init_servo_assembly(self, _servo_datas_array: []) -> None:
+        """!
         Initializes servo assembly
 
         @param _servo_datas_array:
-        :return:
+        @return: none
         """
         if  self.__servo_board is not None:
             self.__servo_board.init_servo_board(_servo_datas_array)
@@ -79,7 +90,7 @@ class ServoAssembly:
 
     # --------------------------------------------------------------------------------------
 
-    def set_all_servos_angle(self, _wanted_angles) -> None:
+    def set_all_servos_angle(self, _wanted_angles: []) -> None:
         """!
         Set the angle of connected servos in degree
 
@@ -124,7 +135,7 @@ class ServoAssembly:
         Checks if servo is connected. Returns False when not connected
 
         @param _servo_nr The servo nr
-        @return: Returns False when not connected
+        @return Returns False when not connected
         """
         if self.__servo_board is not None:
             return self.__servo_board.get_servo_is_connected(_servo_nr)
@@ -136,7 +147,7 @@ class ServoAssembly:
         """!
         Put the device into a sleep state
 
-        @:return: None
+        @return None
         """
         self.__servo_board.sleep()
 
@@ -146,7 +157,7 @@ class ServoAssembly:
         """!
         Wake the device from its sleep state
 
-        @:return: None
+        @return None
         """
         self.__servo_board.wake()
 
@@ -155,7 +166,7 @@ class ServoAssembly:
     def is_servo_sleeping(self) -> bool:
         """
         Get if Servos are sleeping
-        @:return: (bool) returns True when servos are sleeping
+        @return (bool) returns True when servos are sleeping
         """
         return self.__servo_board.is_servo_sleeping()
 
@@ -180,3 +191,11 @@ class ServoAssembly:
 
     # --------------------------------------------------------------------------------------
 
+    def add_signaling_device(self, _signaling_device) -> None:
+        """!
+        Adds device which will alarms the user
+        @param _signaling_device:
+        @return: Nome
+        """
+        if self.__power_monitor_and_io is not None:
+            self.__power_monitor_and_io.add_signaling_device(_signaling_device)

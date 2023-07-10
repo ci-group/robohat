@@ -1,12 +1,6 @@
 # !/usr/bin/env python
 
 
-'''
-~OE ie via een jumper       input pca
-INT_i2C gpio4               output pca, input cpu
-bus i2c-1
-
-'''
 
 import math
 
@@ -44,6 +38,15 @@ MODE2_OCH_BITNR =       3  # output type
 MODE2_OUTDRV_BITNR =    2  # output type
 MODE2_OUTNE1_BITNR =    0  # output mode when not enabled
 
+
+
+"""!
+~OE ie via een jumper       input pca
+INT_i2C gpio4               output pca, input cpu
+bus i2c-1
+
+"""
+
 class PCA9685:
 
     # --------------------------------------------------------------------------------------
@@ -53,14 +56,14 @@ class PCA9685:
         self.__i2c_device = _i2c_device
 
     # --------------------------------------------------------------------------------------
-    def init_pca9685(self):
+    def init_pca9685(self) -> None:
         self.__do_idle()
         self.__do_invert_and_set_driver_to_pushpull()
         self.__do_idle()
         self.__set_pwm_freq(50)
 
     # --------------------------------------------------------------------------------------
-    def set_on_time_channel(self, _channel, _time_wanted_us):
+    def set_on_time_channel(self, _channel: int, _time_wanted_us: float) -> None:
         _channel = _channel - 1
 
         actual_ticks_on = self.__convert_timeUs_to_tick(_time_wanted_us)
@@ -76,12 +79,12 @@ class PCA9685:
         self.__i2c_device.i2c_write_bytes(bytes([LED0_ON_L_ADDRESS + (4 * _channel), on_tick_bytes[0], on_tick_bytes[1], off_tick_bytes[0], off_tick_bytes[1]]))
 
     # --------------------------------------------------------------------------------------
-    def set_on_time_allchannels(self, _wantedtimes_us):
+    def set_on_time_all_channels(self, _wanted_times_us: float) -> None:
 
         data_to_send = bytes([LED0_ON_L_ADDRESS])
 
         for i in range(0, 16):
-            actual_ticks_on = self.__convert_timeUs_to_tick(_wantedtimes_us[i])
+            actual_ticks_on = self.__convert_timeUs_to_tick(_wanted_times_us[i])
             on_ticks = 0
             off_ticks = 4095 - actual_ticks_on - on_ticks
 
@@ -159,7 +162,7 @@ class PCA9685:
         self.__write(PRE_SCALE_ADDRESS, int(pre_scale))
         self.wake()
 
-    def __convert_timeUs_to_tick(self, _time_wanted_us):
+    def __convert_timeUs_to_tick(self, _time_wanted_us: float):
         time_per_tick = ((1.0 / self.__freq) / 4095.0) * 1000000
         actual_ticks = int(_time_wanted_us / time_per_tick)
         return actual_ticks

@@ -2,6 +2,7 @@
 
 try:
     from robohatlib.drivers.PCA9685 import PCA9685
+
 except ImportError:
     print("Failed to import PCA9685")
     raise
@@ -12,12 +13,19 @@ except ImportError:
     print("Failed to import MAX11137")
     raise
 
+try:
+    from robohatlib.driver_ll.i2c.I2CDevice import I2CDevice
+    from robohatlib.driver_ll.spi.SPI_Device import SPI_Device
+except ImportError:
+    print("Failed to resolve dependencies for Servoboard")
+    raise
+
 class ServoBoard:
     __servo_datas_array = None
 
     #--------------------------------------------------------------------------------------
 
-    def __init__(self, i2c_device_servo, _spi_device_servo_adc):
+    def __init__(self, i2c_device_servo: I2CDevice, _spi_device_servo_adc: SPI_Device):
         self.__pwm = PCA9685(i2c_device_servo)
         self.__servo_adc = MAX11137(_spi_device_servo_adc)
 
@@ -53,12 +61,12 @@ class ServoBoard:
 
     #--------------------------------------------------------------------------------------
     #--------------------------------------------------------------------------------------
-    def set_all_servos_angle(self, _wanted_angles) -> None:
+    def set_all_servos_angle(self, _wanted_angles: []) -> None:
         wanted_time_array = [0] * 16
         for i in range(0, 16):
             wanted_time_array[i] = self.__servo_datas_array[i].convert_angle_to_time(_wanted_angles[i])
 
-        self.__pwm.set_on_time_allchannels(wanted_time_array)
+        self.__pwm.set_on_time_all_channels(wanted_time_array)
 
     #--------------------------------------------------------------------------------------
 

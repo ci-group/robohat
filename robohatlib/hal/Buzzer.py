@@ -79,8 +79,8 @@ class Buzzer:
 
     def signal_system_alarm(self) -> None:
         """
-
-        :return: None
+        System alarm
+        @return: None
         """
 
         if ALARM_PERMITTED is True:
@@ -89,3 +89,6 @@ class Buzzer:
                 self.__buzzer_driver.do_alarm_buzzer()
                 print("System alarm")
                 self.__last_time_error = time.time()
+
+    # ---------------------------------------------------------------------------------------
+    # ---------------------------------------------------------------------------------------

@@ -44,7 +44,7 @@ class IOExpander:
         """
 
         if self.__expander is not None:
-            self.__expander.init_MCP23008()
+            self.__expander.init_mcp23008()
 
     #--------------------------------------------------------------------------------------
     def set_direction_io_expander(self, _io_nr:int, _direction: ExpanderDir) -> None:
