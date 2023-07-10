@@ -179,6 +179,8 @@ class MCP23008:
 
     def reset_interrupts(self):
         tmp = self.read_interrupt_capture()
+
+        print("INT reset done! in MCP23008")
         del tmp
 
     # --------------------------------------------------------------------------------------
@@ -219,6 +221,11 @@ class MCP23008:
 
     #--------------------------------------------------------------------------------------
     def __get_port(self, _register):
+        """
+        Gives port value (byte)
+        @param _register:
+        @return: port value
+        """
         return self.__i2c_device.i2c_read_register_byte(_register)
 
     #--------------------------------------------------------------------------------------
@@ -228,8 +235,8 @@ class MCP23008:
     def __check_if_expander_io_is_available(self, _io_nr) -> bool:
         """!
         Return True when Iio_nr is in range
-        :param _io_nr:
-        :return: bool
+        @param _io_nr: the io nr
+        @return: bool
         """
         if _io_nr in range(0, 8):
             return True

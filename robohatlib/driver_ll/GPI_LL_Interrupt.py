@@ -7,6 +7,7 @@ except ImportError:
 try:
     from robohatlib.driver_ll.constants.InterruptTypes import InterruptTypes
     from robohatlib.driver_ll.definitions.GPIInterruptDef import GPIInterruptDef
+    from robohatlib.driver_ll.definitions.InterruptCallbackHolder import InterruptCallbackHolder
 except ImportError:
     raise ImportError("Unable to solve all dependencies for GPI_LL_Interrupt")
 
@@ -35,8 +36,8 @@ class GPI_LL_Interrupt:
         GPIO.setup(self.__gpio_pin, GPIO.IN, GPIO.PUD_UP)
         GPIO.add_event_detect(self.__gpio_pin, GPIO.BOTH, self.__callback_function, 1)
 
-        self.__registered_callbacks = []
-        self.add_callback(_interrupt_definition.get_callback_function())
+        self.__registered_callbackholders = []
+        self.add_callbackholder(_interrupt_definition.get_callbackholder())
 
     # --------------------------------------------------------------------------------------
     # --------------------------------------------------------------------------------------
@@ -63,37 +64,37 @@ class GPI_LL_Interrupt:
     # --------------------------------------------------------------------------------------
     # --------------------------------------------------------------------------------------
 
-    def add_callback(self, _callback) -> None:
+    def add_callbackholder(self, _callbackholder: InterruptCallbackHolder) -> None:
         """!
         Add callback
-        @param _callback: the callback to be added
+        @param _callbackholder: the callback to be added
         @return: None
         """
-        if len(self.__registered_callbacks) is 0:
+        if len(self.__registered_callbackholders) is 0:
             print("first callback")
-            self.__registered_callbacks.append(_callback)
+            self.__registered_callbackholders.append(_callbackholder)
 
-        for callback_out_of_list in self.__registered_callbacks:
-            if callback_out_of_list is _callback:
+        for callback_out_of_list in self.__registered_callbackholders:
+            if callback_out_of_list is _callbackholder:
                 print("callback already present")
                 return
 
         print("new callback")
-        self.__registered_callbacks.append(_callback)
+        self.__registered_callbackholders.append(_callbackholder)
 
     # --------------------------------------------------------------------------------------
 
-    def remove_callback(self, _callback) -> None:
-        """
+    def remove_callbackholder(self, _callbackholder: InterruptCallbackHolder) -> None:
+        """!
         Removes callback
-        @param _callback removes callback
+        @param _callbackholder removes callback
         @Return None
         """
-        if len(self.__registered_callbacks) is 0:
+        if len(self.__registered_callbackholders) is 0:
             return
 
-        for callback_out_of_list in self.__registered_callbacks:
-            self.__registered_callbacks.remove(callback_out_of_list)
+        for callback_out_of_list in self.__registered_callbackholders:
+            self.__registered_callbackholders.remove(callback_out_of_list)
 
     # --------------------------------------------------------------------------------------
     # --------------------------------------------------------------------------------------
@@ -101,16 +102,16 @@ class GPI_LL_Interrupt:
 
     def __callback_function(self, _pin_nr) -> None:
         """!
-        The actual interrupt callback, which executes all the callback stored in an array
+        The actual interrupt callback, which executes all the callback retrieved from a callbackholder stored in an array
         @return: None
         """
         print("callback " + str(_pin_nr))
-        if len(self.__registered_callbacks) is 0:
+        if len(self.__registered_callbackholders) is 0:
             return
 
-        for callback_out_of_list in self.__registered_callbacks:
+        for callbackholder_out_of_list in self.__registered_callbackholders:
             print("Execution callback")
-            callback_out_of_list(_pin_nr)
+            callbackholder_out_of_list.execute_callback(_pin_nr)
 
     # --------------------------------------------------------------------------------------
     # --------------------------------------------------------------------------------------

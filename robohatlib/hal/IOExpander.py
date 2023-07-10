@@ -9,12 +9,12 @@ try:
     from robohatlib.hal.datastructure.ExpanderDirection import ExpanderDir
     from robohatlib.hal.datastructure.ExpanderStatus import ExpanderStatus
     from robohatlib.driver_ll.definitions.GPIInterruptDef import GPIInterruptDef
+    from robohatlib.driver_ll.constants.InterruptTypes import InterruptTypes
     from robohatlib.driver_ll.definitions.IOExpanderDef import IOExpanderDef
     from robohatlib.driver_ll.IOHandler import IOHandler
 except ImportError:
     print("Failed to import dependencies for IOExpander")
     raise
-
 
 class IOExpander:
 
@@ -26,8 +26,8 @@ class IOExpander:
         i2c_device = _iohandler.get_i2c_device(i2c_device_definition)
 
         if i2c_device is not None:
-            if _io_expander_def.get_callback_function() is not None:
-                gpi_interrupt_definition = GPIInterruptDef.from_mcp23008_interrupt_definition(_io_expander_def)
+            if _io_expander_def.get_callbackholder() is not None:
+                gpi_interrupt_definition = GPIInterruptDef(_io_expander_def.get_name(), _io_expander_def.get_gpio_pin(), InterruptTypes.INT_BOTH, _io_expander_def.get_callbackholder() )
                 _iohandler.register_interrupt(gpi_interrupt_definition)
 
             self.__expander = MCP23008(i2c_device, _io_expander_def)
@@ -37,9 +37,7 @@ class IOExpander:
     #--------------------------------------------------------------------------------------
     def init_io_expander(self) -> None:
         """
-        Initializes the io expander
-
-        Mandatory
+        Initializes the io expander (Mandatory)
 
         @return -> None:
         """
@@ -106,6 +104,10 @@ class IOExpander:
 
     #--------------------------------------------------------------------------------------
 
+    def reset_interrupt(self, _io_nr) -> None:
+        self.__expander.reset_interrupts()
+    #--------------------------------------------------------------------------------------
+
     def __check_if_expander_io_is_available(self, _io_nr:int) -> None:
         """!
         Checks if the IO is available
@@ -117,3 +119,5 @@ class IOExpander:
 
         if self.__expander is None or _io_nr not in range(0, 8):
             raise ValueError("only io0 till io7 are available")
+
+    #-------------------------------------------------------------------------------------

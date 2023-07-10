@@ -8,7 +8,7 @@ try:
     from robohatlib.driver_ll.i2c.I2CDeviceDef import I2CDeviceDef
     from robohatlib.driver_ll.constants.InterruptTypes import InterruptTypes
     from robohatlib.driver_ll.constants.GPIO_Direction import GpioDirection
-
+    from robohatlib.driver_ll.definitions.InterruptCallbackHolder import InterruptCallbackHolder
 
     from robohatlib.hal.PowerManagement import PowerManagement
     from robohatlib.hal.Serial import Serial
@@ -66,15 +66,21 @@ class Robohat:
         self.__led = LedMulticolor(self.__io, Robohat_config.STATUSLED_DEF)
         self.__imu = IMU(self.__io, Robohat_config.IMU_DEF)
 
+
+        #-------------------------------------Expander
         io_expander_def = Robohat_config.IO_EXPANDER_DEF
-        io_expander_def.set_callback_function(self._io_expander_int_callback)
+
+        # at the default interrupt definition there are 2 callback added. one for the trigger, the second for the interrupt reset
+        callbackholder = InterruptCallbackHolder("expander_callback_holder", self._io_expander_int_callback, self._io_expander_int_reset_routine, 250)
+        io_expander_def.set_callbackholder(callbackholder)
+
         self.__io_expander = IOExpander(self.__io, io_expander_def, _sw_io_expander)
+        #-------------------------------------
 
         self.__hatAdc = HatADC(self.__io, Robohat_config.HATADC_I2C_DEF)
 
         self.__powerManagement = PowerManagement(self.__io, self.__hatAdc, Robohat_config.POWERSHUTDOWN_GPO_DEF)
         self.__powerManagement.add_signaling_device(self.__buzzer)
-
 
         self.__servo_assembly_1 = ServoAssembly(self.__io, _servo_assembly_1_config,
                                                 Robohat_config.SERVOASSEMBLY_1_I2C_BUS,
@@ -584,6 +590,16 @@ class Robohat:
         """
         print("_io_expander_int_callback by: " + str(_gpi_nr))
         self.do_buzzer_beep()
+
+    def _io_expander_int_reset_routine(self, _gpi_nr: int) -> None:
+        """!
+        This routine will be called to reset the interrupt handler (if needed, is used by MCP23008)
+        @param _gpi_nr: IO nr of the caller
+        @return: None
+        """
+        if self.__io_expander is not None:
+            self.__io_expander.reset_interrupt(_gpi_nr)
+    # ------------------------------------------------------------------------------------
 
     def _io_servo_assembly_callback(self, _gpi_nr):
         """!

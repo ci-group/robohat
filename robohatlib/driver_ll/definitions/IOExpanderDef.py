@@ -1,25 +1,26 @@
 #!/usr/bin/python3
 try:
     from robohatlib.driver_ll.i2c.I2CDeviceDef import I2CDeviceDef
+    from robohatlib.driver_ll.definitions.InterruptCallbackHolder import InterruptCallbackHolder
 except ImportError:
-    print("Failed to import IOExpanderDef")
+    print("Failed to resolve dependencies for IOExpanderDef")
     raise
 
 class IOExpanderDef:
 
-    def __init__(self, _name, _i2c_device_definition:I2CDeviceDef, _gpio_pin:int, _interrupt_settings, _callback_function = None):
+    def __init__(self, _name, _i2c_device_definition:I2CDeviceDef, _gpio_pin:int, _interrupt_settings, _callbackholder : InterruptCallbackHolder = None):
         """!
         @param _name:
         @param _i2c_device_definition:
         @param _gpio_pin:
         @param _interrupt_settings:
-        @param _callback_function:
+        @param _callbackholder:
         """
         self.__name = _name
         self.__i2c_device_definition = _i2c_device_definition
         self.__gpio_pin = _gpio_pin
         self.__interrupt_settings = _interrupt_settings
-        self.__callback_function = _callback_function
+        self.__callbackholder = _callbackholder
 
     # --------------------------------------------------------------------------------------
     # --------------------------------------------------------------------------------------
@@ -68,21 +69,21 @@ class IOExpanderDef:
     # --------------------------------------------------------------------------------------
     # --------------------------------------------------------------------------------------
 
-    def set_callback_function(self, _callback_function) -> None:
+    def set_callbackholder(self, _callbackholder : InterruptCallbackHolder) -> None:
         """!
-        @param _callback_function: new interrupt callback
+        @param _callbackholder: new interrupt callback
         @return: None
         """
-        self.__callback_function = _callback_function
+        self.__callbackholder = _callbackholder
 
     # --------------------------------------------------------------------------------------
 
-    def get_callback_function(self):
+    def get_callbackholder(self) -> InterruptCallbackHolder:
         """!
         get the callback_function:
-        @return: callback_function
+        @return: InterruptCallbackHolder
         """
-        return self.__callback_function
+        return self.__callbackholder
 
     # --------------------------------------------------------------------------------------
     # --------------------------------------------------------------------------------------

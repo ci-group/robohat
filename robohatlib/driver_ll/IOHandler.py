@@ -542,7 +542,7 @@ class IOHandler:
         for interrupt in self.__registered_gpi_ll_interrupts:
             if interrupt.get_gpio_pin() is _gpi_interrupt_definition.get_gpio_pin():
                 print("already claimed: interrupt " + str(interrupt.get_gpio_pin()) + " for: " + interrupt.get_name() )
-                interrupt.add_callback(_gpi_interrupt_definition.get_callback_function() )
+                interrupt.add_callbackholder(_gpi_interrupt_definition.get_callbackholder())
                 return interrupt
 
         interrupt = GPI_LL_Interrupt(_gpi_interrupt_definition)
