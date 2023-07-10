@@ -100,18 +100,23 @@ class PCA9685:
         self.__i2cdevice.i2c_write_bytes( datatosend)
 
     # --------------------------------------------------------------------------------------
-    def sleep(self):
-        """
+    def sleep(self) -> None:
+        """!
         Put the device into a sleep state
+
+        @:return: None
         """
         oldmode = self.__read(MODE1_ADDRESS)
         newmode = oldmode | (1 << MODE1_SLEEP_BITNR)
         self.__write(MODE1_ADDRESS, newmode)
 
     # --------------------------------------------------------------------------------------
-    def wake(self):
-        """
+    def wake(self) -> None:
+        """!
         Wake the device from its sleep state
+
+
+        @:return: None
         """
         self.__write(MODE1_ADDRESS, 0x0000)
         newmode = 0x00a0

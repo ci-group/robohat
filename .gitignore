@@ -3,3 +3,9 @@
 /Lib/
 /Scripts/
 /__pycache__
+/robohatlib/__pycache__
+/robohatlib/driver_ll/__pycache__/
+/robohatlib/driver_ll/constants/__pycache__/
+/robohatlib/driver_ll/i2c/__pycache__/
+/robohatlib/hal/definitions/__pycache__/
+__pycache__

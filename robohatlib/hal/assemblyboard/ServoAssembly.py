@@ -132,6 +132,27 @@ class ServoAssembly:
 
     # --------------------------------------------------------------------------------------
 
+    def sleep(self) -> None:
+        """!
+        Put the device into a sleep state
+
+        @:return: None
+        """
+        self.__servo_board.sleep()
+
+    # --------------------------------------------------------------------------------------
+
+    def wake(self) -> None:
+        """!
+        Wake the device from its sleep state
+
+
+        @:return: None
+        """
+        self.__servo_board.wake()
+
+    # --------------------------------------------------------------------------------------
+
     def get_name(self) -> str:
         return self.__servo_config.get_name()
     # --------------------------------------------------------------------------------------

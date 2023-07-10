@@ -311,6 +311,32 @@ class Robohat:
 
         return None
 
+        # ------------------------------------------------------------------------------------------
+    def put_servos_to_sleep(self) -> None:
+        """!
+        Puts servos to sleep
+        @:return: None
+        """
+
+        if self.__servo_assembly_1 is not None:
+            self.__servo_assembly_1.sleep()
+
+        if self.__servo_assembly_2 is not None:
+            self.__servo_assembly_2.sleep()
+
+    # ------------------------------------------------------------------------------------------
+
+    def wakeup_servos(self) -> None:
+        """!
+        Wakes up the servos
+        @:return: None
+        """
+
+        if self.__servo_assembly_1 is not None:
+            self.__servo_assembly_1.wake()
+
+        if self.__servo_assembly_2 is not None:
+            self.__servo_assembly_2.wake()
     # ------------------------------------------------------------------------------------------
 
     def __get_servo_nr_depending_assembly(self, _servo_nr: int) -> int:
