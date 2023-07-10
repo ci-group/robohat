@@ -52,6 +52,7 @@ class ServoAssembly:
             self.__power_monitor_and_io = None
         # ----------------------------
 
+    #--------------------------------------------------------------------------------------
 
     def init_servo_assembly(self, _servo_datas_array: []) -> None:
         """!
