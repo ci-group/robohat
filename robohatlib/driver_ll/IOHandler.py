@@ -5,7 +5,7 @@ try:
     from robohatlib.driver_ll.GPO_LL_Driver import GPO_LL_Driver
     from robohatlib.driver_ll.GPI_LL_Driver import GPI_LL_Driver
     from robohatlib.driver_ll.GPOPWM_LL_Driver import GPOPWM_LL_Driver
-    from robohatlib.driver_ll.GPI_LL_Interrupt import GP_interrupt
+    from robohatlib.driver_ll.GPI_LL_Interrupt import GPI_LL_Interrupt
 
     from robohatlib.driver_ll.definitions.GPIDef import GPIDef
     from robohatlib.driver_ll.definitions.GPODef import GPODef
@@ -65,7 +65,7 @@ class IOHandler:
         self.__detected_i2c_devices = []
         self.__available_spi_buses = []
         self.__used_spi_devices = []
-
+        self.__registered_gpi_ll_interrupts = []
 
     #--------------------------------------------------------------------------------------
     #--------------------------------------------------------------------------------------
@@ -89,7 +89,7 @@ class IOHandler:
         @return: None
         """
 
-        if self.__i2c_bus_is_scanned == False:
+        if self.__i2c_bus_is_scanned is False:
             self.scan_i2c_bus()
             self.__i2c_bus_is_scanned = True
 
@@ -207,7 +207,7 @@ class IOHandler:
 
         self.__check_spi_bus(spi_bus_nr)                    # will fail when bus has cpnflict with a gpio pin...
 
-        if self.__add_gio_if_not_already_used_or_give_error(spi_cs, _spi_device_def.get_name()) is IOStatus.IO_FAILED:
+        if self.__add_gpio_if_not_already_used_or_give_error(spi_cs, _spi_device_def.get_name()) is IOStatus.IO_FAILED:
             raise Exception("Unable to claim SPI "+ str(spi_bus_nr) + ", CS-pin: '" + str(spi_cs) + "', pin is already in use")
 
         if len(self.__used_spi_devices) is not 0:
@@ -231,7 +231,6 @@ class IOHandler:
     #--------------------------------------------------------------------------------------
     #--------------------------------------------------------------------------------------
     #--------------------------------------------------------------------------------------
-    #todo check if input is really an input pin
 
     def get_gpi(self,_gpi_definition:GPIDef) -> GPI_LL_Driver:
         """!
@@ -242,15 +241,13 @@ class IOHandler:
         """
         gpio_pin = _gpi_definition.get_gpi_pin_nr()
 
-        if self.__add_gio_if_not_already_used_or_give_error(gpio_pin, _gpi_definition.get_name()) is IOStatus.IO_OK:
+        if self.__add_gpio_if_not_already_used_or_give_error(gpio_pin, _gpi_definition.get_name()) is IOStatus.IO_OK:
             return GPI_LL_Driver(_gpi_definition)
         else:
             raise Exception("Unable to claim GPI-pin: '" + str(gpio_pin) + "', the GPI-pin is already in use")
 
     # --------------------------------------------------------------------------------------
     def get_gpo(self, _gpo_definition:GPODef) -> GPO_LL_Driver:
-        # todo check if output is really an output pin
-
         """!
         get GPO (general purpose output)
 
@@ -259,14 +256,14 @@ class IOHandler:
         """
         gpio_pin = _gpo_definition.get_gpo_pin_nr()
 
-        if self.__add_gio_if_not_already_used_or_give_error(gpio_pin, _gpo_definition.get_name() ) is IOStatus.IO_OK:
+        if self.__add_gpio_if_not_already_used_or_give_error(gpio_pin, _gpo_definition.get_name()) is IOStatus.IO_OK:
             return GPO_LL_Driver(_gpo_definition)
         else:
             raise Exception("Unable to claim GPO-pin: '" + str(gpio_pin) + "', the GPO-pin is already in use")
     #--------------------------------------------------------------------------------------
 
     #todo make it shareable!!
-    def register_interrupt(self, _gpi_interrupt_definition:GPIInterruptDef) -> GP_interrupt | None:
+    def register_interrupt(self, _gpi_interrupt_definition: GPIInterruptDef) -> GPI_LL_Interrupt | None:
         """!
         registers interrupt
 
@@ -276,22 +273,22 @@ class IOHandler:
         if _gpi_interrupt_definition is None:
             return None
 
-        return GP_interrupt(_gpi_interrupt_definition)
+        return self.__add_gpi_interrupt_or_return_a_already_registered_one(_gpi_interrupt_definition)
 
     #--------------------------------------------------------------------------------------
 
-    def get_pwm(self, _gpopwm_definition:GPOPWMDef) -> GPOPWM_LL_Driver:
+    def get_pwm(self, _gpo_pwm_definition: GPOPWMDef) -> GPOPWM_LL_Driver:
         """!
         Get PWM
 
-        @param _gpopwm_definition:
+        @param _gpo_pwm_definition:
         @return: GPOPWM_LL_Driver
         @raises: Exception
         """
-        gpio_pin = _gpopwm_definition.get_gpo_pin_nr()
+        gpio_pin = _gpo_pwm_definition.get_gpo_pin_nr()
 
-        if self.__add_gio_if_not_already_used_or_give_error(gpio_pin, _gpopwm_definition.get_name()) is IOStatus.IO_OK:
-            return GPOPWM_LL_Driver(_gpopwm_definition)
+        if self.__add_gpio_if_not_already_used_or_give_error(gpio_pin, _gpo_pwm_definition.get_name()) is IOStatus.IO_OK:
+            return GPOPWM_LL_Driver(_gpo_pwm_definition)
         else:
             raise Exception("Unable to claim PWM-pin: '" + str(gpio_pin) + "', the PWM-pin is already in use")
 
@@ -299,7 +296,7 @@ class IOHandler:
     #--------------------------------------------------------------------------------------
     #--------------------------------------------------------------------------------------
 
-    def get_led_driver(self, _led_def:LedDef) -> Led_driver:
+    def get_led_driver(self, _led_def: LedDef) -> Led_driver:
         """!
         Get LED driver
 
@@ -344,7 +341,7 @@ class IOHandler:
     # --------------------------------------------------------------------------------------
     def __is_i2c_slot_available(self, _to_be_checked:I2CDeviceDef) -> bool:
         """!
-        Check if I2C is detected on the bus (list was generated with
+        Check if I2C is detected on the bus (list was generated with scanI2C
 
         @param _to_be_checked: I2CDeviceDef to be checked i2c_scan
         @return bool:, true if available
@@ -392,10 +389,10 @@ class IOHandler:
         @return: I2C_Handler
         @raises: Exception
         """
-        if self.__add_gio_if_not_already_used_or_give_error(_scl_pin, "scl") is IOStatus.IO_FAILED:
+        if self.__add_gpio_if_not_already_used_or_give_error(_scl_pin, "scl") is IOStatus.IO_FAILED:
             raise Exception("Unable to claim I2C "+ str(_i2c_bus_nr) + ", SCL-pin: '" + str(_scl_pin) + "', pin is already in use")
 
-        if self.__add_gio_if_not_already_used_or_give_error(_sda_pin, "sda") is IOStatus.IO_FAILED:
+        if self.__add_gpio_if_not_already_used_or_give_error(_sda_pin, "sda") is IOStatus.IO_FAILED:
             raise Exception("Unable to claim I2C "+ str(_i2c_bus_nr) + ", SDA-pin: '" + str(_sda_pin) + "', pin is already in use")
 
         return I2CHandler(_i2c_bus_nr)                # <-- answers to 0x70 which is a ghost device?
@@ -461,13 +458,13 @@ class IOHandler:
         @param _miso_pin:
         @return: None
         """
-        if self.__add_gio_if_not_already_used_or_give_error(_sck_pin, "sck") is IOStatus.IO_FAILED:
+        if self.__add_gpio_if_not_already_used_or_give_error(_sck_pin, "sck") is IOStatus.IO_FAILED:
             raise Exception("Unable to claim SPI "+ str(_spi_bus_nr) + ", SCK-pin: '" + str(_sck_pin) + "', pin is already in use")
 
-        if self.__add_gio_if_not_already_used_or_give_error(_mosi_pin, "mosi") is IOStatus.IO_FAILED:
+        if self.__add_gpio_if_not_already_used_or_give_error(_mosi_pin, "mosi") is IOStatus.IO_FAILED:
             raise Exception("Unable to claim SPI "+ str(_spi_bus_nr) + ", MOSI-pin: '" + str(_mosi_pin) + "', pin is already in use")
 
-        if self.__add_gio_if_not_already_used_or_give_error(_miso_pin, "miso") is IOStatus.IO_FAILED:
+        if self.__add_gpio_if_not_already_used_or_give_error(_miso_pin, "miso") is IOStatus.IO_FAILED:
             raise Exception("Unable to claim SPI "+ str(_spi_bus_nr) + ", MISO-pin: '" + str(_miso_pin) + "', pin is already in use")
 
     # --------------------------------------------------------------------------------------
@@ -505,7 +502,7 @@ class IOHandler:
     # --------------------------------------------------------------------------------------
     # --------------------------------------------------------------------------------------
 
-    def __add_gio_if_not_already_used_or_give_error(self, _gpio_nr: int, _name:str) -> IOStatus:
+    def __add_gpio_if_not_already_used_or_give_error(self, _gpio_nr: int, _name:str) -> IOStatus:
         """!
         @param _gpio_nr:
         @param _name:
@@ -526,6 +523,34 @@ class IOHandler:
         self.__used_gpio.append(_gpio_nr)
         print("claimed: gpio " + str(_gpio_nr) + " for: " + _name)
         return IOStatus.IO_OK
+
+    #--------------------------------------------------------------------------------------
+    #--------------------------------------------------------------------------------------
+    #--------------------------------------------------------------------------------------
+
+    def __add_gpi_interrupt_or_return_a_already_registered_one(self, _gpi_interrupt_definition: GPIInterruptDef) -> GPI_LL_Interrupt:
+        # """!
+        # @param _gpi_interrupt_definition: definition of interrupt
+        # @return: GPI_LL_Interrupt
+        # """
+        print("checking interrupt: " + _gpi_interrupt_definition.get_name() )
+
+        if len(self.__registered_gpi_ll_interrupts) is 0:
+            interrupt = GPI_LL_Interrupt(_gpi_interrupt_definition)
+            self.__registered_gpi_ll_interrupts.append(interrupt)
+            print("claimed first: interrupt " + _gpi_interrupt_definition.get_name() )
+            return interrupt
+
+        for interrupt in self.__registered_gpi_ll_interrupts:
+            if interrupt.get_gpio_pin() is _gpi_interrupt_definition.get_gpio_pin():
+                print("already claimed: interrupt " + str(interrupt.get_gpio_pin()) + " for: " + interrupt.get_name() )
+                interrupt.add_callback(_gpi_interrupt_definition.get_callback_function() )
+                return interrupt
+
+        interrupt = GPI_LL_Interrupt(_gpi_interrupt_definition)
+        self.__registered_gpi_ll_interrupts.append(interrupt)
+        print("new claimed: interrupt " + _gpi_interrupt_definition.get_name())
+        return interrupt
 
     #--------------------------------------------------------------------------------------
     #--------------------------------------------------------------------------------------
