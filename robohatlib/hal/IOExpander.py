@@ -1,3 +1,4 @@
+#!/usr/bin/python3
 try:
     from robohatlib.drivers.MCP23008 import MCP23008
 except ImportError:

@@ -1,4 +1,4 @@
-
+#!/usr/bin/python3
 try:
     import RPi.GPIO as GPIO
 except ImportError:
@@ -102,7 +102,7 @@ class GPI_LL_Interrupt:
     def __callback_function(self) -> None:
         """!
         The actual interrupt callback, which executes all the callback stored in an array
-        :return:
+        @return: None
         """
         print("callback")
         if len(self.__registered_callbacks) is 0:

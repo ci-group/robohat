@@ -1,3 +1,4 @@
+#!/usr/bin/python3
 try:
     from robohatlib.driver_ll.constants.InterruptTypes import InterruptTypes
 except ImportError:

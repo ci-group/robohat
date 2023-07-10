@@ -108,7 +108,7 @@ class IOHandler:
 
         found = False
 
-        # I2C bus 0 not availble
+        # I2C bus 0 not available
 
         print("####################")
         print("I2C1:\n")
@@ -262,7 +262,6 @@ class IOHandler:
             raise Exception("Unable to claim GPO-pin: '" + str(gpio_pin) + "', the GPO-pin is already in use")
     #--------------------------------------------------------------------------------------
 
-    #todo make it shareable!!
     def register_interrupt(self, _gpi_interrupt_definition: GPIInterruptDef) -> GPI_LL_Interrupt | None:
         """!
         registers interrupt
@@ -528,15 +527,17 @@ class IOHandler:
     #--------------------------------------------------------------------------------------
     #--------------------------------------------------------------------------------------
 
-    def __add_gpi_interrupt_or_return_a_already_registered_one(self, _gpi_interrupt_definition: GPIInterruptDef) -> GPI_LL_Interrupt:
+    def __add_gpi_interrupt_or_return_a_already_registered_one(self, _gpi_interrupt_definition: GPIInterruptDef) -> GPI_LL_Interrupt | None:
         # """!
         # @param _gpi_interrupt_definition: definition of interrupt
-        # @return: GPI_LL_Interrupt
+        # @return: GPI_LL_Interrupt or None (None is for future use)
         # """
         print("checking interrupt: " + _gpi_interrupt_definition.get_name() )
 
         if len(self.__registered_gpi_ll_interrupts) is 0:
             interrupt = GPI_LL_Interrupt(_gpi_interrupt_definition)
+            if interrupt is None:
+                return None
             self.__registered_gpi_ll_interrupts.append(interrupt)
             print("claimed first: interrupt " + _gpi_interrupt_definition.get_name() )
             return interrupt
@@ -548,6 +549,8 @@ class IOHandler:
                 return interrupt
 
         interrupt = GPI_LL_Interrupt(_gpi_interrupt_definition)
+        if interrupt is None:
+            return None
         self.__registered_gpi_ll_interrupts.append(interrupt)
         print("new claimed: interrupt " + _gpi_interrupt_definition.get_name())
         return interrupt
