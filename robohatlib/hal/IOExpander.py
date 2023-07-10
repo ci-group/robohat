@@ -55,7 +55,7 @@ class IOExpander:
         @return: None
         """
         if self.__expander is not None:
-            self.__check_if_expander_io_is_availble(_io_nr)
+            self.__check_if_expander_io_is_available(_io_nr)
             if  _direction is ExpanderDir.OUTPUT:
                 wanted_pin_value = 0
             else:
@@ -77,7 +77,7 @@ class IOExpander:
         """
 
         if self.__expander is not None:
-            self.__check_if_expander_io_is_availble(_io_nr)
+            self.__check_if_expander_io_is_available(_io_nr)
 
             wanted_pin_value = 0
 
@@ -99,14 +99,14 @@ class IOExpander:
         @return status of the pin or 0 when not available
         """
         if self.__expander is not None:
-            self.__check_if_expander_io_is_availble(_io_nr)
+            self.__check_if_expander_io_is_available(_io_nr)
             return self.__expander.get_pin_data(_io_nr)
 
         return 0
 
     #--------------------------------------------------------------------------------------
 
-    def __check_if_expander_io_is_availble(self, _io_nr:int) -> None:
+    def __check_if_expander_io_is_available(self, _io_nr:int) -> None:
         """!
         Checks if the IO is available
 

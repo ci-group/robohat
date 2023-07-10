@@ -39,12 +39,6 @@ class MCP23008:
         self.invert_port(0x00)
         self.set_interrupt_polarity(True)
 
-        # self.set_port_direction(0xff)
-        # self.set_port_pullup(0xFF)
-        # self.set_interrupt_on_port(0xff )
-        # self.set_interrupt_type_port(0x00 )
-        #self.reset_interrupts()
-
         if self.__mcp_interrupt_definition is not None:
             io_dir_value = 0x00
             gp_int_en_value = 0x00
@@ -59,16 +53,16 @@ class MCP23008:
                 else:
                     io_dir_value = RoboUtil.updatebyte(io_dir_value, bit_nr, 1)                                    # direction input
                     if servo_assembly_interrupt_settings.get_interrupt_type() is InterruptTypes.INT_NONE:
-                        gp_int_en_value = RoboUtil.updatebyte(gp_int_en_value, bit_nr, 0)                            # disables int
+                        gp_int_en_value = RoboUtil.updatebyte(gp_int_en_value, bit_nr, 0)                          # disables int
                     else:
-                        gp_int_en_value = RoboUtil.updatebyte(gp_int_en_value, bit_nr, 1)                            # enables int
+                        gp_int_en_value = RoboUtil.updatebyte(gp_int_en_value, bit_nr, 1)                          # enables int
                         if servo_assembly_interrupt_settings.get_interrupt_type() is InterruptTypes.INT_RISING:
-                            int_con_value = RoboUtil.updatebyte(int_con_value, bit_nr, 0)                          # compare with defval value
+                            int_con_value = RoboUtil.updatebyte(int_con_value, bit_nr, 0)                          # compare with def_val value
                             def_val_value = RoboUtil.updatebyte(def_val_value, bit_nr, 0)                          # int if pin goes from 0 to 1 int occurs
                         elif servo_assembly_interrupt_settings.get_interrupt_type() is InterruptTypes.INT_FALLING:
-                            int_con_value = RoboUtil.updatebyte(int_con_value, bit_nr, 0)                          # compare with defval value
+                            int_con_value = RoboUtil.updatebyte(int_con_value, bit_nr, 0)                          # compare with def_val value
                             def_val_value = RoboUtil.updatebyte(def_val_value, bit_nr, 1)                          # int if pin goes from 1 to 0 int occurs
-                        else:                                                                                       # BOTH
+                        else:                                                                                      # BOTH
                             int_con_value = RoboUtil.updatebyte(int_con_value, bit_nr, 1)                          # int when pin changes
                             def_val_value = RoboUtil.updatebyte(def_val_value, bit_nr, 1)                          # DOES NOT CARE
 
@@ -87,7 +81,6 @@ class MCP23008:
         return self.__get_pin(IO_DIR_ADDRESS, _io_nr)
 
     def set_port_direction(self, _byte_value) -> None:
-        print("port direction: " + hex(_byte_value))
         self.__set_port(IO_DIR_ADDRESS, _byte_value)
 
     def get_port_direction(self):
@@ -111,11 +104,9 @@ class MCP23008:
     def get_pin_data(self, _io_nr):
         """!
         get the input status of an io pin of the IO expander
-
         Note. direction of the pin must be an Input
 
         @param _io_nr io nr
-
         @return status of the pin
         """
 
@@ -195,24 +186,25 @@ class MCP23008:
     # --------------------------------------------------------------------------------------
 
     def __set_pin(self, _register, _io_nr:int, _wanted_pin_value) -> None:
-        self.__check_if_expander_io_is_availble(_io_nr)
 
-        if _wanted_pin_value < 0 or _wanted_pin_value > 1:
-            raise ValueError("value out of range: 0 or 1")
+        if self.__check_if_expander_io_is_available(_io_nr) is True:
+            if _wanted_pin_value < 0 or _wanted_pin_value > 1:
+                raise ValueError("value out of range: 0 or 1")
 
-        curval = self.__i2c_device.i2c_read_register_byte(_register)
-        newval = RoboUtil.updatebyte(curval, _io_nr, _wanted_pin_value)
+            cur_val = self.__i2c_device.i2c_read_register_byte(_register)
+            new_val = RoboUtil.updatebyte(cur_val, _io_nr, _wanted_pin_value)
 
-        self.__i2c_device.i2c_write_register_byte(_register, newval)
-        return
-
+            self.__i2c_device.i2c_write_register_byte(_register, new_val)
+        else:
+            print("pin doesn't exist")
     #--------------------------------------------------------------------------------------
 
     def __get_pin(self, _register, _io_nr) -> int:
-        self.__check_if_expander_io_is_availble(_io_nr)
-
-        cur_val = self.__i2c_device.i2c_read_register_byte(_register)
-        return  RoboUtil.checkbit(cur_val, _io_nr) # - 1)
+        if self.__check_if_expander_io_is_available(_io_nr) is True:
+            cur_val = self.__i2c_device.i2c_read_register_byte(_register)
+            return  RoboUtil.checkbit(cur_val, _io_nr) # - 1)
+        else:
+            print("pin doesn't exist")
 
     #--------------------------------------------------------------------------------------
     #--------------------------------------------------------------------------------------
@@ -233,6 +225,16 @@ class MCP23008:
     #--------------------------------------------------------------------------------------
     #--------------------------------------------------------------------------------------
 
-    def __check_if_expander_io_is_availble(self, _io_nr) -> None:
-        if _io_nr not in range(0, 8):
-            raise ValueError("only io0 till io7 are available")
+    def __check_if_expander_io_is_available(self, _io_nr) -> bool:
+        """!
+        Return True when Iio_nr is in range
+        :param _io_nr:
+        :return: bool
+        """
+        if _io_nr in range(0, 8):
+            return True
+        return False
+
+    #--------------------------------------------------------------------------------------
+    #--------------------------------------------------------------------------------------
+    #--------------------------------------------------------------------------------------
