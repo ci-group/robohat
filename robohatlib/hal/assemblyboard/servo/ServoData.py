@@ -5,7 +5,8 @@
 class ServoData:
     """
     Storage of servo data.
-    Each servo can have its own parameters. So different servos can be used
+    Each servo can have its own parameters. So different kind of servos can be used
+    Data could be:
     __servo_nr: int = 1
     __min_time: float = 500
     __max_time: float = 2500

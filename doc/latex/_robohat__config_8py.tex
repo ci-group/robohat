@@ -22,6 +22,8 @@ float \mbox{\hyperlink{namespace_robohat__config_a070cb4cf2f1798158b9b5af7b52425
 \item 
 float \mbox{\hyperlink{namespace_robohat__config_aa6fe52244a15915be93749ca9911a2c0}{Robohat\+\_\+config.\+ACCU\+\_\+\+VOLTAGE\+\_\+\+ADC\+\_\+\+MULTIPLIER}} = 4.\+3
 \item 
+bool \mbox{\hyperlink{namespace_robohat__config_a5c7faad53ec16d06c96461d893ee6609}{Robohat\+\_\+config.\+ACCU\+\_\+\+LOG\+\_\+\+DISPLAY\+\_\+\+WHEN\+\_\+\+TO\+\_\+\+LOW}} = False
+\item 
 list \mbox{\hyperlink{namespace_robohat__config_a7f678d13bfa3bca447e7f58d890b4211}{Robohat\+\_\+config.\+ACCU\+\_\+\+VOLTAGE\+\_\+\+TO\+\_\+\+PERCENTAGE\+\_\+\+ARRAY}}
 \item 
 \mbox{\hyperlink{namespace_robohat__config_a98a67b4d4544e499bd160b58c5c5bce5}{Robohat\+\_\+config.\+BUZZER\+\_\+\+DEF}} = Buzzer\+Def(\"{}buzzer\"{}, 18, 1000, 50)
@@ -36,17 +38,17 @@ list \mbox{\hyperlink{namespace_robohat__config_a7f678d13bfa3bca447e7f58d890b421
 \item 
 \mbox{\hyperlink{namespace_robohat__config_afe49396710e821ca9c764cdfbdaed4d9}{Robohat\+\_\+config.\+STATUSLED\+\_\+\+DEF}} = Multi\+Color\+Led\+Def(\"{}statusled\"{}, \mbox{\hyperlink{namespace_robohat__config_af1986d651d4ca8ba49183c497fc5d112}{LEDRED\+\_\+\+GPO\+\_\+\+DEF}}, \mbox{\hyperlink{namespace_robohat__config_a08e550ee9ca3cbec402845af2cc02e7b}{LEDGREEN\+\_\+\+GPO\+\_\+\+DEF}}, \mbox{\hyperlink{namespace_robohat__config_a01b327c668f08b83e988ac270a8183e6}{LEDBLUE\+\_\+\+GPO\+\_\+\+DEF}})
 \item 
-\mbox{\hyperlink{namespace_robohat__config_a01768e1d18ac35f936db836f5acdc2bd}{Robohat\+\_\+config.\+MINIMU9\+\_\+\+LIS3\+MDL\+\_\+\+I2\+C\+\_\+\+DEF}} = I2\+CDevice\+Def(\"{}IMU\+\_\+1\+\_\+\+I2\+C\"{}, 5, 0x1e)
+\mbox{\hyperlink{namespace_robohat__config_a01768e1d18ac35f936db836f5acdc2bd}{Robohat\+\_\+config.\+MINIMU9\+\_\+\+LIS3\+MDL\+\_\+\+I2\+C\+\_\+\+DEF}} = I2\+CDevice\+Def(\"{}IMU\+\_\+\+LIS3\+MDL\"{}, 5, 0x1e)
 \item 
-\mbox{\hyperlink{namespace_robohat__config_a322dfe8b508a1d268fc3e374e7f8a485}{Robohat\+\_\+config.\+MINIMU9\+\_\+\+LSM6\+DS33\+\_\+\+I2\+C\+\_\+\+DEF}} = I2\+CDevice\+Def(\"{}IMU\+\_\+2\+\_\+\+I2\+C\"{}, 5, 0x6b)
+\mbox{\hyperlink{namespace_robohat__config_a322dfe8b508a1d268fc3e374e7f8a485}{Robohat\+\_\+config.\+MINIMU9\+\_\+\+LSM6\+DS33\+\_\+\+I2\+C\+\_\+\+DEF}} = I2\+CDevice\+Def(\"{}IMU\+\_\+\+LSMDS33\"{}, 5, 0x6b)
 \item 
 \mbox{\hyperlink{namespace_robohat__config_a8eb4e5d22045700f8e771a3501fa0f0c}{Robohat\+\_\+config.\+IMU\+\_\+\+DEF}} = IMUDef(\"{}IMU\"{}, \mbox{\hyperlink{namespace_robohat__config_a01768e1d18ac35f936db836f5acdc2bd}{MINIMU9\+\_\+\+LIS3\+MDL\+\_\+\+I2\+C\+\_\+\+DEF}}, \mbox{\hyperlink{namespace_robohat__config_a322dfe8b508a1d268fc3e374e7f8a485}{MINIMU9\+\_\+\+LSM6\+DS33\+\_\+\+I2\+C\+\_\+\+DEF}})
 \item 
-\mbox{\hyperlink{namespace_robohat__config_ae12a3d4fe4dd1c47b177e4a52359ad46}{Robohat\+\_\+config.\+HATADC\+\_\+\+I2\+C\+\_\+\+DEF}} = I2\+CDevice\+Def(\"{}hatadc\+\_\+i2c\"{}, 5, 0x34)
+\mbox{\hyperlink{namespace_robohat__config_ae12a3d4fe4dd1c47b177e4a52359ad46}{Robohat\+\_\+config.\+HATADC\+\_\+\+I2\+C\+\_\+\+DEF}} = I2\+CDevice\+Def(\"{}hatadc\"{}, 5, 0x34)
 \item 
 \mbox{\hyperlink{namespace_robohat__config_ab3bbe94717b9db09734be264a10a2f3a}{Robohat\+\_\+config.\+POWERSHUTDOWN\+\_\+\+GPO\+\_\+\+DEF}} = GPODef(\"{}shutdown\"{}, 27)
 \item 
-\mbox{\hyperlink{namespace_robohat__config_aa30de453592b91139a5bb4357620ffac}{Robohat\+\_\+config.\+IOEXPANDER\+\_\+\+I2\+C\+\_\+\+DEF}} = I2\+CDevice\+Def(\"{}ioexpander\+\_\+i2c\"{}, 1, 0x20)
+\mbox{\hyperlink{namespace_robohat__config_aa30de453592b91139a5bb4357620ffac}{Robohat\+\_\+config.\+IOEXPANDER\+\_\+\+I2\+C\+\_\+\+DEF}} = I2\+CDevice\+Def(\"{}ioexpander\"{}, 1, 0x20)
 \item 
 list \mbox{\hyperlink{namespace_robohat__config_adc47956a228b651e535c3e4bef9402e4}{Robohat\+\_\+config.\+IOEXPANDER\+\_\+\+INTERUPT\+\_\+\+SETTINGS}}
 \item 

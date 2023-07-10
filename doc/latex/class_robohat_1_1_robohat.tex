@@ -35,13 +35,19 @@ float \mbox{\hyperlink{class_robohat_1_1_robohat_a524d2702f336935b4bd65c467742ea
 float \mbox{\hyperlink{class_robohat_1_1_robohat_a69653a5ff63691145aacede5dd446216}{get\+\_\+servo\+\_\+angle}} (self, int \+\_\+servo\+\_\+nr)
 \begin{DoxyCompactList}\small\item\em Get angle of connected servo in degree. \end{DoxyCompactList}\item 
 None \mbox{\hyperlink{class_robohat_1_1_robohat_a7a43b9392a7bfc72fd7e5557428ecbfa}{set\+\_\+servo\+\_\+angle}} (self, int \+\_\+servo\+\_\+nr, float \+\_\+angle)
-\begin{DoxyCompactList}\small\item\em Set the angle of connected servo in degree. \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Set the angle of connected servo in degree, does nothing when not avaible. \end{DoxyCompactList}\item 
 \mbox{[}$\,$\mbox{]} \mbox{\hyperlink{class_robohat_1_1_robohat_af907f49b7351b640031b5cef0b595cf6}{get\+\_\+servos\+\_\+adc\+\_\+readout\+\_\+multiple\+\_\+channels}} (self)
-\begin{DoxyCompactList}\small\item\em Get voltages of the potentiometer of all the servos in volt. \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Get voltages of the potentiometer of all the servos in volt @\+Raise when ADC is not available. \end{DoxyCompactList}\item 
 \mbox{[}$\,$\mbox{]} \mbox{\hyperlink{class_robohat_1_1_robohat_a6485990f7bd043e7c330d75e11deff57}{get\+\_\+servos\+\_\+angles}} (self)
 \begin{DoxyCompactList}\small\item\em Get an array of the angles of all the servos. \end{DoxyCompactList}\item 
 None \mbox{\hyperlink{class_robohat_1_1_robohat_a8502d86fe4e75c63b5cfb6dd1e5dbc6f}{set\+\_\+servos\+\_\+angles}} (self, \mbox{[}$\,$\mbox{]} \+\_\+angles\+\_\+array)
 \begin{DoxyCompactList}\small\item\em Set the angle of connected servos in degree. \end{DoxyCompactList}\item 
+None \mbox{\hyperlink{class_robohat_1_1_robohat_a2faf14b70ceb40c360cf27297b1aff85}{put\+\_\+servos\+\_\+to\+\_\+sleep}} (self)
+\begin{DoxyCompactList}\small\item\em Puts servos to sleep @\+:return\+: None. \end{DoxyCompactList}\item 
+None \mbox{\hyperlink{class_robohat_1_1_robohat_a1de72b0952e23ad210fcc7c948017c5d}{wakeup\+\_\+servos}} (self)
+\begin{DoxyCompactList}\small\item\em Wakes up the servos @\+:return\+: None. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{class_robohat_1_1_robohat_ac8c98160d4565f35a504dc1f1db134a6}{are\+\_\+servos\+\_\+sleeping}} (self)
+\item 
 float \mbox{\hyperlink{class_robohat_1_1_robohat_a399cbd66dabf7cd6872e5395b2dd635a}{get\+\_\+hat\+\_\+adc\+\_\+readout\+\_\+single\+\_\+channel}} (self, int \+\_\+channel\+\_\+nr)
 \begin{DoxyCompactList}\small\item\em Get analog value of a channel from the HAT adc. \end{DoxyCompactList}\item 
 \mbox{[}$\,$\mbox{]} \mbox{\hyperlink{class_robohat_1_1_robohat_a199855228453bb7f20bbd979b5f11374}{get\+\_\+hat\+\_\+adc\+\_\+readout\+\_\+multiple\+\_\+channels}} (self)
@@ -83,8 +89,6 @@ None \mbox{\hyperlink{class_robohat_1_1_robohat_ae12a19ae99f5b91d08feda1b97dd3ef
 \begin{DoxyCompactItemize}
 \item 
 \mbox{\hyperlink{class_robohat_1_1_robohat_ad8c2ef1ea187cfad6ccec9242f26186a}{\+\_\+io\+\_\+expander\+\_\+int\+\_\+callback}}
-\item 
-\mbox{\hyperlink{class_robohat_1_1_robohat_a3c4531edcbab32b8564c1be7f5cb8ed1}{\+\_\+io\+\_\+servo\+\_\+assembly\+\_\+callback}}
 \end{DoxyCompactItemize}
 
 
@@ -147,7 +151,7 @@ None
 \end{DoxyReturn}
 
 
-Definition at line \mbox{\hyperlink{_robohat_8py_source_l00511}{511}} of file \mbox{\hyperlink{_robohat_8py_source}{Robohat.\+py}}.
+Definition at line \mbox{\hyperlink{_robohat_8py_source_l00572}{572}} of file \mbox{\hyperlink{_robohat_8py_source}{Robohat.\+py}}.
 
 \Hypertarget{class_robohat_1_1_robohat_ac4d957cff77832fc87d4e3bf43326456}\label{class_robohat_1_1_robohat_ac4d957cff77832fc87d4e3bf43326456} 
 \index{Robohat.Robohat@{Robohat.Robohat}!\_io\_servo\_assembly\_callback@{\_io\_servo\_assembly\_callback}}
@@ -169,7 +173,20 @@ None
 \end{DoxyReturn}
 
 
-Definition at line \mbox{\hyperlink{_robohat_8py_source_l00521}{521}} of file \mbox{\hyperlink{_robohat_8py_source}{Robohat.\+py}}.
+Definition at line \mbox{\hyperlink{_robohat_8py_source_l00582}{582}} of file \mbox{\hyperlink{_robohat_8py_source}{Robohat.\+py}}.
+
+\Hypertarget{class_robohat_1_1_robohat_ac8c98160d4565f35a504dc1f1db134a6}\label{class_robohat_1_1_robohat_ac8c98160d4565f35a504dc1f1db134a6} 
+\index{Robohat.Robohat@{Robohat.Robohat}!are\_servos\_sleeping@{are\_servos\_sleeping}}
+\index{are\_servos\_sleeping@{are\_servos\_sleeping}!Robohat.Robohat@{Robohat.Robohat}}
+\doxysubsubsection{\texorpdfstring{are\_servos\_sleeping()}{are\_servos\_sleeping()}}
+{\footnotesize\ttfamily  bool Robohat.\+Robohat.\+are\+\_\+servos\+\_\+sleeping (\begin{DoxyParamCaption}\item[{}]{self }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Get if Servos are sleeping
+@:return: (bool) returns True when servos are sleeping
+\end{DoxyVerb}
+ 
+
+Definition at line \mbox{\hyperlink{_robohat_8py_source_l00363}{363}} of file \mbox{\hyperlink{_robohat_8py_source}{Robohat.\+py}}.
 
 \Hypertarget{class_robohat_1_1_robohat_ac6e7e67d4e264ab9c6b66cd413efd864}\label{class_robohat_1_1_robohat_ac6e7e67d4e264ab9c6b66cd413efd864} 
 \index{Robohat.Robohat@{Robohat.Robohat}!do\_buzzer\_beep@{do\_buzzer\_beep}}
@@ -259,7 +276,7 @@ None
 \end{DoxyReturn}
 
 
-Definition at line \mbox{\hyperlink{_robohat_8py_source_l00532}{532}} of file \mbox{\hyperlink{_robohat_8py_source}{Robohat.\+py}}.
+Definition at line \mbox{\hyperlink{_robohat_8py_source_l00593}{593}} of file \mbox{\hyperlink{_robohat_8py_source}{Robohat.\+py}}.
 
 \Hypertarget{class_robohat_1_1_robohat_a9e6bcdd1773af2baeefb20c29debe985}\label{class_robohat_1_1_robohat_a9e6bcdd1773af2baeefb20c29debe985} 
 \index{Robohat.Robohat@{Robohat.Robohat}!do\_shutdown@{do\_shutdown}}
@@ -278,7 +295,7 @@ None
 \end{DoxyReturn}
 
 
-Definition at line \mbox{\hyperlink{_robohat_8py_source_l00471}{471}} of file \mbox{\hyperlink{_robohat_8py_source}{Robohat.\+py}}.
+Definition at line \mbox{\hyperlink{_robohat_8py_source_l00532}{532}} of file \mbox{\hyperlink{_robohat_8py_source}{Robohat.\+py}}.
 
 \Hypertarget{class_robohat_1_1_robohat_a2f7f121fe0f85e24f49bd921ae1b96a4}\label{class_robohat_1_1_robohat_a2f7f121fe0f85e24f49bd921ae1b96a4} 
 \index{Robohat.Robohat@{Robohat.Robohat}!get\_acceleration@{get\_acceleration}}
@@ -295,7 +312,7 @@ a tuple of the guro values x,y,z
 \end{DoxyReturn}
 
 
-Definition at line \mbox{\hyperlink{_robohat_8py_source_l00427}{427}} of file \mbox{\hyperlink{_robohat_8py_source}{Robohat.\+py}}.
+Definition at line \mbox{\hyperlink{_robohat_8py_source_l00488}{488}} of file \mbox{\hyperlink{_robohat_8py_source}{Robohat.\+py}}.
 
 \Hypertarget{class_robohat_1_1_robohat_a6f34b7407098693e62dec5a760a17b6f}\label{class_robohat_1_1_robohat_a6f34b7407098693e62dec5a760a17b6f} 
 \index{Robohat.Robohat@{Robohat.Robohat}!get\_accu\_percentage\_capacity@{get\_accu\_percentage\_capacity}}
@@ -312,7 +329,7 @@ Get capacity of accu in percentage.
 \end{DoxyReturn}
 
 
-Definition at line \mbox{\hyperlink{_robohat_8py_source_l00446}{446}} of file \mbox{\hyperlink{_robohat_8py_source}{Robohat.\+py}}.
+Definition at line \mbox{\hyperlink{_robohat_8py_source_l00507}{507}} of file \mbox{\hyperlink{_robohat_8py_source}{Robohat.\+py}}.
 
 \Hypertarget{class_robohat_1_1_robohat_a7b39dab4e54f9b86244a4ddf766ad72d}\label{class_robohat_1_1_robohat_a7b39dab4e54f9b86244a4ddf766ad72d} 
 \index{Robohat.Robohat@{Robohat.Robohat}!get\_accu\_voltage@{get\_accu\_voltage}}
@@ -329,7 +346,7 @@ Get voltage of accu.
 \end{DoxyReturn}
 
 
-Definition at line \mbox{\hyperlink{_robohat_8py_source_l00454}{454}} of file \mbox{\hyperlink{_robohat_8py_source}{Robohat.\+py}}.
+Definition at line \mbox{\hyperlink{_robohat_8py_source_l00515}{515}} of file \mbox{\hyperlink{_robohat_8py_source}{Robohat.\+py}}.
 
 \Hypertarget{class_robohat_1_1_robohat_a724f06bff58ac6dc75e72d836baee88f}\label{class_robohat_1_1_robohat_a724f06bff58ac6dc75e72d836baee88f} 
 \index{Robohat.Robohat@{Robohat.Robohat}!get\_gyro@{get\_gyro}}
@@ -346,7 +363,7 @@ a tuple of the guro values x,y,z
 \end{DoxyReturn}
 
 
-Definition at line \mbox{\hyperlink{_robohat_8py_source_l00435}{435}} of file \mbox{\hyperlink{_robohat_8py_source}{Robohat.\+py}}.
+Definition at line \mbox{\hyperlink{_robohat_8py_source_l00496}{496}} of file \mbox{\hyperlink{_robohat_8py_source}{Robohat.\+py}}.
 
 \Hypertarget{class_robohat_1_1_robohat_a199855228453bb7f20bbd979b5f11374}\label{class_robohat_1_1_robohat_a199855228453bb7f20bbd979b5f11374} 
 \index{Robohat.Robohat@{Robohat.Robohat}!get\_hat\_adc\_readout\_multiple\_channels@{get\_hat\_adc\_readout\_multiple\_channels}}
@@ -363,7 +380,7 @@ analog voltage in an array
 \end{DoxyReturn}
 
 
-Definition at line \mbox{\hyperlink{_robohat_8py_source_l00368}{368}} of file \mbox{\hyperlink{_robohat_8py_source}{Robohat.\+py}}.
+Definition at line \mbox{\hyperlink{_robohat_8py_source_l00429}{429}} of file \mbox{\hyperlink{_robohat_8py_source}{Robohat.\+py}}.
 
 \Hypertarget{class_robohat_1_1_robohat_a399cbd66dabf7cd6872e5395b2dd635a}\label{class_robohat_1_1_robohat_a399cbd66dabf7cd6872e5395b2dd635a} 
 \index{Robohat.Robohat@{Robohat.Robohat}!get\_hat\_adc\_readout\_single\_channel@{get\_hat\_adc\_readout\_single\_channel}}
@@ -385,7 +402,7 @@ analog voltage
 \end{DoxyReturn}
 
 
-Definition at line \mbox{\hyperlink{_robohat_8py_source_l00355}{355}} of file \mbox{\hyperlink{_robohat_8py_source}{Robohat.\+py}}.
+Definition at line \mbox{\hyperlink{_robohat_8py_source_l00416}{416}} of file \mbox{\hyperlink{_robohat_8py_source}{Robohat.\+py}}.
 
 \Hypertarget{class_robohat_1_1_robohat_a3fd5e1d6f910f769384802d2c309c29f}\label{class_robohat_1_1_robohat_a3fd5e1d6f910f769384802d2c309c29f} 
 \index{Robohat.Robohat@{Robohat.Robohat}!get\_io\_expander\_input@{get\_io\_expander\_input}}
@@ -409,7 +426,7 @@ status of the pin
 \end{DoxyReturn}
 
 
-Definition at line \mbox{\hyperlink{_robohat_8py_source_l00404}{404}} of file \mbox{\hyperlink{_robohat_8py_source}{Robohat.\+py}}.
+Definition at line \mbox{\hyperlink{_robohat_8py_source_l00465}{465}} of file \mbox{\hyperlink{_robohat_8py_source}{Robohat.\+py}}.
 
 \Hypertarget{class_robohat_1_1_robohat_ab1ea31f80bab612e1cc2470e651940db}\label{class_robohat_1_1_robohat_ab1ea31f80bab612e1cc2470e651940db} 
 \index{Robohat.Robohat@{Robohat.Robohat}!get\_lib\_builddate@{get\_lib\_builddate}}
@@ -426,7 +443,7 @@ str, version build date of library, such as 20231225
 \end{DoxyReturn}
 
 
-Definition at line \mbox{\hyperlink{_robohat_8py_source_l00496}{496}} of file \mbox{\hyperlink{_robohat_8py_source}{Robohat.\+py}}.
+Definition at line \mbox{\hyperlink{_robohat_8py_source_l00557}{557}} of file \mbox{\hyperlink{_robohat_8py_source}{Robohat.\+py}}.
 
 \Hypertarget{class_robohat_1_1_robohat_aa304587ef960f785dbe1605d134a88b1}\label{class_robohat_1_1_robohat_aa304587ef960f785dbe1605d134a88b1} 
 \index{Robohat.Robohat@{Robohat.Robohat}!get\_lib\_version@{get\_lib\_version}}
@@ -443,7 +460,7 @@ str, version number of library, such as 1.\+0.\+1
 \end{DoxyReturn}
 
 
-Definition at line \mbox{\hyperlink{_robohat_8py_source_l00485}{485}} of file \mbox{\hyperlink{_robohat_8py_source}{Robohat.\+py}}.
+Definition at line \mbox{\hyperlink{_robohat_8py_source_l00546}{546}} of file \mbox{\hyperlink{_robohat_8py_source}{Robohat.\+py}}.
 
 \Hypertarget{class_robohat_1_1_robohat_a7e033631d992a2cb21b8d631b11b8847}\label{class_robohat_1_1_robohat_a7e033631d992a2cb21b8d631b11b8847} 
 \index{Robohat.Robohat@{Robohat.Robohat}!get\_magnetic\_fields@{get\_magnetic\_fields}}
@@ -460,7 +477,7 @@ a tuple of the magnetic fields values x,y,z
 \end{DoxyReturn}
 
 
-Definition at line \mbox{\hyperlink{_robohat_8py_source_l00419}{419}} of file \mbox{\hyperlink{_robohat_8py_source}{Robohat.\+py}}.
+Definition at line \mbox{\hyperlink{_robohat_8py_source_l00480}{480}} of file \mbox{\hyperlink{_robohat_8py_source}{Robohat.\+py}}.
 
 \Hypertarget{class_robohat_1_1_robohat_a524d2702f336935b4bd65c467742ea90}\label{class_robohat_1_1_robohat_a524d2702f336935b4bd65c467742ea90} 
 \index{Robohat.Robohat@{Robohat.Robohat}!get\_servo\_adc\_readout\_single\_channel@{get\_servo\_adc\_readout\_single\_channel}}
@@ -478,7 +495,7 @@ Get angle of connected servo in degree.
 \hline
 \end{DoxyParams}
 \begin{DoxyReturn}{Returns}
-angle of connected servo in degree 
+angle of connected servo in degree, or 0.\+0 when not available 
 \end{DoxyReturn}
 
 
@@ -500,11 +517,11 @@ Get angle of connected servo in degree.
 \hline
 \end{DoxyParams}
 \begin{DoxyReturn}{Returns}
-angle of connected servo in degree 
+angle of connected servo in degree or 0.\+0 when not available 
 \end{DoxyReturn}
 
 
-Definition at line \mbox{\hyperlink{_robohat_8py_source_l00233}{233}} of file \mbox{\hyperlink{_robohat_8py_source}{Robohat.\+py}}.
+Definition at line \mbox{\hyperlink{_robohat_8py_source_l00236}{236}} of file \mbox{\hyperlink{_robohat_8py_source}{Robohat.\+py}}.
 
 \Hypertarget{class_robohat_1_1_robohat_a39b197d94ef1d53960865bd5756642c8}\label{class_robohat_1_1_robohat_a39b197d94ef1d53960865bd5756642c8} 
 \index{Robohat.Robohat@{Robohat.Robohat}!get\_servo\_is\_connected@{get\_servo\_is\_connected}}
@@ -538,14 +555,14 @@ Definition at line \mbox{\hyperlink{_robohat_8py_source_l00196}{196}} of file \m
 
 
 
-Get voltages of the potentiometer of all the servos in volt. 
+Get voltages of the potentiometer of all the servos in volt @\+Raise when ADC is not available. 
 
 \begin{DoxyReturn}{Returns}
 voltages of the potentiometer of all the servos in volt 
 \end{DoxyReturn}
 
 
-Definition at line \mbox{\hyperlink{_robohat_8py_source_l00260}{260}} of file \mbox{\hyperlink{_robohat_8py_source}{Robohat.\+py}}.
+Definition at line \mbox{\hyperlink{_robohat_8py_source_l00268}{268}} of file \mbox{\hyperlink{_robohat_8py_source}{Robohat.\+py}}.
 
 \Hypertarget{class_robohat_1_1_robohat_a6485990f7bd043e7c330d75e11deff57}\label{class_robohat_1_1_robohat_a6485990f7bd043e7c330d75e11deff57} 
 \index{Robohat.Robohat@{Robohat.Robohat}!get\_servos\_angles@{get\_servos\_angles}}
@@ -558,11 +575,11 @@ Definition at line \mbox{\hyperlink{_robohat_8py_source_l00260}{260}} of file \m
 Get an array of the angles of all the servos. 
 
 \begin{DoxyReturn}{Returns}
-angles of servos in degree 
+angles of servos in degree. Returns an empty array when not available 
 \end{DoxyReturn}
 
 
-Definition at line \mbox{\hyperlink{_robohat_8py_source_l00276}{276}} of file \mbox{\hyperlink{_robohat_8py_source}{Robohat.\+py}}.
+Definition at line \mbox{\hyperlink{_robohat_8py_source_l00294}{294}} of file \mbox{\hyperlink{_robohat_8py_source}{Robohat.\+py}}.
 
 \Hypertarget{class_robohat_1_1_robohat_a726c77fb9ff04911df0ea9a5e9a80d57}\label{class_robohat_1_1_robohat_a726c77fb9ff04911df0ea9a5e9a80d57} 
 \index{Robohat.Robohat@{Robohat.Robohat}!init@{init}}
@@ -605,7 +622,21 @@ True is accu capacity is OK
 \end{DoxyReturn}
 
 
-Definition at line \mbox{\hyperlink{_robohat_8py_source_l00463}{463}} of file \mbox{\hyperlink{_robohat_8py_source}{Robohat.\+py}}.
+Definition at line \mbox{\hyperlink{_robohat_8py_source_l00524}{524}} of file \mbox{\hyperlink{_robohat_8py_source}{Robohat.\+py}}.
+
+\Hypertarget{class_robohat_1_1_robohat_a2faf14b70ceb40c360cf27297b1aff85}\label{class_robohat_1_1_robohat_a2faf14b70ceb40c360cf27297b1aff85} 
+\index{Robohat.Robohat@{Robohat.Robohat}!put\_servos\_to\_sleep@{put\_servos\_to\_sleep}}
+\index{put\_servos\_to\_sleep@{put\_servos\_to\_sleep}!Robohat.Robohat@{Robohat.Robohat}}
+\doxysubsubsection{\texorpdfstring{put\_servos\_to\_sleep()}{put\_servos\_to\_sleep()}}
+{\footnotesize\ttfamily  None Robohat.\+Robohat.\+put\+\_\+servos\+\_\+to\+\_\+sleep (\begin{DoxyParamCaption}\item[{}]{self }\end{DoxyParamCaption})}
+
+
+
+Puts servos to sleep @\+:return\+: None. 
+
+
+
+Definition at line \mbox{\hyperlink{_robohat_8py_source_l00335}{335}} of file \mbox{\hyperlink{_robohat_8py_source}{Robohat.\+py}}.
 
 \Hypertarget{class_robohat_1_1_robohat_ab7596aa3157e74f7fdb144b03f754736}\label{class_robohat_1_1_robohat_ab7596aa3157e74f7fdb144b03f754736} 
 \index{Robohat.Robohat@{Robohat.Robohat}!scan\_i2c\_bus@{scan\_i2c\_bus}}
@@ -648,7 +679,7 @@ None
 \end{DoxyReturn}
 
 
-Definition at line \mbox{\hyperlink{_robohat_8py_source_l00379}{379}} of file \mbox{\hyperlink{_robohat_8py_source}{Robohat.\+py}}.
+Definition at line \mbox{\hyperlink{_robohat_8py_source_l00440}{440}} of file \mbox{\hyperlink{_robohat_8py_source}{Robohat.\+py}}.
 
 \Hypertarget{class_robohat_1_1_robohat_a67fb473112d51c3b0438a896596a63ad}\label{class_robohat_1_1_robohat_a67fb473112d51c3b0438a896596a63ad} 
 \index{Robohat.Robohat@{Robohat.Robohat}!set\_io\_expander\_output@{set\_io\_expander\_output}}
@@ -674,7 +705,7 @@ None
 \end{DoxyReturn}
 
 
-Definition at line \mbox{\hyperlink{_robohat_8py_source_l00391}{391}} of file \mbox{\hyperlink{_robohat_8py_source}{Robohat.\+py}}.
+Definition at line \mbox{\hyperlink{_robohat_8py_source_l00452}{452}} of file \mbox{\hyperlink{_robohat_8py_source}{Robohat.\+py}}.
 
 \Hypertarget{class_robohat_1_1_robohat_a9dd9c22a883391d5161ec5410e6e2dee}\label{class_robohat_1_1_robohat_a9dd9c22a883391d5161ec5410e6e2dee} 
 \index{Robohat.Robohat@{Robohat.Robohat}!set\_led\_color@{set\_led\_color}}
@@ -706,7 +737,7 @@ Definition at line \mbox{\hyperlink{_robohat_8py_source_l00167}{167}} of file \m
 
 
 
-Set the angle of connected servo in degree. 
+Set the angle of connected servo in degree, does nothing when not avaible. 
 
 
 \begin{DoxyParams}{Parameters}
@@ -716,11 +747,11 @@ Set the angle of connected servo in degree.
 \hline
 \end{DoxyParams}
 \begin{DoxyReturn}{Returns}
-angle of connected servo in degree 
+None 
 \end{DoxyReturn}
 
 
-Definition at line \mbox{\hyperlink{_robohat_8py_source_l00245}{245}} of file \mbox{\hyperlink{_robohat_8py_source}{Robohat.\+py}}.
+Definition at line \mbox{\hyperlink{_robohat_8py_source_l00251}{251}} of file \mbox{\hyperlink{_robohat_8py_source}{Robohat.\+py}}.
 
 \Hypertarget{class_robohat_1_1_robohat_a8502d86fe4e75c63b5cfb6dd1e5dbc6f}\label{class_robohat_1_1_robohat_a8502d86fe4e75c63b5cfb6dd1e5dbc6f} 
 \index{Robohat.Robohat@{Robohat.Robohat}!set\_servos\_angles@{set\_servos\_angles}}
@@ -738,11 +769,11 @@ Set the angle of connected servos in degree.
 \hline
 \end{DoxyParams}
 \begin{DoxyReturn}{Returns}
-angle of connected servo in degree 
+None 
 \end{DoxyReturn}
 
 
-Definition at line \mbox{\hyperlink{_robohat_8py_source_l00296}{296}} of file \mbox{\hyperlink{_robohat_8py_source}{Robohat.\+py}}.
+Definition at line \mbox{\hyperlink{_robohat_8py_source_l00315}{315}} of file \mbox{\hyperlink{_robohat_8py_source}{Robohat.\+py}}.
 
 \Hypertarget{class_robohat_1_1_robohat_ad20f33d920985552b372f52dc7761177}\label{class_robohat_1_1_robohat_ad20f33d920985552b372f52dc7761177} 
 \index{Robohat.Robohat@{Robohat.Robohat}!turn\_led\_off@{turn\_led\_off}}
@@ -780,6 +811,20 @@ None
 
 Definition at line \mbox{\hyperlink{_robohat_8py_source_l00185}{185}} of file \mbox{\hyperlink{_robohat_8py_source}{Robohat.\+py}}.
 
+\Hypertarget{class_robohat_1_1_robohat_a1de72b0952e23ad210fcc7c948017c5d}\label{class_robohat_1_1_robohat_a1de72b0952e23ad210fcc7c948017c5d} 
+\index{Robohat.Robohat@{Robohat.Robohat}!wakeup\_servos@{wakeup\_servos}}
+\index{wakeup\_servos@{wakeup\_servos}!Robohat.Robohat@{Robohat.Robohat}}
+\doxysubsubsection{\texorpdfstring{wakeup\_servos()}{wakeup\_servos()}}
+{\footnotesize\ttfamily  None Robohat.\+Robohat.\+wakeup\+\_\+servos (\begin{DoxyParamCaption}\item[{}]{self }\end{DoxyParamCaption})}
+
+
+
+Wakes up the servos @\+:return\+: None. 
+
+
+
+Definition at line \mbox{\hyperlink{_robohat_8py_source_l00349}{349}} of file \mbox{\hyperlink{_robohat_8py_source}{Robohat.\+py}}.
+
 
 
 \doxysubsection{Member Data Documentation}
@@ -792,16 +837,6 @@ Definition at line \mbox{\hyperlink{_robohat_8py_source_l00185}{185}} of file \m
 
 
 Definition at line \mbox{\hyperlink{_robohat_8py_source_l00072}{72}} of file \mbox{\hyperlink{_robohat_8py_source}{Robohat.\+py}}.
-
-\Hypertarget{class_robohat_1_1_robohat_a3c4531edcbab32b8564c1be7f5cb8ed1}\label{class_robohat_1_1_robohat_a3c4531edcbab32b8564c1be7f5cb8ed1} 
-\index{Robohat.Robohat@{Robohat.Robohat}!\_io\_servo\_assembly\_callback@{\_io\_servo\_assembly\_callback}}
-\index{\_io\_servo\_assembly\_callback@{\_io\_servo\_assembly\_callback}!Robohat.Robohat@{Robohat.Robohat}}
-\doxysubsubsection{\texorpdfstring{\_io\_servo\_assembly\_callback}{\_io\_servo\_assembly\_callback}}
-{\footnotesize\ttfamily Robohat.\+Robohat.\+\_\+io\+\_\+servo\+\_\+assembly\+\_\+callback\hspace{0.3cm}{\ttfamily [protected]}}
-
-
-
-Definition at line \mbox{\hyperlink{_robohat_8py_source_l00081}{81}} of file \mbox{\hyperlink{_robohat_8py_source}{Robohat.\+py}}.
 
 
 

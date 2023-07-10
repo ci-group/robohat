@@ -1,6 +1,7 @@
 var _robohat__config_8py =
 [
     [ "ACCU_INTERVAL_TIME_IN_SECONDS", "_robohat__config_8py.html#af85aaeb71d89d6474ffd5b6cef821cec", null ],
+    [ "ACCU_LOG_DISPLAY_WHEN_TO_LOW", "_robohat__config_8py.html#a5c7faad53ec16d06c96461d893ee6609", null ],
     [ "ACCU_VOLTAGE_ADC_MULTIPLIER", "_robohat__config_8py.html#aa6fe52244a15915be93749ca9911a2c0", null ],
     [ "ACCU_VOLTAGE_TO_LOW_THRESHOLD", "_robohat__config_8py.html#a070cb4cf2f1798158b9b5af7b52425e5", null ],
     [ "ACCU_VOLTAGE_TO_PERCENTAGE_ARRAY", "_robohat__config_8py.html#a7f678d13bfa3bca447e7f58d890b4211", null ],

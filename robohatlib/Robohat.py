@@ -57,8 +57,6 @@ class Robohat:
         @param _servo_assembly_1_config config of servo assembly 1
         @param _servo_assembly_2_config config of servo assembly 2
         @param _sw_io_expander switch settings, default 7
-
-        @return An instance of the Robohat class
         """
         print("Starting Robohat lib: " + Robohat_constants.ROBOHAT_LIB_VERSION_STR + "\n")
 
@@ -77,11 +75,11 @@ class Robohat:
         self.__powerManagement = PowerManagement(self.__io, self.__hatAdc, Robohat_config.POWERSHUTDOWN_GPO_DEF)
         self.__powerManagement.add_signaling_device(self.__buzzer)
 
-        servo_assembly_interrupt_def = MCPInterruptDef("servo_assembly_int", Robohat_config.SERVOASSEMBLY_COMMON_GPI,
-                                                       self._io_servo_assembly_callback)
+        servo_assembly_interrupt_def = MCPInterruptDef("servo_assembly_int", Robohat_config.SERVOASSEMBLY_COMMON_GPI,self._io_servo_assembly_callback)
         self.__servo_assembly_1 = ServoAssembly(self.__io, _servo_assembly_1_config,
                                                 Robohat_config.SERVOASSEMBLY_1_I2C_BUS,
                                                 Robohat_config.SERVOASSEMBLY_1_SPI_BUS, servo_assembly_interrupt_def)
+
         # self.__servo_assembly_2 = ServoAssembly(self.__io, _servo_assembly_2_config, Robohat_config.SERVOASSEMBLY_2_I2C_BUS, Robohat_config.SERVOASSEMBLY_2_SPI_BUS, servoAssembly_interrupt_def)
 
     # --------------------------------------------------------------------------------------

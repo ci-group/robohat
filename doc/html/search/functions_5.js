@@ -1,5 +1,4 @@
 var searchData=
 [
-  ['turn_5fled_5foff_0',['turn_led_off',['../class_robohat_1_1_robohat.html#ad20f33d920985552b372f52dc7761177',1,'Robohat::Robohat']]],
-  ['turn_5fled_5fon_1',['turn_led_on',['../class_robohat_1_1_robohat.html#a7e97193aaffde3a33961dbef937b0d07',1,'Robohat::Robohat']]]
+  ['put_5fservos_5fto_5fsleep_0',['put_servos_to_sleep',['../class_robohat_1_1_robohat.html#a2faf14b70ceb40c360cf27297b1aff85',1,'Robohat::Robohat']]]
 ];

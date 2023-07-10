@@ -24,6 +24,7 @@
 <table cellspacing="0" cellpadding="0">
  <tbody>
  <tr id="projectrow">
+  <td id="projectlogo"><img alt="Logo" src="VU_logo_RGB-01.png"/></td>
   <td id="projectalign">
    <div id="projectname">Robohat<span id="projectnumber">&#160;2022282301</span>
    </div>
@@ -122,113 +123,115 @@ $(document).ready(function(){initNavTree('_robohat__config_8py_source.html','');
 <div class="line"><a id="l00028" name="l00028"></a><span class="lineno"><a class="line" href="namespace_robohat__config.html#adfa1cafba7a9b700fa6cc3104c2ec38c">   28</a></span>ALARM_TIMEOUT_IN_SEC = 300                          <span class="comment"># timeout between alarm</span></div>
 <div class="line"><a id="l00029" name="l00029"></a><span class="lineno"><a class="line" href="namespace_robohat__config.html#a7edd28e09e6bc80f113a11d4d6bbb72c">   29</a></span>INIT_BEEP_PERMITTED = <span class="keyword">False</span>                         <span class="comment"># beep when started</span></div>
 <div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span> </div>
-<div class="line"><a id="l00031" name="l00031"></a><span class="lineno"><a class="line" href="namespace_robohat__config.html#af85aaeb71d89d6474ffd5b6cef821cec">   31</a></span>ACCU_INTERVAL_TIME_IN_SECONDS = 1</div>
-<div class="line"><a id="l00032" name="l00032"></a><span class="lineno"><a class="line" href="namespace_robohat__config.html#ae2619b03ea7181055ad33d8fa66aa3e3">   32</a></span>ACCU_VOLTAGE_WHEN_FULL = 12.6</div>
-<div class="line"><a id="l00033" name="l00033"></a><span class="lineno"><a class="line" href="namespace_robohat__config.html#a070cb4cf2f1798158b9b5af7b52425e5">   33</a></span>ACCU_VOLTAGE_TO_LOW_THRESHOLD = 11.06</div>
-<div class="line"><a id="l00034" name="l00034"></a><span class="lineno"><a class="line" href="namespace_robohat__config.html#aa6fe52244a15915be93749ca9911a2c0">   34</a></span>ACCU_VOLTAGE_ADC_MULTIPLIER = 4.3                   <span class="comment"># aangepast 4-7-23, was 8.0</span></div>
-<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span> </div>
-<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span><span class="comment"># Voltage to percentage array... depending on accu used</span></div>
-<div class="line"><a id="l00037" name="l00037"></a><span class="lineno"><a class="line" href="namespace_robohat__config.html#a7f678d13bfa3bca447e7f58d890b4211">   37</a></span>ACCU_VOLTAGE_TO_PERCENTAGE_ARRAY =  [</div>
-<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span>                                    [9.6,   0],</div>
-<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span>                                    [9.82,  1],</div>
-<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span>                                    [10.83, 5],</div>
-<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span>                                    [11.06, 10],</div>
-<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span>                                    [11.12, 15],</div>
-<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span>                                    [11.18, 20],</div>
-<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span>                                    [11.24, 25],</div>
-<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span>                                    [11.3,  30],</div>
-<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span>                                    [11.36, 35],</div>
-<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span>                                    [11.39, 40],</div>
-<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span>                                    [11.45, 45],</div>
-<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span>                                    [11.51, 50],</div>
-<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span>                                    [11.56, 55],</div>
-<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span>                                    [11.62, 60],</div>
-<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span>                                    [11.74, 65],</div>
-<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span>                                    [11.86, 70],</div>
-<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span>                                    [11.95, 75],</div>
-<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span>                                    [12.07, 80],</div>
-<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span>                                    [12.25, 85],</div>
-<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span>                                    [12.33, 90],</div>
-<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span>                                    [12.5, 95],</div>
-<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span>                                    [12.6, 100]</div>
-<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span>                                    ]</div>
-<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span> </div>
-<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span><span class="stringliteral">&quot;&quot;&quot;!</span></div>
-<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span><span class="stringliteral">Device settings</span></div>
-<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span><span class="stringliteral">&quot;&quot;&quot;</span></div>
-<div class="line"><a id="l00065" name="l00065"></a><span class="lineno"><a class="line" href="namespace_robohat__config.html#a98a67b4d4544e499bd160b58c5c5bce5">   65</a></span>BUZZER_DEF = BuzzerDef(<span class="stringliteral">&quot;buzzer&quot;</span>, 18, 1000, 50)      <span class="comment"># definition for the buzzer, GPIO nr, initial frequency and initial duty cycle</span></div>
-<div class="line"><a id="l00066" name="l00066"></a><span class="lineno"><a class="line" href="namespace_robohat__config.html#abb02060e2a931afc3560e1b7b3789765">   66</a></span>SERIAL_DEF = SerialDef(<span class="stringliteral">&quot;debug_port&quot;</span>, 1)             <span class="comment"># definition for the serial port. (todo) AT THIS MOMENT NOT IMPLEMENTED</span></div>
-<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span> </div>
-<div class="line"><a id="l00068" name="l00068"></a><span class="lineno"><a class="line" href="namespace_robohat__config.html#af1986d651d4ca8ba49183c497fc5d112">   68</a></span>LEDRED_GPO_DEF = GPODef(<span class="stringliteral">&quot;led_red&quot;</span>, 5)               <span class="comment"># definition of the multicolor LED, the RED part, GPIO nr</span></div>
-<div class="line"><a id="l00069" name="l00069"></a><span class="lineno"><a class="line" href="namespace_robohat__config.html#a08e550ee9ca3cbec402845af2cc02e7b">   69</a></span>LEDGREEN_GPO_DEF = GPODef(<span class="stringliteral">&quot;led_green&quot;</span>, 6)           <span class="comment"># definition of the multicolor LED, the GREEN part, GPIO nr</span></div>
-<div class="line"><a id="l00070" name="l00070"></a><span class="lineno"><a class="line" href="namespace_robohat__config.html#a01b327c668f08b83e988ac270a8183e6">   70</a></span>LEDBLUE_GPO_DEF = GPODef(<span class="stringliteral">&quot;led_blue&quot;</span>, 26)            <span class="comment"># definition of the multicolor LED, the BLUE part, GPIO nr</span></div>
-<div class="line"><a id="l00071" name="l00071"></a><span class="lineno"><a class="line" href="namespace_robohat__config.html#afe49396710e821ca9c764cdfbdaed4d9">   71</a></span>STATUSLED_DEF = MultiColorLedDef(<span class="stringliteral">&quot;statusled&quot;</span>, LEDRED_GPO_DEF, LEDGREEN_GPO_DEF, LEDBLUE_GPO_DEF)    <span class="comment"># definition of the multicolor LED</span></div>
-<div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span> </div>
-<div class="line"><a id="l00073" name="l00073"></a><span class="lineno"><a class="line" href="namespace_robohat__config.html#a01768e1d18ac35f936db836f5acdc2bd">   73</a></span>MINIMU9_LIS3MDL_I2C_DEF = I2CDeviceDef(<span class="stringliteral">&quot;IMU_1_I2C&quot;</span>, 5, 0x1e)                    <span class="comment"># definition of the IMU, LLS3MDL part, i2c bus5, address 0x1e</span></div>
-<div class="line"><a id="l00074" name="l00074"></a><span class="lineno"><a class="line" href="namespace_robohat__config.html#a322dfe8b508a1d268fc3e374e7f8a485">   74</a></span>MINIMU9_LSM6DS33_I2C_DEF = I2CDeviceDef(<span class="stringliteral">&quot;IMU_2_I2C&quot;</span>, 5, 0x6b)                   <span class="comment"># definition of the IMU, LSM6DS33 part, i2c bus5, address 0x6b</span></div>
-<div class="line"><a id="l00075" name="l00075"></a><span class="lineno"><a class="line" href="namespace_robohat__config.html#a8eb4e5d22045700f8e771a3501fa0f0c">   75</a></span>IMU_DEF = IMUDef(<span class="stringliteral">&quot;IMU&quot;</span>, MINIMU9_LIS3MDL_I2C_DEF, MINIMU9_LSM6DS33_I2C_DEF)      <span class="comment"># definition of the IMU</span></div>
-<div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span> </div>
-<div class="line"><a id="l00077" name="l00077"></a><span class="lineno"><a class="line" href="namespace_robohat__config.html#ae12a3d4fe4dd1c47b177e4a52359ad46">   77</a></span>HATADC_I2C_DEF = I2CDeviceDef(<span class="stringliteral">&quot;hatadc_i2c&quot;</span>, 5, 0x34)                            <span class="comment"># definition of the TOPBOARD adc (is also used for power monitor) i2c bus5, address 0x34</span></div>
+<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span> </div>
+<div class="line"><a id="l00032" name="l00032"></a><span class="lineno"><a class="line" href="namespace_robohat__config.html#af85aaeb71d89d6474ffd5b6cef821cec">   32</a></span>ACCU_INTERVAL_TIME_IN_SECONDS = 1</div>
+<div class="line"><a id="l00033" name="l00033"></a><span class="lineno"><a class="line" href="namespace_robohat__config.html#ae2619b03ea7181055ad33d8fa66aa3e3">   33</a></span>ACCU_VOLTAGE_WHEN_FULL = 12.6</div>
+<div class="line"><a id="l00034" name="l00034"></a><span class="lineno"><a class="line" href="namespace_robohat__config.html#a070cb4cf2f1798158b9b5af7b52425e5">   34</a></span>ACCU_VOLTAGE_TO_LOW_THRESHOLD = 11.06</div>
+<div class="line"><a id="l00035" name="l00035"></a><span class="lineno"><a class="line" href="namespace_robohat__config.html#aa6fe52244a15915be93749ca9911a2c0">   35</a></span>ACCU_VOLTAGE_ADC_MULTIPLIER = 4.3                   <span class="comment"># aangepast 4-7-23, was 8.0</span></div>
+<div class="line"><a id="l00036" name="l00036"></a><span class="lineno"><a class="line" href="namespace_robohat__config.html#a5c7faad53ec16d06c96461d893ee6609">   36</a></span>ACCU_LOG_DISPLAY_WHEN_TO_LOW = <span class="keyword">False</span></div>
+<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span> </div>
+<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span><span class="comment"># Voltage to percentage array... depending on accu used</span></div>
+<div class="line"><a id="l00039" name="l00039"></a><span class="lineno"><a class="line" href="namespace_robohat__config.html#a7f678d13bfa3bca447e7f58d890b4211">   39</a></span>ACCU_VOLTAGE_TO_PERCENTAGE_ARRAY =  [</div>
+<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span>                                    [9.6,   0],</div>
+<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span>                                    [9.82,  1],</div>
+<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span>                                    [10.83, 5],</div>
+<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span>                                    [11.06, 10],</div>
+<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span>                                    [11.12, 15],</div>
+<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span>                                    [11.18, 20],</div>
+<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span>                                    [11.24, 25],</div>
+<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span>                                    [11.3,  30],</div>
+<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span>                                    [11.36, 35],</div>
+<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span>                                    [11.39, 40],</div>
+<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span>                                    [11.45, 45],</div>
+<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span>                                    [11.51, 50],</div>
+<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span>                                    [11.56, 55],</div>
+<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span>                                    [11.62, 60],</div>
+<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span>                                    [11.74, 65],</div>
+<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span>                                    [11.86, 70],</div>
+<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span>                                    [11.95, 75],</div>
+<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span>                                    [12.07, 80],</div>
+<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span>                                    [12.25, 85],</div>
+<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span>                                    [12.33, 90],</div>
+<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span>                                    [12.5, 95],</div>
+<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span>                                    [12.6, 100]</div>
+<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span>                                    ]</div>
+<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span> </div>
+<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span><span class="stringliteral">&quot;&quot;&quot;!</span></div>
+<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span><span class="stringliteral">Device settings</span></div>
+<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span><span class="stringliteral">&quot;&quot;&quot;</span></div>
+<div class="line"><a id="l00067" name="l00067"></a><span class="lineno"><a class="line" href="namespace_robohat__config.html#a98a67b4d4544e499bd160b58c5c5bce5">   67</a></span>BUZZER_DEF = BuzzerDef(<span class="stringliteral">&quot;buzzer&quot;</span>, 18, 1000, 50)      <span class="comment"># definition for the buzzer, GPIO nr, initial frequency and initial duty cycle</span></div>
+<div class="line"><a id="l00068" name="l00068"></a><span class="lineno"><a class="line" href="namespace_robohat__config.html#abb02060e2a931afc3560e1b7b3789765">   68</a></span>SERIAL_DEF = SerialDef(<span class="stringliteral">&quot;debug_port&quot;</span>, 1)             <span class="comment"># definition for the serial port. (todo) AT THIS MOMENT NOT IMPLEMENTED</span></div>
+<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span> </div>
+<div class="line"><a id="l00070" name="l00070"></a><span class="lineno"><a class="line" href="namespace_robohat__config.html#af1986d651d4ca8ba49183c497fc5d112">   70</a></span>LEDRED_GPO_DEF = GPODef(<span class="stringliteral">&quot;led_red&quot;</span>, 5)               <span class="comment"># definition of the multicolor LED, the RED part, GPIO nr</span></div>
+<div class="line"><a id="l00071" name="l00071"></a><span class="lineno"><a class="line" href="namespace_robohat__config.html#a08e550ee9ca3cbec402845af2cc02e7b">   71</a></span>LEDGREEN_GPO_DEF = GPODef(<span class="stringliteral">&quot;led_green&quot;</span>, 6)           <span class="comment"># definition of the multicolor LED, the GREEN part, GPIO nr</span></div>
+<div class="line"><a id="l00072" name="l00072"></a><span class="lineno"><a class="line" href="namespace_robohat__config.html#a01b327c668f08b83e988ac270a8183e6">   72</a></span>LEDBLUE_GPO_DEF = GPODef(<span class="stringliteral">&quot;led_blue&quot;</span>, 26)            <span class="comment"># definition of the multicolor LED, the BLUE part, GPIO nr</span></div>
+<div class="line"><a id="l00073" name="l00073"></a><span class="lineno"><a class="line" href="namespace_robohat__config.html#afe49396710e821ca9c764cdfbdaed4d9">   73</a></span>STATUSLED_DEF = MultiColorLedDef(<span class="stringliteral">&quot;statusled&quot;</span>, LEDRED_GPO_DEF, LEDGREEN_GPO_DEF, LEDBLUE_GPO_DEF)    <span class="comment"># definition of the multicolor LED</span></div>
+<div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span> </div>
+<div class="line"><a id="l00075" name="l00075"></a><span class="lineno"><a class="line" href="namespace_robohat__config.html#a01768e1d18ac35f936db836f5acdc2bd">   75</a></span>MINIMU9_LIS3MDL_I2C_DEF = I2CDeviceDef(<span class="stringliteral">&quot;IMU_LIS3MDL&quot;</span>, 5, 0x1e)                    <span class="comment"># definition of the IMU, LLS3MDL part, i2c bus5, address 0x1e</span></div>
+<div class="line"><a id="l00076" name="l00076"></a><span class="lineno"><a class="line" href="namespace_robohat__config.html#a322dfe8b508a1d268fc3e374e7f8a485">   76</a></span>MINIMU9_LSM6DS33_I2C_DEF = I2CDeviceDef(<span class="stringliteral">&quot;IMU_LSMDS33&quot;</span>, 5, 0x6b)                   <span class="comment"># definition of the IMU, LSM6DS33 part, i2c bus5, address 0x6b</span></div>
+<div class="line"><a id="l00077" name="l00077"></a><span class="lineno"><a class="line" href="namespace_robohat__config.html#a8eb4e5d22045700f8e771a3501fa0f0c">   77</a></span>IMU_DEF = IMUDef(<span class="stringliteral">&quot;IMU&quot;</span>, MINIMU9_LIS3MDL_I2C_DEF, MINIMU9_LSM6DS33_I2C_DEF)      <span class="comment"># definition of the IMU</span></div>
 <div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span> </div>
-<div class="line"><a id="l00079" name="l00079"></a><span class="lineno"><a class="line" href="namespace_robohat__config.html#ab3bbe94717b9db09734be264a10a2f3a">   79</a></span>POWERSHUTDOWN_GPO_DEF = GPODef(<span class="stringliteral">&quot;shutdown&quot;</span>, 27)                                  <span class="comment"># definition of the shutdown GPIO pin</span></div>
+<div class="line"><a id="l00079" name="l00079"></a><span class="lineno"><a class="line" href="namespace_robohat__config.html#ae12a3d4fe4dd1c47b177e4a52359ad46">   79</a></span>HATADC_I2C_DEF = I2CDeviceDef(<span class="stringliteral">&quot;hatadc&quot;</span>, 5, 0x34)                            <span class="comment"># definition of the TOPBOARD adc (is also used for power monitor) i2c bus5, address 0x34</span></div>
 <div class="line"><a id="l00080" name="l00080"></a><span class="lineno">   80</span> </div>
-<div class="line"><a id="l00081" name="l00081"></a><span class="lineno"><a class="line" href="namespace_robohat__config.html#aa30de453592b91139a5bb4357620ffac">   81</a></span>IOEXPANDER_I2C_DEF = I2CDeviceDef(<span class="stringliteral">&quot;ioexpander_i2c&quot;</span>, 1, 0x20)          <span class="comment"># i2c bus1, address 0x2</span></div>
-<div class="line"><a id="l00082" name="l00082"></a><span class="lineno"><a class="line" href="namespace_robohat__config.html#adc47956a228b651e535c3e4bef9402e4">   82</a></span>IOEXPANDER_INTERUPT_SETTINGS = [</div>
-<div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span>    McpInitStruct(0, GpioDirection.GPIO_INPUT, InterruptTypes.INT_RISING),</div>
-<div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span>    McpInitStruct(1, GpioDirection.GPIO_INPUT, InterruptTypes.INT_RISING),</div>
-<div class="line"><a id="l00085" name="l00085"></a><span class="lineno">   85</span>    McpInitStruct(2, GpioDirection.GPIO_INPUT, InterruptTypes.INT_RISING),</div>
-<div class="line"><a id="l00086" name="l00086"></a><span class="lineno">   86</span>    McpInitStruct(3, GpioDirection.GPIO_INPUT, InterruptTypes.INT_RISING),</div>
-<div class="line"><a id="l00087" name="l00087"></a><span class="lineno">   87</span>    McpInitStruct(4, GpioDirection.GPIO_INPUT, InterruptTypes.INT_RISING),</div>
-<div class="line"><a id="l00088" name="l00088"></a><span class="lineno">   88</span>    McpInitStruct(5, GpioDirection.GPIO_INPUT, InterruptTypes.INT_RISING),</div>
-<div class="line"><a id="l00089" name="l00089"></a><span class="lineno">   89</span>    McpInitStruct(6, GpioDirection.GPIO_INPUT, InterruptTypes.INT_RISING),</div>
-<div class="line"><a id="l00090" name="l00090"></a><span class="lineno">   90</span>    McpInitStruct(7, GpioDirection.GPIO_INPUT, InterruptTypes.INT_RISING),</div>
-<div class="line"><a id="l00091" name="l00091"></a><span class="lineno">   91</span>    ]</div>
-<div class="line"><a id="l00092" name="l00092"></a><span class="lineno">   92</span> </div>
-<div class="line"><a id="l00093" name="l00093"></a><span class="lineno"><a class="line" href="namespace_robohat__config.html#a7a9f449d409dd8df062f77ca78f139ca">   93</a></span>IO_EXPANDER_DEF = IOExpanderDef(<span class="stringliteral">&quot;ioexpander&quot;</span>, IOEXPANDER_I2C_DEF, 24, IOEXPANDER_INTERUPT_SETTINGS)</div>
+<div class="line"><a id="l00081" name="l00081"></a><span class="lineno"><a class="line" href="namespace_robohat__config.html#ab3bbe94717b9db09734be264a10a2f3a">   81</a></span>POWERSHUTDOWN_GPO_DEF = GPODef(<span class="stringliteral">&quot;shutdown&quot;</span>, 27)                                  <span class="comment"># definition of the shutdown GPIO pin</span></div>
+<div class="line"><a id="l00082" name="l00082"></a><span class="lineno">   82</span> </div>
+<div class="line"><a id="l00083" name="l00083"></a><span class="lineno"><a class="line" href="namespace_robohat__config.html#aa30de453592b91139a5bb4357620ffac">   83</a></span>IOEXPANDER_I2C_DEF = I2CDeviceDef(<span class="stringliteral">&quot;ioexpander&quot;</span>, 1, 0x20)          <span class="comment"># i2c bus1, address 0x2</span></div>
+<div class="line"><a id="l00084" name="l00084"></a><span class="lineno"><a class="line" href="namespace_robohat__config.html#adc47956a228b651e535c3e4bef9402e4">   84</a></span>IOEXPANDER_INTERUPT_SETTINGS = [</div>
+<div class="line"><a id="l00085" name="l00085"></a><span class="lineno">   85</span>    McpInitStruct(0, GpioDirection.GPIO_INPUT, InterruptTypes.INT_RISING),</div>
+<div class="line"><a id="l00086" name="l00086"></a><span class="lineno">   86</span>    McpInitStruct(1, GpioDirection.GPIO_INPUT, InterruptTypes.INT_RISING),</div>
+<div class="line"><a id="l00087" name="l00087"></a><span class="lineno">   87</span>    McpInitStruct(2, GpioDirection.GPIO_INPUT, InterruptTypes.INT_RISING),</div>
+<div class="line"><a id="l00088" name="l00088"></a><span class="lineno">   88</span>    McpInitStruct(3, GpioDirection.GPIO_INPUT, InterruptTypes.INT_RISING),</div>
+<div class="line"><a id="l00089" name="l00089"></a><span class="lineno">   89</span>    McpInitStruct(4, GpioDirection.GPIO_INPUT, InterruptTypes.INT_RISING),</div>
+<div class="line"><a id="l00090" name="l00090"></a><span class="lineno">   90</span>    McpInitStruct(5, GpioDirection.GPIO_INPUT, InterruptTypes.INT_RISING),</div>
+<div class="line"><a id="l00091" name="l00091"></a><span class="lineno">   91</span>    McpInitStruct(6, GpioDirection.GPIO_INPUT, InterruptTypes.INT_RISING),</div>
+<div class="line"><a id="l00092" name="l00092"></a><span class="lineno">   92</span>    McpInitStruct(7, GpioDirection.GPIO_INPUT, InterruptTypes.INT_RISING),</div>
+<div class="line"><a id="l00093" name="l00093"></a><span class="lineno">   93</span>    ]</div>
 <div class="line"><a id="l00094" name="l00094"></a><span class="lineno">   94</span> </div>
-<div class="line"><a id="l00095" name="l00095"></a><span class="lineno">   95</span><span class="comment"># -------------------</span></div>
-<div class="line"><a id="l00096" name="l00096"></a><span class="lineno">   96</span><span class="stringliteral">&quot;&quot;&quot;!</span></div>
-<div class="line"><a id="l00097" name="l00097"></a><span class="lineno">   97</span><span class="stringliteral">Servo assembly board settings</span></div>
-<div class="line"><a id="l00098" name="l00098"></a><span class="lineno">   98</span><span class="stringliteral">&quot;&quot;&quot;</span></div>
-<div class="line"><a id="l00099" name="l00099"></a><span class="lineno"><a class="line" href="namespace_robohat__config.html#ae3b4abf8b75c1747c92fc5c2e3eb58b8">   99</a></span>SERVOASSEMBLY_1_I2C_BUS = 1</div>
-<div class="line"><a id="l00100" name="l00100"></a><span class="lineno"><a class="line" href="namespace_robohat__config.html#abbaf7067949b0c283a2f88d193e7be99">  100</a></span>SERVOASSEMBLY_1_SPI_BUS = 0</div>
-<div class="line"><a id="l00101" name="l00101"></a><span class="lineno">  101</span> </div>
-<div class="line"><a id="l00102" name="l00102"></a><span class="lineno"><a class="line" href="namespace_robohat__config.html#affe28fac1297be7670ba73abbe156287">  102</a></span>SERVOASSEMBLY_2_I2C_BUS = 1</div>
-<div class="line"><a id="l00103" name="l00103"></a><span class="lineno"><a class="line" href="namespace_robohat__config.html#a89cec2da47b86d13c57406da20e31647">  103</a></span>SERVOASSEMBLY_2_SPI_BUS = 0</div>
-<div class="line"><a id="l00104" name="l00104"></a><span class="lineno">  104</span> </div>
-<div class="line"><a id="l00105" name="l00105"></a><span class="lineno"><a class="line" href="namespace_robohat__config.html#a227e47c59a9ce7f7a4c3a3d86209921c">  105</a></span>SERVOASSEMBLY_COMMON_GPI = 4</div>
+<div class="line"><a id="l00095" name="l00095"></a><span class="lineno"><a class="line" href="namespace_robohat__config.html#a7a9f449d409dd8df062f77ca78f139ca">   95</a></span>IO_EXPANDER_DEF = IOExpanderDef(<span class="stringliteral">&quot;ioexpander&quot;</span>, IOEXPANDER_I2C_DEF, 24, IOEXPANDER_INTERUPT_SETTINGS)</div>
+<div class="line"><a id="l00096" name="l00096"></a><span class="lineno">   96</span> </div>
+<div class="line"><a id="l00097" name="l00097"></a><span class="lineno">   97</span><span class="comment"># -------------------</span></div>
+<div class="line"><a id="l00098" name="l00098"></a><span class="lineno">   98</span><span class="stringliteral">&quot;&quot;&quot;!</span></div>
+<div class="line"><a id="l00099" name="l00099"></a><span class="lineno">   99</span><span class="stringliteral">Servo assembly board settings</span></div>
+<div class="line"><a id="l00100" name="l00100"></a><span class="lineno">  100</span><span class="stringliteral">&quot;&quot;&quot;</span></div>
+<div class="line"><a id="l00101" name="l00101"></a><span class="lineno"><a class="line" href="namespace_robohat__config.html#ae3b4abf8b75c1747c92fc5c2e3eb58b8">  101</a></span>SERVOASSEMBLY_1_I2C_BUS = 1</div>
+<div class="line"><a id="l00102" name="l00102"></a><span class="lineno"><a class="line" href="namespace_robohat__config.html#abbaf7067949b0c283a2f88d193e7be99">  102</a></span>SERVOASSEMBLY_1_SPI_BUS = 0</div>
+<div class="line"><a id="l00103" name="l00103"></a><span class="lineno">  103</span> </div>
+<div class="line"><a id="l00104" name="l00104"></a><span class="lineno"><a class="line" href="namespace_robohat__config.html#affe28fac1297be7670ba73abbe156287">  104</a></span>SERVOASSEMBLY_2_I2C_BUS = 1</div>
+<div class="line"><a id="l00105" name="l00105"></a><span class="lineno"><a class="line" href="namespace_robohat__config.html#a89cec2da47b86d13c57406da20e31647">  105</a></span>SERVOASSEMBLY_2_SPI_BUS = 0</div>
 <div class="line"><a id="l00106" name="l00106"></a><span class="lineno">  106</span> </div>
-<div class="line"><a id="l00107" name="l00107"></a><span class="lineno"><a class="line" href="namespace_robohat__config.html#ad92282613c14ab227e1ed6e595210e37">  107</a></span>SERVOASSEMBLY_INTERUPT_SETTINGS = [</div>
-<div class="line"><a id="l00108" name="l00108"></a><span class="lineno">  108</span>    McpInitStruct(0, GpioDirection.GPIO_INPUT, InterruptTypes.INT_RISING),</div>
-<div class="line"><a id="l00109" name="l00109"></a><span class="lineno">  109</span>    McpInitStruct(1, GpioDirection.GPIO_INPUT, InterruptTypes.INT_RISING),</div>
-<div class="line"><a id="l00110" name="l00110"></a><span class="lineno">  110</span>    McpInitStruct(2, GpioDirection.GPIO_INPUT, InterruptTypes.INT_RISING),</div>
-<div class="line"><a id="l00111" name="l00111"></a><span class="lineno">  111</span>    McpInitStruct(3, GpioDirection.GPIO_INPUT, InterruptTypes.INT_RISING),</div>
-<div class="line"><a id="l00112" name="l00112"></a><span class="lineno">  112</span>    McpInitStruct(4, GpioDirection.GPIO_INPUT, InterruptTypes.INT_RISING),</div>
-<div class="line"><a id="l00113" name="l00113"></a><span class="lineno">  113</span>    McpInitStruct(5, GpioDirection.GPIO_INPUT, InterruptTypes.INT_RISING),</div>
-<div class="line"><a id="l00114" name="l00114"></a><span class="lineno">  114</span>    McpInitStruct(6, GpioDirection.GPIO_INPUT, InterruptTypes.INT_RISING),</div>
-<div class="line"><a id="l00115" name="l00115"></a><span class="lineno">  115</span>    McpInitStruct(7, GpioDirection.GPIO_INPUT, InterruptTypes.INT_RISING),</div>
-<div class="line"><a id="l00116" name="l00116"></a><span class="lineno">  116</span>    ]</div>
-<div class="line"><a id="l00117" name="l00117"></a><span class="lineno">  117</span> </div>
-<div class="line"><a id="l00118" name="l00118"></a><span class="lineno">  118</span><span class="stringliteral">&quot;&quot;&quot;!</span></div>
-<div class="line"><a id="l00119" name="l00119"></a><span class="lineno">  119</span><span class="stringliteral">I2C definitions</span></div>
-<div class="line"><a id="l00120" name="l00120"></a><span class="lineno">  120</span><span class="stringliteral">&quot;&quot;&quot;</span></div>
-<div class="line"><a id="l00121" name="l00121"></a><span class="lineno"><a class="line" href="namespace_robohat__config.html#a0e252b618769e21eb5d494b67918ad30">  121</a></span>I2C1_DEF = I2CBusDef(<span class="stringliteral">&quot;main_i2c&quot;</span>, 1, 3, 2, 100000)       <span class="comment"># bus 1, scl, sda, freq</span></div>
-<div class="line"><a id="l00122" name="l00122"></a><span class="lineno"><a class="line" href="namespace_robohat__config.html#ab12f52428e55225130ea7a9436b47223">  122</a></span>I2C5_DEF = I2CBusDef(<span class="stringliteral">&quot;hat_adc&quot;</span>, 5, 13, 12, 100000)      <span class="comment"># bus 5, scl, sda, freq</span></div>
-<div class="line"><a id="l00123" name="l00123"></a><span class="lineno"><a class="line" href="namespace_robohat__config.html#a1fc3568fcb51c2e758f7c978ac5392b5">  123</a></span>I2C6_DEF = I2CBusDef(<span class="stringliteral">&quot;unknown&quot;</span>, 6, 23, 22, 100000)      <span class="comment"># bus 6, scl, sda, freq</span></div>
-<div class="line"><a id="l00124" name="l00124"></a><span class="lineno">  124</span> </div>
-<div class="line"><a id="l00125" name="l00125"></a><span class="lineno">  125</span><span class="stringliteral">&quot;&quot;&quot;!</span></div>
-<div class="line"><a id="l00126" name="l00126"></a><span class="lineno">  126</span><span class="stringliteral">SPI definitions</span></div>
-<div class="line"><a id="l00127" name="l00127"></a><span class="lineno">  127</span><span class="stringliteral">&quot;&quot;&quot;</span></div>
-<div class="line"><a id="l00128" name="l00128"></a><span class="lineno"><a class="line" href="namespace_robohat__config.html#a4329ce49c4be55e37267023e5008ef12">  128</a></span>SPI0_DEF = SPIBusDef(<span class="stringliteral">&quot;spi_bus_0&quot;</span>, 0, 11, 10, 9)         <span class="comment"># bus 0, name, bus, clk, mosi, miso</span></div>
-<div class="line"><a id="l00129" name="l00129"></a><span class="lineno"><a class="line" href="namespace_robohat__config.html#acf631153e70123bcf6e6b12629f55de5">  129</a></span>SPI1_DEF = SPIBusDef(<span class="stringliteral">&quot;spi_bus_1&quot;</span>, 1, 21, 20, 19)        <span class="comment"># bus 1, name, bus, clk, mosi, miso</span></div>
-<div class="line"><a id="l00130" name="l00130"></a><span class="lineno"><a class="line" href="namespace_robohat__config.html#a7a4acbd8996227c01b565ad7d4ca9dfc">  130</a></span>SPI2_DEF = SPIBusDef(<span class="stringliteral">&quot;spi_bus_2&quot;</span>, 2, 42, 41, 40)        <span class="comment"># bus 2, name, bus, clk, mosi, miso</span></div>
+<div class="line"><a id="l00107" name="l00107"></a><span class="lineno"><a class="line" href="namespace_robohat__config.html#a227e47c59a9ce7f7a4c3a3d86209921c">  107</a></span>SERVOASSEMBLY_COMMON_GPI = 4</div>
+<div class="line"><a id="l00108" name="l00108"></a><span class="lineno">  108</span> </div>
+<div class="line"><a id="l00109" name="l00109"></a><span class="lineno"><a class="line" href="namespace_robohat__config.html#ad92282613c14ab227e1ed6e595210e37">  109</a></span>SERVOASSEMBLY_INTERUPT_SETTINGS = [</div>
+<div class="line"><a id="l00110" name="l00110"></a><span class="lineno">  110</span>    McpInitStruct(0, GpioDirection.GPIO_INPUT, InterruptTypes.INT_RISING),</div>
+<div class="line"><a id="l00111" name="l00111"></a><span class="lineno">  111</span>    McpInitStruct(1, GpioDirection.GPIO_INPUT, InterruptTypes.INT_RISING),</div>
+<div class="line"><a id="l00112" name="l00112"></a><span class="lineno">  112</span>    McpInitStruct(2, GpioDirection.GPIO_INPUT, InterruptTypes.INT_RISING),</div>
+<div class="line"><a id="l00113" name="l00113"></a><span class="lineno">  113</span>    McpInitStruct(3, GpioDirection.GPIO_INPUT, InterruptTypes.INT_RISING),</div>
+<div class="line"><a id="l00114" name="l00114"></a><span class="lineno">  114</span>    McpInitStruct(4, GpioDirection.GPIO_INPUT, InterruptTypes.INT_RISING),</div>
+<div class="line"><a id="l00115" name="l00115"></a><span class="lineno">  115</span>    McpInitStruct(5, GpioDirection.GPIO_INPUT, InterruptTypes.INT_RISING),</div>
+<div class="line"><a id="l00116" name="l00116"></a><span class="lineno">  116</span>    McpInitStruct(6, GpioDirection.GPIO_INPUT, InterruptTypes.INT_RISING),</div>
+<div class="line"><a id="l00117" name="l00117"></a><span class="lineno">  117</span>    McpInitStruct(7, GpioDirection.GPIO_INPUT, InterruptTypes.INT_RISING),</div>
+<div class="line"><a id="l00118" name="l00118"></a><span class="lineno">  118</span>    ]</div>
+<div class="line"><a id="l00119" name="l00119"></a><span class="lineno">  119</span> </div>
+<div class="line"><a id="l00120" name="l00120"></a><span class="lineno">  120</span><span class="stringliteral">&quot;&quot;&quot;!</span></div>
+<div class="line"><a id="l00121" name="l00121"></a><span class="lineno">  121</span><span class="stringliteral">I2C definitions</span></div>
+<div class="line"><a id="l00122" name="l00122"></a><span class="lineno">  122</span><span class="stringliteral">&quot;&quot;&quot;</span></div>
+<div class="line"><a id="l00123" name="l00123"></a><span class="lineno"><a class="line" href="namespace_robohat__config.html#a0e252b618769e21eb5d494b67918ad30">  123</a></span>I2C1_DEF = I2CBusDef(<span class="stringliteral">&quot;main_i2c&quot;</span>, 1, 3, 2, 100000)       <span class="comment"># bus 1, scl, sda, freq</span></div>
+<div class="line"><a id="l00124" name="l00124"></a><span class="lineno"><a class="line" href="namespace_robohat__config.html#ab12f52428e55225130ea7a9436b47223">  124</a></span>I2C5_DEF = I2CBusDef(<span class="stringliteral">&quot;hat_adc&quot;</span>, 5, 13, 12, 100000)      <span class="comment"># bus 5, scl, sda, freq</span></div>
+<div class="line"><a id="l00125" name="l00125"></a><span class="lineno"><a class="line" href="namespace_robohat__config.html#a1fc3568fcb51c2e758f7c978ac5392b5">  125</a></span>I2C6_DEF = I2CBusDef(<span class="stringliteral">&quot;unknown&quot;</span>, 6, 23, 22, 100000)      <span class="comment"># bus 6, scl, sda, freq</span></div>
+<div class="line"><a id="l00126" name="l00126"></a><span class="lineno">  126</span> </div>
+<div class="line"><a id="l00127" name="l00127"></a><span class="lineno">  127</span><span class="stringliteral">&quot;&quot;&quot;!</span></div>
+<div class="line"><a id="l00128" name="l00128"></a><span class="lineno">  128</span><span class="stringliteral">SPI definitions</span></div>
+<div class="line"><a id="l00129" name="l00129"></a><span class="lineno">  129</span><span class="stringliteral">&quot;&quot;&quot;</span></div>
+<div class="line"><a id="l00130" name="l00130"></a><span class="lineno"><a class="line" href="namespace_robohat__config.html#a4329ce49c4be55e37267023e5008ef12">  130</a></span>SPI0_DEF = SPIBusDef(<span class="stringliteral">&quot;spi_bus_0&quot;</span>, 0, 11, 10, 9)         <span class="comment"># bus 0, name, bus, clk, mosi, miso</span></div>
+<div class="line"><a id="l00131" name="l00131"></a><span class="lineno"><a class="line" href="namespace_robohat__config.html#acf631153e70123bcf6e6b12629f55de5">  131</a></span>SPI1_DEF = SPIBusDef(<span class="stringliteral">&quot;spi_bus_1&quot;</span>, 1, 21, 20, 19)        <span class="comment"># bus 1, name, bus, clk, mosi, miso</span></div>
+<div class="line"><a id="l00132" name="l00132"></a><span class="lineno"><a class="line" href="namespace_robohat__config.html#a7a4acbd8996227c01b565ad7d4ca9dfc">  132</a></span>SPI2_DEF = SPIBusDef(<span class="stringliteral">&quot;spi_bus_2&quot;</span>, 2, 42, 41, 40)        <span class="comment"># bus 2, name, bus, clk, mosi, miso</span></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="dir_6acad4b402f028c1c46568e28ff279c9.html">robohatlib</a></li><li class="navelem"><a class="el" href="_robohat__config_8py.html">Robohat_config.py</a></li>
-    <li class="footer">Generated on Fri Jul 7 2023 11:48:45 for Robohat by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.7 </li>
+    <li class="footer">Generated on Mon Jul 10 2023 10:19:35 for Robohat by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.7 </li>
   </ul>
 </div>
 </body>

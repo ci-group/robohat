@@ -3,6 +3,7 @@ var class_robohat_1_1_robohat =
     [ "__init__", "class_robohat_1_1_robohat.html#a0d7681e803da0d56f4be652fb7adda35", null ],
     [ "_io_expander_int_callback", "class_robohat_1_1_robohat.html#ae12a19ae99f5b91d08feda1b97dd3ef1", null ],
     [ "_io_servo_assembly_callback", "class_robohat_1_1_robohat.html#ac4d957cff77832fc87d4e3bf43326456", null ],
+    [ "are_servos_sleeping", "class_robohat_1_1_robohat.html#ac8c98160d4565f35a504dc1f1db134a6", null ],
     [ "do_buzzer_beep", "class_robohat_1_1_robohat.html#ac6e7e67d4e264ab9c6b66cd413efd864", null ],
     [ "do_buzzer_freq", "class_robohat_1_1_robohat.html#ac404c660d3289c975d53e3883f42c967", null ],
     [ "do_buzzer_random", "class_robohat_1_1_robohat.html#aa6739066050468f18c513ed7c277f1a3", null ],
@@ -26,6 +27,7 @@ var class_robohat_1_1_robohat =
     [ "get_servos_angles", "class_robohat_1_1_robohat.html#a6485990f7bd043e7c330d75e11deff57", null ],
     [ "init", "class_robohat_1_1_robohat.html#a726c77fb9ff04911df0ea9a5e9a80d57", null ],
     [ "is_accu_capacity_ok", "class_robohat_1_1_robohat.html#a1e255d3ac4e556019e56f1f1f1c2b675", null ],
+    [ "put_servos_to_sleep", "class_robohat_1_1_robohat.html#a2faf14b70ceb40c360cf27297b1aff85", null ],
     [ "scan_i2c_bus", "class_robohat_1_1_robohat.html#ab7596aa3157e74f7fdb144b03f754736", null ],
     [ "set_io_expander_direction", "class_robohat_1_1_robohat.html#a93abcf6cc3c3b39309c732260ce47c6c", null ],
     [ "set_io_expander_output", "class_robohat_1_1_robohat.html#a67fb473112d51c3b0438a896596a63ad", null ],
@@ -34,6 +36,6 @@ var class_robohat_1_1_robohat =
     [ "set_servos_angles", "class_robohat_1_1_robohat.html#a8502d86fe4e75c63b5cfb6dd1e5dbc6f", null ],
     [ "turn_led_off", "class_robohat_1_1_robohat.html#ad20f33d920985552b372f52dc7761177", null ],
     [ "turn_led_on", "class_robohat_1_1_robohat.html#a7e97193aaffde3a33961dbef937b0d07", null ],
-    [ "_io_expander_int_callback", "class_robohat_1_1_robohat.html#ad8c2ef1ea187cfad6ccec9242f26186a", null ],
-    [ "_io_servo_assembly_callback", "class_robohat_1_1_robohat.html#a3c4531edcbab32b8564c1be7f5cb8ed1", null ]
+    [ "wakeup_servos", "class_robohat_1_1_robohat.html#a1de72b0952e23ad210fcc7c948017c5d", null ],
+    [ "_io_expander_int_callback", "class_robohat_1_1_robohat.html#ad8c2ef1ea187cfad6ccec9242f26186a", null ]
 ];

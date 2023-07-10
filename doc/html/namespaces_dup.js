@@ -3,6 +3,7 @@ var namespaces_dup =
     [ "Robohat", "namespace_robohat.html", "namespace_robohat" ],
     [ "Robohat_config", "namespace_robohat__config.html", [
       [ "ACCU_INTERVAL_TIME_IN_SECONDS", "namespace_robohat__config.html#af85aaeb71d89d6474ffd5b6cef821cec", null ],
+      [ "ACCU_LOG_DISPLAY_WHEN_TO_LOW", "namespace_robohat__config.html#a5c7faad53ec16d06c96461d893ee6609", null ],
       [ "ACCU_VOLTAGE_ADC_MULTIPLIER", "namespace_robohat__config.html#aa6fe52244a15915be93749ca9911a2c0", null ],
       [ "ACCU_VOLTAGE_TO_LOW_THRESHOLD", "namespace_robohat__config.html#a070cb4cf2f1798158b9b5af7b52425e5", null ],
       [ "ACCU_VOLTAGE_TO_PERCENTAGE_ARRAY", "namespace_robohat__config.html#a7f678d13bfa3bca447e7f58d890b4211", null ],

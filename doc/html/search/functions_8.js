@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['open_0',['open',['../classsmbus_1_1_s_m_bus.html#af1e29cecb33337db493b1c4659d6e6ce',1,'smbus::SMBus']]]
+  ['wakeup_5fservos_0',['wakeup_servos',['../class_robohat_1_1_robohat.html#a1de72b0952e23ad210fcc7c948017c5d',1,'Robohat::Robohat']]]
 ];

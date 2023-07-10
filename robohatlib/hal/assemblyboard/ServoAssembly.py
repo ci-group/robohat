@@ -1,5 +1,5 @@
 from robohatlib.hal.assemblyboard.servo.ServoBoard import ServoBoard
-from robohatlib.hal.assemblyboard.PowerMonitorAndIO import POWERMONITORANDIO
+from robohatlib.hal.assemblyboard.PowerMonitorAndIO import PowerMonitorAndIO
 from robohatlib.driver_ll.definitions.GPIInterruptDef import GPIInterruptDef
 
 from robohatlib.driver_ll.i2c.I2CDeviceDef import I2CDeviceDef
@@ -36,7 +36,7 @@ class ServoAssembly:
         i2c_device_power_monitor = _iomanager.get_i2c_device(i2c_def_power_monitor)
 
         if i2c_device_power_monitor is not None:
-            self.__power_monitor_and_io = POWERMONITORANDIO(i2c_device_power_monitor, _mcp_interrupt_definition)
+            self.__power_monitor_and_io = PowerMonitorAndIO(i2c_device_power_monitor, _mcp_interrupt_definition)
         else:
             self.__power_monitor_and_io = None
         # ----------------------------
