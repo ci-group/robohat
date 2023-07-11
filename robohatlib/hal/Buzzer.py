@@ -20,8 +20,9 @@ class Buzzer:
         """
         self.__buzzer_driver = _io_handler.get_buzzer_driver(_buzzer_def)
         self.__last_time_error = 0
+        self.__state_alarm_permitted = ALARM_PERMITTED
 
-    # init buzzer -------------------------------------------------------------------------------------
+        # init buzzer -------------------------------------------------------------------------------------
     def init_buzzer(self) -> None:
         """
         Initializes the buzzer
@@ -77,18 +78,41 @@ class Buzzer:
     # ---------------------------------------------------------------------------------------
     # ---------------------------------------------------------------------------------------
 
+    def set_status_system_alarm_permitted(self, _state:bool) -> None:
+        """!
+        Overrides the system alarm switch. If false, no sound alarm will be given
+        @param _state: new state of system alarm
+        @return: None
+        """
+        self.__state_alarm_permitted = _state
+
+    # ---------------------------------------------------------------------------------------
+    # ---------------------------------------------------------------------------------------
+
+    def get_status_system_alarm_permitted(self) -> bool:
+        """!
+        Get the system alarm switch. If false, no sound alarm will be given
+        @return: None
+        """
+        return self.__state_alarm_permitted
+
+    # ---------------------------------------------------------------------------------------
+    # ---------------------------------------------------------------------------------------
+
     def signal_system_alarm(self) -> None:
         """
-        System alarm
+        Sounds a system alarm when permitted. Prints a console Warning
         @return: None
         """
 
-        if ALARM_PERMITTED is True:
+        if self.__state_alarm_permitted is True:
             diff_time_in_seconds = time.time() - self.__last_time_error
             if diff_time_in_seconds > ALARM_TIMEOUT_IN_SEC:
                 self.__buzzer_driver.do_alarm_buzzer()
-                print("System alarm")
+                print("WARNING: System alarm !!!")
                 self.__last_time_error = time.time()
+        else:
+            print("WARNING: System alarm !!!, sound is disabled")
 
     # ---------------------------------------------------------------------------------------
     # ---------------------------------------------------------------------------------------
