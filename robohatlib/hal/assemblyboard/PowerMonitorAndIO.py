@@ -44,10 +44,11 @@ class PowerMonitorAndIO:
     def init_power_monitor_and_io(self) -> None:
         """!
         Init power monitor
-        For future use
+        Mandatory
         @return: None
         """
-        print("Init power monitor")
+        if self.__io_device is not None:
+            self.__io_device.init_mcp23008()
 
     # --------------------------------------------------------------------------------------
 

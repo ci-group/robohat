@@ -33,7 +33,7 @@ class ServoAssembly:
         self.__servo_config = _servo_config
 
         #----------------------------
-        i2c_def_pwm = I2CDeviceDef(_servo_config.get_name(), _i2c_bus_nr, BASE_ADDRESS_PCA9685, _servo_config.get_sw1_pwm_address())
+        i2c_def_pwm = I2CDeviceDef("pwm_" + _servo_config.get_name(), _i2c_bus_nr, BASE_ADDRESS_PCA9685, _servo_config.get_sw1_pwm_address())
         i2c_device_pwm = _io_handler.get_i2c_device(i2c_def_pwm)
 
         spi_def_adc = SPIDeviceDef(_servo_config.get_name(), _spi_bus_nr, _servo_config.get_cs_adc_angle_readout())

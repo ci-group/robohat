@@ -72,11 +72,11 @@ LEDGREEN_GPO_DEF = GPODef("led_green", 6)           # definition of the multicol
 LEDBLUE_GPO_DEF = GPODef("led_blue", 26)            # definition of the multicolor LED, the BLUE part, GPIO nr
 STATUSLED_DEF = MultiColorLedDef("statusled", LEDRED_GPO_DEF, LEDGREEN_GPO_DEF, LEDBLUE_GPO_DEF)    # definition of the multicolor LED
 
-MINIMU9_LIS3MDL_I2C_DEF = I2CDeviceDef("IMU_LIS3MDL", 5, 0x1e)                    # definition of the IMU, LLS3MDL part, i2c bus5, address 0x1e
-MINIMU9_LSM6DS33_I2C_DEF = I2CDeviceDef("IMU_LSMDS33", 5, 0x6b)                   # definition of the IMU, LSM6DS33 part, i2c bus5, address 0x6b
+MINIMU9_LIS3MDL_I2C_DEF = I2CDeviceDef("imu_lis3mdl", 5, 0x1e)                    # definition of the IMU, LLS3MDL part, i2c bus5, address 0x1e
+MINIMU9_LSM6DS33_I2C_DEF = I2CDeviceDef("imu_lsmds33", 5, 0x6b)                   # definition of the IMU, LSM6DS33 part, i2c bus5, address 0x6b
 IMU_DEF = IMUDef("IMU", MINIMU9_LIS3MDL_I2C_DEF, MINIMU9_LSM6DS33_I2C_DEF)      # definition of the IMU
 
-HATADC_I2C_DEF = I2CDeviceDef("hatadc", 5, 0x34)                            # definition of the TOPBOARD adc (is also used for power monitor) i2c bus5, address 0x34
+HATADC_I2C_DEF = I2CDeviceDef("hat_adc", 5, 0x34)                            # definition of the TOPBOARD adc (is also used for power monitor) i2c bus5, address 0x34
 
 POWERSHUTDOWN_GPO_DEF = GPODef("shutdown", 27)                                  # definition of the shutdown GPIO pin
 
@@ -92,7 +92,7 @@ IOEXPANDER_INTERRUPT_SETTINGS = [
     McpInitStruct(7, GpioDirection.GPIO_INPUT, InterruptTypes.INT_RISING),
     ]
 
-IO_EXPANDER_DEF = IOExpanderDef("io_expander", IOEXPANDER_I2C_DEF, 24, IOEXPANDER_INTERRUPT_SETTINGS)
+IO_EXPANDER_DEF = IOExpanderDef("main_io_expander", IOEXPANDER_I2C_DEF, 24, IOEXPANDER_INTERRUPT_SETTINGS)
 
 # -------------------
 """!
