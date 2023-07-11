@@ -270,6 +270,8 @@ class Robohat:
         @return None
         """
 
+        print("set_servo_angle " + str(_servo_nr) + " " + str(_angle) )
+
         servo_assembly = self.__get_servo_assembly_depending_servo_nr(_servo_nr)
 
         if servo_assembly is not None:

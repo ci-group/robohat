@@ -206,12 +206,12 @@ class PowerMonitorAndIO:
         port_value = self.__io_device.get_port_data() and 0x7f
         print("--> " + hex(port_value) )
 
-        #if port_value > 0:
-        #    print("Not able to clear !!!!, power fail is present")
-        #    timer = threading.Timer(10, self.__reset_timer_callback)
-        #    timer.start()
-        #else:
-        #    if self.__io_device is not None:
-        #         self.__io_device.reset_interrupts()
+        if port_value > 0:
+            print("Not able to clear !!!!, power fail is present")
+            timer = threading.Timer(10, self.__reset_timer_callback)
+            timer.start()
+        else:
+            if self.__io_device is not None:
+                 self.__io_device.reset_interrupts()
 
     # --------------------------------------------------------------------------------------
