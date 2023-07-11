@@ -60,12 +60,11 @@ class Robohat:
         """
         print("Starting Robohat lib: " + Robohat_constants.ROBOHAT_LIB_VERSION_STR + "\n")
 
-        self.__io = IOHandler()
-        self.__serial = Serial(self.__io, Robohat_config.SERIAL_DEF)
-        self.__buzzer = Buzzer(self.__io, Robohat_config.BUZZER_DEF)
-        self.__led = LedMulticolor(self.__io, Robohat_config.STATUSLED_DEF)
-        self.__imu = IMU(self.__io, Robohat_config.IMU_DEF)
-
+        self.__io_handler = IOHandler()
+        self.__serial = Serial(self.__io_handler, Robohat_config.SERIAL_DEF)
+        self.__buzzer = Buzzer(self.__io_handler, Robohat_config.BUZZER_DEF)
+        self.__led = LedMulticolor(self.__io_handler, Robohat_config.STATUSLED_DEF)
+        self.__imu = IMU(self.__io_handler, Robohat_config.IMU_DEF)
 
         #-------------------------------------Expander
         io_expander_def = Robohat_config.IO_EXPANDER_DEF
@@ -74,15 +73,16 @@ class Robohat:
         callbackholder = InterruptCallbackHolder("expander_callback_holder", self._io_expander_int_callback, self._io_expander_int_reset_routine, 250)
         io_expander_def.set_callbackholder(callbackholder)
 
-        self.__io_expander = IOExpander(self.__io, io_expander_def, _sw_io_expander)
+        self.__io_expander = IOExpander(self.__io_handler, io_expander_def, _sw_io_expander)
         #-------------------------------------
 
-        self.__hatAdc = HatADC(self.__io, Robohat_config.HATADC_I2C_DEF)
+        self.__hatAdc = HatADC(self.__io_handler, Robohat_config.HATADC_I2C_DEF)
 
-        self.__powerManagement = PowerManagement(self.__io, self.__hatAdc, Robohat_config.POWERSHUTDOWN_GPO_DEF)
+        self.__powerManagement = PowerManagement(self.__io_handler, self.__hatAdc, Robohat_config.POWERSHUTDOWN_GPO_DEF)
         self.__powerManagement.add_signaling_device(self.__buzzer)
 
-        self.__servo_assembly_1 = ServoAssembly(self.__io, _servo_assembly_1_config,
+
+        self.__servo_assembly_1 = ServoAssembly(self.__io_handler, _servo_assembly_1_config,
                                                 Robohat_config.SERVOASSEMBLY_1_I2C_BUS,
                                                 Robohat_config.SERVOASSEMBLY_1_SPI_BUS
                                                 )
@@ -106,7 +106,7 @@ class Robohat:
         @return None
         """
 
-        self.__io.init_io()
+        self.__io_handler.init_io()
         self.__serial.init_serial()
         self.__buzzer.init_buzzer()
         self.__led.init_led()
@@ -133,7 +133,7 @@ class Robohat:
         @return None
         """
 
-        self.__io.scan_i2c_bus()
+        self.__io_handler.scan_i2c_bus()
 
     # end I2C functions ---------------------------------------------------------------------------------
 
@@ -551,7 +551,7 @@ class Robohat:
 
         self.__powerManagement.shutdown()
         sleep(1)
-        self.__io.io_shutdown()
+        self.__io_handler.io_shutdown()
 
     # begin Library functions ---------------------------------------------------------------------------------
 

@@ -19,18 +19,17 @@ except ImportError:
 class IOExpander:
 
     #--------------------------------------------------------------------------------------
-    def __init__(self, _iohandler:IOHandler, _io_expander_def:IOExpanderDef, _sw_io_expander:int):
-
-        i2c_device_definition = _io_expander_def.get_i2c_device_definition()
-        i2c_device_definition.set_i2c_offset_address(_sw_io_expander)
+    def __init__(self, _iohandler:IOHandler, _main_io_expander_def:IOExpanderDef, _sw_main_io_expander:int):
+        i2c_device_definition = _main_io_expander_def.get_i2c_device_definition()
+        i2c_device_definition.set_i2c_offset_address(_sw_main_io_expander)
         i2c_device = _iohandler.get_i2c_device(i2c_device_definition)
 
         if i2c_device is not None:
-            if _io_expander_def.get_callbackholder() is not None:
-                gpi_interrupt_definition = GPIInterruptDef(_io_expander_def.get_name(), _io_expander_def.get_gpio_pin(), InterruptTypes.INT_BOTH, _io_expander_def.get_callbackholder() )
+            if _main_io_expander_def.get_callbackholder() is not None:
+                gpi_interrupt_definition = GPIInterruptDef(_main_io_expander_def.get_name(), _main_io_expander_def.get_gpio_pin(), InterruptTypes.INT_BOTH, _main_io_expander_def.get_callbackholder())
                 _iohandler.register_interrupt(gpi_interrupt_definition)
 
-            self.__expander = MCP23008(i2c_device, _io_expander_def)
+            self.__expander = MCP23008(i2c_device, _main_io_expander_def)
         else:
             self.__expander = None
 

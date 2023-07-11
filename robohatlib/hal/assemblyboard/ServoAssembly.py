@@ -3,7 +3,9 @@ try:
     from robohatlib.hal.assemblyboard.PowerMonitorAndIO import PowerMonitorAndIO
     from robohatlib.driver_ll.definitions.GPIInterruptDef import GPIInterruptDef
     from robohatlib.hal.assemblyboard.ServoAssemblyConfig import ServoAssemblyConfig
+    from robohatlib import Robohat_config
     from robohatlib.driver_ll.IOHandler import IOHandler
+    from robohatlib.driver_ll.definitions.InterruptCallbackHolder import InterruptCallbackHolder
 
     from robohatlib.driver_ll.i2c.I2CDeviceDef import I2CDeviceDef
     from robohatlib.driver_ll.spi.SPIDeviceDef import SPIDeviceDef
@@ -43,15 +45,23 @@ class ServoAssembly:
             self.__servo_board = None
         # ----------------------------
 
-        i2c_def_power_monitor = I2CDeviceDef(_servo_config.get_name() + "power_monitor", _i2c_bus_nr, BASE_ADDRESS_MCP23008, _servo_config.get_sw2_power_good_address())
-        i2c_device_power_monitor = _io_handler.get_i2c_device(i2c_def_power_monitor)
+        servo_assembly_expander_def = Robohat_config.SERVOASSEMBLY_EXPANDER_DEF
+        callbackholder = InterruptCallbackHolder("expander_callback_holder", self.__io_power_monitor_and_io_int_callback, self.__io_power_monitor_and_io_int_reset_routine, 250)
+        servo_assembly_expander_def.set_callbackholder(callbackholder)
 
-        if i2c_device_power_monitor is not None:
-            self.__power_monitor_and_io = PowerMonitorAndIO(i2c_device_power_monitor)
-        else:
-            self.__power_monitor_and_io = None
-        # ----------------------------
+        self.__power_monitor_and_io = PowerMonitorAndIO(_io_handler,servo_assembly_expander_def, _servo_config.get_sw2_power_good_address())
 
+    #--------------------------------------------------------------------------------------
+    #--------------------------------------------------------------------------------------
+    def __io_power_monitor_and_io_int_callback(self, _gpio) -> None:
+        if self.__power_monitor_and_io is not None:
+            self.__power_monitor_and_io.power_monitor_and_io_int_callback(_gpio)
+
+    def __io_power_monitor_and_io_int_reset_routine(self, _gpio) -> None:
+        if self.__power_monitor_and_io is not None:
+            self.__power_monitor_and_io.power_monitor_and_io_int_reset_routine(_gpio)
+
+    #--------------------------------------------------------------------------------------
     #--------------------------------------------------------------------------------------
 
     def init_servo_assembly(self, _servo_datas_array: []) -> None:
