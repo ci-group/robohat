@@ -17,8 +17,11 @@ except ImportError:
 
 def main():
     print("################################################")
+    print("Starting robohat test routine")
+
 
     robohat = Robohat(main_config.servoassembly_1_config, main_config.servoassembly_2_config, main_config.TOPBOARD_IOEXANDER_SW)
+    #robohat.set_status_system_alarm_permitted(True)
     robohat.init(main_config.SERVOBOARD_1_DATAS_ARRAY, main_config.SERVOBOARD_2_DATAS_ARRAY)
 
     #robohat.set_direction_ioexpander(0, EXPANDERDIR.OUTPUT)

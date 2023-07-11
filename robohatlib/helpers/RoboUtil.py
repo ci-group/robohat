@@ -6,7 +6,7 @@ class RoboUtil:
     """
 
     @staticmethod
-    def updatebyte(_data_byte, _bit_nr, _wanted_bit_value):
+    def update_byte(_data_byte, _bit_nr, _wanted_bit_value):
         """
         returns new byte value of _data_byte with wanted boolean value of _bit_nr , _bit_nr starts at 0
         @param _data_byte: initial byte value
@@ -27,13 +27,13 @@ class RoboUtil:
     # --------------------------------------------------------------------------------------
 
     @staticmethod
-    def checkbit(_data_byte, _bit_nr):
+    def check_bit(_data_byte, _bit_nr):
         """
         returns 1 if bit is true in _data_byte of _bit_nr. returns 0 when false. _bit_nr starts at 0
 
         @param _data_byte the value to be checked
         @param _bit_nr bit nr (starts at 0)
-        #return status
+        @return status
         """
 
         value = 0

@@ -80,7 +80,7 @@ class LIS3MDL:
     # --------------------------------------------------------------------------------------
 
     def set_gain(self, _selected_gain_array) -> None:
-        ctrl_reg2_value = RoboUtil.updatebyte(0x00, CTRL_REG2_GAIN_BITNR, _selected_gain_array[0])
+        ctrl_reg2_value = RoboUtil.update_byte(0x00, CTRL_REG2_GAIN_BITNR, _selected_gain_array[0])
         self.__i2cdevice.i2c_write_register_byte(CTRL_REG2, ctrl_reg2_value)
         self.__fullscalegaus = _selected_gain_array[1]
         self.__gain_divider = _selected_gain_array[2]

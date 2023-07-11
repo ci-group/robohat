@@ -33,7 +33,7 @@ class MCP23008:
     # --------------------------------------------------------------------------------------
     def init_mcp23008(self):
 
-        print("init_MCP23008")
+        print("init_MCP23008 " + self.__i2c_device.get_device_name() )
 
         self.__i2c_device.i2c_write_register_byte(0x00, 0x00)        # empty data, wake up mcp
         self.invert_port(0x00)
@@ -49,28 +49,29 @@ class MCP23008:
             for servo_assembly_interrupt_settings in servo_assembly_interrupt_settings_array:
                 bit_nr = servo_assembly_interrupt_settings.get_io_nr()
                 if servo_assembly_interrupt_settings.get_direction is GpioDirection.GPIO_OUTPUT:
-                    io_dir_value = RoboUtil.updatebyte(io_dir_value, bit_nr, 0)                                    # direction output
+                    io_dir_value = RoboUtil.update_byte(io_dir_value, bit_nr, 0)                                    # direction output
                 else:
-                    io_dir_value = RoboUtil.updatebyte(io_dir_value, bit_nr, 1)                                    # direction input
+                    io_dir_value = RoboUtil.update_byte(io_dir_value, bit_nr, 1)                                    # direction input
                     if servo_assembly_interrupt_settings.get_interrupt_type() is InterruptTypes.INT_NONE:
-                        gp_int_en_value = RoboUtil.updatebyte(gp_int_en_value, bit_nr, 0)                          # disables int
+                        gp_int_en_value = RoboUtil.update_byte(gp_int_en_value, bit_nr, 0)                          # disables int
                     else:
-                        gp_int_en_value = RoboUtil.updatebyte(gp_int_en_value, bit_nr, 1)                          # enables int
+                        gp_int_en_value = RoboUtil.update_byte(gp_int_en_value, bit_nr, 1)                          # enables int
                         if servo_assembly_interrupt_settings.get_interrupt_type() is InterruptTypes.INT_RISING:
-                            int_con_value = RoboUtil.updatebyte(int_con_value, bit_nr, 0)                          # compare with def_val value
-                            def_val_value = RoboUtil.updatebyte(def_val_value, bit_nr, 0)                          # int if pin goes from 0 to 1 int occurs
+                            int_con_value = RoboUtil.update_byte(int_con_value, bit_nr, 0)                          # compare with def_val value
+                            def_val_value = RoboUtil.update_byte(def_val_value, bit_nr, 0)                          # int if pin goes from 0 to 1 int occurs
                         elif servo_assembly_interrupt_settings.get_interrupt_type() is InterruptTypes.INT_FALLING:
-                            int_con_value = RoboUtil.updatebyte(int_con_value, bit_nr, 0)                          # compare with def_val value
-                            def_val_value = RoboUtil.updatebyte(def_val_value, bit_nr, 1)                          # int if pin goes from 1 to 0 int occurs
+                            int_con_value = RoboUtil.update_byte(int_con_value, bit_nr, 0)                          # compare with def_val value
+                            def_val_value = RoboUtil.update_byte(def_val_value, bit_nr, 1)                          # int if pin goes from 1 to 0 int occurs
                         else:                                                                                      # BOTH
-                            int_con_value = RoboUtil.updatebyte(int_con_value, bit_nr, 1)                          # int when pin changes
-                            def_val_value = RoboUtil.updatebyte(def_val_value, bit_nr, 1)                          # DOES NOT CARE
+                            int_con_value = RoboUtil.update_byte(int_con_value, bit_nr, 1)                          # int when pin changes
+                            def_val_value = RoboUtil.update_byte(def_val_value, bit_nr, 1)                          # DOES NOT CARE
 
             self.set_port_direction( io_dir_value )
             self.set_port_pullup(0xFF)
-            self.set_interrupt_on_port( gp_int_en_value )
+            self.set_interrupt_on_change_port(gp_int_en_value)
             self.set_interrupt_type_port( int_con_value )
             self.set_interrupt_defaults(def_val_value)
+
         self.reset_interrupts()
 
     # --------------------------------------------------------------------------------------
@@ -137,11 +138,11 @@ class MCP23008:
 
     def set_interrupt_polarity(self, _bool_value) -> None:
         conf = self.__i2c_device.i2c_read_register_byte(IO_CON_ADDRESS)
-        self.__i2c_device.i2c_write_register_byte(IO_CON_ADDRESS, RoboUtil.updatebyte(conf, INT_POL_BIT_NR, _bool_value))
+        self.__i2c_device.i2c_write_register_byte(IO_CON_ADDRESS, RoboUtil.update_byte(conf, INT_POL_BIT_NR, _bool_value))
         return
 
     def get_interrupt_polarity(self):
-        return RoboUtil.checkbit(self.__i2c_device.i2c_read_register_byte(INT_CON_ADDRESS), INT_POL_BIT_NR)
+        return RoboUtil.check_bit(self.__i2c_device.i2c_read_register_byte(INT_CON_ADDRESS), INT_POL_BIT_NR)
 
     def set_interrupt_type_port(self, _byte_value):
         self.__set_port(INT_CON_ADDRESS, _byte_value)
@@ -161,14 +162,28 @@ class MCP23008:
         self.__set_pin(DEF_VAL_ADDRESS, _pin_nr, _bool_value)
         return
 
-    def get_interrupt_on_pin(self, _pin_nr: int):
+    def get_interrupt_on_change_pin(self, _pin_nr: int):
+        """!
+        get status if pin is enable or disable interrupt on change
+        @param _pin_nr:
+        @return: 1 interrupt on change is enabled, or 0 interrupt on change is disabled
+        """
         return self.__get_pin(GP_INT_EN_ADDRESS, _pin_nr)
 
-    def set_interrupt_on_port(self, _byte_value) -> None:
+    def set_interrupt_on_change_port(self, _byte_value) -> None:
+        """!
+        Enable or disable interrupt on change (not this is a port, so all 8 I/O)
+        @param _byte_value: value to set
+        @return: None
+        """
         self.__set_port(GP_INT_EN_ADDRESS, _byte_value)
         return
 
-    def get_interrupt_on_port(self):
+    def get_interrupt_on_change_port(self):
+        """!
+        Get Enable or disable interrupt on change (not this is a port, so all 8 I/O)
+        @return: 1 interrupt on change is enabled, or 0 interrupt on change is disabled So 0xFF all are enabled
+        """
         return self.__get_port(GP_INT_EN_ADDRESS)
 
     def read_interrupt_status(self):
@@ -194,7 +209,7 @@ class MCP23008:
                 raise ValueError("value out of range: 0 or 1")
 
             cur_val = self.__i2c_device.i2c_read_register_byte(_register)
-            new_val = RoboUtil.updatebyte(cur_val, _io_nr, _wanted_pin_value)
+            new_val = RoboUtil.update_byte(cur_val, _io_nr, _wanted_pin_value)
 
             self.__i2c_device.i2c_write_register_byte(_register, new_val)
         else:
@@ -204,7 +219,7 @@ class MCP23008:
     def __get_pin(self, _register, _io_nr) -> int:
         if self.__check_if_expander_io_is_available(_io_nr) is True:
             cur_val = self.__i2c_device.i2c_read_register_byte(_register)
-            return  RoboUtil.checkbit(cur_val, _io_nr) # - 1)
+            return  RoboUtil.check_bit(cur_val, _io_nr) # - 1)
         else:
             print("pin doesn't exist")
 

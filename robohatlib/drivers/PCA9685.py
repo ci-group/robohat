@@ -131,7 +131,7 @@ class PCA9685:
         :rtype: bool
         """
         reg_val = self.__read(MODE1_ADDRESS)
-        if RoboUtil.checkbit(reg_val, MODE1_SLEEP_BITNR):
+        if RoboUtil.check_bit(reg_val, MODE1_SLEEP_BITNR):
             return True
         else:
             return False

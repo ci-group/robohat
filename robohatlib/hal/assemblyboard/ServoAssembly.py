@@ -6,6 +6,7 @@ try:
     from robohatlib import Robohat_config
     from robohatlib.driver_ll.IOHandler import IOHandler
     from robohatlib.driver_ll.definitions.InterruptCallbackHolder import InterruptCallbackHolder
+    from robohatlib.driver_ll.constants.InterruptTypes import InterruptTypes
 
     from robohatlib.driver_ll.i2c.I2CDeviceDef import I2CDeviceDef
     from robohatlib.driver_ll.spi.SPIDeviceDef import SPIDeviceDef
@@ -46,7 +47,7 @@ class ServoAssembly:
         # ----------------------------
 
         servo_assembly_expander_def = Robohat_config.SERVOASSEMBLY_EXPANDER_DEF
-        callbackholder = InterruptCallbackHolder("expander_callback_holder", self.__io_power_monitor_and_io_int_callback, self.__io_power_monitor_and_io_int_reset_routine, 250)
+        callbackholder = InterruptCallbackHolder("expander_callback_holder", self.__io_power_monitor_and_io_int_callback, self.__io_power_monitor_and_io_int_reset_routine, InterruptTypes.INT_FALLING, 250)
         servo_assembly_expander_def.set_callbackholder(callbackholder)
 
         self.__power_monitor_and_io = PowerMonitorAndIO(_io_handler,servo_assembly_expander_def, _servo_config.get_sw2_power_good_address())
@@ -71,6 +72,9 @@ class ServoAssembly:
         @param _servo_datas_array:
         @return: none
         """
+        if self.__power_monitor_and_io is not None:
+            self.__power_monitor_and_io.init_power_monitor_and_io()
+
         if  self.__servo_board is not None:
             self.__servo_board.init_servo_board(_servo_datas_array)
 

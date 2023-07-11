@@ -24,9 +24,13 @@ do not alter
 """!
 Some system settings
 """
+
 ALARM_PERMITTED = False                             # sound an alarm when a system alert is present, such as to low accu capacity
 ALARM_TIMEOUT_IN_SEC = 300                          # timeout between alarm
 INIT_BEEP_PERMITTED = False                         # beep when started
+
+
+
 
 
 ACCU_INTERVAL_TIME_IN_SECONDS = 1
@@ -133,3 +137,4 @@ SPI definitions
 SPI0_DEF = SPIBusDef("spi_bus_0", 0, 11, 10, 9)         # bus 0, name, bus, clk, mosi, miso
 SPI1_DEF = SPIBusDef("spi_bus_1", 1, 21, 20, 19)        # bus 1, name, bus, clk, mosi, miso
 SPI2_DEF = SPIBusDef("spi_bus_2", 2, 42, 41, 40)        # bus 2, name, bus, clk, mosi, miso
+

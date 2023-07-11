@@ -70,7 +70,7 @@ class Robohat:
         io_expander_def = Robohat_config.IO_EXPANDER_DEF
 
         # at the default interrupt definition there are 2 callback added. one for the trigger, the second for the interrupt reset
-        callbackholder = InterruptCallbackHolder("expander_callback_holder", self._io_expander_int_callback, self._io_expander_int_reset_routine, 250)
+        callbackholder = InterruptCallbackHolder("expander_callback_holder", self._io_expander_int_callback, self._io_expander_int_reset_routine, InterruptTypes.INT_BOTH, 250)
         io_expander_def.set_callbackholder(callbackholder)
 
         self.__io_expander = IOExpander(self.__io_handler, io_expander_def, _sw_io_expander)
@@ -619,3 +619,20 @@ class Robohat:
         @return None
         """
         self.__imu.do_imu_test()
+
+    # ------------------------------------------------------------------------------------
+
+    def set_status_system_alarm_permitted(self, _state:bool) -> None:
+        """!
+        Overrides the system alarm switch. If false, no sound alarm will be given
+        @param _state: new state of system alarm
+        @return: None
+        """
+        self.__buzzer.set_status_system_alarm_permitted(_state)
+
+    def get_status_system_alarm_permitted(self) -> bool:
+        """!
+        Get the system alarm switch. If false, no sound alarm will be given
+        @return: None
+        """
+        return self.__buzzer.get_status_system_alarm_permitted()

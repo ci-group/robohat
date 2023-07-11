@@ -1,13 +1,14 @@
 
 try:
     import time
+    from robohatlib.driver_ll.constants.InterruptTypes import InterruptTypes
 except ImportError:
     print("Failed to import needed dependencies for the InterruptCallbackHolder class")
     raise
 
 
 class InterruptCallbackHolder:
-    def __init__(self, _name:str, _callback = None, _release_int_function = None, _time_between_new_possible_trigger = 0):
+    def __init__(self, _name:str, _callback = None, _release_int_function = None, _interrupt_type:InterruptTypes = InterruptTypes.INT_BOTH, _time_between_new_possible_trigger = 0):
         """!
         Constructor of InterruptCallbackHolder
         @param _name:  name of this Holder
@@ -15,6 +16,7 @@ class InterruptCallbackHolder:
         self.__name = _name
         self.__callback = _callback
         self.__release_int_function = _release_int_function
+        self.__interrupt_type = _interrupt_type
         self.__time_between_new_possible_trigger = 0
 
         self.set_time_between_new_possible_trigger_in_ms(_time_between_new_possible_trigger);
@@ -62,8 +64,6 @@ class InterruptCallbackHolder:
         @param _io_nr: io nr which triggered the interrupt
         @return: None
         """
-        if self.__release_int_function is not None:
-            self.__release_int_function(_io_nr)
 
         diff_trigger_time = time.time_ns() - self.__last_time_triggered
         if diff_trigger_time > self.__time_between_new_possible_trigger:
@@ -71,6 +71,15 @@ class InterruptCallbackHolder:
                 self.__last_time_triggered = time.time_ns()
                 self.__callback(_io_nr)
 
+        # release have to be done, when interrupt is handled.. Otherwise no data can be read
+        if self.__release_int_function is not None:
+            self.__release_int_function(_io_nr)
+
+
+
     #--------------------------------------------------------------------------------------
     #--------------------------------------------------------------------------------------
     #--------------------------------------------------------------------------------------
+
+    def  get_interrupt_type(self) -> InterruptTypes:
+        return  self.__interrupt_type
