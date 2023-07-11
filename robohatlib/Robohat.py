@@ -636,3 +636,5 @@ class Robohat:
         @return: None
         """
         return self.__buzzer.get_status_system_alarm_permitted()
+
+    # ------------------------------------------------------------------------------------

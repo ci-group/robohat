@@ -24,7 +24,8 @@ class GPI_LL_Interrupt:
         GPI_LL_Interrupt constructor
         @param _interrupt_definition: definition of the interrupt
         """
-        self.__name = "common_int"
+        self.__name = "int" + _interrupt_definition.get_name()
+        self.__interrupt_definition = _interrupt_definition
 
         if self.__callback_function is None:
             raise Exception("Unable to register interrupt " + self.__name + ", callback is Nome")
@@ -32,12 +33,34 @@ class GPI_LL_Interrupt:
         self.__gpio_pin = _interrupt_definition.get_gpio_pin()
         self.__interrupt_type_port = _interrupt_definition.get_interrupt_type_port()
 
+        self.__registered_callback_holders = []
+
+        self.int_is_active = False
+        self.set_event_detection()
+
+    # --------------------------------------------------------------------------------------
+    # --------------------------------------------------------------------------------------
+    # --------------------------------------------------------------------------------------
+
+    def set_event_detection(self) -> None:
+        print("adds interrupt !!!")
+
         GPIO.setmode(GPIO.BCM)
         GPIO.setup(self.__gpio_pin, GPIO.IN, GPIO.PUD_UP)
         GPIO.add_event_detect(self.__gpio_pin, GPIO.BOTH, self.__callback_function, 1)
 
-        self.__registered_callbackholders = []
-        self.add_callbackholder(_interrupt_definition.get_callbackholder())
+        self.add_callbackholder(self.__interrupt_definition.get_callbackholder())
+        self.int_is_active = True
+
+    # --------------------------------------------------------------------------------------
+    # --------------------------------------------------------------------------------------
+    # --------------------------------------------------------------------------------------
+
+    def remove_event_detection(self) -> None:
+        if self.int_is_active is True:
+            print("removes interrupt !!!")
+            GPIO.remove_event_detect(self.__gpio_pin)
+            self.int_is_active = False
 
     # --------------------------------------------------------------------------------------
     # --------------------------------------------------------------------------------------
@@ -70,17 +93,17 @@ class GPI_LL_Interrupt:
         @param _callbackholder: the callback to be added
         @return: None
         """
-        if len(self.__registered_callbackholders) is 0:
+        if len(self.__registered_callback_holders) is 0:
             print("first callback")
-            self.__registered_callbackholders.append(_callbackholder)
+            self.__registered_callback_holders.append(_callbackholder)
 
-        for callback_out_of_list in self.__registered_callbackholders:
+        for callback_out_of_list in self.__registered_callback_holders:
             if callback_out_of_list is _callbackholder:
                 print("callback already present")
                 return
 
         print("new callback")
-        self.__registered_callbackholders.append(_callbackholder)
+        self.__registered_callback_holders.append(_callbackholder)
 
     # --------------------------------------------------------------------------------------
 
@@ -90,11 +113,11 @@ class GPI_LL_Interrupt:
         @param _callbackholder removes callback
         @Return None
         """
-        if len(self.__registered_callbackholders) is 0:
+        if len(self.__registered_callback_holders) is 0:
             return
 
-        for callback_out_of_list in self.__registered_callbackholders:
-            self.__registered_callbackholders.remove(callback_out_of_list)
+        for callback_out_of_list in self.__registered_callback_holders:
+            self.__registered_callback_holders.remove(callback_out_of_list)
 
     # --------------------------------------------------------------------------------------
     # --------------------------------------------------------------------------------------
@@ -106,10 +129,10 @@ class GPI_LL_Interrupt:
         @return: None
         """
         print("callback " + str(_pin_nr))
-        if len(self.__registered_callbackholders) is 0:
+        if len(self.__registered_callback_holders) is 0:
             return
 
-        for callbackholder_out_of_list in self.__registered_callbackholders:
+        for callbackholder_out_of_list in self.__registered_callback_holders:
             print("Execution callback")
             callbackholder_out_of_list.execute_callback(_pin_nr)
 

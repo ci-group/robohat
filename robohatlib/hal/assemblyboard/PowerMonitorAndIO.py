@@ -1,7 +1,8 @@
 try:
     from robohatlib.drivers.MCP23008 import MCP23008
+    import time, threading
 except ImportError:
-    print("Failed to import MCP23008")
+    print("Failed to resolve dependencies for PowerMonitorAndIO")
     raise
 
 try:
@@ -22,12 +23,15 @@ except ImportError:
     raise
 
 class PowerMonitorAndIO:
-    __interrupt_type = None
+
 
     def __init__(self, _iohandler: IOHandler, _power_io_expander_def: IOExpanderDef, _sw_power_io_expander: int):
         i2c_device_definition = _power_io_expander_def.get_i2c_device_definition()
         i2c_device_definition.set_i2c_offset_address(_sw_power_io_expander)
         i2c_device = _iohandler.get_i2c_device(i2c_device_definition)
+
+        self.__interrupt = None
+        self.__interrupt_type = None
 
         if i2c_device is not None:
             if _power_io_expander_def.get_callbackholder() is not None:
@@ -36,13 +40,14 @@ class PowerMonitorAndIO:
                                                            _power_io_expander_def.get_gpio_pin(),
                                                            _power_io_expander_def.get_callbackholder().get_interrupt_type(),
                                                            _power_io_expander_def.get_callbackholder())
-                _iohandler.register_interrupt(gpi_interrupt_definition)
+                self.__interrupt = _iohandler.register_interrupt(gpi_interrupt_definition)
 
             self.__io_device = MCP23008(i2c_device, _power_io_expander_def)
         else:
             self.__io_device = None
 
         self.__signaling_device = None
+        self.__reset_timerIsRunning = False
 
     # --------------------------------------------------------------------------------------
     # --------------------------------------------------------------------------------------
@@ -76,7 +81,7 @@ class PowerMonitorAndIO:
         if self.__io_device is None:
             return
 
-        if self.__check_if_expander_io_is_availble(_io_nr) is True:
+        if self.__check_if_expander_io_is_available(_io_nr) is True:
             if _direction is ExpanderDir.OUTPUT:
                 wanted_pin_value = 0
             else:
@@ -94,7 +99,7 @@ class PowerMonitorAndIO:
         if self.__io_device is None:
             return
 
-        if self.__check_if_expander_io_is_availble(_io_nr) is True:
+        if self.__check_if_expander_io_is_available(_io_nr) is True:
             self.__io_device.set_pin_data(_io_nr, _bool_value)
         else:
             print("io pin not available for user")
@@ -111,7 +116,7 @@ class PowerMonitorAndIO:
         if self.__io_device is None:
             return 0
 
-        if self.__check_if_expander_io_is_availble(_io_nr) is True:
+        if self.__check_if_expander_io_is_available(_io_nr) is True:
             return self.__io_device.get_pin_data(_io_nr)
         return 0
 
@@ -143,7 +148,7 @@ class PowerMonitorAndIO:
     # --------------------------------------------------------------------------------------
 
 
-    def __check_if_expander_io_is_availble(self, _io_nr:int) -> bool:
+    def __check_if_expander_io_is_available(self, _io_nr:int) -> bool:
         """!
         Checks if IO nr is available for the user (the 0-3 are reserved for power monitor!!
         @param _io_nr: io nr
@@ -186,10 +191,27 @@ class PowerMonitorAndIO:
         @param _gpi_nr: IO nr of the caller
         @return: None
         """
+        if self.__interrupt is not None:
+            self.__interrupt.remove_event_detection()
+
+        timer = threading.Timer(10, self.__reset_timer_callback)
+        timer.start()
+
+    # --------------------------------------------------------------------------------------
+
+    def __reset_timer_callback(self):
         if self.__io_device is None:
             return
 
-        if self.__io_device is not None:
-            self.__io_device.reset_interrupts()
+        port_value = self.__io_device.get_port_data() and 0x7f
+        print("--> " + hex(port_value) )
+
+        #if port_value > 0:
+        #    print("Not able to clear !!!!, power fail is present")
+        #    timer = threading.Timer(10, self.__reset_timer_callback)
+        #    timer.start()
+        #else:
+        #    if self.__io_device is not None:
+        #         self.__io_device.reset_interrupts()
 
     # --------------------------------------------------------------------------------------
