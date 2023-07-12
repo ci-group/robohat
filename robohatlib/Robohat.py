@@ -207,6 +207,13 @@ class Robohat:
          """
         self.__buzzer.buzzer_freq(_freq)
 
+    def do_buzzer_release(self) -> None:
+        """!
+        Stops the buzzer from making sound
+        @return: None
+        """
+        self.__buzzer.buzzer_release()
+
     # end BUZZER functions ------------------------------------------------------------------------------------
 
     # begin LED functions ---------------------------------------------------------------------------------

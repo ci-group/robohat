@@ -11,7 +11,6 @@ try:
     from robohatlib.hal.datastructure.Color import Color
     import sys
     import main_config
-    from robohatlib.helpers.ServoNotFoundException import ServoNotFoundException
 
 
 except ImportError:
@@ -74,26 +73,27 @@ class Example:
 
     def set(self, _data_in:str) -> None:
         """!
-        Will move the servo to wanted position
+        Will handle console request with commando 'set'
         @return: None
         """
-        try:
-            data_in_array = _data_in.split(" ")
 
-            command = data_in_array[1]
-            if command == "servo":
-                sub_command = data_in_array[2]
-                if sub_command == "angle":
-                    servo_nr = int(data_in_array[3])
-                    angle = float(data_in_array[4])
-                    self.robohat.set_servo_angle(servo_nr, angle)
-        except ServoNotFoundException:
-            print("Servo not avail")
+        data_in_array = _data_in.split(" ")
 
+        command = data_in_array[1]
+        if command == "servo":
+           sub_command = data_in_array[2]
+           if sub_command == "angle":
+                servo_nr = int(data_in_array[3])
+                angle = float(data_in_array[4])
+                self.robohat.set_servo_angle(servo_nr, angle)
+        else:
+            print("syntax error")
+
+    # --------------------------------------------------------------------------------------
 
     def get(self, _data_in:str) -> None:
         """!
-        Will move the servo to wanted position
+        Will handle console request with commando 'get'
         @return: None
         """
         data_in_array = _data_in.split(" ")
@@ -102,10 +102,63 @@ class Example:
         if command == "servo":
             sub_command = data_in_array[2]
             if sub_command == "angle":
-                servo_nr = int(data_in_array[3])
-                value = self.robohat.get_servo_angle(servo_nr)
-                print("angle of servo " + str(servo_nr) + " is: " + str(value) + "°" )
+                parameter_str:str = data_in_array[3]
+                if parameter_str.isnumeric():
+                    servo_nr = int(parameter_str)
+                    value = self.robohat.get_servo_angle(servo_nr)
+                    if value != -1:
+                        print("angle of servo " + str(servo_nr) + " is: " + str(value) + "°" )
+                elif parameter_str == "all":
+                    value = self.robohat.get_servos_angles()
+                    print("angles of servos: " + str(value))
+                else:
+                    print("syntax error")
+            elif sub_command == "adc":
+                parameter_str: str = data_in_array[3]
+                if parameter_str.isnumeric():
+                    servo_nr = int(data_in_array[3])
+                    value = self.robohat.get_servo_adc_readout_single_channel(servo_nr)
+                    if value != -1:
+                        print("adc of servo " + str(servo_nr) + " is: " + str(value) + "V" )
+                elif parameter_str == "all":
+                    value = self.robohat.get_servos_adc_readout_multiple_channels()
+                    print("adc volts of servos: " + str(value))
+                else:
+                    print("syntax error")
 
+    # --------------------------------------------------------------------------------------
+
+    def do(self, _data_in:str) -> None:
+        """!
+        Will handle console request with commando 'do'
+        @return: None
+        """
+        data_in_array = _data_in.split(" ")
+
+        command = data_in_array[1]
+        if command == "i2c":
+            sub_command = data_in_array[2]
+            if sub_command == "scan":
+                self.robohat.scan_i2c_bus()
+        elif command == "buzzer":
+            sub_command = data_in_array[2]
+            if sub_command == "random":
+                self.robohat.do_buzzer_random()
+            elif sub_command == "slowwoop":
+                self.robohat.do_buzzer_slowwoop()
+            elif sub_command == "beep":
+                self.robohat.do_buzzer_beep()
+            elif sub_command == "freq":
+                freq_str = data_in_array[3]
+                if freq_str.isnumeric():
+                    freq = int(freq_str)
+                    self.robohat.do_buzzer_freq(freq)
+            elif sub_command == "stop":
+                self.robohat.do_buzzer_release()
+            else:
+                print("syntax error")
+        else:
+            print("syntax error")
     # --------------------------------------------------------------------------------------
 
     def shutdown_power(self) -> None:
@@ -118,11 +171,21 @@ class Example:
         @return: None
         """
         print("Available commands are:\n")
-        print("shutdown                                       power the system down")
+        print("shutdown                                       powers the system down")
         print("exit                                           exit the program")
         print("help                                           prints this text")
         print("set servo angle [servo nr] [angle]             moves servo to the desired angle")
         print("get servo angle [servo nr]                     get servo angle of the desired angle")
+        print("get servo angle all                            get all the servo angels")
+        print("get servo adc [servo nr]                       get servo position adc value")
+        print("get servo adc all                              get all the servo position adc values")
+
+        print("do i2c scan                                    scans the i2c bus")
+        print("do buzzer random                               generate a random sound")
+        print("do buzzer slowwoop                             generate a slowwoop sound")
+        print("do buzzer beep                                 generate a beep")
+        print("do buzzer freq [frequency]                     generates a sound with requested frequency")
+        print("do buzzer stop                                 stop the generation of sound")
 
     def process_commands(self, _command:str):
         if _command == "exit":
@@ -140,8 +203,13 @@ class Example:
         elif _command.startswith("get"):
             self.get(_command)
 
-        #else:
-            #print("syntax error")
+        elif _command.startswith("do"):
+            self.do(_command)
+
+        elif _command.startswith("\n"):
+            print("")
+        else:
+            print("syntax error")
 
 
         #print("command: " + _command)

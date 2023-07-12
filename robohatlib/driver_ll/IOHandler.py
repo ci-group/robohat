@@ -25,6 +25,7 @@ try:
     from robohatlib.drivers.Buzzer_driver import Buzzer_driver
     from robohatlib.hal.definitions.BuzzerDef import BuzzerDef
 
+    from robohatlib.helpers.RoboUtil import RoboUtil
     from robohatlib import Robohat_config
     from robohatlib import Robohat_constants
     from robohatlib.driver_ll.datastructs.IOStatus import IOStatus
@@ -100,66 +101,64 @@ class IOHandler:
         """
 
         if self.__i2c_bus_is_scanned is False:
-            self.scan_i2c_bus()
+            self.scan_i2c_bus(True)
             self.__i2c_bus_is_scanned = True
 
     #--------------------------------------------------------------------------------------
 
-    def scan_i2c_bus(self) -> None:
+
+    def scan_i2c_bus(self, _silent:bool = False) -> None:
         """!
         Scans all the I2C bussed available on the Robohat hardware.
-        Displays found I2C devices onto console
+        Displays found I2C devices onto console, depending on _silent switch (True is no display)
         The found devices will be stored in a list. This list will be used when an I2C device is allocated. When the device is allocated and not in this list, an error will occur
-
+        @param:_silent when True, not data is displayed to console
         @return: None
         """
  
-        print("\nScanning all I2C busses....")
+        RoboUtil.print_depending_switch(_silent, "\nScanning all I2C busses....")
 
         # I2C bus 0 not available
 
-        print("####################")
-        print("I2C1:\n")
+        RoboUtil.print_depending_switch(_silent, "####################")
+        RoboUtil.print_depending_switch(_silent, "I2C1:\n")
         i2c1 = self.__get_i2c_bus(1)
-        print("\n")
         found = False
         for addr in i2c1.get_i2c_handler().scan():
             if self.__i2c_bus_is_scanned is False:
                 self.__detected_i2c_devices.append(I2CDevice("unknown", i2c1.get_i2c_handler(), 1, addr))
-            print("Found I2C_device @ " + hex(addr))
+            RoboUtil.print_depending_switch(_silent, "Found I2C_device @ " + hex(addr))
             found = True
 
         if found is False:
-            print("No I2C_device found on this bus")
+            RoboUtil.print_depending_switch(_silent, "No I2C_device found on this bus")
 
-        print("####################")
-        print("I2C5:\n")
+        RoboUtil.print_depending_switch(_silent, "####################")
+        RoboUtil.print_depending_switch(_silent, "I2C5:\n")
         i2c_5 = self.__get_i2c_bus(5)
-        print("\n")
         found = False
         for addr in i2c_5.get_i2c_handler().scan():
             if self.__i2c_bus_is_scanned is False:
                 self.__detected_i2c_devices.append(I2CDevice("unknown", i2c_5.get_i2c_handler(), 5, addr))
-            print("Found I2C_device @ " + hex(addr))
+            RoboUtil.print_depending_switch(_silent, "Found I2C_device @ " + hex(addr))
             found = True
 
         if found is False:
-            print("No I2C_device found on this bus")
+            RoboUtil.print_depending_switch(_silent, "No I2C_device found on this bus")
 
-        print("####################")
-        print("I2C6:\n")
+        RoboUtil.print_depending_switch(_silent, "####################")
+        RoboUtil.print_depending_switch(_silent, "I2C6:\n")
         i2c6 = self.__get_i2c_bus(6)
-        print("\n")
         found = False
         for addr in i2c6.get_i2c_handler().scan():
             if self.__i2c_bus_is_scanned is False:
                 self.__detected_i2c_devices.append(I2CDevice("unknown", i2c6.get_i2c_handler(), 6, addr))
-            print("Found I2C_device @ " + hex(addr))
+            RoboUtil.print_depending_switch(_silent, "Found I2C_device @ " + hex(addr))
             found = True
 
         if found is False:
-            print("No I2C_device found on this bus")
-        print("####################\n")
+            RoboUtil.print_depending_switch(_silent, "No I2C_device found on this bus")
+        RoboUtil.print_depending_switch(_silent, "####################\n")
 
         # # no deinit, the buses will be used, so no need to deinit them
         # #i2c1.deinit()
