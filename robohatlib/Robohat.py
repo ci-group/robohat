@@ -243,6 +243,9 @@ class Robohat:
         """
         self.__led.turn_led_on()
 
+    def get_led_color(self) -> Color:
+        return self.__led.get_led_color()
+
     # end LED functions ------------------------------------------------------------------------------------
 
     # begin Servo functions --------------------------------------------------------------------------------------

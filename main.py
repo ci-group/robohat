@@ -86,6 +86,29 @@ class Example:
                 servo_nr = int(data_in_array[3])
                 angle = float(data_in_array[4])
                 self.robohat.set_servo_angle(servo_nr, angle)
+           else:
+               print("syntax error")
+        elif command == "led":
+            sub_command = data_in_array[2].upper()
+            if sub_command == "OFF":
+                self.robohat.turn_led_off()
+            elif sub_command == "ON":
+                self.robohat.turn_led_on()
+            elif sub_command == "WHITE":
+                self.robohat.set_led_color(Color.WHITE)
+            elif sub_command == "RED":
+                self.robohat.set_led_color(Color.RED)
+            elif sub_command == "GREEN":
+                self.robohat.set_led_color(Color.GREEN)
+            elif sub_command == "BLUE":
+                self.robohat.set_led_color(Color.BLUE)
+            elif sub_command == "YELLOW":
+                self.robohat.set_led_color(Color.YELLOW)
+            elif sub_command == "PURPLE":
+                self.robohat.set_led_color(Color.PURPLE)
+            else:
+                print("unknown color")
+
         else:
             print("syntax error")
 
@@ -125,6 +148,16 @@ class Example:
                     print("adc volts of servos: " + str(value))
                 else:
                     print("syntax error")
+            else:
+                print("syntax error")
+        elif command == "led":
+            value = self.robohat.get_led_color()
+            if value is Color.OFF:
+                print("Led is OFF")
+            else:
+                print(value)
+        else:
+            print("syntax error")
 
     # --------------------------------------------------------------------------------------
 
@@ -175,12 +208,18 @@ class Example:
         print("exit                                           exit the program")
         print("help                                           prints this text")
         print("set servo angle [servo nr] [angle]             moves servo to the desired angle")
+
+        print("set led [color]                                turn on led with its color [WHITE|RED|GREEN|BLUE|YELLOW|PURPLE|ON|OFF")
+
         print("get servo angle [servo nr]                     get servo angle of the desired angle")
         print("get servo angle all                            get all the servo angels")
         print("get servo adc [servo nr]                       get servo position adc value")
         print("get servo adc all                              get all the servo position adc values")
 
+        print("get led                                        displays the color of the led, or status ON | OFF")
+
         print("do i2c scan                                    scans the i2c bus")
+
         print("do buzzer random                               generate a random sound")
         print("do buzzer slowwoop                             generate a slowwoop sound")
         print("do buzzer beep                                 generate a beep")

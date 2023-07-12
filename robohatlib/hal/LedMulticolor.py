@@ -16,6 +16,8 @@ class LedMulticolor:
         self.__led_driver_red = _io_handler.get_led_driver(_multi_colorled_def.get_red_def())
         self.__led_driver_green = _io_handler.get_led_driver(_multi_colorled_def.get_green_def())
         self.__led_driver_blue = _io_handler.get_led_driver(_multi_colorled_def.get_blue_def())
+        self.__led_on_status = False
+        self.__last_color = Color.NONE
 
     # --------------------------------------------------------------------------------------
     def init_led(self) -> None:
@@ -43,6 +45,13 @@ class LedMulticolor:
         self.turn_led_off()
 
     # --------------------------------------------------------------------------------------
+
+    def get_led_color(self) -> Color:
+        if self.__led_on_status is False:
+            return Color.OFF
+        return self.__last_color
+
+    # --------------------------------------------------------------------------------------
     def set_led_color(self, _color: Color):
         """!
          Sets the color of the LED and turns the LED on
@@ -56,23 +65,46 @@ class LedMulticolor:
             self.__led_driver_red.set_status_led(False)
             self.__led_driver_green.set_status_led(False)
             self.__led_driver_blue.set_status_led(False)
+            self.__last_color = _color
+            self.__led_on_status = True
         elif _color is Color.WHITE:
             self.__led_driver_red.set_status_led(True)
             self.__led_driver_green.set_status_led(True)
             self.__led_driver_blue.set_status_led(True)
+            self.__last_color = _color
+            self.__led_on_status = True
         elif _color is Color.RED:
             self.__led_driver_red.set_status_led(True)
             self.__led_driver_green.set_status_led(False)
             self.__led_driver_blue.set_status_led(False)
+            self.__last_color = _color
+            self.__led_on_status = True
         elif _color is Color.GREEN:
             self.__led_driver_red.set_status_led(False)
             self.__led_driver_green.set_status_led(True)
             self.__led_driver_blue.set_status_led(False)
+            self.__last_color = _color
+            self.__led_on_status = True
         elif _color is Color.BLUE:
             self.__led_driver_red.set_status_led(False)
             self.__led_driver_green.set_status_led(False)
             self.__led_driver_blue.set_status_led(True)
-
+            self.__last_color = _color
+            self.__led_on_status = True
+        elif _color is Color.YELLOW:
+            self.__led_driver_red.set_status_led(True)
+            self.__led_driver_green.set_status_led(True)
+            self.__led_driver_blue.set_status_led(False)
+            self.__last_color = _color
+            self.__led_on_status = True
+        elif _color is Color.PURPLE:
+            self.__led_driver_red.set_status_led(True)
+            self.__led_driver_green.set_status_led(False)
+            self.__led_driver_blue.set_status_led(True)
+            self.__last_color = _color
+            self.__led_on_status = True
+        else:
+            print("Unknown led color !!")
 
     # --------------------------------------------------------------------------------------
     def turn_led_on(self) -> None:
@@ -83,7 +115,7 @@ class LedMulticolor:
         self.__led_driver_red.turn_led_on()
         self.__led_driver_green.turn_led_on()
         self.__led_driver_blue.turn_led_on()
-
+        self.__led_on_status = True
     # --------------------------------------------------------------------------------------
     def turn_led_off(self) -> None:
         """!
@@ -93,6 +125,7 @@ class LedMulticolor:
         self.__led_driver_red.turn_led_off()
         self.__led_driver_green.turn_led_off()
         self.__led_driver_blue.turn_led_off()
+        self.__led_on_status = False
     # --------------------------------------------------------------------------------------
 
     def get_name(self) -> str:
