@@ -164,6 +164,14 @@ class Example:
                 print("Led is OFF")
             else:
                 print(value)
+        elif command == "lib":
+            sub_command = data_in_array[2]
+            if sub_command == "builddate":
+                print("build date of Robohat lib is: " + self.robohat.get_lib_builddate())
+            elif sub_command == "version":
+                print("version of Robohat lib is: " + self.robohat.get_lib_version())
+            else:
+                print("syntax error")
         else:
             print("syntax error")
 
@@ -229,6 +237,9 @@ class Example:
         print("set led [color]                                turn on led with its color [WHITE|RED|GREEN|BLUE|YELLOW|PURPLE|ON|OFF")
         print("get led                                        displays the color of the led, or status ON | OFF")
 
+        print("get lib builddate                               displays date when library was build")
+        print("get lib version                                displays version of the library")
+
         print("do i2c scan                                    scans the i2c bus")
 
         print("do buzzer random                               generate a random sound")
@@ -266,6 +277,8 @@ class Example:
             self.robohat.put_servos_to_sleep()
         elif _command == "wake up servos":
             self.robohat.wakeup_servos()
+
+
 
         elif _command.startswith("\n"):
             print("")
