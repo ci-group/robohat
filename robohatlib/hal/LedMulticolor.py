@@ -34,6 +34,15 @@ class LedMulticolor:
         self.set_led_color(Color.WHITE)
 
     # --------------------------------------------------------------------------------------
+
+    def exit_program(self) -> None:
+        """!
+        Cleans up, when user want to shut down
+        @return: None
+        """
+        self.turn_led_off()
+
+    # --------------------------------------------------------------------------------------
     def set_led_color(self, _color: Color):
         """!
          Sets the color of the LED and turns the LED on

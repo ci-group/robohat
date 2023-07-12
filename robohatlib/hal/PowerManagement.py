@@ -66,6 +66,17 @@ class PowerManagement:
     # --------------------------------------------------------------------------------------
     # --------------------------------------------------------------------------------------
 
+    def exit_program(self) -> None:
+        """!
+        Cleans up, when user want to shut down (for future use)
+        @return: None
+        """
+        self.stop_timer_power_management()
+
+    # --------------------------------------------------------------------------------------
+    # --------------------------------------------------------------------------------------
+    # --------------------------------------------------------------------------------------
+
     def __start_timer_power_management(self) -> None:
         """!
         Starts the timer to check the accu voltage
@@ -85,6 +96,7 @@ class PowerManagement:
         @return: None
         """
         self.__timerIsRunning = False
+        print("accu monitor disabled")
     # --------------------------------------------------------------------------------------
 
     def timer_callback(self) -> None:
@@ -236,7 +248,7 @@ class PowerManagement:
                 percentage = Robohat_config.ACCU_VOLTAGE_TO_PERCENTAGE_ARRAY[index] [1] + remainder_perc
                 return percentage
 
-        self.shutdown()
+        self.shutdown_power()
         return 0
 
     # --------------------------------------------------------------------------------------
@@ -255,9 +267,9 @@ class PowerManagement:
     # --------------------------------------------------------------------------------------
     # --------------------------------------------------------------------------------------
 
-    def shutdown(self) -> None:
+    def shutdown_power(self) -> None:
         """!
-        Will togle GPIO shutdown pin
+        Will toggle GPIO shutdown pin
         @return: -> None
         """
         if self.__shutdown_in_progress is True:

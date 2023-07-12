@@ -1,3 +1,5 @@
+from __future__ import annotations
+
 try:
     from robohatlib import Robohat_config
     from robohatlib import Robohat_constants
@@ -30,6 +32,8 @@ try:
     from time import sleep
 
     from typing import Tuple
+
+    from robohatlib.helpers.ServoNotFoundException import ServoNotFoundException
 
 except ImportError:
     print("Failed to import needed dependencies for the Robohat class")
@@ -90,7 +94,11 @@ class Robohat:
         self.__servo_assembly_1.add_signaling_device(self.__buzzer)
 
 
+
+
         # self.__servo_assembly_2 = ServoAssembly(self.__io, _servo_assembly_2_config, Robohat_config.SERVOASSEMBLY_2_I2C_BUS, Robohat_config.SERVOASSEMBLY_2_SPI_BUS, servoAssembly_interrupt_def)
+
+        self.__i_am_sleeping = False
 
     # --------------------------------------------------------------------------------------
 
@@ -121,6 +129,32 @@ class Robohat:
 
         if self.__servo_assembly_2 is not None:
             self.__servo_assembly_2.init_servo_assembly(_servo_board_1_datas_array)
+
+    # --------------------------------------------------------------------------------------
+
+    def exit_program(self) -> None:
+        """
+        Cleans up, when user want to shut down
+        @return: None
+        """
+        if self.__servo_assembly_1 is not None:
+            self.__servo_assembly_1.exit_program()
+
+        if self.__servo_assembly_2 is not None:
+            self.__servo_assembly_2.exit_program()
+
+
+        self.__serial.exit_program()
+        self.__imu.exit_program()
+        self.__io_expander.exit_program()
+        self.__hatAdc.exit_program()
+
+        self.__led.exit_program()
+        self.__buzzer.exit_program()
+        self.__powerManagement.exit_program()
+
+        self.__io_handler.exit_program()
+
 
     # begin I2C functions ---------------------------------------------------------------------------------
 
@@ -218,47 +252,52 @@ class Robohat:
                 return False
 
             servo_nr = self.__get_servo_nr_depending_assembly(_servo_nr)
-            return self.__servo_assembly_1.get_servo_is_connected(servo_nr)
+            if servo_nr is not None:
+                return self.__servo_assembly_1.get_servo_is_connected(servo_nr)
+            return False
 
         elif _servo_nr >= 17 or _servo_nr <= 32:
             if self.__servo_assembly_2 is None:
                 return False
 
             servo_nr = self.__get_servo_nr_depending_assembly(_servo_nr)
-            return self.__servo_assembly_2.get_servo_is_connected(servo_nr)
+            if servo_nr is not None:
+                return self.__servo_assembly_2.get_servo_is_connected(servo_nr)
+            return False
         else:
             return False
 
     # --------------------------------------------------------------------------------------
     def get_servo_adc_readout_single_channel(self, _servo_nr: int) -> float:
         """!
-        Get angle of connected servo in degree
+        Get angle of connected servo in degree or -1 when an error occurs
 
         @param _servo_nr The servo nr wanted (starts at 1)
-        @return angle of connected servo in degree, or 0.0 when not available
+        @return angle or -1
         """
 
         servo_assembly = self.__get_servo_assembly_depending_servo_nr(_servo_nr)  # the assembly depending on servo_nr
-
         if servo_assembly is not None:
             servo_nr = self.__get_servo_nr_depending_assembly(_servo_nr)  # servo nr of the servo of the assembly
-            return servo_assembly.get_servo_adc_readout_single_channel(servo_nr)
-        return 0.0
+            if servo_nr is not None:
+                return servo_assembly.get_servo_adc_readout_single_channel(servo_nr)
+        return -1
+    # --------------------------------------------------------------------------------------
 
     def get_servo_angle(self, _servo_nr: int) -> float:
         """!
-        Get angle of connected servo in degree
+        Get angle of connected servo in degree or -1 wen an error occurs
 
         @param _servo_nr The servo nr wanted (starts at 1)
-        @return angle of connected servo in degree or 0.0 when not available
+        @return angle or -1
         """
 
         servo_assembly = self.__get_servo_assembly_depending_servo_nr(_servo_nr)  # the assembly depending on servo_nr
-
         if servo_assembly is not None:
             servo_nr = self.__get_servo_nr_depending_assembly(_servo_nr)  # servo nr of the servo of the assembly
-            return servo_assembly.get_servo_angle(servo_nr)
-        return 0.0
+            if servo_nr is not None:
+                return servo_assembly.get_servo_angle(servo_nr)
+        return -1
 
     def set_servo_angle(self, _servo_nr: int, _angle: float) -> None:
         """!
@@ -269,40 +308,32 @@ class Robohat:
 
         @return None
         """
-
-        print("set_servo_angle " + str(_servo_nr) + " " + str(_angle) )
-
         servo_assembly = self.__get_servo_assembly_depending_servo_nr(_servo_nr)
-
         if servo_assembly is not None:
             servo_nr = self.__get_servo_nr_depending_assembly(_servo_nr)
-            return servo_assembly.set_servo_angle(servo_nr, _angle)
+            if servo_nr is not None:
+                servo_assembly.set_servo_angle(servo_nr, _angle)
 
     # ------------------------------------------------------------------------------------------
-    def get_servos_adc_readout_multiple_channels(self) -> []:
+    def get_servos_adc_readout_multiple_channels(self):
         """!
-        Get voltages of the potentiometer of all the servos in volt
-        @Raise when ADC is not available
-        @return voltages of the potentiometer of all the servos in volt
+        Get voltages of the potentiometer of all the servos in volt or en empty array
+        @return array of voltages
         """
 
         return_data = []
 
-        if self.__servo_assembly_1 is not None and self.__servo_assembly_2 is None:     # only assembly 1
+        if self.__servo_assembly_1 is not None:
             data_assembly1 = self.__servo_assembly_1.get_adc_readout_multiple_channels()
-            return_data = data_assembly1
-        elif self.__servo_assembly_1 is None and self.__servo_assembly_2 is not None:       # only assembly 2
+            return_data.append(data_assembly1)
+
+        if self.__servo_assembly_2 is not None:
             data_assembly2 = self.__servo_assembly_2.get_adc_readout_multiple_channels()
-            return_data = data_assembly2
-        elif self.__servo_assembly_1 is not None and self.__servo_assembly_2 is not None:
-            data_assembly1 = self.__servo_assembly_1.get_adc_readout_multiple_channels()
-            data_assembly2 = self.__servo_assembly_2.get_adc_readout_multiple_channels()
-            return_data = data_assembly1 + data_assembly2
+            return_data.append(data_assembly2)
         else:
-            raise "Requested ADC data, but assembly boards aren't available"
+            print("Error, requesting ADC data")
 
         return return_data
-
     # ------------------------------------------------------------------------------------------
 
     def get_servos_angles(self) -> []:
@@ -343,7 +374,6 @@ class Robohat:
             angles_array2 = _angles_array[16:33]
             self.__servo_assembly_2.set_all_servos_angle(angles_array2)
 
-        return None
 
         # ------------------------------------------------------------------------------------------
     def put_servos_to_sleep(self) -> None:
@@ -358,12 +388,21 @@ class Robohat:
         if self.__servo_assembly_2 is not None:
             self.__servo_assembly_2.sleep()
 
+        self.__i_am_sleeping = True
+    # ------------------------------------------------------------------------------------------
+
+    def get_are_servos_a_sleep(self) -> bool:
+        """!
+        Get the status if the Servos are a sleep (so no power)
+        @return: True if sleeping
+        """
+        return self.__i_am_sleeping
     # ------------------------------------------------------------------------------------------
 
     def wakeup_servos(self) -> None:
         """!
         Wakes up the servos
-        @:return: None
+        @return: None
         """
 
         if self.__servo_assembly_1 is not None:
@@ -372,12 +411,13 @@ class Robohat:
         if self.__servo_assembly_2 is not None:
             self.__servo_assembly_2.wake()
 
+        self.__i_am_sleeping = False
     # ------------------------------------------------------------------------------------------
 
     def are_servos_sleeping(self) -> bool:
         """
         Get if Servos are sleeping
-        @:return: (bool) returns True when servos are sleeping
+        @return: True when servos are sleeping
         """
         if self.__servo_assembly_1 is not None:
             return self.__servo_assembly_1.is_servo_sleeping()
@@ -388,13 +428,13 @@ class Robohat:
 
     # ------------------------------------------------------------------------------------------
 
-    def __get_servo_nr_depending_assembly(self, _servo_nr: int) -> int:
+    def __get_servo_nr_depending_assembly(self, _servo_nr: int) -> int | None:
         """!
-        Get servo nr depending on the assembly
+        Get the servo nr of the assembly (so servo nr 17 will be servo nr 1 of assembly 2. If not available
+        None will be returned
 
         @param _servo_nr The servo nr wanted (starts at 1)
-        @return the servo nr of the assembly (so servo nr 17 will be servo nr 1 of assembly 2
-        @raises Exception, when servo nr is not valid
+        @return servo number or None
         """
 
         if _servo_nr >= 1 and _servo_nr <= 16:
@@ -402,27 +442,34 @@ class Robohat:
         elif _servo_nr >= 17 and _servo_nr <= 32:
             return _servo_nr - 16
         else:
-            raise Exception("Requested servo nr is not available")
+            print("Error: requested " + str(_servo_nr) + " is not available")
+            return None
 
-    def __get_servo_assembly_depending_servo_nr(self, _servo_nr: int) -> ServoAssembly:
+    # ------------------------------------------------------------------------------------------
+
+
+    def __get_servo_assembly_depending_servo_nr(self, _servo_nr: int) -> ServoAssembly | None:
         """!
-        Get servo_assembly depending on servo nr
+        Get servo_assembly depending on servo nr or None when an error occurs
 
         @param _servo_nr The servo nr wanted (starts at 1)
-        @return get ServoAssembly depending on _servo_nr
-        @raises Exception, when servo nr is not valid
+        @return servo_nr or None
         """
 
         if _servo_nr >= 1 and _servo_nr <= 16:
             if self.__servo_assembly_1 is None:
-                raise Exception("Servo assembly 1 not initialized")
+                print("Error: servo assembly 1 not initialized")
+                return None
             return self.__servo_assembly_1
+
         elif _servo_nr >= 17 and _servo_nr <= 32:
             if self.__servo_assembly_2 is None:
-                raise Exception("Servo assembly 2 not initialized")
+                print("Error: servo assembly 2 not initialized")
+                return None
             return self.__servo_assembly_2
         else:
-            raise Exception("Requested servo nr is not available")
+            print("Error: requested servo " + str(_servo_nr) + " is not available")
+            return None
 
     # end Servo functions --------------------------------------------------------------------------------------
 
@@ -543,7 +590,7 @@ class Robohat:
         """
         return self.__powerManagement.is_accu_capacity_ok()
 
-    def do_shutdown(self) -> None:
+    def shutdown_power(self) -> None:
         """!
         Gives shutdown signal to power module.
         Cleans up IO
@@ -551,7 +598,7 @@ class Robohat:
         @return None
         """
 
-        self.__powerManagement.shutdown()
+        self.__powerManagement.shutdown_power()
         sleep(1)
         self.__io_handler.io_shutdown()
 

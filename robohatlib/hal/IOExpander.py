@@ -45,6 +45,16 @@ class IOExpander:
             self.__expander.init_mcp23008()
 
     #--------------------------------------------------------------------------------------
+
+    def exit_program(self) -> None:
+        """!
+        Cleans up, when user want to shut down
+        @return: None
+        """
+        if self.__expander is not None:
+            self.__expander.exit_program()
+
+    #--------------------------------------------------------------------------------------
     def set_direction_io_expander(self, _io_nr:int, _direction: ExpanderDir) -> None:
         """!
         @param _io_nr: gpio pin nr

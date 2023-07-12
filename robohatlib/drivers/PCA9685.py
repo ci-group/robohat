@@ -63,6 +63,7 @@ class PCA9685:
         self.__set_pwm_freq(50)
 
         self.wake()         # be sure i'm awake
+
     # --------------------------------------------------------------------------------------
     def set_on_time_channel(self, _channel: int, _time_wanted_us: float) -> None:
         _channel = _channel - 1

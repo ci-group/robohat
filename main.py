@@ -11,6 +11,8 @@ try:
     from robohatlib.hal.datastructure.Color import Color
     import sys
     import main_config
+    from robohatlib.helpers.ServoNotFoundException import ServoNotFoundException
+
 
 except ImportError:
     print("Failed to import Robohat, or failed to import all dependencies")
@@ -53,7 +55,7 @@ class Example:
         Start this example
         @return: None
         """
-        print("Waiting for your input\n\n")
+        print("\n\nWaiting for your input\n\n")
 
         while self.running is True:
             inp = input()
@@ -61,29 +63,34 @@ class Example:
 
     # --------------------------------------------------------------------------------------
 
-    #todo really stop program
-    def stop_example(self) -> None:
+    def exit_program(self) -> None:
         """
         Should stop this program
         @return: None
         """
-        print("to stopp program, use CTRL-D")
+        print("Exiting this program")
+        self.robohat.exit_program()
         self.running = False
         sys.exit(0)
 
+    # --------------------------------------------------------------------------------------
 
     def set(self, _data_in:str) -> None:
         """!
         Will move the servo to wanted position
         @return: None
         """
-        data_in_array = _data_in.split(" ")
+        try:
+            data_in_array = _data_in.split(" ")
 
-        command = data_in_array[1]
-        if command == "servo":
-            servo_nr = int(data_in_array[2])
-            angle = float(data_in_array[3])
-            self.robohat.set_servo_angle(servo_nr, angle)
+            command = data_in_array[1]
+            if command == "servo":
+                servo_nr = int(data_in_array[2])
+                angle = float(data_in_array[3])
+                self.robohat.set_servo_angle(servo_nr, angle)
+        except ServoNotFoundException:
+            print("Servo not avail")
+
 
     def get(self, _data_in:str) -> None:
         """!
@@ -99,12 +106,17 @@ class Example:
             print("angle of servo " + str(servo_nr) + " is: " + str(value) + "°" )
     # --------------------------------------------------------------------------------------
 
+    def shutdown_power(self) -> None:
+        self.robohat.shutdown_power()
+    # --------------------------------------------------------------------------------------
+
     def print_help(self) -> None:
         """
         Print a help page
         @return: None
         """
         print("Available commands are:\n")
+        print("shutdown                                 power the system down")
         print("exit                                     exit the program")
         print("help                                     prints this text")
         print("set servo [servo nr] [angle]             moves servo to the desired angle")
@@ -112,10 +124,13 @@ class Example:
 
     def process_commands(self, _command:str):
         if _command == "exit":
-            self.stop_example()
+            self.exit_program()
 
         elif _command == "help":
             self.print_help()
+
+        elif _command == "shutdown":
+            self.shutdown_power()
 
         elif _command.startswith("set"):
             self.set(_command)
@@ -123,8 +138,8 @@ class Example:
         elif _command.startswith("get"):
             self.get(_command)
 
-        else:
-            print("syntax error")
+        #else:
+            #print("syntax error")
 
 
         #print("command: " + _command)

@@ -43,8 +43,6 @@ class GPI_LL_Interrupt:
     # --------------------------------------------------------------------------------------
 
     def set_event_detection(self) -> None:
-        print("adds interrupt !!!")
-
         GPIO.setmode(GPIO.BCM)
         GPIO.setup(self.__gpio_pin, GPIO.IN, GPIO.PUD_UP)
         GPIO.add_event_detect(self.__gpio_pin, GPIO.BOTH, self.__callback_function, 1)
@@ -58,7 +56,6 @@ class GPI_LL_Interrupt:
 
     def remove_event_detection(self) -> None:
         if self.int_is_active is True:
-            print("removes interrupt !!!")
             GPIO.remove_event_detect(self.__gpio_pin)
             self.int_is_active = False
 
@@ -94,12 +91,11 @@ class GPI_LL_Interrupt:
         @return: None
         """
         if len(self.__registered_callback_holders) is 0:
-            print("first callback")
             self.__registered_callback_holders.append(_callbackholder)
+            return
 
         for callback_out_of_list in self.__registered_callback_holders:
             if callback_out_of_list is _callbackholder:
-                print("callback already present")
                 return
 
         print("new callback")
@@ -133,7 +129,6 @@ class GPI_LL_Interrupt:
             return
 
         for callbackholder_out_of_list in self.__registered_callback_holders:
-            print("Execution callback")
             callbackholder_out_of_list.execute_callback(_pin_nr)
 
     # --------------------------------------------------------------------------------------

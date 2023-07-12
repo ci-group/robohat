@@ -80,6 +80,18 @@ class ServoAssembly:
 
     #--------------------------------------------------------------------------------------
 
+    def exit_program(self) -> None:
+        """!
+        Cleans up, when user want to shut down
+        @return: None
+        """
+        if self.__power_monitor_and_io is not None:
+            self.__power_monitor_and_io.exit_program()
+
+        if  self.__servo_board is not None:
+            self.__servo_board.exit_program()
+    #--------------------------------------------------------------------------------------
+
     def set_servo_angle(self, _servo_nr: int, _wanted_angle: float) -> None:
         """!
         Set the angle servo in degree

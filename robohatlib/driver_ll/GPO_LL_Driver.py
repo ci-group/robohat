@@ -26,6 +26,8 @@ class GPO_LL_Driver:
 
         @return: None
         """
+        GPIO.setmode(GPIO.BCM)
+        GPIO.setup(self.__gpo_definition.get_gpo_pin_nr(), GPIO.OUT)
         GPIO.output(self.__gpo_definition.get_gpo_pin_nr(), GPIO.LOW)
         self.__status = GPOStat.GPO_LOW
 
@@ -39,7 +41,8 @@ class GPO_LL_Driver:
 
         @return: None
         """
-
+        GPIO.setmode(GPIO.BCM)
+        GPIO.setup(self.__gpo_definition.get_gpo_pin_nr(), GPIO.OUT)
         GPIO.output(self.__gpo_definition.get_gpo_pin_nr(), GPIO.HIGH)
         self.__status = GPOStat.GPO_HIGH
 

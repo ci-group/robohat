@@ -48,6 +48,16 @@ class PowerMonitorAndIO:
 
         self.__signaling_device = None
         self.__reset_timerIsRunning = False
+        self.disable_retry_timer_callback = False
+
+    # --------------------------------------------------------------------------------------
+    # --------------------------------------------------------------------------------------
+    def exit_program(self) -> None:
+        """!
+        Cleans up, when user want to shut down
+        @return: None
+        """
+        self.disable_retry_timer_callback = True
 
     # --------------------------------------------------------------------------------------
     # --------------------------------------------------------------------------------------
@@ -199,15 +209,17 @@ class PowerMonitorAndIO:
 
     # --------------------------------------------------------------------------------------
 
-    def __reset_timer_callback(self):
+    def __reset_timer_callback(self) -> None:
         if self.__io_device is None:
             return
 
-        port_value = self.__io_device.get_port_data() and 0x7f
-        print("--> " + hex(port_value) )
+        if self.disable_retry_timer_callback == True:
+            return
 
+        port_value = self.__io_device.get_port_data() and 0x7f
+        #print("--> " + hex(port_value) )
         if port_value > 0:
-            print("Not able to clear !!!!, power fail is present")
+            #print("Not able to clear !!!!, power fail is present")
             timer = threading.Timer(10, self.__reset_timer_callback)
             timer.start()
         else:
@@ -215,3 +227,4 @@ class PowerMonitorAndIO:
                  self.__io_device.reset_interrupts()
 
     # --------------------------------------------------------------------------------------
+

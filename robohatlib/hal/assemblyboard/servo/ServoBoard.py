@@ -41,6 +41,16 @@ class ServoBoard:
     #--------------------------------------------------------------------------------------
     #--------------------------------------------------------------------------------------
 
+    def exit_program(self) -> None:
+        """!
+        Cleans up, when user want to shut down. Sets PWM to sleep
+        @return: None
+        """
+        self.__pwm.sleep()
+
+    #--------------------------------------------------------------------------------------
+    #--------------------------------------------------------------------------------------
+
     def set_servo_angle(self, _servo_nr: int, _wanted_angle: float) -> None:
         wanted_time = self.__servo_datas_array[_servo_nr - 1].convert_angle_to_time(_wanted_angle)
         self.__pwm.set_on_time_channel(_servo_nr, wanted_time)

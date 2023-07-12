@@ -38,6 +38,14 @@ class HatADC:
         if self.__hat_adc is not None:
             self.__hat_adc.init_adc()
 
+    # --------------------------------------------------------------------------------------
+    def exit_program(self) -> None:
+        """
+        Cleans up, when user want to shut down
+        @return: None
+        """
+
+
     # begin, hat adc functions --------------------------------------------------------------------------------------
     def get_voltage_readout_hat_adc_channel(self, _channel_nr: int) -> float:
         """!

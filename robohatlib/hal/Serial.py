@@ -27,3 +27,9 @@ class Serial:
         #     bytesize=serial.EIGHTBITS,
         #     timeout=1
         # )
+
+    def exit_program(self) -> None:
+        """!
+        Cleans up, when user want to shut down (for future use)
+        @return: None
+        """

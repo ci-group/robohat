@@ -42,6 +42,14 @@ class IMU:
         if self.__lsm6ds33 is not None:
             self.__lsm6ds33.init_LSM6DS33()
 
+
+    # --------------------------------------------------------------------------------------
+    def exit_program(self) -> None:
+        """
+        Cleans up, when user want to shut down
+        @return: None
+        """
+
     # --------------------------------------------------------------------------------------
 
     def do_imu_test(self):

@@ -75,16 +75,44 @@ class MCP23008:
         self.reset_interrupts()
 
     # --------------------------------------------------------------------------------------
+    def exit_program(self) -> None:
+        """!
+        Cleans up, when user want to shut down
+        @return: None
+        """
+        self.set_port_direction(0xff)           # set all input
+
+    # --------------------------------------------------------------------------------------
     def set_pin_direction(self, _io_nr:int, _direction) -> None:
+        """!
+        set the direction of a I/O pins. 1 to a pin is input.
+        @param _direction
+        @param _io_nr:
+        @return: None
+        """
         self.__set_pin(IO_DIR_ADDRESS, _io_nr, _direction)
 
     def get_pin_direction(self, _io_nr: int):
+        """!
+        Get the direction of a I/O pins. 1 to a pin is input.
+        @param _io_nr:
+        @return: None
+        """
         return self.__get_pin(IO_DIR_ADDRESS, _io_nr)
 
     def set_port_direction(self, _byte_value) -> None:
+        """!
+        Set the direction of all the 8 I/O pins. 1 to a pin is input. So 0xff is all input
+        @param _byte_value:
+        @return: None
+        """
         self.__set_port(IO_DIR_ADDRESS, _byte_value)
 
     def get_port_direction(self):
+        """!
+        Get the direction of all the 8 I/O pins. 1 to a pin is input. So 0xff is all input
+        @return: None
+        """
         return self.__get_port(IO_DIR_ADDRESS)
 
     def set_pin_pullup(self, _io_nr:int, _bool_value) -> None:

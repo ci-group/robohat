@@ -36,6 +36,15 @@ class Buzzer:
         else:
             self.__buzzer_driver.init_buzzer(False)
 
+
+    # --------------------------------------------------------------------------------------
+    def exit_program(self) -> None:
+        """
+        Cleans up, when user want to shut down
+        @return: None
+        """
+        self.buzzer_beep()
+
     # random buzzer -------------------------------------------------------------------------------------
     def buzzer_random(self) -> None:
         """!
