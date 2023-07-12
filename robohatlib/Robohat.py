@@ -422,7 +422,7 @@ class Robohat:
         if self.__servo_assembly_1 is not None:
             return self.__servo_assembly_1.is_servo_sleeping()
         elif self.__servo_assembly_2 is not None:
-            return self.__servo_assembly_2.is_servo_sleeping()
+            return self.__servo_assembly_2.are_servos_sleeping()
 
         return True
 

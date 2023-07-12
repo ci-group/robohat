@@ -92,17 +92,17 @@ class ServoAssembly:
             self.__servo_board.exit_program()
     #--------------------------------------------------------------------------------------
 
-    def set_servo_angle(self, _servo_nr: int, _wanted_angle: float) -> None:
+    def set_servo_angle(self, _servo_nr: int, _angle: float) -> None:
         """!
         Set the angle servo in degree
 
         @param _servo_nr The servo nr wanted (starts at 1)
-        @param _wanted_angle wanted angle
+        @param _angle wanted angle
 
         @return angle of connected servo in degree
         """
         if self.__servo_board is not None:
-            self.__servo_board.set_servo_angle(_servo_nr, _wanted_angle)
+            self.__servo_board.set_servo_angle(_servo_nr, _angle)
 
     def get_servo_angle(self, _servo_nr: int) -> float:
         """!
@@ -195,7 +195,7 @@ class ServoAssembly:
         Get if Servos are sleeping
         @return (bool) returns True when servos are sleeping
         """
-        return self.__servo_board.is_servo_sleeping()
+        return self.__servo_board.are_servos_sleeping()
 
     # --------------------------------------------------------------------------------------
 

@@ -16,6 +16,7 @@ except ImportError:
 try:
     from robohatlib.driver_ll.i2c.I2CDevice import I2CDevice
     from robohatlib.driver_ll.spi.SPI_Device import SPI_Device
+    from robohatlib.hal.assemblyboard.servo.ServoData import ServoData
 except ImportError:
     print("Failed to resolve dependencies for Servoboard")
     raise
@@ -33,7 +34,6 @@ class ServoBoard:
     #--------------------------------------------------------------------------------------
 
     def init_servo_board(self, _servo_datas_array: []):
-
         self.__servo_datas_array = _servo_datas_array
         self.__pwm.init_pca9685()
         self.__servo_adc.init_adc()
@@ -51,44 +51,59 @@ class ServoBoard:
     #--------------------------------------------------------------------------------------
     #--------------------------------------------------------------------------------------
 
-    def set_servo_angle(self, _servo_nr: int, _wanted_angle: float) -> None:
-        wanted_time = self.__servo_datas_array[_servo_nr - 1].convert_angle_to_time(_wanted_angle)
-        self.__pwm.set_on_time_channel(_servo_nr, wanted_time)
+    def set_servo_angle(self, _servo_nr: int, _angle: float) -> None:
+        if _servo_nr >= 1 and _servo_nr <= 16:
+            servo_data:ServoData = self.__servo_datas_array[_servo_nr - 1]
 
+            if _angle >= servo_data.get_min_angle() or _angle <= servo_data.get_max_angle():
+                wanted_time = servo_data.convert_angle_to_time(_angle)
+                self.__pwm.set_on_time_channel(_servo_nr, wanted_time)
+            else:
+                print("Error, requested angle is not valid: min: " + str(servo_data.get_min_angle()) + " max: " + str(servo_data.get_max_angle()) )
+        else:
+            print("Error, requested servo number is not valid, should be 1 till 16")
     #--------------------------------------------------------------------------------------
 
     def get_servo_angle(self, _servo_nr: int) -> float:
         """!
-        Get angle of connected servo in degree
+        Get angle of connected servo in degree or -1 when in error
 
         @param _servo_nr The servo nr wanted (starts at 1)
-        @return angle of connected servo in degree
+        @return angle or -1
         """
 
-        voltage_channel = self.get_servo_readout_adc_single_channel(_servo_nr)
-        angle_channel = self.__servo_datas_array[_servo_nr - 1].convert_voltage_to_angle(voltage_channel)
-        return angle_channel
+        if _servo_nr >= 1 and _servo_nr <= 16:
+            voltage_channel = self.get_servo_readout_adc_single_channel(_servo_nr)
+            angle_channel = self.__servo_datas_array[_servo_nr - 1].convert_voltage_to_angle(voltage_channel)
+            return angle_channel
+        else:
+            print("Error, requested servo number is not valid, should be 1 till 16")
+            return -1
 
     #--------------------------------------------------------------------------------------
     #--------------------------------------------------------------------------------------
     def set_all_servos_angle(self, _wanted_angles: []) -> None:
+        """!
+        Sets all the angle of the servos
+        @param _wanted_angles:  (should be a array of 16, servo 1 is array pos 0)
+        @return: None
+        """
         wanted_time_array = [0] * 16
         for i in range(0, 16):
             wanted_time_array[i] = self.__servo_datas_array[i].convert_angle_to_time(_wanted_angles[i])
-
         self.__pwm.set_on_time_all_channels(wanted_time_array)
 
     #--------------------------------------------------------------------------------------
 
     def get_all_servos_angle(self) -> []:
         """!
-        @return angles of servos in degree
+        Gets all the angle of the servos (Returns an array of 16, servo 1 is array pos 0)
+        @return array of degrees
         """
 
         angle_array = [0] * 17
         for servo_nr in range(1, 17):
             voltage_adc_channel = self.__servo_adc.get_readout_adc_servo_nr(servo_nr)
-            print("-->" + str(servo_nr) + " " + str(voltage_adc_channel) + " V")
             angle_array[servo_nr] = self.__servo_datas_array[servo_nr-1].convert_voltage_to_angle(voltage_adc_channel)
 
         return angle_array
@@ -98,13 +113,16 @@ class ServoBoard:
 
     def get_servo_readout_adc_single_channel(self, _servo_nr: int) -> float:
         """!
-        Get voltage of the potentiometer of the connected servo in vol
-
+        Get voltage of the potentiometer of the connected servo in volt or -1 when in erro
         @param _servo_nr The servo nr wanted (starts at 1)
-
-        @return voltage of the potentiometer of the connected servo in volt
+        @return voltage or -1
         """
-        return self.__servo_adc.get_readout_adc_servo_nr(_servo_nr)
+
+        if _servo_nr >= 1 and _servo_nr <= 16:
+            return self.__servo_adc.get_readout_adc_servo_nr(_servo_nr)
+        else:
+            print("Error, requested servo number is not valid, should be 1 till 16")
+            return -1
 
     #--------------------------------------------------------------------------------------
 
@@ -119,7 +137,8 @@ class ServoBoard:
         value = self.get_servo_readout_adc_single_channel(_servo_nr)
         if value < 0.1:
             return False
-        return True
+        else:
+            return True
 
     #--------------------------------------------------------------------------------------
 
@@ -132,15 +151,34 @@ class ServoBoard:
     #--------------------------------------------------------------------------------------
     #--------------------------------------------------------------------------------------
 
-    def change_servo_parameters(self, _servo_channel, _min_time, _max_time, _running_degree,  _offset_degree, _min_degree_voltage_adc, _max_degree_voltage_adc):
-        self.__servo_datas_array[_servo_channel - 1].set_running_parameters(_min_time, _max_time, _running_degree, _offset_degree, _min_degree_voltage_adc, _max_degree_voltage_adc)
-        return None
+    def change_servo_parameters(self, _servo_nr:int, _min_time:float, _max_time:float, _running_degree:float,  _offset_degree:float, _formula_a:float, _formula_b:float) -> None:
+        """!
+         Sets new parameters to adjust servo time
+
+        @param _servo_nr:  servo nr (should be 1-16)
+        @param _min_time: PWM time of servo at minimum pos (something like 500 uS)
+        @param _max_time: PWM time of servo at maximum pos (something like 2500 uS)
+        @param _running_degree: Range of degree of servo (something like 180 degree)
+        @param _offset_degree: Offset of the servo (should be 0)
+        @param _formula_a:  First parameter of formula, servo measure-voltage to angle
+        @param _formula_b: Second parameter of formula, servo measure-voltage to angle
+        @return: None
+        """
+
+        if _servo_nr >= 1 and _servo_nr <= 16:
+            self.__servo_datas_array[_servo_nr - 1].set_running_parameters(_min_time, _max_time, _running_degree, _offset_degree, _formula_a, _formula_b)
+        else:
+            print("Error, requested servo number is not valid, should be 1 till 16")
 
     #--------------------------------------------------------------------------------------
     #--------------------------------------------------------------------------------------
 
     # begin, servo assemblyboard adcs functions --------------------------------------------------------------------------------------
-    def reset_adc(self):
+    def reset_adc(self) -> None:
+        """!
+        Resets the ADC which measures the angle of the servos
+        @return: None
+        """
         return self.__servo_adc.reset_adc()
 
     #--------------------------------------------------------------------------------------
@@ -149,7 +187,6 @@ class ServoBoard:
     def sleep(self) -> None:
         """!
         Put the device into a sleep state
-
         @:return: None
         """
         self.__pwm.sleep()
@@ -159,17 +196,16 @@ class ServoBoard:
     def wake(self) -> None:
         """!
         Wakes up device
-
         @:return: None
         """
         self.__pwm.wake()
 
     #--------------------------------------------------------------------------------------
 
-    def is_servo_sleeping(self) -> bool:
-        """
+    def are_servos_sleeping(self) -> bool:
+        """!
         Get if Servos are sleeping
-        @:return: (bool) returns True when servos are sleeping
+        @return: (bool) returns True when servos are sleeping
         """
         return self.__pwm.is_sleeping()
 

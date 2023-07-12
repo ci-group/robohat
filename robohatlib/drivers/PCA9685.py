@@ -81,7 +81,7 @@ class PCA9685:
         self.__i2c_device.i2c_write_bytes(bytes([LED0_ON_L_ADDRESS + (4 * _channel), on_tick_bytes[0], on_tick_bytes[1], off_tick_bytes[0], off_tick_bytes[1]]))
 
     # --------------------------------------------------------------------------------------
-    def set_on_time_all_channels(self, _wanted_times_us: float) -> None:
+    def set_on_time_all_channels(self, _wanted_times_us: []) -> None:
 
         data_to_send = bytes([LED0_ON_L_ADDRESS])
 

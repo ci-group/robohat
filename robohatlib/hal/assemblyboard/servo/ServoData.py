@@ -40,6 +40,23 @@ class ServoData:
         self.__formula_a = _formula_a
         self.__formula_b = _formula_b
 
+        self.__min_angle = 0
+        self.__max_angle = self.__min_angle + self.__running_degree
+    # --------------------------------------------------------------------------------------
+
+    def get_min_angle(self) -> float:
+        """!
+        Get the minimum angle of the servo
+        @return: minimum angle
+        """
+        return self.__min_angle
+    # --------------------------------------------------------------------------------------
+    def get_max_angle(self) -> float:
+        """!
+        Get the maximum angle of the servo
+        @return: maximum angle
+        """
+        return self.__max_angle
     # --------------------------------------------------------------------------------------
 
     def convert_angle_to_time(self, _angle: float) -> float:
@@ -65,23 +82,33 @@ class ServoData:
 
     # --------------------------------------------------------------------------------------
 
-    def set_running_parameters(self, _min_time: float, _max_time: float, _running_degree: float) -> None:
-        """
+    def set_running_parameters(self, _min_time: float, _max_time: float, _running_degree: float, _offset_degree: float, _formula_a: float, _formula_b: float) -> None:
+        """!
         Sets new parameters to adjust servo time
 
+        @param _min_time: PWM time of servo at minimum pos (something like 500 uS)
+        @param _max_time: PWM time of servo at maximum pos (something like 2500 uS)
+        @param _running_degree: Range of degree of servo (something like 180 degree)
+        @param _offset_degree: Offset of the servo (should be 0)
+        @param _formula_a:  First parameter of formula, servo measure-voltage to angle
+        @param _formula_b: Second parameter of formula, servo measure-voltage to angle
         @return: None
         """
 
         self.__min_time = _min_time
         self.__max_time = _max_time
         self.__running_degree = _running_degree
+        self.__formula_a = _formula_a
+        self.__formula_b = _formula_b
 
+        self.__min_angle = 0
+        self.__max_angle = self.__min_angle + self.__running_degree
     # --------------------------------------------------------------------------------------
     # --------------------------------------------------------------------------------------
     # --------------------------------------------------------------------------------------
 
     def convert_voltage_to_angle(self, _current_voltage: float) -> float:
-        """
+        """!
         converts voltage (measured by a adc, connected to the servo) to angle in degree
 
         formula determined by parameters defined in contructor

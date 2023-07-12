@@ -18,12 +18,9 @@ except ImportError:
     print("Failed to import Robohat, or failed to import all dependencies")
     raise
 
-#--------------------
-
-running = False
-
-
-
+# --------------------------------------------------------------------------------------
+# --------------------------------------------------------------------------------------
+# --------------------------------------------------------------------------------------
 
 def main():
     example = Example()
@@ -85,9 +82,11 @@ class Example:
 
             command = data_in_array[1]
             if command == "servo":
-                servo_nr = int(data_in_array[2])
-                angle = float(data_in_array[3])
-                self.robohat.set_servo_angle(servo_nr, angle)
+                sub_command = data_in_array[2]
+                if sub_command == "angle":
+                    servo_nr = int(data_in_array[3])
+                    angle = float(data_in_array[4])
+                    self.robohat.set_servo_angle(servo_nr, angle)
         except ServoNotFoundException:
             print("Servo not avail")
 
@@ -101,9 +100,12 @@ class Example:
 
         command = data_in_array[1]
         if command == "servo":
-            servo_nr = int(data_in_array[2])
-            value = self.robohat.get_servo_angle(servo_nr)
-            print("angle of servo " + str(servo_nr) + " is: " + str(value) + "°" )
+            sub_command = data_in_array[2]
+            if sub_command == "angle":
+                servo_nr = int(data_in_array[3])
+                value = self.robohat.get_servo_angle(servo_nr)
+                print("angle of servo " + str(servo_nr) + " is: " + str(value) + "°" )
+
     # --------------------------------------------------------------------------------------
 
     def shutdown_power(self) -> None:
@@ -116,11 +118,11 @@ class Example:
         @return: None
         """
         print("Available commands are:\n")
-        print("shutdown                                 power the system down")
-        print("exit                                     exit the program")
-        print("help                                     prints this text")
-        print("set servo [servo nr] [angle]             moves servo to the desired angle")
-        print("get servo [servo nr]                     get servo angle of the desired angle")
+        print("shutdown                                       power the system down")
+        print("exit                                           exit the program")
+        print("help                                           prints this text")
+        print("set servo angle [servo nr] [angle]             moves servo to the desired angle")
+        print("get servo angle [servo nr]                     get servo angle of the desired angle")
 
     def process_commands(self, _command:str):
         if _command == "exit":
