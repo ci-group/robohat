@@ -98,7 +98,6 @@ class Robohat:
 
         # self.__servo_assembly_2 = ServoAssembly(self.__io, _servo_assembly_2_config, Robohat_config.SERVOASSEMBLY_2_I2C_BUS, Robohat_config.SERVOASSEMBLY_2_SPI_BUS, servoAssembly_interrupt_def)
 
-        self.__i_am_sleeping = False
 
     # --------------------------------------------------------------------------------------
 
@@ -256,7 +255,6 @@ class Robohat:
         @param _servo_nr The servo nr
         @return: Returns False when not connected
         """
-
         if _servo_nr >= 1 or _servo_nr <= 16:
             if self.__servo_assembly_1 is None:
                 return False
@@ -398,15 +396,7 @@ class Robohat:
         if self.__servo_assembly_2 is not None:
             self.__servo_assembly_2.sleep()
 
-        self.__i_am_sleeping = True
-    # ------------------------------------------------------------------------------------------
 
-    def get_are_servos_a_sleep(self) -> bool:
-        """!
-        Get the status if the Servos are a sleep (so no power)
-        @return: True if sleeping
-        """
-        return self.__i_am_sleeping
     # ------------------------------------------------------------------------------------------
 
     def wakeup_servos(self) -> None:
@@ -421,7 +411,6 @@ class Robohat:
         if self.__servo_assembly_2 is not None:
             self.__servo_assembly_2.wake()
 
-        self.__i_am_sleeping = False
     # ------------------------------------------------------------------------------------------
 
     def are_servos_sleeping(self) -> bool:

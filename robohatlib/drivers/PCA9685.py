@@ -54,6 +54,7 @@ class PCA9685:
 
     def __init__(self, _i2c_device):
         self.__i2c_device = _i2c_device
+        self.__i_am_a_sleep = False
 
     # --------------------------------------------------------------------------------------
     def init_pca9685(self) -> None:
@@ -105,37 +106,34 @@ class PCA9685:
     def sleep(self) -> None:
         """!
         Put the device into a sleep state
-
-        @:return: None
+        @return: None
         """
-        oldmode = self.__read(MODE1_ADDRESS)
-        newmode = oldmode | (1 << MODE1_SLEEP_BITNR)
-        self.__write(MODE1_ADDRESS, newmode)
-
+        old_mode = self.__read(MODE1_ADDRESS)
+        new_mode = old_mode | (1 << MODE1_SLEEP_BITNR)
+        self.__write(MODE1_ADDRESS, new_mode)
+        self.__i_am_a_sleep = True
     # --------------------------------------------------------------------------------------
     def wake(self) -> None:
         """!
         Wake the device from its sleep state
-
-
-        @:return: None
+        @return: None
         """
         self.__write(MODE1_ADDRESS, 0x0000)
-        newmode = 0x00a0
-        self.__write(MODE1_ADDRESS, newmode)
-
+        new_mode = 0x00a0
+        self.__write(MODE1_ADDRESS, new_mode)
+        self.__i_am_a_sleep = False
     # --------------------------------------------------------------------------------------
-    def is_sleeping(self):
-        """
+    def is_sleeping(self) -> bool:
+        """!
         Check the sleep status of the device
-        :return: True or False
-        :rtype: bool
+        @return: True or False
         """
-        reg_val = self.__read(MODE1_ADDRESS)
-        if RoboUtil.check_bit(reg_val, MODE1_SLEEP_BITNR):
-            return True
-        else:
-            return False
+        # reg_val = self.__read(MODE1_ADDRESS)
+        # if RoboUtil.check_bit(reg_val, MODE1_SLEEP_BITNR):
+        #     return True
+        # else:
+        #     return False
+        return self.__i_am_a_sleep
 
     #--------------------------------------------------------------------------------------
     def __set_pwm_freq(self, _freq, _calibration=-3):

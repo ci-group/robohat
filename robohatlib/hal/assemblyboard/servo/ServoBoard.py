@@ -133,7 +133,6 @@ class ServoBoard:
         @param _servo_nr The servo nr
         @return: Returns False when not connected
         """
-
         value = self.get_servo_readout_adc_single_channel(_servo_nr)
         if value < 0.1:
             return False

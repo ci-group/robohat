@@ -148,6 +148,14 @@ class Example:
                     print("adc volts of servos: " + str(value))
                 else:
                     print("syntax error")
+            elif sub_command == "connected":
+                servo_nr = int(data_in_array[3])
+                value = self.robohat.get_servo_is_connected(servo_nr)
+                if value is True:
+                    print("Servo " + str(servo_nr) + " is connected")
+                else:
+                    print("Servo " + str(servo_nr) + " NOT is connected")
+
             else:
                 print("syntax error")
         elif command == "led":
@@ -190,6 +198,7 @@ class Example:
                 self.robohat.do_buzzer_release()
             else:
                 print("syntax error")
+
         else:
             print("syntax error")
     # --------------------------------------------------------------------------------------
@@ -208,14 +217,16 @@ class Example:
         print("exit                                           exit the program")
         print("help                                           prints this text")
         print("set servo angle [servo nr] [angle]             moves servo to the desired angle")
-
-        print("set led [color]                                turn on led with its color [WHITE|RED|GREEN|BLUE|YELLOW|PURPLE|ON|OFF")
-
         print("get servo angle [servo nr]                     get servo angle of the desired angle")
         print("get servo angle all                            get all the servo angels")
         print("get servo adc [servo nr]                       get servo position adc value")
         print("get servo adc all                              get all the servo position adc values")
+        print("get servo connected [servo nr]                 shows if servo is connected")
+        print("put servos to sleep                            puts all servos asleep")
+        print("wake up servos                                 wakes all servo up")
+        print("are servos sleeping                            shows information if servos are sleeping")
 
+        print("set led [color]                                turn on led with its color [WHITE|RED|GREEN|BLUE|YELLOW|PURPLE|ON|OFF")
         print("get led                                        displays the color of the led, or status ON | OFF")
 
         print("do i2c scan                                    scans the i2c bus")
@@ -244,6 +255,17 @@ class Example:
 
         elif _command.startswith("do"):
             self.do(_command)
+
+        elif _command == "are servos sleeping":
+            value = self.robohat.are_servos_sleeping()
+            if value is True:
+                print("Servos are sleeping")
+            else:
+                print("Servos are a wake")
+        elif _command == "put servos to sleep":
+            self.robohat.put_servos_to_sleep()
+        elif _command == "wake up servos":
+            self.robohat.wakeup_servos()
 
         elif _command.startswith("\n"):
             print("")
