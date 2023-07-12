@@ -492,7 +492,7 @@ class Robohat:
 
         @return analog voltage in an array
         """
-        return self.__hatAdc.get_voltage_readout_hatadc_mutiplechannels()
+        return self.__hatAdc.get_voltage_readout_hat_adc_multiple_channels()
 
     # end HAT ADC functions --------------------------------------------------------------------------------------
 

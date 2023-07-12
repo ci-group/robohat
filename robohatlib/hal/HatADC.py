@@ -53,13 +53,19 @@ class HatADC:
 
         @param _channel_nr The channel nr wanted (starts at 1, so 1 is AI0)
 
-        @return analog voltage, or 0.0 when not available
+        @return analog voltage, or -1 when not available
         """
-        if self.__hat_adc is not None:
-            return self.__hat_adc.get_voltage_readout_channel(_channel_nr)
-        return 0.0
 
-    def get_voltage_readout_hatadc_mutiplechannels(self) -> []:
+        if self.__hat_adc is not None:
+            if _channel_nr >= 1 and _channel_nr <= 4:
+                return self.__hat_adc.get_voltage_readout_channel(_channel_nr)
+            else:
+                print("Unknown channel nr")
+        else:
+            print ("hat adc not found ??")
+        return -1
+
+    def get_voltage_readout_hat_adc_multiple_channels(self) -> []:
         """!
         Get analog values of all channel from the HAT adc
 

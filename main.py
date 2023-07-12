@@ -158,6 +158,24 @@ class Example:
 
             else:
                 print("syntax error")
+
+        elif command == "hat":
+            sub_command = data_in_array[2]
+            if sub_command == "adc":
+                parameter_str: str = data_in_array[3]
+                if parameter_str.isnumeric():
+                    channel_nr = int(parameter_str)
+                    value = self.robohat.get_hat_adc_readout_single_channel(channel_nr)
+                    if value != -1:
+                        print("adc hat channel " + str(channel_nr) + " is: " + str(value) + "V" )
+                elif parameter_str == "all":
+                    value = self.robohat.get_hat_adc_readout_multiple_channels()
+                    print("adc hat volts of channels: " + str(value))
+                else:
+                    print("syntax error at hat: " + parameter_str )
+
+
+
         elif command == "led":
             value = self.robohat.get_led_color()
             if value is Color.OFF:
@@ -237,8 +255,11 @@ class Example:
         print("set led [color]                                turn on led with its color [WHITE|RED|GREEN|BLUE|YELLOW|PURPLE|ON|OFF")
         print("get led                                        displays the color of the led, or status ON | OFF")
 
-        print("get lib builddate                               displays date when library was build")
+        print("get lib builddate                              displays date when library was build")
         print("get lib version                                displays version of the library")
+
+        print("get hat adc [channel]                          get hat adc value (channel 4 is divided accu voltage")
+        print("get hat adc all                                get all the hat adc valuea")
 
         print("do i2c scan                                    scans the i2c bus")
 
