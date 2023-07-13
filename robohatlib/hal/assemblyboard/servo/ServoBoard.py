@@ -97,14 +97,14 @@ class ServoBoard:
 
     def get_all_servos_angle(self) -> []:
         """!
-        Gets all the angle of the servos (Returns an array of 16, servo 1 is array pos 0)
+        Gets all the angle of the servos (Returns an array of 16, servo 0 is array pos 0)
         @return array of degrees
         """
 
         angle_array = [0] * 17
         for servo_nr in range(0, 16):
             voltage_adc_channel = self.__servo_adc.get_readout_adc_servo_nr(servo_nr)
-            angle_array[servo_nr] = self.__servo_datas_array[servo_nr-1].convert_voltage_to_angle(voltage_adc_channel)
+            angle_array[servo_nr] = self.__servo_datas_array[servo_nr].convert_voltage_to_angle(voltage_adc_channel)
 
         return angle_array
 

@@ -333,7 +333,8 @@ class Robohat:
         if self.__servo_assembly_2 is not None:
             data_assembly2 = self.__servo_assembly_2.get_adc_readout_multiple_channels()
             return_data.append(data_assembly2)
-        else:
+
+        if self.__servo_assembly_1 is not None and self.__servo_assembly_2 is not None:
             print("Error, requesting ADC data")
 
         return return_data
