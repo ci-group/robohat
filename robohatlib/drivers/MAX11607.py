@@ -38,7 +38,7 @@ class MAX11607:
 
         @return analog voltage or -1
         """
-        if _channel_nr >= 0 and _channel_nr <= 3:
+        if _channel_nr >= 0 and _channel_nr < 4:
             adc_code_array = bytearray(2)
             conf_data = 0x01 | 0x60 | (_channel_nr << 1)                          # single ended, single channel, only selected channel, the channel to be read (AIN3 = channel 4)
 

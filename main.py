@@ -190,6 +190,32 @@ class Example:
                 print("version of Robohat lib is: " + self.robohat.get_lib_version())
             else:
                 print("syntax error")
+
+        elif command == "accu":
+            sub_command = data_in_array[2]
+            if sub_command == "voltage":
+                value = self.robohat.get_accu_voltage()
+                print("accu voltage is: " + str(value) + " V")
+            elif sub_command == "capacity":
+                value = self.robohat.get_accu_percentage_capacity()
+                print("accu capacity is: " + str(value) + " %")
+            else:
+                print("syntax error")
+
+        elif command == "imu":
+            sub_command = data_in_array[2]
+            if sub_command == "magnetic":
+                value = self.robohat.get_magnetic_fields()
+                print("IMU magnetic: " + str(value) )
+            elif sub_command == "acceleration":
+                value = self.robohat.get_acceleration()
+                print("IMU acceleration: " + str(value) )
+            elif sub_command == "gyro":
+                value = self.robohat.get_gyro()
+                print("IMU gyro: " + str(value) )
+            else:
+                print("syntax error")
+
         else:
             print("syntax error")
 
@@ -260,6 +286,13 @@ class Example:
 
         print("get hat adc [channel]                          get hat adc value (channel 4 is divided accu voltage")
         print("get hat adc all                                get all the hat adc values")
+
+        print("get accu voltage                               get voltage of accu")
+        print("get accu capacity                              get capacity of accu")
+
+        print("get imu magnetic                               get magnetic values")
+        print("get imu acceleration                           get acceleration values")
+        print("get imu gyro                                   get gyro values")
 
         print("do i2c scan                                    scans the i2c bus")
 

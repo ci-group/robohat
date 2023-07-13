@@ -59,7 +59,7 @@ class HatADC:
         """
 
         if self.__hat_adc is not None:
-            if _channel_nr >= 1 and _channel_nr <= 4:
+            if _channel_nr >= 0 and _channel_nr < 4:
                 return self.__hat_adc.get_readout_single_channel(_channel_nr)
             else:
                 print("Unknown channel nr")
