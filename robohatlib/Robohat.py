@@ -29,6 +29,7 @@ try:
     from robohatlib.hal.assemblyboard.ServoAssemblyConfig import ServoAssemblyConfig
     from robohatlib.hal.assemblyboard.servo.ServoData import ServoData
 
+    import os
     from time import sleep
 
     from typing import Tuple
@@ -594,7 +595,9 @@ class Robohat:
         sleep(1)
         self.__io_handler.io_shutdown()
 
-    # begin Library functions ---------------------------------------------------------------------------------
+        os.system("sudo shutdown -h now")
+
+        # begin Library functions ---------------------------------------------------------------------------------
 
     def get_lib_version(self) -> str:
         """!
