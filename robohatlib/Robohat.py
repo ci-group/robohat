@@ -591,7 +591,7 @@ class Robohat:
         """
 
         self.__powerManagement.shutdown_power()
-        sleep(5)
+        sleep(1)
         self.__io_handler.io_shutdown()
 
     # begin Library functions ---------------------------------------------------------------------------------

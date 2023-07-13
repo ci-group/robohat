@@ -278,7 +278,7 @@ class PowerManagement:
         print("Power shutdown in 1 minute")
 
         self.__shutdown_gpo.set_high()
-        sleep(1)
+        sleep(5)
         self.__shutdown_gpo.set_low()
 
         if self.__signaling_device is not None:
