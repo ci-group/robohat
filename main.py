@@ -301,10 +301,10 @@ class Example:
 
 
 
-        elif _command.startswith("\n"):
-            print("")
-        else:
-            print("syntax error")
+        # elif _command.startswith("\n"):
+        #     print("")
+        # else:
+        #     print("syntax error")
 
 
         #print("command: " + _command)

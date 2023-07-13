@@ -149,7 +149,7 @@ class MAX11137:
         """!
         Get voltage of the potentiometer of the connected servo in vol
 
-        @param _servo_nr The servo nr wanted (starts at 1)
+        @param _servo_nr The servo nr wanted (starts at 0)
 
         @return voltage of the potentiometer of the connected servo in volt
         """
@@ -166,7 +166,7 @@ class MAX11137:
             #4-7-23
             # instead of using the channel auto increment, just read the whole array... was a bug
             value_array = self.get_readout_adc_mutiplechannels()
-            return value_array[_servo_nr-1]
+            return value_array[_servo_nr]
         else:
             print("Servo range not valid")
             return -1

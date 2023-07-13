@@ -101,11 +101,13 @@ class ServoBoard:
         @return array of degrees
         """
 
-        angle_array = [0] * 17
+        angle_array = [0] * 16
         for servo_nr in range(0, 16):
             voltage_adc_channel = self.__servo_adc.get_readout_adc_servo_nr(servo_nr)
-            angle_array[servo_nr] = self.__servo_datas_array[servo_nr].convert_voltage_to_angle(voltage_adc_channel)
-
+            if voltage_adc_channel != 0:
+                angle_array[servo_nr] = self.__servo_datas_array[servo_nr].convert_voltage_to_angle(voltage_adc_channel)
+            else:
+                angle_array[servo_nr] = -1
         return angle_array
 
     #--------------------------------------------------------------------------------------
@@ -134,7 +136,7 @@ class ServoBoard:
         @return: Returns False when not connected
         """
         value = self.get_servo_readout_adc_single_channel(_servo_nr)
-        if value < 0.1:
+        if value < 0.2:
             return False
         else:
             return True

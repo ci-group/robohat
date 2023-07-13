@@ -160,7 +160,7 @@ class ServoAssembly:
     # --------------------------------------------------------------------------------------
     def get_servo_is_connected(self, _servo_nr: int) -> bool:
         """!
-        Checks if servo is connected. Returns False when not connected
+        Checks if servo is connected. Returns False when not connected Servo starts at 0
 
         @param _servo_nr The servo nr
         @return Returns False when not connected
