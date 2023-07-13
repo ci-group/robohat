@@ -25,8 +25,12 @@ except ImportError:
 class PowerMonitorAndIO:
 
 
-    def __init__(self, _iohandler: IOHandler, _power_io_expander_def: IOExpanderDef, _sw_power_io_expander: int):
+    def __init__(self, _iohandler: IOHandler, _power_io_expander_def: IOExpanderDef, _sw_power_io_expander: int, _name_of_assembly:str = "" ):
         i2c_device_definition = _power_io_expander_def.get_i2c_device_definition()
+        newname = i2c_device_definition.get_name() + "_" + _name_of_assembly
+        i2c_device_definition.set_name(newname)
+
+
         i2c_device_definition.set_i2c_offset_address(_sw_power_io_expander)
         i2c_device = _iohandler.get_i2c_device(i2c_device_definition)
 

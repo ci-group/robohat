@@ -28,9 +28,9 @@ Some system settings
 DEBUG = False                                       # by changing this value to TRUE, more debug msg will be printed on the console
 
 
-ALARM_PERMITTED = True                             # sound an alarm when a system alert is present, such as to low accu capacity
+ALARM_PERMITTED = True                              # sound an alarm when a system alert is present, such as to low accu capacity
 ALARM_TIMEOUT_IN_SEC = 300                          # timeout between alarm
-INIT_BEEP_PERMITTED = False                         # beep when started
+INIT_BEEP_PERMITTED = True                          # beep when started
 
 
 
@@ -39,7 +39,7 @@ INIT_BEEP_PERMITTED = False                         # beep when started
 ACCU_INTERVAL_TIME_IN_SECONDS = 1
 ACCU_VOLTAGE_WHEN_FULL = 12.6
 ACCU_VOLTAGE_TO_LOW_THRESHOLD = 11.06
-ACCU_VOLTAGE_ADC_MULTIPLIER = 4.645                  #3                   # aangepast 4-7-23, was 8.0
+ACCU_VOLTAGE_ADC_MULTIPLIER = 4.645
 ACCU_LOG_DISPLAY_WHEN_TO_LOW = False
 
 # Voltage to percentage array... depending on accu used
@@ -81,7 +81,7 @@ STATUSLED_DEF = MultiColorLedDef("statusled", LEDRED_GPO_DEF, LEDGREEN_GPO_DEF, 
 
 MINIMU9_LIS3MDL_I2C_DEF = I2CDeviceDef("imu_lis3mdl", 5, 0x1e)                    # definition of the IMU, LLS3MDL part, i2c bus5, address 0x1e
 MINIMU9_LSM6DS33_I2C_DEF = I2CDeviceDef("imu_lsmds33", 5, 0x6b)                   # definition of the IMU, LSM6DS33 part, i2c bus5, address 0x6b
-IMU_DEF = IMUDef("IMU", MINIMU9_LIS3MDL_I2C_DEF, MINIMU9_LSM6DS33_I2C_DEF)      # definition of the IMU
+IMU_DEF = IMUDef("imu", MINIMU9_LIS3MDL_I2C_DEF, MINIMU9_LSM6DS33_I2C_DEF)      # definition of the IMU
 
 HATADC_I2C_DEF = I2CDeviceDef("hat_adc", 5, 0x34)                            # definition of the TOPBOARD adc (is also used for power monitor) i2c bus5, address 0x34
 
@@ -99,7 +99,7 @@ IOEXPANDER_INTERRUPT_SETTINGS = [
     McpInitStruct(7, GpioDirection.GPIO_INPUT, InterruptTypes.INT_RISING),
     ]
 
-IO_EXPANDER_DEF = IOExpanderDef("main_io_expander", IOEXPANDER_I2C_DEF, 24, IOEXPANDER_INTERRUPT_SETTINGS)
+IO_EXPANDER_DEF = IOExpanderDef("io_expander_topboard", IOEXPANDER_I2C_DEF, 24, IOEXPANDER_INTERRUPT_SETTINGS)
 
 # -------------------
 """!
@@ -112,7 +112,7 @@ SERVOASSEMBLY_2_I2C_BUS = 1
 SERVOASSEMBLY_2_SPI_BUS = 0
 
 #SERVOASSEMBLY_COMMON_GPI = 4
-SERVOASSEMBLY_I2C_DEF = I2CDeviceDef("servo_io_expander", 1, 0x20)          # i2c bus1, address 0x2
+SERVOASSEMBLY_I2C_DEF = I2CDeviceDef("io_expander", 1, 0x20)          # i2c bus1, address 0x2
 
 SERVOASSEMBLY_INTERRUPT_SETTINGS = [
     McpInitStruct(0, GpioDirection.GPIO_INPUT, InterruptTypes.INT_RISING),

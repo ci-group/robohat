@@ -26,6 +26,16 @@ class I2CDeviceDef:
 
     # --------------------------------------------------------------------------------------
 
+    def set_name(self, _name) -> None:
+        """
+        Set new name of definition
+        @param _name:
+        @return: None
+        """
+        self.__name = _name
+
+    # --------------------------------------------------------------------------------------
+
     def get_i2c_bus_nr(self) -> int:
         """!
         Get I2C bus nr

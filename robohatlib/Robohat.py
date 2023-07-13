@@ -62,6 +62,7 @@ class Robohat:
         @param _servo_assembly_2_config config of servo assembly 2
         @param _sw_io_expander switch settings, default 7
         """
+        print("\n")
         print("Starting Robohat lib: " + Robohat_constants.ROBOHAT_LIB_VERSION_STR + "\n")
 
         self.__io_handler = IOHandler()

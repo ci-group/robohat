@@ -102,6 +102,8 @@ class Buzzer:
         @param _state: new state of system alarm
         @return: None
         """
+
+        print("Override if system alarm is permitted with: " + str(_state))
         self.__state_alarm_permitted = _state
 
     # ---------------------------------------------------------------------------------------
@@ -130,7 +132,7 @@ class Buzzer:
                 print("WARNING: System alarm !!!")
                 self.__last_time_error = time.time()
         else:
-            print("WARNING: System alarm !!!, sound is disabled")
+            print("\nWARNING: System alarm !!!, sound is disabled\n")
 
     # ---------------------------------------------------------------------------------------
     # ---------------------------------------------------------------------------------------

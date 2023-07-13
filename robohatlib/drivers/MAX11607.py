@@ -21,7 +21,7 @@ class MAX11607:
 
     # --------------------------------------------------------------------------------------
     def init_adc(self):
-        print("init MAX11607")
+        #print("init MAX11607")
 
         register_data = 0x80 | 0x2                                              # aak default, no reset
         conf_data = 0x01 | 0x06                                                 # single ended, multiple channel (0 untill last), last channel is AIN3 (channel 4)

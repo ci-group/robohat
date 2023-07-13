@@ -37,7 +37,7 @@ class ServoAssembly:
         i2c_def_pwm = I2CDeviceDef("pwm_" + _servo_config.get_name(), _i2c_bus_nr, BASE_ADDRESS_PCA9685, _servo_config.get_sw1_pwm_address())
         i2c_device_pwm = _io_handler.get_i2c_device(i2c_def_pwm)
 
-        spi_def_adc = SPIDeviceDef(_servo_config.get_name(), _spi_bus_nr, _servo_config.get_cs_adc_angle_readout())
+        spi_def_adc = SPIDeviceDef("adc_" + _servo_config.get_name(), _spi_bus_nr, _servo_config.get_cs_adc_angle_readout())
         spi_device_adc = _io_handler.get_spi_device(spi_def_adc)
 
         if i2c_device_pwm is not None and spi_device_adc is not None:
@@ -50,7 +50,7 @@ class ServoAssembly:
         callbackholder = InterruptCallbackHolder("expander_callback_holder", self.__io_power_monitor_and_io_int_callback, self.__io_power_monitor_and_io_int_reset_routine, InterruptTypes.INT_FALLING, 250)
         servo_assembly_expander_def.set_callbackholder(callbackholder)
 
-        self.__power_monitor_and_io = PowerMonitorAndIO(_io_handler,servo_assembly_expander_def, _servo_config.get_sw2_power_good_address())
+        self.__power_monitor_and_io = PowerMonitorAndIO(_io_handler,servo_assembly_expander_def, _servo_config.get_sw2_power_good_address(), _servo_config.get_name())
 
     #--------------------------------------------------------------------------------------
     #--------------------------------------------------------------------------------------

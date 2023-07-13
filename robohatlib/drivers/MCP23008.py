@@ -33,7 +33,7 @@ class MCP23008:
     # --------------------------------------------------------------------------------------
     def init_mcp23008(self):
 
-        print("init_MCP23008 " + self.__i2c_device.get_device_name() )
+        #print("init_MCP23008 " + self.__i2c_device.get_device_name() )
 
         self.__i2c_device.i2c_write_register_byte(0x00, 0x00)        # empty data, wake up mcp
         self.invert_port(0x00)
@@ -123,7 +123,7 @@ class MCP23008:
         return self.__get_pin(GP_PU_ADDRESS, _io_nr)
 
     def set_port_pullup(self, _byte_value):
-        print("port pullup: " + hex(_byte_value))
+        #print("port pullup: " + hex(_byte_value))
         self.__set_port(GP_PU_ADDRESS, _byte_value)
 
     def set_pin_data(self, _io_nr: int, _bool_value) -> None:
@@ -223,7 +223,7 @@ class MCP23008:
     def reset_interrupts(self):
         tmp = self.read_interrupt_capture()
 
-        print("INT reset done! in MCP23008")
+        #print("INT reset done! in MCP23008")
         del tmp
 
     # --------------------------------------------------------------------------------------
@@ -241,7 +241,7 @@ class MCP23008:
 
             self.__i2c_device.i2c_write_register_byte(_register, new_val)
         else:
-            print("pin doesn't exist")
+            print("pin " + str(_io_nr) + " doesn't exist")
     #--------------------------------------------------------------------------------------
 
     def __get_pin(self, _register, _io_nr) -> int:
@@ -249,7 +249,7 @@ class MCP23008:
             cur_val = self.__i2c_device.i2c_read_register_byte(_register)
             return  RoboUtil.check_bit(cur_val, _io_nr) # - 1)
         else:
-            print("pin doesn't exist")
+            print("pin " + str(_io_nr) + " doesn't exist")
 
     #--------------------------------------------------------------------------------------
     #--------------------------------------------------------------------------------------
@@ -264,7 +264,7 @@ class MCP23008:
 
     #--------------------------------------------------------------------------------------
     def __get_port(self, _register):
-        """
+        """!
         Gives port value (byte)
         @param _register:
         @return: port value

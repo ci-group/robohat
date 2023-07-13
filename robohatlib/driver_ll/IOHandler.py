@@ -395,10 +395,10 @@ class IOHandler:
         @return: I2C_Handler
         @raises: Exception
         """
-        if self.__add_gpio_if_not_already_used_or_give_error(_scl_pin, "scl") is IOStatus.IO_FAILED:
+        if self.__add_gpio_if_not_already_used_or_give_error(_scl_pin, "I2C bus: " + str(_i2c_bus_nr) + ", scl") is IOStatus.IO_FAILED:
             raise Exception("Unable to claim I2C "+ str(_i2c_bus_nr) + ", SCL-pin: '" + str(_scl_pin) + "', pin is already in use")
 
-        if self.__add_gpio_if_not_already_used_or_give_error(_sda_pin, "sda") is IOStatus.IO_FAILED:
+        if self.__add_gpio_if_not_already_used_or_give_error(_sda_pin, "I2C bus: " + str(_i2c_bus_nr) + ", sda") is IOStatus.IO_FAILED:
             raise Exception("Unable to claim I2C "+ str(_i2c_bus_nr) + ", SDA-pin: '" + str(_sda_pin) + "', pin is already in use")
 
         return I2CHandler(_i2c_bus_nr)                # <-- answers to 0x70 which is a ghost device?
@@ -464,13 +464,13 @@ class IOHandler:
         @param _miso_pin:
         @return: None
         """
-        if self.__add_gpio_if_not_already_used_or_give_error(_sck_pin, "sck") is IOStatus.IO_FAILED:
+        if self.__add_gpio_if_not_already_used_or_give_error(_sck_pin, "SPI bus: " + str(_spi_bus_nr) + ", sck") is IOStatus.IO_FAILED:
             raise Exception("Unable to claim SPI "+ str(_spi_bus_nr) + ", SCK-pin: '" + str(_sck_pin) + "', pin is already in use")
 
-        if self.__add_gpio_if_not_already_used_or_give_error(_mosi_pin, "mosi") is IOStatus.IO_FAILED:
+        if self.__add_gpio_if_not_already_used_or_give_error(_mosi_pin, "SPI bus: " + str(_spi_bus_nr) + ", mosi") is IOStatus.IO_FAILED:
             raise Exception("Unable to claim SPI "+ str(_spi_bus_nr) + ", MOSI-pin: '" + str(_mosi_pin) + "', pin is already in use")
 
-        if self.__add_gpio_if_not_already_used_or_give_error(_miso_pin, "miso") is IOStatus.IO_FAILED:
+        if self.__add_gpio_if_not_already_used_or_give_error(_miso_pin, "SPI bus: " + str(_spi_bus_nr) + ", miso") is IOStatus.IO_FAILED:
             raise Exception("Unable to claim SPI "+ str(_spi_bus_nr) + ", MISO-pin: '" + str(_miso_pin) + "', pin is already in use")
 
     # --------------------------------------------------------------------------------------
@@ -538,19 +538,19 @@ class IOHandler:
         # @param _gpi_interrupt_definition: definition of interrupt
         # @return: GPI_LL_Interrupt or None (None is for future use)
         # """
-        print("checking interrupt: " + _gpi_interrupt_definition.get_name() )
+        #print("checking interrupt: " + _gpi_interrupt_definition.get_name() )
 
         if len(self.__registered_gpi_ll_interrupts) is 0:
             interrupt = GPI_LL_Interrupt(_gpi_interrupt_definition)
             if interrupt is None:
                 return None
             self.__registered_gpi_ll_interrupts.append(interrupt)
-            print("claimed first: interrupt " + _gpi_interrupt_definition.get_name() )
+            #print("claimed first: interrupt " + _gpi_interrupt_definition.get_name() )
             return interrupt
 
         for interrupt in self.__registered_gpi_ll_interrupts:
             if interrupt.get_gpio_pin() is _gpi_interrupt_definition.get_gpio_pin():
-                print("already claimed: interrupt " + str(interrupt.get_gpio_pin()) + " for: " + interrupt.get_name() )
+                #print("already claimed: interrupt " + str(interrupt.get_gpio_pin()) + " for: " + interrupt.get_name() )
                 interrupt.add_callbackholder(_gpi_interrupt_definition.get_callbackholder())
                 return interrupt
 
@@ -558,7 +558,7 @@ class IOHandler:
         if interrupt is None:
             return None
         self.__registered_gpi_ll_interrupts.append(interrupt)
-        print("new claimed: interrupt " + _gpi_interrupt_definition.get_name())
+        #print("new claimed: interrupt " + _gpi_interrupt_definition.get_name())
         return interrupt
 
     #--------------------------------------------------------------------------------------

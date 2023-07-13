@@ -5,7 +5,7 @@ from robohatlib.hal.assemblyboard.ServoAssemblyConfig import ServoAssemblyConfig
 from robohatlib.hal.assemblyboard.servo.ServoData import ServoData
 from robohatlib import Robohat_constants
 
-SERVOASSEMBLY_1_NAME = "ServoAssembly_0"                    # just a name for own reference
+SERVOASSEMBLY_1_NAME = "servoassembly_0"                    # just a name for own reference
 SERVOASSEMBLY_1_SW1_PWM_ADDRESS = 0                         # sw1 value of the servo assembly
 SERVOASSEMBLY_1_SW2_POWER_GOOD_ADDRESS = 0                  # sw2 value of the servo assembly
 SERVOASSEMBLY_1_PWMPLUG = Robohat_constants.PWMPLUG_P3      # connected port of the topboard
@@ -35,7 +35,7 @@ servoassembly_1_config = ServoAssemblyConfig(SERVOASSEMBLY_1_NAME,
 
 #--------------------
 
-SERVOASSEMBLY_2_NAME = "ServoAssembly_1"                    # just a name for own reference
+SERVOASSEMBLY_2_NAME = "servoassembly_1"                    # just a name for own reference
 SERVOASSEMBLY_2_SW1_PWM_ADDRESS = 1                         # sw1 value of the servo assembly
 SERVOASSEMBLY_2_SW2_POWER_GOOD_ADDRESS = 1                  # sw2 value of the servo assembly
 SERVOASSEMBLY_2_PWMPLUG = Robohat_constants.PWMPLUG_P4      # connected port of the topboard

@@ -124,7 +124,7 @@ class GPI_LL_Interrupt:
         The actual interrupt callback, which executes all the callback retrieved from a callbackholder stored in an array
         @return: None
         """
-        print("callback " + str(_pin_nr))
+        #print("callback " + str(_pin_nr))
         if len(self.__registered_callback_holders) is 0:
             return
 
