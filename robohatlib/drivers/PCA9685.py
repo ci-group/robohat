@@ -44,7 +44,6 @@ MODE2_OUTNE1_BITNR =    0  # output mode when not enabled
 ~OE ie via een jumper       input pca
 INT_i2C gpio4               output pca, input cpu
 bus i2c-1
-
 """
 
 class PCA9685:
@@ -67,25 +66,28 @@ class PCA9685:
 
     # --------------------------------------------------------------------------------------
     def set_on_time_channel(self, _channel: int, _time_wanted_us: float) -> None:
-        _channel = _channel - 1
+        """!
+        @param _channel: channel nr 0 - 15
+        @param _time_wanted_us: new time in uS
+        @return: None
+        """
+        if _channel >= 0 and _channel <= 15:
+            actual_ticks_on = self.__convert_timeUs_to_tick(_time_wanted_us)
 
-        actual_ticks_on = self.__convert_timeUs_to_tick(_time_wanted_us)
+            on_ticks = 0
+            off_ticks = 4095 - actual_ticks_on - on_ticks
 
-        on_ticks = 0
-        off_ticks = 4095 - actual_ticks_on - on_ticks
+            #print("actual_ticks_on: " + str(actual_ticks_on) + ", on_ticks: " + str(on_ticks) + ", off_ticks: " + str(off_ticks))
 
-        #print("actual_ticks_on: " + str(actual_ticks_on) + ", on_ticks: " + str(on_ticks) + ", off_ticks: " + str(off_ticks))
+            on_tick_bytes = on_ticks.to_bytes(2, 'little')
+            off_tick_bytes = off_ticks.to_bytes(2, 'little')
 
-        on_tick_bytes = on_ticks.to_bytes(2, 'little')
-        off_tick_bytes = off_ticks.to_bytes(2, 'little')
-
-        self.__i2c_device.i2c_write_bytes(bytes([LED0_ON_L_ADDRESS + (4 * _channel), on_tick_bytes[0], on_tick_bytes[1], off_tick_bytes[0], off_tick_bytes[1]]))
-
+            self.__i2c_device.i2c_write_bytes(bytes([LED0_ON_L_ADDRESS + (4 * _channel), on_tick_bytes[0], on_tick_bytes[1], off_tick_bytes[0], off_tick_bytes[1]]))
+        else:
+            print("Channel " + str(_channel) + " in ADC MAX11607 not available")
     # --------------------------------------------------------------------------------------
     def set_on_time_all_channels(self, _wanted_times_us: []) -> None:
-
         data_to_send = bytes([LED0_ON_L_ADDRESS])
-
         for i in range(0, 16):
             actual_ticks_on = self.__convert_timeUs_to_tick(_wanted_times_us[i])
             on_ticks = 0
@@ -97,10 +99,7 @@ class PCA9685:
             off_tick_bytes = off_ticks.to_bytes(2, 'little')
 
             data_to_send = data_to_send + bytes([on_tick_bytes[0], on_tick_bytes[1], off_tick_bytes[0], off_tick_bytes[1]])
-
-
-        #print(datatosend)
-        self.__i2c_device.i2c_write_bytes(data_to_send)
+            self.__i2c_device.i2c_write_bytes(data_to_send)
 
     # --------------------------------------------------------------------------------------
     def sleep(self) -> None:
@@ -122,6 +121,7 @@ class PCA9685:
         new_mode = 0x00a0
         self.__write(MODE1_ADDRESS, new_mode)
         self.__i_am_a_sleep = False
+
     # --------------------------------------------------------------------------------------
     def is_sleeping(self) -> bool:
         """!
@@ -154,13 +154,15 @@ class PCA9685:
         pre_scale = math.floor(scale_val + 0.5)
         pre_scale = pre_scale + _calibration
 
-        print("scaleval: " + str(scale_val) + " Freq: " + str(_freq) + "Hz Prescaler: " + str(pre_scale))
+        #print("scaleval: " + str(scale_val) + " Freq: " + str(_freq) + "Hz Prescaler: " + str(pre_scale))
 
         self.__freq = _freq
 
         self.sleep()
         self.__write(PRE_SCALE_ADDRESS, int(pre_scale))
         self.wake()
+
+    # --------------------------------------------------------------------------------------
 
     def __convert_timeUs_to_tick(self, _time_wanted_us: float):
         time_per_tick = ((1.0 / self.__freq) / 4095.0) * 1000000

@@ -52,8 +52,8 @@ class ServoBoard:
     #--------------------------------------------------------------------------------------
 
     def set_servo_angle(self, _servo_nr: int, _angle: float) -> None:
-        if _servo_nr >= 1 and _servo_nr <= 16:
-            servo_data:ServoData = self.__servo_datas_array[_servo_nr - 1]
+        if _servo_nr >= 0 and _servo_nr < 16:
+            servo_data:ServoData = self.__servo_datas_array[_servo_nr]
 
             if _angle >= servo_data.get_min_angle() or _angle <= servo_data.get_max_angle():
                 wanted_time = servo_data.convert_angle_to_time(_angle)
@@ -61,7 +61,7 @@ class ServoBoard:
             else:
                 print("Error, requested angle is not valid: min: " + str(servo_data.get_min_angle()) + " max: " + str(servo_data.get_max_angle()) )
         else:
-            print("Error, requested servo number is not valid, should be 1 till 16")
+            print("Error, requested servo number is not valid, should be 0 till 15")
     #--------------------------------------------------------------------------------------
 
     def get_servo_angle(self, _servo_nr: int) -> float:
@@ -72,7 +72,7 @@ class ServoBoard:
         @return angle or -1
         """
 
-        if _servo_nr >= 1 and _servo_nr <= 16:
+        if _servo_nr >= 0 and _servo_nr < 16:
             voltage_channel = self.get_servo_readout_adc_single_channel(_servo_nr)
             angle_channel = self.__servo_datas_array[_servo_nr - 1].convert_voltage_to_angle(voltage_channel)
             return angle_channel
@@ -102,7 +102,7 @@ class ServoBoard:
         """
 
         angle_array = [0] * 17
-        for servo_nr in range(1, 17):
+        for servo_nr in range(0, 16):
             voltage_adc_channel = self.__servo_adc.get_readout_adc_servo_nr(servo_nr)
             angle_array[servo_nr] = self.__servo_datas_array[servo_nr-1].convert_voltage_to_angle(voltage_adc_channel)
 
@@ -113,12 +113,12 @@ class ServoBoard:
 
     def get_servo_readout_adc_single_channel(self, _servo_nr: int) -> float:
         """!
-        Get voltage of the potentiometer of the connected servo in volt or -1 when in erro
-        @param _servo_nr The servo nr wanted (starts at 1)
+        Get voltage of the potentiometer of the connected servo in volt or -1 when in error
+        @param _servo_nr The servo nr wanted (starts at 01)
         @return voltage or -1
         """
 
-        if _servo_nr >= 1 and _servo_nr <= 16:
+        if _servo_nr >= 0 and _servo_nr < 16:
             return self.__servo_adc.get_readout_adc_servo_nr(_servo_nr)
         else:
             print("Error, requested servo number is not valid, should be 1 till 16")
@@ -154,7 +154,7 @@ class ServoBoard:
         """!
          Sets new parameters to adjust servo time
 
-        @param _servo_nr:  servo nr (should be 1-16)
+        @param _servo_nr:  servo nr (should be 0-15)
         @param _min_time: PWM time of servo at minimum pos (something like 500 uS)
         @param _max_time: PWM time of servo at maximum pos (something like 2500 uS)
         @param _running_degree: Range of degree of servo (something like 180 degree)
@@ -164,7 +164,7 @@ class ServoBoard:
         @return: None
         """
 
-        if _servo_nr >= 1 and _servo_nr <= 16:
+        if _servo_nr >= 0 and _servo_nr < 16:
             self.__servo_datas_array[_servo_nr - 1].set_running_parameters(_min_time, _max_time, _running_degree, _offset_degree, _formula_a, _formula_b)
         else:
             print("Error, requested servo number is not valid, should be 1 till 16")

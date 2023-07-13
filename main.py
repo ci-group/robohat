@@ -259,7 +259,7 @@ class Example:
         print("get lib version                                displays version of the library")
 
         print("get hat adc [channel]                          get hat adc value (channel 4 is divided accu voltage")
-        print("get hat adc all                                get all the hat adc valuea")
+        print("get hat adc all                                get all the hat adc values")
 
         print("do i2c scan                                    scans the i2c bus")
 

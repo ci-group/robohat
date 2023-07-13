@@ -96,7 +96,7 @@ class ServoAssembly:
         """!
         Set the angle servo in degree
 
-        @param _servo_nr The servo nr wanted (starts at 1)
+        @param _servo_nr The servo nr wanted (starts at 0)
         @param _angle wanted angle
 
         @return angle of connected servo in degree
@@ -106,14 +106,15 @@ class ServoAssembly:
 
     def get_servo_angle(self, _servo_nr: int) -> float:
         """!
-        Get angle of connected servo in degree
+        Get angle of connected servo in degree, or -1 when fails
 
-        @param _servo_nr The servo nr wanted (starts at 1)
+        @param _servo_nr The servo nr wanted (starts at 0)
         @return angle of connected servo in degree, or 0 when not available
         """
         if self.__servo_board is not None:
             return self.__servo_board.get_servo_angle(_servo_nr)
-        return 0
+        else:
+            return -1
 
     # --------------------------------------------------------------------------------------
 
@@ -141,12 +142,12 @@ class ServoAssembly:
         """!
         Get voltage of the potentiometer of the connected servo in vol
 
-        @param _servo_nr The servo nr wanted (starts at 1)
-        @return voltage of connected servo in volt or 0 when not available
+        @param _servo_nr The servo nr wanted (starts at 0)
+        @return voltage of connected servo in volt or -1 when not available
         """
         if self.__servo_board is not None:
             return self.__servo_board.get_servo_readout_adc_single_channel(_servo_nr)
-        return 0.0
+        return -1
 
     def get_adc_readout_multiple_channels(self) -> []:
         """!

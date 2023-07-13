@@ -103,7 +103,7 @@ class MAX11137:
         self.__spi_device = _spi_device
 
     # --------------------------------------------------------------------------------------
-    '''
+    '''!
     public method, init the adc
     '''
     def init_adc(self):
@@ -135,14 +135,14 @@ class MAX11137:
         self.__spi_device.writeRegister(adc_custom_scan1)
 
     # --------------------------------------------------------------------------------------
-    '''
+    '''!
     public method, resets the adc
     '''
     def reset_adc(self):
         self.__spi_device.writeRegister(0x0040)
 
     # --------------------------------------------------------------------------------------
-    '''
+    '''!
     public method, get voltage of 1 channel of the ADC, returns a double
     '''
     def get_readout_adc_servo_nr(self, _servo_nr: int) -> float:
@@ -153,29 +153,26 @@ class MAX11137:
 
         @return voltage of the potentiometer of the connected servo in volt
         """
+        if _servo_nr >= 0 and _servo_nr < 16:
+            # adc_mode_control = 0b0000000000000000
+            # adc_mode_control = self.__updateRegisterValue(adc_mode_control, SCAN_LSB, SCAN_BITS_MANUAL)
+            # adc_mode_control = self.__updateRegisterValue(adc_mode_control, CHSEL_LSB, _servo_nr)
+            # adc_mode_control = self.__updateRegisterValue(adc_mode_control, RESET_LSB, RESET_BITS_NORESET)
+            # adc_mode_control = self.__updateRegisterValue(adc_mode_control, PM_LSB, PM_BITS_NORMAL)
+            # adc_mode_control = self.__updateRegisterValue(adc_mode_control, CHAN_ID_LSB, CHAN_ID_BITS)
+            # adc_mode_control = self.__updateRegisterValue(adc_mode_control, SWCNV_LSB, SWCNV_BITS)
+            # value = self.__give_result_adc(adc_mode_control)
 
-        if _servo_nr < 1 or _servo_nr > 16:
+            #4-7-23
+            # instead of using the channel auto increment, just read the whole array... was a bug
+            value_array = self.get_readout_adc_mutiplechannels()
+            return value_array[_servo_nr-1]
+        else:
             print("Servo range not valid")
-            return 0.0
-
-        # adc_mode_control = 0b0000000000000000
-        # adc_mode_control = self.__updateRegisterValue(adc_mode_control, SCAN_LSB, SCAN_BITS_MANUAL)
-        # adc_mode_control = self.__updateRegisterValue(adc_mode_control, CHSEL_LSB, _servo_nr)
-        # adc_mode_control = self.__updateRegisterValue(adc_mode_control, RESET_LSB, RESET_BITS_NORESET)
-        # adc_mode_control = self.__updateRegisterValue(adc_mode_control, PM_LSB, PM_BITS_NORMAL)
-        # adc_mode_control = self.__updateRegisterValue(adc_mode_control, CHAN_ID_LSB, CHAN_ID_BITS)
-        # adc_mode_control = self.__updateRegisterValue(adc_mode_control, SWCNV_LSB, SWCNV_BITS)
-        # value = self.__give_result_adc(adc_mode_control)
-
-
-        #4-7-23
-        # instead of using the channel auto increment, just read the whole array... was a bug
-        value_array = self.get_readout_adc_mutiplechannels()
-
-        return value_array[_servo_nr-1]
+            return -1
 
     # --------------------------------------------------------------------------------------
-    '''
+    '''!
     public method, get voltage of all 16 channels of the ADC. returns an array
     '''
     def  get_readout_adc_mutiplechannels(self) -> []:
@@ -211,7 +208,7 @@ class MAX11137:
 
     # --------------------------------------------------------------------------------------
 
-    '''
+    '''!
     private method, to get the result out of the ADC in voltage 
     '''
     def __give_result_adc(self, _adc_mode_control) -> float:
@@ -226,13 +223,16 @@ class MAX11137:
         return voltage_float
 
 
+    # --------------------------------------------------------------------------------------
 
 
-    '''
+    '''!
     private method, to alter a value swith bitvalue and a bit position
     '''
     def __updateRegisterValue(self, previous_value, bit_pos, bit_value):
         return_value = previous_value | (bit_value << bit_pos)
         return return_value
+
+    # --------------------------------------------------------------------------------------
 
 

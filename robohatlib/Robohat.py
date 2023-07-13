@@ -39,7 +39,6 @@ except ImportError:
     print("Failed to import needed dependencies for the Robohat class")
     raise
 
-
 # --------------------------------------------------------------------------------------
 
 
@@ -142,7 +141,6 @@ class Robohat:
         if self.__servo_assembly_2 is not None:
             self.__servo_assembly_2.exit_program()
 
-
         self.__serial.exit_program()
         self.__imu.exit_program()
         self.__io_expander.exit_program()
@@ -156,7 +154,6 @@ class Robohat:
 
 
     # begin I2C functions ---------------------------------------------------------------------------------
-
     def scan_i2c_bus(self) -> None:
         """!
         Scans all the available I2C busses on the Robohat hardware
@@ -171,7 +168,6 @@ class Robohat:
     # end I2C functions ---------------------------------------------------------------------------------
 
     # begin BUZZER functions -----------------------------------------------------------------------------
-
     def do_buzzer_random(self) -> None:
         """!
         Generates a random sound
@@ -212,7 +208,6 @@ class Robohat:
         @return: None
         """
         self.__buzzer.buzzer_release()
-
     # end BUZZER functions ------------------------------------------------------------------------------------
 
     # begin LED functions ---------------------------------------------------------------------------------
@@ -244,7 +239,6 @@ class Robohat:
 
     def get_led_color(self) -> Color:
         return self.__led.get_led_color()
-
     # end LED functions ------------------------------------------------------------------------------------
 
     # begin Servo functions --------------------------------------------------------------------------------------
@@ -252,10 +246,10 @@ class Robohat:
         """!
         Checks if servo is connected. Returns False when not connected
 
-        @param _servo_nr The servo nr
+        @param _servo_nr The servo nr 0 - 31
         @return: Returns False when not connected
         """
-        if _servo_nr >= 1 or _servo_nr <= 16:
+        if _servo_nr >= 0 or _servo_nr < 16:
             if self.__servo_assembly_1 is None:
                 return False
 
@@ -264,7 +258,7 @@ class Robohat:
                 return self.__servo_assembly_1.get_servo_is_connected(servo_nr)
             return False
 
-        elif _servo_nr >= 17 or _servo_nr <= 32:
+        elif _servo_nr >= 16 or _servo_nr < 32:
             if self.__servo_assembly_2 is None:
                 return False
 
@@ -280,13 +274,13 @@ class Robohat:
         """!
         Get angle of connected servo in degree or -1 when an error occurs
 
-        @param _servo_nr The servo nr wanted (starts at 1)
+        @param _servo_nr The servo nr wanted, the servo nr 0 - 31
         @return angle or -1
         """
 
-        servo_assembly = self.__get_servo_assembly_depending_servo_nr(_servo_nr)  # the assembly depending on servo_nr
+        servo_assembly = self.__get_servo_assembly_depending_servo_nr(_servo_nr)    # the assembly depending on servo_nr
         if servo_assembly is not None:
-            servo_nr = self.__get_servo_nr_depending_assembly(_servo_nr)  # servo nr of the servo of the assembly
+            servo_nr = self.__get_servo_nr_depending_assembly(_servo_nr)            # servo nr of the servo of the assembly
             if servo_nr is not None:
                 return servo_assembly.get_servo_adc_readout_single_channel(servo_nr)
         return -1
@@ -296,7 +290,7 @@ class Robohat:
         """!
         Get angle of connected servo in degree or -1 wen an error occurs
 
-        @param _servo_nr The servo nr wanted (starts at 1)
+        @param _servo_nr The servo nr wanted (starts at 0)
         @return angle or -1
         """
 
@@ -306,12 +300,13 @@ class Robohat:
             if servo_nr is not None:
                 return servo_assembly.get_servo_angle(servo_nr)
         return -1
+    # --------------------------------------------------------------------------------------
 
     def set_servo_angle(self, _servo_nr: int, _angle: float) -> None:
         """!
         Set the angle of connected servo in degree, does nothing when not avaible
 
-        @param _servo_nr The servo nr wanted (starts at 1)
+        @param _servo_nr The servo nr wanted (starts at 0)
         @param _angle wanted angle
 
         @return None
@@ -375,11 +370,11 @@ class Robohat:
         """
 
         if self.__servo_assembly_1 is not None:
-            angles_array1 = _angles_array[0:17]
+            angles_array1 = _angles_array[0:16]
             self.__servo_assembly_1.set_all_servos_angle(angles_array1)
 
         if self.__servo_assembly_2 is not None and len(_angles_array) >= 32:
-            angles_array2 = _angles_array[16:33]
+            angles_array2 = _angles_array[16:32]
             self.__servo_assembly_2.set_all_servos_angle(angles_array2)
 
 
@@ -395,7 +390,6 @@ class Robohat:
 
         if self.__servo_assembly_2 is not None:
             self.__servo_assembly_2.sleep()
-
 
     # ------------------------------------------------------------------------------------------
 
@@ -429,16 +423,16 @@ class Robohat:
 
     def __get_servo_nr_depending_assembly(self, _servo_nr: int) -> int | None:
         """!
-        Get the servo nr of the assembly (so servo nr 17 will be servo nr 1 of assembly 2. If not available
+        Get the servo nr of the assembly (so servo nr 16 will be servo nr 0 of assembly 2. If not available
         None will be returned
 
         @param _servo_nr The servo nr wanted (starts at 1)
         @return servo number or None
         """
 
-        if _servo_nr >= 1 and _servo_nr <= 16:
+        if _servo_nr >= 0 and _servo_nr < 16:
             return _servo_nr
-        elif _servo_nr >= 17 and _servo_nr <= 32:
+        elif _servo_nr >= 16 and _servo_nr < 32:
             return _servo_nr - 16
         else:
             print("Error: requested " + str(_servo_nr) + " is not available")
@@ -446,22 +440,21 @@ class Robohat:
 
     # ------------------------------------------------------------------------------------------
 
-
     def __get_servo_assembly_depending_servo_nr(self, _servo_nr: int) -> ServoAssembly | None:
         """!
         Get servo_assembly depending on servo nr or None when an error occurs
 
-        @param _servo_nr The servo nr wanted (starts at 1)
+        @param _servo_nr The servo nr wanted (starts at 0)
         @return servo_nr or None
         """
 
-        if _servo_nr >= 1 and _servo_nr <= 16:
+        if _servo_nr >= 0 and _servo_nr < 16:
             if self.__servo_assembly_1 is None:
                 print("Error: servo assembly 1 not initialized")
                 return None
             return self.__servo_assembly_1
 
-        elif _servo_nr >= 17 and _servo_nr <= 32:
+        elif _servo_nr >= 16 and _servo_nr < 32:
             if self.__servo_assembly_2 is None:
                 print("Error: servo assembly 2 not initialized")
                 return None
@@ -477,8 +470,7 @@ class Robohat:
         """!
         Get analog value of a channel from the HAT adc
 
-        @param _channel_nr The channel nr wanted (starts at 1, so 1 is AI0)
-
+        @param _channel_nr The channel nr wanted (starts at 0, so 0 is AI0)
         @return analog voltage
         """
 
@@ -497,7 +489,7 @@ class Robohat:
     # end HAT ADC functions --------------------------------------------------------------------------------------
 
     # begin IO_EXPANDER functions ---------------------------------------------------------------------------------
-    def set_io_expander_direction(self, _io_nr, _direction: ExpanderDir) -> None:
+    def set_io_expander_direction(self, _io_nr:int, _direction: ExpanderDir) -> None:
         """!
         Set the direction of an io pin of the IO expander
 

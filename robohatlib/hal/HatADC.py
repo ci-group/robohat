@@ -25,7 +25,8 @@ class HatADC:
         i2c_device = _iomanager.get_i2c_device(_hat_adc_i2c_def)
         if i2c_device is not None:
             self.__hat_adc = MAX11607(i2c_device)
-        self.__hat_adc = None
+        else:
+            self.__hat_adc = None
 
     # init all adcs --------------------------------------------------------------------------------------
     def init_hat_adc(self) -> None:
@@ -58,7 +59,7 @@ class HatADC:
 
         if self.__hat_adc is not None:
             if _channel_nr >= 1 and _channel_nr <= 4:
-                return self.__hat_adc.get_voltage_readout_channel(_channel_nr)
+                return self.__hat_adc.get_readout_single_channel(_channel_nr)
             else:
                 print("Unknown channel nr")
         else:
@@ -72,7 +73,7 @@ class HatADC:
         @return array of analog voltage or None when not available
         """
         if self.__hat_adc is not None:
-            return self.__hat_adc.get_readout_hatadc_mutiplechannels()
+            return self.__hat_adc.get_readout_multiple_channels()
         return []
 
     # end, hat adc functions --------------------------------------------------------------------------------------
@@ -84,7 +85,7 @@ class HatADC:
         """
 
         if self.__hat_adc is not None:
-            return self.__hat_adc.get_voltage_readout_channel(4)
+            return self.__hat_adc.get_readout_single_channel(4)
         return 0.0
 
 
