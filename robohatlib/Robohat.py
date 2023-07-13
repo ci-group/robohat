@@ -530,27 +530,27 @@ class Robohat:
     # end IO_EXPANDER functions ------------------------------------------------------------------------------------
 
     # begin IMU functions ---------------------------------------------------------------------------------
-    def get_magnetic_fields(self) -> Tuple[float, float, float]:
+    def get_magnetic_fields(self) -> Tuple[float, float, float] | None:
         """!
         Get the magnetic fields
 
-        @return a tuple of the magnetic fields values x,y,z
+        @return a tuple of the magnetic fields values x,y,z or None when not available
         """
         return self.__imu.get_magnetic_fields()
 
-    def get_acceleration(self) -> Tuple[float, float, float]:
+    def get_acceleration(self) -> Tuple[float, float, float] | None:
         """!
         Get the acceleration of the Robohat
 
-        @return a tuple of the guro values x,y,z
+        @return a tuple of the guro values x,y,z or None when not available
         """
         return self.__imu.get_acceleration()
 
-    def get_gyro(self) -> Tuple[float, float, float]:
+    def get_gyro(self) -> Tuple[float, float, float] | None:
         """!
         Get the values of the Gyro
 
-        @return a tuple of the guro values x,y,z
+        @return a tuple of the guro values x,y,z or None when not available
         """
         return self.__imu.get_gyro()
 
@@ -591,7 +591,7 @@ class Robohat:
         """
 
         self.__powerManagement.shutdown_power()
-        sleep(1)
+        sleep(5)
         self.__io_handler.io_shutdown()
 
     # begin Library functions ---------------------------------------------------------------------------------

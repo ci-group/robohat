@@ -1,3 +1,5 @@
+from __future__ import annotations
+
 try:
     from robohatlib.drivers.LIS3MDL import LIS3MDL
     from robohatlib.drivers.LSM6DS33 import LSM6DS33
@@ -45,7 +47,7 @@ class IMU:
 
     # --------------------------------------------------------------------------------------
     def exit_program(self) -> None:
-        """
+        """!
         Cleans up, when user want to shut down
         @return: None
         """
@@ -61,40 +63,40 @@ class IMU:
 
     # --------------------------------------------------------------------------------------
 
-    def get_magnetic_fields(self) -> Tuple[float, float, float]:
+    def get_magnetic_fields(self) -> Tuple[float, float, float] | None:
         """!
-        Get the magnetic fields
-        @return: (Typle x,y,z)  magnetic fields or 0,0,0 if no available
+        Get the magnetic fields or None when not available
+        @return: (Tuple x,y,z)  magnetic fields or None
         """
 
         if self.__lis3ml is not None:
             return self.__lis3ml.get_magnetic_fields()
-        return 0,0,0
+        return None
 
     # --------------------------------------------------------------------------------------
     # --------------------------------------------------------------------------------------
     # --------------------------------------------------------------------------------------
 
-    def get_acceleration(self) -> Tuple[float, float, float]:
+    def get_acceleration(self) -> Tuple[float, float, float] | None:
         """!
-        Get the acceleration fields
-        @return: (Tuple x,y,z)  acceleration fields or 0,0,0 if no available
+        Get the acceleration fields or None when not available
+        @return: (Tuple x,y,z)  acceleration fields or None
         """
 
         if self.__lsm6ds33 is not None:
             return self.__lsm6ds33.get_acceleration()
-        return 0,0,0
+        return None
 
     # --------------------------------------------------------------------------------------
 
-    def get_gyro(self) -> Tuple[float, float, float]:
+    def get_gyro(self) -> Tuple[float, float, float] | None:
         """!
-        Get the gyro fields
-        @return: (Tuple x,y,z)  gyro fields or 0,0,0 if no available
+        Get the gyro fields or None when not available
+        @return: (Tuple x,y,z)  gyro fields or None
         """
 
         if self.__lsm6ds33 is not None:
             return self.__lsm6ds33.get_gyro()
-        return 0,0,0
+        return None
 
     # --------------------------------------------------------------------------------------

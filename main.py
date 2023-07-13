@@ -206,13 +206,22 @@ class Example:
             sub_command = data_in_array[2]
             if sub_command == "magnetic":
                 value = self.robohat.get_magnetic_fields()
-                print("IMU magnetic: " + str(value) )
+                if value is not None:
+                    print("IMU magnetic: " + str(value) )
+                else:
+                    print("IMU not present")
             elif sub_command == "acceleration":
                 value = self.robohat.get_acceleration()
-                print("IMU acceleration: " + str(value) )
+                if value is not None:
+                    print("IMU acceleration: " + str(value) )
+                else:
+                    print("IMU not present")
             elif sub_command == "gyro":
                 value = self.robohat.get_gyro()
-                print("IMU gyro: " + str(value) )
+                if value is not None:
+                    print("IMU gyro: " + str(value) )
+                else:
+                    print("IMU not present")
             else:
                 print("syntax error")
 
