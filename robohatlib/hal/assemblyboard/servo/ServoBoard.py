@@ -104,7 +104,7 @@ class ServoBoard:
         angle_array = [0] * 16
         for servo_nr in range(0, 16):
             voltage_adc_channel = self.__servo_adc.get_readout_adc_servo_nr(servo_nr)
-            if voltage_adc_channel != 0:
+            if voltage_adc_channel > 0.2:
                 angle_array[servo_nr] = self.__servo_datas_array[servo_nr].convert_voltage_to_angle(voltage_adc_channel)
             else:
                 angle_array[servo_nr] = -1

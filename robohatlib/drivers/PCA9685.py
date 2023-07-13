@@ -71,20 +71,18 @@ class PCA9685:
         @param _time_wanted_us: new time in uS
         @return: None
         """
-        if _channel >= 0 and _channel <= 15:
+        if _channel >= 0 and _channel < 16:
             actual_ticks_on = self.__convert_timeUs_to_tick(_time_wanted_us)
 
             on_ticks = 0
             off_ticks = 4095 - actual_ticks_on - on_ticks
-
-            #print("actual_ticks_on: " + str(actual_ticks_on) + ", on_ticks: " + str(on_ticks) + ", off_ticks: " + str(off_ticks))
 
             on_tick_bytes = on_ticks.to_bytes(2, 'little')
             off_tick_bytes = off_ticks.to_bytes(2, 'little')
 
             self.__i2c_device.i2c_write_bytes(bytes([LED0_ON_L_ADDRESS + (4 * _channel), on_tick_bytes[0], on_tick_bytes[1], off_tick_bytes[0], off_tick_bytes[1]]))
         else:
-            print("Channel " + str(_channel) + " in ADC MAX11607 not available")
+            print("Error: channel " + str(_channel) + " in ADC MAX11607 not available")
     # --------------------------------------------------------------------------------------
     def set_on_time_all_channels(self, _wanted_times_us: []) -> None:
         data_to_send = bytes([LED0_ON_L_ADDRESS])
@@ -92,8 +90,6 @@ class PCA9685:
             actual_ticks_on = self.__convert_timeUs_to_tick(_wanted_times_us[i])
             on_ticks = 0
             off_ticks = 4095 - actual_ticks_on - on_ticks
-
-            #print("actual_ticks_on: " + str(actual_ticks_on) + ", on_ticks: " + str(on_ticks) + ", off_ticks: " + str( off_ticks))
 
             on_tick_bytes = on_ticks.to_bytes(2, 'little')
             off_tick_bytes = off_ticks.to_bytes(2, 'little')
