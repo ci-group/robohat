@@ -7,6 +7,7 @@ except ImportError:
     print("Failed to import dependencies for the HatADC")
     raise
 
+CHANNEL_ACCU_VOLTAGE = 3
 
 class HatADC:
     """!
@@ -85,7 +86,7 @@ class HatADC:
         """
 
         if self.__hat_adc is not None:
-            return self.__hat_adc.get_readout_single_channel(4)
+            return self.__hat_adc.get_readout_single_channel(CHANNEL_ACCU_VOLTAGE)
         return 0.0
 
 

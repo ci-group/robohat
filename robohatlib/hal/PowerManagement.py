@@ -102,7 +102,7 @@ class PowerManagement:
     def timer_callback(self) -> None:
         """!
         The actual timer function. Retrieves the voltage of the accu and puts it in the fiter function. Restarts the timer.
-        Timer will not restart when ADC is not availble
+        Timer will not restart when ADC is not available
         @return: None
         """
 
