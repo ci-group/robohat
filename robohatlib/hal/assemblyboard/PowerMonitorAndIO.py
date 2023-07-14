@@ -1,3 +1,5 @@
+from __future__ import annotations
+
 try:
     from robohatlib.drivers.MCP23008 import MCP23008
     import time, threading
@@ -11,9 +13,12 @@ try:
     from robohatlib.driver_ll.i2c.I2CDevice import I2CDevice
     from robohatlib.driver_ll.definitions.InterruptCallbackHolder import InterruptCallbackHolder
     from robohatlib.hal.datastructure.ExpanderStatus import ExpanderStatus
+    from robohatlib.hal.datastructure.ExpanderDirection import ExpanderDir
     from robohatlib.driver_ll.definitions.GPIInterruptDef import GPIInterruptDef
     from robohatlib.driver_ll.constants.InterruptTypes import InterruptTypes
     from robohatlib.driver_ll.definitions.IOExpanderDef import IOExpanderDef
+    from robohatlib.hal.datastructure.ExpanderDirection import ExpanderDir
+    from robohatlib.hal.datastructure.ExpanderStatus import ExpanderStatus
     from robohatlib import Robohat_config
     from robohatlib.driver_ll.IOHandler import IOHandler
     from robohatlib.helpers.RoboUtil import RoboUtil
@@ -83,8 +88,31 @@ class PowerMonitorAndIO:
     # --------------------------------------------------------------------------------------
     # --------------------------------------------------------------------------------------
 
-    def set_direction_io_expander(self, _io_nr:int, _direction) -> None:
+    def get_io_expander_direction(self, _io_nr:int) -> ExpanderDir | None:
+        """!
+        get the direction of the IO pin
+
+        @param _io_nr io nr
+        @return ExpanderDir or none
         """
+
+        if self.__io_device is None:
+            return
+
+        if self.__check_if_expander_io_is_available(_io_nr) is True:
+            value = self.__io_device.get_pin_data(_io_nr)
+            if value is 0:
+                return ExpanderDir.OUTPUT
+            else:
+                return ExpanderDir.INPUT
+        else:
+            print("io pin not available for user")
+            return None
+
+    # --------------------------------------------------------------------------------------
+    # --------------------------------------------------------------------------------------
+    def set_io_expander_direction(self, _io_nr:int, _direction: ExpanderDir) -> None:
+        """!
         Set the direction of the IO pin
 
         @param _io_nr io nr
@@ -105,34 +133,43 @@ class PowerMonitorAndIO:
             print("io pin not available for user")
     # --------------------------------------------------------------------------------------
 
-    def set_output_io_expander(self, _io_nr:int, _bool_value) -> None:
-        """
+    def set_io_expander_output(self, _io_nr:int, _value: ExpanderStatus) -> None:
+        """!
         @param _io_nr: io nr
+        @param _value
         @return None
         """
         if self.__io_device is None:
             return
 
         if self.__check_if_expander_io_is_available(_io_nr) is True:
-            self.__io_device.set_pin_data(_io_nr, _bool_value)
+            if _value is ExpanderStatus.LOW:
+                self.__io_device.set_pin_data(_io_nr, 0)
+            else:
+                self.__io_device.set_pin_data(_io_nr, 1)
         else:
             print("io pin not available for user")
 
     # --------------------------------------------------------------------------------------
 
-    def get_input_io_expander(self, _io_nr:int) -> int:
+    def get_io_expander_input(self, _io_nr:int) -> ExpanderStatus | None:
         """!
         @param _io_nr: io nr
 
-        @return none
+        @return ExpanderStatus or None
         """
 
         if self.__io_device is None:
-            return 0
+            return None
 
         if self.__check_if_expander_io_is_available(_io_nr) is True:
-            return self.__io_device.get_pin_data(_io_nr)
-        return 0
+            value = self.__io_device.get_pin_data(_io_nr)
+            if value is 0:
+                return ExpanderStatus.LOW
+            else:
+                return ExpanderStatus.HIGH
+        else:
+            return None
 
     # --------------------------------------------------------------------------------------
     def add_signaling_device(self, _signaling_device) -> None:

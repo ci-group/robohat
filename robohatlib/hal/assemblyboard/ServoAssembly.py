@@ -1,3 +1,5 @@
+from __future__ import annotations
+
 try:
     from robohatlib.hal.assemblyboard.servo.ServoBoard import ServoBoard
     from robohatlib.hal.assemblyboard.PowerMonitorAndIO import PowerMonitorAndIO
@@ -11,6 +13,8 @@ try:
     from robohatlib.hal.datastructure.ExpanderStatus import ExpanderStatus
     from robohatlib.driver_ll.i2c.I2CDeviceDef import I2CDeviceDef
     from robohatlib.driver_ll.spi.SPIDeviceDef import SPIDeviceDef
+    from robohatlib.hal.datastructure.ExpanderDirection import ExpanderDir
+    from robohatlib.hal.datastructure.ExpanderStatus import ExpanderStatus
 except ImportError:
     print("Failed to resolve dependencies for ServoAssembly")
     raise
@@ -231,17 +235,26 @@ class ServoAssembly:
 
     # --------------------------------------------------------------------------------------
     def set_io_expander_direction(self, _pin_nr: int, _dir: ExpanderDir) -> None:
-        print("Not implemented yet!")
+        if self.__power_monitor_and_io is not None:
+            self.__power_monitor_and_io.set_io_expander_direction(_pin_nr, _dir)
+    # --------------------------------------------------------------------------------------
 
-    def get_io_expander_direction(self, _pin_nr: int, _dir: ExpanderDir) -> ExpanderDir | None:
-        print("Not implemented yet!")
-        return None
+    def get_io_expander_direction(self, _pin_nr: int) -> ExpanderDir | None:
+        if self.__power_monitor_and_io is not None:
+            return self.__power_monitor_and_io.get_io_expander_direction(_pin_nr)
+        else:
+            return None
+    # --------------------------------------------------------------------------------------
 
-    def set_io_expander_output(self, _board_nr: int, _pin_nr: int, _value: ExpanderStatus) -> None:
-        print("Not implemented yet!")
+    def set_io_expander_output(self, _pin_nr: int, _value: ExpanderStatus) -> None:
+        if self.__power_monitor_and_io is not None:
+            self.__power_monitor_and_io.set_io_expander_output(_pin_nr, _value)
+    # --------------------------------------------------------------------------------------
 
-    def get_io_expander_input(self, _board_nr: int, _pin_nr: int) -> ExpanderStatus | None:
-        print("Not implemented yet!")
-        return None
+    def get_io_expander_input(self, _pin_nr: int) -> ExpanderStatus | None:
+        if self.__power_monitor_and_io is not None:
+            return self.__power_monitor_and_io.get_io_expander_output(_pin_nr)
+        else:
+            return None
 
 # --------------------------------------------------------------------------------------
