@@ -436,58 +436,90 @@ class Robohat:
         @param _dir: on or out
         @return None:
         """
+        if _board_nr == Robohat_constants.PWMPLUG_P3:               # board 0
+            if self.__servo_assembly_1 is not None:
+                self.__servo_assembly_1.set_io_expander_direction(_pin_nr,_dir)
+            else:
+                print("Error: servo assembly 1 not initialized")
+        elif _board_nr == Robohat_constants.PWMPLUG_P4:             # board 1
+            if self.__servo_assembly_2 is not None:
+                self.__servo_assembly_2.set_io_expander_direction(_pin_nr,_dir)
+            else:
+                print("Error: servo assembly 2 not initialized")
+        else:
+            print("Error: servo assembly 1 and servo assembly 2 are not initialized")
 
-        print("nothing implemented yet")
-        # servo_assembly = self.__get_servo_assembly_depending_servo_nr(_servo_nr)
-        # if servo_assembly is not None:
-        #     servo_nr = self.__get_servo_nr_depending_assembly(_servo_nr)
-        #     servo_assembly.set_io_expander_output(_pin_nr, _dir)
+    # ------------------------------------------------------------------------------------------
 
-    def get_io_expander_direction(self, _board_nr: int, _pin_nr: int) -> ExpanderDir:
+    def get_io_expander_direction(self, _board_nr: int, _pin_nr: int) -> ExpanderDir| None:
         """!
         Set the direction of the IO pin on a servo board.
         @param _board_nr: board nr
         @param _pin_nr:  pin nr
-        @return None:
+        @return ExpanderDir:
         """
+        if _board_nr == Robohat_constants.PWMPLUG_P3:               # board 0
+            if self.__servo_assembly_1 is not None:
+                return self.__servo_assembly_1.get_io_expander_direction(_pin_nr)
+            else:
+                print("Error: servo assembly 1 not initialized")
+                return None
+        elif _board_nr == Robohat_constants.PWMPLUG_P4:             # board 1
+            if self.__servo_assembly_2 is not None:
+                return self.__servo_assembly_2.get_io_expander_direction(_pin_nr)
+            else:
+                print("Error: servo assembly 2 not initialized")
+                return None
+        else:
+            print("Error: servo assembly 1 and servo assembly 2 are not initialized")
+        return None
 
-        print("nothing implemented yet")
-        # servo_assembly = self.__get_servo_assembly_depending_servo_nr(_servo_nr)
-        # if servo_assembly is not None:
-        #     servo_nr = self.__get_servo_nr_depending_assembly(_servo_nr)
-        #     servo_assembly.set_io_expander_output(_pin_nr, _dir)
-        return ExpanderDir.INPUT
+    # ------------------------------------------------------------------------------------------
 
     def set_io_expander_output(self, _board_nr: int, _pin_nr: int, _value: ExpanderStatus) -> None:
         """!
-        Set the direction of the IO pin on a servo board.
+        Set the value of the IO pin on a servo board. Note, io pin should be an output
         @param _board_nr: board nr
         @param _pin_nr:  pin nr
         @param _value: low or high
         @return None:
         """
+        if _board_nr == Robohat_constants.PWMPLUG_P3:               # board 0
+            if self.__servo_assembly_1 is not None:
+                self.__servo_assembly_1.set_io_expander_output(_pin_nr,_value)
+            else:
+                print("Error: servo assembly 1 not initialized")
+        elif _board_nr == Robohat_constants.PWMPLUG_P4:             # board 1
+            if self.__servo_assembly_2 is not None:
+                self.__servo_assembly_2.set_io_expander_output(_pin_nr,_value)
+            else:
+                print("Error: servo assembly 2 not initialized")
+        else:
+            print("Error: servo assembly 1 and servo assembly 2 are not initialized")
+    # ------------------------------------------------------------------------------------------
 
-        print("nothing implemented yet")
-        # servo_assembly = self.__get_servo_assembly_depending_servo_nr(_servo_nr)
-        # if servo_assembly is not None:
-        #     servo_nr = self.__get_servo_nr_depending_assembly(_servo_nr)
-        #     servo_assembly.set_io_expander_output(_pin_nr, _dir)
-
-    def get_io_expander_input(self, _board_nr: int, _pin_nr: int) -> ExpanderStatus:
+    def get_io_expander_input(self, _board_nr: int, _pin_nr: int) -> ExpanderStatus | None:
         """!
-        Set the direction of the IO pin on a servo board.
+        Get the value of the IO pin on a servo board. Note, io pin should be an output
         @param _board_nr: board nr
         @param _pin_nr:  pin nr
         @return None:
         """
-
-        print("nothing implemented yet")
-        # servo_assembly = self.__get_servo_assembly_depending_servo_nr(_servo_nr)
-        # if servo_assembly is not None:
-        #     servo_nr = self.__get_servo_nr_depending_assembly(_servo_nr)
-        #     servo_assembly.set_io_expander_output(_pin_nr, _dir)
-
-        return ExpanderStatus.LOW
+        if _board_nr == Robohat_constants.PWMPLUG_P3:               # board 0
+            if self.__servo_assembly_1 is not None:
+                return self.__servo_assembly_1.get_io_expander_input(_pin_nr)
+            else:
+                print("Error: servo assembly 1 not initialized")
+                return None
+        elif _board_nr == Robohat_constants.PWMPLUG_P4:             # board 1
+            if self.__servo_assembly_2 is not None:
+                return self.__servo_assembly_2.get_io_expander_input(_pin_nr)
+            else:
+                print("Error: servo assembly 2 not initialized")
+                return None
+        else:
+            print("Error: servo assembly 1 and servo assembly 2 are not initialized")
+        return None
 
     # -----------------------------------------------------------------------------------------
 
