@@ -22,7 +22,7 @@ ACCU_CHECK_SIZE_OF_WINDOW = 5
 
 class PowerManagement:
     """!
-    Class to control the accu capacity
+    Class to measure the accu capacity
     """
 
     def __init__(self, _io_handler: IOHandler, _adc_hat: HatADC, _shutdown_gpo_def: GPODef):
@@ -54,6 +54,7 @@ class PowerManagement:
     def init_power_management(self) -> None:
         """!
         Initializes power management (Mandatory)
+
         @return None
         """
 
@@ -69,6 +70,7 @@ class PowerManagement:
     def exit_program(self) -> None:
         """!
         Cleans up, when user want to shut down (for future use)
+
         @return: None
         """
         self.stop_timer_power_management()
@@ -80,6 +82,7 @@ class PowerManagement:
     def __start_timer_power_management(self) -> None:
         """!
         Starts the timer to check the accu voltage
+
         @return: None
         """
         timer = threading.Timer(Robohat_config.ACCU_INTERVAL_TIME_IN_SECONDS, self.timer_callback)
@@ -92,17 +95,20 @@ class PowerManagement:
 
     def stop_timer_power_management(self) -> None:
         """!
+
         Stops monitoring the accu capacity
         @return: None
         """
         self.__timerIsRunning = False
-        print("accu monitor disabled")
+        print("Warning: accu monitor disabled")
+
     # --------------------------------------------------------------------------------------
 
     def timer_callback(self) -> None:
         """!
         The actual timer function. Retrieves the voltage of the accu and puts it in the fiter function. Restarts the timer.
         Timer will not restart when ADC is not available
+
         @return: None
         """
 
@@ -118,6 +124,7 @@ class PowerManagement:
     def is_timer_running(self) -> bool:
         """!
         Get information if timer is running
+
         @return: (bool) True if timer is running
         """
         return self.__timerIsRunning
@@ -129,6 +136,7 @@ class PowerManagement:
     def get_accu_percentage_capacity(self) -> int:
         """!
         Gets percentage of accu capacity in %
+
         @return: (int) accu percentage
         """
         return self.__accu_percentage_capacity
@@ -140,6 +148,7 @@ class PowerManagement:
     def get_accu_voltage(self) -> float:
         """!
         Get voltage of accu
+
         @return: accu voltage
         """
         return self.__accu_voltage
@@ -151,6 +160,7 @@ class PowerManagement:
     def is_accu_capacity_ok(self) -> bool:
         """!
         Returns True, when accu voltage is above the 'ACCU_VOLTAGE_TO_LOW_THRESHOLD'
+
         @return: (bool) True, accu is OK
         """
         return self.__accu_capacity_ok
@@ -168,6 +178,7 @@ class PowerManagement:
         @param _raw_accu_voltage: accu voltage in volt
         @return: None
         """
+
         # shift new value in array
         for index in range(1, ACCU_CHECK_SIZE_OF_WINDOW, 1):
             self.__raw_accu_voltages_array[index - 1] = self.__raw_accu_voltages_array[index]
@@ -215,7 +226,6 @@ class PowerManagement:
                 print("accu has a too low capacity")
             print("***********************************")
 
-
     # --------------------------------------------------------------------------------------
     # --------------------------------------------------------------------------------------
     # --------------------------------------------------------------------------------------
@@ -223,9 +233,11 @@ class PowerManagement:
     def __calculate_percentage_from_voltage(self, _accu_voltage: float) -> float:
         """!
         Calculates voltgae of accu, to accu capacity, derived from array in Robohat_config
+
         @param _accu_voltage:
         @return: percentage of accu
         """
+
         # gets percentage out of list, and interpolates the voltages between the elements of the list
         if _accu_voltage <= Robohat_config.ACCU_VOLTAGE_TO_PERCENTAGE_ARRAY[0] [0]:
             return 0
@@ -258,9 +270,11 @@ class PowerManagement:
     def add_signaling_device(self, _signaling_device) -> None:
         """!
         Adds device which will alarms the user
+
         @param _signaling_device:
         @return: Nome
         """
+
         self.__signaling_device = _signaling_device
 
     # --------------------------------------------------------------------------------------
@@ -269,8 +283,9 @@ class PowerManagement:
 
     def shutdown_power(self) -> None:
         """!
-        Will toggle GPIO shutdown pin
-        @return: -> None
+        Will toggle the PIO shutdown pin
+
+        @return: None
         """
         if self.__shutdown_in_progress is True:
             return
@@ -278,7 +293,7 @@ class PowerManagement:
         print("Power shutdown in 1 minute")
 
         self.__shutdown_gpo.set_high()
-        sleep(5)
+        sleep(5)                            # hold the GPIO pin for 5 seconds (shorter time will not shutdown the accu management board
         self.__shutdown_gpo.set_low()
 
         if self.__signaling_device is not None:
