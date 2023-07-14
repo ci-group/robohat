@@ -70,7 +70,7 @@ class IMU:
         """
 
         if self.__lis3ml is not None:
-            return self.__lis3ml.get_magnetic_fields()
+            return self.__lis3ml.get_imu_magnetic_fields()
         return None
 
     # --------------------------------------------------------------------------------------
@@ -84,7 +84,7 @@ class IMU:
         """
 
         if self.__lsm6ds33 is not None:
-            return self.__lsm6ds33.get_acceleration()
+            return self.__lsm6ds33.get_imu_acceleration()
         return None
 
     # --------------------------------------------------------------------------------------
@@ -96,7 +96,7 @@ class IMU:
         """
 
         if self.__lsm6ds33 is not None:
-            return self.__lsm6ds33.get_gyro()
+            return self.__lsm6ds33.get_imu_gyro()
         return None
 
     # --------------------------------------------------------------------------------------

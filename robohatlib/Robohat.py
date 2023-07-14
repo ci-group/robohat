@@ -54,13 +54,13 @@ class Robohat:
     # --------------------------------------------------------------------------------------
     # constructor Robohat
 
-    def __init__(self, _servo_assembly_1_config: ServoAssemblyConfig, _servo_assembly_2_config: ServoAssemblyConfig, _sw_io_expander: int = 7):
+    def __init__(self, _servo_assembly_1_config: ServoAssemblyConfig, _servo_assembly_2_config: ServoAssemblyConfig, _switch_hat_board: int = 7):
         """!
         The Robohat base class initializer.
 
         @param _servo_assembly_1_config config of servo assembly 1
         @param _servo_assembly_2_config config of servo assembly 2
-        @param _sw_io_expander switch settings, default 7
+        @param _switch_hat_board dip-switch settings og the hat board (board mounted on RPI), default 7
         """
         print("\n")
         print("Starting Robohat lib: " + Robohat_constants.ROBOHAT_LIB_VERSION_STR + "\n")
@@ -72,22 +72,29 @@ class Robohat:
         self.__imu = IMU(self.__io_handler, Robohat_config.IMU_DEF)
 
         #-------------------------------------Expander
-        io_expander_def = Robohat_config.IO_EXPANDER_DEF
+        hat_io_expander_def = Robohat_config.HAT_IO_EXPANDER_DEF
 
         # at the default interrupt definition there are 2 callback added. one for the trigger, the second for the interrupt reset
-        callbackholder = InterruptCallbackHolder("expander_callback_holder", self._io_expander_int_callback, self._io_expander_int_reset_routine, InterruptTypes.INT_BOTH, 250)
-        io_expander_def.set_callbackholder(callbackholder)
+        hat_io_expander_callbackholder = InterruptCallbackHolder("hat_IO_expander_callback_holder",
+                                                                 self.__hat_io_expander_int_callback,
+                                                                 self.__hat_io_expander_int_reset_routine,
+                                                                 InterruptTypes.INT_BOTH,
+                                                                 250)
 
-        self.__io_expander = IOExpander(self.__io_handler, io_expander_def, _sw_io_expander)
-        #-------------------------------------
+        hat_io_expander_def.set_callbackholder(hat_io_expander_callbackholder)
 
-        self.__hatAdc = HatADC(self.__io_handler, Robohat_config.HATADC_I2C_DEF)
+        self.__hat_io_expander = IOExpander(self.__io_handler, hat_io_expander_def, _switch_hat_board)
+        self.__hat_adc = HatADC(self.__io_handler, Robohat_config.HAT_ADC_I2C_DEF)
 
-        self.__powerManagement = PowerManagement(self.__io_handler, self.__hatAdc, Robohat_config.POWERSHUTDOWN_GPO_DEF)
-        self.__powerManagement.add_signaling_device(self.__buzzer)
+        self.__power_management = PowerManagement(self.__io_handler,
+                                                  self.__hat_adc,
+                                                  Robohat_config.POWER_SHUTDOWN_GPO_DEF)
+
+        self.__power_management.add_signaling_device(self.__buzzer)
 
 
-        self.__servo_assembly_1 = ServoAssembly(self.__io_handler, _servo_assembly_1_config,
+        self.__servo_assembly_1 = ServoAssembly(self.__io_handler,
+                                                _servo_assembly_1_config,
                                                 Robohat_config.SERVOASSEMBLY_1_I2C_BUS,
                                                 Robohat_config.SERVOASSEMBLY_1_SPI_BUS
                                                 )
@@ -119,10 +126,10 @@ class Robohat:
         self.__buzzer.init_buzzer()
         self.__led.init_led()
         self.__imu.init_imu()
-        self.__io_expander.init_io_expander()
+        self.__hat_io_expander.init_io_expander()
 
-        self.__hatAdc.init_hat_adc()
-        self.__powerManagement.init_power_management()
+        self.__hat_adc.init_hat_adc()
+        self.__power_management.init_power_management()
 
         if self.__servo_assembly_1 is not None:
             self.__servo_assembly_1.init_servo_assembly(_servo_board_1_datas_array)
@@ -134,7 +141,7 @@ class Robohat:
 
     def exit_program(self) -> None:
         """
-        Cleans up, when user want to shut down
+        Exit the program.
         @return: None
         """
         if self.__servo_assembly_1 is not None:
@@ -145,30 +152,27 @@ class Robohat:
 
         self.__serial.exit_program()
         self.__imu.exit_program()
-        self.__io_expander.exit_program()
-        self.__hatAdc.exit_program()
+        self.__hat_io_expander.exit_program()
+        self.__hat_adc.exit_program()
 
         self.__led.exit_program()
         self.__buzzer.exit_program()
-        self.__powerManagement.exit_program()
+        self.__power_management.exit_program()
 
         self.__io_handler.exit_program()
 
 
     # begin I2C functions ---------------------------------------------------------------------------------
-    def scan_i2c_bus(self) -> None:
+    def do_i2c_scan(self) -> None:
         """!
         Scans all the available I2C busses on the Robohat hardware
-
         Displays the found I2C devices onto console
-
         @return None
         """
 
-        self.__io_handler.scan_i2c_bus()
+        self.__io_handler.do_i2c_scan()
 
     # end I2C functions ---------------------------------------------------------------------------------
-
     # begin BUZZER functions -----------------------------------------------------------------------------
     def do_buzzer_random(self) -> None:
         """!
@@ -272,7 +276,7 @@ class Robohat:
             return False
 
     # --------------------------------------------------------------------------------------
-    def get_servo_adc_readout_single_channel(self, _servo_nr: int) -> float:
+    def get_servo_adc_single_channel(self, _servo_nr: int) -> float:
         """!
         Get angle of connected servo in degree or -1 when an error occurs
 
@@ -288,7 +292,28 @@ class Robohat:
         return -1
     # --------------------------------------------------------------------------------------
 
-    def get_servo_angle(self, _servo_nr: int) -> float:
+    def get_servo_adc_multiple_channels(self):
+        """!
+        Get voltages of the potentiometer of all the servos in volt or en empty array
+        @return array of voltages
+        """
+
+        return_data = []
+
+        if self.__servo_assembly_1 is not None:
+            data_assembly1 = self.__servo_assembly_1.get_adc_multiple_channels()
+            return_data.append(data_assembly1)
+
+        if self.__servo_assembly_2 is not None:
+            data_assembly2 = self.__servo_assembly_2.get_adc_multiple_channels()
+            return_data.append(data_assembly2)
+
+        if self.__servo_assembly_1 is not None and self.__servo_assembly_2 is not None:
+            print("Error, no assemblies found, requesting ADC data")
+
+        return return_data
+    # --------------------------------------------------------------------------------------
+    def get_servo_single_angle(self, _servo_nr: int) -> float:
         """!
         Get angle of connected servo in degree or -1 wen an error occurs
 
@@ -304,7 +329,7 @@ class Robohat:
         return -1
     # --------------------------------------------------------------------------------------
 
-    def set_servo_angle(self, _servo_nr: int, _angle: float) -> None:
+    def set_servo_single_angle(self, _servo_nr: int, _angle: float) -> None:
         """!
         Set the angle of connected servo in degree, does nothing when not avaible
 
@@ -320,29 +345,9 @@ class Robohat:
                 servo_assembly.set_servo_angle(servo_nr, _angle)
 
     # ------------------------------------------------------------------------------------------
-    def get_servos_adc_readout_multiple_channels(self):
-        """!
-        Get voltages of the potentiometer of all the servos in volt or en empty array
-        @return array of voltages
-        """
-
-        return_data = []
-
-        if self.__servo_assembly_1 is not None:
-            data_assembly1 = self.__servo_assembly_1.get_adc_readout_multiple_channels()
-            return_data.append(data_assembly1)
-
-        if self.__servo_assembly_2 is not None:
-            data_assembly2 = self.__servo_assembly_2.get_adc_readout_multiple_channels()
-            return_data.append(data_assembly2)
-
-        if self.__servo_assembly_1 is not None and self.__servo_assembly_2 is not None:
-            print("Error, requesting ADC data")
-
-        return return_data
     # ------------------------------------------------------------------------------------------
 
-    def get_servos_angles(self) -> []:
+    def get_servo_multiple_angles(self) -> []:
         """!
         Get an array of the angles of all the servos
 
@@ -363,7 +368,7 @@ class Robohat:
 
     # ------------------------------------------------------------------------------------------
 
-    def set_servos_angles(self, _angles_array: []) -> None:
+    def set_servo_multiple_angles(self, _angles_array: []) -> None:
         """!
         Set the angle of connected servos in degree
 
@@ -380,12 +385,11 @@ class Robohat:
             angles_array2 = _angles_array[16:32]
             self.__servo_assembly_2.set_all_servos_angle(angles_array2)
 
-
         # ------------------------------------------------------------------------------------------
-    def put_servos_to_sleep(self) -> None:
+    def put_servo_to_sleep(self) -> None:
         """!
         Puts servos to sleep
-        @:return: None
+        @return: None
         """
 
         if self.__servo_assembly_1 is not None:
@@ -396,7 +400,7 @@ class Robohat:
 
     # ------------------------------------------------------------------------------------------
 
-    def wakeup_servos(self) -> None:
+    def wakeup_servo(self) -> None:
         """!
         Wakes up the servos
         @return: None
@@ -410,7 +414,7 @@ class Robohat:
 
     # ------------------------------------------------------------------------------------------
 
-    def are_servos_sleeping(self) -> bool:
+    def is_servo_sleeping(self) -> bool:
         """
         Get if Servos are sleeping
         @return: True when servos are sleeping
@@ -418,11 +422,74 @@ class Robohat:
         if self.__servo_assembly_1 is not None:
             return self.__servo_assembly_1.is_servo_sleeping()
         elif self.__servo_assembly_2 is not None:
-            return self.__servo_assembly_2.are_servos_sleeping()
+            return self.__servo_assembly_2.is_servo_sleeping()
 
         return True
 
     # ------------------------------------------------------------------------------------------
+
+    def set_io_expander_direction(self, _board_nr: int, _pin_nr: int, _dir: ExpanderDir) -> None:
+        """!
+        Set the direction of the IO pin on a servo board.
+        @param _board_nr: board nr
+        @param _pin_nr:  pin nr
+        @param _dir: on or out
+        @return None:
+        """
+
+        print("nothing implemented yet")
+        # servo_assembly = self.__get_servo_assembly_depending_servo_nr(_servo_nr)
+        # if servo_assembly is not None:
+        #     servo_nr = self.__get_servo_nr_depending_assembly(_servo_nr)
+        #     servo_assembly.set_io_expander_output(_pin_nr, _dir)
+
+    def get_io_expander_direction(self, _board_nr: int, _pin_nr: int) -> ExpanderDir:
+        """!
+        Set the direction of the IO pin on a servo board.
+        @param _board_nr: board nr
+        @param _pin_nr:  pin nr
+        @return None:
+        """
+
+        print("nothing implemented yet")
+        # servo_assembly = self.__get_servo_assembly_depending_servo_nr(_servo_nr)
+        # if servo_assembly is not None:
+        #     servo_nr = self.__get_servo_nr_depending_assembly(_servo_nr)
+        #     servo_assembly.set_io_expander_output(_pin_nr, _dir)
+        return ExpanderDir.INPUT
+
+    def set_io_expander_output(self, _board_nr: int, _pin_nr: int, _value: ExpanderStatus) -> None:
+        """!
+        Set the direction of the IO pin on a servo board.
+        @param _board_nr: board nr
+        @param _pin_nr:  pin nr
+        @param _value: low or high
+        @return None:
+        """
+
+        print("nothing implemented yet")
+        # servo_assembly = self.__get_servo_assembly_depending_servo_nr(_servo_nr)
+        # if servo_assembly is not None:
+        #     servo_nr = self.__get_servo_nr_depending_assembly(_servo_nr)
+        #     servo_assembly.set_io_expander_output(_pin_nr, _dir)
+
+    def get_io_expander_input(self, _board_nr: int, _pin_nr: int) -> ExpanderStatus:
+        """!
+        Set the direction of the IO pin on a servo board.
+        @param _board_nr: board nr
+        @param _pin_nr:  pin nr
+        @return None:
+        """
+
+        print("nothing implemented yet")
+        # servo_assembly = self.__get_servo_assembly_depending_servo_nr(_servo_nr)
+        # if servo_assembly is not None:
+        #     servo_nr = self.__get_servo_nr_depending_assembly(_servo_nr)
+        #     servo_assembly.set_io_expander_output(_pin_nr, _dir)
+
+        return ExpanderStatus.LOW
+
+    # -----------------------------------------------------------------------------------------
 
     def __get_servo_nr_depending_assembly(self, _servo_nr: int) -> int | None:
         """!
@@ -477,7 +544,7 @@ class Robohat:
         @return analog voltage
         """
 
-        return self.__hatAdc.get_voltage_readout_hat_adc_channel(_channel_nr)
+        return self.__hat_adc.get_voltage_readout_hat_adc_channel(_channel_nr)
 
     # ------------------------------------------------------------------------------------------
 
@@ -487,12 +554,12 @@ class Robohat:
 
         @return analog voltage in an array
         """
-        return self.__hatAdc.get_voltage_readout_hat_adc_multiple_channels()
+        return self.__hat_adc.get_voltage_readout_hat_adc_multiple_channels()
 
     # end HAT ADC functions --------------------------------------------------------------------------------------
 
     # begin IO_EXPANDER functions ---------------------------------------------------------------------------------
-    def set_io_expander_direction(self, _io_nr:int, _direction: ExpanderDir) -> None:
+    def set_hat_io_expander_direction(self, _io_nr:int, _direction: ExpanderDir) -> None:
         """!
         Set the direction of an io pin of the IO expander
 
@@ -502,9 +569,21 @@ class Robohat:
         @return None
         """
 
-        self.__io_expander.set_direction_io_expander(_io_nr, _direction)
+        self.__hat_io_expander.set_direction_io_expander(_io_nr, _direction)
 
-    def set_io_expander_output(self, _io_nr, _status) -> None:
+    def get_hat_io_expander_direction(self, _io_nr:int) -> ExpanderDir:
+        """!
+        Get the direction of an io pin of the IO expander
+
+        @param _io_nr io nr
+
+        @return ExpanderDir
+        """
+
+        return self.__hat_io_expander.get_direction_io_expander(_io_nr)
+
+
+    def set_hat_io_expander_output(self, _io_nr: int, _status: ExpanderStatus) -> None:
         """!
         Set the output status of an io pin of the IO expander
 
@@ -515,9 +594,9 @@ class Robohat:
 
         @return None
         """
-        self.__io_expander.set_io_expander_output_status(_io_nr, _status)
+        self.__hat_io_expander.set_io_expander_output_status(_io_nr, _status)
 
-    def get_io_expander_input(self, _io_nr):
+    def get_hat_io_expander_input(self, _io_nr):
         """!
         get the input status of an io pin of the IO expander
 
@@ -527,12 +606,11 @@ class Robohat:
 
         @return status of the pin
         """
-        return self.__io_expander.get_io_expander_input(_io_nr)
+        return self.__hat_io_expander.get_io_expander_input(_io_nr)
 
     # end IO_EXPANDER functions ------------------------------------------------------------------------------------
-
     # begin IMU functions ---------------------------------------------------------------------------------
-    def get_magnetic_fields(self) -> Tuple[float, float, float] | None:
+    def get_imu_magnetic_fields(self) -> Tuple[float, float, float] | None:
         """!
         Get the magnetic fields
 
@@ -540,7 +618,7 @@ class Robohat:
         """
         return self.__imu.get_magnetic_fields()
 
-    def get_acceleration(self) -> Tuple[float, float, float] | None:
+    def get_imu_acceleration(self) -> Tuple[float, float, float] | None:
         """!
         Get the acceleration of the Robohat
 
@@ -548,7 +626,7 @@ class Robohat:
         """
         return self.__imu.get_acceleration()
 
-    def get_gyro(self) -> Tuple[float, float, float] | None:
+    def get_imu_gyro(self) -> Tuple[float, float, float] | None:
         """!
         Get the values of the Gyro
 
@@ -557,15 +635,14 @@ class Robohat:
         return self.__imu.get_gyro()
 
     # end IMU functions ------------------------------------------------------------------------------------
-
-    # begin Power management functions ---------------------------------------------------------------------------------
+    # begin Power management functions ---------------------------------------------------------------------
     def get_accu_percentage_capacity(self) -> int:
         """!
         Get capacity of accu in percentage
 
         @return: percentage
         """
-        return self.__powerManagement.get_accu_percentage_capacity()
+        return self.__power_management.get_accu_percentage_capacity()
 
     def get_accu_voltage(self) -> float:
         """!
@@ -574,7 +651,7 @@ class Robohat:
         @return: voltage of accu
         """
 
-        return self.__powerManagement.get_accu_voltage()
+        return self.__power_management.get_accu_voltage()
 
     def is_accu_capacity_ok(self) -> bool:
         """!
@@ -582,23 +659,42 @@ class Robohat:
 
         @return True is accu capacity is OK
         """
-        return self.__powerManagement.is_accu_capacity_ok()
+        return self.__power_management.is_accu_capacity_ok()
 
-    def shutdown_power(self) -> None:
+    # end Power management functions -------------------------------------------------------------------------
+    # begin System functions ---------------------------------------------------------------------------------
+
+    def do_system_shutdown(self) -> None:
         """!
-        Gives shutdown signal to power module.
-        Cleans up IO
-
+        Cleans-up IO, shutdowns the RPi and gives shutdown signal to power module
         @return None
         """
 
-        self.__powerManagement.shutdown_power()
+        self.__power_management.shutdown_power()
         sleep(1)
         self.__io_handler.io_shutdown()
+        os.system("sudo shutdown -h now")       # actual system call to shutdown the RPi
 
-        os.system("sudo shutdown -h now")
+    # ------------------------------------------------------------------------------------
+    def set_system_alarm_permitted(self, _state: bool) -> None:
+        """!
+        Overrides the system alarm switch. If false, no sound alarm will be given
+        @param _state: new state of system alarm
+        @return: None
+        """
+        self.__buzzer.set_status_system_alarm_permitted(_state)
 
-        # begin Library functions ---------------------------------------------------------------------------------
+    # ------------------------------------------------------------------------------------
+    def get_system_alarm_permitted(self) -> bool:
+        """!
+        Get the system alarm switch. If false, no sound alarm will be given
+        @return: None
+        """
+        return self.__buzzer.get_status_system_alarm_permitted()
+
+    # end System management functions -------------------------------------------------------------------------
+
+    # begin Library functions ---------------------------------------------------------------------------------
 
     def get_lib_version(self) -> str:
         """!
@@ -626,24 +722,24 @@ class Robohat:
     # ------------------------------------------------------------------------------------
 
     # some test routines
-    def _io_expander_int_callback(self, _gpi_nr: int) -> None:
+    def __hat_io_expander_int_callback(self, _gpi_nr: int) -> None:
         """!
-        Just a test callback, should be removed in the future
+        Just a test callback, for the hat_io_expander
 
         @param _gpi_nr (int) mr of the callback gpio pin
         @return None
         """
-        print("_io_expander_int_callback by: " + str(_gpi_nr))
+        print("_hat__io_expander_int_callback by: " + str(_gpi_nr))
         self.do_buzzer_beep()
 
-    def _io_expander_int_reset_routine(self, _gpi_nr: int) -> None:
+    def __hat_io_expander_int_reset_routine(self, _gpi_nr: int) -> None:
         """!
         This routine will be called to reset the interrupt handler (if needed, is used by MCP23008)
         @param _gpi_nr: IO nr of the caller
         @return: None
         """
-        if self.__io_expander is not None:
-            self.__io_expander.reset_interrupt(_gpi_nr)
+        if self.__hat_io_expander is not None:
+            self.__hat_io_expander.reset_interrupt(_gpi_nr)
     # ------------------------------------------------------------------------------------
 
     def _io_servo_assembly_callback(self, _gpi_nr):
@@ -667,19 +763,3 @@ class Robohat:
 
     # ------------------------------------------------------------------------------------
 
-    def set_status_system_alarm_permitted(self, _state:bool) -> None:
-        """!
-        Overrides the system alarm switch. If false, no sound alarm will be given
-        @param _state: new state of system alarm
-        @return: None
-        """
-        self.__buzzer.set_status_system_alarm_permitted(_state)
-
-    def get_status_system_alarm_permitted(self) -> bool:
-        """!
-        Get the system alarm switch. If false, no sound alarm will be given
-        @return: None
-        """
-        return self.__buzzer.get_status_system_alarm_permitted()
-
-    # ------------------------------------------------------------------------------------

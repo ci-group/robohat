@@ -1,14 +1,14 @@
-
 from __future__ import absolute_import, division, print_function, unicode_literals
 
 import time
-
 
 try:
     from robohatlib.Robohat import Robohat
     from robohatlib.hal.assemblyboard.ServoAssemblyConfig import ServoAssemblyConfig
     from robohatlib.hal.assemblyboard.servo.ServoData import ServoData
     from robohatlib.hal.datastructure.Color import Color
+    from robohatlib.hal.datastructure.ExpanderDirection import ExpanderDir
+    from robohatlib.hal.datastructure.ExpanderStatus import ExpanderStatus
     import sys
     import main_config
 
@@ -60,7 +60,7 @@ class Example:
     # --------------------------------------------------------------------------------------
 
     def exit_program(self) -> None:
-        """
+        """!
         Should stop this program
         @return: None
         """
@@ -78,20 +78,61 @@ class Example:
         """
 
         data_in_array = _data_in.split(" ")
-
         command = data_in_array[1]
+
+# ------------------------------------------------------------------------------
         if command == "servo":
-           sub_command = data_in_array[2]
-           if sub_command == "angle":
+            sub_command = data_in_array[2]
+            if sub_command == "angle":
                 servo_nr = int(data_in_array[3])
                 angle = float(data_in_array[4])
-                self.robohat.set_servo_angle(servo_nr, angle)
-           elif sub_command == "io":
+                self.robohat.set_servo_single_angle(servo_nr, angle)
+            elif sub_command == "io":
+                io_command = data_in_array[3]
+                if io_command == "dir":
+                    board_nr = int(data_in_array[4])
+                    pin_nr = int(data_in_array[4])
+                    value = data_in_array[6]
+                    if value is "out":
+                        self.robohat.set_io_expander_direction(board_nr, pin_nr, ExpanderDir.OUTPUT)
+                    else:
+                        self.robohat.set_io_expander_direction(board_nr, pin_nr, ExpanderDir.INPUT)
+                elif io_command == "output":
+                    board_nr = int(data_in_array[4])
+                    pin_nr = int(data_in_array[4])
+                    value = data_in_array[6]
+                    if value is "0":
+                        self.robohat.set_io_expander_output(board_nr, pin_nr, ExpanderStatus.LOW)
+                    else:
+                        self.robohat.set_io_expander_output(board_nr, pin_nr, ExpanderStatus.HIGH)
+                else:
+                    print("syntax error, set servo io command not found")
+            else:
+                print("syntax error, set servo command not found")
+# ------------------------------------------------------------------------------
+        elif command == "hat":
+            sub_command = data_in_array[2]
+            if sub_command == "io":
                io_command = int(data_in_array[3])
-               if io_command == "angle":
-
-           else:
-               print("syntax error")
+               if io_command == "dir":
+                    pin_nr = int(data_in_array[4])
+                    value = data_in_array[5]
+                    if value is "out":
+                        self.robohat.set_hat_io_expander_direction(pin_nr, ExpanderDir.OUTPUT)
+                    else:
+                        self.robohat.set_hat_io_expander_direction(pin_nr, ExpanderDir.INPUT)
+               elif io_command == "out":
+                   pin_nr = int(data_in_array[4])
+                   value = data_in_array[5]
+                   if value is "0":
+                       self.robohat.set_hat_io_expander_output(pin_nr, ExpanderStatus.LOW)
+                   else:
+                       self.robohat.set_hat_io_expander_output(pin_nr, ExpanderStatus.HIGH)
+               else:
+                   print("syntax error, set hat io command not found")
+            else:
+               print("syntax error, set hat command not found")
+# ------------------------------------------------------------------------------
         elif command == "led":
             sub_command = data_in_array[2].upper()
             if sub_command == "OFF":
@@ -111,12 +152,14 @@ class Example:
             elif sub_command == "PURPLE":
                 self.robohat.set_led_color(Color.PURPLE)
             else:
-                print("unknown color")
-
+                print("syntax error, set color unknown")
+# ------------------------------------------------------------------------------
         else:
-            print("syntax error")
+            print("syntax error, unknown set command")
 
-    # --------------------------------------------------------------------------------------
+# --------------------------------------------------------------------------------------
+# --------------------------------------------------------------------------------------
+# --------------------------------------------------------------------------------------
 
     def get(self, _data_in:str) -> None:
         """!
@@ -124,19 +167,19 @@ class Example:
         @return: None
         """
         data_in_array = _data_in.split(" ")
-
         command = data_in_array[1]
+# -------------------------------------------------------------------------------
         if command == "servo":
             sub_command = data_in_array[2]
             if sub_command == "angle":
                 parameter_str:str = data_in_array[3]
                 if parameter_str.isnumeric():
                     servo_nr = int(parameter_str)
-                    value = self.robohat.get_servo_angle(servo_nr)
+                    value = self.robohat.get_servo_single_angle(servo_nr)
                     if value != -1:
                         print("angle of servo " + str(servo_nr) + " is: " + str(value) + "°" )
                 elif parameter_str == "all":
-                    value = self.robohat.get_servos_angles()
+                    value = self.robohat.get_servo_multiple_angles()
                     print("angles of servos: " + str(value))
                 else:
                     print("syntax error")
@@ -144,11 +187,11 @@ class Example:
                 parameter_str: str = data_in_array[3]
                 if parameter_str.isnumeric():
                     servo_nr = int(data_in_array[3])
-                    value = self.robohat.get_servo_adc_readout_single_channel(servo_nr)
+                    value = self.robohat.get_servo_adc_single_channel(servo_nr)
                     if value != -1:
                         print("adc of servo " + str(servo_nr) + " is: " + str(value) + "V" )
                 elif parameter_str == "all":
-                    value = self.robohat.get_servos_adc_readout_multiple_channels()
+                    value = self.robohat.get_servo_adc_multiple_channels()
                     print("adc volts of servos: " + str(value))
                 else:
                     print("syntax error")
@@ -159,10 +202,23 @@ class Example:
                     print("Servo " + str(servo_nr) + " is connected")
                 else:
                     print("Servo " + str(servo_nr) + " NOT is connected")
-
+            elif sub_command == "io":
+                io_command = data_in_array[3]
+                if io_command == "dir":
+                    board_nr = int(data_in_array[4])
+                    pin_nr = int(data_in_array[4])
+                    value = self.robohat.get_io_expander_direction(board_nr, pin_nr)
+                    print(value)
+                elif io_command == "input":
+                    board_nr = int(data_in_array[4])
+                    pin_nr = int(data_in_array[4])
+                    value = self.robohat.get_io_expander_input(board_nr, pin_nr)
+                    print(value)
+                else:
+                    print("syntax error, get servo io ")
             else:
-                print("syntax error")
-
+                print("syntax error, get servo")
+# -------------------------------------------------------------------------------
         elif command == "hat":
             sub_command = data_in_array[2]
             if sub_command == "adc":
@@ -177,15 +233,28 @@ class Example:
                     print("adc hat volts of channels: " + str(value))
                 else:
                     print("syntax error at hat: " + parameter_str )
-
-
-
+            elif sub_command == "io":
+                io_command = int(data_in_array[3])
+                if io_command == "dir":
+                    pin_nr = int(data_in_array[4])
+                    value = self.robohat.get_hat_io_expander_direction(pin_nr)
+                    print(value)
+                elif io_command == "input":
+                    pin_nr = int(data_in_array[4])
+                    value = self.robohat.get_hat_io_expander_input(pin_nr)
+                    print(value)
+                else:
+                    print("syntax error, unknown hat io command")
+            else:
+                print("syntax error, unknown hat command")
+# -------------------------------------------------------------------------------
         elif command == "led":
             value = self.robohat.get_led_color()
             if value is Color.OFF:
                 print("Led is OFF")
             else:
                 print(value)
+# -------------------------------------------------------------------------------
         elif command == "lib":
             sub_command = data_in_array[2]
             if sub_command == "builddate":
@@ -194,7 +263,7 @@ class Example:
                 print("version of Robohat lib is: " + self.robohat.get_lib_version())
             else:
                 print("syntax error")
-
+# -------------------------------------------------------------------------------
         elif command == "accu":
             sub_command = data_in_array[2]
             if sub_command == "voltage":
@@ -205,30 +274,29 @@ class Example:
                 print("accu capacity is: " + str(value) + " %")
             else:
                 print("syntax error")
-
+# -------------------------------------------------------------------------------
         elif command == "imu":
             sub_command = data_in_array[2]
             if sub_command == "magnetic":
-                value = self.robohat.get_magnetic_fields()
+                value = self.robohat.get_imu_magnetic_fields()
                 if value is not None:
                     print("IMU magnetic: " + str(value) )
                 else:
                     print("IMU not present")
             elif sub_command == "acceleration":
-                value = self.robohat.get_acceleration()
+                value = self.robohat.get_imu_acceleration()
                 if value is not None:
                     print("IMU acceleration: " + str(value) )
                 else:
                     print("IMU not present")
             elif sub_command == "gyro":
-                value = self.robohat.get_gyro()
+                value = self.robohat.get_imu_gyro()
                 if value is not None:
                     print("IMU gyro: " + str(value) )
                 else:
                     print("IMU not present")
             else:
                 print("syntax error")
-
         else:
             print("syntax error")
 
@@ -245,7 +313,7 @@ class Example:
         if command == "i2c":
             sub_command = data_in_array[2]
             if sub_command == "scan":
-                self.robohat.scan_i2c_bus()
+                self.robohat.do_i2c_scan()
         elif command == "buzzer":
             sub_command = data_in_array[2]
             if sub_command == "random":
@@ -269,7 +337,7 @@ class Example:
     # --------------------------------------------------------------------------------------
 
     def shutdown_power(self) -> None:
-        self.robohat.shutdown_power()
+        self.robohat.do_system_shutdown()
     # --------------------------------------------------------------------------------------
 
     def print_help(self) -> None:
@@ -288,10 +356,11 @@ class Example:
         print("get servo adc all                              get all the servo position adc values")
         print("get servo connected [servo nr]                 shows if servo is connected")
         print("put servos to sleep                            puts all servos asleep")
+
         print("set servo io dir [pin nr] [in|out]             set the direction of an io pin of a servo board")
         print("get servo io dir [pin nr]                      get the direction of an io pin of a servo board")
-        print("set servo io out [pin nr] [0|1]                set the pin value of an io pin of a servo board")
-        print("get servo io in [pin nr]                       get the pin value of an io pin of a servo board")
+        print("set servo io output [pin nr] [0|1]             set the pin value of an io pin of a servo board")
+        print("get servo io input [pin nr]                    get the pin value of an io pin of a servo board")
 
         print("wake up servos                                 wakes all servo up")
         print("are servos sleeping                            shows information if servos are sleeping")
@@ -344,15 +413,15 @@ class Example:
             self.do(_command)
 
         elif _command == "are servos sleeping":
-            value = self.robohat.are_servos_sleeping()
+            value = self.robohat.is_servo_sleeping()
             if value is True:
                 print("Servos are sleeping")
             else:
                 print("Servos are a wake")
         elif _command == "put servos to sleep":
-            self.robohat.put_servos_to_sleep()
+            self.robohat.put_servo_to_sleep()
         elif _command == "wake up servos":
-            self.robohat.wakeup_servos()
+            self.robohat.wakeup_servo()
 
 
 

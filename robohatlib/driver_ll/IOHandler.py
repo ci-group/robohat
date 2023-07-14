@@ -101,13 +101,13 @@ class IOHandler:
         """
 
         if self.__i2c_bus_is_scanned is False:
-            self.scan_i2c_bus(True)
+            self.do_i2c_scan(True)
             self.__i2c_bus_is_scanned = True
 
     #--------------------------------------------------------------------------------------
 
 
-    def scan_i2c_bus(self, _silent:bool = False) -> None:
+    def do_i2c_scan(self, _silent:bool = False) -> None:
         """!
         Scans all the I2C bussed available on the Robohat hardware.
         Displays found I2C devices onto console, depending on _silent switch (True is no display)

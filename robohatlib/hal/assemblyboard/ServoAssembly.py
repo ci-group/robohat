@@ -102,7 +102,7 @@ class ServoAssembly:
         @return angle of connected servo in degree
         """
         if self.__servo_board is not None:
-            self.__servo_board.set_servo_angle(_servo_nr, _angle)
+            self.__servo_board.set_servo_single_angle(_servo_nr, _angle)
 
     def get_servo_angle(self, _servo_nr: int) -> float:
         """!
@@ -112,7 +112,7 @@ class ServoAssembly:
         @return angle of connected servo in degree, or 0 when not available
         """
         if self.__servo_board is not None:
-            return self.__servo_board.get_servo_angle(_servo_nr)
+            return self.__servo_board.get_servo_single_angle(_servo_nr)
         else:
             return -1
 
@@ -149,7 +149,7 @@ class ServoAssembly:
             return self.__servo_board.get_servo_readout_adc_single_channel(_servo_nr)
         return -1
 
-    def get_adc_readout_multiple_channels(self) -> []:
+    def get_adc_multiple_channels(self) -> []:
         """!
         @return voltages of the potentiometer of all the servos in volt
         """
@@ -196,7 +196,7 @@ class ServoAssembly:
         Get if Servos are sleeping
         @return (bool) returns True when servos are sleeping
         """
-        return self.__servo_board.are_servos_sleeping()
+        return self.__servo_board.is_servo_sleeping()
 
     # --------------------------------------------------------------------------------------
 

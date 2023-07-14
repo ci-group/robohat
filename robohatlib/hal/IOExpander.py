@@ -70,8 +70,19 @@ class IOExpander:
             self.__expander.set_pin_direction(_io_nr, wanted_pin_value)
 
     #--------------------------------------------------------------------------------------
+    def get_direction_io_expander(self, _io_nr:int) -> ExpanderDir:
+        if self.__expander is not None:
+           self.__check_if_expander_io_is_available(_io_nr)
 
-    def set_io_expander_output_status(self, _io_nr:int, _status) -> None:
+           value = self.__expander.get_pin_direction()
+           if value is 0:
+               return ExpanderDir.OUTPUT
+           else:
+               return ExpanderDir.INPUT
+
+    #--------------------------------------------------------------------------------------
+
+    def set_io_expander_output_status(self, _io_nr:int, _status:ExpanderStatus) -> None:
         """!
         Set the output status of an io pin of the IO expander
 
