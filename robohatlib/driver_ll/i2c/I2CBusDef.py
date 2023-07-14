@@ -5,12 +5,15 @@ class I2CBusDef:
 
     def __init__(self, _i2_bus_name:str, _i2c_bus_nr:int, _scl_pin:int, _sda_pin:int, _frequency:int=100000):
         """!
+        Constructor of I2CBusDef
+
         @param _i2_bus_name: I2C bus name
         @param _i2c_bus_nr:  I2C bus nr
-        @param _scl_pin:  GPIO pin nr of SCL. Must be defined in RPI boot.txt ?
-        @param _sda_pin: GPIO pin nr of SDA. Must be defined in RPI boot.txt ?
-        @param _frequency: frequency of I2X bus (100000 100 kHz)
+        @param _scl_pin:  GPIO pin nr of SCL. Must be defined in RPI boot.txt
+        @param _sda_pin: GPIO pin nr of SDA. Must be defined in RPI boot.txt
+        @param _frequency: frequency of I2C bus (100000 = 100 kHz)
         """
+
         self.__i2_bus_name = _i2_bus_name
         self.__i2c_bus_nr = _i2c_bus_nr
         self.__scl_pin = _scl_pin
@@ -24,6 +27,7 @@ class I2CBusDef:
         Get this bus name
         @return: name
         """
+
         return self.__i2_bus_name
 
     # --------------------------------------------------------------------------------------
@@ -33,6 +37,7 @@ class I2CBusDef:
         Get i2C bus nr
         @return: I2C bus nr
         """
+
         return self.__i2c_bus_nr
 
     # --------------------------------------------------------------------------------------
@@ -42,6 +47,7 @@ class I2CBusDef:
         Get this GPIO SCL pin
         @return: SCL
         """
+
         return self.__scl_pin
 
     # --------------------------------------------------------------------------------------
@@ -51,6 +57,7 @@ class I2CBusDef:
         Get this GPIO SDA pin
         @return: SDA
         """
+
         return self.__sda_pin
 
     # --------------------------------------------------------------------------------------
@@ -60,6 +67,7 @@ class I2CBusDef:
         Get current PWM frequency in HX
         @return: frequency
         """
+
         return self.__frequency
 
     # --------------------------------------------------------------------------------------

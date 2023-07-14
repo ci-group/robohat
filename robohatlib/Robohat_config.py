@@ -113,7 +113,7 @@ SERVOASSEMBLY_2_I2C_BUS = 1
 SERVOASSEMBLY_2_SPI_BUS = 0
 
 SERVOASSEMBLY_INTERRUPT_GPI = 4
-SERVOASSEMBLY_I2C_DEF = I2CDeviceDef("io_expander", 1, 0x20)          # i2c bus1, address 0x2
+SERVOASSEMBLY_I2C_DEF = I2CDeviceDef("io_expander", 1, 0x20)          # i2c bus1, address 0x20
 
 SERVOASSEMBLY_INTERRUPT_SETTINGS = [
     McpInitStruct(0, GpioDirection.GPIO_INPUT, InterruptTypes.INT_RISING),
@@ -129,14 +129,14 @@ SERVOASSEMBLY_INTERRUPT_SETTINGS = [
 SERVOASSEMBLY_EXPANDER_DEF = IOExpanderDef("power_monitor_expander", SERVOASSEMBLY_I2C_DEF, SERVOASSEMBLY_INTERRUPT_GPI, SERVOASSEMBLY_INTERRUPT_SETTINGS)
 
 """!
-I2C definitions
+I2C bus definitions 
 """
 I2C1_DEF = I2CBusDef("main_i2c", 1, 3, 2, 100000)       # bus 1, scl, sda, freq
 I2C5_DEF = I2CBusDef("hat_adc", 5, 13, 12, 100000)      # bus 5, scl, sda, freq
 I2C6_DEF = I2CBusDef("unknown", 6, 23, 22, 100000)      # bus 6, scl, sda, freq
 
 """!
-SPI definitions
+SPI bus definitions
 """
 SPI0_DEF = SPIBusDef("spi_bus_0", 0, 11, 10, 9)         # bus 0, name, bus, clk, mosi, miso
 SPI1_DEF = SPIBusDef("spi_bus_1", 1, 21, 20, 19)        # bus 1, name, bus, clk, mosi, miso

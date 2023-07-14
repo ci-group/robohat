@@ -10,6 +10,7 @@ class I2CDeviceDef:
         @param _i2c_base_address: I2C base address
         @param _i2c_offset_address:  I2C offset address
         """
+
         self.__name = _name
         self.__i2c_bus_nr = _i2c_bus_nr
         self.__i2c_base_address = _i2c_base_address
@@ -22,6 +23,7 @@ class I2CDeviceDef:
         Get name of this definition
         @return: name
         """
+
         return self.__name
 
     # --------------------------------------------------------------------------------------
@@ -32,6 +34,7 @@ class I2CDeviceDef:
         @param _name:
         @return: None
         """
+
         self.__name = _name
 
     # --------------------------------------------------------------------------------------
@@ -41,6 +44,7 @@ class I2CDeviceDef:
         Get I2C bus nr
         @return: I2C bus nr
         """
+
         return self.__i2c_bus_nr
 
     # --------------------------------------------------------------------------------------
@@ -50,6 +54,7 @@ class I2CDeviceDef:
         Get I2C device address (actual base address + offset address)
         @:return: I2C device address
         """
+
         return self.__i2c_base_address + self.__i2c_offset_address
 
     # --------------------------------------------------------------------------------------
@@ -59,6 +64,7 @@ class I2CDeviceDef:
         Get I2C base address
         @:return: I2C base address
         """
+
         return self.__i2c_base_address
 
     # --------------------------------------------------------------------------------------
@@ -68,6 +74,7 @@ class I2CDeviceDef:
         Get I2C offset address
         @:return: I2C offset
         """
+
         return self.__i2c_offset_address
 
     def set_i2c_offset_address(self, _i2c_offset_address:int) -> None:
