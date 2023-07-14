@@ -94,17 +94,17 @@ class Example:
                     pin_nr = int(data_in_array[4])
                     value = data_in_array[6]
                     if value is "out":
-                        self.robohat.set_io_expander_direction(board_nr, pin_nr, ExpanderDir.OUTPUT)
+                        self.robohat.set_servo_io_expander_direction(board_nr, pin_nr, ExpanderDir.OUTPUT)
                     else:
-                        self.robohat.set_io_expander_direction(board_nr, pin_nr, ExpanderDir.INPUT)
+                        self.robohat.set_servo_io_expander_direction(board_nr, pin_nr, ExpanderDir.INPUT)
                 elif io_command == "output":
                     board_nr = int(data_in_array[4])
                     pin_nr = int(data_in_array[4])
                     value = data_in_array[6]
                     if value is "0":
-                        self.robohat.set_io_expander_output(board_nr, pin_nr, ExpanderStatus.LOW)
+                        self.robohat.set_servo_io_expander_output(board_nr, pin_nr, ExpanderStatus.LOW)
                     else:
-                        self.robohat.set_io_expander_output(board_nr, pin_nr, ExpanderStatus.HIGH)
+                        self.robohat.set_servo_io_expander_output(board_nr, pin_nr, ExpanderStatus.HIGH)
                 else:
                     print("syntax error, set servo io command not found")
             else:
@@ -207,12 +207,12 @@ class Example:
                 if io_command == "dir":
                     board_nr = int(data_in_array[4])
                     pin_nr = int(data_in_array[4])
-                    value = self.robohat.get_io_expander_direction(board_nr, pin_nr)
+                    value = self.robohat.get_servo_io_expander_direction(board_nr, pin_nr)
                     print(value)
                 elif io_command == "input":
                     board_nr = int(data_in_array[4])
                     pin_nr = int(data_in_array[4])
-                    value = self.robohat.get_io_expander_input(board_nr, pin_nr)
+                    value = self.robohat.get_servo_io_expander_input(board_nr, pin_nr)
                     print(value)
                 else:
                     print("syntax error, get servo io ")
@@ -225,11 +225,11 @@ class Example:
                 parameter_str: str = data_in_array[3]
                 if parameter_str.isnumeric():
                     channel_nr = int(parameter_str)
-                    value = self.robohat.get_hat_adc_readout_single_channel(channel_nr)
+                    value = self.robohat.get_hat_adc_single_channel(channel_nr)
                     if value != -1:
                         print("adc hat channel " + str(channel_nr) + " is: " + str(value) + "V" )
                 elif parameter_str == "all":
-                    value = self.robohat.get_hat_adc_readout_multiple_channels()
+                    value = self.robohat.get_hat_adc_multiple_channels()
                     print("adc hat volts of channels: " + str(value))
                 else:
                     print("syntax error at hat: " + parameter_str )
@@ -258,7 +258,7 @@ class Example:
         elif command == "lib":
             sub_command = data_in_array[2]
             if sub_command == "builddate":
-                print("build date of Robohat lib is: " + self.robohat.get_lib_builddate())
+                print("build date of Robohat lib is: " + self.robohat.get_lib_build_date())
             elif sub_command == "version":
                 print("version of Robohat lib is: " + self.robohat.get_lib_version())
             else:

@@ -81,7 +81,7 @@ class PowerMonitorAndIO:
             self.__io_device.init_mcp23008()
 
     # --------------------------------------------------------------------------------------
-
+    # todo not fully implemented
     def is_power_good(self, _power_channel: int) -> bool:
         return True
 
@@ -129,8 +129,7 @@ class PowerMonitorAndIO:
             else:
                 wanted_pin_value = 1
             self.__io_device.set_pin_direction(_io_nr, wanted_pin_value)
-        else:
-            print("io pin not available for user")
+
     # --------------------------------------------------------------------------------------
 
     def set_io_expander_output(self, _io_nr:int, _value: ExpanderStatus) -> None:
@@ -147,8 +146,6 @@ class PowerMonitorAndIO:
                 self.__io_device.set_pin_data(_io_nr, 0)
             else:
                 self.__io_device.set_pin_data(_io_nr, 1)
-        else:
-            print("io pin not available for user")
 
     # --------------------------------------------------------------------------------------
 
@@ -205,9 +202,10 @@ class PowerMonitorAndIO:
         @param _io_nr: io nr
         @return: True is IO is available, False is not
         """
-        if _io_nr in range(4, 7):
+        if _io_nr >= 4 and _io_nr <= 6:
             return True
-        return False
+        else:
+            return False
 
     # --------------------------------------------------------------------------------------
     def power_monitor_and_io_int_callback(self, _gpi_nr: int) -> None:

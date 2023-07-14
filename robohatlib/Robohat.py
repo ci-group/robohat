@@ -34,8 +34,6 @@ try:
 
     from typing import Tuple
 
-    from robohatlib.helpers.ServoNotFoundException import ServoNotFoundException
-
 except ImportError:
     print("Failed to import needed dependencies for the Robohat class")
     raise
@@ -229,7 +227,6 @@ class Robohat:
          Sets the color of the LED and turns the LED on
 
          @param _color waned color
-
          @return None
          """
         self.__led.set_led_color(_color)
@@ -253,6 +250,7 @@ class Robohat:
     def get_led_color(self) -> Color:
         """!
         Get current color of the LED
+
         @return: Color
         """
         return self.__led.get_led_color()
@@ -261,7 +259,9 @@ class Robohat:
     # begin Servo functions --------------------------------------------------------------------------------------
     def get_servo_is_connected(self, _servo_nr: int) -> bool:
         """!
-        Checks if servo is connected. Returns False when not connected
+        Checks if servo is connected. Returns False when not connected.
+        Servos 0 - 15 are connected to assembly board 0 (PWMPLUG 3) and servos 15 - 31 are connected to assembly
+        board 1 (PWMPLUG 4)
 
         @param _servo_nr The servo nr 0 - 31
         @return: Returns False when not connected
@@ -290,6 +290,8 @@ class Robohat:
     def get_servo_adc_single_channel(self, _servo_nr: int) -> float:
         """!
         Get angle of connected servo in degree or -1 when an error occurs
+        Servos 0 - 15 are connected to assembly board 0 (PWMPLUG 3) and servos 15 - 31 are connected to assembly
+        board 1 (PWMPLUG 4)
 
         @param _servo_nr The servo nr wanted, the servo nr 0 - 31
         @return angle or -1
@@ -327,8 +329,10 @@ class Robohat:
     def get_servo_single_angle(self, _servo_nr: int) -> float:
         """!
         Get angle of connected servo in degree or -1 when an error occurs
+        Servos 0 - 15 are connected to assembly board 0 (PWMPLUG 3) and servos 15 - 31 are connected to assembly
+        board 1 (PWMPLUG 4)
 
-        @param _servo_nr The servo nr wanted (starts at 0)
+        @param _servo_nr The servo nr wanted (0 - 31)
         @return angle or -1
         """
 
@@ -343,8 +347,10 @@ class Robohat:
     def set_servo_single_angle(self, _servo_nr: int, _angle: float) -> None:
         """!
         Set the angle of connected servo in degree, does nothing when not avaible
+        Servos 0 - 15 are connected to assembly board 0 (PWMPLUG 3) and servos 15 - 31 are connected to assembly
+        board 1 (PWMPLUG 4)
 
-        @param _servo_nr The servo nr wanted (starts at 0)
+        @param _servo_nr The servo nr wanted (0 - 31)
         @param _angle wanted angle
 
         @return None
@@ -361,8 +367,9 @@ class Robohat:
     def get_servo_multiple_angles(self) -> []:
         """!
         Get an array of the angles of all the servos
+        Depending on available assembly, an empty array, array of 16 elements or an array od 32 elements will be returned
 
-        @return angles of servos in degree. Returns an empty array when not available
+        @return angles array
         """
 
         return_data = []
@@ -382,9 +389,10 @@ class Robohat:
     def set_servo_multiple_angles(self, _angles_array: []) -> None:
         """!
         Set the angle of connected servos in degree
+        Expect an array of angles. The array should have 16 elements (if only assembly 1 is connected) or array should
+        have 32 elements (if both assemblies are connected)
 
-        @param _angles_array array of the angles
-
+        @param _angles_array, array of the angles
         @return None
         """
 
@@ -399,7 +407,7 @@ class Robohat:
         # ------------------------------------------------------------------------------------------
     def put_servo_to_sleep(self) -> None:
         """!
-        Puts servos to sleep
+        Puts servos to sleep. Note servos will be powered down
         @return: None
         """
 
@@ -441,7 +449,7 @@ class Robohat:
 
     # ------------------------------------------------------------------------------------------
 
-    def set_io_expander_direction(self, _board_nr: int, _pin_nr: int, _dir: ExpanderDir) -> None:
+    def set_servo_io_expander_direction(self, _board_nr: int, _pin_nr: int, _dir: ExpanderDir) -> None:
         """!
         Set the direction of the IO pin on a servo board.
         @param _board_nr: board nr
@@ -452,12 +460,12 @@ class Robohat:
 
         if _board_nr == Robohat_constants.PWMPLUG_P3:               # board 0
             if self.__servo_assembly_1 is not None:
-                self.__servo_assembly_1.set_io_expander_direction(_pin_nr,_dir)
+                self.__servo_assembly_1.set_servo_io_expander_direction(_pin_nr, _dir)
             else:
                 print("Error: servo assembly 1 not initialized")
         elif _board_nr == Robohat_constants.PWMPLUG_P4:             # board 1
             if self.__servo_assembly_2 is not None:
-                self.__servo_assembly_2.set_io_expander_direction(_pin_nr,_dir)
+                self.__servo_assembly_2.set_servo_io_expander_direction(_pin_nr, _dir)
             else:
                 print("Error: servo assembly 2 not initialized")
         else:
@@ -465,7 +473,7 @@ class Robohat:
 
     # ------------------------------------------------------------------------------------------
 
-    def get_io_expander_direction(self, _board_nr: int, _pin_nr: int) -> ExpanderDir| None:
+    def get_servo_io_expander_direction(self, _board_nr: int, _pin_nr: int) -> ExpanderDir | None:
         """!
         Set the direction of the IO pin on a servo board.
         @param _board_nr: board nr
@@ -475,13 +483,13 @@ class Robohat:
 
         if _board_nr == Robohat_constants.PWMPLUG_P3:               # board 0
             if self.__servo_assembly_1 is not None:
-                return self.__servo_assembly_1.get_io_expander_direction(_pin_nr)
+                return self.__servo_assembly_1.get_servo_io_expander_direction(_pin_nr)
             else:
                 print("Error: servo assembly 1 not initialized")
                 return None
         elif _board_nr == Robohat_constants.PWMPLUG_P4:             # board 1
             if self.__servo_assembly_2 is not None:
-                return self.__servo_assembly_2.get_io_expander_direction(_pin_nr)
+                return self.__servo_assembly_2.get_servo_io_expander_direction(_pin_nr)
             else:
                 print("Error: servo assembly 2 not initialized")
                 return None
@@ -491,7 +499,7 @@ class Robohat:
 
     # ------------------------------------------------------------------------------------------
 
-    def set_io_expander_output(self, _board_nr: int, _pin_nr: int, _value: ExpanderStatus) -> None:
+    def set_servo_io_expander_output(self, _board_nr: int, _pin_nr: int, _value: ExpanderStatus) -> None:
         """!
         Set the value of the IO pin on a servo board. Note, io pin should be an output
         @param _board_nr: board nr
@@ -501,19 +509,19 @@ class Robohat:
         """
         if _board_nr == Robohat_constants.PWMPLUG_P3:               # board 0
             if self.__servo_assembly_1 is not None:
-                self.__servo_assembly_1.set_io_expander_output(_pin_nr,_value)
+                self.__servo_assembly_1.set_servo_io_expander_output(_pin_nr, _value)
             else:
                 print("Error: servo assembly 1 not initialized")
         elif _board_nr == Robohat_constants.PWMPLUG_P4:             # board 1
             if self.__servo_assembly_2 is not None:
-                self.__servo_assembly_2.set_io_expander_output(_pin_nr,_value)
+                self.__servo_assembly_2.set_servo_io_expander_output(_pin_nr, _value)
             else:
                 print("Error: servo assembly 2 not initialized")
         else:
             print("Error: servo assembly 1 and servo assembly 2 are not initialized")
     # ------------------------------------------------------------------------------------------
 
-    def get_io_expander_input(self, _board_nr: int, _pin_nr: int) -> ExpanderStatus | None:
+    def get_servo_io_expander_input(self, _board_nr: int, _pin_nr: int) -> ExpanderStatus | None:
         """!
         Get the value of the IO pin on a servo board. Note, io pin should be an output
         @param _board_nr: board nr
@@ -522,13 +530,13 @@ class Robohat:
         """
         if _board_nr == Robohat_constants.PWMPLUG_P3:               # board 0
             if self.__servo_assembly_1 is not None:
-                return self.__servo_assembly_1.get_io_expander_input(_pin_nr)
+                return self.__servo_assembly_1.get_servo_io_expander_input(_pin_nr)
             else:
                 print("Error: servo assembly 1 not initialized")
                 return None
         elif _board_nr == Robohat_constants.PWMPLUG_P4:             # board 1
             if self.__servo_assembly_2 is not None:
-                return self.__servo_assembly_2.get_io_expander_input(_pin_nr)
+                return self.__servo_assembly_2.get_servo_io_expander_input(_pin_nr)
             else:
                 print("Error: servo assembly 2 not initialized")
                 return None
@@ -540,10 +548,10 @@ class Robohat:
 
     def __get_servo_nr_depending_assembly(self, _servo_nr: int) -> int | None:
         """!
-        Get the servo nr of the assembly (so servo nr 16 will be servo nr 0 of assembly 2. If not available
+        Get the servo nr of the assembly (so servo nr 16 will be servo nr 0 of assembly 2). If not available
         None will be returned
 
-        @param _servo_nr The servo nr wanted (starts at 1)
+        @param _servo_nr The servo nr wanted (starts at 0)
         @return servo number or None
         """
 
@@ -583,25 +591,27 @@ class Robohat:
     # end Servo functions --------------------------------------------------------------------------------------
 
     # begin HAT ADC functions --------------------------------------------------------------------------------------
-    def get_hat_adc_readout_single_channel(self, _channel_nr: int) -> float:
+    def get_hat_adc_single_channel(self, _channel_nr: int) -> float:
         """!
         Get analog value of a channel from the HAT adc
+        Requested channels can be 0 - 3 (channel 4 is the derivative of the accu voltage)
 
-        @param _channel_nr The channel nr wanted (starts at 0, so 0 is AI0)
+        @param _channel_nr Wanted channel nr. (Starts at 0)
         @return analog voltage
         """
 
-        return self.__hat_adc.get_voltage_readout_hat_adc_channel(_channel_nr)
+        return self.__hat_adc.get_adc_single_channel(_channel_nr)
 
     # ------------------------------------------------------------------------------------------
 
-    def get_hat_adc_readout_multiple_channels(self) -> []:
+    def get_hat_adc_multiple_channels(self) -> []:
         """!
         Get analog values of the HAT adc
+        Returns an array of 4 elements
 
         @return analog voltage in an array
         """
-        return self.__hat_adc.get_voltage_readout_hat_adc_multiple_channels()
+        return self.__hat_adc.get_adc_multiple_channels()
 
     # end HAT ADC functions --------------------------------------------------------------------------------------
 
@@ -729,7 +739,7 @@ class Robohat:
         self.__power_management.shutdown_power()
         sleep(1)
         self.__io_handler.io_shutdown()
-        os.system("sudo shutdown -h now")       # actual system call to shutdown the RPi
+        os.system("sudo shutdown -h now")       # actual system call to shut down the RPi
 
     # ------------------------------------------------------------------------------------
     def set_system_alarm_permitted(self, _state: bool) -> None:
@@ -763,7 +773,7 @@ class Robohat:
 
     # ------------------------------------------------------------------------------------
 
-    def get_lib_builddate(self) -> str:
+    def get_lib_build_date(self) -> str:
         """!
         Get the build date of library.
 
@@ -796,20 +806,10 @@ class Robohat:
         """
         if self.__hat_io_expander is not None:
             self.__hat_io_expander.reset_interrupt(_gpi_nr)
-    # ------------------------------------------------------------------------------------
-
-    def _io_servo_assembly_callback(self, _gpi_nr):
-        """!
-        Just a test callback, should be removed in the future
-
-        @param _gpi_nr: mr of the callback gpio pin
-
-        @return None
-        """
-        print("_io_servo_assembly_callback by: " + str(_gpi_nr))
-        self.do_buzzer_beep()
-
-
 
     # ------------------------------------------------------------------------------------
+    # ------------------------------------------------------------------------------------
+    # ------------------------------------------------------------------------------------
+
+
 

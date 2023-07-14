@@ -11,15 +11,21 @@ class InterruptCallbackHolder:
     def __init__(self, _name:str, _callback = None, _release_int_function = None, _interrupt_type:InterruptTypes = InterruptTypes.INT_BOTH, _time_between_new_possible_trigger = 0):
         """!
         Constructor of InterruptCallbackHolder
-        @param _name:  name of this Holder
+
+        @param _name: name of this Holder
+        @param _callback: Function which will be called when the trigger is executed
+        @aram _release_int_function: Function which will be called after the callback function is executed
+        @param _interrupt_type: Type of interrupt (Falling, Rising, Both)
+        @param _time_between_new_possible_trigger:  Time out between triggers in mS
         """
+
         self.__name = _name
         self.__callback = _callback
         self.__release_int_function = _release_int_function
         self.__interrupt_type = _interrupt_type
         self.__time_between_new_possible_trigger = 0
 
-        self.set_time_between_new_possible_trigger_in_ms(_time_between_new_possible_trigger);
+        self.set_time_between_new_possible_trigger_in_ms(_time_between_new_possible_trigger)
 
         self.__last_time_triggered = 0
 
@@ -28,6 +34,12 @@ class InterruptCallbackHolder:
     #--------------0------------------------------------------------------------------------
 
     def set_callback(self, _callback) -> None:
+        """!
+        A new function which will be called when the trigger is executed
+
+        @param _callback: a new function
+        @return: Nome
+        """
         self.__callback = _callback
 
     #--------------------------------------------------------------------------------------
@@ -36,8 +48,9 @@ class InterruptCallbackHolder:
 
     def set_release_int_function(self, _release_int_function) -> None:
         """
-        The interrupt reset function can be overriden by a new function
-        @param _release_int_function: the new fucntion
+        A new function which will be called when the trigger is executed
+
+        @param _release_int_function: a new function
         @return: None
         """
         self.__release_int_function = _release_int_function
@@ -46,8 +59,9 @@ class InterruptCallbackHolder:
     #--------------------------------------------------------------------------------------
     #--------------------------------------------------------------------------------------
     def set_time_between_new_possible_trigger_in_ms(self, _time_between_new_possible_trigger:int = 0) -> None:
-        """
+        """!
         The minimal time between 2 triggers. 0 = default
+
         @param _time_between_new_possible_trigger:
         @return: None
         """
@@ -58,8 +72,8 @@ class InterruptCallbackHolder:
     #--------------------------------------------------------------------------------------
 
     def execute_callback(self, _io_nr:int) -> None:
-        """
-        This function will call the reset the interrupt and executes callback
+        """!
+        This function will call the 'reset the interrupt function' and the and executes 'callback function'
 
         @param _io_nr: io nr which triggered the interrupt
         @return: None
@@ -75,11 +89,14 @@ class InterruptCallbackHolder:
         if self.__release_int_function is not None:
             self.__release_int_function(_io_nr)
 
-
-
     #--------------------------------------------------------------------------------------
     #--------------------------------------------------------------------------------------
     #--------------------------------------------------------------------------------------
 
     def  get_interrupt_type(self) -> InterruptTypes:
+        """!
+        Returns wanted interrupt type
+
+        @return InterruptTypes
+        """
         return  self.__interrupt_type

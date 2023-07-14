@@ -280,7 +280,7 @@ class MCP23008:
 
     def __check_if_expander_io_is_available(self, _io_nr) -> bool:
         """!
-        Return True when Iio_nr is in range
+        Return True when _io_nr is in range
         @param _io_nr: the io nr
         @return: bool
         """

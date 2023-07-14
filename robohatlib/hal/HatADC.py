@@ -49,7 +49,7 @@ class HatADC:
 
 
     # begin, hat adc functions --------------------------------------------------------------------------------------
-    def get_voltage_readout_hat_adc_channel(self, _channel_nr: int) -> float:
+    def get_adc_single_channel(self, _channel_nr: int) -> float:
         """!
         Get analog value of a channel from the HAT adc
 
@@ -67,7 +67,7 @@ class HatADC:
             print ("hat adc not found ??")
         return -1
 
-    def get_voltage_readout_hat_adc_multiple_channels(self) -> []:
+    def get_adc_multiple_channels(self) -> []:
         """!
         Get analog values of all channel from the HAT adc
 
