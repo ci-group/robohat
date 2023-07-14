@@ -55,11 +55,16 @@ class IMU:
     # --------------------------------------------------------------------------------------
 
     def do_imu_test(self):
+        if self.__lis3ml is None and self.__lsm6ds33 is None:
+            print("IMU not connected")
+            return
+
         if self.__lis3ml is not None:
             self.__lis3ml.do_test()
 
         if self.__lsm6ds33 is not None:
             self.__lsm6ds33.do_test()
+
 
     # --------------------------------------------------------------------------------------
 
