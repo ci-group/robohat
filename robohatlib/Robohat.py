@@ -92,7 +92,6 @@ class Robohat:
 
         self.__power_management.add_signaling_device(self.__buzzer)
 
-
         self.__servo_assembly_1 = ServoAssembly(self.__io_handler,
                                                 _servo_assembly_1_config,
                                                 Robohat_config.SERVOASSEMBLY_1_I2C_BUS,
@@ -102,7 +101,7 @@ class Robohat:
         if self.__servo_assembly_1 .is_board_avaible() is True:
             self.__servo_assembly_1.add_signaling_device(self.__buzzer)
         else:
-            self.__servo_assembly_1 = None
+            self.__servo_assembly_1 = None              # if not available make None, so class is not accessible
 
         self.__servo_assembly_2 = ServoAssembly(self.__io_handler,
                                                 _servo_assembly_2_config,
@@ -113,7 +112,7 @@ class Robohat:
         if self.__servo_assembly_2.is_board_avaible() is True:
             self.__servo_assembly_2.add_signaling_device(self.__buzzer)
         else:
-            self.__servo_assembly_2 = None
+            self.__servo_assembly_2 = None              # if not available make None, so class is not accessible
 
     # --------------------------------------------------------------------------------------
 
