@@ -7,6 +7,5 @@ var searchData=
   ['accu_5fvoltage_5fto_5fpercentage_5farray_4',['ACCU_VOLTAGE_TO_PERCENTAGE_ARRAY',['../namespace_robohat__config.html#a7f678d13bfa3bca447e7f58d890b4211',1,'Robohat_config']]],
   ['accu_5fvoltage_5fwhen_5ffull_5',['ACCU_VOLTAGE_WHEN_FULL',['../namespace_robohat__config.html#ae2619b03ea7181055ad33d8fa66aa3e3',1,'Robohat_config']]],
   ['alarm_5fpermitted_6',['ALARM_PERMITTED',['../namespace_robohat__config.html#a45751ddbb84fb3c799332c12773d4aa8',1,'Robohat_config']]],
-  ['alarm_5ftimeout_5fin_5fsec_7',['ALARM_TIMEOUT_IN_SEC',['../namespace_robohat__config.html#adfa1cafba7a9b700fa6cc3104c2ec38c',1,'Robohat_config']]],
-  ['are_5fservos_5fsleeping_8',['are_servos_sleeping',['../class_robohat_1_1_robohat.html#ac8c98160d4565f35a504dc1f1db134a6',1,'Robohat::Robohat']]]
+  ['alarm_5ftimeout_5fin_5fsec_7',['ALARM_TIMEOUT_IN_SEC',['../namespace_robohat__config.html#adfa1cafba7a9b700fa6cc3104c2ec38c',1,'Robohat_config']]]
 ];

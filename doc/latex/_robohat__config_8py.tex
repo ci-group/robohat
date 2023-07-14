@@ -28,6 +28,8 @@ bool \mbox{\hyperlink{namespace_robohat__config_a5c7faad53ec16d06c96461d893ee660
 \item 
 list \mbox{\hyperlink{namespace_robohat__config_a7f678d13bfa3bca447e7f58d890b4211}{Robohat\+\_\+config.\+ACCU\+\_\+\+VOLTAGE\+\_\+\+TO\+\_\+\+PERCENTAGE\+\_\+\+ARRAY}}
 \item 
+\mbox{\hyperlink{namespace_robohat__config_a1d2f1ab2e68ecdc270c51c13d3cc9d9e}{Robohat\+\_\+config.\+POWER\+\_\+\+SHUTDOWN\+\_\+\+GPO\+\_\+\+DEF}} = GPODef(\"{}shutdown\"{}, 27)
+\item 
 \mbox{\hyperlink{namespace_robohat__config_a98a67b4d4544e499bd160b58c5c5bce5}{Robohat\+\_\+config.\+BUZZER\+\_\+\+DEF}} = Buzzer\+Def(\"{}buzzer\"{}, 18, 1000, 50)
 \item 
 \mbox{\hyperlink{namespace_robohat__config_abb02060e2a931afc3560e1b7b3789765}{Robohat\+\_\+config.\+SERIAL\+\_\+\+DEF}} = Serial\+Def(\"{}debug\+\_\+port\"{}, 1)
@@ -46,15 +48,15 @@ list \mbox{\hyperlink{namespace_robohat__config_a7f678d13bfa3bca447e7f58d890b421
 \item 
 \mbox{\hyperlink{namespace_robohat__config_a8eb4e5d22045700f8e771a3501fa0f0c}{Robohat\+\_\+config.\+IMU\+\_\+\+DEF}} = IMUDef(\"{}imu\"{}, \mbox{\hyperlink{namespace_robohat__config_a01768e1d18ac35f936db836f5acdc2bd}{MINIMU9\+\_\+\+LIS3\+MDL\+\_\+\+I2\+C\+\_\+\+DEF}}, \mbox{\hyperlink{namespace_robohat__config_a322dfe8b508a1d268fc3e374e7f8a485}{MINIMU9\+\_\+\+LSM6\+DS33\+\_\+\+I2\+C\+\_\+\+DEF}})
 \item 
-\mbox{\hyperlink{namespace_robohat__config_ae12a3d4fe4dd1c47b177e4a52359ad46}{Robohat\+\_\+config.\+HATADC\+\_\+\+I2\+C\+\_\+\+DEF}} = I2\+CDevice\+Def(\"{}hat\+\_\+adc\"{}, 5, 0x34)
+\mbox{\hyperlink{namespace_robohat__config_a8b61ba23f82e09b83cd1ea819076cc4e}{Robohat\+\_\+config.\+HAT\+\_\+\+ADC\+\_\+\+I2\+C\+\_\+\+DEF}} = I2\+CDevice\+Def(\"{}hat\+\_\+adc\"{}, 5, 0x34)
 \item 
-\mbox{\hyperlink{namespace_robohat__config_ab3bbe94717b9db09734be264a10a2f3a}{Robohat\+\_\+config.\+POWERSHUTDOWN\+\_\+\+GPO\+\_\+\+DEF}} = GPODef(\"{}shutdown\"{}, 27)
+\mbox{\hyperlink{namespace_robohat__config_af1e21ca467bfa223d5063b6be77a3674}{Robohat\+\_\+config.\+HAT\+\_\+\+IO\+\_\+\+EXPANDER\+\_\+\+I2\+C\+\_\+\+DEF}} = I2\+CDevice\+Def(\"{}hat\+\_\+io\+\_\+expander\"{}, 1, 0x20)
 \item 
-\mbox{\hyperlink{namespace_robohat__config_aa30de453592b91139a5bb4357620ffac}{Robohat\+\_\+config.\+IOEXPANDER\+\_\+\+I2\+C\+\_\+\+DEF}} = I2\+CDevice\+Def(\"{}main\+\_\+io\+\_\+expander\"{}, 1, 0x20)
+list \mbox{\hyperlink{namespace_robohat__config_abbf912435fcaed087c3e3e8369079d7a}{Robohat\+\_\+config.\+HAT\+\_\+\+IO\+\_\+\+EXPANDER\+\_\+\+INTERRUPT\+\_\+\+SETTINGS}}
 \item 
-list \mbox{\hyperlink{namespace_robohat__config_a13756306381fc4191ab440039e274413}{Robohat\+\_\+config.\+IOEXPANDER\+\_\+\+INTERRUPT\+\_\+\+SETTINGS}}
+int \mbox{\hyperlink{namespace_robohat__config_a5b46629140fc983469b2316b6f3126f6}{Robohat\+\_\+config.\+HAT\+\_\+\+INTERRUPT\+\_\+\+GPI}} = 24
 \item 
-\mbox{\hyperlink{namespace_robohat__config_a7a9f449d409dd8df062f77ca78f139ca}{Robohat\+\_\+config.\+IO\+\_\+\+EXPANDER\+\_\+\+DEF}} = IOExpander\+Def(\"{}io\+\_\+expander\+\_\+topboard\"{}, \mbox{\hyperlink{namespace_robohat__config_aa30de453592b91139a5bb4357620ffac}{IOEXPANDER\+\_\+\+I2\+C\+\_\+\+DEF}}, 24, \mbox{\hyperlink{namespace_robohat__config_a13756306381fc4191ab440039e274413}{IOEXPANDER\+\_\+\+INTERRUPT\+\_\+\+SETTINGS}})
+\mbox{\hyperlink{namespace_robohat__config_a909b54d61d3337d23e242d7ff7289d94}{Robohat\+\_\+config.\+HAT\+\_\+\+IO\+\_\+\+EXPANDER\+\_\+\+DEF}} = IOExpander\+Def(\"{}hat\+\_\+io\+\_\+expander\"{}, \mbox{\hyperlink{namespace_robohat__config_af1e21ca467bfa223d5063b6be77a3674}{HAT\+\_\+\+IO\+\_\+\+EXPANDER\+\_\+\+I2\+C\+\_\+\+DEF}}, \mbox{\hyperlink{namespace_robohat__config_a5b46629140fc983469b2316b6f3126f6}{HAT\+\_\+\+INTERRUPT\+\_\+\+GPI}}, \mbox{\hyperlink{namespace_robohat__config_abbf912435fcaed087c3e3e8369079d7a}{HAT\+\_\+\+IO\+\_\+\+EXPANDER\+\_\+\+INTERRUPT\+\_\+\+SETTINGS}})
 \item 
 int \mbox{\hyperlink{namespace_robohat__config_ae3b4abf8b75c1747c92fc5c2e3eb58b8}{Robohat\+\_\+config.\+SERVOASSEMBLY\+\_\+1\+\_\+\+I2\+C\+\_\+\+BUS}} = 1
 \item 
@@ -64,11 +66,13 @@ int \mbox{\hyperlink{namespace_robohat__config_affe28fac1297be7670ba73abbe156287
 \item 
 int \mbox{\hyperlink{namespace_robohat__config_a89cec2da47b86d13c57406da20e31647}{Robohat\+\_\+config.\+SERVOASSEMBLY\+\_\+2\+\_\+\+SPI\+\_\+\+BUS}} = 0
 \item 
+int \mbox{\hyperlink{namespace_robohat__config_aa2cd25c7bf4e340a1416c411f985c6fc}{Robohat\+\_\+config.\+SERVOASSEMBLY\+\_\+\+INTERRUPT\+\_\+\+GPI}} = 4
+\item 
 \mbox{\hyperlink{namespace_robohat__config_a320525ac61f782461f5faf1c9490f91f}{Robohat\+\_\+config.\+SERVOASSEMBLY\+\_\+\+I2\+C\+\_\+\+DEF}} = I2\+CDevice\+Def(\"{}io\+\_\+expander\"{}, 1, 0x20)
 \item 
 list \mbox{\hyperlink{namespace_robohat__config_a3f2b7249a7dddf863c6ebaafb1804fb0}{Robohat\+\_\+config.\+SERVOASSEMBLY\+\_\+\+INTERRUPT\+\_\+\+SETTINGS}}
 \item 
-\mbox{\hyperlink{namespace_robohat__config_af82df3c555c1e0484bcb050166b84d23}{Robohat\+\_\+config.\+SERVOASSEMBLY\+\_\+\+EXPANDER\+\_\+\+DEF}} = IOExpander\+Def(\"{}power\+\_\+monitor\+\_\+expander\"{}, \mbox{\hyperlink{namespace_robohat__config_a320525ac61f782461f5faf1c9490f91f}{SERVOASSEMBLY\+\_\+\+I2\+C\+\_\+\+DEF}}, 4, \mbox{\hyperlink{namespace_robohat__config_a3f2b7249a7dddf863c6ebaafb1804fb0}{SERVOASSEMBLY\+\_\+\+INTERRUPT\+\_\+\+SETTINGS}})
+\mbox{\hyperlink{namespace_robohat__config_af82df3c555c1e0484bcb050166b84d23}{Robohat\+\_\+config.\+SERVOASSEMBLY\+\_\+\+EXPANDER\+\_\+\+DEF}} = IOExpander\+Def(\"{}power\+\_\+monitor\+\_\+expander\"{}, \mbox{\hyperlink{namespace_robohat__config_a320525ac61f782461f5faf1c9490f91f}{SERVOASSEMBLY\+\_\+\+I2\+C\+\_\+\+DEF}}, \mbox{\hyperlink{namespace_robohat__config_aa2cd25c7bf4e340a1416c411f985c6fc}{SERVOASSEMBLY\+\_\+\+INTERRUPT\+\_\+\+GPI}}, \mbox{\hyperlink{namespace_robohat__config_a3f2b7249a7dddf863c6ebaafb1804fb0}{SERVOASSEMBLY\+\_\+\+INTERRUPT\+\_\+\+SETTINGS}})
 \item 
 \mbox{\hyperlink{namespace_robohat__config_a0e252b618769e21eb5d494b67918ad30}{Robohat\+\_\+config.\+I2\+C1\+\_\+\+DEF}} = I2\+CBus\+Def(\"{}main\+\_\+i2c\"{}, 1, 3, 2, 100000)
 \item 

@@ -7,9 +7,10 @@ var searchData=
   ['servoassembly_5f2_5fspi_5fbus_4',['SERVOASSEMBLY_2_SPI_BUS',['../namespace_robohat__config.html#a89cec2da47b86d13c57406da20e31647',1,'Robohat_config']]],
   ['servoassembly_5fexpander_5fdef_5',['SERVOASSEMBLY_EXPANDER_DEF',['../namespace_robohat__config.html#af82df3c555c1e0484bcb050166b84d23',1,'Robohat_config']]],
   ['servoassembly_5fi2c_5fdef_6',['SERVOASSEMBLY_I2C_DEF',['../namespace_robohat__config.html#a320525ac61f782461f5faf1c9490f91f',1,'Robohat_config']]],
-  ['servoassembly_5finterrupt_5fsettings_7',['SERVOASSEMBLY_INTERRUPT_SETTINGS',['../namespace_robohat__config.html#a3f2b7249a7dddf863c6ebaafb1804fb0',1,'Robohat_config']]],
-  ['spi0_5fdef_8',['SPI0_DEF',['../namespace_robohat__config.html#a4329ce49c4be55e37267023e5008ef12',1,'Robohat_config']]],
-  ['spi1_5fdef_9',['SPI1_DEF',['../namespace_robohat__config.html#acf631153e70123bcf6e6b12629f55de5',1,'Robohat_config']]],
-  ['spi2_5fdef_10',['SPI2_DEF',['../namespace_robohat__config.html#a7a4acbd8996227c01b565ad7d4ca9dfc',1,'Robohat_config']]],
-  ['statusled_5fdef_11',['STATUSLED_DEF',['../namespace_robohat__config.html#afe49396710e821ca9c764cdfbdaed4d9',1,'Robohat_config']]]
+  ['servoassembly_5finterrupt_5fgpi_7',['SERVOASSEMBLY_INTERRUPT_GPI',['../namespace_robohat__config.html#aa2cd25c7bf4e340a1416c411f985c6fc',1,'Robohat_config']]],
+  ['servoassembly_5finterrupt_5fsettings_8',['SERVOASSEMBLY_INTERRUPT_SETTINGS',['../namespace_robohat__config.html#a3f2b7249a7dddf863c6ebaafb1804fb0',1,'Robohat_config']]],
+  ['spi0_5fdef_9',['SPI0_DEF',['../namespace_robohat__config.html#a4329ce49c4be55e37267023e5008ef12',1,'Robohat_config']]],
+  ['spi1_5fdef_10',['SPI1_DEF',['../namespace_robohat__config.html#acf631153e70123bcf6e6b12629f55de5',1,'Robohat_config']]],
+  ['spi2_5fdef_11',['SPI2_DEF',['../namespace_robohat__config.html#a7a4acbd8996227c01b565ad7d4ca9dfc',1,'Robohat_config']]],
+  ['statusled_5fdef_12',['STATUSLED_DEF',['../namespace_robohat__config.html#afe49396710e821ca9c764cdfbdaed4d9',1,'Robohat_config']]]
 ];

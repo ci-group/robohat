@@ -1,20 +1,6 @@
 var searchData=
 [
-  ['get_5facceleration_0',['get_acceleration',['../class_robohat_1_1_robohat.html#ad58f6522212c4917894a632294388083',1,'Robohat::Robohat']]],
-  ['get_5faccu_5fpercentage_5fcapacity_1',['get_accu_percentage_capacity',['../class_robohat_1_1_robohat.html#a6f34b7407098693e62dec5a760a17b6f',1,'Robohat::Robohat']]],
-  ['get_5faccu_5fvoltage_2',['get_accu_voltage',['../class_robohat_1_1_robohat.html#a7b39dab4e54f9b86244a4ddf766ad72d',1,'Robohat::Robohat']]],
-  ['get_5fgyro_3',['get_gyro',['../class_robohat_1_1_robohat.html#a51ec37d350fbc7f626ba4a14d59a42a5',1,'Robohat::Robohat']]],
-  ['get_5fhat_5fadc_5freadout_5fmultiple_5fchannels_4',['get_hat_adc_readout_multiple_channels',['../class_robohat_1_1_robohat.html#a199855228453bb7f20bbd979b5f11374',1,'Robohat::Robohat']]],
-  ['get_5fhat_5fadc_5freadout_5fsingle_5fchannel_5',['get_hat_adc_readout_single_channel',['../class_robohat_1_1_robohat.html#a399cbd66dabf7cd6872e5395b2dd635a',1,'Robohat::Robohat']]],
-  ['get_5fio_5fexpander_5finput_6',['get_io_expander_input',['../class_robohat_1_1_robohat.html#a3fd5e1d6f910f769384802d2c309c29f',1,'Robohat::Robohat']]],
-  ['get_5fled_5fcolor_7',['get_led_color',['../class_robohat_1_1_robohat.html#ab81e0022b843be3d7637ba1d9d1fbb69',1,'Robohat::Robohat']]],
-  ['get_5flib_5fbuilddate_8',['get_lib_builddate',['../class_robohat_1_1_robohat.html#ab1ea31f80bab612e1cc2470e651940db',1,'Robohat::Robohat']]],
-  ['get_5flib_5fversion_9',['get_lib_version',['../class_robohat_1_1_robohat.html#aa304587ef960f785dbe1605d134a88b1',1,'Robohat::Robohat']]],
-  ['get_5fmagnetic_5ffields_10',['get_magnetic_fields',['../class_robohat_1_1_robohat.html#a74cda51d6bd3abfdfb9099854441634f',1,'Robohat::Robohat']]],
-  ['get_5fservo_5fadc_5freadout_5fsingle_5fchannel_11',['get_servo_adc_readout_single_channel',['../class_robohat_1_1_robohat.html#a524d2702f336935b4bd65c467742ea90',1,'Robohat::Robohat']]],
-  ['get_5fservo_5fangle_12',['get_servo_angle',['../class_robohat_1_1_robohat.html#a69653a5ff63691145aacede5dd446216',1,'Robohat::Robohat']]],
-  ['get_5fservo_5fis_5fconnected_13',['get_servo_is_connected',['../class_robohat_1_1_robohat.html#a39b197d94ef1d53960865bd5756642c8',1,'Robohat::Robohat']]],
-  ['get_5fservos_5fadc_5freadout_5fmultiple_5fchannels_14',['get_servos_adc_readout_multiple_channels',['../class_robohat_1_1_robohat.html#a9e71360e6aab3192dab224eb6a7b22db',1,'Robohat::Robohat']]],
-  ['get_5fservos_5fangles_15',['get_servos_angles',['../class_robohat_1_1_robohat.html#a6485990f7bd043e7c330d75e11deff57',1,'Robohat::Robohat']]],
-  ['get_5fstatus_5fsystem_5falarm_5fpermitted_16',['get_status_system_alarm_permitted',['../class_robohat_1_1_robohat.html#a6c0f543e9b513dba3135d3875e970e46',1,'Robohat::Robohat']]]
+  ['init_0',['init',['../class_robohat_1_1_robohat.html#a726c77fb9ff04911df0ea9a5e9a80d57',1,'Robohat::Robohat']]],
+  ['is_5faccu_5fcapacity_5fok_1',['is_accu_capacity_ok',['../class_robohat_1_1_robohat.html#a1e255d3ac4e556019e56f1f1f1c2b675',1,'Robohat::Robohat']]],
+  ['is_5fservo_5fsleeping_2',['is_servo_sleeping',['../class_robohat_1_1_robohat.html#a4b74088f54b511905a300dfa0d3517a4',1,'Robohat::Robohat']]]
 ];
