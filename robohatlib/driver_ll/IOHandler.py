@@ -36,7 +36,7 @@ except ImportError:
 try:
     import spidev
 except ImportError:
-    raise ImportError("spidev not found, needed for IOHandler class")
+    raise ImportError("SPIDEV not found, needed for IOHandler class")
 
 try:
     import RPi.GPIO as GPIO
@@ -179,7 +179,7 @@ class IOHandler:
         self.__pre_scan_i2c_bus()
 
         if self.__is_i2c_slot_available(_i2c_device_def) is False:
-           print("Warning, I2C device: " + _i2c_device_def.get_name() + " is not found I2C bus: " + str(_i2c_device_def.get_i2c_bus_nr()) + " @ address: " + str(_i2c_device_def.get_i2c_device_address()) )
+           print("Warning, I2C device: " + _i2c_device_def.get_name() + " is not found I2C bus: " + str(_i2c_device_def.get_i2c_bus_nr()) + ", address: " + hex(_i2c_device_def.get_i2c_device_address()) )
            return None
 
         i2c_bus = self.__get_i2c_bus(_i2c_device_def.get_i2c_bus_nr() )

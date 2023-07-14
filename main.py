@@ -465,6 +465,9 @@ class Example:
             sub_command = data_in_array[2]
             if sub_command == "scan":
                 self.robohat.do_i2c_scan()
+            else:
+                print("syntax error do i2c")
+
         elif command == "buzzer":
             sub_command = data_in_array[2]
             if sub_command == "random":
@@ -480,10 +483,10 @@ class Example:
                     self.robohat.do_buzzer_freq(freq)
             elif sub_command == "stop":
                 self.robohat.do_buzzer_release()
-            elif sub_command == "test":
-                self.do_test()
             else:
-                print("syntax error")
+                print("syntax error do buzzer")
+        elif command == "test":
+            self.do_test()
 
         else:
             print("syntax error")
