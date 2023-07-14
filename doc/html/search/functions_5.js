@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['put_5fservos_5fto_5fsleep_0',['put_servos_to_sleep',['../class_robohat_1_1_robohat.html#a2faf14b70ceb40c360cf27297b1aff85',1,'Robohat::Robohat']]]
+  ['init_0',['init',['../class_robohat_1_1_robohat.html#a726c77fb9ff04911df0ea9a5e9a80d57',1,'Robohat::Robohat']]],
+  ['is_5faccu_5fcapacity_5fok_1',['is_accu_capacity_ok',['../class_robohat_1_1_robohat.html#a1e255d3ac4e556019e56f1f1f1c2b675',1,'Robohat::Robohat']]]
 ];

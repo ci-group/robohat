@@ -86,6 +86,10 @@ class Example:
                 servo_nr = int(data_in_array[3])
                 angle = float(data_in_array[4])
                 self.robohat.set_servo_angle(servo_nr, angle)
+           elif sub_command == "io":
+               io_command = int(data_in_array[3])
+               if io_command == "angle":
+
            else:
                print("syntax error")
         elif command == "led":
@@ -284,6 +288,11 @@ class Example:
         print("get servo adc all                              get all the servo position adc values")
         print("get servo connected [servo nr]                 shows if servo is connected")
         print("put servos to sleep                            puts all servos asleep")
+        print("set servo io dir [pin nr] [in|out]             set the direction of an io pin of a servo board")
+        print("get servo io dir [pin nr]                      get the direction of an io pin of a servo board")
+        print("set servo io out [pin nr] [0|1]                set the pin value of an io pin of a servo board")
+        print("get servo io in [pin nr]                       get the pin value of an io pin of a servo board")
+
         print("wake up servos                                 wakes all servo up")
         print("are servos sleeping                            shows information if servos are sleeping")
 
@@ -295,6 +304,10 @@ class Example:
 
         print("get hat adc [channel]                          get hat adc value (channel 4 is divided accu voltage")
         print("get hat adc all                                get all the hat adc values")
+        print("set hat io dir [pin nr] [in|out]               set the direction of an io pin of a servo board")
+        print("get hat io dir [pin nr]                        get the direction of an io pin of a servo board")
+        print("set hat io out [pin nr] [0|1]                  set the pin value of an io pin of a servo board")
+        print("get hat io in [pin nr]                         get the pin value of an io pin of a servo board")
 
         print("get accu voltage                               get voltage of accu")
         print("get accu capacity                              get capacity of accu")

@@ -1,6 +1,5 @@
 var searchData=
 [
-  ['ledblue_5fgpo_5fdef_0',['LEDBLUE_GPO_DEF',['../namespace_robohat__config.html#a01b327c668f08b83e988ac270a8183e6',1,'Robohat_config']]],
-  ['ledgreen_5fgpo_5fdef_1',['LEDGREEN_GPO_DEF',['../namespace_robohat__config.html#a08e550ee9ca3cbec402845af2cc02e7b',1,'Robohat_config']]],
-  ['ledred_5fgpo_5fdef_2',['LEDRED_GPO_DEF',['../namespace_robohat__config.html#af1986d651d4ca8ba49183c497fc5d112',1,'Robohat_config']]]
+  ['minimu9_5flis3mdl_5fi2c_5fdef_0',['MINIMU9_LIS3MDL_I2C_DEF',['../namespace_robohat__config.html#a01768e1d18ac35f936db836f5acdc2bd',1,'Robohat_config']]],
+  ['minimu9_5flsm6ds33_5fi2c_5fdef_1',['MINIMU9_LSM6DS33_I2C_DEF',['../namespace_robohat__config.html#a322dfe8b508a1d268fc3e374e7f8a485',1,'Robohat_config']]]
 ];

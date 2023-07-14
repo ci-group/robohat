@@ -24,7 +24,6 @@
 <table cellspacing="0" cellpadding="0">
  <tbody>
  <tr id="projectrow">
-  <td id="projectlogo"><img alt="Logo" src="VU_logo_RGB-01.png"/></td>
   <td id="projectalign">
    <div id="projectname">Robohat<span id="projectnumber">&#160;2022282301</span>
    </div>
@@ -93,7 +92,6 @@ $(document).ready(function(){initNavTree('class_robohat_1_1_robohat.html',''); i
   <div class="summary">
 <a href="#pub-methods">Public Member Functions</a> &#124;
 <a href="#pro-methods">Protected Member Functions</a> &#124;
-<a href="#pro-attribs">Protected Attributes</a> &#124;
 <a href="class_robohat_1_1_robohat-members.html">List of all members</a>  </div>
   <div class="headertitle"><div class="title">Robohat.Robohat Class Reference</div></div>
 </div><!--header-->
@@ -110,6 +108,8 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a726c77fb9ff04911df0ea9a5e9a80d57"><td class="memItemLeft" align="right" valign="top">None&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_robohat_1_1_robohat.html#a726c77fb9ff04911df0ea9a5e9a80d57">init</a> (self, [] _servo_board_1_datas_array, [] _servo_board_2_datas_array)</td></tr>
 <tr class="memdesc:a726c77fb9ff04911df0ea9a5e9a80d57"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initializes the <a class="el" href="namespace_robohat.html">Robohat</a>.  <br /></td></tr>
 <tr class="separator:a726c77fb9ff04911df0ea9a5e9a80d57"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af41039605da368be54e031225af0e6b2"><td class="memItemLeft" align="right" valign="top">None&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_robohat_1_1_robohat.html#af41039605da368be54e031225af0e6b2">exit_program</a> (self)</td></tr>
+<tr class="separator:af41039605da368be54e031225af0e6b2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab7596aa3157e74f7fdb144b03f754736"><td class="memItemLeft" align="right" valign="top">None&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_robohat_1_1_robohat.html#ab7596aa3157e74f7fdb144b03f754736">scan_i2c_bus</a> (self)</td></tr>
 <tr class="memdesc:ab7596aa3157e74f7fdb144b03f754736"><td class="mdescLeft">&#160;</td><td class="mdescRight">Scans all the available I2C busses on the <a class="el" href="namespace_robohat.html">Robohat</a> hardware.  <br /></td></tr>
 <tr class="separator:ab7596aa3157e74f7fdb144b03f754736"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -125,6 +125,9 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:ac404c660d3289c975d53e3883f42c967"><td class="memItemLeft" align="right" valign="top">None&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_robohat_1_1_robohat.html#ac404c660d3289c975d53e3883f42c967">do_buzzer_freq</a> (self, int _freq)</td></tr>
 <tr class="memdesc:ac404c660d3289c975d53e3883f42c967"><td class="mdescLeft">&#160;</td><td class="mdescRight">Beeps the buzzer at a requested frequency.  <br /></td></tr>
 <tr class="separator:ac404c660d3289c975d53e3883f42c967"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6b4e421c4bd1c3d7dedc90b4b83201e0"><td class="memItemLeft" align="right" valign="top">None&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_robohat_1_1_robohat.html#a6b4e421c4bd1c3d7dedc90b4b83201e0">do_buzzer_release</a> (self)</td></tr>
+<tr class="memdesc:a6b4e421c4bd1c3d7dedc90b4b83201e0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Stops the buzzer from making sound.  <br /></td></tr>
+<tr class="separator:a6b4e421c4bd1c3d7dedc90b4b83201e0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9dd9c22a883391d5161ec5410e6e2dee"><td class="memItemLeft" align="right" valign="top">None&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_robohat_1_1_robohat.html#a9dd9c22a883391d5161ec5410e6e2dee">set_led_color</a> (self, Color _color)</td></tr>
 <tr class="memdesc:a9dd9c22a883391d5161ec5410e6e2dee"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets the color of the LED and turns the LED on.  <br /></td></tr>
 <tr class="separator:a9dd9c22a883391d5161ec5410e6e2dee"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -134,21 +137,23 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a7e97193aaffde3a33961dbef937b0d07"><td class="memItemLeft" align="right" valign="top">None&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_robohat_1_1_robohat.html#a7e97193aaffde3a33961dbef937b0d07">turn_led_on</a> (self)</td></tr>
 <tr class="memdesc:a7e97193aaffde3a33961dbef937b0d07"><td class="mdescLeft">&#160;</td><td class="mdescRight">Turns led on, with last known color.  <br /></td></tr>
 <tr class="separator:a7e97193aaffde3a33961dbef937b0d07"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab81e0022b843be3d7637ba1d9d1fbb69"><td class="memItemLeft" align="right" valign="top">Color&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_robohat_1_1_robohat.html#ab81e0022b843be3d7637ba1d9d1fbb69">get_led_color</a> (self)</td></tr>
+<tr class="separator:ab81e0022b843be3d7637ba1d9d1fbb69"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a39b197d94ef1d53960865bd5756642c8"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_robohat_1_1_robohat.html#a39b197d94ef1d53960865bd5756642c8">get_servo_is_connected</a> (self, int _servo_nr)</td></tr>
 <tr class="memdesc:a39b197d94ef1d53960865bd5756642c8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Checks if servo is connected.  <br /></td></tr>
 <tr class="separator:a39b197d94ef1d53960865bd5756642c8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a524d2702f336935b4bd65c467742ea90"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_robohat_1_1_robohat.html#a524d2702f336935b4bd65c467742ea90">get_servo_adc_readout_single_channel</a> (self, int _servo_nr)</td></tr>
-<tr class="memdesc:a524d2702f336935b4bd65c467742ea90"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get angle of connected servo in degree.  <br /></td></tr>
+<tr class="memdesc:a524d2702f336935b4bd65c467742ea90"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get angle of connected servo in degree or -1 when an error occurs.  <br /></td></tr>
 <tr class="separator:a524d2702f336935b4bd65c467742ea90"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a69653a5ff63691145aacede5dd446216"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_robohat_1_1_robohat.html#a69653a5ff63691145aacede5dd446216">get_servo_angle</a> (self, int _servo_nr)</td></tr>
-<tr class="memdesc:a69653a5ff63691145aacede5dd446216"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get angle of connected servo in degree.  <br /></td></tr>
+<tr class="memdesc:a69653a5ff63691145aacede5dd446216"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get angle of connected servo in degree or -1 wen an error occurs.  <br /></td></tr>
 <tr class="separator:a69653a5ff63691145aacede5dd446216"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7a43b9392a7bfc72fd7e5557428ecbfa"><td class="memItemLeft" align="right" valign="top">None&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_robohat_1_1_robohat.html#a7a43b9392a7bfc72fd7e5557428ecbfa">set_servo_angle</a> (self, int _servo_nr, float _angle)</td></tr>
 <tr class="memdesc:a7a43b9392a7bfc72fd7e5557428ecbfa"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the angle of connected servo in degree, does nothing when not avaible.  <br /></td></tr>
 <tr class="separator:a7a43b9392a7bfc72fd7e5557428ecbfa"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af907f49b7351b640031b5cef0b595cf6"><td class="memItemLeft" align="right" valign="top">[]&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_robohat_1_1_robohat.html#af907f49b7351b640031b5cef0b595cf6">get_servos_adc_readout_multiple_channels</a> (self)</td></tr>
-<tr class="memdesc:af907f49b7351b640031b5cef0b595cf6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get voltages of the potentiometer of all the servos in volt @Raise when ADC is not available.  <br /></td></tr>
-<tr class="separator:af907f49b7351b640031b5cef0b595cf6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9e71360e6aab3192dab224eb6a7b22db"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_robohat_1_1_robohat.html#a9e71360e6aab3192dab224eb6a7b22db">get_servos_adc_readout_multiple_channels</a> (self)</td></tr>
+<tr class="memdesc:a9e71360e6aab3192dab224eb6a7b22db"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get voltages of the potentiometer of all the servos in volt or en empty array.  <br /></td></tr>
+<tr class="separator:a9e71360e6aab3192dab224eb6a7b22db"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6485990f7bd043e7c330d75e11deff57"><td class="memItemLeft" align="right" valign="top">[]&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_robohat_1_1_robohat.html#a6485990f7bd043e7c330d75e11deff57">get_servos_angles</a> (self)</td></tr>
 <tr class="memdesc:a6485990f7bd043e7c330d75e11deff57"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get an array of the angles of all the servos.  <br /></td></tr>
 <tr class="separator:a6485990f7bd043e7c330d75e11deff57"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -159,7 +164,7 @@ Public Member Functions</h2></td></tr>
 <tr class="memdesc:a2faf14b70ceb40c360cf27297b1aff85"><td class="mdescLeft">&#160;</td><td class="mdescRight">Puts servos to sleep @:return: None.  <br /></td></tr>
 <tr class="separator:a2faf14b70ceb40c360cf27297b1aff85"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1de72b0952e23ad210fcc7c948017c5d"><td class="memItemLeft" align="right" valign="top">None&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_robohat_1_1_robohat.html#a1de72b0952e23ad210fcc7c948017c5d">wakeup_servos</a> (self)</td></tr>
-<tr class="memdesc:a1de72b0952e23ad210fcc7c948017c5d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Wakes up the servos @:return: None.  <br /></td></tr>
+<tr class="memdesc:a1de72b0952e23ad210fcc7c948017c5d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Wakes up the servos.  <br /></td></tr>
 <tr class="separator:a1de72b0952e23ad210fcc7c948017c5d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac8c98160d4565f35a504dc1f1db134a6"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_robohat_1_1_robohat.html#ac8c98160d4565f35a504dc1f1db134a6">are_servos_sleeping</a> (self)</td></tr>
 <tr class="separator:ac8c98160d4565f35a504dc1f1db134a6"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -169,24 +174,24 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a199855228453bb7f20bbd979b5f11374"><td class="memItemLeft" align="right" valign="top">[]&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_robohat_1_1_robohat.html#a199855228453bb7f20bbd979b5f11374">get_hat_adc_readout_multiple_channels</a> (self)</td></tr>
 <tr class="memdesc:a199855228453bb7f20bbd979b5f11374"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get analog values of the HAT adc.  <br /></td></tr>
 <tr class="separator:a199855228453bb7f20bbd979b5f11374"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a93abcf6cc3c3b39309c732260ce47c6c"><td class="memItemLeft" align="right" valign="top">None&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_robohat_1_1_robohat.html#a93abcf6cc3c3b39309c732260ce47c6c">set_io_expander_direction</a> (self, _io_nr, ExpanderDir _direction)</td></tr>
-<tr class="memdesc:a93abcf6cc3c3b39309c732260ce47c6c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the direction of an io pin of the IO expander.  <br /></td></tr>
-<tr class="separator:a93abcf6cc3c3b39309c732260ce47c6c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae1802cb1b123e4fa04894efd30d10cdc"><td class="memItemLeft" align="right" valign="top">None&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_robohat_1_1_robohat.html#ae1802cb1b123e4fa04894efd30d10cdc">set_io_expander_direction</a> (self, int _io_nr, ExpanderDir _direction)</td></tr>
+<tr class="memdesc:ae1802cb1b123e4fa04894efd30d10cdc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the direction of an io pin of the IO expander.  <br /></td></tr>
+<tr class="separator:ae1802cb1b123e4fa04894efd30d10cdc"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a67fb473112d51c3b0438a896596a63ad"><td class="memItemLeft" align="right" valign="top">None&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_robohat_1_1_robohat.html#a67fb473112d51c3b0438a896596a63ad">set_io_expander_output</a> (self, _io_nr, _status)</td></tr>
 <tr class="memdesc:a67fb473112d51c3b0438a896596a63ad"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the output status of an io pin of the IO expander.  <br /></td></tr>
 <tr class="separator:a67fb473112d51c3b0438a896596a63ad"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3fd5e1d6f910f769384802d2c309c29f"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_robohat_1_1_robohat.html#a3fd5e1d6f910f769384802d2c309c29f">get_io_expander_input</a> (self, _io_nr)</td></tr>
 <tr class="memdesc:a3fd5e1d6f910f769384802d2c309c29f"><td class="mdescLeft">&#160;</td><td class="mdescRight">get the input status of an io pin of the IO expander  <br /></td></tr>
 <tr class="separator:a3fd5e1d6f910f769384802d2c309c29f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7e033631d992a2cb21b8d631b11b8847"><td class="memItemLeft" align="right" valign="top">Tuple[float, float, float]&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_robohat_1_1_robohat.html#a7e033631d992a2cb21b8d631b11b8847">get_magnetic_fields</a> (self)</td></tr>
-<tr class="memdesc:a7e033631d992a2cb21b8d631b11b8847"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the magnetic fields.  <br /></td></tr>
-<tr class="separator:a7e033631d992a2cb21b8d631b11b8847"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2f7f121fe0f85e24f49bd921ae1b96a4"><td class="memItemLeft" align="right" valign="top">Tuple[float, float, float]&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_robohat_1_1_robohat.html#a2f7f121fe0f85e24f49bd921ae1b96a4">get_acceleration</a> (self)</td></tr>
-<tr class="memdesc:a2f7f121fe0f85e24f49bd921ae1b96a4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the acceleration of the <a class="el" href="namespace_robohat.html">Robohat</a>.  <br /></td></tr>
-<tr class="separator:a2f7f121fe0f85e24f49bd921ae1b96a4"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a724f06bff58ac6dc75e72d836baee88f"><td class="memItemLeft" align="right" valign="top">Tuple[float, float, float]&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_robohat_1_1_robohat.html#a724f06bff58ac6dc75e72d836baee88f">get_gyro</a> (self)</td></tr>
-<tr class="memdesc:a724f06bff58ac6dc75e72d836baee88f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the values of the Gyro.  <br /></td></tr>
-<tr class="separator:a724f06bff58ac6dc75e72d836baee88f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a74cda51d6bd3abfdfb9099854441634f"><td class="memItemLeft" align="right" valign="top">Tuple[float, float, float]|None&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_robohat_1_1_robohat.html#a74cda51d6bd3abfdfb9099854441634f">get_magnetic_fields</a> (self)</td></tr>
+<tr class="memdesc:a74cda51d6bd3abfdfb9099854441634f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the magnetic fields.  <br /></td></tr>
+<tr class="separator:a74cda51d6bd3abfdfb9099854441634f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad58f6522212c4917894a632294388083"><td class="memItemLeft" align="right" valign="top">Tuple[float, float, float]|None&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_robohat_1_1_robohat.html#ad58f6522212c4917894a632294388083">get_acceleration</a> (self)</td></tr>
+<tr class="memdesc:ad58f6522212c4917894a632294388083"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the acceleration of the <a class="el" href="namespace_robohat.html">Robohat</a>.  <br /></td></tr>
+<tr class="separator:ad58f6522212c4917894a632294388083"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a51ec37d350fbc7f626ba4a14d59a42a5"><td class="memItemLeft" align="right" valign="top">Tuple[float, float, float]|None&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_robohat_1_1_robohat.html#a51ec37d350fbc7f626ba4a14d59a42a5">get_gyro</a> (self)</td></tr>
+<tr class="memdesc:a51ec37d350fbc7f626ba4a14d59a42a5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the values of the Gyro.  <br /></td></tr>
+<tr class="separator:a51ec37d350fbc7f626ba4a14d59a42a5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6f34b7407098693e62dec5a760a17b6f"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_robohat_1_1_robohat.html#a6f34b7407098693e62dec5a760a17b6f">get_accu_percentage_capacity</a> (self)</td></tr>
 <tr class="memdesc:a6f34b7407098693e62dec5a760a17b6f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get capacity of accu in percentage.  <br /></td></tr>
 <tr class="separator:a6f34b7407098693e62dec5a760a17b6f"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -196,9 +201,9 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a1e255d3ac4e556019e56f1f1f1c2b675"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_robohat_1_1_robohat.html#a1e255d3ac4e556019e56f1f1f1c2b675">is_accu_capacity_ok</a> (self)</td></tr>
 <tr class="memdesc:a1e255d3ac4e556019e56f1f1f1c2b675"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns True if accu capacity is OK.  <br /></td></tr>
 <tr class="separator:a1e255d3ac4e556019e56f1f1f1c2b675"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9e6bcdd1773af2baeefb20c29debe985"><td class="memItemLeft" align="right" valign="top">None&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_robohat_1_1_robohat.html#a9e6bcdd1773af2baeefb20c29debe985">do_shutdown</a> (self)</td></tr>
-<tr class="memdesc:a9e6bcdd1773af2baeefb20c29debe985"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gives shutdown signal to power module.  <br /></td></tr>
-<tr class="separator:a9e6bcdd1773af2baeefb20c29debe985"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4bd2a00807a83e4f741f8721a1175375"><td class="memItemLeft" align="right" valign="top">None&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_robohat_1_1_robohat.html#a4bd2a00807a83e4f741f8721a1175375">shutdown_power</a> (self)</td></tr>
+<tr class="memdesc:a4bd2a00807a83e4f741f8721a1175375"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gives shutdown signal to power module.  <br /></td></tr>
+<tr class="separator:a4bd2a00807a83e4f741f8721a1175375"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa304587ef960f785dbe1605d134a88b1"><td class="memItemLeft" align="right" valign="top">str&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_robohat_1_1_robohat.html#aa304587ef960f785dbe1605d134a88b1">get_lib_version</a> (self)</td></tr>
 <tr class="memdesc:aa304587ef960f785dbe1605d134a88b1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get version number of library.  <br /></td></tr>
 <tr class="separator:aa304587ef960f785dbe1605d134a88b1"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -208,26 +213,30 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a759feeef927161c00b4367dc39b20282"><td class="memItemLeft" align="right" valign="top">None&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_robohat_1_1_robohat.html#a759feeef927161c00b4367dc39b20282">do_imu_test</a> (self)</td></tr>
 <tr class="memdesc:a759feeef927161c00b4367dc39b20282"><td class="mdescLeft">&#160;</td><td class="mdescRight">Just a test, should be removed in the future.  <br /></td></tr>
 <tr class="separator:a759feeef927161c00b4367dc39b20282"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0b37620c7099353c592db3856affc41d"><td class="memItemLeft" align="right" valign="top">None&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_robohat_1_1_robohat.html#a0b37620c7099353c592db3856affc41d">set_status_system_alarm_permitted</a> (self, bool _state)</td></tr>
+<tr class="memdesc:a0b37620c7099353c592db3856affc41d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Overrides the system alarm switch.  <br /></td></tr>
+<tr class="separator:a0b37620c7099353c592db3856affc41d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6c0f543e9b513dba3135d3875e970e46"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_robohat_1_1_robohat.html#a6c0f543e9b513dba3135d3875e970e46">get_status_system_alarm_permitted</a> (self)</td></tr>
+<tr class="memdesc:a6c0f543e9b513dba3135d3875e970e46"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the system alarm switch.  <br /></td></tr>
+<tr class="separator:a6c0f543e9b513dba3135d3875e970e46"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-methods" name="pro-methods"></a>
 Protected Member Functions</h2></td></tr>
 <tr class="memitem:ae12a19ae99f5b91d08feda1b97dd3ef1"><td class="memItemLeft" align="right" valign="top">None&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_robohat_1_1_robohat.html#ae12a19ae99f5b91d08feda1b97dd3ef1">_io_expander_int_callback</a> (self, int _gpi_nr)</td></tr>
 <tr class="memdesc:ae12a19ae99f5b91d08feda1b97dd3ef1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Just a test callback, should be removed in the future.  <br /></td></tr>
 <tr class="separator:ae12a19ae99f5b91d08feda1b97dd3ef1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a551031bce2ba224cd89ef22b54c2c8e1"><td class="memItemLeft" align="right" valign="top">None&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_robohat_1_1_robohat.html#a551031bce2ba224cd89ef22b54c2c8e1">_io_expander_int_reset_routine</a> (self, int _gpi_nr)</td></tr>
+<tr class="memdesc:a551031bce2ba224cd89ef22b54c2c8e1"><td class="mdescLeft">&#160;</td><td class="mdescRight">This routine will be called to reset the interrupt handler (if needed, is used by MCP23008)  <br /></td></tr>
+<tr class="separator:a551031bce2ba224cd89ef22b54c2c8e1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac4d957cff77832fc87d4e3bf43326456"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_robohat_1_1_robohat.html#ac4d957cff77832fc87d4e3bf43326456">_io_servo_assembly_callback</a> (self, _gpi_nr)</td></tr>
 <tr class="memdesc:ac4d957cff77832fc87d4e3bf43326456"><td class="mdescLeft">&#160;</td><td class="mdescRight">Just a test callback, should be removed in the future.  <br /></td></tr>
 <tr class="separator:ac4d957cff77832fc87d4e3bf43326456"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-attribs" name="pro-attribs"></a>
-Protected Attributes</h2></td></tr>
-<tr class="memitem:ad8c2ef1ea187cfad6ccec9242f26186a"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_robohat_1_1_robohat.html#ad8c2ef1ea187cfad6ccec9242f26186a">_io_expander_int_callback</a></td></tr>
-<tr class="separator:ad8c2ef1ea187cfad6ccec9242f26186a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Top class of <a class="el" href="namespace_robohat.html">Robohat</a> library. </p>
 <p>The complete Robohat-hardware is only accessible by accessing this class. This is the connection between the user program and the hardware </p>
 
-<p class="definition">Definition at line <a class="el" href="_robohat_8py_source.html#l00042">42</a> of file <a class="el" href="_robohat_8py_source.html">Robohat.py</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_robohat_8py_source.html#l00046">46</a> of file <a class="el" href="_robohat_8py_source.html">Robohat.py</a>.</p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="a0d7681e803da0d56f4be652fb7adda35" name="a0d7681e803da0d56f4be652fb7adda35"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a0d7681e803da0d56f4be652fb7adda35">&#9670;&#160;</a></span>__init__()</h2>
@@ -272,13 +281,12 @@ Protected Attributes</h2></td></tr>
   <table class="params">
     <tr><td class="paramname">_servo_assembly_1_config</td><td>config of servo assembly 1 </td></tr>
     <tr><td class="paramname">_servo_assembly_2_config</td><td>config of servo assembly 2 </td></tr>
-    <tr><td class="paramname">_sw_io_expander</td><td>switch settings, default 7</td></tr>
+    <tr><td class="paramname">_sw_io_expander</td><td>switch settings, default 7 </td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>An instance of the <a class="el" href="namespace_robohat.html">Robohat</a> class </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="_robohat_8py_source.html#l00053">53</a> of file <a class="el" href="_robohat_8py_source.html">Robohat.py</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_robohat_8py_source.html#l00057">57</a> of file <a class="el" href="_robohat_8py_source.html">Robohat.py</a>.</p>
 
 </div>
 </div>
@@ -326,7 +334,54 @@ Protected Attributes</h2></td></tr>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>None </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="_robohat_8py_source.html#l00572">572</a> of file <a class="el" href="_robohat_8py_source.html">Robohat.py</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_robohat_8py_source.html#l00629">629</a> of file <a class="el" href="_robohat_8py_source.html">Robohat.py</a>.</p>
+
+</div>
+</div>
+<a id="a551031bce2ba224cd89ef22b54c2c8e1" name="a551031bce2ba224cd89ef22b54c2c8e1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a551031bce2ba224cd89ef22b54c2c8e1">&#9670;&#160;</a></span>_io_expander_int_reset_routine()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"> None Robohat.Robohat._io_expander_int_reset_routine </td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>self</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>_gpi_nr</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>This routine will be called to reset the interrupt handler (if needed, is used by MCP23008) </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">_gpi_nr</td><td>IO nr of the caller </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>: None </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="_robohat_8py_source.html#l00639">639</a> of file <a class="el" href="_robohat_8py_source.html">Robohat.py</a>.</p>
 
 </div>
 </div>
@@ -373,7 +428,7 @@ Protected Attributes</h2></td></tr>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>None </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="_robohat_8py_source.html#l00582">582</a> of file <a class="el" href="_robohat_8py_source.html">Robohat.py</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_robohat_8py_source.html#l00649">649</a> of file <a class="el" href="_robohat_8py_source.html">Robohat.py</a>.</p>
 
 </div>
 </div>
@@ -393,9 +448,9 @@ Protected Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 <pre class="fragment">Get if Servos are sleeping
-@:return: (bool) returns True when servos are sleeping
+@return: True when servos are sleeping
 </pre> 
-<p class="definition">Definition at line <a class="el" href="_robohat_8py_source.html#l00363">363</a> of file <a class="el" href="_robohat_8py_source.html">Robohat.py</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_robohat_8py_source.html#l00413">413</a> of file <a class="el" href="_robohat_8py_source.html">Robohat.py</a>.</p>
 
 </div>
 </div>
@@ -418,7 +473,7 @@ Protected Attributes</h2></td></tr>
 <p>Short beep of the buzzer. </p>
 <dl class="section return"><dt>Returns</dt><dd>None </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="_robohat_8py_source.html#l00147">147</a> of file <a class="el" href="_robohat_8py_source.html">Robohat.py</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_robohat_8py_source.html#l00190">190</a> of file <a class="el" href="_robohat_8py_source.html">Robohat.py</a>.</p>
 
 </div>
 </div>
@@ -457,7 +512,7 @@ Protected Attributes</h2></td></tr>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>None </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="_robohat_8py_source.html#l00155">155</a> of file <a class="el" href="_robohat_8py_source.html">Robohat.py</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_robohat_8py_source.html#l00198">198</a> of file <a class="el" href="_robohat_8py_source.html">Robohat.py</a>.</p>
 
 </div>
 </div>
@@ -480,7 +535,30 @@ Protected Attributes</h2></td></tr>
 <p>Generates a random sound. </p>
 <dl class="section return"><dt>Returns</dt><dd>None </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="_robohat_8py_source.html#l00130">130</a> of file <a class="el" href="_robohat_8py_source.html">Robohat.py</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_robohat_8py_source.html#l00173">173</a> of file <a class="el" href="_robohat_8py_source.html">Robohat.py</a>.</p>
+
+</div>
+</div>
+<a id="a6b4e421c4bd1c3d7dedc90b4b83201e0" name="a6b4e421c4bd1c3d7dedc90b4b83201e0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6b4e421c4bd1c3d7dedc90b4b83201e0">&#9670;&#160;</a></span>do_buzzer_release()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"> None Robohat.Robohat.do_buzzer_release </td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>self</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Stops the buzzer from making sound. </p>
+<dl class="section return"><dt>Returns</dt><dd>: None </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="_robohat_8py_source.html#l00207">207</a> of file <a class="el" href="_robohat_8py_source.html">Robohat.py</a>.</p>
 
 </div>
 </div>
@@ -503,7 +581,7 @@ Protected Attributes</h2></td></tr>
 <p>Generates a sound from 2000Hz to 50Hz. </p>
 <dl class="section return"><dt>Returns</dt><dd>None </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="_robohat_8py_source.html#l00138">138</a> of file <a class="el" href="_robohat_8py_source.html">Robohat.py</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_robohat_8py_source.html#l00181">181</a> of file <a class="el" href="_robohat_8py_source.html">Robohat.py</a>.</p>
 
 </div>
 </div>
@@ -526,18 +604,18 @@ Protected Attributes</h2></td></tr>
 <p>Just a test, should be removed in the future. </p>
 <dl class="section return"><dt>Returns</dt><dd>None </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="_robohat_8py_source.html#l00593">593</a> of file <a class="el" href="_robohat_8py_source.html">Robohat.py</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_robohat_8py_source.html#l00660">660</a> of file <a class="el" href="_robohat_8py_source.html">Robohat.py</a>.</p>
 
 </div>
 </div>
-<a id="a9e6bcdd1773af2baeefb20c29debe985" name="a9e6bcdd1773af2baeefb20c29debe985"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a9e6bcdd1773af2baeefb20c29debe985">&#9670;&#160;</a></span>do_shutdown()</h2>
+<a id="af41039605da368be54e031225af0e6b2" name="af41039605da368be54e031225af0e6b2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af41039605da368be54e031225af0e6b2">&#9670;&#160;</a></span>exit_program()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"> None Robohat.Robohat.do_shutdown </td>
+          <td class="memname"> None Robohat.Robohat.exit_program </td>
           <td>(</td>
           <td class="paramtype">&#160;</td>
           <td class="paramname"><em>self</em></td><td>)</td>
@@ -545,23 +623,21 @@ Protected Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-
-<p>Gives shutdown signal to power module. </p>
-<p>Cleans up IO</p>
-<dl class="section return"><dt>Returns</dt><dd>None </dd></dl>
-
-<p class="definition">Definition at line <a class="el" href="_robohat_8py_source.html#l00532">532</a> of file <a class="el" href="_robohat_8py_source.html">Robohat.py</a>.</p>
+<pre class="fragment">Cleans up, when user want to shut down
+@return: None
+</pre> 
+<p class="definition">Definition at line <a class="el" href="_robohat_8py_source.html#l00135">135</a> of file <a class="el" href="_robohat_8py_source.html">Robohat.py</a>.</p>
 
 </div>
 </div>
-<a id="a2f7f121fe0f85e24f49bd921ae1b96a4" name="a2f7f121fe0f85e24f49bd921ae1b96a4"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a2f7f121fe0f85e24f49bd921ae1b96a4">&#9670;&#160;</a></span>get_acceleration()</h2>
+<a id="ad58f6522212c4917894a632294388083" name="ad58f6522212c4917894a632294388083"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad58f6522212c4917894a632294388083">&#9670;&#160;</a></span>get_acceleration()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"> Tuple[float, float, float] Robohat.Robohat.get_acceleration </td>
+          <td class="memname"> Tuple[float, float, float] | None Robohat.Robohat.get_acceleration </td>
           <td>(</td>
           <td class="paramtype">&#160;</td>
           <td class="paramname"><em>self</em></td><td>)</td>
@@ -571,9 +647,9 @@ Protected Attributes</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Get the acceleration of the <a class="el" href="namespace_robohat.html">Robohat</a>. </p>
-<dl class="section return"><dt>Returns</dt><dd>a tuple of the guro values x,y,z </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>a tuple of the guro values x,y,z or None when not available </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="_robohat_8py_source.html#l00488">488</a> of file <a class="el" href="_robohat_8py_source.html">Robohat.py</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_robohat_8py_source.html#l00543">543</a> of file <a class="el" href="_robohat_8py_source.html">Robohat.py</a>.</p>
 
 </div>
 </div>
@@ -596,7 +672,7 @@ Protected Attributes</h2></td></tr>
 <p>Get capacity of accu in percentage. </p>
 <dl class="section return"><dt>Returns</dt><dd>: percentage </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="_robohat_8py_source.html#l00507">507</a> of file <a class="el" href="_robohat_8py_source.html">Robohat.py</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_robohat_8py_source.html#l00562">562</a> of file <a class="el" href="_robohat_8py_source.html">Robohat.py</a>.</p>
 
 </div>
 </div>
@@ -619,18 +695,18 @@ Protected Attributes</h2></td></tr>
 <p>Get voltage of accu. </p>
 <dl class="section return"><dt>Returns</dt><dd>: voltage of accu </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="_robohat_8py_source.html#l00515">515</a> of file <a class="el" href="_robohat_8py_source.html">Robohat.py</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_robohat_8py_source.html#l00570">570</a> of file <a class="el" href="_robohat_8py_source.html">Robohat.py</a>.</p>
 
 </div>
 </div>
-<a id="a724f06bff58ac6dc75e72d836baee88f" name="a724f06bff58ac6dc75e72d836baee88f"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a724f06bff58ac6dc75e72d836baee88f">&#9670;&#160;</a></span>get_gyro()</h2>
+<a id="a51ec37d350fbc7f626ba4a14d59a42a5" name="a51ec37d350fbc7f626ba4a14d59a42a5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a51ec37d350fbc7f626ba4a14d59a42a5">&#9670;&#160;</a></span>get_gyro()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"> Tuple[float, float, float] Robohat.Robohat.get_gyro </td>
+          <td class="memname"> Tuple[float, float, float] | None Robohat.Robohat.get_gyro </td>
           <td>(</td>
           <td class="paramtype">&#160;</td>
           <td class="paramname"><em>self</em></td><td>)</td>
@@ -640,9 +716,9 @@ Protected Attributes</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Get the values of the Gyro. </p>
-<dl class="section return"><dt>Returns</dt><dd>a tuple of the guro values x,y,z </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>a tuple of the guro values x,y,z or None when not available </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="_robohat_8py_source.html#l00496">496</a> of file <a class="el" href="_robohat_8py_source.html">Robohat.py</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_robohat_8py_source.html#l00551">551</a> of file <a class="el" href="_robohat_8py_source.html">Robohat.py</a>.</p>
 
 </div>
 </div>
@@ -665,7 +741,7 @@ Protected Attributes</h2></td></tr>
 <p>Get analog values of the HAT adc. </p>
 <dl class="section return"><dt>Returns</dt><dd>analog voltage in an array </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="_robohat_8py_source.html#l00429">429</a> of file <a class="el" href="_robohat_8py_source.html">Robohat.py</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_robohat_8py_source.html#l00484">484</a> of file <a class="el" href="_robohat_8py_source.html">Robohat.py</a>.</p>
 
 </div>
 </div>
@@ -698,13 +774,13 @@ Protected Attributes</h2></td></tr>
 <p>Get analog value of a channel from the HAT adc. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">_channel_nr</td><td>The channel nr wanted (starts at 1, so 1 is AI0)</td></tr>
+    <tr><td class="paramname">_channel_nr</td><td>The channel nr wanted (starts at 0, so 0 is AI0) </td></tr>
   </table>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>analog voltage </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="_robohat_8py_source.html#l00416">416</a> of file <a class="el" href="_robohat_8py_source.html">Robohat.py</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_robohat_8py_source.html#l00472">472</a> of file <a class="el" href="_robohat_8py_source.html">Robohat.py</a>.</p>
 
 </div>
 </div>
@@ -744,7 +820,27 @@ Protected Attributes</h2></td></tr>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>status of the pin </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="_robohat_8py_source.html#l00465">465</a> of file <a class="el" href="_robohat_8py_source.html">Robohat.py</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_robohat_8py_source.html#l00520">520</a> of file <a class="el" href="_robohat_8py_source.html">Robohat.py</a>.</p>
+
+</div>
+</div>
+<a id="ab81e0022b843be3d7637ba1d9d1fbb69" name="ab81e0022b843be3d7637ba1d9d1fbb69"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab81e0022b843be3d7637ba1d9d1fbb69">&#9670;&#160;</a></span>get_led_color()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"> Color Robohat.Robohat.get_led_color </td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>self</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="_robohat_8py_source.html#l00242">242</a> of file <a class="el" href="_robohat_8py_source.html">Robohat.py</a>.</p>
 
 </div>
 </div>
@@ -767,7 +863,7 @@ Protected Attributes</h2></td></tr>
 <p>Get the build date of library. </p>
 <dl class="section return"><dt>Returns</dt><dd>str, version build date of library, such as 20231225 </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="_robohat_8py_source.html#l00557">557</a> of file <a class="el" href="_robohat_8py_source.html">Robohat.py</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_robohat_8py_source.html#l00614">614</a> of file <a class="el" href="_robohat_8py_source.html">Robohat.py</a>.</p>
 
 </div>
 </div>
@@ -790,18 +886,18 @@ Protected Attributes</h2></td></tr>
 <p>Get version number of library. </p>
 <dl class="section return"><dt>Returns</dt><dd>str, version number of library, such as 1.0.1 </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="_robohat_8py_source.html#l00546">546</a> of file <a class="el" href="_robohat_8py_source.html">Robohat.py</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_robohat_8py_source.html#l00603">603</a> of file <a class="el" href="_robohat_8py_source.html">Robohat.py</a>.</p>
 
 </div>
 </div>
-<a id="a7e033631d992a2cb21b8d631b11b8847" name="a7e033631d992a2cb21b8d631b11b8847"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a7e033631d992a2cb21b8d631b11b8847">&#9670;&#160;</a></span>get_magnetic_fields()</h2>
+<a id="a74cda51d6bd3abfdfb9099854441634f" name="a74cda51d6bd3abfdfb9099854441634f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a74cda51d6bd3abfdfb9099854441634f">&#9670;&#160;</a></span>get_magnetic_fields()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"> Tuple[float, float, float] Robohat.Robohat.get_magnetic_fields </td>
+          <td class="memname"> Tuple[float, float, float] | None Robohat.Robohat.get_magnetic_fields </td>
           <td>(</td>
           <td class="paramtype">&#160;</td>
           <td class="paramname"><em>self</em></td><td>)</td>
@@ -811,9 +907,9 @@ Protected Attributes</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Get the magnetic fields. </p>
-<dl class="section return"><dt>Returns</dt><dd>a tuple of the magnetic fields values x,y,z </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>a tuple of the magnetic fields values x,y,z or None when not available </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="_robohat_8py_source.html#l00480">480</a> of file <a class="el" href="_robohat_8py_source.html">Robohat.py</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_robohat_8py_source.html#l00535">535</a> of file <a class="el" href="_robohat_8py_source.html">Robohat.py</a>.</p>
 
 </div>
 </div>
@@ -843,16 +939,16 @@ Protected Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Get angle of connected servo in degree. </p>
+<p>Get angle of connected servo in degree or -1 when an error occurs. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">_servo_nr</td><td>The servo nr wanted (starts at 1) </td></tr>
+    <tr><td class="paramname">_servo_nr</td><td>The servo nr wanted, the servo nr 0 - 31 </td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>angle of connected servo in degree, or 0.0 when not available </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>angle or -1 </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="_robohat_8py_source.html#l00221">221</a> of file <a class="el" href="_robohat_8py_source.html">Robohat.py</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_robohat_8py_source.html#l00275">275</a> of file <a class="el" href="_robohat_8py_source.html">Robohat.py</a>.</p>
 
 </div>
 </div>
@@ -882,16 +978,16 @@ Protected Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Get angle of connected servo in degree. </p>
+<p>Get angle of connected servo in degree or -1 wen an error occurs. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">_servo_nr</td><td>The servo nr wanted (starts at 1) </td></tr>
+    <tr><td class="paramname">_servo_nr</td><td>The servo nr wanted (starts at 0) </td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>angle of connected servo in degree or 0.0 when not available </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>angle or -1 </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="_robohat_8py_source.html#l00236">236</a> of file <a class="el" href="_robohat_8py_source.html">Robohat.py</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_robohat_8py_source.html#l00291">291</a> of file <a class="el" href="_robohat_8py_source.html">Robohat.py</a>.</p>
 
 </div>
 </div>
@@ -925,24 +1021,24 @@ Protected Attributes</h2></td></tr>
 <p>Returns False when not connected</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">_servo_nr</td><td>The servo nr </td></tr>
+    <tr><td class="paramname">_servo_nr</td><td>The servo nr 0 - 31 </td></tr>
   </table>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>: Returns False when not connected </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="_robohat_8py_source.html#l00196">196</a> of file <a class="el" href="_robohat_8py_source.html">Robohat.py</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_robohat_8py_source.html#l00247">247</a> of file <a class="el" href="_robohat_8py_source.html">Robohat.py</a>.</p>
 
 </div>
 </div>
-<a id="af907f49b7351b640031b5cef0b595cf6" name="af907f49b7351b640031b5cef0b595cf6"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#af907f49b7351b640031b5cef0b595cf6">&#9670;&#160;</a></span>get_servos_adc_readout_multiple_channels()</h2>
+<a id="a9e71360e6aab3192dab224eb6a7b22db" name="a9e71360e6aab3192dab224eb6a7b22db"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9e71360e6aab3192dab224eb6a7b22db">&#9670;&#160;</a></span>get_servos_adc_readout_multiple_channels()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"> [] Robohat.Robohat.get_servos_adc_readout_multiple_channels </td>
+          <td class="memname">Robohat.Robohat.get_servos_adc_readout_multiple_channels </td>
           <td>(</td>
           <td class="paramtype">&#160;</td>
           <td class="paramname"><em>self</em></td><td>)</td>
@@ -951,10 +1047,10 @@ Protected Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Get voltages of the potentiometer of all the servos in volt @Raise when ADC is not available. </p>
-<dl class="section return"><dt>Returns</dt><dd>voltages of the potentiometer of all the servos in volt </dd></dl>
+<p>Get voltages of the potentiometer of all the servos in volt or en empty array. </p>
+<dl class="section return"><dt>Returns</dt><dd>array of voltages </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="_robohat_8py_source.html#l00268">268</a> of file <a class="el" href="_robohat_8py_source.html">Robohat.py</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_robohat_8py_source.html#l00323">323</a> of file <a class="el" href="_robohat_8py_source.html">Robohat.py</a>.</p>
 
 </div>
 </div>
@@ -977,7 +1073,30 @@ Protected Attributes</h2></td></tr>
 <p>Get an array of the angles of all the servos. </p>
 <dl class="section return"><dt>Returns</dt><dd>angles of servos in degree. Returns an empty array when not available </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="_robohat_8py_source.html#l00294">294</a> of file <a class="el" href="_robohat_8py_source.html">Robohat.py</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_robohat_8py_source.html#l00345">345</a> of file <a class="el" href="_robohat_8py_source.html">Robohat.py</a>.</p>
+
+</div>
+</div>
+<a id="a6c0f543e9b513dba3135d3875e970e46" name="a6c0f543e9b513dba3135d3875e970e46"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6c0f543e9b513dba3135d3875e970e46">&#9670;&#160;</a></span>get_status_system_alarm_permitted()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"> bool Robohat.Robohat.get_status_system_alarm_permitted </td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>self</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Get the system alarm switch. </p>
+<p>If false, no sound alarm will be given </p><dl class="section return"><dt>Returns</dt><dd>: None </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="_robohat_8py_source.html#l00678">678</a> of file <a class="el" href="_robohat_8py_source.html">Robohat.py</a>.</p>
 
 </div>
 </div>
@@ -1024,7 +1143,7 @@ Protected Attributes</h2></td></tr>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>None </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="_robohat_8py_source.html#l00089">89</a> of file <a class="el" href="_robohat_8py_source.html">Robohat.py</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_robohat_8py_source.html#l00105">105</a> of file <a class="el" href="_robohat_8py_source.html">Robohat.py</a>.</p>
 
 </div>
 </div>
@@ -1047,7 +1166,7 @@ Protected Attributes</h2></td></tr>
 <p>Returns True if accu capacity is OK. </p>
 <dl class="section return"><dt>Returns</dt><dd>True is accu capacity is OK </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="_robohat_8py_source.html#l00524">524</a> of file <a class="el" href="_robohat_8py_source.html">Robohat.py</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_robohat_8py_source.html#l00579">579</a> of file <a class="el" href="_robohat_8py_source.html">Robohat.py</a>.</p>
 
 </div>
 </div>
@@ -1069,7 +1188,7 @@ Protected Attributes</h2></td></tr>
 
 <p>Puts servos to sleep @:return: None. </p>
 
-<p class="definition">Definition at line <a class="el" href="_robohat_8py_source.html#l00335">335</a> of file <a class="el" href="_robohat_8py_source.html">Robohat.py</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_robohat_8py_source.html#l00385">385</a> of file <a class="el" href="_robohat_8py_source.html">Robohat.py</a>.</p>
 
 </div>
 </div>
@@ -1093,12 +1212,12 @@ Protected Attributes</h2></td></tr>
 <p>Displays the found I2C devices onto console</p>
 <dl class="section return"><dt>Returns</dt><dd>None </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="_robohat_8py_source.html#l00115">115</a> of file <a class="el" href="_robohat_8py_source.html">Robohat.py</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_robohat_8py_source.html#l00159">159</a> of file <a class="el" href="_robohat_8py_source.html">Robohat.py</a>.</p>
 
 </div>
 </div>
-<a id="a93abcf6cc3c3b39309c732260ce47c6c" name="a93abcf6cc3c3b39309c732260ce47c6c"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a93abcf6cc3c3b39309c732260ce47c6c">&#9670;&#160;</a></span>set_io_expander_direction()</h2>
+<a id="ae1802cb1b123e4fa04894efd30d10cdc" name="ae1802cb1b123e4fa04894efd30d10cdc"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae1802cb1b123e4fa04894efd30d10cdc">&#9670;&#160;</a></span>set_io_expander_direction()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1112,7 +1231,7 @@ Protected Attributes</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">&#160;</td>
+          <td class="paramtype">int&#160;</td>
           <td class="paramname"><em>_io_nr</em>, </td>
         </tr>
         <tr>
@@ -1139,7 +1258,7 @@ Protected Attributes</h2></td></tr>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>None </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="_robohat_8py_source.html#l00440">440</a> of file <a class="el" href="_robohat_8py_source.html">Robohat.py</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_robohat_8py_source.html#l00495">495</a> of file <a class="el" href="_robohat_8py_source.html">Robohat.py</a>.</p>
 
 </div>
 </div>
@@ -1186,7 +1305,7 @@ Protected Attributes</h2></td></tr>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>None </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="_robohat_8py_source.html#l00452">452</a> of file <a class="el" href="_robohat_8py_source.html">Robohat.py</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_robohat_8py_source.html#l00507">507</a> of file <a class="el" href="_robohat_8py_source.html">Robohat.py</a>.</p>
 
 </div>
 </div>
@@ -1225,7 +1344,7 @@ Protected Attributes</h2></td></tr>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>None </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="_robohat_8py_source.html#l00167">167</a> of file <a class="el" href="_robohat_8py_source.html">Robohat.py</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_robohat_8py_source.html#l00216">216</a> of file <a class="el" href="_robohat_8py_source.html">Robohat.py</a>.</p>
 
 </div>
 </div>
@@ -1264,14 +1383,14 @@ Protected Attributes</h2></td></tr>
 <p>Set the angle of connected servo in degree, does nothing when not avaible. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">_servo_nr</td><td>The servo nr wanted (starts at 1) </td></tr>
+    <tr><td class="paramname">_servo_nr</td><td>The servo nr wanted (starts at 0) </td></tr>
     <tr><td class="paramname">_angle</td><td>wanted angle</td></tr>
   </table>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>None </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="_robohat_8py_source.html#l00251">251</a> of file <a class="el" href="_robohat_8py_source.html">Robohat.py</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_robohat_8py_source.html#l00307">307</a> of file <a class="el" href="_robohat_8py_source.html">Robohat.py</a>.</p>
 
 </div>
 </div>
@@ -1310,7 +1429,70 @@ Protected Attributes</h2></td></tr>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>None </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="_robohat_8py_source.html#l00315">315</a> of file <a class="el" href="_robohat_8py_source.html">Robohat.py</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_robohat_8py_source.html#l00366">366</a> of file <a class="el" href="_robohat_8py_source.html">Robohat.py</a>.</p>
+
+</div>
+</div>
+<a id="a0b37620c7099353c592db3856affc41d" name="a0b37620c7099353c592db3856affc41d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0b37620c7099353c592db3856affc41d">&#9670;&#160;</a></span>set_status_system_alarm_permitted()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"> None Robohat.Robohat.set_status_system_alarm_permitted </td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>self</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>_state</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Overrides the system alarm switch. </p>
+<p>If false, no sound alarm will be given </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">_state</td><td>new state of system alarm </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>: None </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="_robohat_8py_source.html#l00670">670</a> of file <a class="el" href="_robohat_8py_source.html">Robohat.py</a>.</p>
+
+</div>
+</div>
+<a id="a4bd2a00807a83e4f741f8721a1175375" name="a4bd2a00807a83e4f741f8721a1175375"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4bd2a00807a83e4f741f8721a1175375">&#9670;&#160;</a></span>shutdown_power()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"> None Robohat.Robohat.shutdown_power </td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>self</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Gives shutdown signal to power module. </p>
+<p>Cleans up IO</p>
+<dl class="section return"><dt>Returns</dt><dd>None </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="_robohat_8py_source.html#l00587">587</a> of file <a class="el" href="_robohat_8py_source.html">Robohat.py</a>.</p>
 
 </div>
 </div>
@@ -1333,7 +1515,7 @@ Protected Attributes</h2></td></tr>
 <p>Turns led off, last color will be stored. </p>
 <dl class="section return"><dt>Returns</dt><dd>None </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="_robohat_8py_source.html#l00177">177</a> of file <a class="el" href="_robohat_8py_source.html">Robohat.py</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_robohat_8py_source.html#l00226">226</a> of file <a class="el" href="_robohat_8py_source.html">Robohat.py</a>.</p>
 
 </div>
 </div>
@@ -1357,7 +1539,7 @@ Protected Attributes</h2></td></tr>
 <p>default color is WHITE</p>
 <dl class="section return"><dt>Returns</dt><dd>None </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="_robohat_8py_source.html#l00185">185</a> of file <a class="el" href="_robohat_8py_source.html">Robohat.py</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_robohat_8py_source.html#l00234">234</a> of file <a class="el" href="_robohat_8py_source.html">Robohat.py</a>.</p>
 
 </div>
 </div>
@@ -1377,34 +1559,10 @@ Protected Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Wakes up the servos @:return: None. </p>
+<p>Wakes up the servos. </p>
+<dl class="section return"><dt>Returns</dt><dd>: None </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="_robohat_8py_source.html#l00349">349</a> of file <a class="el" href="_robohat_8py_source.html">Robohat.py</a>.</p>
-
-</div>
-</div>
-<h2 class="groupheader">Member Data Documentation</h2>
-<a id="ad8c2ef1ea187cfad6ccec9242f26186a" name="ad8c2ef1ea187cfad6ccec9242f26186a"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ad8c2ef1ea187cfad6ccec9242f26186a">&#9670;&#160;</a></span>_io_expander_int_callback</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">Robohat.Robohat._io_expander_int_callback</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="_robohat_8py_source.html#l00072">72</a> of file <a class="el" href="_robohat_8py_source.html">Robohat.py</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_robohat_8py_source.html#l00399">399</a> of file <a class="el" href="_robohat_8py_source.html">Robohat.py</a>.</p>
 
 </div>
 </div>
@@ -1417,7 +1575,7 @@ Protected Attributes</h2></td></tr>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="namespace_robohat.html">Robohat</a></li><li class="navelem"><a class="el" href="class_robohat_1_1_robohat.html">Robohat</a></li>
-    <li class="footer">Generated on Mon Jul 10 2023 10:19:35 for Robohat by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.7 </li>
+    <li class="footer">Generated on Thu Jul 13 2023 17:50:01 for Robohat by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.7 </li>
   </ul>
 </div>
 </body>

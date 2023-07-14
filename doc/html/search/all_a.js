@@ -1,11 +1,7 @@
 var searchData=
 [
-  ['robohat_0',['Robohat',['../namespace_robohat.html',1,'Robohat'],['../class_robohat_1_1_robohat.html',1,'Robohat.Robohat']]],
-  ['robohat_2epy_1',['Robohat.py',['../_robohat_8py.html',1,'']]],
-  ['robohat_5fbuilddate_5fstr_2',['ROBOHAT_BUILDDATE_STR',['../namespace_robohat__constants.html#a92d9070be2ade33ccb3f27f4c24c4420',1,'Robohat_constants']]],
-  ['robohat_5fconfig_3',['Robohat_config',['../namespace_robohat__config.html',1,'']]],
-  ['robohat_5fconfig_2epy_4',['Robohat_config.py',['../_robohat__config_8py.html',1,'']]],
-  ['robohat_5fconstants_5',['Robohat_constants',['../namespace_robohat__constants.html',1,'']]],
-  ['robohat_5fconstants_2epy_6',['Robohat_constants.py',['../_robohat__constants_8py.html',1,'']]],
-  ['robohat_5flib_5fversion_5fstr_7',['ROBOHAT_LIB_VERSION_STR',['../namespace_robohat__constants.html#a598b0bbe9de60dfeb86d45c0fb7ec6ad',1,'Robohat_constants']]]
+  ['powershutdown_5fgpo_5fdef_0',['POWERSHUTDOWN_GPO_DEF',['../namespace_robohat__config.html#ab3bbe94717b9db09734be264a10a2f3a',1,'Robohat_config']]],
+  ['put_5fservos_5fto_5fsleep_1',['put_servos_to_sleep',['../class_robohat_1_1_robohat.html#a2faf14b70ceb40c360cf27297b1aff85',1,'Robohat::Robohat']]],
+  ['pwmplug_5fp3_2',['PWMPLUG_P3',['../namespace_robohat__constants.html#af7b07695aa75f946ed3c5b86b0b7ceb4',1,'Robohat_constants']]],
+  ['pwmplug_5fp4_3',['PWMPLUG_P4',['../namespace_robohat__constants.html#a3da90c5c49a431ed5836dc99f93f1b54',1,'Robohat_constants']]]
 ];

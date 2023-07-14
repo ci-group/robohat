@@ -25,6 +25,8 @@ INT_POL_BIT_NR =        1
 MCP23008 driver
 """
 
+
+
 class MCP23008:
     def __init__(self, _i2c_device: I2CDevice, _mcp_interrupt_definition = None):
         self.__i2c_device = _i2c_device
@@ -73,6 +75,7 @@ class MCP23008:
             self.set_interrupt_defaults(def_val_value)
 
         self.reset_interrupts()
+
 
     # --------------------------------------------------------------------------------------
     def exit_program(self) -> None:
