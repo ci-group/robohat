@@ -47,15 +47,22 @@ class ServoAssembly:
 
         if i2c_device_pwm is not None and spi_device_adc is not None:
             self.__servo_board = ServoBoard(i2c_device_pwm, spi_device_adc)
+
+            servo_assembly_expander_def = Robohat_config.SERVOASSEMBLY_EXPANDER_DEF
+            callbackholder = InterruptCallbackHolder("expander_callback_holder", self.__io_power_monitor_and_io_int_callback, self.__io_power_monitor_and_io_int_reset_routine, InterruptTypes.INT_FALLING, 250)
+            servo_assembly_expander_def.set_callbackholder(callbackholder)
+
+            self.__power_monitor_and_io = PowerMonitorAndIO(_io_handler, servo_assembly_expander_def, _servo_config.get_sw2_power_good_address(), _servo_config.get_name())
         else:
             self.__servo_board = None
-        # ----------------------------
 
-        servo_assembly_expander_def = Robohat_config.SERVOASSEMBLY_EXPANDER_DEF
-        callbackholder = InterruptCallbackHolder("expander_callback_holder", self.__io_power_monitor_and_io_int_callback, self.__io_power_monitor_and_io_int_reset_routine, InterruptTypes.INT_FALLING, 250)
-        servo_assembly_expander_def.set_callbackholder(callbackholder)
+    #--------------------------------------------------------------------------------------
+    #--------------------------------------------------------------------------------------
 
-        self.__power_monitor_and_io = PowerMonitorAndIO(_io_handler,servo_assembly_expander_def, _servo_config.get_sw2_power_good_address(), _servo_config.get_name())
+    def is_board_avaible(self) -> bool:
+        if self.__servo_board is None:
+            return False
+        return True
 
     #--------------------------------------------------------------------------------------
     #--------------------------------------------------------------------------------------

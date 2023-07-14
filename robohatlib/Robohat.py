@@ -99,13 +99,21 @@ class Robohat:
                                                 Robohat_config.SERVOASSEMBLY_1_SPI_BUS
                                                 )
 
-        self.__servo_assembly_1.add_signaling_device(self.__buzzer)
+        if self.__servo_assembly_1 .is_board_avaible() is True:
+            self.__servo_assembly_1.add_signaling_device(self.__buzzer)
+        else:
+            self.__servo_assembly_1 = None
 
+        self.__servo_assembly_2 = ServoAssembly(self.__io_handler,
+                                                _servo_assembly_2_config,
+                                                Robohat_config.SERVOASSEMBLY_2_I2C_BUS,
+                                                Robohat_config.SERVOASSEMBLY_2_SPI_BUS
+                                                )
 
-
-
-        # self.__servo_assembly_2 = ServoAssembly(self.__io, _servo_assembly_2_config, Robohat_config.SERVOASSEMBLY_2_I2C_BUS, Robohat_config.SERVOASSEMBLY_2_SPI_BUS, servoAssembly_interrupt_def)
-
+        if self.__servo_assembly_2.is_board_avaible() is True:
+            self.__servo_assembly_2.add_signaling_device(self.__buzzer)
+        else:
+            self.__servo_assembly_2 = None
 
     # --------------------------------------------------------------------------------------
 
@@ -244,6 +252,10 @@ class Robohat:
         self.__led.turn_led_on()
 
     def get_led_color(self) -> Color:
+        """!
+        Get current color of the LED
+        @return: Color
+        """
         return self.__led.get_led_color()
     # end LED functions ------------------------------------------------------------------------------------
 
@@ -315,7 +327,7 @@ class Robohat:
     # --------------------------------------------------------------------------------------
     def get_servo_single_angle(self, _servo_nr: int) -> float:
         """!
-        Get angle of connected servo in degree or -1 wen an error occurs
+        Get angle of connected servo in degree or -1 when an error occurs
 
         @param _servo_nr The servo nr wanted (starts at 0)
         @return angle or -1
@@ -419,8 +431,10 @@ class Robohat:
         Get if Servos are sleeping
         @return: True when servos are sleeping
         """
+
         if self.__servo_assembly_1 is not None:
             return self.__servo_assembly_1.is_servo_sleeping()
+
         elif self.__servo_assembly_2 is not None:
             return self.__servo_assembly_2.is_servo_sleeping()
 
@@ -436,6 +450,7 @@ class Robohat:
         @param _dir: on or out
         @return None:
         """
+
         if _board_nr == Robohat_constants.PWMPLUG_P3:               # board 0
             if self.__servo_assembly_1 is not None:
                 self.__servo_assembly_1.set_io_expander_direction(_pin_nr,_dir)
@@ -458,6 +473,7 @@ class Robohat:
         @param _pin_nr:  pin nr
         @return ExpanderDir:
         """
+
         if _board_nr == Robohat_constants.PWMPLUG_P3:               # board 0
             if self.__servo_assembly_1 is not None:
                 return self.__servo_assembly_1.get_io_expander_direction(_pin_nr)
@@ -666,6 +682,15 @@ class Robohat:
         """
         return self.__imu.get_gyro()
 
+    def do_imu_test(self) -> None:
+        """!
+        Just a IMU test
+
+        @return None
+        """
+        self.__imu.do_imu_test()
+
+
     # end IMU functions ------------------------------------------------------------------------------------
     # begin Power management functions ---------------------------------------------------------------------
     def get_accu_percentage_capacity(self) -> int:
@@ -785,13 +810,7 @@ class Robohat:
         print("_io_servo_assembly_callback by: " + str(_gpi_nr))
         self.do_buzzer_beep()
 
-    def do_imu_test(self) -> None:
-        """!
-        Just a test, should be removed in the future
 
-        @return None
-        """
-        self.__imu.do_imu_test()
 
     # ------------------------------------------------------------------------------------
 
