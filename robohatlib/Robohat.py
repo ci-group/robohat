@@ -748,7 +748,7 @@ class Robohat:
 
     def do_system_shutdown(self) -> None:
         """!
-        Cleans-up IO, shutdowns the RPi and gives shutdown signal to power module
+        Sends shutdown signal to power module, cleans-up IO, shutdowns the RPi
         @return None
         """
 
@@ -756,6 +756,7 @@ class Robohat:
         sleep(1)
         self.__io_handler.io_shutdown()
         os.system("sudo shutdown -h now")       # actual system call to shut down the RPi
+        print("RPi will shutdown")
 
     # ------------------------------------------------------------------------------------
     def set_system_alarm_permitted(self, _state: bool) -> None:
