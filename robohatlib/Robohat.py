@@ -287,6 +287,22 @@ class Robohat:
             return False
 
     # --------------------------------------------------------------------------------------
+    def get_assemblyboard_is_connected(self, _assemblyboard: int ) -> bool:
+        """!
+        Check is an assemblyboard is available. Returns true when available
+        @param _assemblyboard: nr of requested assemblyboard. Use Robohat_constants.PWMPLUG_P3 or Robohat_constants.PWMPLUG_P4
+        @return: bool
+        """
+
+        if _assemblyboard is Robohat_constants.PWMPLUG_P3:
+            if self.__servo_assembly_1 is not None:
+                return True
+        elif _assemblyboard is Robohat_constants.PWMPLUG_P4:
+            if self.__servo_assembly_2 is not None:
+                return True
+        return False
+
+    # --------------------------------------------------------------------------------------
     def get_servo_adc_single_channel(self, _servo_nr: int) -> float:
         """!
         Get angle of connected servo in degree or -1 when an error occurs
