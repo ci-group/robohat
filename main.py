@@ -143,6 +143,7 @@ class Example:
 
         print("get accu voltage                               get voltage of accu")
         print("get accu capacity                              get capacity of accu")
+        print("get accu status                                get status of accu")
 
         print("get imu magnetic                               get magnetic values")
         print("get imu acceleration                           get acceleration values")
@@ -362,6 +363,9 @@ class Example:
             elif sub_command == "capacity":
                 value = self.robohat.get_accu_percentage_capacity()
                 print("accu capacity is: " + str(value) + " %")
+            elif sub_command == "status":
+                value = self.robohat.get_accu_status()
+                print(value)
             else:
                 print("syntax error")
 # -------------------------------------------------------------------------------

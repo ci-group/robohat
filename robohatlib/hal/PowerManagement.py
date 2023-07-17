@@ -9,7 +9,7 @@ try:
     from robohatlib.driver_ll.definitions.GPODef import GPODef
     from robohatlib.hal.HatADC import HatADC
     from robohatlib.driver_ll.IOHandler import IOHandler
-
+    from robohatlib.hal.datastructure.AccuStatus import AccuStatus
 
 except ImportError:
     print("Failed to import needed dependencies for the Robohat class")
@@ -24,6 +24,7 @@ ACCU_CHECK_SIZE_OF_WINDOW = 5
 
 
 class PowerManagement:
+
     """!
     Class to measure the accu capacity
     """
@@ -42,7 +43,7 @@ class PowerManagement:
         self.__timerIsRunning = False
         self.__accu_percentage_capacity = 0
         self.__accu_voltage = 0
-        self.__accu_capacity_ok = False
+        self.__accu_status = AccuStatus.UNKNOWN
         self.__raw_accu_voltages_array = [12.6] * ACCU_CHECK_SIZE_OF_WINDOW     # fills array with default value: 12.6
 
         self.__signaling_device = None
@@ -51,6 +52,7 @@ class PowerManagement:
 
         self.__battery_check_started = False
         self.__to_low_already_display = False
+        self.__to_high_already_display = False
 
     # --------------------------------------------------------------------------------------
     # --------------------------------------------------------------------------------------
@@ -162,13 +164,13 @@ class PowerManagement:
     # --------------------------------------------------------------------------------------
     # --------------------------------------------------------------------------------------
 
-    def is_accu_capacity_ok(self) -> bool:
+    def get_accu_status(self) -> AccuStatus:
         """!
-        Returns True, when accu voltage is above the 'ACCU_VOLTAGE_TO_LOW_THRESHOLD'
+        Returns status ot the accu depending on thresholds,  'ACCU_VOLTAGE_TO_LOW_THRESHOLD' and 'ACCU_VOLTAGE_TO_HIGH_THRESHOLD'
 
-        @return: (bool) True, accu is OK
+        @return: AccuStatus
         """
-        return self.__accu_capacity_ok
+        return self.__accu_status
 
     # --------------------------------------------------------------------------------------
     # --------------------------------------------------------------------------------------
@@ -202,22 +204,47 @@ class PowerManagement:
 
         if self.__accu_voltage > 0.5:
             self.__accu_percentage_capacity = self.__calculate_percentage_from_voltage(self.__accu_voltage)
+
+            # check on to low
             if self.__accu_voltage < Robohat_config.ACCU_VOLTAGE_TO_LOW_THRESHOLD:
-                self.__accu_capacity_ok = False
+                self.__accu_status = AccuStatus.TOO_LOW
 
                 if self.__signaling_device is not None:
                     self.__signaling_device.signal_system_alarm()
 
                 if Robohat_config.ACCU_LOG_DISPLAY_WHEN_TO_LOW is True or self.__to_low_already_display is False:
-                    print("accu capacity to low, only {0:3.2f} %".format(self.__accu_percentage_capacity))
+                    print("accu capacity to low, --> {0:3.2f} %".format(self.__accu_percentage_capacity))
                     self.__to_low_already_display = True
 
-            elif self.__accu_capacity_ok is False or self.__accu_voltage > Robohat_config.ACCU_VOLTAGE_TO_LOW_THRESHOLD + (Robohat_config.ACCU_VOLTAGE_TO_LOW_THRESHOLD * 0.02):
-                self.__accu_capacity_ok = True
+            # check if hysteresis parameters are met when was too low
+            elif self.__accu_status is AccuStatus.TOO_LOW and \
+                    self.__accu_voltage > Robohat_config.ACCU_VOLTAGE_TO_LOW_THRESHOLD + (Robohat_config.ACCU_VOLTAGE_TO_LOW_THRESHOLD * 0.02) and \
+                    self.__accu_voltage < Robohat_config.ACCU_VOLTAGE_TO_HIGH_THRESHOLD:
+                self.__accu_status = AccuStatus.OK
+
+            elif self.__accu_voltage > Robohat_config.ACCU_VOLTAGE_TO_HIGH_THRESHOLD:
+                self.__accu_status = AccuStatus.TOO_HIGH
+
+                if self.__signaling_device is not None:
+                    self.__signaling_device.signal_system_alarm()
+
+                if Robohat_config.ACCU_LOG_DISPLAY_WHEN_TO_HIGH is True or self.__to_high_already_display is False:
+                    print("accu capacity to high, --> {0:3.2f} %".format(self.__accu_percentage_capacity))
+                    self.__to_high_already_display = True
+
+            # check if hysteresis parameters are met when was too high
+            elif self.__accu_status is AccuStatus.TOO_HIGH and \
+                    self.__accu_voltage > Robohat_config.ACCU_VOLTAGE_TO_LOW_THRESHOLD and \
+                    self.__accu_voltage < Robohat_config.ACCU_VOLTAGE_TO_HIGH_THRESHOLD - (Robohat_config.ACCU_VOLTAGE_TO_HIGH_THRESHOLD * 0.02) :
+                self.__accu_status = AccuStatus.OK
+
+            elif self.__accu_status is AccuStatus.UNKNOWN:
+                self.__accu_status = AccuStatus.OK
 
         else:
             if self.__battery_check_started is False:
                 self.__accu_percentage_capacity = -1
+                self.__accu_status = AccuStatus.ACCU_NOT_PRESENT
 
         if self.__battery_check_started is False:
             self.__battery_check_started = True
@@ -227,10 +254,14 @@ class PowerManagement:
             print("accu voltage: {0:2.2f} V".format(self.__accu_voltage))
             print("accu percentage: {0:3.2f} %".format(self.__accu_percentage_capacity))
 
-            if self.__accu_capacity_ok is True:
+            if self.__accu_status is AccuStatus.OK:
                 print("accu is OK")
-            else:
+            elif self.__accu_status is AccuStatus.TOO_LOW:
                 print("accu has a too low capacity")
+            elif self.__accu_status is AccuStatus.TOO_HIGH:
+                print("accu voltage is to high")
+            else:
+                print("unknown accu status")
             print("***********************************")
 
     # --------------------------------------------------------------------------------------
@@ -239,7 +270,7 @@ class PowerManagement:
 
     def __calculate_percentage_from_voltage(self, _accu_voltage: float) -> float:
         """!
-        Calculates voltgae of accu, to accu capacity, derived from array in Robohat_config
+        Calculates voltage of accu, to accu capacity, derived from array in Robohat_config
 
         @param _accu_voltage:
         @return: percentage of accu
@@ -300,7 +331,7 @@ class PowerManagement:
         print("Power shutdown in 1 minute")
 
         self.__shutdown_gpo.set_high()
-        sleep(5)                            # hold the GPIO pin for 5 seconds (shorter time will not shutdown the accu management board
+        sleep(5)                            # hold the GPIO pin for 5 seconds (shorter time will not shut down the accu management board
         self.__shutdown_gpo.set_low()
 
         self.__io_handler.io_shutdown()

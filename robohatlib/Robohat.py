@@ -22,6 +22,7 @@ try:
     from robohatlib.hal.datastructure.ExpanderDirection import ExpanderDir
     from robohatlib.hal.datastructure.ExpanderStatus import ExpanderStatus
     from robohatlib.hal.datastructure.Color import Color
+    from robohatlib.hal.datastructure.AccuStatus import AccuStatus
 
     from robohatlib.hal.assemblyboard.ServoAssembly import ServoAssembly
     from robohatlib.hal.HatADC import HatADC
@@ -733,13 +734,13 @@ class Robohat:
 
         return self.__power_management.get_accu_voltage()
 
-    def is_accu_capacity_ok(self) -> bool:
+    def get_accu_status(self) -> AccuStatus:
         """!
         Returns True if accu capacity is OK
 
         @return True is accu capacity is OK
         """
-        return self.__power_management.is_accu_capacity_ok()
+        return self.__power_management.get_accu_status()
 
     # end Power management functions -------------------------------------------------------------------------
     # begin System functions ---------------------------------------------------------------------------------
