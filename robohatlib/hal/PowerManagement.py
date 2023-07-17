@@ -213,7 +213,7 @@ class PowerManagement:
                     self.__signaling_device.signal_system_alarm("Accu voltage too low")
 
                 if Robohat_config.ACCU_LOG_DISPLAY_WHEN_TO_LOW is True or self.__to_low_already_display is False:
-                    print("accu capacity to low, --> {0:3.2f} %".format(self.__accu_percentage_capacity))
+                    print("accu capacity to low, only {0:3.2f} %".format(self.__accu_percentage_capacity))
                     self.__to_low_already_display = True
 
             # check if hysteresis parameters are met when was too low
@@ -229,7 +229,7 @@ class PowerManagement:
                     self.__signaling_device.signal_system_alarm("Accu voltage too high")
 
                 if Robohat_config.ACCU_LOG_DISPLAY_WHEN_TO_HIGH is True or self.__to_high_already_display is False:
-                    print("accu capacity to high, --> {0:3.2f} %".format(self.__accu_percentage_capacity))
+                    print("Unable to calculate capacity, it's above 100 %")
                     self.__to_high_already_display = True
 
             # check if hysteresis parameters are met when was too high
