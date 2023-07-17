@@ -7,6 +7,7 @@ except ImportError:
     raise ImportError("spidev not found.")
 
 try:
+    #from robohatlib.Robohat_config import Robohat_config
     from robohatlib.driver_ll.spi.SPIDevice import SPIDevice
 except ImportError:
     raise ImportError("failed to resolve all dependencies for MAX11137")
@@ -85,17 +86,16 @@ CHAN_ID_BITS = 0b1
 SWCNV_BITS = 0b1
 
 
+ADC_REF_VOLTAGE = 3.0  # reference voltage for the ADC
+ADC_MAX_COUNT = 4095  # max count, (12 bit = 4095
 
 #--------------------------------------------------------------------------------------
 
 class MAX11137:
     # variables
-    __adcrefvoltage = 3.0               # reference voltage for the ADC
-    __adcmaxcount = 4095                # max count, (12 bit = 4095
 
-    __debug = False
 
-    __adcresultvoltage = [0.0] * 16         # allocates and fills alle elements of array with 0
+    __adc_result_voltage = [0.0] * 16         # allocates and fills alle elements of array with 0
 
     # --------------------------------------------------------------------------------------
     def __init__(self, _spi_device:SPIDevice):
@@ -120,26 +120,26 @@ class MAX11137:
         adc_configuration = self.__update_register_value(adc_configuration, NSCAN_LSB, NSCAN_RETURN_16)
         adc_configuration = self.__update_register_value(adc_configuration, SPM_LSB, SPM_NORMAL)
         adc_configuration = self.__update_register_value(adc_configuration, ECHO_LSB, ECHO_OFF)
-        self.__spi_device.writeRegister(adc_configuration)
+        self.__spi_device.transfer_register(adc_configuration)
 
         adc_range = ADC_RANGE_BASE
         adc_range = self.__update_register_value(adc_range, VREF_LSB, VREF_FULL)
-        self.__spi_device.writeRegister(adc_range)
+        self.__spi_device.transfer_register(adc_range)
 
         adc_custom_scan0 = ADC_CUSTOMSCAN0_BASE
         adc_custom_scan0 = self.__update_register_value(adc_custom_scan0, ADC_CUSTOMSCAN_LSB, ADC_CUSTOMSCAN_ALL)
-        self.__spi_device.writeRegister(adc_custom_scan0)
+        self.__spi_device.transfer_register(adc_custom_scan0)
 
         adc_custom_scan1 = ADC_CUSTOMSCAN1_BASE
         adc_custom_scan1 = self.__update_register_value(adc_custom_scan1, ADC_CUSTOMSCAN_LSB, ADC_CUSTOMSCAN_ALL)
-        self.__spi_device.writeRegister(adc_custom_scan1)
+        self.__spi_device.transfer_register(adc_custom_scan1)
 
     # --------------------------------------------------------------------------------------
     '''!
     public method, resets the adc
     '''
     def reset_adc(self):
-        self.__spi_device.writeRegister(0x0040)
+        self.__spi_device.transfer_register(0x0040)
 
     # --------------------------------------------------------------------------------------
     '''!
@@ -188,23 +188,23 @@ class MAX11137:
         adc_mode_control = self.__update_register_value(adc_mode_control, CHAN_ID_LSB, CHAN_ID_BITS)
         adc_mode_control = self.__update_register_value(adc_mode_control, SWCNV_LSB, SWCNV_BITS)
 
-        count_adc = self.__spi_device.writeRegister(adc_mode_control)
+        count_adc = self.__spi_device.transfer_register(adc_mode_control)
         value_raw_int = int(count_adc & 0x0fff)
         channel_raw_int = int(count_adc >> 12)
-        voltage_float = float((self.__adcrefvoltage / self.__adcmaxcount) * value_raw_int)
-        self.__adcresultvoltage[channel_raw_int] = voltage_float
+        voltage_float = float((ADC_REF_VOLTAGE / ADC_MAX_COUNT) * value_raw_int)
+        self.__adc_result_voltage[channel_raw_int] = voltage_float
 
         for  i  in range(0,16):
             adc_mode_control = 0b0000000000000000
             adc_mode_control = self.__update_register_value(adc_mode_control, SCAN_BITS_NA, SCAN_BITS_NA)
 
-            count_adc = self.__spi_device.writeRegister(adc_mode_control)
+            count_adc = self.__spi_device.transfer_register(adc_mode_control)
             value_raw_int = int(count_adc & 0x0fff)
             channel_raw_int = int(count_adc >> 12)
-            voltage_float = float((self.__adcrefvoltage / self.__adcmaxcount) * value_raw_int)
-            self.__adcresultvoltage[channel_raw_int] = voltage_float
+            voltage_float = float((ADC_REF_VOLTAGE / ADC_MAX_COUNT) * value_raw_int) + 0.02
+            self.__adc_result_voltage[channel_raw_int] = voltage_float
 
-        return self.__adcresultvoltage
+        return self.__adc_result_voltage
 
     # --------------------------------------------------------------------------------------
 
@@ -212,13 +212,13 @@ class MAX11137:
     private method, to get the result out of the ADC in voltage 
     '''
     def __give_result_adc(self, _adc_mode_control) -> float:
-        count_adc = self.__spi_device.writeRegister(_adc_mode_control)
+        count_adc = self.__spi_device.transfer_register(_adc_mode_control)
         value_raw_int = int(count_adc & 0x0fff)
         channel_raw_int = int(count_adc >> 12)
-        voltage_float = float((self.__adcrefvoltage / self.__adcmaxcount) * value_raw_int)
+        voltage_float = float((ADC_REF_VOLTAGE / ADC_MAX_COUNT) * value_raw_int)
 
-        if self.__debug is True:
-            print("-->" + str(self.__spi_device.get_spi_bus_nr()) + " " + hex(count_adc) + " bin: " + bin(count_adc)[2:].zfill(16) + " channel: " + str(channel_raw_int) + " code: " + str(value_raw_int) + " voltage: " + str(voltage_float) + " V")
+        # if Robohat_config.DEBUG is True:
+        #    print("-->" + str(self.__spi_device.get_spi_bus_nr()) + " " + hex(count_adc) + " bin: " + bin(count_adc)[2:].zfill(16) + " channel: " + str(channel_raw_int) + " code: " + str(value_raw_int) + " voltage: " + str(voltage_float) + " V")
 
         return voltage_float
 
@@ -227,7 +227,7 @@ class MAX11137:
 
 
     '''!
-    private method, to alter a value swith bitvalue and a bit position
+    private method, to alter a value depending on bit value and a bit position
     '''
 
     # noinspection PyMethodMayBeStatic

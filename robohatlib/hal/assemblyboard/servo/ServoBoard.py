@@ -51,7 +51,7 @@ class ServoBoard:
     #--------------------------------------------------------------------------------------
     #--------------------------------------------------------------------------------------
 
-    def set_servo_angle(self, _servo_nr: int, _angle: float) -> None:
+    def set_servo_single_angle(self, _servo_nr: int, _angle: float) -> None:
         if _servo_nr >= 0 and _servo_nr < 16:
             servo_data:ServoData = self.__servo_datas_array[_servo_nr]
 
@@ -64,7 +64,7 @@ class ServoBoard:
             print("Error, requested servo number is not valid, should be 0 till 15")
     #--------------------------------------------------------------------------------------
 
-    def get_servo_angle(self, _servo_nr: int) -> float:
+    def get_servo_single_angle(self, _servo_nr: int) -> float:
         """!
         Get angle of connected servo in degree or -1 when in error
 
@@ -75,6 +75,9 @@ class ServoBoard:
         if _servo_nr >= 0 and _servo_nr < 16:
             voltage_channel = self.get_servo_readout_adc_single_channel(_servo_nr)
             angle_channel = self.__servo_datas_array[_servo_nr - 1].convert_voltage_to_angle(voltage_channel)
+            if angle_channel < 0:
+                print("Error, requested servo readout is not connected")
+                return -1
             return angle_channel
         else:
             print("Error, requested servo number is not valid, should be 1 till 16")
@@ -82,7 +85,7 @@ class ServoBoard:
 
     #--------------------------------------------------------------------------------------
     #--------------------------------------------------------------------------------------
-    def set_all_servos_angle(self, _wanted_angles: []) -> None:
+    def set_servo_multiple_angles(self, _wanted_angles: []) -> None:
         """!
         Sets all the angle of the servos
         @param _wanted_angles:  (should be an array of 16, servo 1 is array pos 0)

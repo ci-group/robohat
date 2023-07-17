@@ -104,7 +104,7 @@ class ServoAssembly:
             self.__servo_board.exit_program()
     #--------------------------------------------------------------------------------------
 
-    def set_servo_angle(self, _servo_nr: int, _angle: float) -> None:
+    def set_servo_single_angle(self, _servo_nr: int, _angle: float) -> None:
         """!
         Set the angle servo in degree
 
@@ -116,7 +116,7 @@ class ServoAssembly:
         if self.__servo_board is not None:
             self.__servo_board.set_servo_single_angle(_servo_nr, _angle)
 
-    def get_servo_angle(self, _servo_nr: int) -> float:
+    def get_servo_single_angle(self, _servo_nr: int) -> float:
         """!
         Get angle of connected servo in degree, or -1 when fails
 
@@ -130,7 +130,7 @@ class ServoAssembly:
 
     # --------------------------------------------------------------------------------------
 
-    def set_all_servos_angle(self, _wanted_angles: []) -> None:
+    def set_servo_multiple_angles(self, _wanted_angles: []) -> None:
         """!
         Set the angle of connected servos in degree
 
@@ -138,7 +138,7 @@ class ServoAssembly:
 
         @return angle of connected servo in degree
         """
-        self.__servo_board.set_all_servos_angle(_wanted_angles)
+        self.__servo_board.set_servo_multiple_angles(_wanted_angles)
 
     def get_all_servos_angle(self) -> []:
         """!

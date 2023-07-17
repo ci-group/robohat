@@ -355,7 +355,7 @@ class Robohat:
         if servo_assembly is not None:
             servo_nr = self.__get_servo_nr_depending_assembly(_servo_nr)  # servo nr of the servo of the assembly
             if servo_nr is not None:
-                return servo_assembly.get_servo_angle(servo_nr)
+                return servo_assembly.get_servo_single_angle(servo_nr)
         return -1
     # --------------------------------------------------------------------------------------
 
@@ -374,7 +374,7 @@ class Robohat:
         if servo_assembly is not None:
             servo_nr = self.__get_servo_nr_depending_assembly(_servo_nr)
             if servo_nr is not None:
-                servo_assembly.set_servo_angle(servo_nr, _angle)
+                servo_assembly.set_servo_single_angle(servo_nr, _angle)
 
     # ------------------------------------------------------------------------------------------
     # ------------------------------------------------------------------------------------------
@@ -413,11 +413,11 @@ class Robohat:
 
         if self.__servo_assembly_1 is not None:
             angles_array1 = _angles_array[0:16]
-            self.__servo_assembly_1.set_all_servos_angle(angles_array1)
+            self.__servo_assembly_1.set_servo_multiple_angles(angles_array1)
 
         if self.__servo_assembly_2 is not None and len(_angles_array) >= 32:
             angles_array2 = _angles_array[16:32]
-            self.__servo_assembly_2.set_all_servos_angle(angles_array2)
+            self.__servo_assembly_2.set_servo_multiple_angles(angles_array2)
 
         # ------------------------------------------------------------------------------------------
     def put_servo_to_sleep(self) -> None:

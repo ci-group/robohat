@@ -182,7 +182,7 @@ class Example:
                 io_command = data_in_array[3]
                 if io_command == "dir":
                     board_nr = int(data_in_array[4])
-                    pin_nr = int(data_in_array[4])
+                    pin_nr = int(data_in_array[5])
                     value = data_in_array[6]
                     if value is "out":
                         self.robohat.set_servo_io_expander_direction(board_nr, pin_nr, ExpanderDir.OUTPUT)
@@ -271,7 +271,10 @@ class Example:
                         print("angle of servo " + str(servo_nr) + " is: " + str(value) + "°" )
                 elif parameter_str == "all":
                     value = self.robohat.get_servo_multiple_angles()
-                    print("angles of servos: " + str(value))
+                    if not value:
+                        print("There a no servos attached")
+                    else:
+                        print("angles of servos: " + str(value))
                 else:
                     print("syntax error")
             elif sub_command == "adc":
@@ -283,7 +286,10 @@ class Example:
                         print("adc of servo " + str(servo_nr) + " is: " + str(value) + "V" )
                 elif parameter_str == "all":
                     value = self.robohat.get_servo_adc_multiple_channels()
-                    print("adc volts of servos: " + str(value))
+                    if not value:
+                        print("There a no servos attached")
+                    else:
+                        print("adc volts of servos: " + str(value))
                 else:
                     print("syntax error")
             elif sub_command == "connected":
@@ -445,7 +451,7 @@ class Example:
         Start this example
         @return: None
         """
-        print("\n\nWaiting for your input\n\n")
+        print("\n\nWaiting for your input (type help + [RETURN] for more the command list\n\n")
 
         while self.running is True:
             inp = input()
