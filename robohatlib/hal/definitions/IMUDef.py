@@ -4,8 +4,8 @@ class IMUDef:
     def __init__(self, _name, _lis3mdl_i2c_device_def, _lsm6ds33_i2c_device_def):
         """!
         @param _name:  name of this definition
-        @param _lis3mdl_i2c_device_def: definition for th LIS3MDL
-        @param _lsm6ds33_i2c_device_def: definition for th LMS6D33
+        @param _lis3mdl_i2c_device_def: The definition for th LIS3MDL
+        @param _lsm6ds33_i2c_device_def: The definition for th LMS6D33
         """
         self.__name = _name
         self.__lis3mdl_i2c_device_def = _lis3mdl_i2c_device_def

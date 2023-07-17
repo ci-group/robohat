@@ -7,7 +7,7 @@ except ImportError:
     raise ImportError("spidev not found.")
 
 try:
-    from robohatlib.driver_ll.spi.SPI_Device import SPI_Device
+    from robohatlib.driver_ll.spi.SPIDevice import SPIDevice
 except ImportError:
     raise ImportError("failed to resolve all dependencies for MAX11137")
 
@@ -98,7 +98,7 @@ class MAX11137:
     __adcresultvoltage = [0.0] * 16         # allocates and fills alle elements of array with 0
 
     # --------------------------------------------------------------------------------------
-    def __init__(self, _spi_device:SPI_Device):
+    def __init__(self, _spi_device:SPIDevice):
         #print("Constructor MAX11137")
         self.__spi_device = _spi_device
 
@@ -114,24 +114,24 @@ class MAX11137:
         # spiADC.bits_per_word(16)                       # seems not to be supported at RPi
 
         adc_configuration = ADC_CONFIGURATION_BASE
-        adc_configuration = self.__updateRegisterValue(adc_configuration, REFSEL_LSB, REFSEL_EXTERNAL_SINGLEENDED)
-        adc_configuration = self.__updateRegisterValue(adc_configuration, AVG_LSB, AVG_ON)
-        adc_configuration = self.__updateRegisterValue(adc_configuration, NAVG_LSB, NSCAN_RETURN_32)
-        adc_configuration = self.__updateRegisterValue(adc_configuration, NSCAN_LSB, NSCAN_RETURN_16)
-        adc_configuration = self.__updateRegisterValue(adc_configuration, SPM_LSB, SPM_NORMAL)
-        adc_configuration = self.__updateRegisterValue(adc_configuration, ECHO_LSB, ECHO_OFF)
+        adc_configuration = self.__update_register_value(adc_configuration, REFSEL_LSB, REFSEL_EXTERNAL_SINGLEENDED)
+        adc_configuration = self.__update_register_value(adc_configuration, AVG_LSB, AVG_ON)
+        adc_configuration = self.__update_register_value(adc_configuration, NAVG_LSB, NSCAN_RETURN_32)
+        adc_configuration = self.__update_register_value(adc_configuration, NSCAN_LSB, NSCAN_RETURN_16)
+        adc_configuration = self.__update_register_value(adc_configuration, SPM_LSB, SPM_NORMAL)
+        adc_configuration = self.__update_register_value(adc_configuration, ECHO_LSB, ECHO_OFF)
         self.__spi_device.writeRegister(adc_configuration)
 
         adc_range = ADC_RANGE_BASE
-        adc_range = self.__updateRegisterValue(adc_range, VREF_LSB, VREF_FULL)
+        adc_range = self.__update_register_value(adc_range, VREF_LSB, VREF_FULL)
         self.__spi_device.writeRegister(adc_range)
 
         adc_custom_scan0 = ADC_CUSTOMSCAN0_BASE
-        adc_custom_scan0 = self.__updateRegisterValue(adc_custom_scan0, ADC_CUSTOMSCAN_LSB, ADC_CUSTOMSCAN_ALL)
+        adc_custom_scan0 = self.__update_register_value(adc_custom_scan0, ADC_CUSTOMSCAN_LSB, ADC_CUSTOMSCAN_ALL)
         self.__spi_device.writeRegister(adc_custom_scan0)
 
         adc_custom_scan1 = ADC_CUSTOMSCAN1_BASE
-        adc_custom_scan1 = self.__updateRegisterValue(adc_custom_scan1, ADC_CUSTOMSCAN_LSB, ADC_CUSTOMSCAN_ALL)
+        adc_custom_scan1 = self.__update_register_value(adc_custom_scan1, ADC_CUSTOMSCAN_LSB, ADC_CUSTOMSCAN_ALL)
         self.__spi_device.writeRegister(adc_custom_scan1)
 
     # --------------------------------------------------------------------------------------
@@ -165,7 +165,7 @@ class MAX11137:
 
             #4-7-23
             # instead of using the channel auto increment, just read the whole array... was a bug
-            value_array = self.get_readout_adc_mutiplechannels()
+            value_array = self.get_readout_adc_mutiple_channels()
             return value_array[_servo_nr]
         else:
             print("Servo range not valid")
@@ -175,18 +175,18 @@ class MAX11137:
     '''!
     public method, get voltage of all 16 channels of the ADC. returns an array
     '''
-    def  get_readout_adc_mutiplechannels(self) -> []:
+    def  get_readout_adc_mutiple_channels(self) -> []:
         """!
         @return voltages of the potentiometer of all the servos in volt
         """
 
         adc_mode_control = 0b0000000000000000
-        adc_mode_control = self.__updateRegisterValue(adc_mode_control, SCAN_LSB, SCAN_BITS_STANDARD_INT)
-        adc_mode_control = self.__updateRegisterValue(adc_mode_control, CHSEL_LSB, 15)
-        adc_mode_control = self.__updateRegisterValue(adc_mode_control, RESET_LSB, RESET_BITS_NORESET)
-        adc_mode_control = self.__updateRegisterValue(adc_mode_control, PM_LSB, PM_BITS_NORMAL)
-        adc_mode_control = self.__updateRegisterValue(adc_mode_control, CHAN_ID_LSB, CHAN_ID_BITS)
-        adc_mode_control = self.__updateRegisterValue(adc_mode_control, SWCNV_LSB, SWCNV_BITS)
+        adc_mode_control = self.__update_register_value(adc_mode_control, SCAN_LSB, SCAN_BITS_STANDARD_INT)
+        adc_mode_control = self.__update_register_value(adc_mode_control, CHSEL_LSB, 15)
+        adc_mode_control = self.__update_register_value(adc_mode_control, RESET_LSB, RESET_BITS_NORESET)
+        adc_mode_control = self.__update_register_value(adc_mode_control, PM_LSB, PM_BITS_NORMAL)
+        adc_mode_control = self.__update_register_value(adc_mode_control, CHAN_ID_LSB, CHAN_ID_BITS)
+        adc_mode_control = self.__update_register_value(adc_mode_control, SWCNV_LSB, SWCNV_BITS)
 
         count_adc = self.__spi_device.writeRegister(adc_mode_control)
         value_raw_int = int(count_adc & 0x0fff)
@@ -196,7 +196,7 @@ class MAX11137:
 
         for  i  in range(0,16):
             adc_mode_control = 0b0000000000000000
-            adc_mode_control = self.__updateRegisterValue(adc_mode_control, SCAN_BITS_NA, SCAN_BITS_NA)
+            adc_mode_control = self.__update_register_value(adc_mode_control, SCAN_BITS_NA, SCAN_BITS_NA)
 
             count_adc = self.__spi_device.writeRegister(adc_mode_control)
             value_raw_int = int(count_adc & 0x0fff)
@@ -229,7 +229,9 @@ class MAX11137:
     '''!
     private method, to alter a value swith bitvalue and a bit position
     '''
-    def __updateRegisterValue(self, previous_value, bit_pos, bit_value):
+
+    # noinspection PyMethodMayBeStatic
+    def __update_register_value(self, previous_value, bit_pos, bit_value):
         return_value = previous_value | (bit_value << bit_pos)
         return return_value
 

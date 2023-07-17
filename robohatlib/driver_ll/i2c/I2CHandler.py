@@ -79,7 +79,7 @@ class I2CHandler:
         @param buffer: buffer
         @param start: start, default 0
         @param end: end, default None
-        @param stop:
+        @stop does nothing, for compatibility present
         @return: none
         """
 
@@ -97,9 +97,9 @@ class I2CHandler:
         if end is None:
             end = len(buffer)
 
-        readin = self._i2c_bus.read_bytes(address, end - start)
+        value_in = self._i2c_bus.read_bytes(address, end - start)
         for i in range(end - start):
-            buffer[i + start] = readin[i]
+            buffer[i + start] = value_in[i]
     # --------------------------------------------------------------------------------------
 
     def write_to_then_read_from(
@@ -130,11 +130,9 @@ class I2CHandler:
             self.read_from_into(address, buffer_in, start=in_start, end=in_end)
         else:
             # To generate without a stop, do in one block transaction
-            readin = self._i2c_bus.read_i2c_block_data(
-                address, buffer_out[out_start:out_end], in_end - in_start
-            )
+            data_in = self._i2c_bus.read_i2c_block_data(address, buffer_out[out_start:out_end], in_end - in_start)
             for i in range(in_end - in_start):
-                buffer_in[i + in_start] = readin[i]
+                buffer_in[i + in_start] = data_in[i]
 
     # --------------------------------------------------------------------------------------
     # --------------------------------------------------------------------------------------
@@ -148,8 +146,9 @@ class I2CHandler:
 
         if self._locked:
             return False
-        self._locked = True
-        return True
+        else:
+            self._locked = True
+            return True
 
     # --------------------------------------------------------------------------------------
     # --------------------------------------------------------------------------------------

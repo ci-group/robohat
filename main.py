@@ -36,7 +36,7 @@ class Example:
 
         self.robohat = Robohat(main_config.servoassembly_1_config,
                                main_config.servoassembly_2_config,
-                               main_config.TOPBOARD_IOEXANDER_SW)
+                               main_config.TOPBOARD_IO_EXPANDER_SW)
 
         # self.robohat.set_system_alarm_permitted(False)
 

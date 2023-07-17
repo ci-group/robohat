@@ -224,10 +224,7 @@ class MCP23008:
         return self.__get_port(INT_CAP_ADDRESS)
 
     def reset_interrupts(self):
-        tmp = self.read_interrupt_capture()
-
-        #print("INT reset done! in MCP23008")
-        del tmp
+        self.read_interrupt_capture()
 
     # --------------------------------------------------------------------------------------
     # --------------------------------------------------------------------------------------
@@ -277,7 +274,7 @@ class MCP23008:
     #--------------------------------------------------------------------------------------
     #--------------------------------------------------------------------------------------
     #--------------------------------------------------------------------------------------
-
+    # noinspection PyMethodMayBeStatic
     def __check_if_expander_io_is_available(self, _io_nr) -> bool:
         """!
         Return True when _io_nr is in range

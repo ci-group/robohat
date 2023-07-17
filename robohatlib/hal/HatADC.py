@@ -12,7 +12,7 @@ CHANNEL_ACCU_VOLTAGE = 3
 class HatADC:
     """!
     ADC onto the topboard.
-    This ADC is also used fo accu-powermonitor
+    This ADC is also used fo accu-power-monitor
     """
 
     #---------------------------------------------------------------------

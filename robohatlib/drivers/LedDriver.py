@@ -2,7 +2,7 @@
 from robohatlib.driver_ll.constants.GPO_Stat import GPOStat
 
 
-class Led_driver:
+class LedDriver:
     def __init__(self,  _gpo_ll_driver):
         self.__gpo_ll_driver = _gpo_ll_driver
         self.__color_active = False
@@ -58,6 +58,7 @@ class Led_driver:
         self.__gpo_ll_driver.set_status(self.__return_gpioval_depending_boolean(self.__color_active))
 
     # --------------------------------------------------------------------------------------
+    # noinspection PyMethodMayBeStatic
     def __return_gpioval_depending_boolean(self, _booleanval):
         if _booleanval is False:
             return GPOStat.GPO_LOW

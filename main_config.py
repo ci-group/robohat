@@ -1,6 +1,5 @@
 #!/usr/bin/env python
 
-from robohatlib.Robohat import Robohat
 from robohatlib.hal.assemblyboard.ServoAssemblyConfig import ServoAssemblyConfig
 from robohatlib.hal.assemblyboard.servo.ServoData import ServoData
 from robohatlib import Robohat_constants
@@ -65,6 +64,6 @@ servoassembly_2_config = ServoAssemblyConfig(SERVOASSEMBLY_2_NAME,
 
 #--------------------
 
-TOPBOARD_IOEXANDER_SW = 7
+TOPBOARD_IO_EXPANDER_SW = 7
 
 #--------------------

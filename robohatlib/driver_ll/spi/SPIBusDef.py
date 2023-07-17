@@ -5,12 +5,12 @@ class SPIBusDef:
     """
     def __init__(self, _spi_bus_name: str, _spi_bus_nr: int, _sck_pin: int, _mosi_pin: int, _miso_pin: int):
         """!
-        Contructor of the SPI bus definition
-        :param _spi_bus_name: name of this definition, just for your own reference
-        :param _spi_bus_nr: spi bus nr (should be the nr as called in the host)
-        :param _sck_pin: GPIO nr of SCK
-        :param _mosi_pin:  GPIO nr of MOSI
-        :param _miso_pin: GPIO nr of MISO
+        Constructor of the SPI bus definition
+        @param _spi_bus_name: name of this definition, just for your own reference
+        @param _spi_bus_nr: spi bus nr (should be the nr as called in the host)
+        @param _sck_pin: GPIO nr of SCK
+        @param _mosi_pin:  GPIO nr of MOSI
+        @param _miso_pin: GPIO nr of MISO
         """
         self.__spi_bus_name = _spi_bus_name
         self.__spi_bus_nr = _spi_bus_nr

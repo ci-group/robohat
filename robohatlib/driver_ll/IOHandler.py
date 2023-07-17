@@ -17,12 +17,12 @@ try:
     from robohatlib.driver_ll.i2c.I2CBus import I2CBus
     from robohatlib.driver_ll.i2c.I2CHandler import I2CHandler
 
-    from robohatlib.driver_ll.spi.SPI_Device import SPI_Device
+    from robohatlib.driver_ll.spi.SPIDevice import SPIDevice
     from robohatlib.driver_ll.spi.SPIDeviceDef import SPIDeviceDef
 
-    from robohatlib.drivers.Led_driver import Led_driver
+    from robohatlib.drivers.LedDriver import LedDriver
     from robohatlib.driver_ll.definitions.LedDef import LedDef
-    from robohatlib.drivers.Buzzer_driver import Buzzer_driver
+    from robohatlib.drivers.BuzzerDriver import BuzzerDriver
     from robohatlib.hal.definitions.BuzzerDef import BuzzerDef
 
     from robohatlib.helpers.RoboUtil import RoboUtil
@@ -201,7 +201,7 @@ class IOHandler:
     #--------------------------------------------------------------------------------------
     #--------------------------------------------------------------------------------------
 
-    def get_spi_device(self, _spi_device_def:SPIDeviceDef) -> SPI_Device:
+    def get_spi_device(self, _spi_device_def:SPIDeviceDef) -> SPIDevice:
         """!
         Get SPI device
 
@@ -228,7 +228,7 @@ class IOHandler:
         spi_bus.max_speed_hz = _spi_device_def.get_spi_max_speed()
         spi_bus.mode = _spi_device_def.get_spi_mode()                                    # SPI mode as two bit pattern of clock polarity and phase [CPOL|CPHA], min: 0b00 = 0, max: 0b11 = 3
         spi_bus.lsbfirst = False
-        spi_device =  SPI_Device(_spi_device_def.get_name(), spi_bus, _spi_device_def.get_spi_bus_nr(), _spi_device_def.get_spi_cs_nr())
+        spi_device =  SPIDevice(_spi_device_def.get_name(), spi_bus, _spi_device_def.get_spi_bus_nr(), _spi_device_def.get_spi_cs_nr())
 
         print("SPI device registered: " + _spi_device_def.get_name() + " -> spi_bus:" + str(spi_bus_nr) + ", cs: " + str(spi_cs))
         self.__used_spi_devices.append(spi_device)
@@ -302,7 +302,7 @@ class IOHandler:
     #--------------------------------------------------------------------------------------
     #--------------------------------------------------------------------------------------
 
-    def get_led_driver(self, _led_def: LedDef) -> Led_driver:
+    def get_led_driver(self, _led_def: LedDef) -> LedDriver:
         """!
         Get LED driver
 
@@ -313,11 +313,11 @@ class IOHandler:
         gpo_def = GPODef(_led_def.get_name(), _led_def.get_gpo_pin_nr())
 
         gpo_ll_driver = self.get_gpo(gpo_def)                  # gpo_def had the same functions of led_def
-        return Led_driver(gpo_ll_driver)
+        return LedDriver(gpo_ll_driver)
 
     #--------------------------------------------------------------------------------------
 
-    def get_buzzer_driver(self, _buzzer_def: BuzzerDef) -> Buzzer_driver:
+    def get_buzzer_driver(self, _buzzer_def: BuzzerDef) -> BuzzerDriver:
         """!
         Get Buzzer driver
 
@@ -327,12 +327,12 @@ class IOHandler:
 
         gpo_pwm_def = GPOPWMDef(_buzzer_def.get_name(), _buzzer_def.get_gpo_pin_nr(), _buzzer_def.get_freq(), _buzzer_def.get_duty_cycle())
         gpo_pwm_ll_driver = self.get_pwm(gpo_pwm_def)
-        return Buzzer_driver(gpo_pwm_ll_driver)
+        return BuzzerDriver(gpo_pwm_ll_driver)
 
     #--------------------------------------------------------------------------------------
     #--------------------------------------------------------------------------------------
     #--------------------------------------------------------------------------------------
-
+    # noinspection PyMethodMayBeStatic
     def io_shutdown(self) ->None:
         """!
         shuts down the IO

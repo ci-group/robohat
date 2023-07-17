@@ -10,9 +10,9 @@ class MAX11607:
     """
 
     # --------------------------------------------------------------------------------------
-    def __init__(self, _i2cdevice):
+    def __init__(self, _i2c_device):
         #print("constructor MAX11607")
-        self.__i2c_device = _i2cdevice
+        self.__i2c_device = _i2c_device
 
         self.__adc_max_count = 1024
         self.__adc_ref_voltage = 3.3
@@ -24,7 +24,7 @@ class MAX11607:
         #print("init MAX11607")
 
         register_data = 0x80 | 0x2                                              # aak default, no reset
-        conf_data = 0x01 | 0x06                                                 # single ended, multiple channel (0 untill last), last channel is AIN3 (channel 4)
+        conf_data = 0x01 | 0x06                                                 # single ended, multiple channel (0 un till last), last channel is AIN3 (channel 4)
 
         self.__i2c_device.i2c_write_bytes(bytes([register_data, conf_data]))
 
@@ -64,7 +64,7 @@ class MAX11607:
 
         adc_code_array = bytearray(8)
 
-        conf_data = 0x01 | 0x06                                                 # single ended, multiple channel (0 untill last), last channel is AIN3 (channel 4)
+        conf_data = 0x01 | 0x06                                                 # single ended, multiple channel (0 un till last), last channel is AIN3 (channel 4)
 
         self.__i2c_device.i2c_write_bytes(bytes([conf_data]))
         self.__i2c_device.read_from_into(adc_code_array)

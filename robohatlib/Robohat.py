@@ -560,7 +560,7 @@ class Robohat:
         return None
 
     # -----------------------------------------------------------------------------------------
-
+    # noinspection PyMethodMayBeStatic
     def __get_servo_nr_depending_assembly(self, _servo_nr: int) -> int | None:
         """!
         Get the servo nr of the assembly (so servo nr 16 will be servo nr 0 of assembly 2). If not available
@@ -774,7 +774,7 @@ class Robohat:
     # end System management functions -------------------------------------------------------------------------
 
     # begin Library functions ---------------------------------------------------------------------------------
-
+    # noinspection PyMethodMayBeStatic
     def get_lib_version(self) -> str:
         """!
         Get version number of library.
@@ -785,7 +785,7 @@ class Robohat:
         return Robohat_constants.ROBOHAT_LIB_VERSION_STR
 
     # ------------------------------------------------------------------------------------
-
+    # noinspection PyMethodMayBeStatic
     def get_lib_build_date(self) -> str:
         """!
         Get the build date of library.

@@ -15,7 +15,7 @@ except ImportError:
 
 try:
     from robohatlib.driver_ll.i2c.I2CDevice import I2CDevice
-    from robohatlib.driver_ll.spi.SPI_Device import SPI_Device
+    from robohatlib.driver_ll.spi.SPIDevice import SPIDevice
     from robohatlib.hal.assemblyboard.servo.ServoData import ServoData
 except ImportError:
     print("Failed to resolve dependencies for Servoboard")
@@ -26,7 +26,7 @@ class ServoBoard:
 
     #--------------------------------------------------------------------------------------
 
-    def __init__(self, i2c_device_servo: I2CDevice, _spi_device_servo_adc: SPI_Device):
+    def __init__(self, i2c_device_servo: I2CDevice, _spi_device_servo_adc: SPIDevice):
         self.__pwm = PCA9685(i2c_device_servo)
         self.__servo_adc = MAX11137(_spi_device_servo_adc)
 
@@ -85,7 +85,7 @@ class ServoBoard:
     def set_all_servos_angle(self, _wanted_angles: []) -> None:
         """!
         Sets all the angle of the servos
-        @param _wanted_angles:  (should be a array of 16, servo 1 is array pos 0)
+        @param _wanted_angles:  (should be an array of 16, servo 1 is array pos 0)
         @return: None
         """
         wanted_time_array = [0] * 16
@@ -147,7 +147,7 @@ class ServoBoard:
         """!
         @return voltages of the potentiometer of all the servos in volt
         """
-        return self.__servo_adc.get_readout_adc_mutiplechannels()
+        return self.__servo_adc.get_readout_adc_mutiple_channels()
 
     #--------------------------------------------------------------------------------------
     #--------------------------------------------------------------------------------------

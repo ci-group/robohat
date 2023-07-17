@@ -81,9 +81,18 @@ class PowerMonitorAndIO:
             self.__io_device.init_mcp23008()
 
     # --------------------------------------------------------------------------------------
-    # todo not fully implemented
+
     def is_power_good(self, _power_channel: int) -> bool:
-        return True
+        """!
+        Replies if DC/DC channel is ok
+        @param _power_channel: Wanted channel
+        @return: bool
+        """
+        value = self.get_io_expander_input(_power_channel)
+        if value is 0:
+            return False
+        else:
+            return True
 
     # --------------------------------------------------------------------------------------
     # --------------------------------------------------------------------------------------
@@ -191,14 +200,14 @@ class PowerMonitorAndIO:
         print("_io_servo_assembly_callback by: " + str(_gpi_nr))
 
         if self.__signaling_device is not None:
-            self.__signaling_device.signal_system_alarm()
+            self.__signaling_device.signal_system_alarm("A DC / DC converter of an servo is shorted !")
 
     # --------------------------------------------------------------------------------------
 
-
+    # noinspection PyMethodMayBeStatic
     def __check_if_expander_io_is_available(self, _io_nr:int) -> bool:
         """!
-        Checks if IO nr is available for the user (the 0-3 are reserved for power monitor!!
+        Checks if IO nr is available for the user (the 0-3 are reserved for power monitor!!)
         @param _io_nr: io nr
         @return: True is IO is available, False is not
         """
@@ -252,7 +261,7 @@ class PowerMonitorAndIO:
         if self.__io_device is None:
             return
 
-        if self.disable_retry_timer_callback == True:
+        if self.disable_retry_timer_callback is True:
             return
 
         port_value = self.__io_device.get_port_data() and 0x7f

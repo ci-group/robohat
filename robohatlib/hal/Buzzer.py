@@ -55,7 +55,7 @@ class Buzzer:
         self.__buzzer_driver.random_buzzer()
 
 
-    # slow woop ----------------------------------------------------------------------------------------
+    # slowwoop ----------------------------------------------------------------------------------------
     def buzzer_slowwoop(self) -> None:
         """!
         Generates a sound from 2000Hz to 50Hz
@@ -119,7 +119,7 @@ class Buzzer:
     # ---------------------------------------------------------------------------------------
     # ---------------------------------------------------------------------------------------
 
-    def signal_system_alarm(self) -> None:
+    def signal_system_alarm(self, _txt:str = None) -> None:
         """
         Sounds a system alarm when permitted. Prints a console Warning
         @return: None
@@ -130,9 +130,12 @@ class Buzzer:
             if diff_time_in_seconds > ALARM_TIMEOUT_IN_SEC:
                 self.__buzzer_driver.do_alarm_buzzer()
                 print("WARNING: System alarm !!!")
+                if _txt is not None:
+                    print(_txt)
                 self.__last_time_error = time.time()
         else:
             print("\nWARNING: System alarm !!!, sound is disabled\n")
-
+            if _txt is not None:
+                print(_txt)
     # ---------------------------------------------------------------------------------------
     # ---------------------------------------------------------------------------------------

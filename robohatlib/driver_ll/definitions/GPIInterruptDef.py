@@ -66,26 +66,5 @@ class GPIInterruptDef:
 
     # --------------------------------------------------------------------------------------
     # --------------------------------------------------------------------------------------
-    # # --------------------------------------------------------------------------------------
-    # @classmethod
-    # def from_mcp23008_interrupt_definition(cls, _mcp_interrupt_definition):
-    #     # if from mcp, type is always rising
-    #     if _mcp_interrupt_definition is None:
-    #         return None
-    #
-    #     return cls(_mcp_interrupt_definition.get_name(), _mcp_interrupt_definition.get_gpio_pin(), InterruptTypes.INT_BOTH, _mcp_interrupt_definition.get_callback_function())
-    #
-    # # --------------------------------------------------------------------------------------
-    # # --------------------------------------------------------------------------------------
-    # # --------------------------------------------------------------------------------------
-    #
-    # def __repr__(self):
-    #     return (
-    #         f"{self.__class__.__name__}"
-    #         f"(name={self.__name}, gpio_pin={self.__gpio_pin}, interrupt_type_port={self.__interrupt_type_port}, callback_function={self.__callbackholder})"
-    #     )
-
-    # --------------------------------------------------------------------------------------
-    # --------------------------------------------------------------------------------------
     # --------------------------------------------------------------------------------------
 

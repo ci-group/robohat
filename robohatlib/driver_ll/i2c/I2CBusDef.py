@@ -24,7 +24,7 @@ class I2CBusDef:
 
     def get_i2c_bus_name(self) -> str:
         """!
-        Get this bus name
+        Get this bus bus_name
         @return: name
         """
 

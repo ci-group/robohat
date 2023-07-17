@@ -4,7 +4,7 @@ except ImportError:
     raise ImportError("Failed to import needed dependencies for the Buzzer_driver class")
 
 
-class Buzzer_driver:
+class BuzzerDriver:
     def __init__(self, _pwm_ll_driver):
         self.__pwm_ll_driver = _pwm_ll_driver
 
@@ -13,11 +13,11 @@ class Buzzer_driver:
     #--------------------------------------------------------------------------------------
 
     def init_buzzer(self, _init_beep_permitted) -> None:
-        """
-        Inits the buzzer,
+        """!
+        Init the buzzer,
 
-        :param _init_beep_permitted: bool, if True, a small beep will sound after init
-        :return: None
+        @param _init_beep_permitted: bool, if True, a small beep will sound after init
+        @return: None
         """
         if _init_beep_permitted is True:
             self.do_buzzer_beep()

@@ -210,7 +210,7 @@ class PowerManagement:
                 self.__accu_status = AccuStatus.TOO_LOW
 
                 if self.__signaling_device is not None:
-                    self.__signaling_device.signal_system_alarm()
+                    self.__signaling_device.signal_system_alarm("Accu voltage too low")
 
                 if Robohat_config.ACCU_LOG_DISPLAY_WHEN_TO_LOW is True or self.__to_low_already_display is False:
                     print("accu capacity to low, --> {0:3.2f} %".format(self.__accu_percentage_capacity))
@@ -226,7 +226,7 @@ class PowerManagement:
                 self.__accu_status = AccuStatus.TOO_HIGH
 
                 if self.__signaling_device is not None:
-                    self.__signaling_device.signal_system_alarm()
+                    self.__signaling_device.signal_system_alarm("Accu voltage too high")
 
                 if Robohat_config.ACCU_LOG_DISPLAY_WHEN_TO_HIGH is True or self.__to_high_already_display is False:
                     print("accu capacity to high, --> {0:3.2f} %".format(self.__accu_percentage_capacity))
@@ -339,7 +339,7 @@ class PowerManagement:
         print("RPi will shutdown")
 
         if self.__signaling_device is not None:
-            self.__signaling_device.signal_system_alarm()
+            self.__signaling_device.signal_system_alarm("System shutdown in progress")
 
         self.__shutdown_in_progress = True
 

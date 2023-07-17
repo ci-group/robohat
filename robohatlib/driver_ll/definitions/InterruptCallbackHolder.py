@@ -85,7 +85,7 @@ class InterruptCallbackHolder:
                 self.__last_time_triggered = time.time_ns()
                 self.__callback(_io_nr)
 
-        # release have to be done, when interrupt is handled.. Otherwise no data can be read
+        # release have to be done, when interrupt is handled. Otherwise, no data can be read
         if self.__release_int_function is not None:
             self.__release_int_function(_io_nr)
 

@@ -15,7 +15,7 @@ class MultiColorLedDef:
 
     def __init__(self, _name, _red_def, _green_def, _blue_def):
         """
-        :param _name: name of this definition
+        :param _name: name
         :param _red_def: definition of the RED LED
         :param _green_def:  definition of the GREEN LED
         :param _blue_def: definition of the BLUE LED

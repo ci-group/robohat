@@ -22,7 +22,6 @@ INT_THS_H = 0x33
 
 _GAUSS_TO_UT = 100
 
-import time
 from typing import Tuple
 
 try:
@@ -59,8 +58,11 @@ class LIS3MDL:
     # --------------------------------------------------------------------------------------
     # --------------------------------------------------------------------------------------
 
-    def __init__(self, _i2cdevice):
-        self.__i2cdevice = _i2cdevice
+    def __init__(self, _i2c_device):
+        self.__i2c_device = _i2c_device
+
+        self.__full_scale_gaus = GAIN_16[1]
+        self.__gain_divider = GAIN_16[2]
 
     # --------------------------------------------------------------------------------------
     # --------------------------------------------------------------------------------------
@@ -68,12 +70,12 @@ class LIS3MDL:
     def init_LIS3MDL(self) -> None:
         print("init LIS3MDL")
 
-        self.__i2cdevice.i2c_write_register_byte(CTRL_REG1, 0x70)          # 0x70 = 0b01110000,, OM = 11 (ultra-high-performance mode for X and Y); DO = 100 (10 Hz ODR)
+        self.__i2c_device.i2c_write_register_byte(CTRL_REG1, 0x70)          # 0x70 = 0b01110000,, OM = 11 (ultra-high-performance mode for X and Y); DO = 100 (10 Hz ODR)
         self.set_gain(GAIN_4)                                               # 0x00 = 0b00000000,  FS = 00 (+/- 4 gauss full scale)
-        self.__i2cdevice.i2c_write_register_byte(CTRL_REG3, 0x00)          # 0x00 = 0b00000000,  MD = 00 (continuous-conversion mode)
-        self.__i2cdevice.i2c_write_register_byte(CTRL_REG4, 0x0C)          # 0x0C = 0b00001100,  OMZ = 11 (ultra-high-performance mode for Z)
+        self.__i2c_device.i2c_write_register_byte(CTRL_REG3, 0x00)          # 0x00 = 0b00000000,  MD = 00 (continuous-conversion mode)
+        self.__i2c_device.i2c_write_register_byte(CTRL_REG4, 0x0C)          # 0x0C = 0b00001100,  OMZ = 11 (ultra-high-performance mode for Z)
 
-        print("Found LIS3MDL with ID: " + hex(self.__i2cdevice.i2c_read_register_byte (WHO_AM_I) ) )
+        print("Found LIS3MDL with ID: " + hex(self.__i2c_device.i2c_read_register_byte (WHO_AM_I)))
 
     # --------------------------------------------------------------------------------------
     # --------------------------------------------------------------------------------------
@@ -81,8 +83,8 @@ class LIS3MDL:
 
     def set_gain(self, _selected_gain_array) -> None:
         ctrl_reg2_value = RoboUtil.update_byte(0x00, CTRL_REG2_GAIN_BITNR, _selected_gain_array[0])
-        self.__i2cdevice.i2c_write_register_byte(CTRL_REG2, ctrl_reg2_value)
-        self.__fullscalegaus = _selected_gain_array[1]
+        self.__i2c_device.i2c_write_register_byte(CTRL_REG2, ctrl_reg2_value)
+        self.__full_scale_gaus = _selected_gain_array[1]
         self.__gain_divider = _selected_gain_array[2]
         print(_selected_gain_array)
 
@@ -98,7 +100,8 @@ class LIS3MDL:
     # --------------------------------------------------------------------------------------
     # --------------------------------------------------------------------------------------
 
-    """The processed magnetometer sensor values.
+    """!
+    The processed magnetometer sensor values.
     A 3-tuple of X, Y, Z axis values in microteslas that are signed floats.
     """
     def get_magnetic_fields(self) -> Tuple[float, float, float]:        # Reads the 3 mag channels and stores them in vector m
@@ -106,7 +109,7 @@ class LIS3MDL:
         in_value_array[0] = (OUT_X_L | 0x80)
 
         return_value_array = bytearray(6)
-        self.__i2cdevice.write_to_then_read_from(in_value_array, return_value_array)
+        self.__i2c_device.write_to_then_read_from(in_value_array, return_value_array)
 
         x_raw = int(return_value_array[0] | return_value_array[1] << 8)
         y_raw = int(return_value_array[2] | return_value_array[3] << 8)
@@ -129,8 +132,8 @@ class LIS3MDL:
     # --------------------------------------------------------------------------------------
     # --------------------------------------------------------------------------------------
 
-    def get_fullscale_gaus(self) -> int:
-        return self.__fullscalegaus
+    def get_full_scale_gaus(self) -> int:
+        return self.__full_scale_gaus
 
     # --------------------------------------------------------------------------------------
     # --------------------------------------------------------------------------------------

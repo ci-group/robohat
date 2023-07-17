@@ -377,7 +377,7 @@ class LSM6DS33:
     # --------------------------------------------------------------------------------------
     # --------------------------------------------------------------------------------------
     # --------------------------------------------------------------------------------------
-
+    # noinspection PyMethodMayBeStatic
     def __convert_raw_acc_to_meters_per_second(self, raw_measurement: int) -> float:
         _gain_divider = 1000        # todo somthing usefull
         _GAUSS_TO_UT = 100          # todo somthing usefull
@@ -387,7 +387,7 @@ class LSM6DS33:
     # --------------------------------------------------------------------------------------
     # --------------------------------------------------------------------------------------
     # --------------------------------------------------------------------------------------
-
+    # noinspection PyMethodMayBeStatic
     def __convert_raw_gyro_to_meters_per_second(self, raw_measurement: int) -> float:
         _gain_divider = 1000  # todo somthing usefull
         _GAUSS_TO_UT = 100  # todo somthing usefull

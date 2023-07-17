@@ -104,14 +104,14 @@ class I2CDevice:
 
     def get_device_name(self) -> str:
         """!
-        Get device name
-        :return: name
+        Get device_name
+        :return: str
         """
         return self.__device_name
 
     def get_i2c_bus_nr(self) -> int:
         """!
-        Get bus nr
+        Get the i2c bus_nr
         @return: bus nr
         """
         return self.__i2c_bus_nr

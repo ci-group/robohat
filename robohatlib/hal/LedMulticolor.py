@@ -9,7 +9,7 @@ class LedMulticolor:
     def __init__(self, _io_handler: IOHandler, _multi_colorled_def):
         """!
         Top class of LedMulticolor.
-        This is driver for a multi-color led
+        This is driver for a multicolor led
         """
         self.__multi_colorled_def = _multi_colorled_def
 

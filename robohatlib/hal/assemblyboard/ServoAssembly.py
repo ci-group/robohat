@@ -260,7 +260,7 @@ class ServoAssembly:
 
     def get_io_expander_input(self, _pin_nr: int) -> ExpanderStatus | None:
         if self.__power_monitor_and_io is not None:
-            return self.__power_monitor_and_io.get_io_expander_output(_pin_nr)
+            return self.__power_monitor_and_io.get_io_expander_input(_pin_nr)
         else:
             return None
 
