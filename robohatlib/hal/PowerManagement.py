@@ -1,12 +1,15 @@
 try:
-    import time, threading
+    import time
+    import threading
     import statistics
     import subprocess
+    import os
     from time import sleep
     from robohatlib import Robohat_config
     from robohatlib.driver_ll.definitions.GPODef import GPODef
     from robohatlib.hal.HatADC import HatADC
     from robohatlib.driver_ll.IOHandler import IOHandler
+
 
 except ImportError:
     print("Failed to import needed dependencies for the Robohat class")
@@ -32,6 +35,7 @@ class PowerManagement:
         @param _shutdown_gpo_def: GPO definition of the power shutdown pin
         @return An instance of the PowerManagement class
         """
+        self.__io_handler = _io_handler
         self.__adc_hat = _adc_hat
         self.__shutdown_gpo = _io_handler.get_gpo(_shutdown_gpo_def)
 
@@ -200,6 +204,7 @@ class PowerManagement:
 
                 if self.__signaling_device is not None:
                     self.__signaling_device.signal_system_alarm()
+                    print("power fail alarm triggered")
 
                 if Robohat_config.ACCU_LOG_DISPLAY_WHEN_TO_LOW is True or self.__to_low_already_display is False:
                     print("accu capacity to low, only {0:3.2f} %".format(self.__accu_percentage_capacity))
@@ -295,6 +300,10 @@ class PowerManagement:
         self.__shutdown_gpo.set_high()
         sleep(5)                            # hold the GPIO pin for 5 seconds (shorter time will not shutdown the accu management board
         self.__shutdown_gpo.set_low()
+
+        self.__io_handler.io_shutdown()
+        os.system("sudo shutdown -h now")       # actual system call to shut down the RPi
+        print("RPi will shutdown")
 
         if self.__signaling_device is not None:
             self.__signaling_device.signal_system_alarm()

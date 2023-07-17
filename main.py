@@ -38,7 +38,7 @@ class Example:
                                main_config.servoassembly_2_config,
                                main_config.TOPBOARD_IOEXANDER_SW)
 
-        self.robohat.set_system_alarm_permitted(False)
+        # self.robohat.set_system_alarm_permitted(False)
 
         self.robohat.init(main_config.SERVOBOARD_1_DATAS_ARRAY,
                           main_config.SERVOBOARD_2_DATAS_ARRAY)

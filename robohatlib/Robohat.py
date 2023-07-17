@@ -28,8 +28,6 @@ try:
     from robohatlib.hal.assemblyboard.servo.ServoBoard import ServoBoard
     from robohatlib.hal.assemblyboard.ServoAssemblyConfig import ServoAssemblyConfig
     from robohatlib.hal.assemblyboard.servo.ServoData import ServoData
-
-    import os
     from time import sleep
 
     from typing import Tuple
@@ -753,10 +751,7 @@ class Robohat:
         """
 
         self.__power_management.shutdown_power()
-        sleep(1)
-        self.__io_handler.io_shutdown()
-        os.system("sudo shutdown -h now")       # actual system call to shut down the RPi
-        print("RPi will shutdown")
+
 
     # ------------------------------------------------------------------------------------
     def set_system_alarm_permitted(self, _state: bool) -> None:
@@ -812,7 +807,7 @@ class Robohat:
         @param _gpi_nr (int) mr of the callback gpio pin
         @return None
         """
-        print("_hat__io_expander_int_callback by: " + str(_gpi_nr))
+        #print("hat__io_expander_int_callback by: " + str(_gpi_nr))
         self.do_buzzer_beep()
 
     def __hat_io_expander_int_reset_routine(self, _gpi_nr: int) -> None:

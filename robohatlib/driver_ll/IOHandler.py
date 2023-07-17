@@ -214,7 +214,7 @@ class IOHandler:
 
         self.__check_spi_bus(spi_bus_nr)                    # will fail when bus has conflict with a gpio pin...
 
-        if self.__add_gpio_if_not_already_used_or_give_error(spi_cs, _spi_device_def.get_name()) is IOStatus.IO_FAILED:
+        if self.__add_gpio_if_not_already_used_or_give_error(spi_cs, "cs_" + _spi_device_def.get_name()) is IOStatus.IO_FAILED:
             raise Exception("Unable to claim SPI "+ str(spi_bus_nr) + ", CS-pin: '" + str(spi_cs) + "', pin is already in use")
 
         if len(self.__used_spi_devices) is not 0:
@@ -477,13 +477,13 @@ class IOHandler:
 
     def __check_spi_bus(self, _spi_bus_nr:int) -> None:
         """!
-        @param _spi_bus_nr:
+        Checks if SPI bus available. Raises an error when the system hasn't the requested SPI bus
+        @param _spi_bus_nr: wanted spi bus nr
         @return: None
         """
         if len(self.__available_spi_buses) is not 0:
             for spi_bus_nr_already_checked in self.__available_spi_buses:
                 if spi_bus_nr_already_checked is _spi_bus_nr:
-                    print("SPI already checked!!: " + str(_spi_bus_nr))
                     return
 
         if _spi_bus_nr is 0:
@@ -517,16 +517,16 @@ class IOHandler:
 
         if len(self.__used_gpio) is 0:
             self.__used_gpio.append(_gpio_nr)
-            print("claimed: gpio " + str(_gpio_nr) + " for: " + _name)
+            print("GPIO registered: " + str(_gpio_nr) + " for: " + _name)
             return IOStatus.IO_OK
 
         for gp in self.__used_gpio:
             if gp == _gpio_nr:
-                print("already claimed: gpio " + str(_gpio_nr) + " for: " + _name)
+                print("Already claimed: gpio " + str(_gpio_nr) + " for: " + _name)
                 return IOStatus.IO_FAILED
 
         self.__used_gpio.append(_gpio_nr)
-        print("claimed: gpio " + str(_gpio_nr) + " for: " + _name)
+        print("GPIO registered: " + str(_gpio_nr) + " for: " + _name)
         return IOStatus.IO_OK
 
     #--------------------------------------------------------------------------------------
@@ -534,10 +534,12 @@ class IOHandler:
     #--------------------------------------------------------------------------------------
 
     def __add_gpi_interrupt_or_return_a_already_registered_one(self, _gpi_interrupt_definition: GPIInterruptDef) -> GPI_LL_Interrupt | None:
-        # """!
-        # @param _gpi_interrupt_definition: definition of interrupt
-        # @return: GPI_LL_Interrupt or None (None is for future use)
-        # """
+        """!
+        Setup interrupt, and add new definition if already registered
+        @param _gpi_interrupt_definition: definition of interrupt
+        @return: GPI_LL_Interrupt or None (None is for future use)
+        """
+
         #print("checking interrupt: " + _gpi_interrupt_definition.get_name() )
 
         if len(self.__registered_gpi_ll_interrupts) is 0:

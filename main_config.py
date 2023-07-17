@@ -8,7 +8,7 @@ from robohatlib import Robohat_constants
 SERVOASSEMBLY_1_NAME = "servoassembly_0"                    # just a name for own reference
 SERVOASSEMBLY_1_SW1_PWM_ADDRESS = 0                         # sw1 value of the servo assembly
 SERVOASSEMBLY_1_SW2_POWER_GOOD_ADDRESS = 0                  # sw2 value of the servo assembly
-SERVOASSEMBLY_1_PWM_PLUG = Robohat_constants.PWMPLUG_P3      # connected port of the topboard
+SERVOASSEMBLY_1_PWM_PLUG = Robohat_constants.PWMPLUG_P3     # connected port of the tophat board, is actual the cs of the SPI bus
 SERVOBOARD_1_DATAS_ARRAY = [
                     ServoData(1, 500, 2500, 180, 0, 72.2058435743876, -22.8429203374794),
                     ServoData(2, 500, 2500, 180, 0, 72.2058435743876, -22.8429203374794),
@@ -38,7 +38,7 @@ servoassembly_1_config = ServoAssemblyConfig(SERVOASSEMBLY_1_NAME,
 SERVOASSEMBLY_2_NAME = "servoassembly_1"                    # just a name for own reference
 SERVOASSEMBLY_2_SW1_PWM_ADDRESS = 1                         # sw1 value of the servo assembly
 SERVOASSEMBLY_2_SW2_POWER_GOOD_ADDRESS = 1                  # sw2 value of the servo assembly
-SERVOASSEMBLY_2_PWMPLUG = Robohat_constants.PWMPLUG_P4      # connected port of the topboard
+SERVOASSEMBLY_2_PWMPLUG = Robohat_constants.PWMPLUG_P4      # connected port of the tophat board, is actual the cs of the SPI bus
 SERVOBOARD_2_DATAS_ARRAY = [
                     ServoData(1, 500, 2500, 180, 0, 72.2058435743876, -22.0429203374794),
                     ServoData(2, 500, 2500, 180, 0, 72.2058435743876, -22.8429203374794),
