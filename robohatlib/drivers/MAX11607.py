@@ -62,7 +62,7 @@ class MAX11607:
         @return analog voltage in an array
         """
 
-        adc_code_array = bytearray(4)
+        adc_code_array = bytearray(8)
 
         conf_data = 0x01 | 0x06                                                 # single ended, multiple channel (0 untill last), last channel is AIN3 (channel 4)
 

@@ -117,7 +117,8 @@ class PowerManagement:
         """
 
         adc_accu_voltage = self.__adc_hat.get_voltage_of_accu()
-        calculated_accu_voltage = adc_accu_voltage * Robohat_config.ACCU_VOLTAGE_ADC_MULTIPLIER
+
+        calculated_accu_voltage = (adc_accu_voltage * Robohat_config.ACCU_VOLTAGE_ADC_FORMULA_A) + Robohat_config.ACCU_VOLTAGE_ADC_FORMULA_B
         self.__insert_power_voltage(calculated_accu_voltage)
         self.__start_timer_power_management()
 
@@ -176,12 +177,13 @@ class PowerManagement:
     def __insert_power_voltage(self, _raw_accu_voltage: float) -> None:
         """!
         Puts the voltage in a median filter.
-        Checks if accu voltage is below a threshold.
-        When to low alarm and a message will appear
+        Checks if accu voltage (out of the filter) is below the threshold (ACCU_VOLTAGE_TO_LOW_THRESHOLD).
+        When the voltage is 'too low' an alarm and a message will appear
 
         @param _raw_accu_voltage: accu voltage in volt
         @return: None
         """
+
 
         # shift new value in array
         for index in range(1, ACCU_CHECK_SIZE_OF_WINDOW, 1):
@@ -194,8 +196,9 @@ class PowerManagement:
             return
 
         self.__counter_prevent_startup_power_fail = ACCU_CHECK_SIZE_OF_WINDOW    # prevent overrun
-
         self.__accu_voltage = statistics.median(map(float, self.__raw_accu_voltages_array)) # create median
+
+        # print("voltage: " + str(self.__accu_voltage ) )
 
         if self.__accu_voltage > 0.5:
             self.__accu_percentage_capacity = self.__calculate_percentage_from_voltage(self.__accu_voltage)
@@ -204,7 +207,6 @@ class PowerManagement:
 
                 if self.__signaling_device is not None:
                     self.__signaling_device.signal_system_alarm()
-                    print("power fail alarm triggered")
 
                 if Robohat_config.ACCU_LOG_DISPLAY_WHEN_TO_LOW is True or self.__to_low_already_display is False:
                     print("accu capacity to low, only {0:3.2f} %".format(self.__accu_percentage_capacity))

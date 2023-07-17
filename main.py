@@ -134,7 +134,7 @@ class Example:
         print("get lib builddate                              displays date when library was build")
         print("get lib version                                displays version of the library")
 
-        print("get hat adc [channel]                          get hat adc value (channel 4 is divided accu voltage")
+        print("get hat adc [channel]                          get hat adc value (channel 3 is divided accu voltage")
         print("get hat adc all                                get all the hat adc values")
         print("set hat io dir [pin nr] [in|out]               set the direction of an io pin of a servo board")
         print("get hat io dir [pin nr]                        get the direction of an io pin of a servo board")
@@ -162,7 +162,7 @@ class Example:
     # --------------------------------------------------------------------------------------
     # --------------------------------------------------------------------------------------
 
-    def set(self, _data_in:str) -> None:
+    def process_set(self, _data_in:str) -> None:
         """!
         Will handle console request with commando 'set'
         @return: None
@@ -251,7 +251,7 @@ class Example:
 # --------------------------------------------------------------------------------------
 # --------------------------------------------------------------------------------------
 
-    def get(self, _data_in:str) -> None:
+    def process_get(self, _data_in:str) -> None:
         """!
         Will handle console request with commando 'get'
         @return: None
@@ -394,7 +394,7 @@ class Example:
     # --------------------------------------------------------------------------------------
     # --------------------------------------------------------------------------------------
 
-    def do(self, _data_in:str) -> None:
+    def process_do(self, _data_in:str) -> None:
         """!
         Will handle console request with commando 'do'
         @return: None
@@ -462,13 +462,13 @@ class Example:
             self.shutdown_power()
 
         elif _command.startswith("set"):
-            self.set(_command)
+            self.process_set(_command)
 
         elif _command.startswith("get"):
-            self.get(_command)
+            self.process_get(_command)
 
         elif _command.startswith("do"):
-            self.do(_command)
+            self.process_do(_command)
 
         elif _command == "are servos sleeping":
             value = self.robohat.is_servo_sleeping()
