@@ -17,6 +17,7 @@ class IOExpanderDef:
         @param _callbackholder:
         """
 
+        self.__basename = _name
         self.__name = _name
         self.__i2c_device_definition = _i2c_device_definition
         self.__gpio_pin = _gpio_pin
@@ -33,6 +34,17 @@ class IOExpanderDef:
         @return: name
         """
         return self.__name
+
+    # --------------------------------------------------------------------------------------
+    # --------------------------------------------------------------------------------------
+    # --------------------------------------------------------------------------------------
+
+    def get_basename(self) -> str:
+        """!
+        Get original name created at constructor
+        @return: basename
+        """
+        return self.__basename
 
     # --------------------------------------------------------------------------------------
     # --------------------------------------------------------------------------------------

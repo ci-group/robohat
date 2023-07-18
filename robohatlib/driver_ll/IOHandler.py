@@ -298,6 +298,19 @@ class IOHandler:
 
     #--------------------------------------------------------------------------------------
 
+    def start_interrupts(self) -> None:
+        """!
+        Start the interrupts
+        @return: None
+        """
+        if len(self.__registered_gpi_ll_interrupts) is 0:
+                return
+
+        for interrupt in self.__registered_gpi_ll_interrupts:
+            interrupt.start()
+
+    #--------------------------------------------------------------------------------------
+
     def get_pwm(self, _gpo_pwm_definition: GPOPWMDef) -> GPOPWM_LL_Driver:
         """!
         Get PWM

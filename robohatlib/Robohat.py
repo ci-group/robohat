@@ -119,6 +119,7 @@ class Robohat:
         if self.__servo_assembly_2.is_board_avaible() is True:
             self.__servo_assembly_2.add_signaling_device(self.__buzzer)
         else:
+            print("did not fpund board 2")
             self.__servo_assembly_2 = None              # if not available make None, so class is not accessible
 
 
@@ -154,6 +155,8 @@ class Robohat:
 
         if self.__servo_assembly_2 is not None:
             self.__servo_assembly_2.init_servo_assembly(_servo_board_1_datas_array)
+
+        self.__io_handler.start_interrupts()
 
     # --------------------------------------------------------------------------------------
 

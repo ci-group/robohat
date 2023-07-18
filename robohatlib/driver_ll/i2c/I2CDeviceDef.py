@@ -13,10 +13,22 @@ class I2CDeviceDef:
         @param _i2c_offset_address:  I2C offset address
         """
 
+        self.__basename = _name
         self.__name = _name
         self.__i2c_bus_nr = _i2c_bus_nr
         self.__i2c_base_address = _i2c_base_address
         self.__i2c_offset_address = _i2c_offset_address
+
+    # --------------------------------------------------------------------------------------
+
+    # --------------------------------------------------------------------------------------
+
+    def get_basename(self) -> str:
+        """!
+        Get original name created at constructor
+        @return: basename
+        """
+        return self.__basename
 
     # --------------------------------------------------------------------------------------
 

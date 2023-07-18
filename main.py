@@ -147,12 +147,12 @@ class Example:
         print("get lib builddate                              displays date when library was build")
         print("get lib version                                displays version of the library")
 
-        print("get hat adc [channel]                          get hat adc value (channel 3 is divided accu voltage")
-        print("get hat adc all                                get all the hat adc values")
-        print("set hat io dir [pin nr] [in|out]               set the direction of an io pin of a servo board")
-        print("get hat io dir [pin nr]                        get the direction of an io pin of a servo board")
-        print("set hat io out [pin nr] [0|1]                  set the pin value of an io pin of a servo board")
-        print("get hat io in [pin nr]                         get the pin value of an io pin of a servo board")
+        print("get topboard adc [channel]                     get topboard adc value (channel 3 is divided accu voltage")
+        print("get topboard adc all                           get all the topboard adc values")
+        print("set topboard io dir [pin nr] [in|out]          set the direction of an io pin on the topboard")
+        print("get topboard io dir [pin nr]                   get the direction of an io pin on the topboard")
+        print("set topboard io out [pin nr] [0|1]             set the pin value of an io pin on the topboard")
+        print("get topboard io in [pin nr]                    get the pin value of an io pin on the topboard")
 
         print("get accu voltage                               get voltage of accu")
         print("get accu capacity                              get capacity of accu")
@@ -214,7 +214,7 @@ class Example:
             else:
                 print("syntax error, set servo command not found")
 # ------------------------------------------------------------------------------
-        elif command == "hat":
+        elif command == "topboard":
             sub_command = data_in_array[2]
             if sub_command == "io":
                io_command = int(data_in_array[3])

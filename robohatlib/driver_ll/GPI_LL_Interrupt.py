@@ -35,7 +35,7 @@ class GPI_LL_Interrupt:
 
         self.__registered_callback_holders = []
 
-        self.int_is_active = False
+        self.__int_is_active = False
         self.set_event_detection()
 
     # --------------------------------------------------------------------------------------
@@ -52,7 +52,7 @@ class GPI_LL_Interrupt:
         GPIO.add_event_detect(self.__gpio_pin, GPIO.BOTH, self.__callback_function, 1)
 
         self.add_callbackholder(self.__interrupt_definition.get_callbackholder())
-        self.int_is_active = True
+        #self.int_is_active = True
 
     # --------------------------------------------------------------------------------------
     # --------------------------------------------------------------------------------------
@@ -63,9 +63,21 @@ class GPI_LL_Interrupt:
         turns off the event detection
         @return: None
         """
-        if self.int_is_active is True:
+        if self.__int_is_active is True:
             GPIO.remove_event_detect(self.__gpio_pin)
-            self.int_is_active = False
+            self.__int_is_active = False
+
+    # --------------------------------------------------------------------------------------
+    # --------------------------------------------------------------------------------------
+    # --------------------------------------------------------------------------------------
+
+    def start(self) -> None:
+        """!
+        Starts the interrupt
+        @return: None
+        """
+
+        self.__int_is_active = True
 
     # --------------------------------------------------------------------------------------
     # --------------------------------------------------------------------------------------
@@ -106,7 +118,6 @@ class GPI_LL_Interrupt:
             if callback_out_of_list is _callbackholder:
                 return
 
-        print("new callback")
         self.__registered_callback_holders.append(_callbackholder)
 
     # --------------------------------------------------------------------------------------
@@ -137,7 +148,8 @@ class GPI_LL_Interrupt:
             return
 
         for callbackholder_out_of_list in self.__registered_callback_holders:
-            callbackholder_out_of_list.execute_callback(_pin_nr)
+            if self.__int_is_active is True:
+                callbackholder_out_of_list.execute_callback(_pin_nr)
 
     # --------------------------------------------------------------------------------------
     # --------------------------------------------------------------------------------------

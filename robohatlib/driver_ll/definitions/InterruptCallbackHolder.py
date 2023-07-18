@@ -59,6 +59,7 @@ class InterruptCallbackHolder:
     #--------------------------------------------------------------------------------------
     #--------------------------------------------------------------------------------------
     #--------------------------------------------------------------------------------------
+
     def set_time_between_new_possible_trigger_in_ms(self, _time_between_new_possible_trigger:int = 0) -> None:
         """!
         The minimal time between 2 triggers. 0 = default
