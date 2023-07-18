@@ -143,7 +143,7 @@ class PowerMonitorAndIO:
     #todo check in io-pin is an output
     def set_io_expander_output(self, _io_nr:int, _value: ExpanderStatus) -> None:
         """!
-        Set the output of a output pin, onto the desired value
+        Set the output of an output pin, onto the desired value
         @param _io_nr: wanted io nr
         @param _value wanted value
         @return None
