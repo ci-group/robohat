@@ -1,6 +1,6 @@
 from __future__ import absolute_import, division, print_function, unicode_literals
 
-import time
+
 
 try:
     from robohatlib.Robohat import Robohat
@@ -9,8 +9,11 @@ try:
     from robohatlib.hal.datastructure.Color import Color
     from robohatlib.hal.datastructure.ExpanderDirection import ExpanderDir
     from robohatlib.hal.datastructure.ExpanderStatus import ExpanderStatus
-    import sys
     import main_config
+    import sys
+    import os
+    import time
+
 
 except ImportError:
     print("Failed to import Robohat, or failed to import all dependencies")
@@ -22,7 +25,17 @@ except ImportError:
 
 def main():
     example = Example()
-    example.start_example()
+
+    try:
+        example.start_example()
+    except KeyboardInterrupt:
+        print('Interrupted')
+        try:
+            sys.exit(130)
+        except SystemExit:
+            example.exit_program()
+
+
 
     print("Exit")
 
@@ -497,3 +510,7 @@ class Example:
 
 if __name__ == "__main__":
     main()
+
+    # --------------------------------------------------------------------------------------
+    # --------------------------------------------------------------------------------------
+    # --------------------------------------------------------------------------------------

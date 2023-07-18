@@ -169,6 +169,18 @@ class IOHandler:
     #--------------------------------------------------------------------------------------
     #--------------------------------------------------------------------------------------
 
+    def is_i2c_device_available(self, _i2c_device_def: I2CDeviceDef) -> bool:
+        """
+        Returns True when i2c device with same bus and same address is present, before registering the device
+        @param _i2c_device_def: definition of the I2C device
+        @return: bool
+        """
+        return self.__is_i2c_slot_available(_i2c_device_def)
+
+    #--------------------------------------------------------------------------------------
+    #--------------------------------------------------------------------------------------
+    #--------------------------------------------------------------------------------------
+
     def get_i2c_device(self, _i2c_device_def: I2CDeviceDef) -> I2CDevice | None:
         """!
         allocates the I2C device, when available on the I2C bus (so should be seen in the scan).

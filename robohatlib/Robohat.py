@@ -121,6 +121,10 @@ class Robohat:
         else:
             self.__servo_assembly_2 = None              # if not available make None, so class is not accessible
 
+
+        if self.__servo_assembly_1 is None and self.__servo_assembly_2 is None:
+            print("Error, no assembly-boards are available")
+
     # --------------------------------------------------------------------------------------
 
     def init(self, _servo_board_1_datas_array: [], _servo_board_2_datas_array: []) -> None:
@@ -171,7 +175,7 @@ class Robohat:
 
         self.__led.exit_program()
         self.__buzzer.exit_program()
-        self.__power_management.exit_program()
+        self.__power_management.exit_program(False)
 
         self.__io_handler.exit_program()
 

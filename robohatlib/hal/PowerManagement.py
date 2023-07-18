@@ -74,13 +74,13 @@ class PowerManagement:
     # --------------------------------------------------------------------------------------
     # --------------------------------------------------------------------------------------
 
-    def exit_program(self) -> None:
+    def exit_program(self, dp_msg:bool = True) -> None:
         """!
         Cleans up, when user want to shut down (for future use)
 
         @return: None
         """
-        self.stop_timer_power_management()
+        self.__stop_timer_power_management(dp_msg)
 
     # --------------------------------------------------------------------------------------
     # --------------------------------------------------------------------------------------
@@ -100,14 +100,16 @@ class PowerManagement:
     # --------------------------------------------------------------------------------------
     # --------------------------------------------------------------------------------------
 
-    def stop_timer_power_management(self) -> None:
+    def __stop_timer_power_management(self, do_msg: bool = True) -> None:
         """!
 
         Stops monitoring the accu capacity
         @return: None
         """
         self.__timerIsRunning = False
-        print("Warning: accu monitor disabled")
+
+        if do_msg is True:
+            print("Warning: accu monitor disabled")
 
     # --------------------------------------------------------------------------------------
     # --------------------------------------------------------------------------------------
