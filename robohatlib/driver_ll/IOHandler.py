@@ -115,7 +115,9 @@ class IOHandler:
         @param:_silent when True, not data is displayed to console
         @return: None
         """
- 
+
+        _silent = False
+
         RoboUtil.print_depending_switch(_silent, "\nScanning all I2C busses....")
 
         # I2C bus 0 not available
@@ -169,12 +171,13 @@ class IOHandler:
     #--------------------------------------------------------------------------------------
     #--------------------------------------------------------------------------------------
 
-    def is_i2c_device_available(self, _i2c_device_def: I2CDeviceDef) -> bool:
-        """
+    def is_i2c_device_detected(self, _i2c_device_def: I2CDeviceDef) -> bool:
+        """!
         Returns True when i2c device with same bus and same address is present, before registering the device
         @param _i2c_device_def: definition of the I2C device
         @return: bool
         """
+
         return self.__is_i2c_slot_available(_i2c_device_def)
 
     #--------------------------------------------------------------------------------------
@@ -366,7 +369,7 @@ class IOHandler:
         """
 
         if self.__i2c_bus_is_scanned is False:  # there should always be scanned
-            raise Exception("Fatal error, an I2C scan should always be done, before checking if an device is available")
+            self.__pre_scan_i2c_bus()
 
         if len(self.__detected_i2c_devices) is not 0:
             for i2c_device_from_list in self.__detected_i2c_devices:

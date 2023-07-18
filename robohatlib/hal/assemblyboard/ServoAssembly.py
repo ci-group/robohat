@@ -40,7 +40,7 @@ class ServoAssembly:
 
         #----------------------------
         i2c_def_pwm = I2CDeviceDef("pwm_" + _servo_config.get_name(), _i2c_bus_nr, BASE_ADDRESS_PCA9685, _servo_config.get_sw1_pwm_address())
-        if _io_handler.is_i2c_device_available is True:                     # check if the PWM controllers is present on the I2C bus.. if not.. no assemblyboard
+        if _io_handler.is_i2c_device_detected(i2c_def_pwm) is True:                     # check if the PWM controllers is present on the I2C bus.. if not.. no assemblyboard
             i2c_device_pwm = _io_handler.get_i2c_device(i2c_def_pwm)
 
             spi_def_adc = SPIDeviceDef("adc_" + _servo_config.get_name(), _spi_bus_nr, _servo_config.get_cs_adc_angle_readout())
