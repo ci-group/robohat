@@ -1,3 +1,4 @@
+#!/usr/bin/python3
 try:
     import threading
 except ImportError:
@@ -18,7 +19,8 @@ except ImportError:
 class I2CHandler:
     def __init__(self, _bus_nr:int):
         """!
-        @:param _bus_nr bus nr
+        Constructor
+        @param _bus_nr bus nr
         """
 
         self._i2c_bus = SMBus(_bus_nr)
@@ -30,7 +32,8 @@ class I2CHandler:
 
     def __enter__(self):
         """!
-        @return: ?
+        Will enter when class is used
+        Locks the I2C bus when using i
         """
         if threading is not None:
             self._lock.acquire()
@@ -41,7 +44,9 @@ class I2CHandler:
 
     def __exit__(self, exc_type, exc_value, traceback):
         """!
-        Destructor
+        Will enter when function is left
+        Releasing the I2C bus when leaving it
+
         @param exc_type: ?
         @param exc_value: ?
         @param traceback: ?

@@ -1,3 +1,4 @@
+#!/usr/bin/python3
 class MCPInterruptDef:
     """!
     Definition of a MCPInterrupt device
@@ -30,8 +31,8 @@ class MCPInterruptDef:
     # --------------------------------------------------------------------------------------
 
     def get_gpio_pin(self) -> int:
-        """
-
+        """!
+        Returns the gpio pin nr
         @return: GPIO pin nr
         """
         return self.__gpio_pin

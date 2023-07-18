@@ -8,7 +8,7 @@ except ImportError:
 
 class IOExpanderDef:
 
-    def __init__(self, _name, _i2c_device_definition:I2CDeviceDef, _gpio_pin:int, _interrupt_settings, _callbackholder : InterruptCallbackHolder = None):
+    def __init__(self, _name, _i2c_device_definition: I2CDeviceDef, _gpio_pin:int, _interrupt_settings: [], _callbackholder : InterruptCallbackHolder = None):
         """!
         @param _name:
         @param _i2c_device_definition:
@@ -16,6 +16,7 @@ class IOExpanderDef:
         @param _interrupt_settings:
         @param _callbackholder:
         """
+
         self.__name = _name
         self.__i2c_device_definition = _i2c_device_definition
         self.__gpio_pin = _gpio_pin
@@ -37,11 +38,12 @@ class IOExpanderDef:
     # --------------------------------------------------------------------------------------
     # --------------------------------------------------------------------------------------
     def set_name(self, _name) -> None:
-        """
+        """!
         Set new name of definition
         @param _name:
         @return: None
         """
+
         self.__name = _name
 
     # --------------------------------------------------------------------------------------
@@ -53,6 +55,7 @@ class IOExpanderDef:
         returns i2c_device_definition
         @return: i2c_device_definition
         """
+
         return self.__i2c_device_definition
 
     # --------------------------------------------------------------------------------------
@@ -64,6 +67,7 @@ class IOExpanderDef:
         Returns gpio pin nr
         @return gpio pin nr
         """
+
         return self.__gpio_pin
 
     # --------------------------------------------------------------------------------------

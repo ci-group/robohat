@@ -150,7 +150,7 @@ class ServoBoard:
         """!
         @return voltages of the potentiometer of all the servos in volt
         """
-        return self.__servo_adc.get_readout_adc_mutiple_channels()
+        return self.__servo_adc.get_readout_adc_multiple_channels()
 
     #--------------------------------------------------------------------------------------
     #--------------------------------------------------------------------------------------

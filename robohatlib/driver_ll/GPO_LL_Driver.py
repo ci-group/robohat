@@ -1,4 +1,4 @@
-
+#!/usr/bin/python3
 try:
     import RPi.GPIO as GPIO
     from robohatlib.driver_ll.constants.GPO_Stat import GPOStat
@@ -8,8 +8,15 @@ except ImportError:
 
 
 class GPO_LL_Driver:
+    """
+    Driver of a GPIO output
+    """
 
     def __init__(self, _gpo_definition:GPODef):
+        """
+        Constructor
+        @param _gpo_definition: definition of this output pin
+        """
         self.__gpo_definition = _gpo_definition
         GPIO.setmode(GPIO.BCM)
         GPIO.setup(self.__gpo_definition.get_gpo_pin_nr(), GPIO.OUT)
@@ -21,7 +28,7 @@ class GPO_LL_Driver:
     # --------------------------------------------------------------------------------------
 
     def set_low(self) -> None:
-        """
+        """!
         Set output to low
 
         @return: None
@@ -36,7 +43,7 @@ class GPO_LL_Driver:
     # --------------------------------------------------------------------------------------
 
     def set_high(self) -> None:
-        """
+        """!
         Set output to high
 
         @return: None
@@ -51,7 +58,7 @@ class GPO_LL_Driver:
     # --------------------------------------------------------------------------------------
 
     def set_status(self, _stat) -> None:
-        """
+        """!
         Set status depending parameter
 
         @stat status
@@ -69,7 +76,7 @@ class GPO_LL_Driver:
     # --------------------------------------------------------------------------------------
 
     def get_status(self) -> GPOStat:
-        """
+        """!
         Give current status
 
         @return: GPOStat

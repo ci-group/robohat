@@ -8,6 +8,7 @@ try:
     from robohatlib.driver_ll.i2c.I2CBusDef import I2CBusDef
     from robohatlib.driver_ll.spi.SPIBusDef import SPIBusDef
     from robohatlib.driver_ll.definitions.GPODef import GPODef
+    from robohatlib.driver_ll.definitions.LedDef import LedDef
     from robohatlib.driver_ll.definitions.MultiColorLedDef import MultiColorLedDef
     from robohatlib.hal.definitions.BuzzerDef import BuzzerDef
     from robohatlib.driver_ll.definitions.SerialDef import SerialDef
@@ -21,33 +22,32 @@ Configuration for the Robohat lib. These settings aren't ment to be altered by t
 do not alter
 """
 
-"""!
-Some system settings
-"""
 
+"""!
+General settings
+"""
 DEBUG = False                                       # by changing this value to TRUE, more debug msg will be printed on the console
 
-
+"""!
+Accu settings
+"""
 ALARM_PERMITTED = True                              # sound an alarm when a system alert is present, such as to low accu capacity
 ALARM_TIMEOUT_IN_SEC = 300                          # timeout between alarm
-INIT_BEEP_PERMITTED = False                          # beep when started
+INIT_BEEP_PERMITTED = False                         # beep when started if True
 
 
+ACCU_INTERVAL_TIME_IN_SECONDS = 1                   # time between accu monitoring
+#ACCU_VOLTAGE_WHEN_FULL = 12.6
 
+ACCU_VOLTAGE_TO_LOW_THRESHOLD = 11.06               # threshold. below this value, the accu voltage is too low
+ACCU_VOLTAGE_TO_HIGH_THRESHOLD = 12.70              # threshold, above this value, the accu voltage is too high
 
+ACCU_VOLTAGE_ADC_FORMULA_A = 4.85533606358714       # part A of formula, form adc voltage to actual accu voltage (y = Ax + B)
+ACCU_VOLTAGE_ADC_FORMULA_B = -0.512839675475041     # part B of formula, form adc voltage to actual accu voltage (y = Ax + B)
+ACCU_LOG_DISPLAY_WHEN_TO_LOW = False                # keep on logging when accu voltage is too low
+ACCU_LOG_DISPLAY_WHEN_TO_HIGH = False               # keep on logging when accu voltage is too high
 
-ACCU_INTERVAL_TIME_IN_SECONDS = 1
-ACCU_VOLTAGE_WHEN_FULL = 12.6
-
-ACCU_VOLTAGE_TO_LOW_THRESHOLD = 11.06
-ACCU_VOLTAGE_TO_HIGH_THRESHOLD = 12.70
-
-ACCU_VOLTAGE_ADC_FORMULA_A = 4.85533606358714
-ACCU_VOLTAGE_ADC_FORMULA_B = -0.512839675475041
-ACCU_LOG_DISPLAY_WHEN_TO_LOW = False
-ACCU_LOG_DISPLAY_WHEN_TO_HIGH = False
-
-# Voltage to percentage array... depending on accu used
+# accu voltage to accu percentage array... depending on accu used
 ACCU_VOLTAGE_TO_PERCENTAGE_ARRAY =  [
                                     [9.6,	0],
                                     [9.82,	1],
@@ -77,23 +77,30 @@ ACCU_VOLTAGE_TO_PERCENTAGE_ARRAY =  [
 Device settings
 """
 
-POWER_SHUTDOWN_GPO_DEF = GPODef("shutdown", 27)                                  # definition of the shutdown GPIO pin
+POWER_SHUTDOWN_GPO_DEF = GPODef("shutdown", 27)                                 # definition of the shutdown GPIO pin, The pin which send the signal to the power monitor PCB
 
-BUZZER_DEF = BuzzerDef("buzzer", 18, 1000, 50)      # definition for the buzzer, GPIO nr, initial frequency and initial duty cycle
-SERIAL_DEF = SerialDef("debug_port", 1)             # definition for the serial port. (todo) AT THIS MOMENT NOT IMPLEMENTED
+BUZZER_DEF = BuzzerDef("buzzer", 18, 1000, 50)                                  # definition for the buzzer, GPIO nr, initial frequency and initial duty cycle
+SERIAL_DEF = SerialDef("debug_port", 1)                                         # definition for the serial port. (todo) AT THIS MOMENT NOT IMPLEMENTED, we are using the normal console
 
-LEDRED_GPO_DEF = GPODef("led_red", 5)               # definition of the multicolor LED, the RED part, GPIO nr
-LEDGREEN_GPO_DEF = GPODef("led_green", 6)           # definition of the multicolor LED, the GREEN part, GPIO nr
-LEDBLUE_GPO_DEF = GPODef("led_blue", 26)            # definition of the multicolor LED, the BLUE part, GPIO nr
-STATUSLED_DEF = MultiColorLedDef("statusled", LEDRED_GPO_DEF, LEDGREEN_GPO_DEF, LEDBLUE_GPO_DEF)    # definition of the multicolor LED
+LED_RED_GPO_DEF = LedDef("led_red", 5)                                          # definition of the RED LED (which is a part of the multicolor LED), the GPIO nr
+LED_GREEN_GPO_DEF = LedDef("led_green", 6)                                      # definition of the GREEN LED (which is a part of the multicolor LED), the GPIO nr
+LED_BLUE_GPO_DEF = LedDef("led_blue", 26)                                       # definition of the BLUE LED (which is a part of the multicolor LED), the GPIO nr
+STATUS_LED_DEF = MultiColorLedDef("status_led",
+                                  LED_RED_GPO_DEF,
+                                  LED_GREEN_GPO_DEF,
+                                  LED_BLUE_GPO_DEF)                             # definition of the multicolor LED
 
-MINIMU9_LIS3MDL_I2C_DEF = I2CDeviceDef("imu_lis3mdl", 5, 0x1e)                    # definition of the IMU, LLS3MDL part, i2c bus5, address 0x1e
-MINIMU9_LSM6DS33_I2C_DEF = I2CDeviceDef("imu_lsmds33", 5, 0x6b)                   # definition of the IMU, LSM6DS33 part, i2c bus5, address 0x6b
-IMU_DEF = IMUDef("imu", MINIMU9_LIS3MDL_I2C_DEF, MINIMU9_LSM6DS33_I2C_DEF)      # definition of the IMU
+IMU_LIS3MDL_I2C_DEF = I2CDeviceDef("imu_lis3mdl", 5, 0x1e)                      # definition of a part of the IMU, the LLS3MDL part, i2c bus5, address 0x1e
+IMU_LSM6DS33_I2C_DEF = I2CDeviceDef("imu_lsmds33", 5, 0x6b)                     # definition of a part of the IMU, the LSM6DS33 part, i2c bus5, address 0x6b
+IMU_DEF = IMUDef("imu", IMU_LIS3MDL_I2C_DEF, IMU_LSM6DS33_I2C_DEF)              # definition of the IMU
 
-HAT_ADC_I2C_DEF = I2CDeviceDef("hat_adc", 5, 0x34)                            # definition of the TOPBOARD adc (is also used for power monitor) i2c bus5, address 0x34
-HAT_IO_EXPANDER_I2C_DEF = I2CDeviceDef("hat_io_expander", 1, 0x20)          # i2c bus1, address 0x2
-HAT_IO_EXPANDER_INTERRUPT_SETTINGS = [
+
+
+
+TOPBOARD_ADC_I2C_DEF = I2CDeviceDef("topboard_adc", 5, 0x34)                    # definition of the TOPBOARD adc (is also used for power monitor) i2c bus5, address 0x34
+TOPBOARD_IO_EXPANDER_I2C_DEF = I2CDeviceDef("topboard_io_expander", 1, 0x20)    # i2c bus1, i2c base address 0x20
+
+TOPBOARD_IO_EXPANDER_INTERRUPT_SETTINGS = [
     McpInitStruct(0, GpioDirection.GPIO_INPUT, InterruptTypes.INT_RISING),
     McpInitStruct(1, GpioDirection.GPIO_INPUT, InterruptTypes.INT_RISING),
     McpInitStruct(2, GpioDirection.GPIO_INPUT, InterruptTypes.INT_RISING),
@@ -102,23 +109,26 @@ HAT_IO_EXPANDER_INTERRUPT_SETTINGS = [
     McpInitStruct(5, GpioDirection.GPIO_INPUT, InterruptTypes.INT_RISING),
     McpInitStruct(6, GpioDirection.GPIO_INPUT, InterruptTypes.INT_RISING),
     McpInitStruct(7, GpioDirection.GPIO_INPUT, InterruptTypes.INT_RISING),
-    ]
+    ]                                                                           # interrupt settings of the IO expander, for each IO pin
 
-HAT_INTERRUPT_GPI = 24
-HAT_IO_EXPANDER_DEF = IOExpanderDef("hat_io_expander", HAT_IO_EXPANDER_I2C_DEF, HAT_INTERRUPT_GPI, HAT_IO_EXPANDER_INTERRUPT_SETTINGS)
+TOPBOARD_INTERRUPT_GPI = 24                                                     # rpi-gpio pin which is the interrupt pin of the topboard
+TOPBOARD_IO_EXPANDER_DEF = IOExpanderDef("topboard_io_expander",
+                                         TOPBOARD_IO_EXPANDER_I2C_DEF,
+                                         TOPBOARD_INTERRUPT_GPI,
+                                         TOPBOARD_IO_EXPANDER_INTERRUPT_SETTINGS) # io expander definition of the topboard
 
 # -------------------
 """!
 Servo assembly board settings
 """
-SERVOASSEMBLY_1_I2C_BUS = 1
-SERVOASSEMBLY_1_SPI_BUS = 0
+SERVOASSEMBLY_1_I2C_BUS = 1                                                         # I2C bus nr of servo assembly 1, connected by P3
+SERVOASSEMBLY_1_SPI_BUS = 0                                                         # SPI bus nr of servo assembly 1, connected by P3
 
-SERVOASSEMBLY_2_I2C_BUS = 1
-SERVOASSEMBLY_2_SPI_BUS = 0
+SERVOASSEMBLY_2_I2C_BUS = 1                                                         # I2C bus nr of servo assembly 2, connected by P4
+SERVOASSEMBLY_2_SPI_BUS = 0                                                         # SPI bus nr of servo assembly 2, connected by P4
 
 SERVOASSEMBLY_INTERRUPT_GPI = 4
-SERVOASSEMBLY_I2C_DEF = I2CDeviceDef("io_expander", 1, 0x20)          # i2c bus1, address 0x20
+SERVOASSEMBLY_I2C_DEF = I2CDeviceDef("io_expander", 1, 0x20)                        # i2c bus1, i2c base address 0x20
 
 SERVOASSEMBLY_INTERRUPT_SETTINGS = [
     McpInitStruct(0, GpioDirection.GPIO_INPUT, InterruptTypes.INT_RISING),
@@ -129,21 +139,24 @@ SERVOASSEMBLY_INTERRUPT_SETTINGS = [
     McpInitStruct(5, GpioDirection.GPIO_INPUT, InterruptTypes.INT_RISING),
     McpInitStruct(6, GpioDirection.GPIO_INPUT, InterruptTypes.INT_RISING),
     McpInitStruct(7, GpioDirection.GPIO_INPUT, InterruptTypes.INT_RISING),
-    ]
+    ]                                                                               # interrupt settings of the IO expander, for each IO pin
 
-SERVOASSEMBLY_EXPANDER_DEF = IOExpanderDef("power_monitor_expander", SERVOASSEMBLY_I2C_DEF, SERVOASSEMBLY_INTERRUPT_GPI, SERVOASSEMBLY_INTERRUPT_SETTINGS)
+SERVOASSEMBLY_EXPANDER_DEF = IOExpanderDef("power_monitor_expander",
+                                           SERVOASSEMBLY_I2C_DEF,
+                                           SERVOASSEMBLY_INTERRUPT_GPI,
+                                           SERVOASSEMBLY_INTERRUPT_SETTINGS)        # io expander definition of a assembly board
 
 """!
 I2C bus definitions 
 """
-I2C1_DEF = I2CBusDef("main_i2c", 1, 3, 2, 100000)       # bus 1, scl, sda, freq
-I2C5_DEF = I2CBusDef("hat_adc", 5, 13, 12, 100000)      # bus 5, scl, sda, freq
-I2C6_DEF = I2CBusDef("unknown", 6, 23, 22, 100000)      # bus 6, scl, sda, freq
+I2C1_DEF = I2CBusDef("main_i2c", 1, 3, 2, 100000)                                   # definition for i2c-bus 1: name, bus-nr, scl-io, sda-io, freq
+I2C5_DEF = I2CBusDef("hat_adc", 5, 13, 12, 100000)                                  # definition for i2c-bus 5: name, bus-nr, scl-io, sda-io, freq
+I2C6_DEF = I2CBusDef("unknown", 6, 23, 22, 100000)                                  # definition for i2c-bus 6: name, bus-nr, scl-io, sda-io, freq
 
 """!
 SPI bus definitions
 """
-SPI0_DEF = SPIBusDef("spi_bus_0", 0, 11, 10, 9)         # bus 0, name, bus, clk, mosi, miso
-SPI1_DEF = SPIBusDef("spi_bus_1", 1, 21, 20, 19)        # bus 1, name, bus, clk, mosi, miso
-SPI2_DEF = SPIBusDef("spi_bus_2", 2, 42, 41, 40)        # bus 2, name, bus, clk, mosi, miso
+SPI0_DEF = SPIBusDef("spi_bus_0", 0, 11, 10, 9)                                     # definition for spi-bus 0: name, bus-nr, clk, mosi, miso
+SPI1_DEF = SPIBusDef("spi_bus_1", 1, 21, 20, 19)                                    # definition for spi-bus 2: name, bus-nr, clk, mosi, miso
+SPI2_DEF = SPIBusDef("spi_bus_2", 2, 42, 41, 40)                                    # definition for spi-bus 2: name, bus-nr, clk, mosi, miso
 

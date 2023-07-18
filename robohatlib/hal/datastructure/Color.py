@@ -1,5 +1,9 @@
 from enum import Enum
 
+"""!
+Enum with Colors for a LED
+"""
+
 class Color(Enum):
     NONE = 0
     WHITE = 1

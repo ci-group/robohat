@@ -1,3 +1,4 @@
+#!/usr/bin/python3
 try:
     from robohatlib.driver_ll.i2c.I2CHandler import I2CHandler
 except ImportError:
@@ -73,7 +74,7 @@ class I2CDevice:
     #--------------------------------------------------------------------------------------
 
     def read_from_into(self, _bytes_out) -> None:
-        """
+        """!
         @param _bytes_out: buffer to store data read from i2c device
         @return: None
         """
@@ -86,7 +87,7 @@ class I2CDevice:
 
 
     def write_to_then_read_from(self, _bytes_to, _bytes_out):
-        """
+        """!
         @param _bytes_to: data to I2C device
         @param _bytes_out: buffer to store data read from i2c device
         @return: None

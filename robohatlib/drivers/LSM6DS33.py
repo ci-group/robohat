@@ -1,3 +1,9 @@
+#!/usr/bin/python3
+
+"""!
+Lsm6ds33 driver
+"""
+
 
 FUNC_CFG_ACCESS = 0x01
 
@@ -302,6 +308,11 @@ class LSM6DS33:
     # --------------------------------------------------------------------------------------
 
     def do_test(self) -> None:
+        """!
+        Does a test
+        @return: None
+        """
+
         acc_x, acc_y, acc_z = self.get_acceleration()
         print("X:{0:10.2f}, Y:{1:10.2f}, Z:{2:10.2f} ".format(acc_x, acc_y, acc_z))
 

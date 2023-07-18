@@ -43,6 +43,10 @@ class GPI_LL_Interrupt:
     # --------------------------------------------------------------------------------------
 
     def set_event_detection(self) -> None:
+        """!
+        turns on the event detection
+        @return: None
+        """
         GPIO.setmode(GPIO.BCM)
         GPIO.setup(self.__gpio_pin, GPIO.IN, GPIO.PUD_UP)
         GPIO.add_event_detect(self.__gpio_pin, GPIO.BOTH, self.__callback_function, 1)
@@ -55,6 +59,10 @@ class GPI_LL_Interrupt:
     # --------------------------------------------------------------------------------------
 
     def remove_event_detection(self) -> None:
+        """!
+        turns off the event detection
+        @return: None
+        """
         if self.int_is_active is True:
             GPIO.remove_event_detect(self.__gpio_pin)
             self.int_is_active = False

@@ -1,9 +1,23 @@
+#!/usr/bin/python3
 
-from robohatlib.driver_ll.constants.GPO_Stat import GPOStat
 
+try:
+    from robohatlib.driver_ll.constants.GPO_Stat import GPOStat
+    from robohatlib.driver_ll.GPO_LL_Driver import GPO_LL_Driver
+except ImportError:
+    raise ImportError("Failed to import needed dependencies for the LedDriver class")
+
+
+"""!
+LED driver
+"""
 
 class LedDriver:
-    def __init__(self,  _gpo_ll_driver):
+    def __init__(self,  _gpo_ll_driver: GPO_LL_Driver):
+        """!
+
+        @param _gpo_ll_driver:
+        """
         self.__gpo_ll_driver = _gpo_ll_driver
         self.__color_active = False
 
@@ -11,8 +25,12 @@ class LedDriver:
     # --------------------------------------------------------------------------------------
     # --------------------------------------------------------------------------------------
 
-    def init_led(self):
-        #print("init LED")
+    def init_led(self) -> None:
+        """!
+        Initialize this LED
+        @return: None
+        """
+
         self.__color_active = False
         self.__set_status_led_to_vars()
         self.turn_led_off()

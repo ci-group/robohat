@@ -1,3 +1,4 @@
+#!/usr/bin/python3
 class GPIDef:
     """!
     Definition of an GPIO defined as an input pin

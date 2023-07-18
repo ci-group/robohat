@@ -1,3 +1,10 @@
+#!/usr/bin/python3
+
+"""!
+Lis3MDL driver
+"""
+
+
 WHO_AM_I = 0x0F
 
 CTRL_REG1 = 0x20
@@ -68,8 +75,10 @@ class LIS3MDL:
     # --------------------------------------------------------------------------------------
     # --------------------------------------------------------------------------------------
     def init_LIS3MDL(self) -> None:
-        print("init LIS3MDL")
-
+        """!
+        Init if LIS3MDL
+        @return: None
+        """
         self.__i2c_device.i2c_write_register_byte(CTRL_REG1, 0x70)          # 0x70 = 0b01110000,, OM = 11 (ultra-high-performance mode for X and Y); DO = 100 (10 Hz ODR)
         self.set_gain(GAIN_4)                                               # 0x00 = 0b00000000,  FS = 00 (+/- 4 gauss full scale)
         self.__i2c_device.i2c_write_register_byte(CTRL_REG3, 0x00)          # 0x00 = 0b00000000,  MD = 00 (continuous-conversion mode)
@@ -81,7 +90,12 @@ class LIS3MDL:
     # --------------------------------------------------------------------------------------
     # --------------------------------------------------------------------------------------
 
-    def set_gain(self, _selected_gain_array) -> None:
+    def set_gain(self, _selected_gain_array: []) -> None:
+        """
+        Set the gain register
+        @param _selected_gain_array:
+        @return: None
+        """
         ctrl_reg2_value = RoboUtil.update_byte(0x00, CTRL_REG2_GAIN_BITNR, _selected_gain_array[0])
         self.__i2c_device.i2c_write_register_byte(CTRL_REG2, ctrl_reg2_value)
         self.__full_scale_gaus = _selected_gain_array[1]
@@ -93,6 +107,11 @@ class LIS3MDL:
     # --------------------------------------------------------------------------------------
 
     def do_test(self) -> None:
+        """!
+        Does a test
+        @return: None
+        """
+
         mag_x, mag_y, mag_z = self.get_magnetic_fields()
         print("X:{0:10.2f}, Y:{1:10.2f}, Z:{2:10.2f} uT".format(mag_x, mag_y, mag_z))
 
@@ -100,11 +119,15 @@ class LIS3MDL:
     # --------------------------------------------------------------------------------------
     # --------------------------------------------------------------------------------------
 
-    """!
-    The processed magnetometer sensor values.
-    A 3-tuple of X, Y, Z axis values in microteslas that are signed floats.
-    """
+
     def get_magnetic_fields(self) -> Tuple[float, float, float]:        # Reads the 3 mag channels and stores them in vector m
+        """!
+        The processed magnetometer sensor values.
+        A 3-tuple of X, Y, Z axis values in microteslas that are signed floats.
+
+        @return: Tuple x,y,z
+        """
+
         in_value_array = bytearray(1)
         in_value_array[0] = (OUT_X_L | 0x80)
 
@@ -125,14 +148,23 @@ class LIS3MDL:
     # --------------------------------------------------------------------------------------
     # --------------------------------------------------------------------------------------
 
-    def __convert_raw_to_gaus_in_ut(self, raw_measurement: int) -> float:
-        return (raw_measurement / self.__gain_divider) * _GAUSS_TO_UT
+    def __convert_raw_to_gaus_in_ut(self, _raw_measurement: int) -> float:
+        """!
+        Convert raw data to uTesla
+        @param: raw_measurement
+        @return: uTesla
+        """
+        return (_raw_measurement / self.__gain_divider) * _GAUSS_TO_UT
 
     # --------------------------------------------------------------------------------------
     # --------------------------------------------------------------------------------------
     # --------------------------------------------------------------------------------------
 
     def get_full_scale_gaus(self) -> int:
+        """!
+
+        @return: int
+        """
         return self.__full_scale_gaus
 
     # --------------------------------------------------------------------------------------
@@ -140,6 +172,10 @@ class LIS3MDL:
     # --------------------------------------------------------------------------------------
 
     def get_gain_divider(self) -> int:
+        """
+
+        @return: int
+        """
         return self.__gain_divider
 
     # --------------------------------------------------------------------------------------

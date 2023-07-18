@@ -1,3 +1,4 @@
+#!/usr/bin/python3
 try:
     from time import sleep
 except ImportError:

@@ -1,24 +1,25 @@
+#!/usr/bin/python3
+
 try:
     from robohatlib.driver_ll.definitions.LedDef import LedDef
+    from robohatlib.driver_ll.definitions.GPODef import GPODef
 except ImportError:
     print("Failed to import MultiColorLedDef")
     raise
 
 
-
-
 class MultiColorLedDef:
-
     """!
     Definition for a MultiColorLed Device
     """
 
-    def __init__(self, _name, _red_def, _green_def, _blue_def):
-        """
-        :param _name: name
-        :param _red_def: definition of the RED LED
-        :param _green_def:  definition of the GREEN LED
-        :param _blue_def: definition of the BLUE LED
+    def __init__(self, _name: str, _red_def: LedDef, _green_def: LedDef, _blue_def: LedDef):
+        """!
+        Constructor
+        @param _name: reference name of this LED
+        @param _red_def: definition of the RED LED
+        @param _green_def:  definition of the GREEN LED
+        @param _blue_def: definition of the BLUE LED
         """
         self.__name = _name
         self.__red_def = _red_def

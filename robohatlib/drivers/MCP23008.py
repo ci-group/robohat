@@ -1,4 +1,4 @@
-
+#!/usr/bin/python3
 try:
     from robohatlib.helpers.RoboUtil import RoboUtil
     from robohatlib.driver_ll.i2c.I2CDevice import I2CDevice
@@ -28,14 +28,20 @@ MCP23008 driver
 
 
 class MCP23008:
-    def __init__(self, _i2c_device: I2CDevice, _mcp_interrupt_definition = None):
+    """!
+    Constructor MCP23008
+    """
+    def __init__(self, _i2c_device: I2CDevice, _mcp_interrupt_definition: [] = None):
         self.__i2c_device = _i2c_device
         self.__mcp_interrupt_definition = _mcp_interrupt_definition
 
     # --------------------------------------------------------------------------------------
     def init_mcp23008(self):
+        """!
+        Initializes the MCP23008
 
-        #print("init_MCP23008 " + self.__i2c_device.get_device_name() )
+        @return -> None:
+        """
 
         self.__i2c_device.i2c_write_register_byte(0x00, 0x00)        # empty data, wake up mcp
         self.invert_port(0x00)
@@ -139,7 +145,7 @@ class MCP23008:
         self.__set_pin(GPIO_ADDRESS, _io_nr, _bool_value)
         return
 
-    def get_pin_data(self, _io_nr):
+    def get_pin_data(self, _io_nr: int):
         """!
         get the input status of an io pin of the IO expander
         Note. direction of the pin must be an Input
@@ -248,6 +254,7 @@ class MCP23008:
             self.__i2c_device.i2c_write_register_byte(_register, new_val)
         else:
             print("pin " + str(_io_nr) + " doesn't exist")
+
     #--------------------------------------------------------------------------------------
 
     def __get_pin(self, _register, _io_nr) -> int:

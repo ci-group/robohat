@@ -92,13 +92,14 @@ ADC_MAX_COUNT = 4095  # max count, (12 bit = 4095
 #--------------------------------------------------------------------------------------
 
 class MAX11137:
-    # variables
-
-
     __adc_result_voltage = [0.0] * 16         # allocates and fills alle elements of array with 0
 
     # --------------------------------------------------------------------------------------
     def __init__(self, _spi_device:SPIDevice):
+        """!
+        Constructor of the MAX11137
+        @param _spi_device: spi connection of this device
+        """
         #print("Constructor MAX11137")
         self.__spi_device = _spi_device
 
@@ -106,9 +107,12 @@ class MAX11137:
     '''!
     public method, init the adc
     '''
-    def init_adc(self):
-        #print("init MAX11137")
+    def init_adc(self) -> None:
+        """
+        Initialize this ADC
 
+        @return: None
+        """
 
         # spiADC.read0 = False                           # Read 0 bytes after transfer to lower CS if cshigh == True, bestaat niet rpi
         # spiADC.bits_per_word(16)                       # seems not to be supported at RPi
@@ -135,16 +139,15 @@ class MAX11137:
         self.__spi_device.transfer_register(adc_custom_scan1)
 
     # --------------------------------------------------------------------------------------
-    '''!
-    public method, resets the adc
-    '''
-    def reset_adc(self):
+
+    def reset_adc(self)-> None:
+        """!
+        public method, resets the adc
+        """
         self.__spi_device.transfer_register(0x0040)
 
     # --------------------------------------------------------------------------------------
-    '''!
-    public method, get voltage of 1 channel of the ADC, returns a double
-    '''
+
     def get_readout_adc_servo_nr(self, _servo_nr: int) -> float:
         """!
         Get voltage of the potentiometer of the connected servo in vol
@@ -165,19 +168,19 @@ class MAX11137:
 
             #4-7-23
             # instead of using the channel auto increment, just read the whole array... was a bug
-            value_array = self.get_readout_adc_mutiple_channels()
+            value_array = self.get_readout_adc_multiple_channels()
             return value_array[_servo_nr]
         else:
             print("Servo range not valid")
             return -1
 
     # --------------------------------------------------------------------------------------
-    '''!
-    public method, get voltage of all 16 channels of the ADC. returns an array
-    '''
-    def  get_readout_adc_mutiple_channels(self) -> []:
+
+    def  get_readout_adc_multiple_channels(self) -> []:
         """!
-        @return voltages of the potentiometer of all the servos in volt
+        Get ADC data
+        @return array voltages of the potentiometer of all the servos in volt
+
         """
 
         adc_mode_control = 0b0000000000000000
@@ -208,17 +211,17 @@ class MAX11137:
 
     # --------------------------------------------------------------------------------------
 
-    '''!
-    private method, to get the result out of the ADC in voltage 
-    '''
+
     def __give_result_adc(self, _adc_mode_control) -> float:
+        """!
+
+        @param _adc_mode_control:
+        @return: float
+        """
         count_adc = self.__spi_device.transfer_register(_adc_mode_control)
         value_raw_int = int(count_adc & 0x0fff)
         channel_raw_int = int(count_adc >> 12)
         voltage_float = float((ADC_REF_VOLTAGE / ADC_MAX_COUNT) * value_raw_int)
-
-        # if Robohat_config.DEBUG is True:
-        #    print("-->" + str(self.__spi_device.get_spi_bus_nr()) + " " + hex(count_adc) + " bin: " + bin(count_adc)[2:].zfill(16) + " channel: " + str(channel_raw_int) + " code: " + str(value_raw_int) + " voltage: " + str(voltage_float) + " V")
 
         return voltage_float
 

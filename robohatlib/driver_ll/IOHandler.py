@@ -306,13 +306,13 @@ class IOHandler:
         """!
         Get LED driver
 
-        @param _led_def:
-        @return: Led
+        @param _led_def: a LED definition
+        @return: Led Driver
         """
 
         gpo_def = GPODef(_led_def.get_name(), _led_def.get_gpo_pin_nr())
 
-        gpo_ll_driver = self.get_gpo(gpo_def)                  # gpo_def had the same functions of led_def
+        gpo_ll_driver: GPO_LL_Driver = self.get_gpo(gpo_def)
         return LedDriver(gpo_ll_driver)
 
     #--------------------------------------------------------------------------------------
@@ -326,14 +326,14 @@ class IOHandler:
         """
 
         gpo_pwm_def = GPOPWMDef(_buzzer_def.get_name(), _buzzer_def.get_gpo_pin_nr(), _buzzer_def.get_freq(), _buzzer_def.get_duty_cycle())
-        gpo_pwm_ll_driver = self.get_pwm(gpo_pwm_def)
+        gpo_pwm_ll_driver: GPOPWM_LL_Driver = self.get_pwm(gpo_pwm_def)
         return BuzzerDriver(gpo_pwm_ll_driver)
 
     #--------------------------------------------------------------------------------------
     #--------------------------------------------------------------------------------------
     #--------------------------------------------------------------------------------------
     # noinspection PyMethodMayBeStatic
-    def io_shutdown(self) ->None:
+    def io_shutdown(self) -> None:
         """!
         shuts down the IO
 
@@ -345,7 +345,7 @@ class IOHandler:
     # --------------------------------------------------------------------------------------
     # --------------------------------------------------------------------------------------
     # --------------------------------------------------------------------------------------
-    def __is_i2c_slot_available(self, _to_be_checked:I2CDeviceDef) -> bool:
+    def __is_i2c_slot_available(self, _to_be_checked: I2CDeviceDef) -> bool:
         """!
         Check if I2C is detected on the bus (list was generated with scanI2C)
 
@@ -368,7 +368,7 @@ class IOHandler:
     # --------------------------------------------------------------------------------------
     # --------------------------------------------------------------------------------------
 
-    def is_i2c_device_available(self, _to_be_checked:I2CDeviceDef) -> bool:
+    def is_i2c_device_available(self, _to_be_checked: I2CDeviceDef) -> bool:
         """!
         @param _to_be_checked: I2CDeviceDef to be checked
         @return bool:, true if available

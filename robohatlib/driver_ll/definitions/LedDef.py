@@ -1,11 +1,10 @@
-
+#!/usr/bin/python3
 class LedDef:
     """!
     Definition of a LED device
     """
     def __init__(self, _name:str, _gpo_pin_nr:int):
-        """
-
+        """!
         @param _name: name of this definition
         @param _gpo_pin_nr:
         """
@@ -25,7 +24,7 @@ class LedDef:
     # --------------------------------------------------------------------------------------
 
     def get_gpo_pin_nr(self) -> int:
-        """
+        """!
         @return: GPIO pin nr
         """
         return self.__gpo_pin_nr

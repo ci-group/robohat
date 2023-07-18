@@ -1,8 +1,10 @@
 from __future__ import annotations
 
 try:
+    from robohatlib.driver_ll.IOHandler import IOHandler
     from robohatlib.drivers.LIS3MDL import LIS3MDL
     from robohatlib.drivers.LSM6DS33 import LSM6DS33
+    from robohatlib.hal.definitions.IMUDef import IMUDef
     from typing import Tuple
 except ImportError:
     print("Failed to import dependencies for IMU")
@@ -10,7 +12,11 @@ except ImportError:
 
 
 class IMU:
-    def __init__(self, _io_handler, _imu_def):
+    """!
+    IMU driver for MiniIMU-9 v5
+    """
+
+    def __init__(self, _io_handler: IOHandler, _imu_def: IMUDef):
         lis3mdl_i2c_def = _imu_def.get_lis3mdl_i2c_device_def()
         i2c_device_lis3ml = _io_handler.get_i2c_device(lis3mdl_i2c_def)
 
@@ -54,7 +60,11 @@ class IMU:
 
     # --------------------------------------------------------------------------------------
 
-    def do_imu_test(self):
+    def do_imu_test(self) -> None:
+        """!
+        Does a test
+        @return: None
+        """
         if self.__lis3ml is None and self.__lsm6ds33 is None:
             print("IMU not connected")
             return

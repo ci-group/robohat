@@ -1,3 +1,4 @@
+#!/usr/bin/python3
 class GPODef:
     """!
     Definition of an GPIO defined as an output pin

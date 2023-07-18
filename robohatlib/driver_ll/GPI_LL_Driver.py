@@ -1,3 +1,4 @@
+#!/usr/bin/python3
 
 try:
     import RPi.GPIO as GPIO
@@ -7,8 +8,15 @@ except ImportError:
 
 
 class GPI_LL_Driver:
+    """!
+    Driver of an GPIO pin configured as Input
+    """
 
     def __init__(self, _gpi_definition:GPIDef):
+        """
+        Constructor
+        @param _gpi_definition: definition of this input pin
+        """
         self.__gpi_definition = _gpi_definition
 
         GPIO.setmode(GPIO.BCM)
@@ -19,6 +27,10 @@ class GPI_LL_Driver:
     # --------------------------------------------------------------------------------------
 
     def get_status(self):
+        """!
+        Get status of an Input pin
+        @return: int (bool?)
+        """
         return GPIO.input(self.__gpi_definition.get_gpi_pin_nr())
 
     # --------------------------------------------------------------------------------------

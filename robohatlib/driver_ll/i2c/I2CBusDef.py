@@ -1,3 +1,4 @@
+#!/usr/bin/python3
 class I2CBusDef:
     """!
     I2C bus definition

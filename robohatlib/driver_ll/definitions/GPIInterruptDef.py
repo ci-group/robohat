@@ -12,8 +12,6 @@ class GPIInterruptDef:
     Definition of an GPIO defined as an interrupt input pin
     """
 
-
-
     def __init__(self, _name: str, _gpio_pin: int, _interrupt_type_port, _callbackholder:InterruptCallbackHolder = None):
         """
         @param _name:  name of this definition

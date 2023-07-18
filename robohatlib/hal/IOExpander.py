@@ -41,7 +41,7 @@ class IOExpander:
 
     #--------------------------------------------------------------------------------------
     def init_io_expander(self) -> None:
-        """
+        """!
         Initializes the io expander (Mandatory)
 
         @return -> None:

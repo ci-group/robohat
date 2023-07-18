@@ -1,4 +1,9 @@
 from enum import Enum
+
+"""!
+Enum with Accu status constants
+"""
+
 class AccuStatus(Enum):
     UNKNOWN = 0
     TOO_LOW = 1

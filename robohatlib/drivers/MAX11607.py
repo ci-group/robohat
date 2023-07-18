@@ -5,13 +5,16 @@ except ImportError:
     raise
 
 class MAX11607:
-    """
+    """!
     ADC, 4 channel, 10 bit I2C
     """
 
     # --------------------------------------------------------------------------------------
     def __init__(self, _i2c_device):
-        #print("constructor MAX11607")
+        """!
+        Constructor
+        :param _i2c_device:
+        """
         self.__i2c_device = _i2c_device
 
         self.__adc_max_count = 1024
@@ -20,8 +23,12 @@ class MAX11607:
 
 
     # --------------------------------------------------------------------------------------
-    def init_adc(self):
-        #print("init MAX11607")
+    def init_adc(self) -> None:
+        """
+        Initializes the ADC
+        @return: None
+        """
+
 
         register_data = 0x80 | 0x2                                              # aak default, no reset
         conf_data = 0x01 | 0x06                                                 # single ended, multiple channel (0 un till last), last channel is AIN3 (channel 4)

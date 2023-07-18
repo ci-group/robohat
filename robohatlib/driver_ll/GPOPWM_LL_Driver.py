@@ -1,3 +1,4 @@
+#!/usr/bin/python3
 
 try:
     import RPi.GPIO as GPIO
@@ -10,9 +11,12 @@ except ImportError:
 
 
 class GPOPWM_LL_Driver:
+    """
+    Driver of a GPIO output configured as PWM
+    """
 
     def __init__(self, _gpo_pwm_definition:GPOPWMDef):
-        """
+        """!
         @param _gpo_pwm_definition: definition for the PWM
         """
         self._gpo_pwm_definition = _gpo_pwm_definition
@@ -200,7 +204,7 @@ class GPOPWM_LL_Driver:
     # --------------------------------------------------------------------------------------
 
     def release(self) -> None:
-        """
+        """!
         Releases PWM
 
         @return: None

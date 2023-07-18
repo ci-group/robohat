@@ -1,5 +1,11 @@
+#!/usr/bin/python3
 from robohatlib.driver_ll.constants.InterruptTypes import InterruptTypes
 from robohatlib.driver_ll.constants.GPIO_Direction import GpioDirection
+
+
+"""!
+Data struct to attach properties to an io pin of an IO expander (MCP 23008)
+"""
 
 class McpInitStruct:
 
@@ -18,21 +24,33 @@ class McpInitStruct:
     # --------------------------------------------------------------------------------------
     # --------------------------------------------------------------------------------------
 
-    def get_io_nr(self):
+    def get_io_nr(self) -> int:
+        """!
+        Get io pin nr
+        @return: pin nr
+        """
         return self.__io_nr
 
     # --------------------------------------------------------------------------------------
     # --------------------------------------------------------------------------------------
     # --------------------------------------------------------------------------------------
 
-    def get_direction(self):
+    def get_direction(self) -> GpioDirection:
+        """!
+        Get the pin direction of the IO
+        @return: GpioDirection
+        """
         return self.__direction
 
     # --------------------------------------------------------------------------------------
     # --------------------------------------------------------------------------------------
     # --------------------------------------------------------------------------------------
 
-    def get_interrupt_type(self):
+    def get_interrupt_type(self) -> InterruptTypes:
+        """!
+        Get interrupt type
+        @return:
+        """
         return self.__interrupt_type
 
     # --------------------------------------------------------------------------------------

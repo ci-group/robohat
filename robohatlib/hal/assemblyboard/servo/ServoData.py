@@ -49,6 +49,7 @@ class ServoData:
         Get the minimum angle of the servo
         @return: minimum angle
         """
+
         return self.__min_angle
     # --------------------------------------------------------------------------------------
     def get_max_angle(self) -> float:
@@ -56,6 +57,7 @@ class ServoData:
         Get the maximum angle of the servo
         @return: maximum angle
         """
+
         return self.__max_angle
     # --------------------------------------------------------------------------------------
 
@@ -66,8 +68,7 @@ class ServoData:
         @return: (float) time in uS
         """
 
-        time = (((self.__max_time - self.__min_time) / self.__running_degree) * (
-                    _angle - self.__offset_degree)) + self.__min_time
+        time = (((self.__max_time - self.__min_time) / self.__running_degree) * (_angle - self.__offset_degree)) + self.__min_time
         return time
 
     # --------------------------------------------------------------------------------------
@@ -103,6 +104,7 @@ class ServoData:
 
         self.__min_angle = 0
         self.__max_angle = self.__min_angle + self.__running_degree
+
     # --------------------------------------------------------------------------------------
     # --------------------------------------------------------------------------------------
     # --------------------------------------------------------------------------------------
@@ -116,7 +118,7 @@ class ServoData:
         y = ax + b , a = self._formula_a, b = self._formula_b,
         angle = self.__running_degree / (self.__max_degree_voltage_adc - self.__min_degree_voltage_adc ) * (_current_voltage - self.__min_degree_voltage_adc) - self.__offset_degree
 
-        @_current_voltage voltage from servo, in volt
+        @current_voltage voltage from servo, in volt
         @return: (float) angle in degree
         """
 
@@ -126,3 +128,11 @@ class ServoData:
     # --------------------------------------------------------------------------------------
     # --------------------------------------------------------------------------------------
     # --------------------------------------------------------------------------------------
+
+
+    def get_servo_nr(self) -> int:
+        """!
+        Get servo nr of this Dataholder
+        @return: servo_nr
+        """
+        return self.__servo_nr

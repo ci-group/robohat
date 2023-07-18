@@ -1,12 +1,13 @@
 try:
     from robohatlib.hal.datastructure.Color import Color
     from robohatlib.driver_ll.IOHandler import IOHandler
+    from robohatlib.driver_ll.definitions.MultiColorLedDef import MultiColorLedDef
 except ImportError:
     raise ImportError("Failed to import needed dependencies for the LedMulticolor class")
 
 class LedMulticolor:
 
-    def __init__(self, _io_handler: IOHandler, _multi_colorled_def):
+    def __init__(self, _io_handler: IOHandler, _multi_colorled_def: MultiColorLedDef):
         """!
         Top class of LedMulticolor.
         This is driver for a multicolor led

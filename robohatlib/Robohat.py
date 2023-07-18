@@ -75,11 +75,11 @@ class Robohat:
         self.__io_handler = IOHandler()
         self.__serial = Serial(self.__io_handler, Robohat_config.SERIAL_DEF)
         self.__buzzer = Buzzer(self.__io_handler, Robohat_config.BUZZER_DEF)
-        self.__led = LedMulticolor(self.__io_handler, Robohat_config.STATUSLED_DEF)
+        self.__led = LedMulticolor(self.__io_handler, Robohat_config.STATUS_LED_DEF)
         self.__imu = IMU(self.__io_handler, Robohat_config.IMU_DEF)
 
         #-------------------------------------Expander
-        hat_io_expander_def = Robohat_config.HAT_IO_EXPANDER_DEF
+        hat_io_expander_def = Robohat_config.TOPBOARD_IO_EXPANDER_DEF
 
         # at the default interrupt definition there are 2 callback added. one for the trigger, the second for the interrupt reset
         hat_io_expander_callbackholder = InterruptCallbackHolder("hat_IO_expander_callback_holder",
@@ -91,7 +91,7 @@ class Robohat:
         hat_io_expander_def.set_callbackholder(hat_io_expander_callbackholder)
 
         self.__hat_io_expander = IOExpander(self.__io_handler, hat_io_expander_def, _switch_top_board)
-        self.__hat_adc = HatADC(self.__io_handler, Robohat_config.HAT_ADC_I2C_DEF)
+        self.__hat_adc = HatADC(self.__io_handler, Robohat_config.TOPBOARD_ADC_I2C_DEF)
 
         self.__power_management = PowerManagement(self.__io_handler,
                                                   self.__hat_adc,

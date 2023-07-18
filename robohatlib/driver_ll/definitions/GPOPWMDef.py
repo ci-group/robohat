@@ -1,11 +1,11 @@
-
+#!/usr/bin/python3
 class GPOPWMDef:
     """!
     Definition of an GPIO defined as an PWM output pin
     """
 
     def __init__(self, _name: str, _gpo_pin_nr: int, _freq, _duty_cycle:int):
-        """
+        """!
         @param _name: name of this definition
         @aram _gpo_pin_nr:  GPIO pin nr
         @param _freq:  frequency in HZ

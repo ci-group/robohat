@@ -1,3 +1,5 @@
+#!/usr/bin/python3
+
 class I2CDeviceDef:
     """!
     Definition of an I2C device
@@ -29,7 +31,7 @@ class I2CDeviceDef:
     # --------------------------------------------------------------------------------------
 
     def set_name(self, _name) -> None:
-        """
+        """!
         Set new name of definition
         @param _name:
         @return: None
@@ -52,7 +54,7 @@ class I2CDeviceDef:
     def get_i2c_device_address(self) -> int:
         """!
         Get I2C device address (actual base address + offset address)
-        @:return: I2C device address
+        @return: I2C device address
         """
 
         return self.__i2c_base_address + self.__i2c_offset_address
