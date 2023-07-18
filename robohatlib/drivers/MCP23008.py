@@ -119,6 +119,12 @@ class MCP23008:
         return self.__get_port(IO_DIR_ADDRESS)
 
     def set_pin_pullup(self, _io_nr:int, _bool_value) -> None:
+        """!
+        Set pull up of a pin
+        @param _io_nr:
+        @param _bool_value:
+        @return:  None
+        """
         self.__set_pin(GP_PU_ADDRESS, _io_nr, _bool_value)
         return
 

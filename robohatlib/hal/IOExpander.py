@@ -20,6 +20,12 @@ class IOExpander:
 
     #--------------------------------------------------------------------------------------
     def __init__(self, _iohandler:IOHandler, _main_io_expander_def:IOExpanderDef, _sw_main_io_expander:int):
+        """!
+        Constructor of IO expander
+        @param _iohandler: the IO handler, connection to all the IO
+        @param _main_io_expander_def: definition of this IO expander
+        @param _sw_main_io_expander: offset of i2c base address
+        """
         i2c_device_definition = _main_io_expander_def.get_i2c_device_definition()
         i2c_device_definition.set_i2c_offset_address(_sw_main_io_expander)
         i2c_device = _iohandler.get_i2c_device(i2c_device_definition)

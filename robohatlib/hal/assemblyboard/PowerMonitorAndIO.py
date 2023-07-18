@@ -140,11 +140,12 @@ class PowerMonitorAndIO:
             self.__io_device.set_pin_direction(_io_nr, wanted_pin_value)
 
     # --------------------------------------------------------------------------------------
-
+    #todo check in io-pin is an output
     def set_io_expander_output(self, _io_nr:int, _value: ExpanderStatus) -> None:
         """!
-        @param _io_nr: io nr
-        @param _value
+        Set the output of a output pin, onto the desired value
+        @param _io_nr: wanted io nr
+        @param _value wanted value
         @return None
         """
         if self.__io_device is None:
@@ -157,9 +158,10 @@ class PowerMonitorAndIO:
                 self.__io_device.set_pin_data(_io_nr, 1)
 
     # --------------------------------------------------------------------------------------
-
+    #todo check in io-pin is an input
     def get_io_expander_input(self, _io_nr:int) -> ExpanderStatus | None:
         """!
+        Gets current value of the desired input pin
         @param _io_nr: io nr
 
         @return ExpanderStatus or None

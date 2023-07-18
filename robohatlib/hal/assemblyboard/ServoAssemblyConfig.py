@@ -5,7 +5,7 @@ class ServoAssemblyConfig:
     # --------------------------------------------------------------------------------------
 
     """!
-    These settings are needed to get the hardware working. There can multiple assemblies connected at the RPI
+    These settings are needed to get the hardware working. There can multiple assemblies connected at the RPi
     """
 
     def __init__(self, _name:str, _sw1_pwm_address:int, _sw2_power_good_address:int, _cs_adc_angle_readout:int):

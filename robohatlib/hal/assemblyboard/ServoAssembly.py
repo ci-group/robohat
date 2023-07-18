@@ -28,10 +28,10 @@ class ServoAssembly:
 
     def __init__(self, _io_handler: IOHandler, _servo_config: ServoAssemblyConfig, _i2c_bus_nr: int, _spi_bus_nr: int):
         """!
-        @param _io_handler
-        @param _servo_config
-        @param _i2c_bus_nr
-        @param _spi_bus_nr
+        @param _io_handler the IO handler, connection to all the IO
+        @param _servo_config configuration of this ServoAssembly
+        @param _i2c_bus_nr connected i2c bus nr
+        @param _spi_bus_nr connected spi bus nr
 
         @return: none
         """
@@ -60,17 +60,33 @@ class ServoAssembly:
     #--------------------------------------------------------------------------------------
 
     def is_board_avaible(self) -> bool:
+        """!
+        Returns True when board is available
+        @return: bool
+        """
         if self.__servo_board is None:
             return False
         return True
 
     #--------------------------------------------------------------------------------------
     #--------------------------------------------------------------------------------------
-    def __io_power_monitor_and_io_int_callback(self, _gpio) -> None:
+    def __io_power_monitor_and_io_int_callback(self, _gpio: int) -> None:
+        """!
+        Callback of interrupt service routine. This routine will be called when the IO expander interrupt fires
+        @param _gpio: The GPIO nr which caused the interrupt. (Just for information purpose)
+        @return: None
+        """
         if self.__power_monitor_and_io is not None:
             self.__power_monitor_and_io.power_monitor_and_io_int_callback(_gpio)
 
-    def __io_power_monitor_and_io_int_reset_routine(self, _gpio) -> None:
+    #--------------------------------------------------------------------------------------
+
+    def __io_power_monitor_and_io_int_reset_routine(self, _gpio: int) -> None:
+        """!
+        Callback after the interrupt service routine is handled, to reset the interrupt and restart the check
+        @param _gpio: The GPIO nr which caused the interrupt. (Just for information purpose)
+        @return: None
+        """
         if self.__power_monitor_and_io is not None:
             self.__power_monitor_and_io.power_monitor_and_io_int_reset_routine(_gpio)
 
@@ -241,21 +257,41 @@ class ServoAssembly:
             self.__power_monitor_and_io.add_signaling_device(_signaling_device)
 
     # --------------------------------------------------------------------------------------
-    def set_io_expander_direction(self, _pin_nr: int, _dir: ExpanderDir) -> None:
+    def set_io_expander_direction(self, _io_nr: int, _direction: ExpanderDir) -> None:
+        """!
+        Set the direction of the IO pin
+
+        @param _io_nr io nr
+        @param _direction, 0 = Pin is configured as an output, 1 = Pin is configured as an input
+        @return none
+        """
+
         if self.__power_monitor_and_io is not None:
-            self.__power_monitor_and_io.set_io_expander_direction(_pin_nr, _dir)
+            self.__power_monitor_and_io.set_io_expander_direction(_io_nr, _direction)
     # --------------------------------------------------------------------------------------
 
-    def get_io_expander_direction(self, _pin_nr: int) -> ExpanderDir | None:
+    def get_io_expander_direction(self, _io_nr: int) -> ExpanderDir | None:
+        """!
+        get the direction of the IO pin
+
+        @param _io_nr io nr
+        @return ExpanderDir or none
+        """
         if self.__power_monitor_and_io is not None:
-            return self.__power_monitor_and_io.get_io_expander_direction(_pin_nr)
+            return self.__power_monitor_and_io.get_io_expander_direction(_io_nr)
         else:
             return None
     # --------------------------------------------------------------------------------------
 
-    def set_io_expander_output(self, _pin_nr: int, _value: ExpanderStatus) -> None:
+    def set_io_expander_output(self, _io_nr: int, _value: ExpanderStatus) -> None:
+        """!
+        Set the output onto the desired value
+        @param _io_nr: wanted io nr
+        @param _value wanted value
+        @return None
+        """
         if self.__power_monitor_and_io is not None:
-            self.__power_monitor_and_io.set_io_expander_output(_pin_nr, _value)
+            self.__power_monitor_and_io.set_io_expander_output(_io_nr, _value)
     # --------------------------------------------------------------------------------------
 
     def get_io_expander_input(self, _pin_nr: int) -> ExpanderStatus | None:

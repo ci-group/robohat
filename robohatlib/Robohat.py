@@ -51,7 +51,7 @@ class Robohat:
     # --------------------------------------------------------------------------------------
     # constructor Robohat
 
-    def __init__(self, _servo_assembly_1_config: ServoAssemblyConfig, _servo_assembly_2_config: ServoAssemblyConfig, _switch_hat_board: int = 7):
+    def __init__(self, _servo_assembly_1_config: ServoAssemblyConfig, _servo_assembly_2_config: ServoAssemblyConfig, _switch_top_board: int = 7):
         """!
         The Robohat base class initializer.
 
@@ -60,13 +60,13 @@ class Robohat:
 
         @param _servo_assembly_1_config config of servo assembly 1
         @param _servo_assembly_2_config config of servo assembly 2
-        @param _switch_hat_board dip-switch settings og the hat board (board mounted on RPI), default 7
+        @param _switch_top_board dip-switch settings og the top board (board mounted on RPi), default 7
         """
         print("\n")
         print("Starting Robohat lib: " + Robohat_constants.ROBOHAT_LIB_VERSION_STR + "\n")
 
-        if _switch_hat_board is _servo_assembly_1_config.get_sw2_power_good_address() or \
-                _switch_hat_board is _servo_assembly_2_config.get_sw2_power_good_address() or \
+        if _switch_top_board is _servo_assembly_1_config.get_sw2_power_good_address() or \
+                _switch_top_board is _servo_assembly_2_config.get_sw2_power_good_address() or \
                 _servo_assembly_1_config.get_sw2_power_good_address() is _servo_assembly_2_config.get_sw2_power_good_address():
             print("Error, dip-witches in config are in conflict, can't continue.")
             print("Preferred config is, the first assembly board on 0, the second on 1 and the switch on the topboard on 7 ")
@@ -90,7 +90,7 @@ class Robohat:
 
         hat_io_expander_def.set_callbackholder(hat_io_expander_callbackholder)
 
-        self.__hat_io_expander = IOExpander(self.__io_handler, hat_io_expander_def, _switch_hat_board)
+        self.__hat_io_expander = IOExpander(self.__io_handler, hat_io_expander_def, _switch_top_board)
         self.__hat_adc = HatADC(self.__io_handler, Robohat_config.HAT_ADC_I2C_DEF)
 
         self.__power_management = PowerManagement(self.__io_handler,
