@@ -30,7 +30,7 @@ DEBUG = False                                       # by changing this value to 
 
 ALARM_PERMITTED = True                              # sound an alarm when a system alert is present, such as to low accu capacity
 ALARM_TIMEOUT_IN_SEC = 300                          # timeout between alarm
-INIT_BEEP_PERMITTED = True                          # beep when started
+INIT_BEEP_PERMITTED = False                          # beep when started
 
 
 

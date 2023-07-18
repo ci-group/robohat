@@ -55,12 +55,22 @@ class Robohat:
         """!
         The Robohat base class initializer.
 
+        Checks if dip switches have no conflict
+        Initializes all the IO
+
         @param _servo_assembly_1_config config of servo assembly 1
         @param _servo_assembly_2_config config of servo assembly 2
         @param _switch_hat_board dip-switch settings og the hat board (board mounted on RPI), default 7
         """
         print("\n")
         print("Starting Robohat lib: " + Robohat_constants.ROBOHAT_LIB_VERSION_STR + "\n")
+
+        if _switch_hat_board is _servo_assembly_1_config.get_sw2_power_good_address() or \
+                _switch_hat_board is _servo_assembly_2_config.get_sw2_power_good_address() or \
+                _servo_assembly_1_config.get_sw2_power_good_address() is _servo_assembly_2_config.get_sw2_power_good_address():
+            print("Error, dip-witches in config are in conflict, can't continue.")
+            print("Preferred config is, the first assembly board on 0, the second on 1 and the switch on the topboard on 7 ")
+            return
 
         self.__io_handler = IOHandler()
         self.__serial = Serial(self.__io_handler, Robohat_config.SERIAL_DEF)

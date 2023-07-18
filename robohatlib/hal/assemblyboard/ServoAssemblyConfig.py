@@ -38,8 +38,8 @@ class ServoAssemblyConfig:
         Value of sw1 on the Servo PCB
         @return: sw1 value
         """
-        return  self.__sw1_pwm_address
 
+        return self.__sw1_pwm_address
     # --------------------------------------------------------------------------------------
 
     def get_sw2_power_good_address(self) -> int:
