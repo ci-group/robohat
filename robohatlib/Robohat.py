@@ -510,7 +510,7 @@ class Robohat:
             else:
                 print("Error: servo assembly 2 not initialized")
         else:
-            print("Error: servo assembly 1 and servo assembly 2 are not initialized")
+            print("Board nr not available")
 
     # ------------------------------------------------------------------------------------------
 
@@ -535,7 +535,7 @@ class Robohat:
                 print("Error: servo assembly 2 not initialized")
                 return None
         else:
-            print("Error: servo assembly 1 and servo assembly 2 are not initialized")
+            print("Board nr not available")
         return None
 
     # ------------------------------------------------------------------------------------------
@@ -559,7 +559,7 @@ class Robohat:
             else:
                 print("Error: servo assembly 2 not initialized")
         else:
-            print("Error: servo assembly 1 and servo assembly 2 are not initialized")
+            print("Board nr not available")
     # ------------------------------------------------------------------------------------------
 
     def get_servo_io_expander_input(self, _board_nr: int, _pin_nr: int) -> ExpanderStatus | None:
@@ -582,7 +582,7 @@ class Robohat:
                 print("Error: servo assembly 2 not initialized")
                 return None
         else:
-            print("Error: servo assembly 1 and servo assembly 2 are not initialized")
+            print("Board nr not available")
         return None
 
     # -----------------------------------------------------------------------------------------

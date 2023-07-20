@@ -186,7 +186,6 @@ class ServoAssembly:
 
     # --------------------------------------------------------------------------------------
 
-
     def get_servo_adc_multiple_channels(self) -> []:
         """!
         @return voltages of the angle of all the servos in volt. Returns an array of 16 elements
@@ -267,7 +266,7 @@ class ServoAssembly:
             self.__power_monitor_and_io.add_signaling_device(_signaling_device)
 
     # --------------------------------------------------------------------------------------
-    def set_io_expander_direction(self, _io_nr: int, _direction: ExpanderDir) -> None:
+    def set_servo_io_expander_direction(self, _io_nr: int, _direction: ExpanderDir) -> None:
         """!
         Set the direction of the IO pin
 
@@ -280,7 +279,7 @@ class ServoAssembly:
             self.__power_monitor_and_io.set_io_expander_direction(_io_nr, _direction)
     # --------------------------------------------------------------------------------------
 
-    def get_io_expander_direction(self, _io_nr: int) -> ExpanderDir | None:
+    def get_servo_io_expander_direction(self, _io_nr: int) -> ExpanderDir | None:
         """!
         get the direction of the IO pin
 
@@ -293,7 +292,7 @@ class ServoAssembly:
             return None
     # --------------------------------------------------------------------------------------
 
-    def set_io_expander_output(self, _io_nr: int, _value: ExpanderStatus) -> None:
+    def set_servo_io_expander_output(self, _io_nr: int, _value: ExpanderStatus) -> None:
         """!
         Set the output onto the desired value
         @param _io_nr: wanted io nr
@@ -304,7 +303,7 @@ class ServoAssembly:
             self.__power_monitor_and_io.set_io_expander_output(_io_nr, _value)
     # --------------------------------------------------------------------------------------
 
-    def get_io_expander_input(self, _pin_nr: int) -> ExpanderStatus | None:
+    def get_servo_io_expander_input(self, _pin_nr: int) -> ExpanderStatus | None:
         if self.__power_monitor_and_io is not None:
             return self.__power_monitor_and_io.get_io_expander_input(_pin_nr)
         else:

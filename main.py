@@ -122,55 +122,45 @@ class Example:
         @return: None
         """
         print("Available commands are:\n")
-        print("shutdown                                       powers the system down")
-        print("exit                                           exit the program")
-        print("help                                           prints this text")
-        print("set servo angle [servo nr] [angle]             moves servo to the desired angle")
-        print("get servo angle [servo nr]                     get servo angle of the desired angle")
-        print("get servo angle all                            get all the servo angels")
-        print("get servo adc [servo nr]                       get servo position adc value")
-        print("get servo adc all                              get all the servo position adc values")
-        print("get servo connected [servo nr]                 shows if servo is connected")
-        print("put servos to sleep                            puts all servos asleep")
-
-        print("set servo io dir [pin nr] [in|out]             set the direction of an io pin of a servo board")
-        print("get servo io dir [pin nr]                      get the direction of an io pin of a servo board")
-        print("set servo io output [pin nr] [low|high]        set the pin value of an io pin of a servo board")
-        print("get servo io input [pin nr]                    get the pin value of an io pin of a servo board")
-
-        print("wake up servos                                 wakes all servo up")
-        print("are servos sleeping                            shows information if servos are sleeping")
-
-        print("set led [color]                                turn on led with its color [WHITE|RED|GREEN|BLUE|YELLOW|PURPLE|ON|OFF")
-        print("get led                                        displays the color of the led, or status ON | OFF")
-
-        print("get lib builddate                              displays date when library was build")
-        print("get lib version                                displays version of the library")
-
-        print("get topboard adc [channel]                     get topboard adc value (channel 3 is divided accu voltage")
-        print("get topboard adc all                           get all the topboard adc values")
-        print("set topboard io dir [pin nr] [in|out]          set the direction of an io pin on the topboard")
-        print("get topboard io dir [pin nr]                   get the direction of an io pin on the topboard")
-        print("set topboard io output [pin nr] [low|high]     set the pin value of an io pin on the topboard")
-        print("get topboard io input [pin nr]                 get the pin value of an io pin on the topboard")
-
-        print("get accu voltage                               get voltage of accu")
-        print("get accu capacity                              get capacity of accu")
-        print("get accu status                                get status of accu")
-
-        print("get imu magnetic                               get magnetic values")
-        print("get imu acceleration                           get acceleration values")
-        print("get imu gyro                                   get gyro values")
-
-        print("do i2c scan                                    scans the i2c bus")
-
-        print("do buzzer random                               generate a random sound")
-        print("do buzzer slowwoop                             generate a slowwoop sound")
-        print("do buzzer beep                                 generate a beep")
-        print("do buzzer freq [frequency]                     generates a sound with requested frequency")
-        print("do buzzer stop                                 stop the generation of sound")
-
-        print("do test                                        will start a test")
+        print("shutdown                                            powers the system down")
+        print("exit                                                exit the program")
+        print("help                                                prints this text")
+        print("set servo angle [servo nr] [angle]                  moves servo to the desired angle")
+        print("get servo angle [servo nr]                          get servo angle of the desired angle")
+        print("get servo angle all                                 get all the servo angels")
+        print("get servo adc [servo nr]                            get servo position adc value")
+        print("get servo adc all                                   get all the servo position adc values")
+        print("get servo connected [servo nr]                      shows if servo is connected")
+        print("put servos to sleep                                 puts all servos asleep")
+        print("set servo io dir [board nr] [pin nr] [in|out]       set the direction of an io pin of a servo board [0|1]")
+        print("get servo io dir [board nr] [pin nr]                get the direction of an io pin of a servo board [0|1]")
+        print("set servo io output [board nr] [pin nr] [low|high]  set the pin value of an io pin of a servo board [0|1]")
+        print("get servo io input [board nr] [pin nr]              get the pin value of an io pin of a servo board [0|1]")
+        print("wake up servos                                      wakes all servo up")
+        print("are servos sleeping                                 shows information if servos are sleeping")
+        print("set led [color]                                     turn on led with its color [WHITE|RED|GREEN|BLUE|YELLOW|PURPLE|ON|OFF")
+        print("get led                                             displays the color of the led, or status ON | OFF")
+        print("get lib builddate                                   displays date when library was build")
+        print("get lib version                                     displays version of the library")
+        print("get topboard adc [channel]                          get topboard adc value (channel 3 is divided accu voltage")
+        print("get topboard adc all                                get all the topboard adc values")
+        print("set topboard io dir [pin nr] [in|out]               set the direction of an io pin on the topboard")
+        print("get topboard io dir [pin nr]                        get the direction of an io pin on the topboard")
+        print("set topboard io output [pin nr] [low|high]          set the pin value of an io pin on the topboard")
+        print("get topboard io input [pin nr]                      get the pin value of an io pin on the topboard")
+        print("get accu voltage                                    get voltage of accu")
+        print("get accu capacity                                   get capacity of accu")
+        print("get accu status                                     get status of accu")
+        print("get imu magnetic                                    get magnetic values")
+        print("get imu acceleration                                get acceleration values")
+        print("get imu gyro                                        get gyro values")
+        print("do i2c scan                                         scans the i2c bus")
+        print("do buzzer random                                    generate a random sound")
+        print("do buzzer slowwoop                                  generate a slowwoop sound")
+        print("do buzzer beep                                      generate a beep")
+        print("do buzzer freq [frequency]                          generates a sound with requested frequency")
+        print("do buzzer stop                                      stop the generation of sound")
+        print("do test                                             will start a test")
 
     # --------------------------------------------------------------------------------------
     # --------------------------------------------------------------------------------------
@@ -197,18 +187,26 @@ class Example:
                     board_nr = int(data_in_array[4])
                     pin_nr = int(data_in_array[5])
                     value = data_in_array[6]
-                    if value is "out":
+                    if value == "OUT" or value == "out":
                         self.robohat.set_servo_io_expander_direction(board_nr, pin_nr, ExpanderDir.OUTPUT)
-                    else:
+                        print("Direction set to output")
+                    elif value == "IN" or value == "in":
                         self.robohat.set_servo_io_expander_direction(board_nr, pin_nr, ExpanderDir.INPUT)
+                        print("Direction set to input")
+                    else:
+                        print("Syntax error setting direction")
                 elif io_command == "output":
                     board_nr = int(data_in_array[4])
-                    pin_nr = int(data_in_array[4])
+                    pin_nr = int(data_in_array[5])
                     value = data_in_array[6]
-                    if value is "0":
-                        self.robohat.set_servo_io_expander_output(board_nr, pin_nr, ExpanderStatus.LOW)
-                    else:
+                    if value == "HIGH" or value == "high":
                         self.robohat.set_servo_io_expander_output(board_nr, pin_nr, ExpanderStatus.HIGH)
+                        print("Pin set to HIGH")
+                    elif value == "LOW" or value == "low":
+                        self.robohat.set_servo_io_expander_output(board_nr, pin_nr, ExpanderStatus.LOW)
+                        print("Pin set to LOW")
+                    else:
+                        print("Syntax error setting output")
                 else:
                     print("syntax error, set servo io command not found")
             else:
@@ -221,21 +219,26 @@ class Example:
                if io_command == "dir":
                     pin_nr = int(data_in_array[4])
                     value = data_in_array[5]
-                    if value == "out":
+                    if value == "OUT" or value == "out":
                         self.robohat.set_hat_io_expander_direction(pin_nr, ExpanderDir.OUTPUT)
-                        print("Direction set to out")
-                    else:
+                        print("Direction set to output")
+                    elif value == "IN" or value == "in":
                         self.robohat.set_hat_io_expander_direction(pin_nr, ExpanderDir.INPUT)
-                        print("Direction set to in")
-               elif io_command == "out":
+                        print("Direction set to input")
+                    else:
+                        print("Syntax error setting direction pin")
+
+               elif io_command == "output":
                    pin_nr = int(data_in_array[4])
                    value = data_in_array[5]
                    if value == "HIGH" or value == "high":
                        self.robohat.set_hat_io_expander_output(pin_nr, ExpanderStatus.HIGH)
                        print("Pin set to HIGH")
-                   else:
+                   elif value == "LOW" or value == "low":
                        self.robohat.set_hat_io_expander_output(pin_nr, ExpanderStatus.LOW)
                        print("Pin set to LOW")
+                   else:
+                        print("Syntax error setting pin")
                else:
                    print("syntax error, set hat io command not found")
             else:
@@ -320,12 +323,12 @@ class Example:
                 io_command = data_in_array[3]
                 if io_command == "dir":
                     board_nr = int(data_in_array[4])
-                    pin_nr = int(data_in_array[4])
+                    pin_nr = int(data_in_array[5])
                     value = self.robohat.get_servo_io_expander_direction(board_nr, pin_nr)
                     print(value)
                 elif io_command == "input":
                     board_nr = int(data_in_array[4])
-                    pin_nr = int(data_in_array[4])
+                    pin_nr = int(data_in_array[5])
                     value = self.robohat.get_servo_io_expander_input(board_nr, pin_nr)
                     print(value)
                 else:
@@ -356,7 +359,7 @@ class Example:
                 elif io_command == "input":
                     pin_nr = int(data_in_array[4])
                     value = self.robohat.get_hat_io_expander_input(pin_nr)
-                    print("topboard io: " + str(value) )
+                    print(value)
                 else:
                     print("syntax error, unknown hat io command")
             else:

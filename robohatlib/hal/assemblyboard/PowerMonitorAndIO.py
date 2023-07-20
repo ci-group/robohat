@@ -97,12 +97,12 @@ class PowerMonitorAndIO:
     # --------------------------------------------------------------------------------------
     # --------------------------------------------------------------------------------------
 
-    def get_io_expander_direction(self, _io_nr:int) -> ExpanderDir | None:
+    def get_io_expander_direction(self, _io_nr:int) -> ExpanderDir:
         """!
         get the direction of the IO pin
 
         @param _io_nr io nr
-        @return ExpanderDir or none
+        @return ExpanderDir
         """
 
         if self.__io_device is None:
@@ -115,8 +115,7 @@ class PowerMonitorAndIO:
             else:
                 return ExpanderDir.INPUT
         else:
-            print("io pin not available for user")
-            return None
+            return ExpanderDir.INVALID
 
     # --------------------------------------------------------------------------------------
     # --------------------------------------------------------------------------------------
@@ -213,9 +212,14 @@ class PowerMonitorAndIO:
         @param _io_nr: io nr
         @return: True is IO is available, False is not
         """
+
         if _io_nr >= 4 and _io_nr <= 6:
             return True
+        elif _io_nr > 6:
+            print("IO pin does not exist")
+            return False
         else:
+            print("IO pin not available for user")
             return False
 
     # --------------------------------------------------------------------------------------
