@@ -29,13 +29,19 @@ INT_THS_H = 0x33
 
 _GAUSS_TO_UT = 100
 
-from typing import Tuple
+
 
 try:
+    import time
+    from typing import Tuple
+    from robohatlib.driver_ll.i2c.I2CDevice import I2CDevice
     from robohatlib.helpers.RoboUtil import RoboUtil
 except ImportError:
-    print("Failed to import RoboUtil")
-    raise
+    raise ImportError("Failed to import needed dependencies for the LIS3MDL class")
+
+
+
+
 
 
 #   Full-scale (G), Gain@16-bit (LSB/Gauss)
@@ -65,7 +71,7 @@ class LIS3MDL:
     # --------------------------------------------------------------------------------------
     # --------------------------------------------------------------------------------------
 
-    def __init__(self, _i2c_device):
+    def __init__(self, _i2c_device: I2CDevice):
         self.__i2c_device = _i2c_device
 
         self.__full_scale_gaus = GAIN_16[1]
@@ -84,8 +90,6 @@ class LIS3MDL:
         self.__i2c_device.i2c_write_register_byte(CTRL_REG3, 0x00)          # 0x00 = 0b00000000,  MD = 00 (continuous-conversion mode)
         self.__i2c_device.i2c_write_register_byte(CTRL_REG4, 0x0C)          # 0x0C = 0b00001100,  OMZ = 11 (ultra-high-performance mode for Z)
 
-        print("Found LIS3MDL with ID: " + hex(self.__i2c_device.i2c_read_register_byte (WHO_AM_I)))
-
     # --------------------------------------------------------------------------------------
     # --------------------------------------------------------------------------------------
     # --------------------------------------------------------------------------------------
@@ -100,7 +104,6 @@ class LIS3MDL:
         self.__i2c_device.i2c_write_register_byte(CTRL_REG2, ctrl_reg2_value)
         self.__full_scale_gaus = _selected_gain_array[1]
         self.__gain_divider = _selected_gain_array[2]
-        print(_selected_gain_array)
 
     # --------------------------------------------------------------------------------------
     # --------------------------------------------------------------------------------------
@@ -113,7 +116,7 @@ class LIS3MDL:
         """
 
         mag_x, mag_y, mag_z = self.get_magnetic_fields()
-        print("X:{0:10.2f}, Y:{1:10.2f}, Z:{2:10.2f} uT".format(mag_x, mag_y, mag_z))
+        print("Mag: X:{0:10.2f}, Y:{1:10.2f}, Z:{2:10.2f} uT".format(mag_x, mag_y, mag_z))
 
     # --------------------------------------------------------------------------------------
     # --------------------------------------------------------------------------------------

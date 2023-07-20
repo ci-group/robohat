@@ -260,8 +260,15 @@ STATUS_MASTER = 0x22
 #define DS33_WHO_ID    0x69
 #define DSO_WHO_ID    0x6C
 
-from typing import Tuple
-import time
+
+try:
+    import time
+    from typing import Tuple
+    from robohatlib.driver_ll.i2c.I2CDevice import I2CDevice
+except ImportError:
+     raise ImportError("Failed to import needed dependencies for the LSM6DS33 class")
+
+# I2CDevice
 
 class LSM6DS33:
 
@@ -278,30 +285,35 @@ class LSM6DS33:
 
 
     # --------------------------------------------------------------------------------------
-    def __init__(self, _i2cdevice):
-        self.__i2cdevice = _i2cdevice
+    def __init__(self, _i2c_device: I2CDevice):
+        """!
+
+        @param _i2c_device:
+        """
+        self.__i2c_device = _i2c_device
 
     # --------------------------------------------------------------------------------------
-    def init_LSM6DS33(self):
-        print("init LSM6DS33")
+    def init_LSM6DS33(self) -> None:
+        """!
 
-        print("Found LSM6DS33 with ID: " + hex(self.__i2cdevice.i2c_read_register_byte (WHO_AM_I) ) )
+        @return:
+        """
 
         # clear all
-        self.__i2cdevice.i2c_write_register_byte(CTRL1_XL, 0x00)
-        self.__i2cdevice.i2c_write_register_byte(CTRL2_G, 0x00)
-        self.__i2cdevice.i2c_write_register_byte(CTRL3_C, 0x00)
+        self.__i2c_device.i2c_write_register_byte(CTRL1_XL, 0x00)
+        self.__i2c_device.i2c_write_register_byte(CTRL2_G, 0x00)
+        self.__i2c_device.i2c_write_register_byte(CTRL3_C, 0x00)
 
         time.sleep(1)
 
         # Accelerometer
-        self.__i2cdevice.i2c_write_register_byte(CTRL1_XL, 0b10000100)            # 0x80 = 0b10000000// ODR = 1000 (1.66 kHz (high performance)); FS_XL = 00 (+/-2 g full scale)
+        self.__i2c_device.i2c_write_register_byte(CTRL1_XL, 0b10000100)            # 0x80 = 0b10000000// ODR = 1000 (1.66 kHz (high performance)); FS_XL = 00 (+/-2 g full scale)
 
         # Gyro
-        self.__i2cdevice.i2c_write_register_byte(CTRL2_G, 0b10001000)            # 0x80 = 0b010000000 // ODR = 1000 (1.66 kHz (high performance)); FS_G = 00 (245 dps for DS33, 250 dps for DSO)
+        self.__i2c_device.i2c_write_register_byte(CTRL2_G, 0b10001000)            # 0x80 = 0b010000000 // ODR = 1000 (1.66 kHz (high performance)); FS_G = 00 (245 dps for DS33, 250 dps for DSO)
 
         # Common
-        self.__i2cdevice.i2c_write_register_byte(CTRL3_C, 0x04)             # 0x04 = 0b00000100 // IF_INC = 1 (automatically increment register address)
+        self.__i2c_device.i2c_write_register_byte(CTRL3_C, 0x04)             # 0x04 = 0b00000100 // IF_INC = 1 (automatically increment register address)
 
     # --------------------------------------------------------------------------------------
     # --------------------------------------------------------------------------------------
@@ -314,10 +326,10 @@ class LSM6DS33:
         """
 
         acc_x, acc_y, acc_z = self.get_acceleration()
-        print("X:{0:10.2f}, Y:{1:10.2f}, Z:{2:10.2f} ".format(acc_x, acc_y, acc_z))
+        print("Accu X:{0:10.2f}, Y:{1:10.2f}, Z:{2:10.2f} ".format(acc_x, acc_y, acc_z))
 
         gyro_x, gyro_y, gyro_z = self.get_gyro()
-        print("X:{0:10.2f}, Y:{1:10.2f}, Z:{2:10.2f} ".format(gyro_x, gyro_y, gyro_z))
+        print("Gyro X:{0:10.2f}, Y:{1:10.2f}, Z:{2:10.2f} ".format(gyro_x, gyro_y, gyro_z))
 
         temp = self.read_temp()
         print("Temp:{0:10.2f} ".format(temp))
@@ -328,13 +340,16 @@ class LSM6DS33:
 
     # Reads the 3 accelerometer channels and stores them in vector a
     def get_acceleration(self) -> Tuple[float, float, float]:
+        """!
+
+        @return: x,y,z
+        """
+
         in_value_array = bytearray(1)
         in_value_array[0] = OUTX_L_XL #(OUTX_L_XL | 0x80)      # automatic increment of register address is enabled by default (IF_INC in CTRL3_C)
 
         return_value_array = bytearray(6)
-        self.__i2cdevice.write_to_then_read_from(in_value_array, return_value_array)
-
-        print("-acc-> " + hex(return_value_array[0]) + "," + hex(return_value_array[1]) + "," + hex(return_value_array[2]) + hex(return_value_array[3]) + "," + hex(return_value_array[4]) + "," + hex(return_value_array[5]) )
+        self.__i2c_device.write_to_then_read_from(in_value_array, return_value_array)
 
         x_raw = int(return_value_array[0] | return_value_array[1] << 8)
         y_raw = int(return_value_array[2] | return_value_array[3] << 8)
@@ -352,14 +367,18 @@ class LSM6DS33:
 
     # Reads the 3 gyro channels and stores them in vector g void
     def get_gyro(self) -> Tuple[float, float, float]:
+        """!
+
+        @return: x,y,z
+        """
 
         in_value_array = bytearray(1)
         in_value_array[0] = OUTX_L_G #| 0x80)      # // automatic  increment of register address is enabled by b default(IF_INC in CTRL3_C)
 
         return_value_array = bytearray(6)
-        self.__i2cdevice.write_to_then_read_from(in_value_array, return_value_array)
+        self.__i2c_device.write_to_then_read_from(in_value_array, return_value_array)
 
-        print("-gyro-> " + hex(return_value_array[0]) + "," + hex(return_value_array[1]) + "," + hex(return_value_array[2]) + hex(return_value_array[3]) + "," + hex(return_value_array[4]) + "," + hex(return_value_array[5]) )
+        #print("-gyro-> " + hex(return_value_array[0]) + "," + hex(return_value_array[1]) + "," + hex(return_value_array[2]) + hex(return_value_array[3]) + "," + hex(return_value_array[4]) + "," + hex(return_value_array[5]) )
 
         x_raw = int(return_value_array[0] | return_value_array[1] << 8)
         y_raw = int(return_value_array[2] | return_value_array[3] << 8)
@@ -376,12 +395,14 @@ class LSM6DS33:
     # --------------------------------------------------------------------------------------
 
     def read_temp(self) -> float:
-        tempL = self.__i2cdevice.i2c_read_register_byte(OUT_TEMP_L)
-        tempH = self.__i2cdevice.i2c_read_register_byte(OUT_TEMP_H)
+        """!
+        Get temperature
+        @return: temperature float
+        """
+        tempL = self.__i2c_device.i2c_read_register_byte(OUT_TEMP_L)
+        tempH = self.__i2c_device.i2c_read_register_byte(OUT_TEMP_H)
 
         temp_raw = int(tempL | tempH << 8)
-
-        print("-temp-> " + hex(tempL) + "," + hex(tempH)  )
 
         return temp_raw / 10.0
 
@@ -390,8 +411,8 @@ class LSM6DS33:
     # --------------------------------------------------------------------------------------
     # noinspection PyMethodMayBeStatic
     def __convert_raw_acc_to_meters_per_second(self, raw_measurement: int) -> float:
-        _gain_divider = 1000        # todo somthing usefull
-        _GAUSS_TO_UT = 100          # todo somthing usefull
+        _gain_divider = 1000        # todo somthing useful
+        _GAUSS_TO_UT = 100          # todo somthing useful
 
         return (raw_measurement / _gain_divider) * _GAUSS_TO_UT
 
@@ -400,8 +421,8 @@ class LSM6DS33:
     # --------------------------------------------------------------------------------------
     # noinspection PyMethodMayBeStatic
     def __convert_raw_gyro_to_meters_per_second(self, raw_measurement: int) -> float:
-        _gain_divider = 1000  # todo somthing usefull
-        _GAUSS_TO_UT = 100  # todo somthing usefull
+        _gain_divider = 1000  # todo somthing useful
+        _GAUSS_TO_UT = 100  # todo somthing useful
 
         return (raw_measurement / _gain_divider) * _GAUSS_TO_UT
 
@@ -409,4 +430,3 @@ class LSM6DS33:
     # --------------------------------------------------------------------------------------
     # --------------------------------------------------------------------------------------
 
-    """The x, y, z angular velocity values returned in a 3-tuple and are in radians / second"""

@@ -35,8 +35,6 @@ def main():
         except SystemExit:
             example.exit_program()
 
-
-
     print("Exit")
 
 
