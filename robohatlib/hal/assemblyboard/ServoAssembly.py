@@ -48,7 +48,7 @@ class ServoAssembly:
             spi_device_adc = _io_handler.get_spi_device(spi_def_adc)
 
             if i2c_device_pwm is not None and spi_device_adc is not None:
-                self.__servo_board = ServoBoard(i2c_device_pwm, spi_device_adc)
+                self.__servo_board = ServoBoard("servoboard_" + _servo_config.get_name(), i2c_device_pwm, spi_device_adc)
 
                 servo_assembly_expander_def = Robohat_config.SERVOASSEMBLY_EXPANDER_DEF
                 callbackholder = InterruptCallbackHolder("expander_callback_holder", self.__io_power_monitor_and_io_int_callback, self.__io_power_monitor_and_io_int_reset_routine, InterruptTypes.INT_FALLING, 250)
@@ -157,22 +157,23 @@ class ServoAssembly:
         Set the angle of connected servos in degree
 
         @param _wanted_angles array of the angles
-
         @return angle of connected servo in degree
         """
         self.__servo_board.set_servo_multiple_angles(_wanted_angles)
 
-    def get_all_servos_angle(self) -> []:
+    # --------------------------------------------------------------------------------------
+
+    def get_servo_multiple_angles(self) -> []:
         """!
         @return angles of servos in degree
         """
         if self.__servo_board is not None:
-            return self.__servo_board.get_all_servos_angle()
+            return self.__servo_board.get_servo_multiple_angles()
         return []
 
     # --------------------------------------------------------------------------------------
 
-    def get_servo_adc_readout_single_channel(self, _servo_nr: int) -> float:
+    def get_servo_adc_single_channel(self, _servo_nr: int) -> float:
         """!
         Get voltage of the potentiometer of the connected servo in vol
 
@@ -180,15 +181,18 @@ class ServoAssembly:
         @return voltage of connected servo in volt or -1 when not available
         """
         if self.__servo_board is not None:
-            return self.__servo_board.get_servo_readout_adc_single_channel(_servo_nr)
+            return self.__servo_board.get_servo_adc_single_channel(_servo_nr)
         return -1
 
-    def get_adc_multiple_channels(self) -> []:
+    # --------------------------------------------------------------------------------------
+
+
+    def get_servo_adc_multiple_channels(self) -> []:
         """!
-        @return voltages of the potentiometer of all the servos in volt
+        @return voltages of the angle of all the servos in volt. Returns an array of 16 elements
         """
         if self.__servo_board is not None:
-            return self.__servo_board.get_readout_adc_multiple_channels()
+            return self.__servo_board.get_servo_adc_multiple_channels()
         return []
 
     # --------------------------------------------------------------------------------------
@@ -225,12 +229,12 @@ class ServoAssembly:
 
     # --------------------------------------------------------------------------------------
 
-    def is_servo_sleeping(self) -> bool:
+    def are_servos_sleeping(self) -> bool:
         """
         Get if Servos are sleeping
         @return (bool) returns True when servos are sleeping
         """
-        return self.__servo_board.is_servo_sleeping()
+        return self.__servo_board.are_servos_sleeping()
 
     # --------------------------------------------------------------------------------------
 

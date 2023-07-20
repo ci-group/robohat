@@ -84,7 +84,7 @@ class Example:
             self.robohat.set_led_color(Color.GREEN)
             for i in range(100,1700, 10):
                 angle:float = i / 10.0
-                self.robohat.set_servo_multiple_angles([angle, angle, angle, angle, angle, angle, angle, angle, angle, angle, angle, angle, angle, angle, angle, angle])
+                self.robohat.set_servo_multiple_angles([angle, angle, angle, angle, angle, angle, angle, angle, angle, angle, angle, angle, angle, angle, angle, angle, angle, angle, angle, angle, angle, angle, angle, angle, angle, angle, angle, angle, angle, angle, angle, angle])
             print(self.robohat.get_servo_multiple_angles())
 
             time.sleep(5)
@@ -93,7 +93,7 @@ class Example:
             self.robohat.set_led_color(Color.RED)
             for i in range(1700,100, -10):
                 angle:float = i / 10.0
-                self.robohat.set_servo_multiple_angles([angle, angle, angle, angle, angle, angle, angle, angle, angle, angle, angle, angle, angle, angle, angle, angle])
+                self.robohat.set_servo_multiple_angles([angle, angle, angle, angle, angle, angle, angle, angle, angle, angle, angle, angle, angle, angle, angle, angle, angle, angle, angle, angle, angle, angle, angle, angle, angle, angle, angle, angle, angle, angle, angle, angle])
             print(self.robohat.get_servo_multiple_angles())
 
             time.sleep(5)
@@ -494,15 +494,17 @@ class Example:
             self.process_do(_command)
 
         elif _command == "are servos sleeping":
-            value = self.robohat.is_servo_sleeping()
+            value = self.robohat.are_servos_sleeping()
             if value is True:
                 print("Servos are sleeping")
             else:
                 print("Servos are a wake")
         elif _command == "put servos to sleep":
             self.robohat.put_servo_to_sleep()
+            print("servos went to sleep")
         elif _command == "wake up servos":
             self.robohat.wakeup_servo()
+            print("servos are a wake")
 
     # --------------------------------------------------------------------------------------
     # --------------------------------------------------------------------------------------

@@ -6,6 +6,7 @@ import math
 
 try:
     from robohatlib.helpers.RoboUtil import RoboUtil
+    from robohatlib.driver_ll.i2c.I2CDevice import I2CDevice
 except ImportError:
     print("Failed to import RoboUtil")
     raise
@@ -51,12 +52,20 @@ class PCA9685:
     # --------------------------------------------------------------------------------------
     # --------------------------------------------------------------------------------------
 
-    def __init__(self, _i2c_device):
+    def __init__(self, _i2c_device: I2CDevice):
+        """!
+        Constructor
+        @param _i2c_device: connection IO
+        """
         self.__i2c_device = _i2c_device
         self.__i_am_a_sleep = False
 
     # --------------------------------------------------------------------------------------
     def init_pca9685(self) -> None:
+        """!
+        Initializes PCA9685
+        @return None:
+        """
         self.__do_idle()
         self.__do_invert_and_set_driver_to_pushpull()
         self.__do_idle()
@@ -85,6 +94,11 @@ class PCA9685:
             print("Error: channel " + str(_channel) + " in ADC MAX11607 not available")
     # --------------------------------------------------------------------------------------
     def set_on_time_all_channels(self, _wanted_times_us: []) -> None:
+        """!
+
+        @param _wanted_times_us:
+        @return: None
+        """
         data_to_send = bytes([LED0_ON_L_ADDRESS])
         for i in range(0, 16):
             actual_ticks_on = self.__convert_timeUs_to_tick(_wanted_times_us[i])
@@ -132,13 +146,13 @@ class PCA9685:
         return self.__i_am_a_sleep
 
     #--------------------------------------------------------------------------------------
-    def __set_pwm_freq(self, _freq, _calibration=-3):
-        """
+    def __set_pwm_freq(self, _freq: int, _calibration: int=-3) -> None:
+        """!
         Set the PWM frequency
-        :param _freq: 40 to 1000
-        :type _freq: int
-        :param _calibration: optional integer value to offset oscillator errors. defaults to 0
-        :raises ValueError: set_pwm_freq: freq out of range
+        @param _freq: 40 to 1000
+        @type _freq: int
+        @param _calibration: optional integer value to offset oscillator errors. defaults to 0
+        @raises ValueError: set_pwm_freq: freq out of range
         """
         if _freq < 40 or _freq > 1000:
             raise ValueError('set_pwm_freq: freq out of range')
@@ -148,9 +162,7 @@ class PCA9685:
         scale_val = scale_val / float(_freq)
         scale_val = scale_val - 1
         pre_scale = math.floor(scale_val + 0.5)
-        pre_scale = pre_scale + _calibration
-
-        #print("scaleval: " + str(scale_val) + " Freq: " + str(_freq) + "Hz Prescaler: " + str(pre_scale))
+        pre_scale = pre_scale + float(_calibration)
 
         self.__freq = _freq
 
@@ -160,7 +172,7 @@ class PCA9685:
 
     # --------------------------------------------------------------------------------------
 
-    def __convert_timeUs_to_tick(self, _time_wanted_us: float):
+    def __convert_timeUs_to_tick(self, _time_wanted_us: float) -> int:
         time_per_tick = ((1.0 / self.__freq) / 4095.0) * 1000000
         actual_ticks = int(_time_wanted_us / time_per_tick)
         return actual_ticks
@@ -172,15 +184,20 @@ class PCA9685:
         self.__write(MODE2_ADDRESS, new_mode)
 
     # --------------------------------------------------------------------------------------
-    def __do_idle(self):
+    def __do_idle(self) -> None:
         self.__write(0x00, 0x00)
 
     # --------------------------------------------------------------------------------------
-    def __write(self, reg, value):
+    def __write(self, reg, value) -> None:
         self.__i2c_device.i2c_write_bytes(bytes([reg, value]))
 
     # --------------------------------------------------------------------------------------
     def __read(self, reg):
+        """!
+
+        @param reg:
+        @return:
+        """
         return_value_array = bytearray(2)
         self.__i2c_device.write_to_then_read_from(bytes([0x00, reg]), return_value_array)
         return return_value_array[0]

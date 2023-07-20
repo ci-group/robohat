@@ -7,7 +7,6 @@ except ImportError:
     raise ImportError("spidev not found.")
 
 try:
-    #from robohatlib.Robohat_config import Robohat_config
     from robohatlib.driver_ll.spi.SPIDevice import SPIDevice
 except ImportError:
     raise ImportError("failed to resolve all dependencies for MAX11137")
@@ -92,15 +91,14 @@ ADC_MAX_COUNT = 4095  # max count, (12 bit = 4095
 #--------------------------------------------------------------------------------------
 
 class MAX11137:
-    __adc_result_voltage = [0.0] * 16         # allocates and fills alle elements of array with 0
+
 
     # --------------------------------------------------------------------------------------
-    def __init__(self, _spi_device:SPIDevice):
+    def __init__(self, _spi_device: SPIDevice):
         """!
         Constructor of the MAX11137
         @param _spi_device: spi connection of this device
         """
-        #print("Constructor MAX11137")
         self.__spi_device = _spi_device
 
     # --------------------------------------------------------------------------------------
@@ -182,7 +180,6 @@ class MAX11137:
         @return array voltages of the potentiometer of all the servos in volt
 
         """
-
         adc_mode_control = 0b0000000000000000
         adc_mode_control = self.__update_register_value(adc_mode_control, SCAN_LSB, SCAN_BITS_STANDARD_INT)
         adc_mode_control = self.__update_register_value(adc_mode_control, CHSEL_LSB, 15)
@@ -195,7 +192,9 @@ class MAX11137:
         value_raw_int = int(count_adc & 0x0fff)
         channel_raw_int = int(count_adc >> 12)
         voltage_float = float((ADC_REF_VOLTAGE / ADC_MAX_COUNT) * value_raw_int)
-        self.__adc_result_voltage[channel_raw_int] = voltage_float
+
+        adc_result_voltage = [-1.0] * 16  # allocates and fills alle elements of array with 0
+        adc_result_voltage[channel_raw_int] = voltage_float
 
         for  i  in range(0,16):
             adc_mode_control = 0b0000000000000000
@@ -205,9 +204,9 @@ class MAX11137:
             value_raw_int = int(count_adc & 0x0fff)
             channel_raw_int = int(count_adc >> 12)
             voltage_float = float((ADC_REF_VOLTAGE / ADC_MAX_COUNT) * value_raw_int) + 0.02
-            self.__adc_result_voltage[channel_raw_int] = voltage_float
+            adc_result_voltage[channel_raw_int] = voltage_float
 
-        return self.__adc_result_voltage
+        return adc_result_voltage
 
     # --------------------------------------------------------------------------------------
 

@@ -43,7 +43,7 @@ class Buzzer:
         Cleans up, when user want to shut down
         @return: None
         """
-        self.buzzer_beep()
+        # self.buzzer_beep()
 
     # random buzzer -------------------------------------------------------------------------------------
     def buzzer_random(self) -> None:

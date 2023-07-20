@@ -26,8 +26,9 @@ class ServoBoard:
 
     #--------------------------------------------------------------------------------------
 
-    def __init__(self, i2c_device_servo: I2CDevice, _spi_device_servo_adc: SPIDevice):
-        self.__pwm = PCA9685(i2c_device_servo)
+    def __init__(self, _name:str, _i2c_device_servo: I2CDevice, _spi_device_servo_adc: SPIDevice):
+        self.__name = _name
+        self.__pwm = PCA9685(_i2c_device_servo)
         self.__servo_adc = MAX11137(_spi_device_servo_adc)
 
     #--------------------------------------------------------------------------------------
@@ -37,6 +38,12 @@ class ServoBoard:
         self.__servo_datas_array = _servo_datas_array
         self.__pwm.init_pca9685()
         self.__servo_adc.init_adc()
+
+    #--------------------------------------------------------------------------------------
+    #--------------------------------------------------------------------------------------
+
+    def get_name(self) -> str:
+        return self.__name
 
     #--------------------------------------------------------------------------------------
     #--------------------------------------------------------------------------------------
@@ -73,7 +80,7 @@ class ServoBoard:
         """
 
         if _servo_nr >= 0 and _servo_nr < 16:
-            voltage_channel = self.get_servo_readout_adc_single_channel(_servo_nr)
+            voltage_channel = self.get_servo_adc_single_channel(_servo_nr)
             angle_channel = self.__servo_datas_array[_servo_nr - 1].convert_voltage_to_angle(voltage_channel)
             if angle_channel < 0:
                 print("Error, requested servo readout is not connected")
@@ -91,6 +98,7 @@ class ServoBoard:
         @param _wanted_angles:  (should be an array of 16, servo 1 is array pos 0)
         @return: None
         """
+
         wanted_time_array = [0] * 16
         for i in range(0, 16):
             wanted_time_array[i] = self.__servo_datas_array[i].convert_angle_to_time(_wanted_angles[i])
@@ -98,7 +106,7 @@ class ServoBoard:
 
     #--------------------------------------------------------------------------------------
 
-    def get_all_servos_angle(self) -> []:
+    def get_servo_multiple_angles(self) -> []:
         """!
         Gets all the angle of the servos (Returns an array of 16, servo 0 is array pos 0)
         @return array of degrees
@@ -116,7 +124,7 @@ class ServoBoard:
     #--------------------------------------------------------------------------------------
     #--------------------------------------------------------------------------------------
 
-    def get_servo_readout_adc_single_channel(self, _servo_nr: int) -> float:
+    def get_servo_adc_single_channel(self, _servo_nr: int) -> float:
         """!
         Get voltage of the potentiometer of the connected servo in volt or -1 when in error
         @param _servo_nr The servo nr wanted (starts at 01)
@@ -131,6 +139,14 @@ class ServoBoard:
 
     #--------------------------------------------------------------------------------------
 
+    def get_servo_adc_multiple_channels(self) -> []:
+        """!
+        @return array of voltages of the angle of all the servos in volt Returns 16 elements
+        """
+        return self.__servo_adc.get_readout_adc_multiple_channels()
+
+    #--------------------------------------------------------------------------------------
+
     def get_servo_is_connected(self, _servo_nr: int) -> bool:
         """!
         Checks if servo is connected. Returns False when not connected
@@ -138,19 +154,11 @@ class ServoBoard:
         @param _servo_nr The servo nr
         @return: Returns False when not connected
         """
-        value = self.get_servo_readout_adc_single_channel(_servo_nr)
+        value = self.get_servo_adc_single_channel(_servo_nr)
         if value < 0.2:
             return False
         else:
             return True
-
-    #--------------------------------------------------------------------------------------
-
-    def get_readout_adc_multiple_channels(self) -> []:
-        """!
-        @return voltages of the potentiometer of all the servos in volt
-        """
-        return self.__servo_adc.get_readout_adc_multiple_channels()
 
     #--------------------------------------------------------------------------------------
     #--------------------------------------------------------------------------------------

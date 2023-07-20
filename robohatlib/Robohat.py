@@ -333,31 +333,34 @@ class Robohat:
         if servo_assembly is not None:
             servo_nr = self.__get_servo_nr_depending_assembly(_servo_nr)            # servo nr of the servo of the assembly
             if servo_nr is not None:
-                return servo_assembly.get_servo_adc_readout_single_channel(servo_nr)
+                return servo_assembly.get_servo_adc_single_channel(servo_nr)
         return -1
     # --------------------------------------------------------------------------------------
 
-    def get_servo_adc_multiple_channels(self):
+    def get_servo_adc_multiple_channels(self) -> []:
         """!
-        Get voltages of the potentiometer of all the servos in volt or en empty array
+        Get voltages of the angle of all the servos. The array consists of 32 elements.
         @return array of voltages
         """
 
-        return_data = []
+        return_data = [-1.0] * 32
 
         if self.__servo_assembly_1 is not None:
-            data_assembly1 = self.__servo_assembly_1.get_adc_multiple_channels()
-            return_data.append(data_assembly1)
+            data_assembly1 = self.__servo_assembly_1.get_servo_adc_multiple_channels()
+            for i in range(0, 16):
+                return_data[i] = data_assembly1[i]
 
         if self.__servo_assembly_2 is not None:
-            data_assembly2 = self.__servo_assembly_2.get_adc_multiple_channels()
-            return_data.append(data_assembly2)
+            data_assembly2 = self.__servo_assembly_2.get_servo_adc_multiple_channels()
+            for i in range(0, 16):
+                return_data[i+ 16] = data_assembly2[i]
 
-        if self.__servo_assembly_1 is not None and self.__servo_assembly_2 is not None:
+        if self.__servo_assembly_1 is None and self.__servo_assembly_2 is None:
             print("Error, no assemblies found, requesting ADC data")
 
         return return_data
     # --------------------------------------------------------------------------------------
+
     def get_servo_single_angle(self, _servo_nr: int) -> float:
         """!
         Get angle of connected servo in degree or -1 when an error occurs
@@ -399,20 +402,22 @@ class Robohat:
     def get_servo_multiple_angles(self) -> []:
         """!
         Get an array of the angles of all the servos
-        Depending on available assembly, an empty array, array of 16 elements or an array od 32 elements will be returned
+        an array of 32 elements will be returned
 
         @return angles array
         """
 
-        return_data = []
+        return_data = [-1.0] * 32
 
         if self.__servo_assembly_1 is not None:
-            data_assembly1 = self.__servo_assembly_1.get_all_servos_angle()
-            return_data.append(data_assembly1)
+            data_assembly1 = self.__servo_assembly_1.get_servo_multiple_angles()
+            for i in range(0, 16):
+                return_data[i] = data_assembly1[i]
 
         if self.__servo_assembly_2 is not None:
-            data_assembly2 = self.__servo_assembly_2.get_all_servos_angle()
-            return_data.append(data_assembly2)
+            data_assembly2 = self.__servo_assembly_2.get_servo_multiple_angles()
+            for i in range(0, 16):
+                return_data[i+16] = data_assembly2[i]
 
         return return_data
 
@@ -428,12 +433,16 @@ class Robohat:
         @return None
         """
 
-        if self.__servo_assembly_1 is not None:
-            angles_array1 = _angles_array[0:16]
+        if self.__servo_assembly_1 is not None and len(_angles_array) >= 16:
+            angles_array1 = [0.0] * 16
+            for i in range(0, 16):
+                angles_array1[i] = _angles_array[i]
             self.__servo_assembly_1.set_servo_multiple_angles(angles_array1)
 
         if self.__servo_assembly_2 is not None and len(_angles_array) >= 32:
-            angles_array2 = _angles_array[16:32]
+            angles_array2 = [0.0] * 16
+            for i in range(0, 16):
+                angles_array2[i] = _angles_array[i+16]
             self.__servo_assembly_2.set_servo_multiple_angles(angles_array2)
 
         # ------------------------------------------------------------------------------------------
@@ -465,17 +474,17 @@ class Robohat:
 
     # ------------------------------------------------------------------------------------------
 
-    def is_servo_sleeping(self) -> bool:
+    def are_servos_sleeping(self) -> bool:
         """
         Get if Servos are sleeping
         @return: True when servos are sleeping
         """
 
         if self.__servo_assembly_1 is not None:
-            return self.__servo_assembly_1.is_servo_sleeping()
+            return self.__servo_assembly_1.are_servos_sleeping()
 
         elif self.__servo_assembly_2 is not None:
-            return self.__servo_assembly_2.is_servo_sleeping()
+            return self.__servo_assembly_2.are_servos_sleeping()
 
         return True
 
