@@ -694,14 +694,12 @@ class Robohat:
         """
         self.__hat_io_expander.set_io_expander_output_status(_io_nr, _status)
 
-    def get_hat_io_expander_input(self, _io_nr):
+    def get_hat_io_expander_input(self, _io_nr: int):
         """!
         get the input status of an io pin of the IO expander
-
         Note. direction of the pin must be an Input
 
         @param _io_nr io nr
-
         @return status of the pin
         """
         return self.__hat_io_expander.get_io_expander_input(_io_nr)

@@ -151,8 +151,8 @@ class Example:
         print("get topboard adc all                           get all the topboard adc values")
         print("set topboard io dir [pin nr] [in|out]          set the direction of an io pin on the topboard")
         print("get topboard io dir [pin nr]                   get the direction of an io pin on the topboard")
-        print("set topboard io out [pin nr] [0|1]             set the pin value of an io pin on the topboard")
-        print("get topboard io in [pin nr]                    get the pin value of an io pin on the topboard")
+        print("set topboard io output [pin nr] [0|1]          set the pin value of an io pin on the topboard")
+        print("get topboard io input [pin nr]                 get the pin value of an io pin on the topboard")
 
         print("get accu voltage                               get voltage of accu")
         print("get accu capacity                              get capacity of accu")
@@ -329,7 +329,7 @@ class Example:
             else:
                 print("syntax error, get servo")
 # -------------------------------------------------------------------------------
-        elif command == "hat":
+        elif command == "topboard":
             sub_command = data_in_array[2]
             if sub_command == "adc":
                 parameter_str: str = data_in_array[3]
@@ -344,7 +344,7 @@ class Example:
                 else:
                     print("syntax error at hat: " + parameter_str )
             elif sub_command == "io":
-                io_command = int(data_in_array[3])
+                io_command = data_in_array[3]
                 if io_command == "dir":
                     pin_nr = int(data_in_array[4])
                     value = self.robohat.get_hat_io_expander_direction(pin_nr)
@@ -352,7 +352,7 @@ class Example:
                 elif io_command == "input":
                     pin_nr = int(data_in_array[4])
                     value = self.robohat.get_hat_io_expander_input(pin_nr)
-                    print(value)
+                    print("topboard io: " + str(value) )
                 else:
                     print("syntax error, unknown hat io command")
             else:

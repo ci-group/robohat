@@ -68,24 +68,24 @@ class IOExpander:
         @return: None
         """
         if self.__expander is not None:
-            self.__check_if_expander_io_is_available(_io_nr)
-            if  _direction is ExpanderDir.OUTPUT:
-                wanted_pin_value = 0
-            else:
-                wanted_pin_value = 1
-            self.__expander.set_pin_direction(_io_nr, wanted_pin_value)
+            if self.__check_if_expander_io_is_available(_io_nr) is True:
+                if  _direction is ExpanderDir.OUTPUT:
+                    wanted_pin_value = 0
+                else:
+                    wanted_pin_value = 1
+                self.__expander.set_pin_direction(_io_nr, wanted_pin_value)
 
     #--------------------------------------------------------------------------------------
     def get_direction_io_expander(self, _io_nr:int) -> ExpanderDir:
         if self.__expander is not None:
-           self.__check_if_expander_io_is_available(_io_nr)
-
-           value = self.__expander.get_pin_direction()
-           if value is 0:
-               return ExpanderDir.OUTPUT
-           else:
-               return ExpanderDir.INPUT
-
+            if self.__check_if_expander_io_is_available(_io_nr) is True:
+               value = self.__expander.get_pin_direction()
+               if value is 0:
+                   return ExpanderDir.OUTPUT
+               else:
+                   return ExpanderDir.INPUT
+            else:
+                return ExpanderDir.INVALID
     #--------------------------------------------------------------------------------------
 
     def set_io_expander_output_status(self, _io_nr:int, _status:ExpanderStatus) -> None:
@@ -101,14 +101,13 @@ class IOExpander:
         """
 
         if self.__expander is not None:
-            self.__check_if_expander_io_is_available(_io_nr)
-
-            wanted_pin_value = 0
-
-            if  _status is ExpanderStatus.LOW:
+            if self.__check_if_expander_io_is_available(_io_nr) is True:
                 wanted_pin_value = 0
 
-            self.__expander.set_pin_data(_io_nr, wanted_pin_value)
+                if  _status is ExpanderStatus.LOW:
+                    wanted_pin_value = 0
+
+                self.__expander.set_pin_data(_io_nr, wanted_pin_value)
 
     #--------------------------------------------------------------------------------------
 
@@ -120,30 +119,35 @@ class IOExpander:
 
         @param _io_nr io nr
 
-        @return status of the pin or 0 when not available
+        @return status of the pin or -1 when not available
         """
         if self.__expander is not None:
-            self.__check_if_expander_io_is_available(_io_nr)
-            return self.__expander.get_pin_data(_io_nr)
-
-        return 0
+            if self.__check_if_expander_io_is_available(_io_nr) is True:
+                return self.__expander.get_pin_data(_io_nr)
+        return -1
 
     #--------------------------------------------------------------------------------------
 
-    def reset_interrupt(self, _io_nr) -> None:
+    def reset_interrupt(self, _io_nr:int) -> None:
+        """!
+
+        @param _io_nr:
+        @return: None
+        """
         self.__expander.reset_interrupts()
     #--------------------------------------------------------------------------------------
 
-    def __check_if_expander_io_is_available(self, _io_nr:int) -> None:
+    def __check_if_expander_io_is_available(self, _io_nr:int) -> bool:
         """!
-        Checks if the IO is available
+        Checks if the IO is available, True if avaible
 
         @param _io_nr: pint n of the GPIO
-        @return: Nome
-        @:raises exception when not available
+        @return: bool
         """
 
         if self.__expander is None or _io_nr not in range(0, 8):
-            raise ValueError("only io0 till io7 are available")
+            print("io pin not available. Must between 0 until 7")
+            return False
+        return True
 
     #-------------------------------------------------------------------------------------
