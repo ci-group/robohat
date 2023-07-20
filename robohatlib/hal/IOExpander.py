@@ -79,7 +79,7 @@ class IOExpander:
     def get_direction_io_expander(self, _io_nr:int) -> ExpanderDir:
         if self.__expander is not None:
             if self.__check_if_expander_io_is_available(_io_nr) is True:
-               value = self.__expander.get_pin_direction()
+               value = self.__expander.get_pin_direction(_io_nr)
                if value is 0:
                    return ExpanderDir.OUTPUT
                else:
@@ -104,8 +104,8 @@ class IOExpander:
             if self.__check_if_expander_io_is_available(_io_nr) is True:
                 wanted_pin_value = 0
 
-                if  _status is ExpanderStatus.LOW:
-                    wanted_pin_value = 0
+                if  _status is ExpanderStatus.HIGH:
+                    wanted_pin_value = 1
 
                 self.__expander.set_pin_data(_io_nr, wanted_pin_value)
 

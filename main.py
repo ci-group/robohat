@@ -135,7 +135,7 @@ class Example:
 
         print("set servo io dir [pin nr] [in|out]             set the direction of an io pin of a servo board")
         print("get servo io dir [pin nr]                      get the direction of an io pin of a servo board")
-        print("set servo io output [pin nr] [0|1]             set the pin value of an io pin of a servo board")
+        print("set servo io output [pin nr] [low|high]        set the pin value of an io pin of a servo board")
         print("get servo io input [pin nr]                    get the pin value of an io pin of a servo board")
 
         print("wake up servos                                 wakes all servo up")
@@ -151,7 +151,7 @@ class Example:
         print("get topboard adc all                           get all the topboard adc values")
         print("set topboard io dir [pin nr] [in|out]          set the direction of an io pin on the topboard")
         print("get topboard io dir [pin nr]                   get the direction of an io pin on the topboard")
-        print("set topboard io output [pin nr] [0|1]          set the pin value of an io pin on the topboard")
+        print("set topboard io output [pin nr] [low|high]     set the pin value of an io pin on the topboard")
         print("get topboard io input [pin nr]                 get the pin value of an io pin on the topboard")
 
         print("get accu voltage                               get voltage of accu")
@@ -217,21 +217,25 @@ class Example:
         elif command == "topboard":
             sub_command = data_in_array[2]
             if sub_command == "io":
-               io_command = int(data_in_array[3])
+               io_command = data_in_array[3]
                if io_command == "dir":
                     pin_nr = int(data_in_array[4])
                     value = data_in_array[5]
-                    if value is "out":
+                    if value == "out":
                         self.robohat.set_hat_io_expander_direction(pin_nr, ExpanderDir.OUTPUT)
+                        print("Direction set to out")
                     else:
                         self.robohat.set_hat_io_expander_direction(pin_nr, ExpanderDir.INPUT)
+                        print("Direction set to in")
                elif io_command == "out":
                    pin_nr = int(data_in_array[4])
                    value = data_in_array[5]
-                   if value is "0":
-                       self.robohat.set_hat_io_expander_output(pin_nr, ExpanderStatus.LOW)
-                   else:
+                   if value == "HIGH" or value == "high":
                        self.robohat.set_hat_io_expander_output(pin_nr, ExpanderStatus.HIGH)
+                       print("Pin set to HIGH")
+                   else:
+                       self.robohat.set_hat_io_expander_output(pin_nr, ExpanderStatus.LOW)
+                       print("Pin set to LOW")
                else:
                    print("syntax error, set hat io command not found")
             else:
