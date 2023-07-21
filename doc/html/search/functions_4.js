@@ -13,8 +13,8 @@ var searchData=
   ['get_5flib_5fversion_10',['get_lib_version',['../class_robohat_1_1_robohat.html#aa304587ef960f785dbe1605d134a88b1',1,'Robohat::Robohat']]],
   ['get_5fservo_5fadc_5fmultiple_5fchannels_11',['get_servo_adc_multiple_channels',['../class_robohat_1_1_robohat.html#a00b98eea43b3db2aa2d77032f676a0eb',1,'Robohat::Robohat']]],
   ['get_5fservo_5fadc_5fsingle_5fchannel_12',['get_servo_adc_single_channel',['../class_robohat_1_1_robohat.html#ab250efb9aba4bfc557d5f608365b6f49',1,'Robohat::Robohat']]],
-  ['get_5fservo_5fio_5fexpander_5fdirection_13',['get_servo_io_expander_direction',['../class_robohat_1_1_robohat.html#aa311e9fa5d62d41eb687125cbbbc80d6',1,'Robohat::Robohat']]],
-  ['get_5fservo_5fio_5fexpander_5finput_14',['get_servo_io_expander_input',['../class_robohat_1_1_robohat.html#a6b6c853b974e1d3f3160768ce9fce87a',1,'Robohat::Robohat']]],
+  ['get_5fservo_5fio_5fexpander_5fdirection_13',['get_servo_io_expander_direction',['../class_robohat_1_1_robohat.html#a4374ce287446f1c478eec17db604ee77',1,'Robohat::Robohat']]],
+  ['get_5fservo_5fio_5fexpander_5finput_14',['get_servo_io_expander_input',['../class_robohat_1_1_robohat.html#a057799503761bded27c8acc32813f1a1',1,'Robohat::Robohat']]],
   ['get_5fservo_5fis_5fconnected_15',['get_servo_is_connected',['../class_robohat_1_1_robohat.html#a39b197d94ef1d53960865bd5756642c8',1,'Robohat::Robohat']]],
   ['get_5fservo_5fmultiple_5fangles_16',['get_servo_multiple_angles',['../class_robohat_1_1_robohat.html#a0a6b40376a6d7089dbf7a7877746bae1',1,'Robohat::Robohat']]],
   ['get_5fservo_5fsingle_5fangle_17',['get_servo_single_angle',['../class_robohat_1_1_robohat.html#a2f4162ec1ae859e03781e652f87ddf95',1,'Robohat::Robohat']]],
@@ -22,5 +22,5 @@ var searchData=
   ['get_5ftopboard_5fadc_5fmultiple_5fchannels_19',['get_topboard_adc_multiple_channels',['../class_robohat_1_1_robohat.html#a8f8adbc89f0d3887630c0a6ad16ae384',1,'Robohat::Robohat']]],
   ['get_5ftopboard_5fadc_5fsingle_5fchannel_20',['get_topboard_adc_single_channel',['../class_robohat_1_1_robohat.html#af86a031ba23fc4e455dd6de5faeaee88',1,'Robohat::Robohat']]],
   ['get_5ftopboard_5fio_5fexpander_5fdirection_21',['get_topboard_io_expander_direction',['../class_robohat_1_1_robohat.html#a4b20b151cb9ffaf25c0c255a8136ef74',1,'Robohat::Robohat']]],
-  ['get_5ftopboard_5fio_5fexpander_5finput_22',['get_topboard_io_expander_input',['../class_robohat_1_1_robohat.html#a4166465686443bcfddcf6c6c51bfb5db',1,'Robohat::Robohat']]]
+  ['get_5ftopboard_5fio_5fexpander_5finput_22',['get_topboard_io_expander_input',['../class_robohat_1_1_robohat.html#a7fd577a7cc4d8f0686e62877c3767823',1,'Robohat::Robohat']]]
 ];
