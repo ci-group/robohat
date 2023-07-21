@@ -7,3 +7,4 @@ Enum with statuses for a io expander
 class ExpanderStatus(Enum):
     LOW = 0
     HIGH = 1
+    INVALID = 2

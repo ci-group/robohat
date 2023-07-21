@@ -7,6 +7,8 @@ try:
     from robohatlib.hal.datastructure.Color import Color
     from robohatlib.hal.datastructure.ExpanderDirection import ExpanderDir
     from robohatlib.hal.datastructure.ExpanderStatus import ExpanderStatus
+    from robohatlib.driver_ll.datastructs.IOStatus import IOStatus
+
     import test_config
     import sys
     import os
@@ -212,11 +214,13 @@ class Example:
                     pin_nr = int(data_in_array[5])
                     value = data_in_array[6]
                     if value == "OUT" or value == "out":
-                        self.robohat.set_servo_io_expander_direction(board_nr, pin_nr, ExpanderDir.OUTPUT)
-                        print("Direction set to output")
+                        stat = self.robohat.set_servo_io_expander_direction(board_nr, pin_nr, ExpanderDir.OUTPUT)
+                        if stat == IOStatus.IO_OK:
+                            print("Direction set to output")
                     elif value == "IN" or value == "in":
-                        self.robohat.set_servo_io_expander_direction(board_nr, pin_nr, ExpanderDir.INPUT)
-                        print("Direction set to input")
+                        stat = self.robohat.set_servo_io_expander_direction(board_nr, pin_nr, ExpanderDir.INPUT)
+                        if stat == IOStatus.IO_OK:
+                            print("Direction set to input")
                     else:
                         print("Syntax error setting direction")
                 elif io_command == "output":
@@ -224,11 +228,13 @@ class Example:
                     pin_nr = int(data_in_array[5])
                     value = data_in_array[6]
                     if value == "HIGH" or value == "high":
-                        self.robohat.set_servo_io_expander_output(board_nr, pin_nr, ExpanderStatus.HIGH)
-                        print("Pin set to HIGH")
+                        stat = self.robohat.set_servo_io_expander_output(board_nr, pin_nr, ExpanderStatus.HIGH)
+                        if stat == IOStatus.IO_OK:
+                            print("Pin set to HIGH")
                     elif value == "LOW" or value == "low":
-                        self.robohat.set_servo_io_expander_output(board_nr, pin_nr, ExpanderStatus.LOW)
-                        print("Pin set to LOW")
+                        stat = self.robohat.set_servo_io_expander_output(board_nr, pin_nr, ExpanderStatus.LOW)
+                        if stat == IOStatus.IO_OK:
+                            print("Pin set to LOW")
                     else:
                         print("Syntax error setting output")
                 else:
@@ -244,11 +250,13 @@ class Example:
                     pin_nr = int(data_in_array[4])
                     value = data_in_array[5]
                     if value == "OUT" or value == "out":
-                        self.robohat.set_topboard_io_expander_direction(pin_nr, ExpanderDir.OUTPUT)
-                        print("Direction set to output")
+                        stat = self.robohat.set_topboard_io_expander_direction(pin_nr, ExpanderDir.OUTPUT)
+                        if stat == IOStatus.IO_OK:
+                            print("Direction set to output")
                     elif value == "IN" or value == "in":
-                        self.robohat.set_topboard_io_expander_direction(pin_nr, ExpanderDir.INPUT)
-                        print("Direction set to input")
+                        stat = self.robohat.set_topboard_io_expander_direction(pin_nr, ExpanderDir.INPUT)
+                        if stat == IOStatus.IO_OK:
+                            print("Direction set to input")
                     else:
                         print("Syntax error setting direction pin")
 
@@ -256,17 +264,19 @@ class Example:
                    pin_nr = int(data_in_array[4])
                    value = data_in_array[5]
                    if value == "HIGH" or value == "high":
-                       self.robohat.set_topboard_io_expander_output(pin_nr, ExpanderStatus.HIGH)
-                       print("Pin set to HIGH")
+                       stat = self.robohat.set_topboard_io_expander_output(pin_nr, ExpanderStatus.HIGH)
+                       if stat == IOStatus.IO_OK:
+                            print("Pin set to HIGH")
                    elif value == "LOW" or value == "low":
-                       self.robohat.set_topboard_io_expander_output(pin_nr, ExpanderStatus.LOW)
-                       print("Pin set to LOW")
+                       stat = self.robohat.set_topboard_io_expander_output(pin_nr, ExpanderStatus.LOW)
+                       if stat == IOStatus.IO_OK:
+                            print("Pin set to LOW")
                    else:
                         print("Syntax error setting pin")
                else:
-                   print("syntax error, set hat io command not found")
+                   print("syntax error, set topboard io command not found")
             else:
-               print("syntax error, set hat command not found")
+               print("syntax error, set topboard command not found")
 # ------------------------------------------------------------------------------
         elif command == "led":
             sub_command = data_in_array[2].upper()
@@ -558,7 +568,6 @@ class Example:
         """
         print("__test_hat_io_expander_int_callback by: " + str(_gpi_nr))
         self.robohat.do_buzzer_beep()
-
 
     # some test routines
     def __test_assemblyboard_1_io_expander_int_callback(self, _gpi_nr: int) -> None:

@@ -25,10 +25,13 @@ try:
     from robohatlib.hal.datastructure.AccuStatus import AccuStatus
 
     from robohatlib.hal.assemblyboard.ServoAssembly import ServoAssembly
-    from robohatlib.hal.HatADC import HatADC
+    from robohatlib.hal.TopboardADC import HatADC
     from robohatlib.hal.assemblyboard.servo.ServoBoard import ServoBoard
     from robohatlib.hal.assemblyboard.ServoAssemblyConfig import ServoAssemblyConfig
     from robohatlib.hal.assemblyboard.servo.ServoData import ServoData
+
+    from robohatlib.driver_ll.datastructs.IOStatus import IOStatus
+
     from time import sleep
 
     from typing import Tuple
@@ -445,7 +448,8 @@ class Robohat:
                 angles_array2[i] = _angles_array[i+16]
             self.__servo_assembly_2.set_servo_multiple_angles(angles_array2)
 
-        # ------------------------------------------------------------------------------------------
+    # ------------------------------------------------------------------------------------------
+
     def put_servo_to_sleep(self) -> None:
         """!
         Puts servos to sleep. Note servos will be powered down
@@ -490,7 +494,7 @@ class Robohat:
 
     # ------------------------------------------------------------------------------------------
 
-    def set_servo_io_expander_direction(self, _board_nr: int, _pin_nr: int, _dir: ExpanderDir) -> None:
+    def set_servo_io_expander_direction(self, _board_nr: int, _pin_nr: int, _dir: ExpanderDir) -> IOStatus:
         """!
         Set the direction of the IO pin on a servo board.
         @param _board_nr: board nr
@@ -501,20 +505,23 @@ class Robohat:
 
         if _board_nr == Robohat_constants.PWMPLUG_P3:               # board 0
             if self.__servo_assembly_1 is not None:
-                self.__servo_assembly_1.set_servo_io_expander_direction(_pin_nr, _dir)
+                return self.__servo_assembly_1.set_servo_io_expander_direction(_pin_nr, _dir)
             else:
                 print("Error: servo assembly 1 not initialized")
+                return IOStatus.IO_FAILED
         elif _board_nr == Robohat_constants.PWMPLUG_P4:             # board 1
             if self.__servo_assembly_2 is not None:
-                self.__servo_assembly_2.set_servo_io_expander_direction(_pin_nr, _dir)
+                return self.__servo_assembly_2.set_servo_io_expander_direction(_pin_nr, _dir)
             else:
                 print("Error: servo assembly 2 not initialized")
+                return IOStatus.IO_FAILED
         else:
             print("Board nr not available")
+            return IOStatus.IO_FAILED
 
     # ------------------------------------------------------------------------------------------
 
-    def get_servo_io_expander_direction(self, _board_nr: int, _pin_nr: int) -> ExpanderDir | None:
+    def get_servo_io_expander_direction(self, _board_nr: int, _pin_nr: int) -> ExpanderDir:
         """!
         Set the direction of the IO pin on a servo board.
         @param _board_nr: board nr
@@ -527,20 +534,20 @@ class Robohat:
                 return self.__servo_assembly_1.get_servo_io_expander_direction(_pin_nr)
             else:
                 print("Error: servo assembly 1 not initialized")
-                return None
+                return ExpanderDir.INVALID
         elif _board_nr == Robohat_constants.PWMPLUG_P4:             # board 1
             if self.__servo_assembly_2 is not None:
                 return self.__servo_assembly_2.get_servo_io_expander_direction(_pin_nr)
             else:
                 print("Error: servo assembly 2 not initialized")
-                return None
+                return ExpanderDir.INVALID
         else:
             print("Board nr not available")
-        return None
+        return ExpanderDir.INVALID
 
     # ------------------------------------------------------------------------------------------
 
-    def set_servo_io_expander_output(self, _board_nr: int, _pin_nr: int, _value: ExpanderStatus) -> None:
+    def set_servo_io_expander_output(self, _board_nr: int, _pin_nr: int, _value: ExpanderStatus) -> IOStatus:
         """!
         Set the value of the IO pin on a servo board. Note, io pin should be an output
         @param _board_nr: board nr
@@ -550,19 +557,22 @@ class Robohat:
         """
         if _board_nr == Robohat_constants.PWMPLUG_P3:               # board 0
             if self.__servo_assembly_1 is not None:
-                self.__servo_assembly_1.set_servo_io_expander_output(_pin_nr, _value)
+                return self.__servo_assembly_1.set_servo_io_expander_output(_pin_nr, _value)
             else:
                 print("Error: servo assembly 1 not initialized")
+                return IOStatus.IO_FAILED
         elif _board_nr == Robohat_constants.PWMPLUG_P4:             # board 1
             if self.__servo_assembly_2 is not None:
-                self.__servo_assembly_2.set_servo_io_expander_output(_pin_nr, _value)
+                return self.__servo_assembly_2.set_servo_io_expander_output(_pin_nr, _value)
             else:
                 print("Error: servo assembly 2 not initialized")
+                return IOStatus.IO_FAILED
         else:
             print("Board nr not available")
+            return IOStatus.IO_FAILED
     # ------------------------------------------------------------------------------------------
 
-    def get_servo_io_expander_input(self, _board_nr: int, _pin_nr: int) -> ExpanderStatus | None:
+    def get_servo_io_expander_input(self, _board_nr: int, _pin_nr: int) -> ExpanderStatus:
         """!
         Get the value of the IO pin on a servo board. Note, io pin should be an output
         @param _board_nr: board nr
@@ -574,16 +584,16 @@ class Robohat:
                 return self.__servo_assembly_1.get_servo_io_expander_input(_pin_nr)
             else:
                 print("Error: servo assembly 1 not initialized")
-                return None
+                return ExpanderStatus.INVALID
         elif _board_nr == Robohat_constants.PWMPLUG_P4:             # board 1
             if self.__servo_assembly_2 is not None:
                 return self.__servo_assembly_2.get_servo_io_expander_input(_pin_nr)
             else:
                 print("Error: servo assembly 2 not initialized")
-                return None
+                return ExpanderStatus.INVALID
         else:
             print("Board nr not available")
-        return None
+        return ExpanderStatus.INVALID
 
     # -----------------------------------------------------------------------------------------
     # noinspection PyMethodMayBeStatic
@@ -657,17 +667,17 @@ class Robohat:
     # end Topboard ADC functions --------------------------------------------------------------------------------------
 
     # begin Topboard IO_EXPANDER functions ---------------------------------------------------------------------------------
-    def set_topboard_io_expander_direction(self, _io_nr:int, _direction: ExpanderDir) -> None:
+    def set_topboard_io_expander_direction(self, _io_nr:int, _direction: ExpanderDir) -> IOStatus:
         """!
         Set the direction of an io pin of the IO expander
 
         @param _io_nr io nr
         @param _direction the direction of the pin.
 
-        @return None
+        @return IOStatus
         """
 
-        self.__topboard_io_expander.set_direction_io_expander(_io_nr, _direction)
+        return self.__topboard_io_expander.set_io_expander_direction(_io_nr, _direction)
 
     def get_topboard_io_expander_direction(self, _io_nr:int) -> ExpanderDir:
         """!
@@ -678,9 +688,9 @@ class Robohat:
         @return ExpanderDir
         """
 
-        return self.__topboard_io_expander.get_direction_io_expander(_io_nr)
+        return self.__topboard_io_expander.get_io_expander_direction(_io_nr)
 
-    def set_topboard_io_expander_output(self, _io_nr: int, _status: ExpanderStatus) -> None:
+    def set_topboard_io_expander_output(self, _io_nr: int, _status: ExpanderStatus) -> IOStatus:
         """!
         Set the output status of an io pin of the IO expander
 
@@ -691,15 +701,15 @@ class Robohat:
 
         @return None
         """
-        self.__topboard_io_expander.set_io_expander_output_status(_io_nr, _status)
+        return self.__topboard_io_expander.set_io_expander_output(_io_nr, _status)
 
-    def get_topboard_io_expander_input(self, _io_nr: int):
+    def get_topboard_io_expander_input(self, _io_nr: int) -> ExpanderStatus:
         """!
         get the input status of an io pin of the IO expander
         Note. direction of the pin must be an Input
 
         @param _io_nr io nr
-        @return status of the pin
+        @return ExpanderStatus
         """
         return self.__topboard_io_expander.get_io_expander_input(_io_nr)
 

@@ -22,6 +22,8 @@ try:
     from robohatlib import Robohat_config
     from robohatlib.driver_ll.IOHandler import IOHandler
     from robohatlib.helpers.RoboUtil import RoboUtil
+    from robohatlib.driver_ll.datastructs.IOStatus import IOStatus
+
 
 except ImportError:
     print("Failed to resolve dependencies for PowerMonitorAndIO")
@@ -62,6 +64,7 @@ class PowerMonitorAndIO:
 
     # --------------------------------------------------------------------------------------
     # --------------------------------------------------------------------------------------
+
     def exit_program(self) -> None:
         """!
         Cleans up, when user want to shut down
@@ -90,10 +93,10 @@ class PowerMonitorAndIO:
         @return: bool
         """
         value = self.get_io_expander_input(_power_channel)
-        if value is 0:
-            return False
-        else:
+        if value is ExpanderStatus.HIGH:
             return True
+        else:
+            return False
 
     # --------------------------------------------------------------------------------------
     # --------------------------------------------------------------------------------------
@@ -120,7 +123,8 @@ class PowerMonitorAndIO:
 
     # --------------------------------------------------------------------------------------
     # --------------------------------------------------------------------------------------
-    def set_io_expander_direction(self, _io_nr:int, _direction: ExpanderDir) -> None:
+
+    def set_io_expander_direction(self, _io_nr:int, _direction: ExpanderDir) -> IOStatus:
         """!
         Set the direction of the IO pin
 
@@ -130,7 +134,7 @@ class PowerMonitorAndIO:
         """
 
         if self.__io_device is None:
-            return
+            return IOStatus.IO_FAILED
 
         if self.__check_if_expander_io_is_available(_io_nr) is True:
             if _direction is ExpanderDir.OUTPUT:
@@ -139,9 +143,12 @@ class PowerMonitorAndIO:
                 wanted_pin_value = 1
             self.__io_device.set_pin_direction(_io_nr, wanted_pin_value)
 
+            return IOStatus.IO_OK
+        else:
+            return IOStatus.IO_FAILED
+
     # --------------------------------------------------------------------------------------
-    #todo check in io-pin is an output
-    def set_io_expander_output(self, _io_nr:int, _value: ExpanderStatus) -> None:
+    def set_io_expander_output(self, _io_nr:int, _value: ExpanderStatus) -> IOStatus:
         """!
         Set the output of an output pin, onto the desired value
         @param _io_nr: wanted io nr
@@ -149,35 +156,45 @@ class PowerMonitorAndIO:
         @return None
         """
         if self.__io_device is None:
-            return
+            return IOStatus.IO_FAILED
 
         if self.__check_if_expander_io_is_available(_io_nr) is True:
-            if _value is ExpanderStatus.LOW:
-                self.__io_device.set_pin_data(_io_nr, 0)
+            if self.get_io_expander_direction(_io_nr) is ExpanderDir.OUTPUT:
+                if _value is ExpanderStatus.LOW:
+                    self.__io_device.set_pin_data(_io_nr, 0)
+                else:
+                    self.__io_device.set_pin_data(_io_nr, 1)
+
+                return IOStatus.IO_OK
             else:
-                self.__io_device.set_pin_data(_io_nr, 1)
+                print("Can not write to an input pin")
+                return IOStatus.IO_FAILED
+        else:
+            return IOStatus.IO_FAILED
 
     # --------------------------------------------------------------------------------------
-    #todo check in io-pin is an input
-    def get_io_expander_input(self, _io_nr:int) -> ExpanderStatus | None:
+    def get_io_expander_input(self, _io_nr:int) -> ExpanderStatus:
         """!
         Gets current value of the desired input pin
         @param _io_nr: io nr
 
-        @return ExpanderStatus or None
+        @return ExpanderStatus
         """
 
         if self.__io_device is None:
-            return None
+            return ExpanderStatus.INVALID
 
         if self.__check_if_expander_io_is_available(_io_nr) is True:
-            value = self.__io_device.get_pin_data(_io_nr)
-            if value is 0:
-                return ExpanderStatus.LOW
+            if self.get_io_expander_direction(_io_nr) is ExpanderDir.INPUT:
+                value = self.__io_device.get_pin_data(_io_nr)
+                if value is 0:
+                    return ExpanderStatus.LOW
+                else:
+                    return ExpanderStatus.HIGH
             else:
-                return ExpanderStatus.HIGH
+                print("Can't read from an output pin")
         else:
-            return None
+            return ExpanderStatus.INVALID
 
     # --------------------------------------------------------------------------------------
     def add_signaling_device(self, _signaling_device) -> None:
@@ -253,7 +270,11 @@ class PowerMonitorAndIO:
 
     # --------------------------------------------------------------------------------------
 
-    def __do_signaling_device(self):
+    def __do_signaling_device(self) -> None:
+        """!
+        Will generated a system signal when possible
+        @return: None
+        """
         if self.__signaling_device is not None:
             self.__signaling_device.signal_system_alarm()
         else:
@@ -276,6 +297,10 @@ class PowerMonitorAndIO:
     # --------------------------------------------------------------------------------------
 
     def __reset_timer_callback(self) -> None:
+        """!
+        function which will be executed after the int callback function is executed, to reset the interrupt routine
+        @return: None
+        """
         if self.__io_device is None:
             return
 
@@ -283,7 +308,6 @@ class PowerMonitorAndIO:
             return
 
         port_value = self.__io_device.get_port_data() and 0x7f
-        #print("--> " + hex(port_value) )
         if port_value > 0:
             #print("Not able to clear !!!!, power fail is present")
             timer = threading.Timer(10, self.__reset_timer_callback)
@@ -295,4 +319,11 @@ class PowerMonitorAndIO:
     # --------------------------------------------------------------------------------------
 
     def set_io_expander_int_callback_function(self, _callback) -> None:
-        print("nothig")
+        """!
+        This will set a callback functions, which will be executed when the IO expander will generate an interrupt
+        @param _callback: new callback function
+        @return: None
+        """
+        self.__user_int_callback = _callback
+
+    # --------------------------------------------------------------------------------------

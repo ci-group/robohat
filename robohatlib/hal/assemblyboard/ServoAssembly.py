@@ -15,6 +15,8 @@ try:
     from robohatlib.driver_ll.spi.SPIDeviceDef import SPIDeviceDef
     from robohatlib.hal.datastructure.ExpanderDirection import ExpanderDir
     from robohatlib.hal.datastructure.ExpanderStatus import ExpanderStatus
+    from robohatlib.driver_ll.datastructs.IOStatus import IOStatus
+
 except ImportError:
     print("Failed to resolve dependencies for ServoAssembly")
     raise
@@ -266,7 +268,7 @@ class ServoAssembly:
             self.__power_monitor_and_io.add_signaling_device(_signaling_device)
 
     # --------------------------------------------------------------------------------------
-    def set_servo_io_expander_direction(self, _io_nr: int, _direction: ExpanderDir) -> None:
+    def set_servo_io_expander_direction(self, _io_nr: int, _direction: ExpanderDir) -> IOStatus:
         """!
         Set the direction of the IO pin
 
@@ -276,10 +278,12 @@ class ServoAssembly:
         """
 
         if self.__power_monitor_and_io is not None:
-            self.__power_monitor_and_io.set_io_expander_direction(_io_nr, _direction)
+            return self.__power_monitor_and_io.set_io_expander_direction(_io_nr, _direction)
+        else:
+            return IOStatus.IO_FAILED
     # --------------------------------------------------------------------------------------
 
-    def get_servo_io_expander_direction(self, _io_nr: int) -> ExpanderDir | None:
+    def get_servo_io_expander_direction(self, _io_nr: int) -> ExpanderDir:
         """!
         get the direction of the IO pin
 
@@ -289,10 +293,10 @@ class ServoAssembly:
         if self.__power_monitor_and_io is not None:
             return self.__power_monitor_and_io.get_io_expander_direction(_io_nr)
         else:
-            return None
+            return ExpanderDir.INVALID
     # --------------------------------------------------------------------------------------
 
-    def set_servo_io_expander_output(self, _io_nr: int, _value: ExpanderStatus) -> None:
+    def set_servo_io_expander_output(self, _io_nr: int, _value: ExpanderStatus) -> IOStatus:
         """!
         Set the output onto the desired value
         @param _io_nr: wanted io nr
@@ -300,14 +304,17 @@ class ServoAssembly:
         @return None
         """
         if self.__power_monitor_and_io is not None:
-            self.__power_monitor_and_io.set_io_expander_output(_io_nr, _value)
+            return self.__power_monitor_and_io.set_io_expander_output(_io_nr, _value)
+        else:
+            return IOStatus.IO_FAILED
+
     # --------------------------------------------------------------------------------------
 
-    def get_servo_io_expander_input(self, _pin_nr: int) -> ExpanderStatus | None:
+    def get_servo_io_expander_input(self, _pin_nr: int) -> ExpanderStatus:
         if self.__power_monitor_and_io is not None:
             return self.__power_monitor_and_io.get_io_expander_input(_pin_nr)
         else:
-            return None
+            return ExpanderStatus.INVALID
 
 # --------------------------------------------------------------------------------------
 

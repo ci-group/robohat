@@ -7,7 +7,7 @@ try:
     from time import sleep
     from robohatlib import Robohat_config
     from robohatlib.driver_ll.definitions.GPODef import GPODef
-    from robohatlib.hal.HatADC import HatADC
+    from robohatlib.hal.TopboardADC import HatADC
     from robohatlib.driver_ll.IOHandler import IOHandler
     from robohatlib.hal.datastructure.AccuStatus import AccuStatus
 
