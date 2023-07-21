@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['minimu9_5flis3mdl_5fi2c_5fdef_0',['MINIMU9_LIS3MDL_I2C_DEF',['../namespace_robohat__config.html#a01768e1d18ac35f936db836f5acdc2bd',1,'Robohat_config']]],
-  ['minimu9_5flsm6ds33_5fi2c_5fdef_1',['MINIMU9_LSM6DS33_I2C_DEF',['../namespace_robohat__config.html#a322dfe8b508a1d268fc3e374e7f8a485',1,'Robohat_config']]]
+  ['robohat_5fbuild_5fdate_5fstr_0',['ROBOHAT_BUILD_DATE_STR',['../namespace_robohat__constants.html#a91ecded21fe75947aff12025e77fe000',1,'Robohat_constants']]],
+  ['robohat_5flib_5fversion_5fstr_1',['ROBOHAT_LIB_VERSION_STR',['../namespace_robohat__constants.html#a598b0bbe9de60dfeb86d45c0fb7ec6ad',1,'Robohat_constants']]]
 ];

@@ -1,7 +1,5 @@
 from __future__ import absolute_import, division, print_function, unicode_literals
 
-
-
 try:
     from robohatlib.Robohat import Robohat
     from robohatlib.hal.assemblyboard.ServoAssemblyConfig import ServoAssemblyConfig
@@ -9,11 +7,10 @@ try:
     from robohatlib.hal.datastructure.Color import Color
     from robohatlib.hal.datastructure.ExpanderDirection import ExpanderDir
     from robohatlib.hal.datastructure.ExpanderStatus import ExpanderStatus
-    import main_config
+    import test_config
     import sys
     import os
     import time
-
 
 except ImportError:
     print("Failed to import Robohat, or failed to import all dependencies")
@@ -24,43 +21,61 @@ except ImportError:
 # --------------------------------------------------------------------------------------
 
 def main():
-    example = Example()
+    """!
+    Start of our test program
+    """
+
+    example = Example()                     # creates the class Example
 
     try:
-        example.start_example()
-    except KeyboardInterrupt:
+        example.start_example()             # starts the example
+
+    except KeyboardInterrupt:               # catch 'CTR-C to get a graceful exit'
         print('Interrupted')
         try:
             sys.exit(130)
         except SystemExit:
-            example.exit_program()
-
+            example.exit_program()         # graceful exit
     print("Exit")
 
 
     # --------------------------------------------------------------------------------------
+
 class Example:
+    """!
+    Out example class.
+
+    The Robohat class will be created.
+    The Robohat class will be initialized
+
+    Interrupt callbacks will be set onto the io expanders
+    """
+
     def __init__(self):
         print("################################################")
         print("Starting robohat test routine")
         self.running = True
 
-        self.robohat = Robohat(main_config.servoassembly_1_config,
-                               main_config.servoassembly_2_config,
-                               main_config.TOPBOARD_IO_EXPANDER_SW)
+        self.robohat = Robohat(test_config.servoassembly_1_config,
+                               test_config.servoassembly_2_config,
+                               test_config.TOPBOARD_IO_EXPANDER_SW)
 
         # self.robohat.set_system_alarm_permitted(False)
 
-        self.robohat.init(main_config.SERVOBOARD_1_DATAS_ARRAY,
-                          main_config.SERVOBOARD_2_DATAS_ARRAY)
+        self.robohat.init(test_config.SERVOBOARD_1_DATAS_ARRAY,
+                          test_config.SERVOBOARD_2_DATAS_ARRAY)
 
+        self.robohat.set_topboard_io_expander_int_callback(self.__test_hat_io_expander_int_callback)
+        self.robohat.set_assemblyboard_1_io_expander_int_callback(self.__test_assemblyboard_1_io_expander_int_callback)
+        self.robohat.set_assemblyboard_2_io_expander_int_callback(self.__test_assemblyboard_2_io_expander_int_callback)
 
     # --------------------------------------------------------------------------------------
     # --------------------------------------------------------------------------------------
     # --------------------------------------------------------------------------------------
+
     def exit_program(self) -> None:
         """!
-        Should stop this program
+        Should exit this program
         @return: None
         """
         print("Exiting this program")
@@ -72,7 +87,12 @@ class Example:
     # --------------------------------------------------------------------------------------
     # --------------------------------------------------------------------------------------
 
-    def do_test(self):
+    def do_test(self) -> None:
+        """!
+        Single test routine which will drive all the servos, will make an beep sound and changes the color of the Multi-LED
+        @return: None
+        """
+
         print("Test started")
 
         running = True
@@ -107,18 +127,24 @@ class Example:
     # --------------------------------------------------------------------------------------
     # --------------------------------------------------------------------------------------
     # --------------------------------------------------------------------------------------
+
     def shutdown_power(self) -> None:
+        """!
+        Function which will shut down the RPi and power down the power supply
+        :return:
+        """
         self.robohat.do_system_shutdown()
 
     # --------------------------------------------------------------------------------------
     # --------------------------------------------------------------------------------------
     # --------------------------------------------------------------------------------------
-
+    # noinspection PyMethodMayBeStatic
     def print_help(self) -> None:
         """!
-        Print a help page
+        Print a help page will all known command in this test routine
         @return: None
         """
+
         print("Available commands are:\n")
         print("shutdown                                            powers the system down")
         print("exit                                                exit the program")
@@ -218,10 +244,10 @@ class Example:
                     pin_nr = int(data_in_array[4])
                     value = data_in_array[5]
                     if value == "OUT" or value == "out":
-                        self.robohat.set_hat_io_expander_direction(pin_nr, ExpanderDir.OUTPUT)
+                        self.robohat.set_topboard_io_expander_direction(pin_nr, ExpanderDir.OUTPUT)
                         print("Direction set to output")
                     elif value == "IN" or value == "in":
-                        self.robohat.set_hat_io_expander_direction(pin_nr, ExpanderDir.INPUT)
+                        self.robohat.set_topboard_io_expander_direction(pin_nr, ExpanderDir.INPUT)
                         print("Direction set to input")
                     else:
                         print("Syntax error setting direction pin")
@@ -230,10 +256,10 @@ class Example:
                    pin_nr = int(data_in_array[4])
                    value = data_in_array[5]
                    if value == "HIGH" or value == "high":
-                       self.robohat.set_hat_io_expander_output(pin_nr, ExpanderStatus.HIGH)
+                       self.robohat.set_topboard_io_expander_output(pin_nr, ExpanderStatus.HIGH)
                        print("Pin set to HIGH")
                    elif value == "LOW" or value == "low":
-                       self.robohat.set_hat_io_expander_output(pin_nr, ExpanderStatus.LOW)
+                       self.robohat.set_topboard_io_expander_output(pin_nr, ExpanderStatus.LOW)
                        print("Pin set to LOW")
                    else:
                         print("Syntax error setting pin")
@@ -340,11 +366,11 @@ class Example:
                 parameter_str: str = data_in_array[3]
                 if parameter_str.isnumeric():
                     channel_nr = int(parameter_str)
-                    value = self.robohat.get_hat_adc_single_channel(channel_nr)
+                    value = self.robohat.get_topboard_adc_single_channel(channel_nr)
                     if value != -1:
                         print("adc hat channel " + str(channel_nr) + " is: " + str(value) + "V" )
                 elif parameter_str == "all":
-                    value = self.robohat.get_hat_adc_multiple_channels()
+                    value = self.robohat.get_topboard_adc_multiple_channels()
                     print("adc hat volts of channels: " + str(value))
                 else:
                     print("syntax error at hat: " + parameter_str )
@@ -352,11 +378,11 @@ class Example:
                 io_command = data_in_array[3]
                 if io_command == "dir":
                     pin_nr = int(data_in_array[4])
-                    value = self.robohat.get_hat_io_expander_direction(pin_nr)
+                    value = self.robohat.get_topboard_io_expander_direction(pin_nr)
                     print(value)
                 elif io_command == "input":
                     pin_nr = int(data_in_array[4])
-                    value = self.robohat.get_hat_io_expander_input(pin_nr)
+                    value = self.robohat.get_topboard_io_expander_input(pin_nr)
                     print(value)
                 else:
                     print("syntax error, unknown hat io command")
@@ -464,22 +490,12 @@ class Example:
     # --------------------------------------------------------------------------------------
     # --------------------------------------------------------------------------------------
 
-    def start_example(self) -> None:
+    def process_commands(self, _command:str) -> None:
         """!
-        Start this example
+        Will handle console request
+        @param _command: console input
         @return: None
         """
-        print("\n\nWaiting for your input (type help + [RETURN] for more the command list\n\n")
-
-        while self.running is True:
-            inp = input()
-            self.process_commands(inp)
-
-    # --------------------------------------------------------------------------------------
-    # --------------------------------------------------------------------------------------
-    # --------------------------------------------------------------------------------------
-
-    def process_commands(self, _command:str):
         if _command == "exit":
             self.exit_program()
 
@@ -510,6 +526,64 @@ class Example:
         elif _command == "wake up servos":
             self.robohat.wakeup_servo()
             print("servos are a wake")
+
+    # --------------------------------------------------------------------------------------
+    # --------------------------------------------------------------------------------------
+    # --------------------------------------------------------------------------------------
+
+    def start_example(self) -> None:
+        """!
+        Start this example
+        @return: None
+        """
+        print("\n\nWaiting for your input (type help + [RETURN] for more the command list\n\n")
+
+        while self.running is True:
+            inp = input()
+            self.process_commands(inp)
+
+    # --------------------------------------------------------------------------------------
+    # --------------------------------------------------------------------------------------
+    # --------------------------------------------------------------------------------------
+
+    # some test routines
+    def __test_hat_io_expander_int_callback(self, _gpi_nr: int) -> None:
+        """!
+        Just a test callback, for the hat_io_expander
+        due to 'self.robohat.set_hat_io_expander_int_callback(self.__test_hat_io_expander_int_callback)' this function is
+        added to the interrupt handler and wil be executed when the interrupt is triggered
+
+        @param _gpi_nr (int) mr of the callback gpio pin
+        @return None
+        """
+        print("__test_hat_io_expander_int_callback by: " + str(_gpi_nr))
+        self.robohat.do_buzzer_beep()
+
+
+    # some test routines
+    def __test_assemblyboard_1_io_expander_int_callback(self, _gpi_nr: int) -> None:
+        """!
+        Just a test callback, for the hat_io_expander
+        self.robohat.set_assemblyboard_1_io_expander_int_callback(self.__test_assemblyboard_1_io_expander_int_callback)
+        added to the interrupt handler and wil be executed when the interrupt is triggered
+
+        @param _gpi_nr (int) nr of the callback gpio pin
+        @return None
+        """
+        print("__test_assemblyboard1_io_expander_int_callback by: " + str(_gpi_nr))
+        self.robohat.do_buzzer_beep()
+
+    def __test_assemblyboard_2_io_expander_int_callback(self, _gpi_nr: int) -> None:
+        """!
+        Just a test callback, for the hat_io_expander
+        self.robohat.set_assemblyboard_2_io_expander_int_callback(self.__test_assemblyboard_1_io_expander_int_callback)
+        added to the interrupt handler and wil be executed when the interrupt is triggered
+
+        @param _gpi_nr (int) nr of the callback gpio pin
+        @return None
+        """
+        print("__test_assemblyboard2_io_expander_int_callback by: " + str(_gpi_nr))
+        self.robohat.do_buzzer_beep()
 
     # --------------------------------------------------------------------------------------
     # --------------------------------------------------------------------------------------

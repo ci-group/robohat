@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['put_5fservo_5fto_5fsleep_0',['put_servo_to_sleep',['../class_robohat_1_1_robohat.html#a7e85ea49c23326d1cce284d319ec5823',1,'Robohat::Robohat']]]
+  ['init_0',['init',['../class_robohat_1_1_robohat.html#a726c77fb9ff04911df0ea9a5e9a80d57',1,'Robohat::Robohat']]]
 ];

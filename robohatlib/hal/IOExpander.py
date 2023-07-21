@@ -11,6 +11,8 @@ try:
     from robohatlib.driver_ll.definitions.GPIInterruptDef import GPIInterruptDef
     from robohatlib.driver_ll.constants.InterruptTypes import InterruptTypes
     from robohatlib.driver_ll.definitions.IOExpanderDef import IOExpanderDef
+    from robohatlib.driver_ll.constants.InterruptTypes import InterruptTypes
+    from robohatlib.driver_ll.definitions.InterruptCallbackHolder import InterruptCallbackHolder
     from robohatlib.driver_ll.IOHandler import IOHandler
 except ImportError:
     print("Failed to import dependencies for IOExpander")
@@ -32,8 +34,8 @@ class IOExpander:
 
         if i2c_device is not None:
             if _main_io_expander_def.get_callbackholder() is not None:
-                gpi_interrupt_definition = GPIInterruptDef(_main_io_expander_def.get_name(), _main_io_expander_def.get_gpio_pin(), InterruptTypes.INT_BOTH, _main_io_expander_def.get_callbackholder())
-                _iohandler.register_interrupt(gpi_interrupt_definition)
+                self.__gpi_interrupt_definition = GPIInterruptDef(_main_io_expander_def.get_name(), _main_io_expander_def.get_gpio_pin(), InterruptTypes.INT_BOTH, _main_io_expander_def.get_callbackholder())
+                _iohandler.register_interrupt(self.__gpi_interrupt_definition)
 
             self.__expander = MCP23008(i2c_device, _main_io_expander_def)
         else:
@@ -151,3 +153,26 @@ class IOExpander:
         return True
 
     #-------------------------------------------------------------------------------------
+
+    def set_io_expander_int_callback_function(self, _callback_function) -> None:
+        """!
+        Set new callback function which will be executed when an interrupt triggers
+        @param _callback_function: the callback function
+        @return: None
+        """
+        if self.__gpi_interrupt_definition is not None:
+            callbackholder:InterruptCallbackHolder = self.__gpi_interrupt_definition.get_callbackholder()
+            callbackholder.set_callback_function(_callback_function)
+
+    #-------------------------------------------------------------------------------------
+
+    def set_io_expander_int_release_function(self, _release_int_function) -> None:
+        """!
+        Set new callback function which will be executed after the int callback function is executed, to reset the interrupt routine
+        @param _release_int_function: the callback function
+        @param _release_int_function:
+        @return: None
+        """
+        if self.__gpi_interrupt_definition is not None:
+            callbackholder:InterruptCallbackHolder = self.__gpi_interrupt_definition.get_callbackholder()
+            callbackholder.set_release_int_release_function(_release_int_function)

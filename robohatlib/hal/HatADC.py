@@ -30,7 +30,7 @@ class HatADC:
             self.__hat_adc = None
 
     # init all adcs --------------------------------------------------------------------------------------
-    def init_hat_adc(self) -> None:
+    def init_topboard_adc(self) -> None:
         """!
         Initializes the HAT Adc
 

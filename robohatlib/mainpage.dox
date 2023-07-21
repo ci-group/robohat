@@ -5,6 +5,42 @@
 
 Version: 0.0.2
 
+Robohat library is an library to access IO of the Robohat project written in Python
+
+
+<h2>Robohatlib test</h1>
+The Robohat library comes with a testroutine wich consists of 2 files
+
+test.py
+<BR>
+test_config.py
+<BR>
+
+These files should be placed in the directory where the 'robohatlib' is placed
+
+To execute the test:
+
+\code
+cd ~/robohat		
+python3 test.py
+\endcode <I>example to execute the test python module. Can be placed in a batch file</I>
+
+When starting the test program (which initialises the Robohatlib) a summery of the IO will be printed on the console. The user will be notified when a IO devices will fail.
+
+By typing help (+ [RETURN] ) a list with commandos will be displayed.
+
+<BR>
+<BR>
+<BR>
+
+<h2>Using Robohatlib</h1>
+
+<BR>
+The Startpoint of the RoboHat Library is the Robohat class. After contructing the Robohat class, the 'init' function (of the Robohat class) has to be executed. The rest of the Robohat class consist of functions which can be used to access the Robohat hardware.
+
+<BR>
+
+
 A little example of using the Robohat library
 
 \code
@@ -16,22 +52,20 @@ A little example of using the Robohat library
 
     for i in range(1,1800, 1):
         angle = i / 10.0
-        robohat.set_servos_angles([angle, angle, angle, angle, angle, angle, angle, angle, angle, angle, angle, angle, angle, angle, angle, angle])
-        print("-->" + str(robohat.get_servo_angle(1)) + " °")
+        robohat.set_servo_multiple_angles([angle, angle, angle, angle, angle, angle, angle, angle, angle, angle, angle, angle, angle, angle, angle, angle, angle, angle, angle, angle, angle, angle, angle, angle, angle, angle, angle, angle, angle, angle, angle, angle])
+        print("-->" + str(robohat.get_servo_single_angle(1)) + " °")
         time.sleep(1)
 
     robohat.set_led_color(Color.RED)
     for i in range(1800,1, -1):
         angle = i / 10.0
-        robohat.set_servos_angles([angle, angle, angle, angle, angle, angle, angle, angle, angle, angle, angle, angle, angle, angle, angle, angle])
-        print("-->" + str(robohat.get_servo_angle(1)) + " °")
+        robohat.set_servo_multiple_angles([angle, angle, angle, angle, angle, angle, angle, angle, angle, angle, angle, angle, angle, angle, angle, angle, angle, angle, angle, angle, angle, angle, angle, angle, angle, angle, angle, angle, angle, angle, angle, angle])
+        print("-->" + str(robohat.get_servo_single_angle(1)) + " °")
         time.sleep(1)
 
 \endcode <I>example sourcecode</I>
 
-<BR>
-The Startpoint of the RoboHat Library is the Robohat class
-<BR>
+
 
 <h1>Robohat constructor</h1>
 
@@ -46,7 +80,7 @@ robohat = Robohat(SERVOASSEMBLY_1_CONFIG, SERVOASSEMBLY_2_CONFIG, TOPBOARD_IO_SW
 <TABLE class="par">
 <TR><TH>SERVOASSEMBLY_1_CONFIG</TH>                     <TH>configuration of first servo assembly (ServoAssemblyConfig) </TH> </TR>
 <TR><TH>SERVOASSEMBLY_2_CONFIG</TH>                     <TH>configuration of second servo assembly (ServoAssemblyConfig) </TH> </TR>
-<TR><TH>TOPBOARD_IO_SWITCH</TH>                         <TH>IO Expander switch value (int) </TH> </TR>
+<TR><TH>TOPBOARD_IO_EXPANDER_SW</TH>                    <TH>IO Expander switch value (int) </TH> </TR>
 </TABLE>
 
 <BR>
@@ -55,7 +89,7 @@ The servo assembly is the PCB to which the servos are connected
 
 <h1>ServoAssemblyConfig</h1>
 
-A ServoAssemblyConfig consist out of 4 parameters.
+A ServoAssemblyConfig is the configuration for a ServoAssembly board, which consist out of 4 parameters.
 
 \code
 servoassembly_1_config = ServoAssemblyConfig(SERVOASSEMBLY_1_NAME, SERVOASSEMBLY_1_SW1_PWM_ADDRESS,SERVOASSEMBLY_1_SW2_POWER_GOOD_ADDRESS, SERVOASSEMBLY_1_PWMPLUG)
@@ -63,19 +97,27 @@ servoassembly_1_config = ServoAssemblyConfig(SERVOASSEMBLY_1_NAME, SERVOASSEMBLY
 
 <TABLE class="par">
 <TR><TH>SERVOASSEMBLY_1_NAME</TH>                   <TH>for your own reference </TH> </TR>
-<TR><TH>SERVOASSEMBLY_1_SW1_PWM_ADDRESS</TH>        <TH>SW1, switch value for the PWM address (default 0 or 1)  </TH> </TR>
-<TR><TH>SERVOASSEMBLY_1_SW2_POWER_GOOD_ADDRESS</TH> <TH>SW2, switch value for the POWER GOOD address (default 0 or 1, but the same as SW1) </TH> </TR>
-<TR><TH>SERVOASSEMBLY_1_PWMPLUG</TH>                <TH>cable connected to P3 or P4 of the topboard</TH> </TR>
+<TR><TH>SERVOASSEMBLY_1_SW1_PWM_ADDRESS</TH>        <TH>SW1, switch value for the PWM address (a switch on the assembly bord, default 0 or 1)  </TH> </TR>
+<TR><TH>SERVOASSEMBLY_1_SW2_POWER_GOOD_ADDRESS</TH> <TH>SW2, switch value for the POWER GOOD address (a switch on the assembly bord, default 0 or 1, but the same as SW1) </TH> </TR>
+<TR><TH>SERVOASSEMBLY_1_PWMPLUG</TH>                <TH>flatcable connected to P3 or P4 of the topboard</TH> </TR>
 </TABLE>
 
 
 \image html assemblyboards_dipswitch.png settings of the switch on a servo assembly and its value
 
+<B>note.</B> 
+<BR>
+One assembly-board should always be connected to connector P3 of the topboard. The second assembly board is not mandantory, which can be connected to P4 of the topboard. <BR>  
+When an assembly-board is connected at connecter P3 of the topboard, the ID of the assembly-board will be 0. <BR>
+When an assembly-board is connected at connector P4 of the topboard, the ID of the assembly-board will be 1. <BR>
+    
+
+
 <BR>
 
 <h1>IO Expander switch value</h1>
 
-The last parameter of the robohat constructor, is the 'topboard_io_switch' value. Default its value 7.<BR>
+The last parameter of the robohat constructor, is the 'topboard_io_switch' value. The default value is 7.<BR>
 This value determines the The I2C-address of the IOexpander (MCP23008) of the topboard.<BR>
 The IO-pins can be accessed by plug J2 of the topboard<BR>
 

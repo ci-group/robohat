@@ -310,3 +310,11 @@ class ServoAssembly:
             return None
 
 # --------------------------------------------------------------------------------------
+
+    def set_io_expander_int_callback_function(self, _callback) -> None:
+        """!
+        @param _callback:
+        @return: None
+        """
+        if self.__power_monitor_and_io is not None:
+            self.__power_monitor_and_io.set_io_expander_int_callback_function(_callback)

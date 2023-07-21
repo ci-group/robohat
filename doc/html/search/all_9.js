@@ -1,7 +1,7 @@
 var searchData=
 [
-  ['main_20page_0',['Main page',['../index.html',1,'']]],
-  ['mainpage_2edox_1',['mainpage.dox',['../mainpage_8dox.html',1,'']]],
-  ['minimu9_5flis3mdl_5fi2c_5fdef_2',['MINIMU9_LIS3MDL_I2C_DEF',['../namespace_robohat__config.html#a01768e1d18ac35f936db836f5acdc2bd',1,'Robohat_config']]],
-  ['minimu9_5flsm6ds33_5fi2c_5fdef_3',['MINIMU9_LSM6DS33_I2C_DEF',['../namespace_robohat__config.html#a322dfe8b508a1d268fc3e374e7f8a485',1,'Robohat_config']]]
+  ['power_5fshutdown_5fgpo_5fdef_0',['POWER_SHUTDOWN_GPO_DEF',['../namespace_robohat__config.html#a1d2f1ab2e68ecdc270c51c13d3cc9d9e',1,'Robohat_config']]],
+  ['put_5fservo_5fto_5fsleep_1',['put_servo_to_sleep',['../class_robohat_1_1_robohat.html#a7e85ea49c23326d1cce284d319ec5823',1,'Robohat::Robohat']]],
+  ['pwmplug_5fp3_2',['PWMPLUG_P3',['../namespace_robohat__constants.html#af7b07695aa75f946ed3c5b86b0b7ceb4',1,'Robohat_constants']]],
+  ['pwmplug_5fp4_3',['PWMPLUG_P4',['../namespace_robohat__constants.html#a3da90c5c49a431ed5836dc99f93f1b54',1,'Robohat_constants']]]
 ];

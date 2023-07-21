@@ -83,18 +83,18 @@ class Robohat:
 
         # at the default interrupt definition there are 2 callback added. one for the trigger, the second for the interrupt reset
         hat_io_expander_callbackholder = InterruptCallbackHolder("hat_IO_expander_callback_holder",
-                                                                 self.__hat_io_expander_int_callback,
-                                                                 self.__hat_io_expander_int_reset_routine,
+                                                                 None,  # the callback routine has to be set by the user
+                                                                 self.__topboard_io_expander_int_reset_routine,
                                                                  InterruptTypes.INT_BOTH,
                                                                  250)
 
         hat_io_expander_def.set_callbackholder(hat_io_expander_callbackholder)
 
-        self.__hat_io_expander = IOExpander(self.__io_handler, hat_io_expander_def, _switch_top_board)
-        self.__hat_adc = HatADC(self.__io_handler, Robohat_config.TOPBOARD_ADC_I2C_DEF)
+        self.__topboard_io_expander = IOExpander(self.__io_handler, hat_io_expander_def, _switch_top_board)
+        self.__topboard_adc = HatADC(self.__io_handler, Robohat_config.TOPBOARD_ADC_I2C_DEF)
 
         self.__power_management = PowerManagement(self.__io_handler,
-                                                  self.__hat_adc,
+                                                  self.__topboard_adc,
                                                   Robohat_config.POWER_SHUTDOWN_GPO_DEF)
 
         self.__power_management.add_signaling_device(self.__buzzer)
@@ -145,9 +145,9 @@ class Robohat:
         self.__buzzer.init_buzzer()
         self.__led.init_led()
         self.__imu.init_imu()
-        self.__hat_io_expander.init_io_expander()
 
-        self.__hat_adc.init_hat_adc()
+        self.__topboard_io_expander.init_io_expander()
+        self.__topboard_adc.init_topboard_adc()
         self.__power_management.init_power_management()
 
         if self.__servo_assembly_1 is not None:
@@ -173,8 +173,8 @@ class Robohat:
 
         self.__serial.exit_program()
         self.__imu.exit_program()
-        self.__hat_io_expander.exit_program()
-        self.__hat_adc.exit_program()
+        self.__topboard_io_expander.exit_program()
+        self.__topboard_adc.exit_program()
 
         self.__led.exit_program()
         self.__buzzer.exit_program()
@@ -631,33 +631,33 @@ class Robohat:
 
     # end Servo functions --------------------------------------------------------------------------------------
 
-    # begin HAT ADC functions --------------------------------------------------------------------------------------
-    def get_hat_adc_single_channel(self, _channel_nr: int) -> float:
+    # begin Topboard ADC functions --------------------------------------------------------------------------------------
+    def get_topboard_adc_single_channel(self, _channel_nr: int) -> float:
         """!
-        Get analog value of a channel from the HAT adc
-        Requested channels can be 0 - 3 (channel 4 is the derivative of the accu voltage)
+        Get analog value of a channel from the Topboard adc
+        Requested channels can be 0 - 3 (channel 3 is the derivative of the accu voltage)
 
         @param _channel_nr Wanted channel nr. (Starts at 0)
         @return analog voltage
         """
 
-        return self.__hat_adc.get_adc_single_channel(_channel_nr)
+        return self.__topboard_adc.get_adc_single_channel(_channel_nr)
 
     # ------------------------------------------------------------------------------------------
 
-    def get_hat_adc_multiple_channels(self) -> []:
+    def get_topboard_adc_multiple_channels(self) -> []:
         """!
         Get analog values of the HAT adc
         Returns an array of 4 elements
 
         @return analog voltage in an array
         """
-        return self.__hat_adc.get_adc_multiple_channels()
+        return self.__topboard_adc.get_adc_multiple_channels()
 
-    # end HAT ADC functions --------------------------------------------------------------------------------------
+    # end Topboard ADC functions --------------------------------------------------------------------------------------
 
-    # begin IO_EXPANDER functions ---------------------------------------------------------------------------------
-    def set_hat_io_expander_direction(self, _io_nr:int, _direction: ExpanderDir) -> None:
+    # begin Topboard IO_EXPANDER functions ---------------------------------------------------------------------------------
+    def set_topboard_io_expander_direction(self, _io_nr:int, _direction: ExpanderDir) -> None:
         """!
         Set the direction of an io pin of the IO expander
 
@@ -667,9 +667,9 @@ class Robohat:
         @return None
         """
 
-        self.__hat_io_expander.set_direction_io_expander(_io_nr, _direction)
+        self.__topboard_io_expander.set_direction_io_expander(_io_nr, _direction)
 
-    def get_hat_io_expander_direction(self, _io_nr:int) -> ExpanderDir:
+    def get_topboard_io_expander_direction(self, _io_nr:int) -> ExpanderDir:
         """!
         Get the direction of an io pin of the IO expander
 
@@ -678,10 +678,9 @@ class Robohat:
         @return ExpanderDir
         """
 
-        return self.__hat_io_expander.get_direction_io_expander(_io_nr)
+        return self.__topboard_io_expander.get_direction_io_expander(_io_nr)
 
-
-    def set_hat_io_expander_output(self, _io_nr: int, _status: ExpanderStatus) -> None:
+    def set_topboard_io_expander_output(self, _io_nr: int, _status: ExpanderStatus) -> None:
         """!
         Set the output status of an io pin of the IO expander
 
@@ -692,9 +691,9 @@ class Robohat:
 
         @return None
         """
-        self.__hat_io_expander.set_io_expander_output_status(_io_nr, _status)
+        self.__topboard_io_expander.set_io_expander_output_status(_io_nr, _status)
 
-    def get_hat_io_expander_input(self, _io_nr: int):
+    def get_topboard_io_expander_input(self, _io_nr: int):
         """!
         get the input status of an io pin of the IO expander
         Note. direction of the pin must be an Input
@@ -702,9 +701,37 @@ class Robohat:
         @param _io_nr io nr
         @return status of the pin
         """
-        return self.__hat_io_expander.get_io_expander_input(_io_nr)
+        return self.__topboard_io_expander.get_io_expander_input(_io_nr)
 
-    # end IO_EXPANDER functions ------------------------------------------------------------------------------------
+    def set_topboard_io_expander_int_callback(self, _callback) -> None:
+        """!
+        Set a new function which will be executed when the topboard-io-expander is triggerd
+        @param _callback: the callback function
+        @return: None
+        """
+        if self.__topboard_io_expander is not None:
+            self.__topboard_io_expander.set_io_expander_int_callback_function(_callback)
+
+    def set_topboard_io_expander_int_release_function(self, _callback) -> None:
+        """!
+        Set a new function which will be executed after the interrupt callback function is executed
+        @param _callback: the callback function
+        @return: None
+        """
+        if self.__topboard_io_expander is not None:
+            self.__topboard_io_expander.set_io_expander_int_release_function(_callback)
+
+    def __topboard_io_expander_int_reset_routine(self, _gpi_nr: int) -> None:
+        """!
+        This routine will be called to reset the interrupt handler (if needed, is used by MCP23008)
+        @param _gpi_nr: IO nr of the caller
+        @return: None
+        """
+        if self.__topboard_io_expander is not None:
+            self.__topboard_io_expander.reset_interrupt(_gpi_nr)
+
+    # end Topboard IO_EXPANDER functions ------------------------------------------------------------------------------------
+
     # begin IMU functions ---------------------------------------------------------------------------------
     def get_imu_magnetic_fields(self) -> Tuple[float, float, float] | None:
         """!
@@ -818,35 +845,37 @@ class Robohat:
         """
         return Robohat_constants.ROBOHAT_BUILD_DATE_STR
 
+    # ------------------------------------------------------------------------------------
+
+    def get_buzzer(self) -> Buzzer:
+        """!
+        Return the buzzer device for signaling purposes
+        @return Buzzer device
+        """
+        return self.__buzzer
+
     # End Library functions ---------------------------------------------------------------------------------
 
     # ------------------------------------------------------------------------------------
     # ------------------------------------------------------------------------------------
     # ------------------------------------------------------------------------------------
 
-    # some test routines
-    def __hat_io_expander_int_callback(self, _gpi_nr: int) -> None:
+    def set_assemblyboard_1_io_expander_int_callback(self, _callback) -> None:
         """!
-        Just a test callback, for the hat_io_expander
-
-        @param _gpi_nr (int) mr of the callback gpio pin
-        @return None
-        """
-        #print("hat__io_expander_int_callback by: " + str(_gpi_nr))
-        self.do_buzzer_beep()
-
-    def __hat_io_expander_int_reset_routine(self, _gpi_nr: int) -> None:
-        """!
-        This routine will be called to reset the interrupt handler (if needed, is used by MCP23008)
-        @param _gpi_nr: IO nr of the caller
+        Set a new function which will be executed when the io-expander of the assembly board 1 is triggerd
+        @param _callback: callback function
         @return: None
         """
-        if self.__hat_io_expander is not None:
-            self.__hat_io_expander.reset_interrupt(_gpi_nr)
+        if self.__servo_assembly_1 is not None:
+            self.__servo_assembly_1.set_io_expander_int_callback_function(_callback)
+
+    def set_assemblyboard_2_io_expander_int_callback(self, _callback) -> None:
+        """!
+        Set a new function which will be executed when the io-expander of the assembly board 2 is triggerd
+        @param _callback: callback function
+        @return: None
+        """
+        if self.__servo_assembly_2 is not None:
+            self.__servo_assembly_2.set_io_expander_int_callback_function(_callback)
 
     # ------------------------------------------------------------------------------------
-    # ------------------------------------------------------------------------------------
-    # ------------------------------------------------------------------------------------
-
-
-

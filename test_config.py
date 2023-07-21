@@ -1,16 +1,16 @@
 #!/usr/bin/env python
-
 from robohatlib.hal.assemblyboard.ServoAssemblyConfig import ServoAssemblyConfig
 from robohatlib.hal.assemblyboard.servo.ServoData import ServoData
 from robohatlib import Robohat_constants
 
-VOLT_TO_ANGLE_FORMULA_A = 73.00       # part A of the formula servo voltage to angle (y = Ax + B)
-VOLT_TO_ANGLE_FORMULA_B = -12.45      # part B of the formula servo voltage to angle (y = Ax + B)
+VOLT_TO_ANGLE_FORMULA_A = 73.00                             # part A of the formula servo voltage to angle (y = Ax + B)
+VOLT_TO_ANGLE_FORMULA_B = -12.45                            # part B of the formula servo voltage to angle (y = Ax + B)
 
 SERVOASSEMBLY_1_NAME = "servoassembly_1"                    # just a name for own reference
 SERVOASSEMBLY_1_SW1_PWM_ADDRESS = 0                         # sw1 value of the servo assembly
 SERVOASSEMBLY_1_SW2_POWER_GOOD_ADDRESS = 0                  # sw2 value of the servo assembly
 SERVOASSEMBLY_1_PWM_PLUG = Robohat_constants.PWMPLUG_P3     # connected port of the tophat board, is actual the cs of the SPI bus
+
 SERVOBOARD_1_DATAS_ARRAY = [
                     ServoData( 0, 500, 2500, 180, 0, VOLT_TO_ANGLE_FORMULA_A, VOLT_TO_ANGLE_FORMULA_B),
                     ServoData( 1, 500, 2500, 180, 0, VOLT_TO_ANGLE_FORMULA_A, VOLT_TO_ANGLE_FORMULA_B),
@@ -61,7 +61,7 @@ SERVOBOARD_2_DATAS_ARRAY = [
                     ServoData(13, 500, 2500, 180, 0, VOLT_TO_ANGLE_FORMULA_A, VOLT_TO_ANGLE_FORMULA_B),
                     ServoData(14, 500, 2500, 180, 0, VOLT_TO_ANGLE_FORMULA_A, VOLT_TO_ANGLE_FORMULA_B),
                     ServoData(15, 500, 2500, 180, 0, VOLT_TO_ANGLE_FORMULA_A, VOLT_TO_ANGLE_FORMULA_B),
-                    ]           # array with servo settings :           servo nr, min time us, max time us, max range degree, degree offset, formula A, formula B
+                    ]                       # array with servo settings :           servo nr, min time us, max time us, max range degree, degree offset, formula A, formula B
 
 servoassembly_2_config = ServoAssemblyConfig(SERVOASSEMBLY_2_NAME,
                                              SERVOASSEMBLY_2_SW1_PWM_ADDRESS,
@@ -70,6 +70,6 @@ servoassembly_2_config = ServoAssemblyConfig(SERVOASSEMBLY_2_NAME,
 
 #--------------------
 
-TOPBOARD_IO_EXPANDER_SW = 7
+TOPBOARD_IO_EXPANDER_SW = 7         # switch value of the dip switch onto the topboard. Default value is 7
 
 #--------------------

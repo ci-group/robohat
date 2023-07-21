@@ -24,7 +24,6 @@
 <table cellspacing="0" cellpadding="0">
  <tbody>
  <tr id="projectrow">
-  <td id="projectlogo"><img alt="Logo" src="VU_logo_RGB-01.png"/></td>
   <td id="projectalign">
    <div id="projectname">Robohat<span id="projectnumber">&#160;2022282301</span>
    </div>
@@ -95,6 +94,28 @@ $(document).ready(function(){initNavTree('index.html',''); initResizable(); });
 <div class="contents">
 <div class="textblock"><h1><a class="el" href="namespace_robohat.html">Robohat</a> library</h1>
 <p>Version: 0.0.2</p>
+<p><a class="el" href="namespace_robohat.html">Robohat</a> library is an library to access IO of the <a class="el" href="namespace_robohat.html">Robohat</a> project written in Python</p>
+<h2>Robohatlib test</h2>
+<p>The <a class="el" href="namespace_robohat.html">Robohat</a> library comes with a testroutine wich consists of 2 files</p>
+<p>test.py <br  />
+ test_config.py <br  />
+</p>
+<p>These files should be placed in the directory where the 'robohatlib' is placed</p>
+<p>To execute the test:</p>
+<div class="fragment"><div class="line">cd ~/robohat        </div>
+<div class="line">python3 test.py</div>
+</div><!-- fragment --><p> <em>example to execute the test python module. Can be placed in a batch file</em></p>
+<p>When starting the test program (which initialises the Robohatlib) a summery of the IO will be printed on the console. The user will be notified when a IO devices will fail.</p>
+<p>By typing help (+ [RETURN] ) a list with commandos will be displayed.</p>
+<p><br  />
+ <br  />
+ <br  />
+</p>
+<h2>Using Robohatlib</h2>
+<p><br  />
+ The Startpoint of the RoboHat Library is the <a class="el" href="namespace_robohat.html">Robohat</a> class. After contructing the <a class="el" href="namespace_robohat.html">Robohat</a> class, the 'init' function (of the <a class="el" href="namespace_robohat.html">Robohat</a> class) has to be executed. The rest of the <a class="el" href="namespace_robohat.html">Robohat</a> class consist of functions which can be used to access the <a class="el" href="namespace_robohat.html">Robohat</a> hardware.</p>
+<p><br  />
+</p>
 <p>A little example of using the <a class="el" href="namespace_robohat.html">Robohat</a> library</p>
 <div class="fragment"><div class="line">robohat = <a class="code hl_namespace" href="namespace_robohat.html">Robohat</a>(main_config.servoassembly_1_config, main_config.servoassembly_2_config, main_config.TOPBOARD_IOEXANDER_SW)</div>
 <div class="line">robohat.scan_i2c_bus()</div>
@@ -104,21 +125,18 @@ $(document).ready(function(){initNavTree('index.html',''); initResizable(); });
 <div class="line"> </div>
 <div class="line">for i in range(1,1800, 1):</div>
 <div class="line">    angle = i / 10.0</div>
-<div class="line">    robohat.set_servos_angles([angle, angle, angle, angle, angle, angle, angle, angle, angle, angle, angle, angle, angle, angle, angle, angle])</div>
-<div class="line">    print(&quot;--&gt;&quot; + str(robohat.get_servo_angle(1)) + &quot; °&quot;)</div>
+<div class="line">    robohat.set_servo_multiple_angles([angle, angle, angle, angle, angle, angle, angle, angle, angle, angle, angle, angle, angle, angle, angle, angle, angle, angle, angle, angle, angle, angle, angle, angle, angle, angle, angle, angle, angle, angle, angle, angle])</div>
+<div class="line">    print(&quot;--&gt;&quot; + str(robohat.get_servo_single_angle(1)) + &quot; °&quot;)</div>
 <div class="line">    time.sleep(1)</div>
 <div class="line"> </div>
 <div class="line">robohat.set_led_color(Color.RED)</div>
 <div class="line">for i in range(1800,1, -1):</div>
 <div class="line">    angle = i / 10.0</div>
-<div class="line">    robohat.set_servos_angles([angle, angle, angle, angle, angle, angle, angle, angle, angle, angle, angle, angle, angle, angle, angle, angle])</div>
-<div class="line">    print(&quot;--&gt;&quot; + str(robohat.get_servo_angle(1)) + &quot; °&quot;)</div>
+<div class="line">    robohat.set_servo_multiple_angles([angle, angle, angle, angle, angle, angle, angle, angle, angle, angle, angle, angle, angle, angle, angle, angle, angle, angle, angle, angle, angle, angle, angle, angle, angle, angle, angle, angle, angle, angle, angle, angle])</div>
+<div class="line">    print(&quot;--&gt;&quot; + str(robohat.get_servo_single_angle(1)) + &quot; °&quot;)</div>
 <div class="line">    time.sleep(1)</div>
 <div class="ttc" id="anamespace_robohat_html"><div class="ttname"><a href="namespace_robohat.html">Robohat</a></div><div class="ttdef"><b>Definition</b> <a href="_robohat_8py_source.html#l00001">Robohat.py:1</a></div></div>
 </div><!-- fragment --><p> <em>example sourcecode</em></p>
-<p><br  />
- The Startpoint of the RoboHat Library is the <a class="el" href="namespace_robohat.html">Robohat</a> class <br  />
-</p>
 <h1><a class="el" href="namespace_robohat.html">Robohat</a> constructor</h1>
 <p><br  />
  The <a class="el" href="namespace_robohat.html">Robohat</a> constructor, consist out of 3 parameters, 2 ServoAssemblyConfigs and a Switch value <br  />
@@ -131,7 +149,7 @@ $(document).ready(function(){initNavTree('index.html',''); initResizable(); });
 <tr>
 <th>SERVOASSEMBLY_2_CONFIG </th><th>configuration of second servo assembly (ServoAssemblyConfig)   </th></tr>
 <tr>
-<th>TOPBOARD_IO_SWITCH </th><th>IO Expander switch value (int)   </th></tr>
+<th>TOPBOARD_IO_EXPANDER_SW </th><th>IO Expander switch value (int)   </th></tr>
 </table>
 <p><br  />
  The servo assembly is the PCB to which the servos are connected </p><div class="image">
@@ -139,27 +157,33 @@ $(document).ready(function(){initNavTree('index.html',''); initResizable(); });
 <div class="caption">
 the servo assembly PCB</div></div>
 <h1>ServoAssemblyConfig</h1>
-<p>A ServoAssemblyConfig consist out of 4 parameters.</p>
+<p>A ServoAssemblyConfig is the configuration for a ServoAssembly board, which consist out of 4 parameters.</p>
 <div class="fragment"><div class="line">servoassembly_1_config = ServoAssemblyConfig(SERVOASSEMBLY_1_NAME, SERVOASSEMBLY_1_SW1_PWM_ADDRESS,SERVOASSEMBLY_1_SW2_POWER_GOOD_ADDRESS, SERVOASSEMBLY_1_PWMPLUG)</div>
 </div><!-- fragment --><p> <em>ServoAssemblyConfig constructor</em></p>
 <table class="par">
 <tr>
 <th>SERVOASSEMBLY_1_NAME </th><th>for your own reference   </th></tr>
 <tr>
-<th>SERVOASSEMBLY_1_SW1_PWM_ADDRESS </th><th>SW1, switch value for the PWM address (default 0 or 1)   </th></tr>
+<th>SERVOASSEMBLY_1_SW1_PWM_ADDRESS </th><th>SW1, switch value for the PWM address (a switch on the assembly bord, default 0 or 1)   </th></tr>
 <tr>
-<th>SERVOASSEMBLY_1_SW2_POWER_GOOD_ADDRESS </th><th>SW2, switch value for the POWER GOOD address (default 0 or 1, but the same as SW1)   </th></tr>
+<th>SERVOASSEMBLY_1_SW2_POWER_GOOD_ADDRESS </th><th>SW2, switch value for the POWER GOOD address (a switch on the assembly bord, default 0 or 1, but the same as SW1)   </th></tr>
 <tr>
-<th>SERVOASSEMBLY_1_PWMPLUG </th><th>cable connected to P3 or P4 of the topboard  </th></tr>
+<th>SERVOASSEMBLY_1_PWMPLUG </th><th>flatcable connected to P3 or P4 of the topboard  </th></tr>
 </table>
 <div class="image">
 <img src="assemblyboards_dipswitch.png" alt=""/>
 <div class="caption">
 settings of the switch on a servo assembly and its value</div></div>
+<p><b>note.</b> <br  />
+ One assembly-board should always be connected to connector P3 of the topboard. The second assembly board is not mandantory, which can be connected to P4 of the topboard. <br  />
+ <br  />
+ When an assembly-board is connected at connecter P3 of the topboard, the ID of the assembly-board will be 0. <br  />
+ When an assembly-board is connected at connector P4 of the topboard, the ID of the assembly-board will be 1. <br  />
+</p>
 <p><br  />
 </p>
 <h1>IO Expander switch value</h1>
-<p>The last parameter of the robohat constructor, is the 'topboard_io_switch' value. Default its value 7.<br  />
+<p>The last parameter of the robohat constructor, is the 'topboard_io_switch' value. The default value is 7.<br  />
  This value determines the The I2C-address of the IOexpander (MCP23008) of the topboard.<br  />
  The IO-pins can be accessed by plug J2 of the topboard<br  />
 </p>
@@ -226,7 +250,7 @@ servo voltage to angle</div></div>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="footer">Generated on Fri Jul 14 2023 17:03:06 for Robohat by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.7 </li>
+    <li class="footer">Generated on Fri Jul 21 2023 11:16:03 for Robohat by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.7 </li>
   </ul>
 </div>
 </body>

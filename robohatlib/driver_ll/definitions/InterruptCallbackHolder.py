@@ -34,7 +34,7 @@ class InterruptCallbackHolder:
     #--------------------------------------------------------------------------------------
     #--------------0------------------------------------------------------------------------
 
-    def set_callback(self, _callback) -> None:
+    def set_callback_function(self, _callback) -> None:
         """!
         A new function which will be called when the trigger is executed
 
@@ -42,12 +42,13 @@ class InterruptCallbackHolder:
         @return: Nome
         """
         self.__callback = _callback
+        print("New callback holder set !!!")
 
     #--------------------------------------------------------------------------------------
     #--------------------------------------------------------------------------------------
     #--------------------------------------------------------------------------------------
 
-    def set_release_int_function(self, _release_int_function) -> None:
+    def set_release_int_release_function(self, _release_int_function) -> None:
         """
         A new function which will be called when the trigger is executed
 

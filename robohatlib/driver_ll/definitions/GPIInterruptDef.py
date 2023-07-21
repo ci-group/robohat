@@ -59,7 +59,11 @@ class GPIInterruptDef:
     # --------------------------------------------------------------------------------------
     # --------------------------------------------------------------------------------------
 
-    def get_callbackholder(self):
+    def get_callbackholder(self) -> InterruptCallbackHolder:
+        """!
+
+        @return: InterruptCallbackHolder
+        """
         return self.__callbackholder
 
     # --------------------------------------------------------------------------------------
