@@ -33,6 +33,11 @@ class IMU:
         else:
             self.__lsm6ds33 = None
 
+        if self.__lis3ml is not None and self.__lsm6ds33 is not None:
+            print("Found: IMU")
+        else:
+            print("Warning: IMU not found")
+
     # --------------------------------------------------------------------------------------
 
     def init_imu(self) -> None:
