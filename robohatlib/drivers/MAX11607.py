@@ -10,11 +10,12 @@ class MAX11607:
     """
 
     # --------------------------------------------------------------------------------------
-    def __init__(self, _i2c_device):
+    def __init__(self, _i2c_device:I2CDevice):
         """!
         Constructor
-        :param _i2c_device:
+        @param _i2c_device:
         """
+
         self.__i2c_device = _i2c_device
 
         self.__adc_max_count = 1024

@@ -1,3 +1,4 @@
+#!/usr/bin/env python
 from __future__ import absolute_import, division, print_function, unicode_literals
 
 try:
@@ -8,6 +9,8 @@ try:
     from robohatlib.hal.datastructure.ExpanderDirection import ExpanderDir
     from robohatlib.hal.datastructure.ExpanderStatus import ExpanderStatus
     from robohatlib.driver_ll.datastructs.IOStatus import IOStatus
+
+    from Walk import Walk
 
     import test_config
     import sys
@@ -56,20 +59,20 @@ class Example:
     def __init__(self):
         print("################################################")
         print("Starting robohat test routine")
-        self.running = True
+        self.__running = True
 
-        self.robohat = Robohat(test_config.servoassembly_1_config,
-                               test_config.servoassembly_2_config,
-                               test_config.TOPBOARD_IO_EXPANDER_SW)
+        self.__robohat = Robohat(test_config.servoassembly_1_config,
+                                 test_config.servoassembly_2_config,
+                                 test_config.TOPBOARD_IO_EXPANDER_SW)
 
         # self.robohat.set_system_alarm_permitted(False)
 
-        self.robohat.init(test_config.SERVOBOARD_1_DATAS_ARRAY,
-                          test_config.SERVOBOARD_2_DATAS_ARRAY)
+        self.__robohat.init(test_config.SERVOBOARD_1_DATAS_ARRAY,
+                            test_config.SERVOBOARD_2_DATAS_ARRAY)
 
-        self.robohat.set_topboard_io_expander_int_callback(self.__test_hat_io_expander_int_callback)
-        self.robohat.set_assemblyboard_1_io_expander_int_callback(self.__test_assemblyboard_1_io_expander_int_callback)
-        self.robohat.set_assemblyboard_2_io_expander_int_callback(self.__test_assemblyboard_2_io_expander_int_callback)
+        self.__robohat.set_topboard_io_expander_int_callback(self.__test_hat_io_expander_int_callback)
+        self.__robohat.set_assemblyboard_1_io_expander_int_callback(self.__test_assemblyboard_1_io_expander_int_callback)
+        self.__robohat.set_assemblyboard_2_io_expander_int_callback(self.__test_assemblyboard_2_io_expander_int_callback)
 
     # --------------------------------------------------------------------------------------
     # --------------------------------------------------------------------------------------
@@ -81,9 +84,28 @@ class Example:
         @return: None
         """
         print("Exiting this program")
-        self.robohat.exit_program()
-        self.running = False
+        self.__robohat.exit_program()
+        self.__running = False
         sys.exit(0)
+
+    # --------------------------------------------------------------------------------------
+    # --------------------------------------------------------------------------------------
+    # --------------------------------------------------------------------------------------
+
+    def do_walk(self) -> None:
+        """!
+        Single test routine to start walking
+        @return: None
+        """
+
+        print("Test started")
+        self.__robohat.set_led_color(Color.GREEN)
+
+        walk_routine = Walk(self.__robohat)
+        walk_routine.start_walking()
+
+        self.__robohat.set_led_color(Color.RED)
+        print("Test stopped")
 
     # --------------------------------------------------------------------------------------
     # --------------------------------------------------------------------------------------
@@ -101,24 +123,24 @@ class Example:
         counter = 0
 
         while running:
-            self.robohat.set_led_color(Color.GREEN)
+            self.__robohat.set_led_color(Color.GREEN)
             for i in range(100,1700, 10):
                 angle:float = i / 10.0
-                self.robohat.set_servo_multiple_angles([angle, angle, angle, angle, angle, angle, angle, angle, angle, angle, angle, angle, angle, angle, angle, angle, angle, angle, angle, angle, angle, angle, angle, angle, angle, angle, angle, angle, angle, angle, angle, angle])
-            print(self.robohat.get_servo_multiple_angles())
+                self.__robohat.set_servo_multiple_angles([angle, angle, angle, angle, angle, angle, angle, angle, angle, angle, angle, angle, angle, angle, angle, angle, angle, angle, angle, angle, angle, angle, angle, angle, angle, angle, angle, angle, angle, angle, angle, angle])
+            print(self.__robohat.get_servo_multiple_angles())
 
             time.sleep(5)
-            self.robohat.do_buzzer_beep()
+            self.__robohat.do_buzzer_beep()
 
-            self.robohat.set_led_color(Color.RED)
+            self.__robohat.set_led_color(Color.RED)
             for i in range(1700,100, -10):
                 angle:float = i / 10.0
-                self.robohat.set_servo_multiple_angles([angle, angle, angle, angle, angle, angle, angle, angle, angle, angle, angle, angle, angle, angle, angle, angle, angle, angle, angle, angle, angle, angle, angle, angle, angle, angle, angle, angle, angle, angle, angle, angle])
-            print(self.robohat.get_servo_multiple_angles())
+                self.__robohat.set_servo_multiple_angles([angle, angle, angle, angle, angle, angle, angle, angle, angle, angle, angle, angle, angle, angle, angle, angle, angle, angle, angle, angle, angle, angle, angle, angle, angle, angle, angle, angle, angle, angle, angle, angle])
+            print(self.__robohat.get_servo_multiple_angles())
 
             time.sleep(5)
-            self.robohat.do_buzzer_beep()
-            self.robohat.do_imu_test()
+            self.__robohat.do_buzzer_beep()
+            self.__robohat.do_imu_test()
 
             counter = counter + 1
             if counter > 10:
@@ -135,7 +157,7 @@ class Example:
         Function which will shut down the RPi and power down the power supply
         :return:
         """
-        self.robohat.do_system_shutdown()
+        self.__robohat.do_system_shutdown()
 
     # --------------------------------------------------------------------------------------
     # --------------------------------------------------------------------------------------
@@ -187,6 +209,7 @@ class Example:
         print("do buzzer freq [frequency]                          generates a sound with requested frequency")
         print("do buzzer stop                                      stop the generation of sound")
         print("do test                                             will start a test")
+        print("do walk                                             the robot start to walk")
 
     # --------------------------------------------------------------------------------------
     # --------------------------------------------------------------------------------------
@@ -206,7 +229,7 @@ class Example:
             if sub_command == "angle":
                 servo_nr = int(data_in_array[3])
                 angle = float(data_in_array[4])
-                self.robohat.set_servo_single_angle(servo_nr, angle)
+                self.__robohat.set_servo_single_angle(servo_nr, angle)
             elif sub_command == "io":
                 io_command = data_in_array[3]
                 if io_command == "dir":
@@ -214,11 +237,11 @@ class Example:
                     pin_nr = int(data_in_array[5])
                     value = data_in_array[6]
                     if value == "OUT" or value == "out":
-                        stat = self.robohat.set_servo_io_expander_direction(board_nr, pin_nr, ExpanderDir.OUTPUT)
+                        stat = self.__robohat.set_servo_io_expander_direction(board_nr, pin_nr, ExpanderDir.OUTPUT)
                         if stat == IOStatus.IO_OK:
                             print("Direction set to output")
                     elif value == "IN" or value == "in":
-                        stat = self.robohat.set_servo_io_expander_direction(board_nr, pin_nr, ExpanderDir.INPUT)
+                        stat = self.__robohat.set_servo_io_expander_direction(board_nr, pin_nr, ExpanderDir.INPUT)
                         if stat == IOStatus.IO_OK:
                             print("Direction set to input")
                     else:
@@ -228,11 +251,11 @@ class Example:
                     pin_nr = int(data_in_array[5])
                     value = data_in_array[6]
                     if value == "HIGH" or value == "high":
-                        stat = self.robohat.set_servo_io_expander_output(board_nr, pin_nr, ExpanderStatus.HIGH)
+                        stat = self.__robohat.set_servo_io_expander_output(board_nr, pin_nr, ExpanderStatus.HIGH)
                         if stat == IOStatus.IO_OK:
                             print("Pin set to HIGH")
                     elif value == "LOW" or value == "low":
-                        stat = self.robohat.set_servo_io_expander_output(board_nr, pin_nr, ExpanderStatus.LOW)
+                        stat = self.__robohat.set_servo_io_expander_output(board_nr, pin_nr, ExpanderStatus.LOW)
                         if stat == IOStatus.IO_OK:
                             print("Pin set to LOW")
                     else:
@@ -250,11 +273,11 @@ class Example:
                     pin_nr = int(data_in_array[4])
                     value = data_in_array[5]
                     if value == "OUT" or value == "out":
-                        stat = self.robohat.set_topboard_io_expander_direction(pin_nr, ExpanderDir.OUTPUT)
+                        stat = self.__robohat.set_topboard_io_expander_direction(pin_nr, ExpanderDir.OUTPUT)
                         if stat == IOStatus.IO_OK:
                             print("Direction set to output")
                     elif value == "IN" or value == "in":
-                        stat = self.robohat.set_topboard_io_expander_direction(pin_nr, ExpanderDir.INPUT)
+                        stat = self.__robohat.set_topboard_io_expander_direction(pin_nr, ExpanderDir.INPUT)
                         if stat == IOStatus.IO_OK:
                             print("Direction set to input")
                     else:
@@ -264,11 +287,11 @@ class Example:
                    pin_nr = int(data_in_array[4])
                    value = data_in_array[5]
                    if value == "HIGH" or value == "high":
-                       stat = self.robohat.set_topboard_io_expander_output(pin_nr, ExpanderStatus.HIGH)
+                       stat = self.__robohat.set_topboard_io_expander_output(pin_nr, ExpanderStatus.HIGH)
                        if stat == IOStatus.IO_OK:
                             print("Pin set to HIGH")
                    elif value == "LOW" or value == "low":
-                       stat = self.robohat.set_topboard_io_expander_output(pin_nr, ExpanderStatus.LOW)
+                       stat = self.__robohat.set_topboard_io_expander_output(pin_nr, ExpanderStatus.LOW)
                        if stat == IOStatus.IO_OK:
                             print("Pin set to LOW")
                    else:
@@ -281,21 +304,21 @@ class Example:
         elif command == "led":
             sub_command = data_in_array[2].upper()
             if sub_command == "OFF":
-                self.robohat.turn_led_off()
+                self.__robohat.turn_led_off()
             elif sub_command == "ON":
-                self.robohat.turn_led_on()
+                self.__robohat.turn_led_on()
             elif sub_command == "WHITE":
-                self.robohat.set_led_color(Color.WHITE)
+                self.__robohat.set_led_color(Color.WHITE)
             elif sub_command == "RED":
-                self.robohat.set_led_color(Color.RED)
+                self.__robohat.set_led_color(Color.RED)
             elif sub_command == "GREEN":
-                self.robohat.set_led_color(Color.GREEN)
+                self.__robohat.set_led_color(Color.GREEN)
             elif sub_command == "BLUE":
-                self.robohat.set_led_color(Color.BLUE)
+                self.__robohat.set_led_color(Color.BLUE)
             elif sub_command == "YELLOW":
-                self.robohat.set_led_color(Color.YELLOW)
+                self.__robohat.set_led_color(Color.YELLOW)
             elif sub_command == "PURPLE":
-                self.robohat.set_led_color(Color.PURPLE)
+                self.__robohat.set_led_color(Color.PURPLE)
             else:
                 print("syntax error, set color unknown")
 # ------------------------------------------------------------------------------
@@ -320,11 +343,11 @@ class Example:
                 parameter_str:str = data_in_array[3]
                 if parameter_str.isnumeric():
                     servo_nr = int(parameter_str)
-                    value = self.robohat.get_servo_single_angle(servo_nr)
+                    value = self.__robohat.get_servo_single_angle(servo_nr)
                     if value != -1:
                         print("angle of servo " + str(servo_nr) + " is: " + str(value) + "°" )
                 elif parameter_str == "all":
-                    value = self.robohat.get_servo_multiple_angles()
+                    value = self.__robohat.get_servo_multiple_angles()
                     if not value:
                         print("There a no servos attached")
                     else:
@@ -335,11 +358,11 @@ class Example:
                 parameter_str: str = data_in_array[3]
                 if parameter_str.isnumeric():
                     servo_nr = int(data_in_array[3])
-                    value = self.robohat.get_servo_adc_single_channel(servo_nr)
+                    value = self.__robohat.get_servo_adc_single_channel(servo_nr)
                     if value != -1:
                         print("adc of servo " + str(servo_nr) + " is: " + str(value) + "V" )
                 elif parameter_str == "all":
-                    value = self.robohat.get_servo_adc_multiple_channels()
+                    value = self.__robohat.get_servo_adc_multiple_channels()
                     if not value:
                         print("There a no servos attached")
                     else:
@@ -348,7 +371,7 @@ class Example:
                     print("syntax error")
             elif sub_command == "connected":
                 servo_nr = int(data_in_array[3])
-                value = self.robohat.get_servo_is_connected(servo_nr)
+                value = self.__robohat.get_servo_is_connected(servo_nr)
                 if value is True:
                     print("Servo " + str(servo_nr) + " is connected")
                 else:
@@ -358,12 +381,12 @@ class Example:
                 if io_command == "dir":
                     board_nr = int(data_in_array[4])
                     pin_nr = int(data_in_array[5])
-                    value = self.robohat.get_servo_io_expander_direction(board_nr, pin_nr)
+                    value = self.__robohat.get_servo_io_expander_direction(board_nr, pin_nr)
                     print(value)
                 elif io_command == "input":
                     board_nr = int(data_in_array[4])
                     pin_nr = int(data_in_array[5])
-                    value = self.robohat.get_servo_io_expander_input(board_nr, pin_nr)
+                    value = self.__robohat.get_servo_io_expander_input(board_nr, pin_nr)
                     print(value)
                 else:
                     print("syntax error, get servo io ")
@@ -376,11 +399,11 @@ class Example:
                 parameter_str: str = data_in_array[3]
                 if parameter_str.isnumeric():
                     channel_nr = int(parameter_str)
-                    value = self.robohat.get_topboard_adc_single_channel(channel_nr)
+                    value = self.__robohat.get_topboard_adc_single_channel(channel_nr)
                     if value != -1:
                         print("adc hat channel " + str(channel_nr) + " is: " + str(value) + "V" )
                 elif parameter_str == "all":
-                    value = self.robohat.get_topboard_adc_multiple_channels()
+                    value = self.__robohat.get_topboard_adc_multiple_channels()
                     print("adc hat volts of channels: " + str(value))
                 else:
                     print("syntax error at hat: " + parameter_str )
@@ -388,11 +411,11 @@ class Example:
                 io_command = data_in_array[3]
                 if io_command == "dir":
                     pin_nr = int(data_in_array[4])
-                    value = self.robohat.get_topboard_io_expander_direction(pin_nr)
+                    value = self.__robohat.get_topboard_io_expander_direction(pin_nr)
                     print(value)
                 elif io_command == "input":
                     pin_nr = int(data_in_array[4])
-                    value = self.robohat.get_topboard_io_expander_input(pin_nr)
+                    value = self.__robohat.get_topboard_io_expander_input(pin_nr)
                     print(value)
                 else:
                     print("syntax error, unknown hat io command")
@@ -400,7 +423,7 @@ class Example:
                 print("syntax error, unknown hat command")
 # -------------------------------------------------------------------------------
         elif command == "led":
-            value = self.robohat.get_led_color()
+            value = self.__robohat.get_led_color()
             if value is Color.OFF:
                 print("Led is OFF")
             else:
@@ -409,22 +432,22 @@ class Example:
         elif command == "lib":
             sub_command = data_in_array[2]
             if sub_command == "builddate":
-                print("build date of Robohat lib is: " + self.robohat.get_lib_build_date())
+                print("build date of Robohat lib is: " + self.__robohat.get_lib_build_date())
             elif sub_command == "version":
-                print("version of Robohat lib is: " + self.robohat.get_lib_version())
+                print("version of Robohat lib is: " + self.__robohat.get_lib_version())
             else:
                 print("syntax error")
 # -------------------------------------------------------------------------------
         elif command == "accu":
             sub_command = data_in_array[2]
             if sub_command == "voltage":
-                value = self.robohat.get_accu_voltage()
+                value = self.__robohat.get_accu_voltage()
                 print("accu voltage is: " + str(value) + " V")
             elif sub_command == "capacity":
-                value = self.robohat.get_accu_percentage_capacity()
+                value = self.__robohat.get_accu_percentage_capacity()
                 print("accu capacity is: " + str(value) + " %")
             elif sub_command == "status":
-                value = self.robohat.get_accu_status()
+                value = self.__robohat.get_accu_status()
                 print(value)
             else:
                 print("syntax error")
@@ -432,19 +455,19 @@ class Example:
         elif command == "imu":
             sub_command = data_in_array[2]
             if sub_command == "magnetic":
-                value = self.robohat.get_imu_magnetic_fields()
+                value = self.__robohat.get_imu_magnetic_fields()
                 if value is not None:
                     print("IMU magnetic: " + str(value) )
                 else:
                     print("IMU not present")
             elif sub_command == "acceleration":
-                value = self.robohat.get_imu_acceleration()
+                value = self.__robohat.get_imu_acceleration()
                 if value is not None:
                     print("IMU acceleration: " + str(value) )
                 else:
                     print("IMU not present")
             elif sub_command == "gyro":
-                value = self.robohat.get_imu_gyro()
+                value = self.__robohat.get_imu_gyro()
                 if value is not None:
                     print("IMU gyro: " + str(value) )
                 else:
@@ -469,29 +492,31 @@ class Example:
         if command == "i2c":
             sub_command = data_in_array[2]
             if sub_command == "scan":
-                self.robohat.do_i2c_scan()
+                self.__robohat.do_i2c_scan()
             else:
                 print("syntax error do i2c")
 
         elif command == "buzzer":
             sub_command = data_in_array[2]
             if sub_command == "random":
-                self.robohat.do_buzzer_random()
+                self.__robohat.do_buzzer_random()
             elif sub_command == "slowwoop":
-                self.robohat.do_buzzer_slowwoop()
+                self.__robohat.do_buzzer_slowwoop()
             elif sub_command == "beep":
-                self.robohat.do_buzzer_beep()
+                self.__robohat.do_buzzer_beep()
             elif sub_command == "freq":
                 freq_str = data_in_array[3]
                 if freq_str.isnumeric():
                     freq = int(freq_str)
-                    self.robohat.do_buzzer_freq(freq)
+                    self.__robohat.do_buzzer_freq(freq)
             elif sub_command == "stop":
-                self.robohat.do_buzzer_release()
+                self.__robohat.do_buzzer_release()
             else:
                 print("syntax error do buzzer")
         elif command == "test":
             self.do_test()
+        elif command == "walk":
+            self.do_walk()
 
         else:
             print("syntax error")
@@ -525,16 +550,16 @@ class Example:
             self.process_do(_command)
 
         elif _command == "are servos sleeping":
-            value = self.robohat.are_servos_sleeping()
+            value = self.__robohat.are_servos_sleeping()
             if value is True:
                 print("Servos are sleeping")
             else:
                 print("Servos are a wake")
         elif _command == "put servos to sleep":
-            self.robohat.put_servo_to_sleep()
+            self.__robohat.put_servo_to_sleep()
             print("servos went to sleep")
         elif _command == "wake up servos":
-            self.robohat.wakeup_servo()
+            self.__robohat.wakeup_servo()
             print("servos are a wake")
 
     # --------------------------------------------------------------------------------------
@@ -549,7 +574,7 @@ class Example:
         """
         print("\n\nWaiting for your input (type help + [RETURN] for more the command list\n\n")
 
-        while self.running is True:
+        while self.__running is True:
             inp = input()
             self.process_commands(inp)
 
@@ -568,7 +593,7 @@ class Example:
         @return None
         """
         print("__test_hat_io_expander_int_callback by: " + str(_gpi_nr))
-        self.robohat.do_buzzer_beep()
+        self.__robohat.do_buzzer_beep()
 
     # some test routines
     def __test_assemblyboard_1_io_expander_int_callback(self, _gpi_nr: int) -> None:
@@ -581,7 +606,7 @@ class Example:
         @return None
         """
         print("__test_assemblyboard1_io_expander_int_callback by: " + str(_gpi_nr))
-        self.robohat.do_buzzer_beep()
+        self.__robohat.do_buzzer_beep()
 
     def __test_assemblyboard_2_io_expander_int_callback(self, _gpi_nr: int) -> None:
         """!
@@ -593,7 +618,7 @@ class Example:
         @return None
         """
         print("__test_assemblyboard2_io_expander_int_callback by: " + str(_gpi_nr))
-        self.robohat.do_buzzer_beep()
+        self.__robohat.do_buzzer_beep()
 
     # --------------------------------------------------------------------------------------
     # --------------------------------------------------------------------------------------

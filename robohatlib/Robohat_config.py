@@ -31,6 +31,7 @@ DEBUG = False                                       # by changing this value to 
 """!
 Accu settings
 """
+
 ALARM_PERMITTED = False                              # sound an alarm when a system alert is present, such as to low accu capacity
 ALARM_TIMEOUT_IN_SEC = 300                          # timeout between alarm
 INIT_BEEP_PERMITTED = False                         # beep when started if True
@@ -93,9 +94,6 @@ STATUS_LED_DEF = MultiColorLedDef("status_led",
 IMU_LIS3MDL_I2C_DEF = I2CDeviceDef("imu_lis3mdl", 5, 0x1e)                      # definition of a part of the IMU, the LLS3MDL part, i2c bus5, address 0x1e
 IMU_LSM6DS33_I2C_DEF = I2CDeviceDef("imu_lsmds33", 5, 0x6b)                     # definition of a part of the IMU, the LSM6DS33 part, i2c bus5, address 0x6b
 IMU_DEF = IMUDef("imu", IMU_LIS3MDL_I2C_DEF, IMU_LSM6DS33_I2C_DEF)              # definition of the IMU
-
-
-
 
 TOPBOARD_ADC_I2C_DEF = I2CDeviceDef("topboard_adc", 5, 0x34)                    # definition of the TOPBOARD adc (is also used for power monitor) i2c bus5, address 0x34
 TOPBOARD_IO_EXPANDER_I2C_DEF = I2CDeviceDef("topboard_io_expander", 1, 0x20)    # i2c bus1, i2c base address 0x20
