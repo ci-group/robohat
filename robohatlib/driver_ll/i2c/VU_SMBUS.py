@@ -166,6 +166,22 @@ class VU_SMBUS():
 
         ioctl(self.__fd, I2C_SMBUS, msg)
 
+
+    def write_register_single_word(self, _slave_address:int, register, value):
+        """
+        Write a single word (2 bytes) to a given register.
+
+        """
+        self.__set_i2c_slave_address(_slave_address)
+        msg = i2c_smbus_ioctl_data.create(
+                                    read_write=I2C_SMBUS_WRITE,
+                                    command=register,
+                                    size=I2C_SMBUS_WORD_DATA
+                                        )
+        msg.data.contents.word = value
+
+        ioctl(self.__fd, I2C_SMBUS, msg)
+
     #--------------------------------------------------------------------------------------
     #--------------------------------------------------------------------------------------
     #--------------------------------------------------------------------------------------
@@ -245,6 +261,29 @@ class VU_SMBUS():
 
     #--------------------------------------------------------------------------------------
 
+    def transfer_data(self, _slave_address, register, data):
+
+        length = len(data)
+        if length > I2C_SMBUS_BLOCK_MAX:
+            raise ValueError("Data length cannot exceed %d bytes" % I2C_SMBUS_BLOCK_MAX)
+
+        self.__set_i2c_slave_address(_slave_address)
+
+        msg = i2c_smbus_ioctl_data.create(
+                                    read_write=I2C_SMBUS_WRITE,
+                                    command=register,
+                                    size=I2C_SMBUS_BLOCK_PROC_CALL
+                                    )
+
+        msg.data.contents.block[0] = length
+        msg.data.contents.block[1:length + 1] = data
+
+        ioctl(self.__fd, I2C_SMBUS, msg)
+        length = msg.data.contents.block[0]
+
+        return msg.data.contents.block[1:length + 1]
+
+    #--------------------------------------------------------------------------------------
 
 
 
