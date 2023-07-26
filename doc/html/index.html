@@ -92,7 +92,49 @@ $(document).ready(function(){initNavTree('index.html',''); initResizable(); });
   <div class="headertitle"><div class="title">Main page </div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><h1><a class="el" href="namespace_robohat.html">Robohat</a> library</h1>
+<div class="textblock"><h1><a class="el" href="namespace_robohat.html">Robohat</a></h1>
+<div class="image">
+<img src="robohat.png" alt=""/>
+</div>
+<p>The electronics of <a class="el" href="namespace_robohat.html">Robohat</a> consits out mutiple boards, and is build arround a RaspberryPi 4. On this Raspberry a 'Topboard' is connected (as a hat) which is in its turn connencted to the rest of the baords. A user can control the electronics with a library written in python called '<a class="el" href="namespace_robohat.html">Robohat</a> library'</p>
+<h2>Topboard</h2>
+<div class="image">
+<img src="topboard.png" alt=""/>
+</div>
+<p>The Topboard is the connection between the RaspberryPi and the rest of the system. On the Topboard itself a buzzer, and an IO expander available. These can be accesed by the Topboard API calls.</p>
+<h2>IMU</h2>
+<div class="image">
+<img src="IMU.png" alt=""/>
+</div>
+<p>The IMU is connected to the PI through the Topboard. Is accessed by its OWM API-calls. At IMU nothing is selectedable and should be auto detected at startup of the <a class="el" href="namespace_robohat.html">Robohat</a> library.</p>
+<h2>Servo assembly</h2>
+<p>The servo assembly consists of 2 boards (the PWM board and the ADC board) sandwitched together. The servo assembly powers, drives and readsout the attached servos. A Servo aseembly is connected by a flat-cable onto the Topboard (onto plug P3 or plug P4) At the back of the Servo assembly (at the PWM board) are 2 dip-swiches mounted. Onto this swiches an address of the servo assembly can be selected. Be sure if you use 2 servo assemblies (or in the future more), that the addreses should NOT be the same. To keep it simple, set the address of switch SW1 the same as the switch SW2.</p>
+<p>The Servo assembly handles the power distrubution of the servo. The servos are grouped. Each goup has its own powersupplie. If servos in a group take to much power to handle, you can swap a servo with an other group to even the power distrubtion. The Servo groups are</p>
+<p><br  />
+ </p><table style="width:200px">
+<tr>
+<th style="text-align: left">Servo group</th><th style="text-align: left" colspan="4">Servos </th></tr>
+<tr>
+<td>1</td><td>1</td><td>5</td><td>9</td><td>13 </td></tr>
+<tr>
+<td>2</td><td>2</td><td>6</td><td>10</td><td>14 </td></tr>
+<tr>
+<td>3</td><td>3</td><td>7</td><td>11</td><td>15 </td></tr>
+<tr>
+<td>4</td><td>4</td><td>8</td><td>12</td><td>16 </td></tr>
+</table>
+<h2>Powerboard</h2>
+<div class="image">
+<img src="powerboard.png" alt=""/>
+</div>
+<p>The accu can deliver a huge amount of power. To keep it save and prevent wrong useage of the accu, each accu has its own powerboard.</p>
+<p>So the powerboard is the power distrutor and the supervisor of the Accu. First an accu with enough capacity has to be connected. When the accu has enough capacity, a LED will blink two times. The LED will flash mutiple times, when the Accu capacity to low, but still measureble. When the accu is complety dead nothing will happen.</p>
+<p>Power on The <a class="el" href="namespace_robohat.html">Robohat</a> can only be turned on when the accu has enough capacity. To power on, the user has to press the power-on switch. When the switch is pressed the LED will blink 3 times. After the blinking period, the LED will flash mutiple times. The user should release the power switch before the flashen stops. Nothing will happen, when the user releases the button after flashing is finished. This is done, to prevent exedently turning on the <a class="el" href="namespace_robohat.html">Robohat</a>.</p>
+<p>Turning off the power has to be done the same way (pressing the button (and holding it while the LED is blinking, and releasing it while the LED flashing) Note. A hard power-shutdown can destroy disk-data. Use the shutdown API-function of the <a class="el" href="namespace_robohat.html">Robohat</a> library, or type /code sudo shutdown now /endcode in the console of the Raspberry</p>
+<p>When the <a class="el" href="namespace_robohat.html">Robohat</a> is turned on, and the capacity goes below a threshold (2%) the LED will flash, and the power will eventualy will shutdown. Because the accu capacity is too low, the user isn'able to turn the power on again. The auto shutdown will be performed to save the accu. The accu will be destroyed if used below a capacity of 1%</p>
+<p>Note: A gracefull shutdown (shut-downing the OS of the Raspberry) will be performed when the <a class="el" href="namespace_robohat.html">Robohat</a> library is beeing used and the capacity of the accu goed below 5%. This is more preferable. The disk-data could be destroyed with an sudden power-shutdown.</p>
+<p>While the accu is in standby, the led will periodly flash (interval of 6 seconds)</p>
+<h1><a class="el" href="namespace_robohat.html">Robohat</a> library</h1>
 <p>Version: 0.0.2</p>
 <p><a class="el" href="namespace_robohat.html">Robohat</a> library is an library to access IO of the <a class="el" href="namespace_robohat.html">Robohat</a> project written in Python</p>
 <h2>Robohatlib test</h2>
@@ -102,7 +144,7 @@ $(document).ready(function(){initNavTree('index.html',''); initResizable(); });
 </p>
 <p>These files should be placed in the directory where the 'robohatlib' is placed</p>
 <p>To execute the test:</p>
-<div class="fragment"><div class="line">cd ~/robohat        </div>
+<div class="fragment"><div class="line">cd ~/robohat</div>
 <div class="line">python3 test.py</div>
 </div><!-- fragment --><p> <em>example to execute the test python module. Can be placed in a batch file</em></p>
 <p>When starting the test program (which initialises the Robohatlib) a summery of the IO will be printed on the console. The user will be notified when a IO devices will fail.</p>
@@ -126,14 +168,14 @@ $(document).ready(function(){initNavTree('index.html',''); initResizable(); });
 <div class="line">for i in range(1,1800, 1):</div>
 <div class="line">    angle = i / 10.0</div>
 <div class="line">    robohat.set_servo_multiple_angles([angle, angle, angle, angle, angle, angle, angle, angle, angle, angle, angle, angle, angle, angle, angle, angle, angle, angle, angle, angle, angle, angle, angle, angle, angle, angle, angle, angle, angle, angle, angle, angle])</div>
-<div class="line">    print(&quot;--&gt;&quot; + str(robohat.get_servo_single_angle(1)) + &quot; Â°&quot;)</div>
+<div class="line">    print(&quot;--&gt;&quot; + str(robohat.get_servo_single_angle(1)) + &quot; °&quot;)</div>
 <div class="line">    time.sleep(1)</div>
 <div class="line"> </div>
 <div class="line">robohat.set_led_color(Color.RED)</div>
 <div class="line">for i in range(1800,1, -1):</div>
 <div class="line">    angle = i / 10.0</div>
 <div class="line">    robohat.set_servo_multiple_angles([angle, angle, angle, angle, angle, angle, angle, angle, angle, angle, angle, angle, angle, angle, angle, angle, angle, angle, angle, angle, angle, angle, angle, angle, angle, angle, angle, angle, angle, angle, angle, angle])</div>
-<div class="line">    print(&quot;--&gt;&quot; + str(robohat.get_servo_single_angle(1)) + &quot; Â°&quot;)</div>
+<div class="line">    print(&quot;--&gt;&quot; + str(robohat.get_servo_single_angle(1)) + &quot; °&quot;)</div>
 <div class="line">    time.sleep(1)</div>
 <div class="ttc" id="anamespace_robohat_html"><div class="ttname"><a href="namespace_robohat.html">Robohat</a></div><div class="ttdef"><b>Definition</b> <a href="_robohat_8py_source.html#l00001">Robohat.py:1</a></div></div>
 </div><!-- fragment --><p> <em>example sourcecode</em></p>
@@ -176,7 +218,6 @@ the servo assembly PCB</div></div>
 settings of the switch on a servo assembly and its value</div></div>
 <p><b>note.</b> <br  />
  One assembly-board should always be connected to connector P3 of the topboard. The second assembly board is not mandantory, which can be connected to P4 of the topboard. <br  />
- <br  />
  When an assembly-board is connected at connecter P3 of the topboard, the ID of the assembly-board will be 0. <br  />
  When an assembly-board is connected at connector P4 of the topboard, the ID of the assembly-board will be 1. <br  />
 </p>
@@ -241,8 +282,14 @@ settings of the switch on the topboard and its value</div></div>
 <div class="caption">
 servo voltage to angle</div></div>
 <p>After initialisation the servos position can be altered</p>
-<h1>set_servos_angles</h1>
-<p>with the function 'set_servos_angles' you set all the angles of the 16 servos</p>
+<h1>Interrupts</h1>
+<p>The <a class="el" href="namespace_robohat.html">Robohat</a> library can generated 3 interrupts. The first one is the interrupt of the Topboard IO-expander. Both Assembly boards can also generate a interrupt.</p>
+<h2>Topboard interrupt</h2>
+<p>When an I/O pin of the Topboard IO expander is set as an intput, it can generate an interrupt. To catch this interrupt, a callback function has to be set with the function 'set_topboard_io_expander_int_callback( <em>the</em> function)' of the <a class="el" href="namespace_robohat.html">Robohat</a> library. This callback function has accept an integer as parameter. This parameter is set to tell the callback function which IO pin has cause the triggering of the interrupt.</p>
+<h2>Assemblyboard interrupt</h2>
+<p>Both assembly board has a IO exapnder which is used to detect if the power delivery for the servos is working correctly. To detect a power failer only 4 IO pins of the expander are used. IO pin 4,5 and 6 can be used by a user. When these pins a configured as an input, in can generate an interrupt. To catch this interrupt, a callback function has to be set with the function 'set_topboard_io_expander_int_callback( <em>the</em> function)' of the <a class="el" href="namespace_robohat.html">Robohat</a> library. This callback function has accept an integer as parameter. This parameter is set to tell the callback function which IO pin has cause the triggering of the interrupt.</p>
+<h1>set the servos angles</h1>
+<p>with the function 'set_servos_angles' you set the angle of all the servos. The array has to be have a size of 16 or 32 elements. When the size is 16 elements, only the first 16 servos will be addressed. When the array has 32 elements, all of the servos will be addressed.</p>
 <p>/code robohat.set_servos_angles([angle, angle, angle, angle, angle, angle, angle, angle, angle, angle, angle, angle, angle, angle, angle, angle]) /endcode <em>Setting the servos to an angle</em> </p>
 </div></div><!-- PageDoc -->
 </div><!-- contents -->
@@ -250,7 +297,7 @@ servo voltage to angle</div></div>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="footer">Generated on Fri Jul 21 2023 12:32:23 for Robohat by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.7 </li>
+    <li class="footer">Generated on Tue Jul 25 2023 14:10:17 for Robohat by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.7 </li>
   </ul>
 </div>
 </body>

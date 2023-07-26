@@ -91,7 +91,7 @@ class Example:
 
     def do_test(self) -> None:
         """!
-        Single test routine which will drive all the servos, will make an beep sound and changes the color of the Multi-LED
+        Single test routine which will drive all the servos, will make a beep sound and changes the color of the Multi-LED
         @return: None
         """
 
@@ -541,7 +541,8 @@ class Example:
     # --------------------------------------------------------------------------------------
     # --------------------------------------------------------------------------------------
 
-    def start_example(self) -> None:
+    def \
+            start_example(self) -> None:
         """!
         Start this example
         @return: None

@@ -1,5 +1,65 @@
 \chapter{Main page}
 \hypertarget{index}{}\label{index}\index{Main page@{Main page}}
+\doxysection*{\doxylink{namespace_robohat}{Robohat}}
+
+
+
+The electronics of \doxylink{namespace_robohat}{Robohat} consits out mutiple boards, and is build arround a Raspberry\+Pi 4. On this Raspberry a \textquotesingle{}Topboard\textquotesingle{} is connected (as a hat) which is in its turn connencted to the rest of the baords. A user can control the electronics with a library written in python called \textquotesingle{}\doxylink{namespace_robohat}{Robohat} library\textquotesingle{}
+
+\doxysubsection*{Topboard}
+
+
+
+The Topboard is the connection between the Raspberry\+Pi and the rest of the system. On the Topboard itself a buzzer, and an IO expander available. These can be accesed by the Topboard API calls.
+
+\doxysubsection*{IMU}
+
+
+
+The IMU is connected to the PI through the Topboard. Is accessed by its OWM API-\/calls. At IMU nothing is selectedable and should be auto detected at startup of the \doxylink{namespace_robohat}{Robohat} library.
+
+\doxysubsection*{Servo assembly}
+
+The servo assembly consists of 2 boards (the PWM board and the ADC board) sandwitched together. The servo assembly powers, drives and readsout the attached servos. A Servo aseembly is connected by a flat-\/cable onto the Topboard (onto plug P3 or plug P4) At the back of the Servo assembly (at the PWM board) are 2 dip-\/swiches mounted. Onto this swiches an address of the servo assembly can be selected. Be sure if you use 2 servo assemblies (or in the future more), that the addreses should NOT be the same. To keep it simple, set the address of switch SW1 the same as the switch SW2.
+
+The Servo assembly handles the power distrubution of the servo. The servos are grouped. Each goup has its own powersupplie. If servos in a group take to much power to handle, you can swap a servo with an other group to even the power distrubtion. The Servo groups are
+
+~\newline
+ \tabulinesep=1mm
+\begin{longtabu}spread 0pt [c]{*{5}{|X[-1]}|}
+\hline
+\cellcolor{\tableheadbgcolor}\textbf{ Servo group}&\multicolumn{4}{l|}{\cellcolor{\tableheadbgcolor}\textbf{ Servos }}\\\cline{1-5}
+\endfirsthead
+\hline
+\endfoot
+\hline
+\cellcolor{\tableheadbgcolor}\textbf{ Servo group}&\multicolumn{4}{l|}{\cellcolor{\tableheadbgcolor}\textbf{ Servos }}\\\cline{1-5}
+\endhead
+1&1&5&9&13 \\\cline{1-5}
+2&2&6&10&14 \\\cline{1-5}
+3&3&7&11&15 \\\cline{1-5}
+4&4&8&12&16 \\\cline{1-5}
+\end{longtabu}
+
+
+\doxysubsection*{Powerboard}
+
+
+
+The accu can deliver a huge amount of power. To keep it save and prevent wrong useage of the accu, each accu has its own powerboard.
+
+So the powerboard is the power distrutor and the supervisor of the Accu. First an accu with enough capacity has to be connected. When the accu has enough capacity, a LED will blink two times. The LED will flash mutiple times, when the Accu capacity to low, but still measureble. When the accu is complety dead nothing will happen.
+
+Power on The \doxylink{namespace_robohat}{Robohat} can only be turned on when the accu has enough capacity. To power on, the user has to press the power-\/on switch. When the switch is pressed the LED will blink 3 times. After the blinking period, the LED will flash mutiple times. The user should release the power switch before the flashen stops. Nothing will happen, when the user releases the button after flashing is finished. This is done, to prevent exedently turning on the \doxylink{namespace_robohat}{Robohat}.
+
+Turning off the power has to be done the same way (pressing the button (and holding it while the LED is blinking, and releasing it while the LED flashing) Note. A hard power-\/shutdown can destroy disk-\/data. Use the shutdown API-\/function of the \doxylink{namespace_robohat}{Robohat} library, or type /code sudo shutdown now /endcode in the console of the Raspberry
+
+When the \doxylink{namespace_robohat}{Robohat} is turned on, and the capacity goes below a threshold (2\%) the LED will flash, and the power will eventualy will shutdown. Because the accu capacity is too low, the user isn\textquotesingle{}able to turn the power on again. The auto shutdown will be performed to save the accu. The accu will be destroyed if used below a capacity of 1\%
+
+Note\+: A gracefull shutdown (shut-\/downing the OS of the Raspberry) will be performed when the \doxylink{namespace_robohat}{Robohat} library is beeing used and the capacity of the accu goed below 5\%. This is more preferable. The disk-\/data could be destroyed with an sudden power-\/shutdown.
+
+While the accu is in standby, the led will periodly flash (interval of 6 seconds)
+
 \doxysection*{\doxylink{namespace_robohat}{Robohat} library}
 
 Version\+: 0.\+0.\+2
@@ -20,7 +80,7 @@ To execute the test\+:
 
 
 \begin{DoxyCode}{0}
-\DoxyCodeLine{cd\ \string~/robohat\ \ \ \ \ \ \ \ }
+\DoxyCodeLine{cd\ \string~/robohat}
 \DoxyCodeLine{python3\ test.py}
 
 \end{DoxyCode}
@@ -56,14 +116,14 @@ A little example of using the \doxylink{namespace_robohat}{Robohat} library
 \DoxyCodeLine{for\ i\ in\ range(1,1800,\ 1):}
 \DoxyCodeLine{\ \ \ \ angle\ =\ i\ /\ 10.0}
 \DoxyCodeLine{\ \ \ \ robohat.set\_servo\_multiple\_angles([angle,\ angle,\ angle,\ angle,\ angle,\ angle,\ angle,\ angle,\ angle,\ angle,\ angle,\ angle,\ angle,\ angle,\ angle,\ angle,\ angle,\ angle,\ angle,\ angle,\ angle,\ angle,\ angle,\ angle,\ angle,\ angle,\ angle,\ angle,\ angle,\ angle,\ angle,\ angle])}
-\DoxyCodeLine{\ \ \ \ print("{}-\/-\/>"{}\ +\ str(robohat.get\_servo\_single\_angle(1))\ +\ "{}\ Â°"{})}
+\DoxyCodeLine{\ \ \ \ print("{}-\/-\/>"{}\ +\ str(robohat.get\_servo\_single\_angle(1))\ +\ "{}\ °"{})}
 \DoxyCodeLine{\ \ \ \ time.sleep(1)}
 \DoxyCodeLine{}
 \DoxyCodeLine{robohat.set\_led\_color(Color.RED)}
 \DoxyCodeLine{for\ i\ in\ range(1800,1,\ -\/1):}
 \DoxyCodeLine{\ \ \ \ angle\ =\ i\ /\ 10.0}
 \DoxyCodeLine{\ \ \ \ robohat.set\_servo\_multiple\_angles([angle,\ angle,\ angle,\ angle,\ angle,\ angle,\ angle,\ angle,\ angle,\ angle,\ angle,\ angle,\ angle,\ angle,\ angle,\ angle,\ angle,\ angle,\ angle,\ angle,\ angle,\ angle,\ angle,\ angle,\ angle,\ angle,\ angle,\ angle,\ angle,\ angle,\ angle,\ angle])}
-\DoxyCodeLine{\ \ \ \ print("{}-\/-\/>"{}\ +\ str(robohat.get\_servo\_single\_angle(1))\ +\ "{}\ Â°"{})}
+\DoxyCodeLine{\ \ \ \ print("{}-\/-\/>"{}\ +\ str(robohat.get\_servo\_single\_angle(1))\ +\ "{}\ °"{})}
 \DoxyCodeLine{\ \ \ \ time.sleep(1)}
 
 \end{DoxyCode}
@@ -131,7 +191,6 @@ A Servo\+Assembly\+Config is the configuration for a Servo\+Assembly board, whic
 
 {\bfseries{note.}} ~\newline
  One assembly-\/board should always be connected to connector P3 of the topboard. The second assembly board is not mandantory, which can be connected to P4 of the topboard. ~\newline
- ~\newline
  When an assembly-\/board is connected at connecter P3 of the topboard, the ID of the assembly-\/board will be 0. ~\newline
  When an assembly-\/board is connected at connector P4 of the topboard, the ID of the assembly-\/board will be 1. ~\newline
 
@@ -219,8 +278,20 @@ Before we have some action, we have to initialize the robohat class~\newline
 
 After initialisation the servos position can be altered
 
-\doxysection*{set\+\_\+servos\+\_\+angles}
+\doxysection*{Interrupts}
 
-with the function \textquotesingle{}set\+\_\+servos\+\_\+angles\textquotesingle{} you set all the angles of the 16 servos
+The \doxylink{namespace_robohat}{Robohat} library can generated 3 interrupts. The first one is the interrupt of the Topboard IO-\/expander. Both Assembly boards can also generate a interrupt.
+
+\doxysubsection*{Topboard interrupt}
+
+When an I/O pin of the Topboard IO expander is set as an intput, it can generate an interrupt. To catch this interrupt, a callback function has to be set with the function \textquotesingle{}set\+\_\+topboard\+\_\+io\+\_\+expander\+\_\+int\+\_\+callback( {\itshape the} function)\textquotesingle{} of the \doxylink{namespace_robohat}{Robohat} library. This callback function has accept an integer as parameter. This parameter is set to tell the callback function which IO pin has cause the triggering of the interrupt.
+
+\doxysubsection*{Assemblyboard interrupt}
+
+Both assembly board has a IO exapnder which is used to detect if the power delivery for the servos is working correctly. To detect a power failer only 4 IO pins of the expander are used. IO pin 4,5 and 6 can be used by a user. When these pins a configured as an input, in can generate an interrupt. To catch this interrupt, a callback function has to be set with the function \textquotesingle{}set\+\_\+topboard\+\_\+io\+\_\+expander\+\_\+int\+\_\+callback( {\itshape the} function)\textquotesingle{} of the \doxylink{namespace_robohat}{Robohat} library. This callback function has accept an integer as parameter. This parameter is set to tell the callback function which IO pin has cause the triggering of the interrupt.
+
+\doxysection*{set the servos angles}
+
+with the function \textquotesingle{}set\+\_\+servos\+\_\+angles\textquotesingle{} you set the angle of all the servos. The array has to be have a size of 16 or 32 elements. When the size is 16 elements, only the first 16 servos will be addressed. When the array has 32 elements, all of the servos will be addressed.
 
 /code robohat.\+set\+\_\+servos\+\_\+angles(\mbox{[}angle, angle, angle, angle, angle, angle, angle, angle, angle, angle, angle, angle, angle, angle, angle, angle\mbox{]}) /endcode {\itshape Setting the servos to an angle} 
