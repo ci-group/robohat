@@ -1,5 +1,7 @@
 from robohatlib.Robohat import Robohat
 import time
+from enum import Enum
+from enum import IntEnum
 
 # --------------------------------------------------------------------------------------
 """     +---------+
@@ -16,12 +18,15 @@ import time
 
 """
 
-LEFT_FRONT_LEG_SERVO = 1
-RIGHT_FRONT_LEG_SERVO = 2
-NECK_SERVO = 3
-HIP_SERVO = 4
-LEFT_BACK_LEG_SERVO = 5
-RIGHT_BACK_LEG_SERVO = 6
+
+ARRAY_POS_LEFT_FRONT_LEG_SERVO = 0
+ARRAY_POS_RIGHT_FRONT_LEG_SERVO = 1
+ARRAY_POS_NECK_SERVO = 2
+ARRAY_POS_HIP_SERVO = 3
+ARRAY_POS_LEFT_BACK_LEG_SERVO = 4
+ARRAY_POS_RIGHT_BACK_LEG_SERVO = 5
+
+
 
 TIME_BETWEEN_STEP = 5
 
@@ -39,9 +44,15 @@ HIP_LEFT = 0.0
 HIP_RIGHT = 180.0
 
 
+class ID(IntEnum):
+    LEFT_FRONT_LEG = 1
+    RIGHT_FRONT_LEG = 2
+    NECK = 3
+    HIP = 4
+    LEFT_BACK_LEG = 5
+    RIGHT_BACK_LEG = 6
+
 class Walk:
-
-
 
 
     # --------------------------------------------------------------------------------------
@@ -57,12 +68,12 @@ class Walk:
 
         self.__servo_positions = [0.0] * 6
 
-        self.set_servo_preset_value(LEFT_FRONT_LEG_SERVO, LEG_NEUTRAL)
-        self.set_servo_preset_value(RIGHT_FRONT_LEG_SERVO, LEG_NEUTRAL)
-        self.set_servo_preset_value(NECK_SERVO, NECK_NEUTRAL)
-        self.set_servo_preset_value(HIP_SERVO, NECK_NEUTRAL)
-        self.set_servo_preset_value(LEFT_BACK_LEG_SERVO, LEG_NEUTRAL)
-        self.set_servo_preset_value(RIGHT_BACK_LEG_SERVO, LEG_NEUTRAL)
+        self.set_servo_preset_value(ID.LEFT_FRONT_LEG, LEG_NEUTRAL)
+        self.set_servo_preset_value(ID.RIGHT_FRONT_LEG, LEG_NEUTRAL)
+        self.set_servo_preset_value(ID.NECK, NECK_NEUTRAL)
+        self.set_servo_preset_value(ID.HIP, NECK_NEUTRAL)
+        self.set_servo_preset_value(ID.LEFT_BACK_LEG, LEG_NEUTRAL)
+        self.set_servo_preset_value(ID.RIGHT_BACK_LEG, LEG_NEUTRAL)
 
         self.push_preset_values_to_servos()
 
@@ -104,6 +115,7 @@ class Walk:
         self._leg_left_back_neutral()
         self._joint_neutral()
 
+        print("STALL")
         time.sleep(TIME_BETWEEN_STEP)
     # --------------------------------------------------------------------------------------
 
@@ -116,6 +128,8 @@ class Walk:
         self._joint_right()
         self._leg_right_back_neutral()
         self._joint_neutral()
+
+        print("STALL")
         time.sleep(TIME_BETWEEN_STEP)
     # --------------------------------------------------------------------------------------
 
@@ -133,185 +147,180 @@ class Walk:
     # --------------------------------------------------------------------------------------
 
     def push_preset_values_to_servos(self) -> None:
-        unused_angle = 0
+        unused_angle = 0.0
 
-        self.__robohat.set_servo_multiple_angles(
-                                                [self.get_servo_preset_value(1),
-                                                 self.get_servo_preset_value(2),
-                                                 self.get_servo_preset_value(3),
-                                                 self.get_servo_preset_value(4),
-                                                 self.get_servo_preset_value(5),
-                                                 self.get_servo_preset_value(6),
-                                                 unused_angle,
-                                                 unused_angle,
-                                                 unused_angle,
-                                                 unused_angle,
-                                                 unused_angle,
-                                                 unused_angle,
-                                                 unused_angle,
-                                                 unused_angle,
-                                                 unused_angle,
-                                                 unused_angle,
-                                                 unused_angle,
-                                                 unused_angle,
-                                                 unused_angle,
-                                                 unused_angle,
-                                                 unused_angle,
-                                                 unused_angle,
-                                                 unused_angle,
-                                                 unused_angle,
-                                                 unused_angle,
-                                                 unused_angle,
-                                                 unused_angle,
-                                                 unused_angle,
-                                                 unused_angle,
-                                                 unused_angle,
-                                                 unused_angle,
-                                                 unused_angle])
+        angles = [unused_angle] * 32
+        angles[ARRAY_POS_LEFT_FRONT_LEG_SERVO] =        self.get_servo_preset_value(ID.LEFT_FRONT_LEG)
+        angles[ARRAY_POS_RIGHT_FRONT_LEG_SERVO] =       self.get_servo_preset_value(ID.RIGHT_FRONT_LEG)
+        angles[ARRAY_POS_NECK_SERVO] =                  self.get_servo_preset_value(ID.NECK)
+        angles[ARRAY_POS_HIP_SERVO] =                   self.get_servo_preset_value(ID.HIP)
+        angles[ARRAY_POS_LEFT_BACK_LEG_SERVO] =         self.get_servo_preset_value(ID.LEFT_BACK_LEG)
+        angles[ARRAY_POS_RIGHT_BACK_LEG_SERVO] =        self.get_servo_preset_value(ID.RIGHT_BACK_LEG)
+
+        self.__robohat.set_servo_multiple_angles(angles)
 
     # --------------------------------------------------------------------------------------
     # --------------------------------------------------------------------------------------
     # --------------------------------------------------------------------------------------
 
-    def set_servo_preset_value(self, _servo_nr:int, _pos:float) -> None:
-        if _servo_nr < 1 or _servo_nr > 6:
-            return
+    def set_servo_preset_value(self, _servo_id:ID, _pos:float) -> None:
+        servo_nr:int = int(_servo_id)
 
-        self.__servo_positions[_servo_nr-1] = _pos
+        self.__servo_positions[servo_nr-1] = _pos
 
     # --------------------------------------------------------------------------------------
     # --------------------------------------------------------------------------------------
     # --------------------------------------------------------------------------------------
 
-    def get_servo_preset_value(self, _servo_nr:int) -> float:
-        if _servo_nr < 1 or _servo_nr > 6:
-            return -1
+    def get_servo_preset_value(self, _servo_id:ID) -> float:
+        servo_nr: int = int(_servo_id)
 
-        return self.__servo_positions[_servo_nr-1]
+        return self.__servo_positions[servo_nr-1]
 
     # --------------------------------------------------------------------------------------
     # --------------------------------------------------------------------------------------
     # --------------------------------------------------------------------------------------
 
     def _leg_right_front_up(self):
-        self.set_servo_preset_value(RIGHT_FRONT_LEG_SERVO, LEG_UP)
+        print("_leg_right_front_up")
+        self.set_servo_preset_value(ID.RIGHT_FRONT_LEG, LEG_UP)
         self.push_preset_values_to_servos()
         time.sleep(1)
 
     def _leg_right_front_down(self):
-        self.set_servo_preset_value(RIGHT_FRONT_LEG_SERVO, LEG_DOWN)
+        print("_leg_right_front_down")
+        self.set_servo_preset_value(ID.RIGHT_FRONT_LEG, LEG_DOWN)
         self.push_preset_values_to_servos()
         time.sleep(1)
 
     def _leg_right_front_neutral(self):
-        self.set_servo_preset_value(RIGHT_FRONT_LEG_SERVO, LEG_NEUTRAL)
+        print("_leg_right_front_neutral")
+        self.set_servo_preset_value(ID.RIGHT_FRONT_LEG, LEG_NEUTRAL)
         self.push_preset_values_to_servos()
         time.sleep(1)
 
     # --------------------------------------------------------------------------------------
 
     def _leg_left_front_up(self):
-        self.set_servo_preset_value(LEFT_FRONT_LEG_SERVO, LEG_UP)
+        print("_leg_left_front_up")
+        self.set_servo_preset_value(ID.LEFT_FRONT_LEG, LEG_UP)
         self.push_preset_values_to_servos()
         time.sleep(1)
 
     def _leg_left_front_down(self):
-        self.set_servo_preset_value(LEFT_FRONT_LEG_SERVO, LEG_DOWN)
+        print("_leg_left_front_down")
+        self.set_servo_preset_value(ID.LEFT_FRONT_LEG, LEG_DOWN)
         self.push_preset_values_to_servos()
         time.sleep(1)
 
     def _leg_left_front_neutral(self):
-        self.set_servo_preset_value(LEFT_FRONT_LEG_SERVO, LEG_NEUTRAL)
+        print("_leg_left_front_neutral")
+        self.set_servo_preset_value(ID.LEFT_FRONT_LEG, LEG_NEUTRAL)
         self.push_preset_values_to_servos()
         time.sleep(1)
 
     # --------------------------------------------------------------------------------------
 
     def _leg_right_back_up(self):
-        self.set_servo_preset_value(RIGHT_BACK_LEG_SERVO, LEG_UP)
+        print("_leg_right_back_up")
+        self.set_servo_preset_value(ID.RIGHT_BACK_LEG, LEG_UP)
         self.push_preset_values_to_servos()
         time.sleep(1)
 
     def _leg_right_back_down(self):
-        self.set_servo_preset_value(RIGHT_BACK_LEG_SERVO, LEG_DOWN)
+        print("_leg_right_back_down")
+        self.set_servo_preset_value(ID.RIGHT_BACK_LEG, LEG_DOWN)
         self.push_preset_values_to_servos()
         time.sleep(1)
 
     def _leg_right_back_neutral(self):
-        self.set_servo_preset_value(RIGHT_BACK_LEG_SERVO, LEG_NEUTRAL)
+        print("_leg_right_back_neutral")
+        self.set_servo_preset_value(ID.RIGHT_BACK_LEG, LEG_NEUTRAL)
         self.push_preset_values_to_servos()
         time.sleep(1)
 
     # --------------------------------------------------------------------------------------
 
     def _leg_left_back_up(self):
-        self.set_servo_preset_value(LEFT_BACK_LEG_SERVO, LEG_UP)
+        print("_leg_left_back_up")
+        self.set_servo_preset_value(ID.LEFT_BACK_LEG, LEG_UP)
         self.push_preset_values_to_servos()
         time.sleep(1)
 
     def _leg_left_back_down(self):
-        self.set_servo_preset_value(LEFT_BACK_LEG_SERVO, LEG_DOWN)
+        print("_leg_left_back_down")
+        self.set_servo_preset_value(ID.LEFT_BACK_LEG, LEG_DOWN)
         self.push_preset_values_to_servos()
         time.sleep(1)
 
     def _leg_left_back_neutral(self):
-        self.set_servo_preset_value(LEFT_BACK_LEG_SERVO, LEG_NEUTRAL)
+        print("_leg_left_back_neutral")
+        self.set_servo_preset_value(ID.LEFT_BACK_LEG, LEG_NEUTRAL)
         self.push_preset_values_to_servos()
         time.sleep(1)
 
     # --------------------------------------------------------------------------------------
 
     def _joint_right(self):
-        self.set_servo_preset_value(NECK_SERVO, NECK_RIGHT)
-        self.set_servo_preset_value(HIP_SERVO, HIP_LEFT)
+        print("_joint_right")
+        self.set_servo_preset_value(ID.NECK, NECK_RIGHT)
+        self.set_servo_preset_value(ID.HIP, HIP_LEFT)
 
         self.push_preset_values_to_servos()
         time.sleep(1)
 
     def _joint_left(self):
-        self.set_servo_preset_value(NECK_SERVO, NECK_LEFT)
-        self.set_servo_preset_value(HIP_SERVO, HIP_RIGHT)
+        print("_joint_left")
+        self.set_servo_preset_value(ID.NECK, NECK_LEFT)
+        self.set_servo_preset_value(ID.HIP, HIP_RIGHT)
 
         self.push_preset_values_to_servos()
         time.sleep(1)
 
     def _joint_neutral(self):
-        self.set_servo_preset_value(NECK_SERVO, NECK_NEUTRAL)
-        self.set_servo_preset_value(HIP_SERVO, NECK_NEUTRAL)
+        print("_joint_neutral")
+        self.set_servo_preset_value(ID.NECK, NECK_NEUTRAL)
+        self.set_servo_preset_value(ID.HIP, NECK_NEUTRAL)
         self.push_preset_values_to_servos()
         time.sleep(1)
 
     # --------------------------------------------------------------------------------------
 
     def _neck_right(self):
-        self.set_servo_preset_value(NECK_SERVO, NECK_RIGHT)
+        print("_neck_right")
+        self.set_servo_preset_value(ID.NECK, NECK_RIGHT)
         self.push_preset_values_to_servos()
         time.sleep(1)
 
     def _neck_left(self):
-        self.set_servo_preset_value(NECK_SERVO, NECK_LEFT)
+        print("_neck_left")
+        self.set_servo_preset_value(ID.NECK, NECK_LEFT)
         self.push_preset_values_to_servos()
         time.sleep(1)
 
     def _neck_neutral(self):
-        self.set_servo_preset_value(NECK_SERVO, NECK_NEUTRAL)
+        print("_neck_neutral")
+        self.set_servo_preset_value(ID.NECK, NECK_NEUTRAL)
         self.push_preset_values_to_servos()
         time.sleep(1)
 
     # --------------------------------------------------------------------------------------
 
     def _hip_right(self):
-        self.set_servo_preset_value(HIP_SERVO, HIP_RIGHT)
+        print("_hip_right")
+        self.set_servo_preset_value(ID.HIP, HIP_RIGHT)
         self.push_preset_values_to_servos()
         time.sleep(1)
 
     def _hip_left(self):
-        self.set_servo_preset_value(HIP_SERVO, HIP_LEFT)
+        print("_hip_left")
+        self.set_servo_preset_value(ID.HIP, HIP_LEFT)
         self.push_preset_values_to_servos()
         time.sleep(1)
 
     def _hip_neutral(self):
-        self.set_servo_preset_value(HIP_SERVO, HIP_NEUTRAL)
+        print("_hip_neutral")
+        self.set_servo_preset_value(ID.HIP, HIP_NEUTRAL)
         self.push_preset_values_to_servos()
         time.sleep(1)
 
