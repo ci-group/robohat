@@ -3,6 +3,7 @@ from __future__ import absolute_import, division, print_function, unicode_litera
 
 try:
     from robohatlib.Robohat import Robohat
+    from robohatlib.Robohat_constants import Robohat_constants
     from robohatlib.hal.assemblyboard.ServoAssemblyConfig import ServoAssemblyConfig
     from robohatlib.hal.assemblyboard.servo.ServoData import ServoData
     from robohatlib.hal.datastructure.Color import Color
@@ -118,11 +119,22 @@ class Example:
         @return None
         """
 
-        servo_angles = self.__robohat.get_servo_multiple_angles()
+        if self.__robohat.get_assemblyboard_is_connected(Robohat_constants.PWMPLUG_P3) == False and self.__robohat.get_assemblyboard_is_connected(Robohat_constants.PWMPLUG_P4) == False:
+            print("No servos available, no assembly board is connected")
+        else:
+            servo_angles = self.__robohat.get_servo_multiple_angles()
 
-        for i in range(0, len(servo_angles) ):
-            if servo_angles[i] > -1:
-                print("Found connected servo: " + str(i) )
+            servo_counter = 0
+
+            for i in range(0, len(servo_angles) ):
+                if servo_angles[i] > -1:
+                    print("Found connected servo: " + str(i) )
+                    servo_counter = servo_counter + 1
+
+            if servo_counter == 0:
+                print("Did not found any servos")
+            else:
+                print("Did found: " + str(servo_counter) + " servos")
 
     # --------------------------------------------------------------------------------------
     # --------------------------------------------------------------------------------------
