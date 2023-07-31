@@ -3,7 +3,7 @@ from __future__ import absolute_import, division, print_function, unicode_litera
 
 try:
     from robohatlib.Robohat import Robohat
-    from robohatlib.Robohat_constants import Robohat_constants
+    from robohatlib import Robohat_constants
     from robohatlib.hal.assemblyboard.ServoAssemblyConfig import ServoAssemblyConfig
     from robohatlib.hal.assemblyboard.servo.ServoData import ServoData
     from robohatlib.hal.datastructure.Color import Color
