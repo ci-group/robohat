@@ -58,10 +58,8 @@ class ServoAssembly:
 
                 self.__power_monitor_and_io = PowerMonitorAndIO(_io_handler, servo_assembly_expander_def, _servo_config.get_sw2_power_good_address(), _servo_config.get_name())
             else:
-                print("nine ar 2")
                 self.__servo_board = None
         else:
-            print("nine ar 1")
             self.__servo_board = None
 
     #--------------------------------------------------------------------------------------

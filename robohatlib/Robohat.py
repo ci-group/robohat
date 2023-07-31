@@ -72,7 +72,7 @@ class Robohat:
                 _switch_top_board is _servo_assembly_2_config.get_sw2_power_good_address() or \
                 _servo_assembly_1_config.get_sw2_power_good_address() is _servo_assembly_2_config.get_sw2_power_good_address():
             print("Error, dip-witches in config are in conflict, can't continue.")
-            print("Preferred config is, the first assembly board on 0, the second on 1 and the switch on the topboard on 7 ")
+            print("Preferred config is, the first assembly board on 0, the second first assembly board on 1 and the switch on the topboard on 7 ")
             return
 
         self.__io_handler = IOHandler()
@@ -122,12 +122,16 @@ class Robohat:
         if self.__servo_assembly_2.is_board_avaible() is True:
             self.__servo_assembly_2.add_signaling_device(self.__buzzer)
         else:
-            print("did not found board 2")
             self.__servo_assembly_2 = None              # if not available make None, so class is not accessible
 
 
+        # Messages to the user
         if self.__servo_assembly_1 is None and self.__servo_assembly_2 is None:
             print("Error, no assembly-boards are available")
+        elif self.__servo_assembly_1 is None:
+            print("Warning, did not found assembly board 1, assembly board should be available")
+        elif self.__servo_assembly_2 is None:
+            print("Warning, did not found assembly board 2, assembly board should be available")
 
     # --------------------------------------------------------------------------------------
 
