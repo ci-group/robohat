@@ -34,7 +34,11 @@ class ServoBoard:
     #--------------------------------------------------------------------------------------
     #--------------------------------------------------------------------------------------
 
-    def init_servo_board(self, _servo_datas_array: []):
+    def init_servo_board(self, _servo_datas_array: []) -> None:
+        """
+        @param _servo_datas_array:
+        @return: None
+        """
         self.__servo_datas_array = _servo_datas_array
         self.__pwm.init_pca9685()
         self.__servo_adc.init_adc()
