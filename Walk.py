@@ -19,21 +19,21 @@ from enum import IntEnum
 """
 
 
-ARRAY_POS_LEFT_FRONT_LEG_SERVO = 0
-ARRAY_POS_RIGHT_FRONT_LEG_SERVO = 1
-ARRAY_POS_NECK_SERVO = 2
-ARRAY_POS_HIP_SERVO = 3
-ARRAY_POS_LEFT_BACK_LEG_SERVO = 4
-ARRAY_POS_RIGHT_BACK_LEG_SERVO = 5
+# CONSTANTS BELOW ARE THE SERVO NR OF THE HARDWARE SERVO. mAY NOT EXCEED 32
+FRONT_LEG_SERVO_NR = 0
+RIGHT_FRONT_LEG_SERVO_NR = 1
+NECK_SERVO_NR = 2
+HIP_SERVO_NR = 3
+LEFT_BACK_LEG_SERVO_NR = 4
+RIGHT_BACK_LEG_SERVO_NR = 5
 
 
-
+# OTHER CONSTANTS
 TIME_BETWEEN_STEP = 5
 
 LEG_NEUTRAL = 45.0
 LEG_DOWN = 0
 LEG_UP = 180.0
-
 
 NECK_NEUTRAL = 90.0
 NECK_LEFT = 0.0
@@ -44,20 +44,32 @@ HIP_LEFT = 0.0
 HIP_RIGHT = 180.0
 
 
+
+
 class ID(IntEnum):
-    LEFT_FRONT_LEG = 1
-    RIGHT_FRONT_LEG = 2
-    NECK = 3
-    HIP = 4
-    LEFT_BACK_LEG = 5
-    RIGHT_BACK_LEG = 6
+    """
+    Internal ID. Maps to an array. ID nr should be lower than the size of the array ( < 32 )
+    """
+    LEFT_FRONT_LEG = 0
+    RIGHT_FRONT_LEG = 1
+    NECK = 2
+    HIP = 3
+    LEFT_BACK_LEG = 4
+    RIGHT_BACK_LEG = 5
+
+    # --------------------------------------------------------------------------------------
+    # --------------------------------------------------------------------------------------
+    # --------------------------------------------------------------------------------------
+    # --------------------------------------------------------------------------------------
+    # --------------------------------------------------------------------------------------
+    # --------------------------------------------------------------------------------------
 
 class Walk:
 
+    # --------------------------------------------------------------------------------------
+    # --------------------------------------------------------------------------------------
+    # --------------------------------------------------------------------------------------
 
-    # --------------------------------------------------------------------------------------
-    # --------------------------------------------------------------------------------------
-    # --------------------------------------------------------------------------------------
 
     def __init__(self, _robohat:Robohat):
         """!
@@ -66,7 +78,7 @@ class Walk:
         """
         self.__robohat = _robohat
 
-        self.__servo_positions = [0.0] * 6
+        self.__servo_positions = [0.0] * 32
 
         self.set_servo_preset_value(ID.LEFT_FRONT_LEG, LEG_NEUTRAL)
         self.set_servo_preset_value(ID.RIGHT_FRONT_LEG, LEG_NEUTRAL)
@@ -150,12 +162,12 @@ class Walk:
         unused_angle = 0.0
 
         angles = [unused_angle] * 32
-        angles[ARRAY_POS_LEFT_FRONT_LEG_SERVO] =        self.get_servo_preset_value(ID.LEFT_FRONT_LEG)
-        angles[ARRAY_POS_RIGHT_FRONT_LEG_SERVO] =       self.get_servo_preset_value(ID.RIGHT_FRONT_LEG)
-        angles[ARRAY_POS_NECK_SERVO] =                  self.get_servo_preset_value(ID.NECK)
-        angles[ARRAY_POS_HIP_SERVO] =                   self.get_servo_preset_value(ID.HIP)
-        angles[ARRAY_POS_LEFT_BACK_LEG_SERVO] =         self.get_servo_preset_value(ID.LEFT_BACK_LEG)
-        angles[ARRAY_POS_RIGHT_BACK_LEG_SERVO] =        self.get_servo_preset_value(ID.RIGHT_BACK_LEG)
+        angles[FRONT_LEG_SERVO_NR] =        self.get_servo_preset_value(ID.LEFT_FRONT_LEG)
+        angles[RIGHT_FRONT_LEG_SERVO_NR] =       self.get_servo_preset_value(ID.RIGHT_FRONT_LEG)
+        angles[NECK_SERVO_NR] =                  self.get_servo_preset_value(ID.NECK)
+        angles[HIP_SERVO_NR] =                   self.get_servo_preset_value(ID.HIP)
+        angles[LEFT_BACK_LEG_SERVO_NR] =         self.get_servo_preset_value(ID.LEFT_BACK_LEG)
+        angles[RIGHT_BACK_LEG_SERVO_NR] =        self.get_servo_preset_value(ID.RIGHT_BACK_LEG)
 
         self.__robohat.set_servo_multiple_angles(angles)
 
@@ -164,18 +176,18 @@ class Walk:
     # --------------------------------------------------------------------------------------
 
     def set_servo_preset_value(self, _servo_id:ID, _pos:float) -> None:
-        servo_nr:int = int(_servo_id)
+        array_pos_servo_pos:int = int(_servo_id)
 
-        self.__servo_positions[servo_nr-1] = _pos
+        self.__servo_positions[array_pos_servo_pos] = _pos
 
     # --------------------------------------------------------------------------------------
     # --------------------------------------------------------------------------------------
     # --------------------------------------------------------------------------------------
 
     def get_servo_preset_value(self, _servo_id:ID) -> float:
-        servo_nr: int = int(_servo_id)
+        array_pos_servo_pos:int = int(_servo_id)
 
-        return self.__servo_positions[servo_nr-1]
+        return self.__servo_positions[array_pos_servo_pos]
 
     # --------------------------------------------------------------------------------------
     # --------------------------------------------------------------------------------------
