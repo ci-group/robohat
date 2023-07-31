@@ -34,7 +34,8 @@ class MAX11607:
         register_data = 0x80 | 0x2                                              # aak default, no reset
         conf_data = 0x01 | 0x06                                                 # single ended, multiple channel (0 un till last), last channel is AIN3 (channel 4)
 
-        self.__i2c_device.i2c_write_bytes(bytes([register_data, conf_data]))
+        self.__i2c_device.i2c_write_register_byte(register_data, conf_data)
+        #self.__i2c_device.i2c_write_bytes(bytes([register_data, conf_data]))
 
     # self.device.readinto(result)
     # --------------------------------------------------------------------------------------

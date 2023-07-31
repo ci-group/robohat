@@ -7,6 +7,8 @@ class I2CDeviceDef:
 
     def __init__(self, _name:str, _i2c_bus_nr:int, _i2c_base_address:int, _i2c_offset_address=0):
         """!
+        Constructor of the I2C definition
+
         @param _name: name of this definition
         @param _i2c_bus_nr: I2C bus nr
         @param _i2c_base_address: I2C base address
@@ -18,8 +20,6 @@ class I2CDeviceDef:
         self.__i2c_bus_nr = _i2c_bus_nr
         self.__i2c_base_address = _i2c_base_address
         self.__i2c_offset_address = _i2c_offset_address
-
-    # --------------------------------------------------------------------------------------
 
     # --------------------------------------------------------------------------------------
 

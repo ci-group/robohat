@@ -189,7 +189,8 @@ class PCA9685:
 
     # --------------------------------------------------------------------------------------
     def __write(self, reg, value) -> None:
-        self.__i2c_device.i2c_write_bytes(bytes([reg, value]))
+        self.__i2c_device.i2c_write_register_byte(reg, value)
+        #self.__i2c_device.i2c_write_bytes(bytes([reg, value]))
 
     # --------------------------------------------------------------------------------------
     def __read(self, reg):
@@ -198,8 +199,10 @@ class PCA9685:
         @param reg:
         @return:
         """
+
         return_value_array = bytearray(2)
         self.__i2c_device.write_to_then_read_from(bytes([0x00, reg]), return_value_array)
+
         return return_value_array[0]
 
     # --------------------------------------------------------------------------------------

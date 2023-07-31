@@ -131,11 +131,12 @@ class LIS3MDL:
         @return: Tuple x,y,z
         """
 
-        in_value_array = bytearray(1)
-        in_value_array[0] = (OUT_X_L | 0x80)
+
+        register = (OUT_X_L | 0x80)
 
         return_value_array = bytearray(6)
-        self.__i2c_device.write_to_then_read_from(in_value_array, return_value_array)
+
+        self.__i2c_device.i2c_read_register_multiple_bytes(register, return_value_array)
 
         x_raw = int(return_value_array[0] | return_value_array[1] << 8)
         y_raw = int(return_value_array[2] | return_value_array[3] << 8)

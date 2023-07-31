@@ -1,9 +1,13 @@
-import posix
-from fcntl import ioctl
-from ctypes import c_uint32, c_uint8, c_uint16, pointer, POINTER, Structure, Array, Union
+try:
+    from fcntl import ioctl
+    from ctypes import c_uint32, c_uint8, c_uint16, pointer, POINTER, Structure, Array, Union
+except ImportError:
+    print("Failed to resolve dependencies for the SMMbus")
+    raise
 
 
-# Commands from uapi/linux/i2c-dev.h
+# Commands from uapi/linux/i2c-dev.h for use with ioctl
+
 I2C_RETRIES	= 0x0701        #number of times a device address should be polled when not acknowledging
 I2C_TIMEOUT	= 0x0702        # set timeout - call with int
 I2C_SLAVE = 0x0703          # Change slave address, Slave address is 7 or 10 bits
@@ -45,248 +49,150 @@ LP_c_uint32 = POINTER(c_uint32)
 I2C_SMBUS_BLOCK_MAX = 32
 
 
-# ================================================
-
-class i2c_smbus_data(Array):
-    """
-    Adaptation of the i2c_smbus_data union in ``i2c.h``.
-
-    Data for SMBus messages.
-    """
-    _length_ = I2C_SMBUS_BLOCK_MAX + 2
-    _type_ = c_uint8
+# --------------------------------------------------------------------------------------
+# --------------------------------------------------------------------------------------
+# --------------------------------------------------------------------------------------
+# --------------------------------------------------------------------------------------
+# --------------------------------------------------------------------------------------
+# --------------------------------------------------------------------------------------
 
 
-class union_i2c_smbus_data(Union):
-    _fields_ = [
-        ("byte", c_uint8),
-        ("word", c_uint16),
-        ("block", i2c_smbus_data)
-    ]
-
-
-union_pointer_type = POINTER(union_i2c_smbus_data)
-
-class i2c_smbus_ioctl_data(Structure):
-
-    _fields_ = [
-        ('read_write', c_uint8),
-        ('command', c_uint8),
-        ('size', c_uint32),
-        ('data', union_pointer_type)]
-    __slots__ = [name for name, type in _fields_]
-
-    @staticmethod
-    def create(read_write=I2C_SMBUS_READ, command=0, size=I2C_SMBUS_BYTE_DATA):
-        u = union_i2c_smbus_data()
-
-        returnValue = i2c_smbus_ioctl_data(read_write=read_write,
-                                           command=command,
-                                           size=size,
-                                           data=union_pointer_type(u))
-
-        return returnValue
-
-    #--------------------------------------------------------------------------------------
-    #--------------------------------------------------------------------------------------
-    #--------------------------------------------------------------------------------------
-
-class VU_SMBUS():
-    __fd = None
-    __current_slave_address = None
-
-    #--------------------------------------------------------------------------------------
-
-    def __init__(self, bus=None):
-        self.open(bus)
-
-    #--------------------------------------------------------------------------------------
-
-    def open(self, _bus: int) -> None:
+# Create an interface that mimics the Python SMBus API.
+class VU_SMBUS:
+    def __init__(self, _bus_nr: int):
         """
-        Open SMB bus
-        @param _bus:
-        @return:
+        Constructor if this SMBbus
+        @param _bus_nr:
         """
-        self.__fd = posix.open("/dev/i2c-{}".format(_bus), posix.O_RDWR)
-        self.__current_slave_address = None
+        self.__device = None
 
-        if self.__fd < 0:
-            print("Error, failed to open SMB bus")
+        self.__open(_bus_nr)
 
     #--------------------------------------------------------------------------------------
+    #--------------------------------------------------------------------------------------
+    #--------------------------------------------------------------------------------------
 
-    def close(self) -> None:
+    def __del__(self):
         """
-        Close SMB bus
+        Destructor if this SMBbus
+        """
+        self.__close()
+
+    #--------------------------------------------------------------------------------------
+    #--------------------------------------------------------------------------------------
+    #--------------------------------------------------------------------------------------
+
+    def __open(self, _bus_nr: int) -> None:
+        """
+        Open the SMBbus
         @return: None
         """
-        if self.__fd:
-            posix.close(self.__fd)
-            self.__fd = None
+
+        # already opened by the user
+        if self.__device is not None:
+            return
+
+        self.__device = open("/dev/i2c-{0}".format(_bus_nr), "r+b", buffering=0)
 
     #--------------------------------------------------------------------------------------
+    #--------------------------------------------------------------------------------------
+    #--------------------------------------------------------------------------------------
 
-    def __set_i2c_slave_address(self, _slave_address:int, _force=None) -> None:
+    def __close(self) -> None:
         """
-        Sets the i2C slave address. Skips if already set
+        Close the SMBbus
+        @return: None
+        """
+
+        if self.__device is not None:
+            self.__device.close()
+            self.__device = None
+
+    #--------------------------------------------------------------------------------------
+    #--------------------------------------------------------------------------------------
+    #--------------------------------------------------------------------------------------
+
+    def __set_i2c_slave_address(self, _slave_address, _force=None) -> bool:
+        """!
+        Sets the i2C slave address. If OK, it returns True
 
         @param _slave_address: Address of the address i2c slave-device
-        @return: None
+        @return: bool
         """
+        if self.__device is None:
+            return False
 
         if _force is True:
-            ioctl(self.__fd, I2C_SLAVE_FORCE, _slave_address & 0x7F)
+            status = ioctl(self.__device.fileno(), I2C_SLAVE_FORCE, _slave_address & 0x7F)
         else:
-            ioctl(self.__fd, I2C_SLAVE, _slave_address & 0x7F)
+            status = ioctl(self.__device.fileno(), I2C_SLAVE, _slave_address & 0x7F)
 
         self.__current_slave_address = _slave_address
 
+        if status < 1:
+            return False
+        else:
+            return True
+
     #--------------------------------------------------------------------------------------
     #--------------------------------------------------------------------------------------
     #--------------------------------------------------------------------------------------
 
-    def write_register_single_byte(self, _slave_address:int, _register, _byte_value) -> None:
-        """
-        Write a byte value to a register
-        @param _slave_address: Address of the address i2c slave-device
-        :param _register:
-        :param _byte_value:
-        :return:
-        """
-
-        self.__set_i2c_slave_address(_slave_address)
-
-        msg = i2c_smbus_ioctl_data.create(
-                            read_write=I2C_SMBUS_WRITE,
-                            command=_register,
-                            size=I2C_SMBUS_BYTE_DATA)
-
-        msg.data.contents.byte = _byte_value
-
-        ioctl(self.__fd, I2C_SMBUS, msg)
-
-
-    def write_register_single_word(self, _slave_address:int, register, value):
-        """
-        Write a single word (2 bytes) to a given register.
-
+    def read_byte(self, _slave_address):
+        """!
+        Read a single byte from the SMB bus
+        @param _slave_address:
+        @return: 1 byte
         """
         self.__set_i2c_slave_address(_slave_address)
-        msg = i2c_smbus_ioctl_data.create(
-                                    read_write=I2C_SMBUS_WRITE,
-                                    command=register,
-                                    size=I2C_SMBUS_WORD_DATA
-                                        )
-        msg.data.contents.word = value
-
-        ioctl(self.__fd, I2C_SMBUS, msg)
+        return ord(self.__device.read(1))
 
     #--------------------------------------------------------------------------------------
     #--------------------------------------------------------------------------------------
     #--------------------------------------------------------------------------------------
-
-    def write_register_multiple_bytes(self, _slave_address:int, _register, _buffer) -> None:
+    #OK
+    def read_bytes(self, _slave_address, _size_of_bytes_to_read) -> bytes:
+        """!
+        Reads multiple bytes from the SMB bus
+        @param _slave_address:
+        @param _size_of_bytes_to_read
+        @return: bytes
         """
-        Write a block of data to a register
-        @param _slave_address: Address of the address i2c slave-device
-        @param _register:
-        @param _buffer:
+        self.__set_i2c_slave_address(_slave_address)
+        return self.__device.read(_size_of_bytes_to_read)
+
+    #--------------------------------------------------------------------------------------
+    #--------------------------------------------------------------------------------------
+    #--------------------------------------------------------------------------------------
+
+    def write_byte(self, _slave_address, _byte_value) -> None:
+        """!
+        Write a byte to the I2C bus
+        @param _slave_address:
+        @param _byte_value:
+        @return:
+        """
+
+        data = bytearray(1)
+        data[0] = _byte_value & 0xFF
+        self.write_bytes(_slave_address, data)
+
+    #--------------------------------------------------------------------------------------
+    #--------------------------------------------------------------------------------------
+    #--------------------------------------------------------------------------------------
+
+    def write_bytes(self, _slave_address, _buffer_out) -> None:
+        """
+        Writes multiple bytes to the I2C bus
+        @param _slave_address:
+        @param _buffer_out:
         @return: None
         """
 
         self.__set_i2c_slave_address(_slave_address)
-
-        length = len(_buffer)
-
-        msg = i2c_smbus_ioctl_data.create(
-                                    read_write=I2C_SMBUS_WRITE,
-                                    command=_register,
-                                    size=I2C_SMBUS_BLOCK_DATA)
-
-        msg.data.contents.block[0] = length
-        msg.data.contents.block[1:length + 1] = _buffer
-
-        ioctl(self.__fd, I2C_SMBUS, msg)
+        self.__device.write(_buffer_out)
 
     #--------------------------------------------------------------------------------------
-
-    def read_single_byte(self, _slave_address:int):
-        """
-        Read a single data
-        @param _slave_address: Address of the address i2c slave-device
-        @return: byte data
-        """
-        return self.read_register_single_byte(_slave_address, 0)
-
     #--------------------------------------------------------------------------------------
-
-    def read_register_single_byte(self, _slave_address:int, _register):
-        """
-        @param _slave_address: Address of the address i2c slave-device
-        @param _register:
-        :return:
-        """
-
-
-        self.__set_i2c_slave_address(_slave_address)
-
-        data_pointer = pointer(c_uint8())
-
-        msg = i2c_smbus_ioctl_data.create(
-                                        read_write=I2C_SMBUS_READ,
-                                        command=_register,
-                                        size=I2C_SMBUS_BYTE_DATA)
-
-        ioctl(self.__fd, I2C_SMBUS, msg)
-
-        return msg.data.contents.byte
-
     #--------------------------------------------------------------------------------------
-
-    def read_register_multiple_bytes(self, _slave_address:int, _register, _length = I2C_SMBUS_BLOCK_DATA):
-
-        self.__set_i2c_slave_address(_slave_address)
-
-        msg = i2c_smbus_ioctl_data.create(
-                                        read_write=I2C_SMBUS_READ,
-                                        command=_register,
-                                        size=_length)
-
-        ioctl(self.__fd, I2C_SMBUS, msg)
-
-        length = msg.data.contents.block[0]
-
-        return msg.data.contents.block[1:length + 1]
-
-    #--------------------------------------------------------------------------------------
-
-    def transfer_data(self, _slave_address, register, data):
-
-        length = len(data)
-        if length > I2C_SMBUS_BLOCK_MAX:
-            raise ValueError("Data length cannot exceed %d bytes" % I2C_SMBUS_BLOCK_MAX)
-
-        self.__set_i2c_slave_address(_slave_address)
-
-        msg = i2c_smbus_ioctl_data.create(
-                                    read_write=I2C_SMBUS_WRITE,
-                                    command=register,
-                                    size=I2C_SMBUS_BLOCK_PROC_CALL
-                                    )
-
-        msg.data.contents.block[0] = length
-        msg.data.contents.block[1:length + 1] = data
-
-        ioctl(self.__fd, I2C_SMBUS, msg)
-        length = msg.data.contents.block[0]
-
-        return msg.data.contents.block[1:length + 1]
-
-    #--------------------------------------------------------------------------------------
-
-
-
-
-
 

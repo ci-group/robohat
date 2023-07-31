@@ -39,6 +39,7 @@ class I2CDevice:
             finally:
                 self.__i2c_handler.unlock()
 
+    #--------------------------------------------------------------------------------------
 
     def i2c_write_bytes(self, _value_bytes: []) -> None:
         """!
@@ -73,6 +74,20 @@ class I2CDevice:
 
     #--------------------------------------------------------------------------------------
 
+    def i2c_read_register_multiple_bytes(self, _register, _bytes_out):
+        """
+        not implemented
+        :param _register:
+        :param _bytes_out:
+        :return:
+        """
+        in_value_array = bytearray(1)
+        in_value_array[0] = _register
+
+        self.write_to_then_read_from(in_value_array, _bytes_out)
+
+    #--------------------------------------------------------------------------------------
+
     def read_from_into(self, _bytes_out) -> None:
         """!
         @param _bytes_out: buffer to store data read from i2c device
@@ -84,6 +99,8 @@ class I2CDevice:
             finally:
                 self.__i2c_handler.unlock()
 
+
+    #--------------------------------------------------------------------------------------
 
 
     def write_to_then_read_from(self, _bytes_to, _bytes_out):

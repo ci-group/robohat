@@ -345,11 +345,13 @@ class LSM6DS33:
         @return: x,y,z
         """
 
-        in_value_array = bytearray(1)
-        in_value_array[0] = OUTX_L_XL #(OUTX_L_XL | 0x80)      # automatic increment of register address is enabled by default (IF_INC in CTRL3_C)
+        register = OUTX_L_XL #(OUTX_L_XL | 0x80)      # automatic increment of register address is enabled by default (IF_INC in CTRL3_C)
 
         return_value_array = bytearray(6)
-        self.__i2c_device.write_to_then_read_from(in_value_array, return_value_array)
+
+        self.__i2c_device.i2c_read_register_multiple_bytes(register, return_value_array)
+
+
 
         x_raw = int(return_value_array[0] | return_value_array[1] << 8)
         y_raw = int(return_value_array[2] | return_value_array[3] << 8)
@@ -372,11 +374,10 @@ class LSM6DS33:
         @return: x,y,z
         """
 
-        in_value_array = bytearray(1)
-        in_value_array[0] = OUTX_L_G #| 0x80)      # // automatic  increment of register address is enabled by b default(IF_INC in CTRL3_C)
+        register = OUTX_L_G #| 0x80)      # // automatic  increment of register address is enabled by b default(IF_INC in CTRL3_C)
 
         return_value_array = bytearray(6)
-        self.__i2c_device.write_to_then_read_from(in_value_array, return_value_array)
+        self.__i2c_device.i2c_read_register_multiple_bytes(register, return_value_array)
 
         #print("-gyro-> " + hex(return_value_array[0]) + "," + hex(return_value_array[1]) + "," + hex(return_value_array[2]) + hex(return_value_array[3]) + "," + hex(return_value_array[4]) + "," + hex(return_value_array[5]) )
 

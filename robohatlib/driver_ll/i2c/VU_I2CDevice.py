@@ -5,12 +5,13 @@ except ImportError:
     print("Failed to import I2CDevice")
     raise
 
+
 class VU_I2CDevice:
     """!
     I2C device
     """
 
-    def __init__(self, _device_name:str, _i2c_handler:VU_I2CHandler, _i2c_bus_nr:int, _i2c_device_address:int):
+    def __init__(self, _device_name: str, _i2c_handler: VU_I2CHandler, _i2c_bus_nr: int, _i2c_device_address: int):
         """!
         @param _device_name:
         @param _i2c_handler:
@@ -22,10 +23,10 @@ class VU_I2CDevice:
         self.__i2c_bus_nr = _i2c_bus_nr
         self.__i2c_device_address = _i2c_device_address
 
-    #--------------------------------------------------------------------------------------
-    #--------------------------------------------------------------------------------------
-    #--------------------------------------------------------------------------------------
-
+    # --------------------------------------------------------------------------------------
+    # --------------------------------------------------------------------------------------
+    # --------------------------------------------------------------------------------------
+    #OK
     def i2c_write_register_byte(self, _register, _value) -> None:
         """!
         Writes a byte to a register
@@ -33,13 +34,10 @@ class VU_I2CDevice:
         @param _value:
         @return: None
         """
-        while not self.__i2c_handler.try_lock():
-            try:
-                self.__i2c_handler.write_to(self.__i2c_device_address, bytes([_register, _value]))
-            finally:
-                self.__i2c_handler.unlock()
+        self.i2c_write_bytes(bytes([_register, _value]))
 
-
+    # --------------------------------------------------------------------------------------
+    #OK
     def i2c_write_bytes(self, _value_bytes: []) -> None:
         """!
         Writes bytes to a register
@@ -49,14 +47,14 @@ class VU_I2CDevice:
 
         while not self.__i2c_handler.try_lock():
             try:
-                self.__i2c_handler.write_to(self.__i2c_device_address, _value_bytes)
+                self.__i2c_handler.write_bytes(self.__i2c_device_address, _value_bytes)
             finally:
                 self.__i2c_handler.unlock()
 
-    #--------------------------------------------------------------------------------------
-    #--------------------------------------------------------------------------------------
-    #--------------------------------------------------------------------------------------
-
+    # --------------------------------------------------------------------------------------
+    # --------------------------------------------------------------------------------------
+    # --------------------------------------------------------------------------------------
+    # OK
     def i2c_read_register_byte(self, _register):
         """!
         @param _register:
@@ -71,8 +69,22 @@ class VU_I2CDevice:
 
         return return_value_array[0]
 
-    #--------------------------------------------------------------------------------------
+    # --------------------------------------------------------------------------------------
+    #OK
+    def i2c_read_register_multiple_bytes(self, _register, _bytes_out_buffer):
+        """!
+        Read multiple bytes from register
+        @param _register:
+        @param _bytes_out_buffer:
+        @return:
+        """
+        in_value_array = bytearray(1)
+        in_value_array[0] = _register
 
+        self.write_to_then_read_from(in_value_array, _bytes_out_buffer)
+
+    # --------------------------------------------------------------------------------------
+    #OK
     def read_from_into(self, _bytes_out) -> None:
         """!
         @param _bytes_out: buffer to store data read from i2c device
@@ -84,8 +96,8 @@ class VU_I2CDevice:
             finally:
                 self.__i2c_handler.unlock()
 
-
-
+    # --------------------------------------------------------------------------------------
+    #OK
     def write_to_then_read_from(self, _bytes_to, _bytes_out):
         """!
         @param _bytes_to: data to I2C device
@@ -98,10 +110,9 @@ class VU_I2CDevice:
             finally:
                 self.__i2c_handler.unlock()
 
-
-    #--------------------------------------------------------------------------------------
-    #--------------------------------------------------------------------------------------
-    #--------------------------------------------------------------------------------------
+    # --------------------------------------------------------------------------------------
+    # --------------------------------------------------------------------------------------
+    # --------------------------------------------------------------------------------------
 
     def get_device_name(self) -> str:
         """!
@@ -131,6 +142,6 @@ class VU_I2CDevice:
         """
         return self.__i2c_handler
 
-    #--------------------------------------------------------------------------------------
-    #--------------------------------------------------------------------------------------
-    #--------------------------------------------------------------------------------------
+    # --------------------------------------------------------------------------------------
+    # --------------------------------------------------------------------------------------
+    # --------------------------------------------------------------------------------------

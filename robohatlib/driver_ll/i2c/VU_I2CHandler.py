@@ -12,18 +12,15 @@ except ImportError:
 # --------------------------------------------------------------------------------------
 # --------------------------------------------------------------------------------------
 # --------------------------------------------------------------------------------------
-# --------------------------------------------------------------------------------------
-# --------------------------------------------------------------------------------------
-# --------------------------------------------------------------------------------------
 
 class VU_I2CHandler:
-    def __init__(self, _bus_nr:int):
+    def __init__(self, _bus_nr: int):
         """!
         Constructor
         @param _bus_nr bus nr
         """
 
-        self._i2c_bus = SMBus(_bus_nr)
+        self._i2c_bus = VU_SMBUS(_bus_nr)
         self._locked = False
         self._lock = threading.RLock()
 
@@ -76,68 +73,38 @@ class VU_I2CHandler:
 
     # --------------------------------------------------------------------------------------
     # --------------------------------------------------------------------------------------
-
-    def write_to(self, address, buffer, *, start=0, end=None, stop=True) -> None:
-        """!
-        Writes bytes to the I2C bus
-        @param address: its address
-        @param buffer: buffer
-        @param start: start, default 0
-        @param end: end, default None
-        @stop does nothing, for compatibility present
-        @return: none
+    def write_bytes(self, _slave_address, buffer) -> None:
+        """
+        Write multiply bytes to the I2C bus
+        @param _slave_address:
+        @param buffer:
+        @return: None
         """
 
-        if end is None:
-            end = len(buffer)
-        self._i2c_bus.write_bytes(address, buffer[start:end])
+        self._i2c_bus.write_bytes(_slave_address, buffer)
 
     # --------------------------------------------------------------------------------------
-
-    def read_from_into(self, address, buffer, *, start=0, end=None, stop=True) -> None:
+    def read_from_into(self, address, buffer) -> None:
         """!
         Read data from an address and into the buffer
         """
 
-        if end is None:
-            end = len(buffer)
+        length = len(buffer)
+        tmp_buffer = self._i2c_bus.read_bytes(address, length)
 
-        value_in = self._i2c_bus.read_bytes(address, end - start)
-        for i in range(end - start):
-            buffer[i + start] = value_in[i]
+        # put into buffer given by the user
+        for i in range(length):
+            buffer[i] = tmp_buffer[i]
+
     # --------------------------------------------------------------------------------------
-
-    def write_to_then_read_from(
-            self,
-            address,
-            buffer_out,
-            buffer_in,
-            *,
-            out_start=0,
-            out_end=None,
-            in_start=0,
-            in_end=None,
-            stop=False,
-    ) -> None:
-
+    def write_to_then_read_from(self, _slave_address, buffer_out, buffer_in ) -> None:
         """!
-        Write data from buffer_out to an address and then
-        read data from an address and into buffer_in
+        Write bytes to the I2C bus
+        Reads bytes to the I2C bus
         """
 
-        if out_end is None:
-            out_end = len(buffer_out)
-        if in_end is None:
-            in_end = len(buffer_in)
-        if stop:
-            # To generate a stop in linux, do in two transactions
-            self.write_to(address, buffer_out, start=out_start, end=out_end, stop=True)
-            self.read_from_into(address, buffer_in, start=in_start, end=in_end)
-        else:
-            # To generate without a stop, do in one block transaction
-            data_in = self._i2c_bus.read_i2c_block_data(address, buffer_out[out_start:out_end], in_end - in_start)
-            for i in range(in_end - in_start):
-                buffer_in[i + in_start] = data_in[i]
+        self.write_bytes(_slave_address, buffer_out)
+        self.read_from_into(_slave_address, buffer_in)
 
     # --------------------------------------------------------------------------------------
     # --------------------------------------------------------------------------------------
