@@ -6,21 +6,21 @@ from enum import IntEnum
 # --------------------------------------------------------------------------------------
 """     +---------+
         |         |
-[1]-----+         +-----[2]
+[0]-----+         +-----[1]
         |         |
         +----+----+
              |
+            [2]
+             |
             [3]
              |
-            [4]
-             |
-[5]----------+-=--------[6]
+[4]----------+-=--------[5]
 
 """
 
 
 # CONSTANTS BELOW ARE THE SERVO NR OF THE HARDWARE SERVO. mAY NOT EXCEED 32
-FRONT_LEG_SERVO_NR = 0
+LEFT_FRONT_LEG_SERVO_NR = 0
 RIGHT_FRONT_LEG_SERVO_NR = 1
 NECK_SERVO_NR = 2
 HIP_SERVO_NR = 3
@@ -32,16 +32,16 @@ RIGHT_BACK_LEG_SERVO_NR = 5
 TIME_BETWEEN_STEP = 5
 
 LEG_NEUTRAL = 45.0
-LEG_DOWN = 0
-LEG_UP = 180.0
+LEG_DOWN = 10
+LEG_UP = 90.0
 
 NECK_NEUTRAL = 90.0
-NECK_LEFT = 0.0
-NECK_RIGHT = 180.0
+NECK_LEFT = 80.0
+NECK_RIGHT = 100.0
 
-HIP_NEUTRAL = 90.0
-HIP_LEFT = 0.0
-HIP_RIGHT = 180.0
+HIP_NEUTRAL = 80.0
+HIP_LEFT = 30.0
+HIP_RIGHT = 150.0
 
 
 
@@ -162,7 +162,7 @@ class Walk:
         unused_angle = 0.0
 
         angles = [unused_angle] * 32
-        angles[FRONT_LEG_SERVO_NR] =        self.get_servo_preset_value(ID.LEFT_FRONT_LEG)
+        angles[LEFT_FRONT_LEG_SERVO_NR] =        self.get_servo_preset_value(ID.LEFT_FRONT_LEG)
         angles[RIGHT_FRONT_LEG_SERVO_NR] =       self.get_servo_preset_value(ID.RIGHT_FRONT_LEG)
         angles[NECK_SERVO_NR] =                  self.get_servo_preset_value(ID.NECK)
         angles[HIP_SERVO_NR] =                   self.get_servo_preset_value(ID.HIP)

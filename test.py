@@ -260,6 +260,7 @@ class Example:
                 servo_nr = int(data_in_array[3])
                 angle = float(data_in_array[4])
                 self.__robohat.set_servo_single_angle(servo_nr, angle)
+                print("set servo angle " + str(servo_nr) + " " + str(angle) )
             elif sub_command == "io":
                 io_command = data_in_array[3]
                 if io_command == "dir":

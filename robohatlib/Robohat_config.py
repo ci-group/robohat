@@ -26,7 +26,7 @@ do not alter
 """!
 General settings
 """
-DEBUG = False                                       # by changing this value to TRUE, more debug msg will be printed on the console
+DEBUG = True                                       # by changing this value to TRUE, more debug msg will be printed on the console
 
 """!
 Accu settings

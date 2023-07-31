@@ -402,6 +402,11 @@ class Robohat:
             servo_nr = self.__get_servo_nr_depending_assembly(_servo_nr)
             if servo_nr is not None:
                 servo_assembly.set_servo_single_angle(servo_nr, _angle)
+            elif Robohat_config.DEBUG is True:
+                print("Unknown servo")
+        elif Robohat_config.DEBUG is True:
+            print("Did not found servo assembly")
+
 
     # ------------------------------------------------------------------------------------------
     # ------------------------------------------------------------------------------------------
