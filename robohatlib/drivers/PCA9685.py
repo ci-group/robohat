@@ -7,6 +7,7 @@ import math
 try:
     from robohatlib.helpers.RoboUtil import RoboUtil
     from robohatlib.driver_ll.i2c.I2CDevice import I2CDevice
+    from robohatlib.Robohat_config import DEBUG
 except ImportError:
     print("Failed to import RoboUtil")
     raise
@@ -66,12 +67,18 @@ class PCA9685:
         Initializes PCA9685
         @return None:
         """
+        if DEBUG is True:
+            print("init_pca9685")
+
         self.__do_idle()
         self.__do_invert_and_set_driver_to_pushpull()
-        self.__do_idle()
+        self.wake()
         self.__set_pwm_freq(50)
 
-        self.wake()         # be sure i'm awake
+
+
+
+
 
     # --------------------------------------------------------------------------------------
     def set_on_time_channel(self, _channel: int, _time_wanted_us: float) -> None:
