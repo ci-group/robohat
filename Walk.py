@@ -1,5 +1,7 @@
 from robohatlib.Robohat import Robohat
 import time
+import threading
+import time
 from enum import Enum
 from enum import IntEnum
 
@@ -78,7 +80,7 @@ class Walk:
         """
         self.__robohat = _robohat
 
-        self.__servo_positions = [0.0] * 32
+        self.__servo_positions = [90.0] * 32
 
         self.set_servo_preset_value(ID.LEFT_FRONT_LEG, LEG_NEUTRAL)
         self.set_servo_preset_value(ID.RIGHT_FRONT_LEG, LEG_NEUTRAL)
