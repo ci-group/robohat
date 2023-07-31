@@ -66,7 +66,7 @@ class Robohat:
         @param _switch_top_board dip-switch settings og the top board (board mounted on RPi), default 7
         """
         print("\n")
-        print("Starting Robohat lib: " + Robohat_constants.ROBOHAT_LIB_VERSION_STR + "\n")
+        print("Starting Robohat lib: " + Robohat_constants.ROBOHAT_LIB_VERSION_STR + "( " + Robohat_constants.ROBOHAT_BUILD_DATE_STR + ") \n")
 
         if _switch_top_board is _servo_assembly_1_config.get_sw2_power_good_address() or \
                 _switch_top_board is _servo_assembly_2_config.get_sw2_power_good_address() or \
