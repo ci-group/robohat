@@ -111,6 +111,23 @@ class Example:
     # --------------------------------------------------------------------------------------
     # --------------------------------------------------------------------------------------
 
+    def do_scan_servos(self) -> None:
+        """!
+        Displays connected servos.
+        Does his by sensing the angle values. It can't find the servo, when the angle sense wire is not connected
+        @return None
+        """
+
+        servo_angles = self.__robohat.get_servo_multiple_angles()
+
+        for i in range(0, len(servo_angles) ):
+            if servo_angles[i] > -1:
+                print("Found connected servo: " + str(i) )
+
+    # --------------------------------------------------------------------------------------
+    # --------------------------------------------------------------------------------------
+    # --------------------------------------------------------------------------------------
+
     def do_test(self) -> None:
         """!
         Single test routine which will drive all the servos, will make a beep sound and changes the color of the Multi-LED
@@ -210,6 +227,7 @@ class Example:
         print("do buzzer stop                                      stop the generation of sound")
         print("do test                                             will start a test")
         print("do walk                                             the robot start to walk")
+        print("do servo scan                                       displays all servos connected")
 
     # --------------------------------------------------------------------------------------
     # --------------------------------------------------------------------------------------
@@ -495,7 +513,7 @@ class Example:
                 self.__robohat.do_i2c_scan()
             else:
                 print("syntax error do i2c")
-
+# -------------------------------------------------------
         elif command == "buzzer":
             sub_command = data_in_array[2]
             if sub_command == "random":
@@ -513,6 +531,13 @@ class Example:
                 self.__robohat.do_buzzer_release()
             else:
                 print("syntax error do buzzer")
+# -------------------------------------------------------
+        elif command == "servo":
+            sub_command = data_in_array[2]
+            if sub_command == "scan":
+                self.do_scan_servos()
+# -------------------------------------------------------
+
         elif command == "test":
             self.do_test()
         elif command == "walk":
