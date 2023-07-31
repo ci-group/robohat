@@ -11,7 +11,7 @@ try:
     from robohatlib.hal.datastructure.ExpanderStatus import ExpanderStatus
     from robohatlib.driver_ll.datastructs.IOStatus import IOStatus
 
-    from Walk import Walk
+    from testlib.Walk import Walk
 
     import test_config
     import sys

@@ -1,9 +1,19 @@
-from robohatlib.Robohat import Robohat
-import time
-import threading
-import time
-from enum import Enum
-from enum import IntEnum
+try:
+    from robohatlib.Robohat import Robohat
+    import time
+    import threading
+    import time
+    from enum import Enum
+    from enum import IntEnum
+
+    from testlib.WalkDriver import WalkDriver
+
+except ImportError:
+    print("Failed to import needed dependencies for the Walk class")
+    raise
+
+
+
 
 # --------------------------------------------------------------------------------------
 """     +---------+
@@ -89,7 +99,11 @@ class Walk:
         self.set_servo_preset_value(ID.LEFT_BACK_LEG, LEG_NEUTRAL)
         self.set_servo_preset_value(ID.RIGHT_BACK_LEG, LEG_NEUTRAL)
 
-        self.push_preset_values_to_servos()
+        self.__walk_driver = WalkDriver()
+        self.__walk_driver.start_walking()
+
+
+        #self.push_preset_values_to_servos()
 
     # --------------------------------------------------------------------------------------
     # --------------------------------------------------------------------------------------
@@ -338,6 +352,3 @@ class Walk:
         self.push_preset_values_to_servos()
         time.sleep(1)
 
-    # --------------------------------------------------------------------------------------
-    # --------------------------------------------------------------------------------------
-    # --------------------------------------------------------------------------------------
