@@ -65,15 +65,27 @@ class Robohat:
         @param _servo_assembly_2_config config of servo assembly 2
         @param _switch_top_board dip-switch settings og the top board (board mounted on RPi), default 7
         """
+
         print("\n")
         print("Starting Robohat lib: " + Robohat_constants.ROBOHAT_LIB_VERSION_STR + " (" + Robohat_constants.ROBOHAT_BUILD_DATE_STR + ") \n")
 
-        if _switch_top_board is _servo_assembly_1_config.get_sw2_power_good_address() or \
-                _switch_top_board is _servo_assembly_2_config.get_sw2_power_good_address() or \
-                _servo_assembly_1_config.get_sw2_power_good_address() is _servo_assembly_2_config.get_sw2_power_good_address():
-            print("Error, dip-witches in config are in conflict, can't continue.")
-            print("Preferred config is, the first assembly board on 0, the second first assembly board on 1 and the switch on the topboard on 7 ")
-            return
+        if _servo_assembly_1_config is not None and _servo_assembly_2_config is not None:
+            if _switch_top_board is _servo_assembly_1_config.get_sw2_power_good_address() or \
+                    _switch_top_board is _servo_assembly_2_config.get_sw2_power_good_address() or \
+                    _servo_assembly_1_config.get_sw2_power_good_address() is _servo_assembly_2_config.get_sw2_power_good_address():
+                print("Error, dip-witches in config are in conflict, can't continue.")
+                print("Preferred config is, the first assembly board on 0, the second assembly board on 1 and the switch onto the topboard on 7 ")
+                return
+        elif _servo_assembly_1_config is not None and _servo_assembly_2_config is None:
+            if _switch_top_board is _servo_assembly_1_config.get_sw2_power_good_address():
+                print("Error, dip-witches in config are in conflict, can't continue.")
+                print("Preferred config is, the first assembly board on 0 and the switch onto the topboard on 7 ")
+                return
+        elif _servo_assembly_1_config is not None and _servo_assembly_2_config is not None:
+            if _switch_top_board is _servo_assembly_2_config.get_sw2_power_good_address():
+                print("Error, dip-witches in config are in conflict, can't continue.")
+                print("Preferred config is, the second assembly board on 1 and the switch onto the topboard on 7 ")
+                return
 
         self.__io_handler = IOHandler()
         self.__serial = Serial(self.__io_handler, Robohat_config.SERIAL_DEF)
@@ -102,28 +114,35 @@ class Robohat:
 
         self.__power_management.add_signaling_device(self.__buzzer)
 
-        self.__servo_assembly_1 = ServoAssembly(self.__io_handler,
-                                                _servo_assembly_1_config,
-                                                Robohat_config.SERVOASSEMBLY_1_I2C_BUS,
-                                                Robohat_config.SERVOASSEMBLY_1_SPI_BUS
-                                                )
+        if _servo_assembly_1_config is not None:
+            self.__servo_assembly_1 = ServoAssembly(self.__io_handler,
+                                                    _servo_assembly_1_config,
+                                                    Robohat_config.SERVOASSEMBLY_1_I2C_BUS,
+                                                    Robohat_config.SERVOASSEMBLY_1_SPI_BUS
+                                                    )
 
-        if self.__servo_assembly_1 .is_board_avaible() is True:
-            self.__servo_assembly_1.add_signaling_device(self.__buzzer)
+            if self.__servo_assembly_1 .is_board_avaible() is True:
+                self.__servo_assembly_1.add_signaling_device(self.__buzzer)
+            else:
+                self.__servo_assembly_1 = None              # if not available make None, so class is not accessible
         else:
-            self.__servo_assembly_1 = None              # if not available make None, so class is not accessible
+            self.__servo_assembly_1 = None  # if not available make None, so class is not accessible
 
-        self.__servo_assembly_2 = ServoAssembly(self.__io_handler,
-                                                _servo_assembly_2_config,
-                                                Robohat_config.SERVOASSEMBLY_2_I2C_BUS,
-                                                Robohat_config.SERVOASSEMBLY_2_SPI_BUS
-                                                )
+# --------------------------------------------------------
+        if _servo_assembly_2_config is not None:
+            self.__servo_assembly_2 = ServoAssembly(self.__io_handler,
+                                                    _servo_assembly_2_config,
+                                                    Robohat_config.SERVOASSEMBLY_2_I2C_BUS,
+                                                    Robohat_config.SERVOASSEMBLY_2_SPI_BUS
+                                                    )
 
-        if self.__servo_assembly_2.is_board_avaible() is True:
-            self.__servo_assembly_2.add_signaling_device(self.__buzzer)
+            if self.__servo_assembly_2.is_board_avaible() is True:
+                self.__servo_assembly_2.add_signaling_device(self.__buzzer)
+            else:
+                self.__servo_assembly_2 = None              # if not available make None, so class is not accessible
         else:
-            self.__servo_assembly_2 = None              # if not available make None, so class is not accessible
-
+            self.__servo_assembly_2 = None
+# --------------------------------------------------------
 
         # Messages to the user
         if self.__servo_assembly_1 is None and self.__servo_assembly_2 is None:
@@ -168,8 +187,8 @@ class Robohat:
     # --------------------------------------------------------------------------------------
 
     def exit_program(self) -> None:
-        """
-        Exit the program.
+        """!
+        Exit the program. Will shut down all the software processes and the hardware
         @return: None
         """
         if self.__servo_assembly_1 is not None:
