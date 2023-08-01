@@ -140,6 +140,28 @@ class Example:
     # --------------------------------------------------------------------------------------
     # --------------------------------------------------------------------------------------
 
+    def servo_fit(self) -> None:
+
+        value_y1 = 20
+        value_y2 = 170
+
+        self.__robohat.set_servo_single_angle(0, value_y1)
+        time.sleep(2)
+        value_x1 = self.__robohat.get_servo_adc_single_channel(0)
+        time.sleep(0.1)
+        self.__robohat.set_servo_single_angle(0, value_y2)
+        time.sleep(2)
+        value_x2 = self.__robohat.get_servo_adc_single_channel(0)
+
+        a = (value_y2 - value_y1) / (value_x2 - value_x1)
+        b = value_y1 - (a * value_x1)
+
+        print("Formula is: " + str(a) + "x + " + str(b) + " created out of: (" + str(value_x1) + "," + str(value_y1) + "),(" + str(value_x2) + "," + str(value_y2) + ")")
+
+    # --------------------------------------------------------------------------------------
+    # --------------------------------------------------------------------------------------
+    # --------------------------------------------------------------------------------------
+
     def do_test(self) -> None:
         """!
         Single test routine which will drive all the servos, will make a beep sound and changes the color of the Multi-LED
@@ -254,9 +276,9 @@ class Example:
         data_in_array = _data_in.split(" ")
         command = data_in_array[1]
 
-        if command == "servo":
+        if command == "servo" and len(data_in_array) >= 3:
             sub_command = data_in_array[2]
-            if sub_command == "angle":
+            if sub_command == "angle" and len(data_in_array) is 5:
                 servo_nr = int(data_in_array[3])
                 angle = float(data_in_array[4])
                 self.__robohat.set_servo_single_angle(servo_nr, angle)
@@ -368,9 +390,9 @@ class Example:
         data_in_array = _data_in.split(" ")
         command = data_in_array[1]
 # -------------------------------------------------------------------------------
-        if command == "servo":
+        if command == "servo" and len(data_in_array) >= 3:
             sub_command = data_in_array[2]
-            if sub_command == "angle":
+            if sub_command == "angle" and len(data_in_array) is 4:
                 parameter_str:str = data_in_array[3]
                 if parameter_str.isnumeric():
                     servo_nr = int(parameter_str)
@@ -424,7 +446,7 @@ class Example:
             else:
                 print("syntax error, get servo")
 # -------------------------------------------------------------------------------
-        elif command == "topboard":
+        elif command == "topboard" and len(data_in_array) >= 3:
             sub_command = data_in_array[2]
             if sub_command == "adc":
                 parameter_str: str = data_in_array[3]
@@ -460,7 +482,7 @@ class Example:
             else:
                 print(value)
 # -------------------------------------------------------------------------------
-        elif command == "lib":
+        elif command == "lib" and len(data_in_array) >= 3:
             sub_command = data_in_array[2]
             if sub_command == "builddate":
                 print("build date of Robohat lib is: " + self.__robohat.get_lib_build_date())
@@ -469,7 +491,7 @@ class Example:
             else:
                 print("syntax error")
 # -------------------------------------------------------------------------------
-        elif command == "accu":
+        elif command == "accu" and len(data_in_array) >= 3:
             sub_command = data_in_array[2]
             if sub_command == "voltage":
                 value = self.__robohat.get_accu_voltage()
@@ -483,7 +505,7 @@ class Example:
             else:
                 print("syntax error")
 # -------------------------------------------------------------------------------
-        elif command == "imu":
+        elif command == "imu" and len(data_in_array) >= 3:
             sub_command = data_in_array[2]
             if sub_command == "magnetic":
                 value = self.__robohat.get_imu_magnetic_fields()
@@ -599,13 +621,14 @@ class Example:
         elif _command == "wake up servos":
             self.__robohat.wakeup_servo()
             print("servos are a wake")
+        elif _command == "fit":
+            self.servo_fit()
 
     # --------------------------------------------------------------------------------------
     # --------------------------------------------------------------------------------------
     # --------------------------------------------------------------------------------------
 
-    def \
-            start_example(self) -> None:
+    def start_example(self) -> None:
         """!
         Start this example
         @return: None
