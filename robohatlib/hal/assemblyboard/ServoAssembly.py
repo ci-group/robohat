@@ -42,7 +42,7 @@ class ServoAssembly:
 
         #----------------------------
         i2c_def_pwm = I2CDeviceDef("pwm_" + _servo_config.get_name(), _i2c_bus_nr, BASE_ADDRESS_PCA9685, _servo_config.get_sw1_pwm_address())
-        if _io_handler.is_i2c_device_detected(i2c_def_pwm) is True:                     # check if the PWM controllers is present on the I2C bus.. if not.. no assemblyboard
+        if _io_handler.is_i2c_device_detected(i2c_def_pwm) is True:                     # check if the PWM controllers is present on the I2C bus, if not, no assemblyboard
             print("Found: " + _servo_config.get_name())
             i2c_device_pwm = _io_handler.get_i2c_device(i2c_def_pwm)
 
@@ -73,28 +73,6 @@ class ServoAssembly:
         if self.__servo_board is None:
             return False
         return True
-
-    #--------------------------------------------------------------------------------------
-    #--------------------------------------------------------------------------------------
-    def __io_power_monitor_and_io_int_callback(self, _gpio: int) -> None:
-        """!
-        Callback of interrupt service routine. This routine will be called when the IO expander interrupt fires
-        @param _gpio: The GPIO nr which caused the interrupt. (Just for information purpose)
-        @return: None
-        """
-        if self.__power_monitor_and_io is not None:
-            self.__power_monitor_and_io.power_monitor_and_io_int_callback(_gpio)
-
-    #--------------------------------------------------------------------------------------
-
-    def __io_power_monitor_and_io_int_reset_routine(self, _gpio: int) -> None:
-        """!
-        Callback after the interrupt service routine is handled, to reset the interrupt and restart the check
-        @param _gpio: The GPIO nr which caused the interrupt. (Just for information purpose)
-        @return: None
-        """
-        if self.__power_monitor_and_io is not None:
-            self.__power_monitor_and_io.power_monitor_and_io_int_reset_routine(_gpio)
 
     #--------------------------------------------------------------------------------------
     #--------------------------------------------------------------------------------------
@@ -323,3 +301,25 @@ class ServoAssembly:
         """
         if self.__power_monitor_and_io is not None:
             self.__power_monitor_and_io.set_io_expander_int_callback_function(_callback)
+
+    #--------------------------------------------------------------------------------------
+    #--------------------------------------------------------------------------------------
+    def __io_power_monitor_and_io_int_callback(self, _gpio: int) -> None:
+        """!
+        Callback of interrupt service routine. This routine will be called when the IO expander interrupt fires
+        @param _gpio: The GPIO nr which caused the interrupt. (Just for information purpose)
+        @return: None
+        """
+        if self.__power_monitor_and_io is not None:
+            self.__power_monitor_and_io.power_monitor_and_io_int_callback(_gpio)
+
+    #--------------------------------------------------------------------------------------
+
+    def __io_power_monitor_and_io_int_reset_routine(self, _gpio: int) -> None:
+        """!
+        Callback after the interrupt service routine is handled, to reset the interrupt and restart the check
+        @param _gpio: The GPIO nr which caused the interrupt. (Just for information purpose)
+        @return: None
+        """
+        if self.__power_monitor_and_io is not None:
+            self.__power_monitor_and_io.power_monitor_and_io_int_reset_routine(_gpio)

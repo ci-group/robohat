@@ -210,10 +210,8 @@ class MAX11137:
 
     # --------------------------------------------------------------------------------------
 
-
     def __give_result_adc(self, _adc_mode_control) -> float:
         """!
-
         @param _adc_mode_control:
         @return: float
         """
@@ -228,13 +226,20 @@ class MAX11137:
     # --------------------------------------------------------------------------------------
 
 
-    '''!
-    private method, to alter a value depending on bit value and a bit position
-    '''
 
     # noinspection PyMethodMayBeStatic
-    def __update_register_value(self, previous_value, bit_pos, bit_value):
-        return_value = previous_value | (bit_value << bit_pos)
+    def __update_register_value(self, _previous_value, _bit_pos, _bit_value):
+        """!
+        private method, to alter a value depending on bit value and a bit position
+
+        @param _previous_value
+        @param _bit_pos
+        @param _bit_value
+        @return:
+        """
+
+
+        return_value = _previous_value | (_bit_value << _bit_pos)
         return return_value
 
     # --------------------------------------------------------------------------------------

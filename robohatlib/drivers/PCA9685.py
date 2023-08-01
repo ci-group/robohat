@@ -1,7 +1,4 @@
 # !/usr/bin/env python
-
-
-
 import math
 
 try:
@@ -9,7 +6,7 @@ try:
     from robohatlib.driver_ll.i2c.I2CDevice import I2CDevice
     from robohatlib.Robohat_config import DEBUG
 except ImportError:
-    print("Failed to import RoboUtil")
+    print("Failed to resolve dependencies for the PCA9685")
     raise
 
 
@@ -41,8 +38,9 @@ MODE2_OUTDRV_BITNR =    2  # output type
 MODE2_OUTNE1_BITNR =    0  # output mode when not enabled
 
 
-
 """!
+PWM driver 
+
 ~OE ie via een jumper       input pca
 INT_i2C gpio4               output pca, input cpu
 bus i2c-1
@@ -62,24 +60,28 @@ class PCA9685:
         self.__i_am_a_sleep = False
 
     # --------------------------------------------------------------------------------------
-    def init_pca9685(self) -> None:
+
+    def init_pca9685(self, _should_be_time) -> None:
         """!
-        Initializes PCA9685
+        Initializes PCA9685 and set time of the current angles
         @return None:
         """
+
         if DEBUG is True:
             print("init_pca9685")
 
         self.__do_idle()
         self.__do_invert_and_set_driver_to_pushpull()
-        self.wake()
+
         self.__set_pwm_freq(50)
+        #if _should_be_time is not None:
+
+        self.sleep()
+        self.set_on_time_all_channels(_should_be_time)
 
 
 
-
-
-
+        self.wake()
     # --------------------------------------------------------------------------------------
     def set_on_time_channel(self, _channel: int, _time_wanted_us: float) -> None:
         """!
@@ -88,7 +90,7 @@ class PCA9685:
         @return: None
         """
         if _channel >= 0 and _channel < 16:
-            actual_ticks_on = self.__convert_timeUs_to_tick(_time_wanted_us)
+            actual_ticks_on = self.__convert_time_us_to_tick(_time_wanted_us)
 
             on_ticks = 0
             off_ticks = 4095 - actual_ticks_on - on_ticks
@@ -108,7 +110,7 @@ class PCA9685:
         """
         data_to_send = bytes([LED0_ON_L_ADDRESS])
         for i in range(0, 16):
-            actual_ticks_on = self.__convert_timeUs_to_tick(_wanted_times_us[i])
+            actual_ticks_on = self.__convert_time_us_to_tick(_wanted_times_us[i])
             on_ticks = 0
             off_ticks = 4095 - actual_ticks_on - on_ticks
 
@@ -179,7 +181,7 @@ class PCA9685:
 
     # --------------------------------------------------------------------------------------
 
-    def __convert_timeUs_to_tick(self, _time_wanted_us: float) -> int:
+    def __convert_time_us_to_tick(self, _time_wanted_us: float) -> int:
         time_per_tick = ((1.0 / self.__freq) / 4095.0) * 1000000
         actual_ticks = int(_time_wanted_us / time_per_tick)
         return actual_ticks

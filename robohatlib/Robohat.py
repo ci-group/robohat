@@ -445,6 +445,9 @@ class Robohat:
         @return None
         """
 
+        # if Robohat_config.DEBUG is True:
+        #     print(_angles_array)
+
         if self.__servo_assembly_1 is not None and len(_angles_array) >= 16:
             angles_array1 = [0.0] * 16
             for i in range(0, 16):
@@ -500,6 +503,7 @@ class Robohat:
             return self.__servo_assembly_2.are_servos_sleeping()
 
         return True
+
 
     # ------------------------------------------------------------------------------------------
 

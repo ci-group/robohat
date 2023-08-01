@@ -35,18 +35,30 @@ class ServoBoard:
     #--------------------------------------------------------------------------------------
 
     def init_servo_board(self, _servo_datas_array: []) -> None:
-        """
+        """!
         @param _servo_datas_array:
         @return: None
         """
+
+        # self.__servo_datas_array = _servo_datas_array
+        # self.__pwm.init_pca9685()
+        # self.__servo_adc.init_adc()
+
         self.__servo_datas_array = _servo_datas_array
-        self.__pwm.init_pca9685()
         self.__servo_adc.init_adc()
+
+        should_be_time = self._get_current_times_depending_current_angle()
+
+        self.__pwm.init_pca9685(should_be_time)
 
     #--------------------------------------------------------------------------------------
     #--------------------------------------------------------------------------------------
 
     def get_name(self) -> str:
+        """!
+        Get name of Servoboard
+        @return: name
+        """
         return self.__name
 
     #--------------------------------------------------------------------------------------
@@ -87,7 +99,7 @@ class ServoBoard:
             voltage_channel = self.get_servo_adc_single_channel(_servo_nr)
             angle_channel = self.__servo_datas_array[_servo_nr - 1].convert_voltage_to_angle(voltage_channel)
             if angle_channel < 0:
-                print("Error, requested servo readout is not connected")
+                print("Error, requested servo: " + str(_servo_nr) + " readout is not connected")
                 return -1
             return angle_channel
         else:
@@ -96,6 +108,7 @@ class ServoBoard:
 
     #--------------------------------------------------------------------------------------
     #--------------------------------------------------------------------------------------
+
     def set_servo_multiple_angles(self, _wanted_angles: []) -> None:
         """!
         Sets all the angle of the servos
@@ -140,6 +153,20 @@ class ServoBoard:
         else:
             print("Error, requested servo number is not valid, should be 1 till 16")
             return -1
+
+    #--------------------------------------------------------------------------------------
+
+
+    def _get_current_times_depending_current_angle(self) -> []:
+        current_angles = self.get_servo_multiple_angles()
+        should_be_time = [0] * 16
+        for i in range(0, 16):
+            angle = current_angles[i]
+            if angle is -1:
+                angle = 90
+            should_be_time[i] = self.__servo_datas_array[i].convert_angle_to_time(angle)
+
+        return should_be_time
 
     #--------------------------------------------------------------------------------------
 
