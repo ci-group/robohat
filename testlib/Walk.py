@@ -42,9 +42,9 @@ RIGHT_BACK_LEG_SERVO_NR = 5
 # OTHER CONSTANTS
 TIME_BETWEEN_STEP = 5
 
-LEG_NEUTRAL = 45.0
+LEG_NEUTRAL = 90.0
 LEG_DOWN = 10.0
-LEG_UP = 90.0
+LEG_UP = 145.0
 
 NECK_NEUTRAL = 90.0
 NECK_LEFT = 60.0
@@ -54,7 +54,7 @@ HIP_NEUTRAL = 90.0
 HIP_LEFT = 70.0
 HIP_RIGHT = 110.0
 
-DELAY_STEP = 1
+DELAY_STEP = 5
 
 
     # --------------------------------------------------------------------------------------
@@ -89,8 +89,6 @@ class Walk:
 
         self.__running = False
 
-
-
     # --------------------------------------------------------------------------------------
     # --------------------------------------------------------------------------------------
     # --------------------------------------------------------------------------------------
@@ -103,14 +101,26 @@ class Walk:
 
         print("Started walking")
 
-        self.__walk_driver.start_walking()
+        current_angles = self.__robohat.get_servo_multiple_angles()
+        self.__walk_driver.start_walking(current_angles)
+
+
+        print ("1")
+        self._side_right_neutral()
+        self._side_left_neutral()
+        self._joint_neutral()
+        time.sleep(5)
 
         counter = 0
         self.__running = True
 
         while self.__running:
-            self._step_forward_right()
-            self._step_forward_left()
+
+            self._step_forward()
+            time.sleep(TIME_BETWEEN_STEP)
+
+            # self._step_forward_left()
+            # time.sleep(TIME_BETWEEN_STEP)
 
             counter = counter + 1
             if counter > 10:
@@ -137,60 +147,41 @@ class Walk:
     # --------------------------------------------------------------------------------------
     # --------------------------------------------------------------------------------------
 
-    def _step_forward_right(self):
-        self._leg_right_front_up()
-        time.sleep(DELAY_STEP)
+    def _step_forward(self):
 
+        # we are standing in a neutral pos
+        print ("2")
         self._joint_left()
         time.sleep(DELAY_STEP)
 
-        self._leg_right_front_neutral()
+        print ("3")
+        self._side_right_down()
         time.sleep(DELAY_STEP)
 
+        print ("3")
         self._joint_neutral()
         time.sleep(DELAY_STEP)
 
-        self._leg_left_back_up()
+        print ("4")
+        self._side_right_neutral()
         time.sleep(DELAY_STEP)
 
+        #--------------------------------
+        print ("5")
         self._joint_right()
         time.sleep(DELAY_STEP)
 
-        self._leg_left_back_neutral()
+        print ("6")
+        self._side_left_down()
         time.sleep(DELAY_STEP)
 
+        print ("7")
         self._joint_neutral()
         time.sleep(DELAY_STEP)
 
-    # --------------------------------------------------------------------------------------
-    # --------------------------------------------------------------------------------------
-    # --------------------------------------------------------------------------------------
-
-    def _step_forward_left(self):
-        self._leg_left_front_up()
+        print ("8")
+        self._side_left_neutral()
         time.sleep(DELAY_STEP)
-
-        self._joint_right()
-        time.sleep(DELAY_STEP)
-
-        self._leg_left_front_neutral()
-        time.sleep(DELAY_STEP)
-
-        self._joint_neutral()
-        time.sleep(DELAY_STEP)
-
-        self._leg_right_back_up()
-        time.sleep(DELAY_STEP)
-
-        self._joint_left()
-        time.sleep(DELAY_STEP)
-
-        self._leg_right_back_neutral()
-        time.sleep(DELAY_STEP)
-
-        self._joint_neutral()
-        time.sleep(DELAY_STEP)
-
 
     # --------------------------------------------------------------------------------------
     # --------------------------------------------------------------------------------------
@@ -226,7 +217,6 @@ class Walk:
         print("_leg_right_front_neutral")
         self.__set_servo_preset_value(WalkServoID.RIGHT_FRONT_LEG, LEG_NEUTRAL)
         while self.__get_servo_is_wanted_angle(WalkServoID.RIGHT_FRONT_LEG) is False:
-            print("_leg_right_front_neutral zzz")
             time.sleep(0.1)
 
     # --------------------------------------------------------------------------------------
@@ -300,24 +290,74 @@ class Walk:
     # --------------------------------------------------------------------------------------
     # --------------------------------------------------------------------------------------
 
+    def _side_right_up(self):
+        print("_side_right_up")
+        self.__set_servo_preset_value(WalkServoID.RIGHT_FRONT_LEG, LEG_UP)
+        self.__set_servo_preset_value(WalkServoID.RIGHT_BACK_LEG, LEG_UP)
+        while self.__get_servo_is_wanted_angle(WalkServoID.RIGHT_FRONT_LEG) is False or self.__get_servo_is_wanted_angle(WalkServoID.RIGHT_BACK_LEG) is False:
+            time.sleep(0.1)
+
+    def _side_right_down(self):
+        print("_side_right_down")
+        self.__set_servo_preset_value(WalkServoID.RIGHT_FRONT_LEG, LEG_DOWN)
+        self.__set_servo_preset_value(WalkServoID.RIGHT_BACK_LEG, LEG_DOWN)
+        while self.__get_servo_is_wanted_angle(WalkServoID.RIGHT_FRONT_LEG) is False or self.__get_servo_is_wanted_angle(WalkServoID.RIGHT_BACK_LEG) is False:
+            time.sleep(0.1)
+
+    def _side_right_neutral(self):
+        print("_side_right_neutral")
+        self.__set_servo_preset_value(WalkServoID.RIGHT_FRONT_LEG, LEG_NEUTRAL)
+        self.__set_servo_preset_value(WalkServoID.RIGHT_BACK_LEG, LEG_NEUTRAL)
+        while self.__get_servo_is_wanted_angle(WalkServoID.RIGHT_FRONT_LEG) is False or self.__get_servo_is_wanted_angle(WalkServoID.RIGHT_BACK_LEG) is False:
+            time.sleep(0.1)
+
+    # --------------------------------------------------------------------------------------
+    # --------------------------------------------------------------------------------------
+    # --------------------------------------------------------------------------------------
+
+    def _side_left_up(self):
+        print("_leg_right_front_up")
+        self.__set_servo_preset_value(WalkServoID.LEFT_FRONT_LEG, LEG_UP)
+        self.__set_servo_preset_value(WalkServoID.LEFT_BACK_LEG, LEG_UP)
+        while self.__get_servo_is_wanted_angle(WalkServoID.LEFT_FRONT_LEG) is False or self.__get_servo_is_wanted_angle(WalkServoID.LEFT_BACK_LEG) is False:
+            time.sleep(0.1)
+
+    def _side_left_down(self):
+        print("_leg_right_front_down")
+        self.__set_servo_preset_value(WalkServoID.LEFT_FRONT_LEG, LEG_DOWN)
+        self.__set_servo_preset_value(WalkServoID.LEFT_BACK_LEG, LEG_DOWN)
+        while self.__get_servo_is_wanted_angle(WalkServoID.LEFT_FRONT_LEG) is False or self.__get_servo_is_wanted_angle(WalkServoID.LEFT_BACK_LEG) is False:
+            time.sleep(0.1)
+
+    def _side_left_neutral(self):
+        print("_leg_right_front_neutral")
+        self.__set_servo_preset_value(WalkServoID.LEFT_FRONT_LEG, LEG_NEUTRAL)
+        self.__set_servo_preset_value(WalkServoID.LEFT_BACK_LEG, LEG_NEUTRAL)
+        while self.__get_servo_is_wanted_angle(WalkServoID.LEFT_FRONT_LEG) is False or self.__get_servo_is_wanted_angle(WalkServoID.LEFT_BACK_LEG) is False:
+            time.sleep(0.1)
+
+    # --------------------------------------------------------------------------------------
+    # --------------------------------------------------------------------------------------
+    # --------------------------------------------------------------------------------------
+
     def _joint_right(self):
         print("_joint_right")
         self.__set_servo_preset_value(WalkServoID.NECK, NECK_RIGHT)
-        self.__set_servo_preset_value(WalkServoID.HIP, HIP_LEFT)
+        self.__set_servo_preset_value(WalkServoID.HIP, HIP_RIGHT)
         while self.__get_servo_is_wanted_angle(WalkServoID.NECK) is False or self.__get_servo_is_wanted_angle(WalkServoID.HIP) is False:
             time.sleep(0.1)
 
     def _joint_left(self):
         print("_joint_left")
         self.__set_servo_preset_value(WalkServoID.NECK, NECK_LEFT)
-        self.__set_servo_preset_value(WalkServoID.HIP, HIP_RIGHT)
+        self.__set_servo_preset_value(WalkServoID.HIP, HIP_LEFT)
         while self.__get_servo_is_wanted_angle(WalkServoID.NECK) is False or self.__get_servo_is_wanted_angle(WalkServoID.HIP) is False:
             time.sleep(0.1)
 
     def _joint_neutral(self):
         print("_joint_neutral")
         self.__set_servo_preset_value(WalkServoID.NECK, NECK_NEUTRAL)
-        self.__set_servo_preset_value(WalkServoID.HIP, NECK_NEUTRAL)
+        self.__set_servo_preset_value(WalkServoID.HIP, HIP_NEUTRAL)
         while self.__get_servo_is_wanted_angle(WalkServoID.NECK) is False or self.__get_servo_is_wanted_angle(WalkServoID.HIP) is False:
             time.sleep(0.1)
 

@@ -33,8 +33,12 @@ class WalkDriver:
     # --------------------------------------------------------------------------------------
     # --------------------------------------------------------------------------------------
 
-    def start_walking(self) -> None:
+    def start_walking(self, _current_servo_positions = None) -> None:
         print("start_walking")
+
+        if _current_servo_positions is not None:
+            for i in range(0, len(_current_servo_positions)):
+                self.__current_servo_positions[i] = _current_servo_positions[i]
 
         self.__running = True
         thread = threading.Thread(target=self.run, args=())
