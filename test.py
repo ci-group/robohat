@@ -141,6 +141,7 @@ class Example:
     # --------------------------------------------------------------------------------------
 
     def servo_fit(self) -> None:
+        print("Going to fit voltage to angle for Servo 0")
 
         value_y1 = 20
         value_y2 = 170
