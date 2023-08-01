@@ -69,7 +69,7 @@ class ServoBoard:
         Cleans up, when user want to shut down. Sets PWM to sleep
         @return: None
         """
-        self.__pwm.sleep()
+        self.sleep()
 
     #--------------------------------------------------------------------------------------
     #--------------------------------------------------------------------------------------

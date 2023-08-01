@@ -67,9 +67,6 @@ class PCA9685:
         @return None:
         """
 
-        if DEBUG is True:
-            print("init_pca9685")
-
         self.__do_idle()
         self.__do_invert_and_set_driver_to_pushpull()
 
