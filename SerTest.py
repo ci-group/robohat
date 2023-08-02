@@ -26,28 +26,10 @@ except ImportError:
 # --------------------------------------------------------------------------------------
 # --------------------------------------------------------------------------------------
 
-def main():
-    """!
-    Start of our test program
-    """
-
-    ser_test = SerTest()                     # creates the class Example
-
-    try:
-        ser_test.start()             # starts the example
-
-    except KeyboardInterrupt:               # catch 'CTR-C to get a graceful exit'
-        print('Interrupted')
-        try:
-            sys.exit(130)
-        except SystemExit:
-            ser_test.exit_program()         # graceful exit
-    print("Exit")
-
 
     # --------------------------------------------------------------------------------------
 
-class SerTest:
+class SerTestClass:
     """!
     Our example class.
 
@@ -67,12 +49,14 @@ class SerTest:
         self.__robohat.init(TestConfig.SERVOBOARD_1_DATAS_ARRAY,
                             TestConfig.SERVOBOARD_2_DATAS_ARRAY)
 
+        self.__robohat.do_buzzer_beep()
+
     # --------------------------------------------------------------------------------------
     # --------------------------------------------------------------------------------------
     # --------------------------------------------------------------------------------------
 
     def start(self) -> None:
-        help()
+        self.ser_test_help()
 
         while self.__running is True:
 
@@ -83,7 +67,8 @@ class SerTest:
     # --------------------------------------------------------------------------------------
     # --------------------------------------------------------------------------------------
 
-    def help(self) -> None:
+    # noinspection PyMethodMayBeStatic
+    def ser_test_help(self) -> None:
         """!
         Will print available commands
         @return: None
@@ -91,10 +76,11 @@ class SerTest:
         print("\n")
 
         print("1 for servo 0, calibrate")
-        print("2 for servo 0, move to 20 degree")
-        print("3 for servo 0, move to 90 degree")
-        print("4 for servo 0, move to 160 degree")
-        print("5 for exit")
+        print("2 read out angle of servo 0")
+        print("3 for servo 0, move to 20 degree")
+        print("4 for servo 0, move to 90 degree")
+        print("5 for servo 0, move to 160 degree")
+        print("6 for exit")
 
     # --------------------------------------------------------------------------------------
     # --------------------------------------------------------------------------------------
@@ -120,7 +106,7 @@ class SerTest:
         elif _command == "6":
             self.exit_program()
         else:
-            self.help()
+            self.ser_test_help()
 
     # --------------------------------------------------------------------------------------
     # --------------------------------------------------------------------------------------
@@ -132,6 +118,7 @@ class SerTest:
         @return: None
         """
         self.__robohat.do_servo_fit_formula_readout_vs_angle(0)
+
 
     # --------------------------------------------------------------------------------------
     # --------------------------------------------------------------------------------------
@@ -158,6 +145,7 @@ class SerTest:
         @return: None
         """
         self.__robohat.set_servo_single_angle(0, _degree)
+        print("Angle of servo 0 should be: " + str(_degree) + "°")
 
     # --------------------------------------------------------------------------------------
     # --------------------------------------------------------------------------------------
@@ -173,7 +161,33 @@ class SerTest:
         self.__running = False
         sys.exit(0)
 
-    # --------------------------------------------------------------------------------------
-    # --------------------------------------------------------------------------------------
-    # --------------------------------------------------------------------------------------
+        # --------------------------------------------------------------------------------------
+        # --------------------------------------------------------------------------------------
+        # --------------------------------------------------------------------------------------
+
+def main():
+    """!
+    Start of our test program
+    """
+
+    ser_test = SerTestClass()  # creates the class Example
+
+    try:
+        ser_test.start()  # starts the example
+
+    except KeyboardInterrupt:  # catch 'CTR-C to get a graceful exit'
+        print('Interrupted')
+        try:
+            sys.exit(130)
+        except SystemExit:
+            ser_test.exit_program()  # graceful exit
+    print("Exit")
+
+
+# --------------------------------------------------------------------------------------
+# --------------------------------------------------------------------------------------
+# --------------------------------------------------------------------------------------
+
+if __name__ == "__main__":
+    main()
 
