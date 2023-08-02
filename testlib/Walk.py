@@ -45,8 +45,8 @@ LEG_FRONT_DOWN = 30.0
 LEG_FRONT_UP = 125.0
 
 LEG_BACK_NEUTRAL = 90.0
-LEG_BACK_DOWN = 10.0
-LEG_BACK_UP = 145.0
+LEG_BACK_DOWN = 20.0
+LEG_BACK_UP = 150.0
 
 NECK_NEUTRAL = 90.0
 NECK_LEFT = 60.0
@@ -160,14 +160,14 @@ class Walk:
         time.sleep(DELAY_STEP)
 
         print ("3")
-        self._joint_right()
+        self._joint_neutral()
         time.sleep(DELAY_STEP)
 
         print ("4")
         self._side_right_neutral()
         time.sleep(DELAY_STEP)
 
-        #--------------------------------
+        # #--------------------------------
         print ("5")
         self._joint_right()
         time.sleep(DELAY_STEP)
@@ -177,7 +177,7 @@ class Walk:
         time.sleep(DELAY_STEP)
 
         print ("7")
-        self._joint_left()
+        self._joint_neutral()
         time.sleep(DELAY_STEP)
 
         print ("8")

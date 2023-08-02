@@ -206,7 +206,8 @@ class ServoAssembly:
 
         @return None
         """
-        self.__servo_board.sleep()
+        if self.__servo_board is not None:
+            self.__servo_board.sleep()
 
     # --------------------------------------------------------------------------------------
 
@@ -216,7 +217,8 @@ class ServoAssembly:
 
         @return None
         """
-        self.__servo_board.wake()
+        if self.__servo_board is not None:
+            self.__servo_board.wake()
 
     # --------------------------------------------------------------------------------------
 
@@ -225,7 +227,10 @@ class ServoAssembly:
         Get if Servos are sleeping
         @return (bool) returns True when servos are sleeping
         """
-        return self.__servo_board.are_servos_sleeping()
+        if self.__servo_board is not None:
+            return self.__servo_board.are_servos_sleeping()
+
+        return True
 
     # --------------------------------------------------------------------------------------
 

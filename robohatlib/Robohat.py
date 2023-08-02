@@ -891,9 +891,7 @@ class Robohat:
         Sends shutdown signal to power module, cleans-up IO, shutdowns the RPi
         @return None
         """
-
         self.__power_management.shutdown_power()
-
 
     # ------------------------------------------------------------------------------------
     def set_system_alarm_permitted(self, _state: bool) -> None:

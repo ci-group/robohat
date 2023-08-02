@@ -38,10 +38,12 @@ INIT_BEEP_PERMITTED = False                         # beep when started if True
 
 
 ACCU_INTERVAL_TIME_IN_SECONDS = 1                   # time between accu monitoring
-#ACCU_VOLTAGE_WHEN_FULL = 12.6
 
 ACCU_VOLTAGE_TO_LOW_THRESHOLD = 11.06               # threshold. below this value, the accu voltage is too low
 ACCU_VOLTAGE_TO_HIGH_THRESHOLD = 13.00              # threshold, above this value, the accu voltage is too high
+ACCU_WARNING_PERCENTAGE_2 = 20
+ACCU_WARNING_PERCENTAGE_1 = 15
+
 
 ACCU_VOLTAGE_ADC_FORMULA_A = 4.85533606358714       # part A of formula, form adc voltage to actual accu voltage (y = Ax + B)
 ACCU_VOLTAGE_ADC_FORMULA_B = -0.512839675475041     # part B of formula, form adc voltage to actual accu voltage (y = Ax + B)

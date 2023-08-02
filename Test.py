@@ -49,7 +49,7 @@ def main():
 
 class Example:
     """!
-    Out example class.
+    Our example class.
 
     The Robohat class will be created.
     The Robohat class will be initialized
