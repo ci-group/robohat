@@ -5,9 +5,9 @@ try:
     import subprocess
     import os
     from time import sleep
-    from robohatlib import Robohat_config
+    from robohatlib import RobohatConfig
     from robohatlib.driver_ll.definitions.GPODef import GPODef
-    from robohatlib.hal.TopboardADC import HatADC
+    from robohatlib.hal.TopboardADC import TopboardADC
     from robohatlib.driver_ll.IOHandler import IOHandler
     from robohatlib.hal.datastructure.AccuStatus import AccuStatus
 
@@ -29,7 +29,7 @@ class PowerManagement:
     Class to measure the accu capacity
     """
 
-    def __init__(self, _io_handler: IOHandler, _adc_hat: HatADC, _shutdown_gpo_def: GPODef):
+    def __init__(self, _io_handler: IOHandler, _adc_hat: TopboardADC, _shutdown_gpo_def: GPODef):
         """!
         @param _io_handler: the IO handler
         @param _adc_hat:  ADC on the top-board
@@ -92,7 +92,7 @@ class PowerManagement:
 
         @return: None
         """
-        timer = threading.Timer(Robohat_config.ACCU_INTERVAL_TIME_IN_SECONDS, self.timer_callback)
+        timer = threading.Timer(RobohatConfig.ACCU_INTERVAL_TIME_IN_SECONDS, self.timer_callback)
         if self.__timerIsRunning is True:
             timer.start()
 
@@ -125,7 +125,7 @@ class PowerManagement:
 
         adc_accu_voltage = self.__adc_hat.get_voltage_of_accu()
 
-        calculated_accu_voltage = (adc_accu_voltage * Robohat_config.ACCU_VOLTAGE_ADC_FORMULA_A) + Robohat_config.ACCU_VOLTAGE_ADC_FORMULA_B
+        calculated_accu_voltage = (adc_accu_voltage * RobohatConfig.ACCU_VOLTAGE_ADC_FORMULA_A) + RobohatConfig.ACCU_VOLTAGE_ADC_FORMULA_B
         self.__insert_power_voltage(calculated_accu_voltage)
         self.__start_timer_power_management()
 
@@ -211,36 +211,36 @@ class PowerManagement:
             self.__accu_percentage_capacity = self.__calculate_percentage_from_voltage(self.__accu_voltage)
 
             # check on to low
-            if self.__accu_voltage < Robohat_config.ACCU_VOLTAGE_TO_LOW_THRESHOLD:
+            if self.__accu_voltage < RobohatConfig.ACCU_VOLTAGE_TO_LOW_THRESHOLD:
                 self.__accu_status = AccuStatus.TOO_LOW
 
                 if self.__signaling_device is not None:
                     self.__signaling_device.signal_system_alarm("Accu voltage too low")
 
-                if Robohat_config.ACCU_LOG_DISPLAY_WHEN_TO_LOW is True or self.__to_low_already_display is False:
+                if RobohatConfig.ACCU_LOG_DISPLAY_WHEN_TO_LOW is True and self.__to_low_already_display is False:
                     print("accu capacity to low, only {0:3.2f} %".format(self.__accu_percentage_capacity))
                     self.__to_low_already_display = True
 
             # check if hysteresis parameters are met when was too low
             elif self.__accu_status is AccuStatus.TOO_LOW and \
-                    self.__accu_voltage > Robohat_config.ACCU_VOLTAGE_TO_LOW_THRESHOLD + (Robohat_config.ACCU_VOLTAGE_TO_LOW_THRESHOLD * 0.02) and \
-                    self.__accu_voltage < Robohat_config.ACCU_VOLTAGE_TO_HIGH_THRESHOLD:
+                    self.__accu_voltage > RobohatConfig.ACCU_VOLTAGE_TO_LOW_THRESHOLD + (RobohatConfig.ACCU_VOLTAGE_TO_LOW_THRESHOLD * 0.02) and \
+                    self.__accu_voltage < RobohatConfig.ACCU_VOLTAGE_TO_HIGH_THRESHOLD:
                 self.__accu_status = AccuStatus.OK
 
-            elif self.__accu_voltage > Robohat_config.ACCU_VOLTAGE_TO_HIGH_THRESHOLD:
+            elif self.__accu_voltage > RobohatConfig.ACCU_VOLTAGE_TO_HIGH_THRESHOLD:
                 self.__accu_status = AccuStatus.TOO_HIGH
 
                 if self.__signaling_device is not None:
                     self.__signaling_device.signal_system_alarm("Accu voltage too high")
 
-                if Robohat_config.ACCU_LOG_DISPLAY_WHEN_TO_HIGH is True or self.__to_high_already_display is False:
+                if RobohatConfig.ACCU_LOG_DISPLAY_WHEN_TO_HIGH is True or self.__to_high_already_display is False:
                     print("Unable to calculate capacity, it's above 100 %")
                     self.__to_high_already_display = True
 
             # check if hysteresis parameters are met when was too high
             elif self.__accu_status is AccuStatus.TOO_HIGH and \
-                    self.__accu_voltage > Robohat_config.ACCU_VOLTAGE_TO_LOW_THRESHOLD and \
-                    self.__accu_voltage < Robohat_config.ACCU_VOLTAGE_TO_HIGH_THRESHOLD - (Robohat_config.ACCU_VOLTAGE_TO_HIGH_THRESHOLD * 0.02) :
+                    self.__accu_voltage > RobohatConfig.ACCU_VOLTAGE_TO_LOW_THRESHOLD and \
+                    self.__accu_voltage < RobohatConfig.ACCU_VOLTAGE_TO_HIGH_THRESHOLD - (RobohatConfig.ACCU_VOLTAGE_TO_HIGH_THRESHOLD * 0.02) :
                 self.__accu_status = AccuStatus.OK
 
             elif self.__accu_status is AccuStatus.UNKNOWN:
@@ -282,25 +282,25 @@ class PowerManagement:
         """
 
         # gets percentage out of list, and interpolates the voltages between the elements of the list
-        if _accu_voltage <= Robohat_config.ACCU_VOLTAGE_TO_PERCENTAGE_ARRAY[0] [0]:
+        if _accu_voltage <= RobohatConfig.ACCU_VOLTAGE_TO_PERCENTAGE_ARRAY[0] [0]:
             return 0
 
-        if _accu_voltage >= Robohat_config.ACCU_VOLTAGE_TO_PERCENTAGE_ARRAY[len(Robohat_config.ACCU_VOLTAGE_TO_PERCENTAGE_ARRAY) - 1] [0]:
+        if _accu_voltage >= RobohatConfig.ACCU_VOLTAGE_TO_PERCENTAGE_ARRAY[len(RobohatConfig.ACCU_VOLTAGE_TO_PERCENTAGE_ARRAY) - 1] [0]:
             return 100
 
-        for index in range(0, len(Robohat_config.ACCU_VOLTAGE_TO_PERCENTAGE_ARRAY) - 1, 1):
-            voltage_low = Robohat_config.ACCU_VOLTAGE_TO_PERCENTAGE_ARRAY[index] [0]
-            voltage_high = Robohat_config.ACCU_VOLTAGE_TO_PERCENTAGE_ARRAY[index + 1] [0]
+        for index in range(0, len(RobohatConfig.ACCU_VOLTAGE_TO_PERCENTAGE_ARRAY) - 1, 1):
+            voltage_low = RobohatConfig.ACCU_VOLTAGE_TO_PERCENTAGE_ARRAY[index] [0]
+            voltage_high = RobohatConfig.ACCU_VOLTAGE_TO_PERCENTAGE_ARRAY[index + 1] [0]
 
             diff_voltage = voltage_high - voltage_low
-            diff_perc = Robohat_config.ACCU_VOLTAGE_TO_PERCENTAGE_ARRAY[index + 1] [1] - Robohat_config.ACCU_VOLTAGE_TO_PERCENTAGE_ARRAY[index] [1]
+            diff_perc = RobohatConfig.ACCU_VOLTAGE_TO_PERCENTAGE_ARRAY[index + 1] [1] - RobohatConfig.ACCU_VOLTAGE_TO_PERCENTAGE_ARRAY[index] [1]
             perc_per_volt = diff_perc / diff_voltage
 
             if voltage_low <= _accu_voltage <= voltage_high:
                 remainder_volt = voltage_high - _accu_voltage
                 remainder_perc = remainder_volt * perc_per_volt
 
-                percentage = Robohat_config.ACCU_VOLTAGE_TO_PERCENTAGE_ARRAY[index] [1] + remainder_perc
+                percentage = RobohatConfig.ACCU_VOLTAGE_TO_PERCENTAGE_ARRAY[index] [1] + remainder_perc
                 return percentage
 
         self.shutdown_power()
