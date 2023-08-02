@@ -75,9 +75,6 @@ class PCA9685:
 
         self.sleep()
         self.set_on_time_all_channels(_should_be_time)
-
-
-
         self.wake()
     # --------------------------------------------------------------------------------------
     def set_on_time_channel(self, _channel: int, _time_wanted_us: float) -> None:
@@ -127,6 +124,7 @@ class PCA9685:
         new_mode = old_mode | (1 << MODE1_SLEEP_BITNR)
         self.__write(MODE1_ADDRESS, new_mode)
         self.__i_am_a_sleep = True
+
     # --------------------------------------------------------------------------------------
     def wake(self) -> None:
         """!
