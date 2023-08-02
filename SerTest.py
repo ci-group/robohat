@@ -119,7 +119,7 @@ class SerTest:
             self.servo_move(160.0)
         elif _command == "6":
             self.exit_program()
-        else
+        else:
             self.help()
 
     # --------------------------------------------------------------------------------------
