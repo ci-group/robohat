@@ -140,24 +140,9 @@ class Example:
     # --------------------------------------------------------------------------------------
     # --------------------------------------------------------------------------------------
 
-    def servo_fit(self) -> None:
-        print("Going to fit voltage to angle for Servo 0")
+    def servo_fit(self, _servo_nr: int) -> None:
+        self.__robohat.do_servo_fit_formula_readout_vs_angle(_servo_nr)
 
-        value_y1 = 20
-        value_y2 = 170
-
-        self.__robohat.set_servo_single_angle(0, value_y1)
-        time.sleep(2)
-        value_x1 = self.__robohat.get_servo_adc_single_channel(0)
-        time.sleep(0.1)
-        self.__robohat.set_servo_single_angle(0, value_y2)
-        time.sleep(2)
-        value_x2 = self.__robohat.get_servo_adc_single_channel(0)
-
-        a = (value_y2 - value_y1) / (value_x2 - value_x1)
-        b = value_y1 - (a * value_x1)
-
-        print("Formula is: " + str(a) + "x + " + str(b) + " created out of: (" + str(value_x1) + "," + str(value_y1) + "),(" + str(value_x2) + "," + str(value_y2) + ")")
 
     # --------------------------------------------------------------------------------------
     # --------------------------------------------------------------------------------------
@@ -236,6 +221,8 @@ class Example:
         print("get servo io dir [board nr] [pin nr]                get the direction of an io pin of a servo board [0|1]")
         print("set servo io output [board nr] [pin nr] [low|high]  set the pin value of an io pin of a servo board [0|1]")
         print("get servo io input [board nr] [pin nr]              get the pin value of an io pin of a servo board [0|1]")
+        print("do servo scan                                       displays all servos connected")
+        print("do servo fit [servo nr]                             fits angle with voltage readout servo")
         print("wake up servos                                      wakes all servo up")
         print("are servos sleeping                                 shows information if servos are sleeping")
         print("set led [color]                                     turn on led with its color [WHITE|RED|GREEN|BLUE|YELLOW|PURPLE|ON|OFF")
@@ -262,7 +249,7 @@ class Example:
         print("do buzzer stop                                      stop the generation of sound")
         print("do test                                             will start a test")
         print("do walk                                             the robot start to walk")
-        print("do servo scan                                       displays all servos connected")
+
 
     # --------------------------------------------------------------------------------------
     # --------------------------------------------------------------------------------------
@@ -572,6 +559,11 @@ class Example:
             sub_command = data_in_array[2]
             if sub_command == "scan":
                 self.do_scan_servos()
+            elif sub_command == "fit" and len(data_in_array) >= 4:
+                servo_nr = int(data_in_array[3])
+                self.servo_fit(servo_nr)
+
+
 # -------------------------------------------------------
 
         elif command == "test":
@@ -622,8 +614,7 @@ class Example:
         elif _command == "wake up servos":
             self.__robohat.wakeup_servo()
             print("servos are a wake")
-        elif _command == "fit":
-            self.servo_fit()
+
 
     # --------------------------------------------------------------------------------------
     # --------------------------------------------------------------------------------------

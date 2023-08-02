@@ -92,6 +92,20 @@ class ServoAssembly:
 
     #--------------------------------------------------------------------------------------
 
+    def servo_set_new_readout_vs_angle_formula(self, _servo_nr, _formula_a, _formula_b) -> None:
+        """!
+        Set new formula parameters for voltage angle conversion
+        @param _servo_nr: wanted servo nr
+        @param _formula_a: first part of linear formula
+        @param _formula_b: second part of linear formula
+        @return: None
+        """
+
+        if self.__servo_board is not None:
+            self.__servo_board.set_new_readout_vs_angle_formula(_servo_nr, _formula_a, _formula_b)
+
+    #--------------------------------------------------------------------------------------
+
     def exit_program(self) -> None:
         """!
         Cleans up, when user want to shut down

@@ -109,6 +109,21 @@ class ServoData:
     # --------------------------------------------------------------------------------------
     # --------------------------------------------------------------------------------------
 
+    def set_new_readout_vs_angle_formula(self, _formula_a, _formula_b) -> None:
+        """!
+        Set new formula parameters for voltage angle conversion
+        @param _formula_a: first part of linear formula
+        @param _formula_b: second part of linear formula
+        @return: None
+        """
+
+        self.__formula_a = _formula_a
+        self.__formula_b = _formula_b
+
+    # --------------------------------------------------------------------------------------
+    # --------------------------------------------------------------------------------------
+    # --------------------------------------------------------------------------------------
+
     def convert_voltage_to_angle(self, _current_voltage: float) -> float:
         """!
         converts voltage (measured by a adc, connected to the servo) to angle in degree

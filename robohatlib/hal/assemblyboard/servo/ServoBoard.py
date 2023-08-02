@@ -54,6 +54,22 @@ class ServoBoard:
     #--------------------------------------------------------------------------------------
     #--------------------------------------------------------------------------------------
 
+    def set_new_readout_vs_angle_formula(self, _servo_nr, _formula_a, _formula_b) -> None:
+        """!
+        Set new formula parameters for voltage angle conversion
+        @param _servo_nr: wanted servo nr
+        @param _formula_a: first part of linear formula
+        @param _formula_b: second part of linear formula
+        @return: None
+        """
+
+        if self.__servo_datas_array is not None:
+            if len(self.__servo_datas_array) >= _servo_nr-1:
+                self.__servo_datas_array[_servo_nr].set_new_readout_vs_angle_formula(_formula_a, _formula_b)
+
+    #--------------------------------------------------------------------------------------
+    #--------------------------------------------------------------------------------------
+
     def get_name(self) -> str:
         """!
         Get name of Servoboard

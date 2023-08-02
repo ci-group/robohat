@@ -296,9 +296,57 @@ class Robohat:
         @return: Color
         """
         return self.__led.get_led_color()
+
     # end LED functions ------------------------------------------------------------------------------------
 
     # begin Servo functions --------------------------------------------------------------------------------------
+    def do_servo_fit_formula_readout_vs_angle(self, _servo_nr: int) -> None:
+        """!
+        Set new formula parameters for voltage angle conversion by setting the servo at angle of 20 and 160
+        and readout the voltage of the ADC
+        @param _servo_nr: wanted servo nr
+        @return: None
+        """
+
+        if self.get_servo_is_connected(_servo_nr) is False:
+            print("Sorry, but servo  " + str(_servo_nr) + " is not connected")
+            return
+
+        print("Going to fit voltage to angle for Servo " + str(_servo_nr))
+
+        value_y1 = 20.0
+        value_y2 = 160.0
+        self.set_servo_single_angle(_servo_nr, value_y1)
+        sleep(2)
+        value_x1 = self.get_servo_adc_single_channel(_servo_nr)
+        sleep(0.1)
+        self.set_servo_single_angle(_servo_nr, value_y2)
+        sleep(2)
+        value_x2 = self.get_servo_adc_single_channel(_servo_nr)
+
+        a = (value_y2 - value_y1) / (value_x2 - value_x1)
+        b = value_y1 - (a * value_x1)
+
+        print("Formula is: " + str(a) + "x + " + str(b) + " created out of: (" + str(value_x1) + "," + str(value_y1) + "),(" + str(value_x2) + "," + str(value_y2) + ")")
+        self.servo_set_new_readout_vs_angle_formula(_servo_nr, a, b)
+
+
+
+    def servo_set_new_readout_vs_angle_formula(self, _servo_nr, _formula_a, _formula_b) -> None:
+        """!
+        Set new formula parameters for voltage angle conversion
+        @param _servo_nr: wanted servo nr
+        @param _formula_a: first part of linear formula
+        @param _formula_b: second part of linear formula
+        @return: None
+        """
+
+        assemble_board = self.__get_servo_assembly_depending_servo_nr(_servo_nr)
+        if assemble_board is not None:
+            servo_nr = self.__get_servo_nr_depending_assembly(_servo_nr)
+            assemble_board.servo_set_new_readout_vs_angle_formula(servo_nr, _formula_a, _formula_b)
+
+
     def get_servo_is_connected(self, _servo_nr: int) -> bool:
         """!
         Checks if servo is connected. Returns False when not connected.
