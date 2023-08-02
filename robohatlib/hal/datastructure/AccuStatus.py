@@ -9,4 +9,6 @@ class AccuStatus(Enum):
     TOO_LOW = 1
     OK = 2
     TOO_HIGH = 3
-    ACCU_NOT_PRESENT = 4
+    WARNING_2 = 4
+    WARNING_1 = 5
+    ACCU_NOT_PRESENT = 255
