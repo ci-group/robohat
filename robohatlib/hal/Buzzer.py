@@ -1,5 +1,5 @@
 try:
-    from robohatlib.Robohat_config import ALARM_PERMITTED, ALARM_TIMEOUT_IN_SEC, INIT_BEEP_PERMITTED
+    from robohatlib.RobohatConfig import ALARM_PERMITTED, ALARM_TIMEOUT_IN_SEC, INIT_BEEP_PERMITTED
     from robohatlib.hal.definitions.BuzzerDef import BuzzerDef
     from robohatlib.driver_ll.IOHandler import IOHandler
     import time

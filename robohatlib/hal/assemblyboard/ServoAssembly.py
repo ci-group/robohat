@@ -5,7 +5,7 @@ try:
     from robohatlib.hal.assemblyboard.PowerMonitorAndIO import PowerMonitorAndIO
     from robohatlib.driver_ll.definitions.GPIInterruptDef import GPIInterruptDef
     from robohatlib.hal.assemblyboard.ServoAssemblyConfig import ServoAssemblyConfig
-    from robohatlib import Robohat_config
+    from robohatlib import RobohatConfig
     from robohatlib.driver_ll.IOHandler import IOHandler
     from robohatlib.driver_ll.definitions.InterruptCallbackHolder import InterruptCallbackHolder
     from robohatlib.driver_ll.constants.InterruptTypes import InterruptTypes
@@ -52,7 +52,7 @@ class ServoAssembly:
             if i2c_device_pwm is not None and spi_device_adc is not None:
                 self.__servo_board = ServoBoard("servoboard_" + _servo_config.get_name(), i2c_device_pwm, spi_device_adc)
 
-                servo_assembly_expander_def = Robohat_config.SERVOASSEMBLY_EXPANDER_DEF
+                servo_assembly_expander_def = RobohatConfig.SERVOASSEMBLY_EXPANDER_DEF
                 callbackholder = InterruptCallbackHolder("expander_callback_holder", self.__io_power_monitor_and_io_int_callback, self.__io_power_monitor_and_io_int_reset_routine, InterruptTypes.INT_FALLING, 250)
                 servo_assembly_expander_def.set_callbackholder(callbackholder)
 

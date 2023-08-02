@@ -4,7 +4,7 @@ try:
     from robohatlib.driver_ll.i2c.I2CDeviceDef import I2CDeviceDef
     from robohatlib.drivers.datastructs.McpInitStruct import McpInitStruct
     from robohatlib.driver_ll.constants.InterruptTypes import InterruptTypes
-    from robohatlib.driver_ll.constants.GPIO_Direction import GpioDirection
+    from robohatlib.driver_ll.constants.GpioDirection import GpioDirection
     from robohatlib.driver_ll.i2c.I2CBusDef import I2CBusDef
     from robohatlib.driver_ll.spi.SPIBusDef import SPIBusDef
     from robohatlib.driver_ll.definitions.GPODef import GPODef
@@ -15,7 +15,7 @@ try:
     from robohatlib.hal.definitions.IMUDef import IMUDef
     from robohatlib.driver_ll.definitions.IOExpanderDef import IOExpanderDef
 except ImportError:
-    raise ImportError("Failed to import needed dependencies for the Robohat_config")
+    raise ImportError("Failed to import needed dependencies for the RobohatConfig")
 
 """!
 Configuration for the Robohat lib. These settings aren't ment to be altered by the app programmer

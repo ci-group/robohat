@@ -19,7 +19,7 @@ try:
     from robohatlib.driver_ll.definitions.IOExpanderDef import IOExpanderDef
     from robohatlib.hal.datastructure.ExpanderDirection import ExpanderDir
     from robohatlib.hal.datastructure.ExpanderStatus import ExpanderStatus
-    from robohatlib import Robohat_config
+    from robohatlib import RobohatConfig
     from robohatlib.driver_ll.IOHandler import IOHandler
     from robohatlib.helpers.RoboUtil import RoboUtil
     from robohatlib.driver_ll.datastructs.IOStatus import IOStatus

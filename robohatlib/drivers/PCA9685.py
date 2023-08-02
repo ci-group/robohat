@@ -4,7 +4,7 @@ import math
 try:
     from robohatlib.helpers.RoboUtil import RoboUtil
     from robohatlib.driver_ll.i2c.I2CDevice import I2CDevice
-    from robohatlib.Robohat_config import DEBUG
+    from robohatlib.RobohatConfig import DEBUG
 except ImportError:
     print("Failed to resolve dependencies for the PCA9685")
     raise

@@ -3,7 +3,7 @@ try:
     from robohatlib.helpers.RoboUtil import RoboUtil
     from robohatlib.driver_ll.i2c.I2CDevice import I2CDevice
     from robohatlib.driver_ll.constants.InterruptTypes import InterruptTypes
-    from robohatlib.driver_ll.constants.GPIO_Direction import GpioDirection
+    from robohatlib.driver_ll.constants.GpioDirection import GpioDirection
 except ImportError:
     print("Failed to resolve dependencies for MCP23008")
     raise

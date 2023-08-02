@@ -3,7 +3,7 @@ from __future__ import absolute_import, division, print_function, unicode_litera
 
 try:
     from robohatlib.Robohat import Robohat
-    from robohatlib import Robohat_constants
+    from robohatlib import RobohatConstants
     from robohatlib.hal.assemblyboard.ServoAssemblyConfig import ServoAssemblyConfig
     from robohatlib.hal.assemblyboard.servo.ServoData import ServoData
     from robohatlib.hal.datastructure.Color import Color
@@ -13,7 +13,7 @@ try:
 
     from testlib.Walk import Walk
 
-    import test_config
+    import TestConfig
     import sys
     import os
     import time
@@ -62,14 +62,14 @@ class Example:
         print("Starting robohat test routine")
         self.__running = True
 
-        self.__robohat = Robohat(test_config.servoassembly_1_config,
-                                 test_config.servoassembly_2_config,
-                                 test_config.TOPBOARD_IO_EXPANDER_SW)
+        self.__robohat = Robohat(TestConfig.servoassembly_1_config,
+                                 TestConfig.servoassembly_2_config,
+                                 TestConfig.TOPBOARD_IO_EXPANDER_SW)
 
         # self.robohat.set_system_alarm_permitted(False)
 
-        self.__robohat.init(test_config.SERVOBOARD_1_DATAS_ARRAY,
-                            test_config.SERVOBOARD_2_DATAS_ARRAY)
+        self.__robohat.init(TestConfig.SERVOBOARD_1_DATAS_ARRAY,
+                            TestConfig.SERVOBOARD_2_DATAS_ARRAY)
 
         self.__robohat.set_topboard_io_expander_int_callback(self.__test_hat_io_expander_int_callback)
         self.__robohat.set_assemblyboard_1_io_expander_int_callback(self.__test_assemblyboard_1_io_expander_int_callback)
@@ -119,7 +119,7 @@ class Example:
         @return None
         """
 
-        if self.__robohat.get_assemblyboard_is_connected(Robohat_constants.PWMPLUG_P3) == False and self.__robohat.get_assemblyboard_is_connected(Robohat_constants.PWMPLUG_P4) == False:
+        if self.__robohat.get_assemblyboard_is_connected(RobohatConstants.PWMPLUG_P3) == False and self.__robohat.get_assemblyboard_is_connected(RobohatConstants.PWMPLUG_P4) == False:
             print("No servos available, no assembly board is connected")
         else:
             servo_angles = self.__robohat.get_servo_multiple_angles()

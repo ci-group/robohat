@@ -2,7 +2,7 @@
 
 
 try:
-    from robohatlib.driver_ll.constants.GPO_Stat import GPOStat
+    from robohatlib.driver_ll.constants.GPOStat import GPOStat
     from robohatlib.driver_ll.GPO_LL_Driver import GPO_LL_Driver
 except ImportError:
     raise ImportError("Failed to import needed dependencies for the LedDriver class")

@@ -26,8 +26,8 @@ try:
     from robohatlib.hal.definitions.BuzzerDef import BuzzerDef
 
     from robohatlib.helpers.RoboUtil import RoboUtil
-    from robohatlib import Robohat_config
-    from robohatlib import Robohat_constants
+    from robohatlib import RobohatConfig
+    from robohatlib import RobohatConstants
     from robohatlib.driver_ll.datastructs.IOStatus import IOStatus
 
 except ImportError:
@@ -444,21 +444,21 @@ class IOHandler:
         @raises: Exception
         """
         if _i2c_bus_nr is 1:
-            def_i = Robohat_config.I2C1_DEF
+            def_i = RobohatConfig.I2C1_DEF
             i2c_handler_1 = self.__allocate_i2c_handler(def_i.get_i2c_bus_nr(), def_i.get_scl_pin(), def_i.get_sda_pin(), def_i.get_frequency())
             i2c_bus_1 = I2CBus(_i2c_bus_nr, i2c_handler_1)
             self.__available_i2c_busses.append(i2c_bus_1)
             return i2c_bus_1
 
         elif _i2c_bus_nr is 5:
-            def_i = Robohat_config.I2C5_DEF
+            def_i = RobohatConfig.I2C5_DEF
             i2c_handler_5 = self.__allocate_i2c_handler(def_i.get_i2c_bus_nr(), def_i.get_scl_pin(), def_i.get_sda_pin(), def_i.get_frequency())
             i2c_bus_5 = I2CBus(_i2c_bus_nr, i2c_handler_5)
             self.__available_i2c_busses.append(i2c_bus_5)
             return i2c_bus_5
 
         elif _i2c_bus_nr is 6:
-            def_i = Robohat_config.I2C6_DEF
+            def_i = RobohatConfig.I2C6_DEF
             i2c_handler_6 = self.__allocate_i2c_handler(def_i.get_i2c_bus_nr(), def_i.get_scl_pin(), def_i.get_sda_pin(), def_i.get_frequency())
             i2c_bus_6 = I2CBus(_i2c_bus_nr, i2c_handler_6)
             self.__available_i2c_busses.append(i2c_bus_6)
@@ -515,17 +515,17 @@ class IOHandler:
                     return
 
         if _spi_bus_nr is 0:
-            def_i = Robohat_config.SPI0_DEF
+            def_i = RobohatConfig.SPI0_DEF
             self.__check_pinning_spi_bus(def_i.get_spi_bus_nr(), def_i.get_sck_pin(), def_i.get_mosi_pin(), def_i.get_miso_pin())
             self.__available_spi_buses.append(_spi_bus_nr)
 
         elif _spi_bus_nr is 1:
-            def_i = Robohat_config.SPI1_DEF
+            def_i = RobohatConfig.SPI1_DEF
             self.__check_pinning_spi_bus(def_i.get_spi_bus_nr(), def_i.get_sck_pin(), def_i.get_mosi_pin(), def_i.get_miso_pin())
             self.__available_spi_buses.append(_spi_bus_nr)
 
         elif _spi_bus_nr is 2:
-            def_i = Robohat_config.SPI2_DEF
+            def_i = RobohatConfig.SPI2_DEF
             self.__check_pinning_spi_bus(def_i.get_spi_bus_nr(), def_i.get_sck_pin(), def_i.get_mosi_pin(), def_i.get_miso_pin())
             self.__available_spi_buses.append(_spi_bus_nr)
 

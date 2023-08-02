@@ -1,15 +1,15 @@
 from __future__ import annotations
 
 try:
-    from robohatlib import Robohat_config
-    from robohatlib import Robohat_constants
+    from robohatlib import RobohatConfig
+    from robohatlib import RobohatConstants
 
     from robohatlib.drivers.datastructs.McpInitStruct import McpInitStruct
 
     from robohatlib.driver_ll.IOHandler import IOHandler
     from robohatlib.driver_ll.i2c.I2CDeviceDef import I2CDeviceDef
     from robohatlib.driver_ll.constants.InterruptTypes import InterruptTypes
-    from robohatlib.driver_ll.constants.GPIO_Direction import GpioDirection
+    from robohatlib.driver_ll.constants.GpioDirection import GpioDirection
     from robohatlib.driver_ll.definitions.InterruptCallbackHolder import InterruptCallbackHolder
 
     from robohatlib.hal.PowerManagement import PowerManagement
@@ -25,7 +25,7 @@ try:
     from robohatlib.hal.datastructure.AccuStatus import AccuStatus
 
     from robohatlib.hal.assemblyboard.ServoAssembly import ServoAssembly
-    from robohatlib.hal.TopboardADC import HatADC
+    from robohatlib.hal.TopboardADC import TopboardADC
     from robohatlib.hal.assemblyboard.servo.ServoBoard import ServoBoard
     from robohatlib.hal.assemblyboard.ServoAssemblyConfig import ServoAssemblyConfig
     from robohatlib.hal.assemblyboard.servo.ServoData import ServoData
@@ -67,7 +67,7 @@ class Robohat:
         """
 
         print("\n")
-        print("Starting Robohat lib: " + Robohat_constants.ROBOHAT_LIB_VERSION_STR + " (" + Robohat_constants.ROBOHAT_BUILD_DATE_STR + ") \n")
+        print("Starting Robohat lib: " + RobohatConstants.ROBOHAT_LIB_VERSION_STR + " (" + RobohatConstants.ROBOHAT_BUILD_DATE_STR + ") \n")
 
         if _servo_assembly_1_config is not None and _servo_assembly_2_config is not None:
             if _switch_top_board is _servo_assembly_1_config.get_sw2_power_good_address() or \
@@ -88,13 +88,13 @@ class Robohat:
                 return
 
         self.__io_handler = IOHandler()
-        self.__serial = Serial(self.__io_handler, Robohat_config.SERIAL_DEF)
-        self.__buzzer = Buzzer(self.__io_handler, Robohat_config.BUZZER_DEF)
-        self.__led = LedMulticolor(self.__io_handler, Robohat_config.STATUS_LED_DEF)
-        self.__imu = IMU(self.__io_handler, Robohat_config.IMU_DEF)
+        self.__serial = Serial(self.__io_handler, RobohatConfig.SERIAL_DEF)
+        self.__buzzer = Buzzer(self.__io_handler, RobohatConfig.BUZZER_DEF)
+        self.__led = LedMulticolor(self.__io_handler, RobohatConfig.STATUS_LED_DEF)
+        self.__imu = IMU(self.__io_handler, RobohatConfig.IMU_DEF)
 
         #-------------------------------------Expander
-        hat_io_expander_def = Robohat_config.TOPBOARD_IO_EXPANDER_DEF
+        hat_io_expander_def = RobohatConfig.TOPBOARD_IO_EXPANDER_DEF
 
         # at the default interrupt definition there are 2 callback added. one for the trigger, the second for the interrupt reset
         hat_io_expander_callbackholder = InterruptCallbackHolder("hat_IO_expander_callback_holder",
@@ -106,19 +106,19 @@ class Robohat:
         hat_io_expander_def.set_callbackholder(hat_io_expander_callbackholder)
 
         self.__topboard_io_expander = IOExpander(self.__io_handler, hat_io_expander_def, _switch_top_board)
-        self.__topboard_adc = HatADC(self.__io_handler, Robohat_config.TOPBOARD_ADC_I2C_DEF)
+        self.__topboard_adc = TopboardADC(self.__io_handler, RobohatConfig.TOPBOARD_ADC_I2C_DEF)
 
         self.__power_management = PowerManagement(self.__io_handler,
                                                   self.__topboard_adc,
-                                                  Robohat_config.POWER_SHUTDOWN_GPO_DEF)
+                                                  RobohatConfig.POWER_SHUTDOWN_GPO_DEF)
 
         self.__power_management.add_signaling_device(self.__buzzer)
 
         if _servo_assembly_1_config is not None:
             self.__servo_assembly_1 = ServoAssembly(self.__io_handler,
                                                     _servo_assembly_1_config,
-                                                    Robohat_config.SERVOASSEMBLY_1_I2C_BUS,
-                                                    Robohat_config.SERVOASSEMBLY_1_SPI_BUS
+                                                    RobohatConfig.SERVOASSEMBLY_1_I2C_BUS,
+                                                    RobohatConfig.SERVOASSEMBLY_1_SPI_BUS
                                                     )
 
             if self.__servo_assembly_1 .is_board_avaible() is True:
@@ -132,8 +132,8 @@ class Robohat:
         if _servo_assembly_2_config is not None:
             self.__servo_assembly_2 = ServoAssembly(self.__io_handler,
                                                     _servo_assembly_2_config,
-                                                    Robohat_config.SERVOASSEMBLY_2_I2C_BUS,
-                                                    Robohat_config.SERVOASSEMBLY_2_SPI_BUS
+                                                    RobohatConfig.SERVOASSEMBLY_2_I2C_BUS,
+                                                    RobohatConfig.SERVOASSEMBLY_2_SPI_BUS
                                                     )
 
             if self.__servo_assembly_2.is_board_avaible() is True:
@@ -336,10 +336,10 @@ class Robohat:
         @return: bool
         """
 
-        if _assemblyboard is Robohat_constants.PWMPLUG_P3:
+        if _assemblyboard is RobohatConstants.PWMPLUG_P3:
             if self.__servo_assembly_1 is not None:
                 return True
-        elif _assemblyboard is Robohat_constants.PWMPLUG_P4:
+        elif _assemblyboard is RobohatConstants.PWMPLUG_P4:
             if self.__servo_assembly_2 is not None:
                 return True
         return False
@@ -421,9 +421,9 @@ class Robohat:
             servo_nr = self.__get_servo_nr_depending_assembly(_servo_nr)
             if servo_nr is not None:
                 servo_assembly.set_servo_single_angle(servo_nr, _angle)
-            elif Robohat_config.DEBUG is True:
+            elif RobohatConfig.DEBUG is True:
                 print("Unknown servo")
-        elif Robohat_config.DEBUG is True:
+        elif RobohatConfig.DEBUG is True:
             print("Did not found servo assembly")
 
 
@@ -535,13 +535,13 @@ class Robohat:
         @return None:
         """
 
-        if _board_nr == Robohat_constants.PWMPLUG_P3:               # board 0
+        if _board_nr == RobohatConstants.PWMPLUG_P3:               # board 0
             if self.__servo_assembly_1 is not None:
                 return self.__servo_assembly_1.set_servo_io_expander_direction(_pin_nr, _dir)
             else:
                 print("Error: servo assembly 1 not initialized")
                 return IOStatus.IO_FAILED
-        elif _board_nr == Robohat_constants.PWMPLUG_P4:             # board 1
+        elif _board_nr == RobohatConstants.PWMPLUG_P4:             # board 1
             if self.__servo_assembly_2 is not None:
                 return self.__servo_assembly_2.set_servo_io_expander_direction(_pin_nr, _dir)
             else:
@@ -561,13 +561,13 @@ class Robohat:
         @return ExpanderDir:
         """
 
-        if _board_nr == Robohat_constants.PWMPLUG_P3:               # board 0
+        if _board_nr == RobohatConstants.PWMPLUG_P3:               # board 0
             if self.__servo_assembly_1 is not None:
                 return self.__servo_assembly_1.get_servo_io_expander_direction(_pin_nr)
             else:
                 print("Error: servo assembly 1 not initialized")
                 return ExpanderDir.INVALID
-        elif _board_nr == Robohat_constants.PWMPLUG_P4:             # board 1
+        elif _board_nr == RobohatConstants.PWMPLUG_P4:             # board 1
             if self.__servo_assembly_2 is not None:
                 return self.__servo_assembly_2.get_servo_io_expander_direction(_pin_nr)
             else:
@@ -587,13 +587,13 @@ class Robohat:
         @param _value: low or high
         @return None:
         """
-        if _board_nr == Robohat_constants.PWMPLUG_P3:               # board 0
+        if _board_nr == RobohatConstants.PWMPLUG_P3:               # board 0
             if self.__servo_assembly_1 is not None:
                 return self.__servo_assembly_1.set_servo_io_expander_output(_pin_nr, _value)
             else:
                 print("Error: servo assembly 1 not initialized")
                 return IOStatus.IO_FAILED
-        elif _board_nr == Robohat_constants.PWMPLUG_P4:             # board 1
+        elif _board_nr == RobohatConstants.PWMPLUG_P4:             # board 1
             if self.__servo_assembly_2 is not None:
                 return self.__servo_assembly_2.set_servo_io_expander_output(_pin_nr, _value)
             else:
@@ -611,13 +611,13 @@ class Robohat:
         @param _pin_nr:  pin nr
         @return None:
         """
-        if _board_nr == Robohat_constants.PWMPLUG_P3:               # board 0
+        if _board_nr == RobohatConstants.PWMPLUG_P3:               # board 0
             if self.__servo_assembly_1 is not None:
                 return self.__servo_assembly_1.get_servo_io_expander_input(_pin_nr)
             else:
                 print("Error: servo assembly 1 not initialized")
                 return ExpanderStatus.INVALID
-        elif _board_nr == Robohat_constants.PWMPLUG_P4:             # board 1
+        elif _board_nr == RobohatConstants.PWMPLUG_P4:             # board 1
             if self.__servo_assembly_2 is not None:
                 return self.__servo_assembly_2.get_servo_io_expander_input(_pin_nr)
             else:
@@ -875,7 +875,7 @@ class Robohat:
         @return str, version number of library, such as 1.0.1
         """
 
-        return Robohat_constants.ROBOHAT_LIB_VERSION_STR
+        return RobohatConstants.ROBOHAT_LIB_VERSION_STR
 
     # ------------------------------------------------------------------------------------
     # noinspection PyMethodMayBeStatic
@@ -885,7 +885,7 @@ class Robohat:
 
         @return str, version build date of library, such as 20231225
         """
-        return Robohat_constants.ROBOHAT_BUILD_DATE_STR
+        return RobohatConstants.ROBOHAT_BUILD_DATE_STR
 
     # ------------------------------------------------------------------------------------
 

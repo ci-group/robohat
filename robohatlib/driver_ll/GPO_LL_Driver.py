@@ -1,7 +1,7 @@
 #!/usr/bin/python3
 try:
     import RPi.GPIO as GPIO
-    from robohatlib.driver_ll.constants.GPO_Stat import GPOStat
+    from robohatlib.driver_ll.constants.GPOStat import GPOStat
     from robohatlib.driver_ll.definitions.GPODef import GPODef
 except ImportError:
     raise ImportError("GPIO not found, needed for GPO_LL_Driver class")
