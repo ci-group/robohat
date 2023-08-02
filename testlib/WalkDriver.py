@@ -81,8 +81,8 @@ class WalkDriver:
         servo_nr: int = int(_servo_id)
         angle_preset = self.__preset_servo_positions[servo_nr]
 
-        angle_low = angle_preset
-        angle_high = angle_preset + 1
+        angle_low = self.__current_servo_positions[servo_nr] - 1
+        angle_high = self.__current_servo_positions[servo_nr] + 1
 
         #print(str(angle_low ) + " < " + str(angle_preset) + " < " + str(angle_high) )
         if angle_preset >= angle_low and angle_preset <= angle_high:

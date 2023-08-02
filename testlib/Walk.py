@@ -40,7 +40,7 @@ RIGHT_BACK_LEG_SERVO_NR = 5
 
 
 # OTHER CONSTANTS
-TIME_BETWEEN_STEP = 5
+TIME_BETWEEN_STEP = 0.1
 
 LEG_NEUTRAL = 90.0
 LEG_DOWN = 10.0
@@ -54,7 +54,7 @@ HIP_NEUTRAL = 90.0
 HIP_LEFT = 70.0
 HIP_RIGHT = 110.0
 
-DELAY_STEP = 5
+DELAY_STEP = 0.1
 
 
     # --------------------------------------------------------------------------------------
@@ -159,7 +159,7 @@ class Walk:
         time.sleep(DELAY_STEP)
 
         print ("3")
-        self._joint_neutral()
+        self._joint_right()
         time.sleep(DELAY_STEP)
 
         print ("4")
@@ -176,7 +176,7 @@ class Walk:
         time.sleep(DELAY_STEP)
 
         print ("7")
-        self._joint_neutral()
+        self._joint_left()
         time.sleep(DELAY_STEP)
 
         print ("8")
