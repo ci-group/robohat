@@ -29,7 +29,6 @@ except ImportError:
 
 """
 
-
 # CONSTANTS BELOW ARE THE SERVO NR OF THE HARDWARE SERVO. mAY NOT EXCEED 32
 LEFT_FRONT_LEG_SERVO_NR = 0
 RIGHT_FRONT_LEG_SERVO_NR = 1
@@ -37,7 +36,6 @@ NECK_SERVO_NR = 2
 HIP_SERVO_NR = 3
 LEFT_BACK_LEG_SERVO_NR = 4
 RIGHT_BACK_LEG_SERVO_NR = 5
-
 
 # OTHER CONSTANTS
 TIME_BETWEEN_STEP = 0.1
@@ -59,7 +57,6 @@ HIP_LEFT = 60.0
 HIP_RIGHT = 120.0
 
 DELAY_STEP = 0.1
-
 
     # --------------------------------------------------------------------------------------
     # --------------------------------------------------------------------------------------
