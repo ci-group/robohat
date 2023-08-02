@@ -9,7 +9,7 @@ except ImportError:
 
 CHANNEL_ACCU_VOLTAGE = 3
 
-class HatADC:
+class TopboardADC:
     """!
     ADC onto the topboard.
     This ADC is also used fo accu-power-monitor
