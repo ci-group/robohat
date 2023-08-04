@@ -13,7 +13,7 @@ try:
 
     from testlib.Walk import Walk
 
-    import TestConfig
+    from testlib import TestConfig
     import sys
     import os
     import time
@@ -26,8 +26,13 @@ except ImportError:
 # --------------------------------------------------------------------------------------
 # --------------------------------------------------------------------------------------
 
+SUPER_USER_MAX_MOVE = 175
+SUPER_USER_MIN_MOVE = 5
 
-    # --------------------------------------------------------------------------------------
+NORMAL_USER_MAX_MOVE = 160
+NORMAL_USER_MIN_MOVE = 20
+
+# --------------------------------------------------------------------------------------
 
 class SerTestClass:
     """!
@@ -50,6 +55,22 @@ class SerTestClass:
                             TestConfig.SERVOBOARD_2_DATAS_ARRAY)
 
         self.__robohat.do_buzzer_beep()
+
+
+        self.__i_am_super_user = False
+
+        print("\n")
+
+        if len(sys.argv) > 1:
+            self.__i_am_super_user = True
+            print("You are a superuser, warning")
+            self.__limit_min = SUPER_USER_MIN_MOVE
+            self.__limit_max = SUPER_USER_MAX_MOVE
+        else:
+            self.__limit_min = NORMAL_USER_MIN_MOVE
+            self.__limit_max = NORMAL_USER_MAX_MOVE
+
+        print("limits are from " + str(self.__limit_min) + " till "+ str(self.__limit_max) )
 
     # --------------------------------------------------------------------------------------
     # --------------------------------------------------------------------------------------
@@ -74,13 +95,14 @@ class SerTestClass:
         @return: None
         """
         print("\n")
-
-        print("1 for servo 0, calibrate")
-        print("2 read out angle of servo 0")
-        print("3 for servo 0, move to 20 degree")
-        print("4 for servo 0, move to 90 degree")
-        print("5 for servo 0, move to 160 degree")
-        print("6 for exit")
+        print("1 show all connected servos")
+        print("2 calibrate servos")
+        print("3 read out the angles of the servos")
+        print("4 move servos to " + str(self.__limit_min) + " °")
+        print("5 move servos to 90 °")
+        print("6 move servos to " + str(self.__limit_max) + " °")
+        print("7 for exit")
+        print("\n")
 
     # --------------------------------------------------------------------------------------
     # --------------------------------------------------------------------------------------
@@ -92,21 +114,39 @@ class SerTestClass:
         @param _command: console input
         @return: None
         """
-
         if _command == "1":
-            self.servo_calibrate()
+            self.servo_show_connected()
         elif _command == "2":
-            self.servo_read_angle()
+            self.servo_calibrate()
         elif _command == "3":
-            self.servo_move(20.0)
+            self.servo_read_angle()
         elif _command == "4":
-            self.servo_move(90.0)
+            self.servo_move(self.__limit_min)
         elif _command == "5":
-            self.servo_move(160.0)
+            self.servo_move(90.0)
         elif _command == "6":
+            self.servo_move(self.__limit_max)
+        elif _command == "7":
             self.exit_program()
         else:
             self.ser_test_help()
+
+    # --------------------------------------------------------------------------------------
+    # --------------------------------------------------------------------------------------
+    # --------------------------------------------------------------------------------------
+
+    def servo_show_connected(self) -> None:
+        angles = self.__robohat.get_servo_multiple_angles()
+
+        servo_counter = 0
+        for servo_nr in range(0, len(angles)):
+            pos = angles[servo_nr]
+            if pos is not -1:
+                print("Servo " + str(servo_nr) + " is connected")
+                servo_counter = servo_counter + 1
+
+        if servo_counter is 0:
+            print("No servos are found")
 
     # --------------------------------------------------------------------------------------
     # --------------------------------------------------------------------------------------
@@ -117,8 +157,7 @@ class SerTestClass:
         Will calibrate the adc of servo 0
         @return: None
         """
-        self.__robohat.do_servo_fit_formula_readout_vs_angle(0)
-
+        self.__robohat.do_servo_fit_formula_readout_vs_angle_multiple_servos(self.__limit_min, self.__limit_max)
 
     # --------------------------------------------------------------------------------------
     # --------------------------------------------------------------------------------------
@@ -130,9 +169,14 @@ class SerTestClass:
         @return: None
         """
 
-        value = self.__robohat.get_servo_single_angle(0)
-        if value != -1:
-            print("angle of servo " + str(0) + " is: " + str(value) + "°")
+        angles = self.__robohat.get_servo_multiple_angles()
+        for i in range(0, len(angles)):
+            pos = angles[i]
+            if pos is -1:
+                print("Servo " + str(i) + " is not connected")
+            else:
+                print("Servo " + str(i) + " position is " + str(pos) + " °")
+
 
     # --------------------------------------------------------------------------------------
     # --------------------------------------------------------------------------------------
@@ -144,8 +188,14 @@ class SerTestClass:
         @paramL _degree wanted degree of servo
         @return: None
         """
-        self.__robohat.set_servo_single_angle(0, _degree)
-        print("Angle of servo 0 should be: " + str(_degree) + "°")
+
+        self.__robohat.set_servo_multiple_angles(
+            [
+            _degree, _degree, _degree, _degree, _degree, _degree, _degree, _degree, _degree, _degree, _degree, _degree, _degree, _degree, _degree, _degree,
+            _degree, _degree, _degree, _degree, _degree, _degree, _degree, _degree, _degree, _degree, _degree, _degree,_degree, _degree, _degree, _degree
+            ])
+
+        print("Angles of the servos should be: " + str(_degree) + "°")
 
     # --------------------------------------------------------------------------------------
     # --------------------------------------------------------------------------------------
