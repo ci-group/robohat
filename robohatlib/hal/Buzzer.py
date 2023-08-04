@@ -31,11 +31,8 @@ class Buzzer:
 
         @return None
         """
-        if INIT_BEEP_PERMITTED is True:
-            self.__buzzer_driver.init_buzzer(True)
-        else:
-            self.__buzzer_driver.init_buzzer(False)
 
+        self.__buzzer_driver.init_buzzer(True)
 
     # --------------------------------------------------------------------------------------
     def exit_program(self) -> None:
