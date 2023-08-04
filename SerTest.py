@@ -141,11 +141,11 @@ class SerTestClass:
         servo_counter = 0
         for servo_nr in range(0, len(angles)):
             pos = angles[servo_nr]
-            if pos is not -1:
+            if pos != -1:
                 print("Servo " + str(servo_nr) + " is connected")
                 servo_counter = servo_counter + 1
 
-        if servo_counter is 0:
+        if servo_counter == 0:
             print("No servos are found")
 
     # --------------------------------------------------------------------------------------
@@ -172,7 +172,7 @@ class SerTestClass:
         angles = self.__robohat.get_servo_multiple_angles()
         for i in range(0, len(angles)):
             pos = angles[i]
-            if pos is -1:
+            if pos == -1:
                 print("Servo " + str(i) + " is not connected")
             else:
                 print("Servo " + str(i) + " position is " + str(pos) + " °")
