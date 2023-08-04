@@ -13,7 +13,7 @@ try:
 
     from testlib.Walk import Walk
 
-    import TestConfig
+    from testlib import TestConfig
     import sys
     import os
     import time
@@ -141,7 +141,7 @@ class Example:
     # --------------------------------------------------------------------------------------
 
     def servo_fit(self, _servo_nr: int) -> None:
-        self.__robohat.do_servo_fit_formula_readout_vs_angle(_servo_nr)
+        self.__robohat.do_servo_fit_formula_readout_vs_angle_single_servo(_servo_nr)
 
 
     # --------------------------------------------------------------------------------------
