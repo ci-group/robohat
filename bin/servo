@@ -1,0 +1,4 @@
+echo "Sertest"
+cd ~/projects/robohatlib/
+
+python3 SerTest.py super
