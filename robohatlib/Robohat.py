@@ -300,7 +300,7 @@ class Robohat:
     # end LED functions ------------------------------------------------------------------------------------
 
     # begin Servo functions --------------------------------------------------------------------------------------
-    def do_servo_fit_formula_readout_vs_angle(self, _servo_nr: int) -> None:
+    def do_servo_fit_formula_readout_vs_angle_single_servo(self, _servo_nr: int) -> None:
         """!
         Set new formula parameters for voltage angle conversion by setting the servo at angle of 20 and 160
         and readout the voltage of the ADC
@@ -330,7 +330,57 @@ class Robohat:
         print("Formula is: " + str(a) + "x + " + str(b) + " created out of: (" + str(value_x1) + "," + str(value_y1) + "),(" + str(value_x2) + "," + str(value_y2) + ")")
         self.servo_set_new_readout_vs_angle_formula(_servo_nr, a, b)
 
+#----------------------
 
+    def do_servo_fit_formula_readout_vs_angle_multiple_servos(self, _min_range, _max_range) -> None:
+        """!
+        Set new formula parameters for voltage angle conversion by setting the servo at angle of 20 and 160
+        and readout the voltage of the ADC
+        @param _servo_nr: wanted servo nr
+        @return: None
+        """
+
+        pre_angles = self.get_servo_multiple_angles()
+
+        print("Setting servos to min: " + str(_min_range) + "°" )
+        self.set_servo_multiple_angles(
+            [
+                _min_range, _min_range, _min_range, _min_range, _min_range, _min_range, _min_range, _min_range, _min_range, _min_range, _min_range, _min_range, _min_range, _min_range, _min_range, _min_range,
+                _min_range, _min_range, _min_range, _min_range, _min_range, _min_range, _min_range, _min_range, _min_range, _min_range, _min_range, _min_range, _min_range, _min_range, _min_range, _min_range
+            ])
+
+        sleep(2)
+        voltages_min = self.get_servo_adc_multiple_channels()
+        sleep(0.1)
+        print("Setting servos to max: " + str(_max_range) + "°")
+        self.set_servo_multiple_angles(
+            [
+                _max_range, _max_range, _max_range, _max_range, _max_range, _max_range, _max_range, _max_range, _max_range, _max_range, _max_range, _max_range, _max_range, _max_range, _max_range, _max_range,
+                _max_range, _max_range, _max_range, _max_range, _max_range, _max_range, _max_range, _max_range, _max_range, _max_range, _max_range, _max_range, _max_range, _max_range, _max_range, _max_range
+            ])
+
+        sleep(2)
+        voltage_max = self.get_servo_adc_multiple_channels()
+        sleep(0.1)
+
+        for servo_nr in range(0, len(pre_angles)):
+            pos = pre_angles[servo_nr]
+            if pos is not -1:
+                a = (_max_range - _min_range) / (voltage_max[servo_nr] - voltages_min[servo_nr])
+                b = _min_range - (a * voltages_min[servo_nr])
+                print("Servo: " + str(servo_nr) + " formula is: " + str(a) + "x + " + str(b) + " created out of: (" + str(voltages_min[servo_nr]) + "," + str(_min_range) + "),(" + str(voltage_max[servo_nr]) + "," + str(_max_range) + ")")
+                self.servo_set_new_readout_vs_angle_formula(servo_nr, a, b)
+
+        sleep(2)
+        default_degree = 90
+        print("Setting all servos to " + str(default_degree) + " °")
+        self.set_servo_multiple_angles(
+            [
+                default_degree, default_degree, default_degree, default_degree, default_degree, default_degree, default_degree, default_degree, default_degree, default_degree, default_degree, default_degree, default_degree, default_degree, default_degree, default_degree,
+                default_degree, default_degree, default_degree, default_degree, default_degree, default_degree, default_degree, default_degree, default_degree, default_degree, default_degree, default_degree, default_degree, default_degree, default_degree, default_degree
+            ])
+
+#----------------------------------
 
     def servo_set_new_readout_vs_angle_formula(self, _servo_nr, _formula_a, _formula_b) -> None:
         """!
