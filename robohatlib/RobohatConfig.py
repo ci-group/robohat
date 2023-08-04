@@ -32,7 +32,7 @@ DEBUG = True                                       # by changing this value to T
 Accu settings
 """
 
-ALARM_PERMITTED = False                              # sound an alarm when a system alert is present, such as to low accu capacity
+ALARM_PERMITTED = True                              # sound an alarm when a system alert is present, such as to low accu capacity
 ALARM_TIMEOUT_IN_SEC = 300                          # timeout between alarm
 INIT_BEEP_PERMITTED = False                         # beep when started if True
 
