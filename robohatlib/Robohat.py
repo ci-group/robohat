@@ -36,11 +36,6 @@ try:
 
     from typing import Tuple
 
-    import warnings
-
-    with warnings.catch_warnings():
-        warnings.simplefilter('ignore', SyntaxWarning)
-
 except ImportError:
     print("Failed to import needed dependencies for the Robohat class")
     raise
