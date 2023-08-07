@@ -37,6 +37,8 @@ class IOExpander:
         i2c_device_definition.set_i2c_offset_address(_sw_io_expander)
         i2c_device = _iohandler.get_i2c_device(i2c_device_definition)
 
+        self.__gpi_interrupt_definition = None
+
         if i2c_device is not None:
             if _io_expander_def.get_callbackholder() is not None:
                 self.__gpi_interrupt_definition = GPIInterruptDef(_io_expander_def.get_name(), _io_expander_def.get_gpio_pin(), InterruptTypes.INT_BOTH, _io_expander_def.get_callbackholder())
@@ -82,7 +84,7 @@ class IOExpander:
                 else:
                     wanted_pin_value = 1
                 self.__expander.set_pin_direction(_io_nr, wanted_pin_value)
-
+                print("IO: Setting dir: " + str(_io_nr) + " <> " + str(wanted_pin_value))
                 return IOStatus.IO_OK
             else:
                 return IOStatus.IO_FAILED
@@ -101,6 +103,7 @@ class IOExpander:
                    return ExpanderDir.INPUT
             else:
                 return ExpanderDir.INVALID
+
     #--------------------------------------------------------------------------------------
 
     def set_io_expander_output(self, _io_nr:int, _status:ExpanderStatus) -> IOStatus:
@@ -122,15 +125,15 @@ class IOExpander:
                     if  _status is ExpanderStatus.HIGH:
                         wanted_pin_value = 1
                     self.__expander.set_pin_data(_io_nr, wanted_pin_value)
-
                     return IOStatus.IO_OK
                 else:
-                    print("Can not write to an input pin")
+                    print("IOExpander: Can not write to an input pin")
                     return IOStatus.IO_FAILED
             else:
                 return IOStatus.IO_FAILED
         else:
             return IOStatus.IO_FAILED
+
     #--------------------------------------------------------------------------------------
 
     def get_io_expander_input(self, _io_nr:int) -> ExpanderStatus:
@@ -152,18 +155,18 @@ class IOExpander:
                     else:
                         return ExpanderStatus.HIGH
                 else:
-                    print("Can not read from an output pin")
+                    print("Can not read from an output pin: " + str(_io_nr))
         return ExpanderStatus.INVALID
 
     #--------------------------------------------------------------------------------------
 
     def reset_interrupt(self, _io_nr:int) -> None:
         """!
-
         @param _io_nr:
         @return: None
         """
         self.__expander.reset_interrupts()
+
     #--------------------------------------------------------------------------------------
 
     def __check_if_expander_io_is_available(self, _io_nr:int) -> bool:
@@ -203,3 +206,5 @@ class IOExpander:
         if self.__gpi_interrupt_definition is not None:
             callbackholder:InterruptCallbackHolder = self.__gpi_interrupt_definition.get_callbackholder()
             callbackholder.set_release_int_release_function(_release_int_function)
+
+    #-------------------------------------------------------------------------------------

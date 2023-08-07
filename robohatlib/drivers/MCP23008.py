@@ -1,6 +1,7 @@
 #!/usr/bin/python3
 try:
     from robohatlib.helpers.RoboUtil import RoboUtil
+    from robohatlib.RobohatConfig import DEBUG
     from robohatlib.driver_ll.i2c.I2CDevice import I2CDevice
     from robohatlib.driver_ll.constants.InterruptTypes import InterruptTypes
     from robohatlib.driver_ll.constants.GpioDirection import GpioDirection
@@ -53,35 +54,37 @@ class MCP23008:
             int_con_value = 0x00
             def_val_value = 0x00
 
-            servo_assembly_interrupt_settings_array = self.__mcp_interrupt_definition.get_interrupt_settings()
-            for servo_assembly_interrupt_settings in servo_assembly_interrupt_settings_array:
-                bit_nr = servo_assembly_interrupt_settings.get_io_nr()
-                if servo_assembly_interrupt_settings.get_direction is GpioDirection.GPIO_OUTPUT:
+            interrupt_settings_array = self.__mcp_interrupt_definition.get_interrupt_settings()
+            for interrupt_settings in interrupt_settings_array:
+                bit_nr = interrupt_settings.get_io_nr()
+                if interrupt_settings.get_direction is GpioDirection.GPIO_OUTPUT:
                     io_dir_value = RoboUtil.update_byte(io_dir_value, bit_nr, 0)                                    # direction output
                 else:
                     io_dir_value = RoboUtil.update_byte(io_dir_value, bit_nr, 1)                                    # direction input
-                    if servo_assembly_interrupt_settings.get_interrupt_type() is InterruptTypes.INT_NONE:
+                    if interrupt_settings.get_interrupt_type() is InterruptTypes.INT_NONE:
                         gp_int_en_value = RoboUtil.update_byte(gp_int_en_value, bit_nr, 0)                          # disables int
                     else:
                         gp_int_en_value = RoboUtil.update_byte(gp_int_en_value, bit_nr, 1)                          # enables int
-                        if servo_assembly_interrupt_settings.get_interrupt_type() is InterruptTypes.INT_RISING:
+                        if interrupt_settings.get_interrupt_type() is InterruptTypes.INT_RISING:
                             int_con_value = RoboUtil.update_byte(int_con_value, bit_nr, 0)                          # compare with def_val value
                             def_val_value = RoboUtil.update_byte(def_val_value, bit_nr, 0)                          # int if pin goes from 0 to 1 int occurs
-                        elif servo_assembly_interrupt_settings.get_interrupt_type() is InterruptTypes.INT_FALLING:
+                        elif interrupt_settings.get_interrupt_type() is InterruptTypes.INT_FALLING:
                             int_con_value = RoboUtil.update_byte(int_con_value, bit_nr, 0)                          # compare with def_val value
                             def_val_value = RoboUtil.update_byte(def_val_value, bit_nr, 1)                          # int if pin goes from 1 to 0 int occurs
                         else:                                                                                      # BOTH
                             int_con_value = RoboUtil.update_byte(int_con_value, bit_nr, 1)                          # int when pin changes
                             def_val_value = RoboUtil.update_byte(def_val_value, bit_nr, 1)                          # DOES NOT CARE
 
-            self.set_port_direction( io_dir_value )
+            self.set_port_direction(io_dir_value )
             self.set_port_pullup(0xFF)
             self.set_interrupt_on_change_port(gp_int_en_value)
             self.set_interrupt_type_port( int_con_value )
             self.set_interrupt_defaults(def_val_value)
+        else:
+            self.set_port_direction(0xff)
+            self.set_port_pullup(0xFF)
 
         self.reset_interrupts()
-
 
     # --------------------------------------------------------------------------------------
     def exit_program(self) -> None:
@@ -93,6 +96,8 @@ class MCP23008:
 
     # --------------------------------------------------------------------------------------
     def set_pin_direction(self, _io_nr:int, _direction) -> None:
+        if DEBUG is True:
+            print("Setting pin direction: " + str(_io_nr) + " " + str(_io_nr) )
         """!
         set the direction of a I/O pins. 1 to a pin is input.
         @param _direction
@@ -138,7 +143,6 @@ class MCP23008:
         return self.__get_pin(GP_PU_ADDRESS, _io_nr)
 
     def set_port_pullup(self, _byte_value):
-        #print("port pullup: " + hex(_byte_value))
         self.__set_port(GP_PU_ADDRESS, _byte_value)
 
     def set_pin_data(self, _io_nr: int, _bool_value) -> None:
