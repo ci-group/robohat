@@ -234,10 +234,10 @@ class PowerMonitorAndIO:
         if _io_nr >= 4 and _io_nr <= 6:
             return True
         elif _io_nr > 6:
-            print("IO pin does not exist")
+            print("IO pin does not exist: " + str(_io_nr))
             return False
         else:
-            print("IO pin not available for user")
+            print("IO pin not available for user: " + str(_io_nr))
             return False
 
     # --------------------------------------------------------------------------------------
