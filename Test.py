@@ -18,6 +18,8 @@ try:
     import os
     import time
 
+    import warnings
+
 except ImportError:
     print("Failed to import Robohat, or failed to import all dependencies")
     raise
@@ -266,7 +268,7 @@ class Example:
 
         if command == "servo" and len(data_in_array) >= 3:
             sub_command = data_in_array[2]
-            if sub_command == "angle" and len(data_in_array) is 5:
+            if sub_command == "angle" and len(data_in_array) == 5:
                 servo_nr = int(data_in_array[3])
                 angle = float(data_in_array[4])
                 self.__robohat.set_servo_single_angle(servo_nr, angle)
@@ -380,7 +382,7 @@ class Example:
 # -------------------------------------------------------------------------------
         if command == "servo" and len(data_in_array) >= 3:
             sub_command = data_in_array[2]
-            if sub_command == "angle" and len(data_in_array) is 4:
+            if sub_command == "angle" and len(data_in_array) == 4:
                 parameter_str:str = data_in_array[3]
                 if parameter_str.isnumeric():
                     servo_nr = int(parameter_str)
