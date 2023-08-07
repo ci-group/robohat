@@ -85,7 +85,7 @@ class ServoAssembly:
         @return: none
         """
         if self.__power_monitor_and_io is not None:
-            self.__power_monitor_and_io.init_power_monitor_and_io()
+            self.__power_monitor_and_io.init_io_expander()
 
         if  self.__servo_board is not None:
             self.__servo_board.init_servo_board(_servo_datas_array)
@@ -252,15 +252,15 @@ class ServoAssembly:
         return self.__servo_config.get_cs_adc_angle_readout()
 
     # --------------------------------------------------------------------------------------
-
+    # todo
     def add_signaling_device(self, _signaling_device) -> None:
         """!
         Adds device which will alarms the user
         @param _signaling_device:
         @return: Nome
         """
-        if self.__power_monitor_and_io is not None:
-            self.__power_monitor_and_io.add_signaling_device(_signaling_device)
+        #if self.__power_monitor_and_io is not None:
+        #    self.__power_monitor_and_io.add_signaling_device(_signaling_device)
 
     # --------------------------------------------------------------------------------------
     def set_servo_io_expander_direction(self, _io_nr: int, _direction: ExpanderDir) -> IOStatus:
@@ -323,6 +323,7 @@ class ServoAssembly:
 
     #--------------------------------------------------------------------------------------
     #--------------------------------------------------------------------------------------
+    # todo
     def __io_power_monitor_and_io_int_callback(self, _gpio: int) -> None:
         """!
         Callback of interrupt service routine. This routine will be called when the IO expander interrupt fires
@@ -330,10 +331,10 @@ class ServoAssembly:
         @return: None
         """
         if self.__power_monitor_and_io is not None:
-            self.__power_monitor_and_io.power_monitor_and_io_int_callback(_gpio)
+           self.__power_monitor_and_io.power_monitor_and_io_int_callback(_gpio)
 
     #--------------------------------------------------------------------------------------
-
+    # todo
     def __io_power_monitor_and_io_int_reset_routine(self, _gpio: int) -> None:
         """!
         Callback after the interrupt service routine is handled, to reset the interrupt and restart the check
@@ -341,4 +342,4 @@ class ServoAssembly:
         @return: None
         """
         if self.__power_monitor_and_io is not None:
-            self.__power_monitor_and_io.power_monitor_and_io_int_reset_routine(_gpio)
+           self.__power_monitor_and_io.power_monitor_and_io_int_reset_routine(_gpio)
