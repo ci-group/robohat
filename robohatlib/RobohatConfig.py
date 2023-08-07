@@ -27,6 +27,7 @@ do not alter
 General settings
 """
 DEBUG = True                                       # by changing this value to TRUE, more debug msg will be printed on the console
+DEBUG_I2C = False
 
 """!
 Accu settings
@@ -135,10 +136,6 @@ SERVOASSEMBLY_INTERRUPT_SETTINGS = [
     McpInitStruct(1, GpioDirection.GPIO_INPUT, InterruptTypes.INT_RISING),
     McpInitStruct(2, GpioDirection.GPIO_INPUT, InterruptTypes.INT_RISING),
     McpInitStruct(3, GpioDirection.GPIO_INPUT, InterruptTypes.INT_RISING),
-    McpInitStruct(4, GpioDirection.GPIO_INPUT, InterruptTypes.INT_RISING),
-    McpInitStruct(5, GpioDirection.GPIO_INPUT, InterruptTypes.INT_RISING),
-    McpInitStruct(6, GpioDirection.GPIO_INPUT, InterruptTypes.INT_RISING),
-    McpInitStruct(7, GpioDirection.GPIO_INPUT, InterruptTypes.INT_RISING),
     ]                                                                               # interrupt settings of the IO expander, for each IO pin
 
 SERVOASSEMBLY_EXPANDER_DEF = IOExpanderDef("power_monitor_expander",

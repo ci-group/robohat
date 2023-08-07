@@ -6,6 +6,7 @@ except ImportError:
 
 try:
     from robohatlib.driver_ll.i2c.smbus import SMBus
+    from robohatlib.RobohatConfig import DEBUG_I2C
 except ImportError:
     raise ImportError("SMBus not found.")
 
@@ -23,9 +24,10 @@ class I2CHandler:
         @param _bus_nr bus nr
         """
 
-        self._i2c_bus = SMBus(_bus_nr)
-        self._locked = False
-        self._lock = threading.RLock()
+        self.__bus_nr = _bus_nr
+        self.__i2c_bus = SMBus(_bus_nr)
+        self.__locked = False
+        self.__lock = threading.RLock()
 
     # --------------------------------------------------------------------------------------
     # --------------------------------------------------------------------------------------
@@ -36,7 +38,7 @@ class I2CHandler:
         Locks the I2C bus when using i
         """
         if threading is not None:
-            self._lock.acquire()
+            self.__lock.acquire()
         return self
 
     # --------------------------------------------------------------------------------------
@@ -53,8 +55,8 @@ class I2CHandler:
         @return: ?
         """
         if threading is not None:
-            self._lock.release()
-            del self._i2c_bus
+            self.__lock.release()
+            del self.__i2c_bus
 
     # --------------------------------------------------------------------------------------
     # --------------------------------------------------------------------------------------
@@ -68,7 +70,7 @@ class I2CHandler:
         found = []
         for addr in range(0, 0x80):
             try:
-                self._i2c_bus.read_byte(addr)
+                self.__i2c_bus.read_byte(addr)
             except OSError:
                 continue
             found.append(addr)
@@ -90,8 +92,10 @@ class I2CHandler:
 
         if end is None:
             end = len(buffer)
-        self._i2c_bus.write_bytes(address, buffer[start:end])
+        self.__i2c_bus.write_bytes(address, buffer[start:end])
 
+        if DEBUG_I2C is True:
+            print(hex(address) + ": " + str(buffer[start:end]) )
     # --------------------------------------------------------------------------------------
 
     def read_from_into(self, address, buffer, *, start=0, end=None, stop=True) -> None:
@@ -102,7 +106,7 @@ class I2CHandler:
         if end is None:
             end = len(buffer)
 
-        value_in = self._i2c_bus.read_bytes(address, end - start)
+        value_in = self.__i2c_bus.read_bytes(address, end - start)
         for i in range(end - start):
             buffer[i + start] = value_in[i]
     # --------------------------------------------------------------------------------------
@@ -135,7 +139,7 @@ class I2CHandler:
             self.read_from_into(address, buffer_in, start=in_start, end=in_end)
         else:
             # To generate without a stop, do in one block transaction
-            data_in = self._i2c_bus.read_i2c_block_data(address, buffer_out[out_start:out_end], in_end - in_start)
+            data_in = self.__i2c_bus.read_i2c_block_data(address, buffer_out[out_start:out_end], in_end - in_start)
             for i in range(in_end - in_start):
                 buffer_in[i + in_start] = data_in[i]
 
@@ -149,10 +153,10 @@ class I2CHandler:
         @return: status of the LOCK
         """
 
-        if self._locked:
+        if self.__locked:
             return False
         else:
-            self._locked = True
+            self.__locked = True
             return True
 
     # --------------------------------------------------------------------------------------
@@ -165,8 +169,8 @@ class I2CHandler:
         @return: None
         """
 
-        if self._locked:
-            self._locked = False
+        if self.__locked:
+            self.__locked = False
         else:
             raise ValueError("Not locked")
 
