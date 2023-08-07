@@ -200,7 +200,7 @@ class IOHandler:
         i2c_bus = self.__get_i2c_bus(_i2c_device_def.get_i2c_bus_nr() )
         i2c_handler = i2c_bus.get_i2c_handler()
 
-        if len(self.__used_i2c_devices) is not 0:
+        if len(self.__used_i2c_devices) != 0:
             for i2c_device_from_list in self.__used_i2c_devices:
                 #print("comparing for: " + _i2c_device_def.get_name() + " -> " + str(i2c_device_from_list.get_i2c_bus_nr()) + "<>" + str(_i2c_device_def.get_i2c_bus_nr()) + ", wanted: " + hex(i2c_device_from_list.get_i2c_device_address()) + "<>" + hex(_i2c_device_def.get_i2c_device_address()) )
                 if i2c_device_from_list.get_i2c_bus_nr() is _i2c_device_def.get_i2c_bus_nr() and i2c_device_from_list.get_i2c_device_address() is _i2c_device_def.get_i2c_device_address():
@@ -232,7 +232,7 @@ class IOHandler:
         if self.__add_gpio_if_not_already_used_or_give_error(spi_cs, "cs_" + _spi_device_def.get_name()) is IOStatus.IO_FAILED:
             raise Exception("Unable to claim SPI "+ str(spi_bus_nr) + ", CS-pin: '" + str(spi_cs) + "', pin is already in use")
 
-        if len(self.__used_spi_devices) is not 0:
+        if len(self.__used_spi_devices) != 0:
             for _device_in_list in self.__used_spi_devices:
                 if _device_in_list.get_spi_bus_nr() is spi_bus_nr and _device_in_list.get_spi_cs() is spi_cs:
                     print("SPI device already claimed!!: SPI-bus: " + spi_bus_nr + " cs:" + str(spi_cs))
@@ -303,7 +303,7 @@ class IOHandler:
         Start the interrupts
         @return: None
         """
-        if len(self.__registered_gpi_ll_interrupts) is 0:
+        if len(self.__registered_gpi_ll_interrupts) == 0:
                 return
 
         for interrupt in self.__registered_gpi_ll_interrupts:
@@ -384,7 +384,7 @@ class IOHandler:
         if self.__i2c_bus_is_scanned is False:  # there should always be scanned
             self.__pre_scan_i2c_bus()
 
-        if len(self.__detected_i2c_devices) is not 0:
+        if len(self.__detected_i2c_devices) != 0:
             for i2c_device_from_list in self.__detected_i2c_devices:
                 available_device:I2CDevice = i2c_device_from_list
                 if _to_be_checked.get_i2c_bus_nr() is available_device.get_i2c_bus_nr() and _to_be_checked.get_i2c_device_address() is available_device.get_i2c_device_address():
@@ -402,7 +402,7 @@ class IOHandler:
         @return bool:, true if available
         """
 
-        if len(self.__used_i2c_devices) is not 0:
+        if len(self.__used_i2c_devices) != 0:
             for i2c_device_from_list in self.__used_i2c_devices:
                 available_device:I2CDevice = i2c_device_from_list
                 if _to_be_checked.get_i2c_bus_nr() is available_device.get_i2c_bus_nr() and _to_be_checked.get_i2c_device_address() is available_device.get_i2c_device_address():
@@ -473,9 +473,9 @@ class IOHandler:
         @param _i2c_bus_nr:
         @return: I2CBus
         """
-        if len(self.__available_i2c_busses) is not 0:
+        if len(self.__available_i2c_busses) != 0:
             for i2c_bus in self.__available_i2c_busses:
-                if i2c_bus.get_i2c_bus_nr() is _i2c_bus_nr:
+                if i2c_bus.get_i2c_bus_nr() == _i2c_bus_nr:
                     return i2c_bus
 
         return self.__claim_i2c_bus(_i2c_bus_nr)
@@ -509,22 +509,22 @@ class IOHandler:
         @param _spi_bus_nr: wanted spi bus nr
         @return: None
         """
-        if len(self.__available_spi_buses) is not 0:
+        if len(self.__available_spi_buses) != 0:
             for spi_bus_nr_already_checked in self.__available_spi_buses:
-                if spi_bus_nr_already_checked is _spi_bus_nr:
+                if spi_bus_nr_already_checked == _spi_bus_nr:
                     return
 
-        if _spi_bus_nr is 0:
+        if _spi_bus_nr == 0:
             def_i = RobohatConfig.SPI0_DEF
             self.__check_pinning_spi_bus(def_i.get_spi_bus_nr(), def_i.get_sck_pin(), def_i.get_mosi_pin(), def_i.get_miso_pin())
             self.__available_spi_buses.append(_spi_bus_nr)
 
-        elif _spi_bus_nr is 1:
+        elif _spi_bus_nr == 1:
             def_i = RobohatConfig.SPI1_DEF
             self.__check_pinning_spi_bus(def_i.get_spi_bus_nr(), def_i.get_sck_pin(), def_i.get_mosi_pin(), def_i.get_miso_pin())
             self.__available_spi_buses.append(_spi_bus_nr)
 
-        elif _spi_bus_nr is 2:
+        elif _spi_bus_nr == 2:
             def_i = RobohatConfig.SPI2_DEF
             self.__check_pinning_spi_bus(def_i.get_spi_bus_nr(), def_i.get_sck_pin(), def_i.get_mosi_pin(), def_i.get_miso_pin())
             self.__available_spi_buses.append(_spi_bus_nr)
@@ -543,7 +543,7 @@ class IOHandler:
         @return: IOStatus
         """
 
-        if len(self.__used_gpio) is 0:
+        if len(self.__used_gpio) == 0:
             self.__used_gpio.append(_gpio_nr)
             print("GPIO registered: " + str(_gpio_nr) + " for: " + _name)
             return IOStatus.IO_OK
@@ -570,7 +570,7 @@ class IOHandler:
 
         #print("checking interrupt: " + _gpi_interrupt_definition.get_name() )
 
-        if len(self.__registered_gpi_ll_interrupts) is 0:
+        if len(self.__registered_gpi_ll_interrupts) == 0:
             interrupt = GPI_LL_Interrupt(_gpi_interrupt_definition)
             if interrupt is None:
                 return None
@@ -587,6 +587,7 @@ class IOHandler:
         interrupt = GPI_LL_Interrupt(_gpi_interrupt_definition)
         if interrupt is None:
             return None
+
         self.__registered_gpi_ll_interrupts.append(interrupt)
         #print("new claimed: interrupt " + _gpi_interrupt_definition.get_name())
         return interrupt

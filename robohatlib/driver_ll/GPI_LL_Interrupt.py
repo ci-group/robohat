@@ -110,7 +110,7 @@ class GPI_LL_Interrupt:
         @param _callbackholder: the callback to be added
         @return: None
         """
-        if len(self.__registered_callback_holders) is 0:
+        if len(self.__registered_callback_holders) == 0:
             self.__registered_callback_holders.append(_callbackholder)
             return
 
@@ -128,7 +128,7 @@ class GPI_LL_Interrupt:
         @param _callbackholder removes callback
         @Return None
         """
-        if len(self.__registered_callback_holders) is 0:
+        if len(self.__registered_callback_holders) == 0:
             return
 
         for callback_out_of_list in self.__registered_callback_holders:
@@ -144,7 +144,7 @@ class GPI_LL_Interrupt:
         @return: None
         """
         #print("callback " + str(_pin_nr))
-        if len(self.__registered_callback_holders) is 0:
+        if len(self.__registered_callback_holders) == 0:
             return
 
         for callbackholder_out_of_list in self.__registered_callback_holders:
