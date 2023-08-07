@@ -4,6 +4,7 @@ from __future__ import absolute_import, division, print_function, unicode_litera
 try:
     from robohatlib.Robohat import Robohat
     from robohatlib import RobohatConstants
+    from robohatlib import RobohatConfig
     from robohatlib.hal.assemblyboard.ServoAssemblyConfig import ServoAssemblyConfig
     from robohatlib.hal.assemblyboard.servo.ServoData import ServoData
     from robohatlib.hal.datastructure.Color import Color
@@ -101,7 +102,12 @@ class SerTestClass:
         print("4 move servos to " + str(self.__limit_min) + " °")
         print("5 move servos to 90 °")
         print("6 move servos to " + str(self.__limit_max) + " °")
-        print("7 for exit")
+        print("7 topboard OUTPUT test ")
+        print("8 assembly boards OUTPUT test ")
+        print("l for led test ")
+
+        print("\n")
+        print("x for exit")
         print("\n")
 
     # --------------------------------------------------------------------------------------
@@ -127,6 +133,17 @@ class SerTestClass:
         elif _command == "6":
             self.servo_move(self.__limit_max)
         elif _command == "7":
+            self.topboard_running_light()
+        elif _command == "8":
+            self.assembly_boards_running_light()
+
+
+
+
+        elif _command == "l":
+            self.led_test()
+    # --------------------------------------------------------------------------------------
+        elif _command == "x":
             self.exit_program()
         else:
             self.ser_test_help()
@@ -201,6 +218,103 @@ class SerTestClass:
     # --------------------------------------------------------------------------------------
     # --------------------------------------------------------------------------------------
 
+    def topboard_running_light(self) -> None:
+        print("Starting topboard OUTPUT test")
+
+        for pin_nr_dir in range(8):
+            self.__robohat.set_topboard_io_expander_direction(pin_nr_dir, ExpanderDir.OUTPUT)
+
+        pin_high_nr = 0
+        for loop_counter in range(3):
+            for led_counter in range(8):
+                for pin_nr in range(8):
+                    self.__robohat.set_topboard_io_expander_output(pin_nr, ExpanderStatus.LOW)
+
+                self.__robohat.set_topboard_io_expander_output(pin_high_nr, ExpanderStatus.HIGH)
+                pin_high_nr = pin_high_nr + 1
+                if pin_high_nr >= 8:
+                    pin_high_nr = 0
+
+                print("--> " + str(loop_counter) + " LED GP:" + str(led_counter) )
+                time.sleep(1)
+
+        for pin_nr in range(8):
+            self.__robohat.set_topboard_io_expander_output(pin_nr, ExpanderStatus.LOW)
+
+        print("Ready topboard OUTPUT test")
+
+    # --------------------------------------------------------------------------------------
+    # --------------------------------------------------------------------------------------
+    # --------------------------------------------------------------------------------------
+
+    def assembly_boards_running_light(self) -> None:
+        print("Starting assembly boards OUTPUT test")
+
+        for pin_nr_dir in range(4,7):
+            if self.__robohat.get_assemblyboard_is_connected(RobohatConstants.PWMPLUG_P3) is True:
+                self.__robohat.set_servo_io_expander_direction(RobohatConstants.PWMPLUG_P3, pin_nr_dir, ExpanderDir.OUTPUT)
+            if self.__robohat.get_assemblyboard_is_connected(RobohatConstants.PWMPLUG_P4) is True:
+                self.__robohat.set_servo_io_expander_direction(RobohatConstants.PWMPLUG_P4, pin_nr_dir, ExpanderDir.OUTPUT)
+
+        pin_high_nr = 4
+        for loop_counter in range(3):
+
+            for led_counter in range(4,7):
+                for pin_nr in range(4,7):
+                    if self.__robohat.get_assemblyboard_is_connected(RobohatConstants.PWMPLUG_P3) is True:
+                        self.__robohat.set_servo_io_expander_output(RobohatConstants.PWMPLUG_P3, pin_nr, ExpanderStatus.LOW)
+                    if self.__robohat.get_assemblyboard_is_connected(RobohatConstants.PWMPLUG_P4) is True:
+                        self.__robohat.set_servo_io_expander_output(RobohatConstants.PWMPLUG_P4, pin_nr, ExpanderStatus.LOW)
+
+                if self.__robohat.get_assemblyboard_is_connected(RobohatConstants.PWMPLUG_P3) is True:
+                    self.__robohat.set_servo_io_expander_output(RobohatConstants.PWMPLUG_P3, pin_high_nr, ExpanderStatus.HIGH)
+                if self.__robohat.get_assemblyboard_is_connected(RobohatConstants.PWMPLUG_P4) is True:
+                    self.__robohat.set_servo_io_expander_output(RobohatConstants.PWMPLUG_P4, pin_high_nr, ExpanderStatus.HIGH)
+
+                pin_high_nr = pin_high_nr + 1
+                if pin_high_nr >= 7:
+                    pin_high_nr = 4
+
+                if self.__robohat.get_assemblyboard_is_connected(RobohatConstants.PWMPLUG_P3) is True:
+                    print("Plug P3: --> " + str(loop_counter) + " LED GP:" + str(led_counter) )
+                if self.__robohat.get_assemblyboard_is_connected(RobohatConstants.PWMPLUG_P4) is True:
+                    print("Plug P4: --> " + str(loop_counter) + " LED GP:" + str(led_counter) )
+                time.sleep(1)
+
+        for pin_nr in range(4,7):
+            if self.__robohat.get_assemblyboard_is_connected(RobohatConstants.PWMPLUG_P3) is True:
+                self.__robohat.set_servo_io_expander_output(RobohatConstants.PWMPLUG_P3, pin_nr, ExpanderStatus.LOW)
+            if self.__robohat.get_assemblyboard_is_connected(RobohatConstants.PWMPLUG_P4) is True:
+                self.__robohat.set_servo_io_expander_output(RobohatConstants.PWMPLUG_P4, pin_nr, ExpanderStatus.LOW)
+
+        print("Ready assembly boards OUTPUT test")
+
+    # --------------------------------------------------------------------------------------
+    # --------------------------------------------------------------------------------------
+    # --------------------------------------------------------------------------------------
+
+    def led_test(self) -> None:
+        print("Starting LED test")
+        self.__robohat.set_led_color(Color.RED)
+        print("LED: RED")
+        time.sleep(1)
+        self.__robohat.set_led_color(Color.GREEN)
+        print("LED: GREEN")
+        time.sleep(1)
+        self.__robohat.set_led_color(Color.YELLOW)
+        print("LED: YELLOW")
+        time.sleep(1)
+        self.__robohat.set_led_color(Color.BLUE)
+        print("LED: BLUE")
+        time.sleep(1)
+        self.__robohat.set_led_color(Color.WHITE)
+        print("Ready LED test")
+
+    # --------------------------------------------------------------------------------------
+    # --------------------------------------------------------------------------------------
+    # --------------------------------------------------------------------------------------
+
+
     def exit_program(self) -> None:
         """!
         Should exit this program
@@ -217,7 +331,7 @@ class SerTestClass:
 
 def main():
     """!
-    Start of our test program
+    Start of our servo test program
     """
 
     ser_test = SerTestClass()  # creates the class Example
