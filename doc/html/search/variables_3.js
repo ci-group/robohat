@@ -1,10 +1,10 @@
 var searchData=
 [
-  ['i2c1_5fdef_0',['I2C1_DEF',['../namespace_robohat__config.html#a0e252b618769e21eb5d494b67918ad30',1,'Robohat_config']]],
-  ['i2c5_5fdef_1',['I2C5_DEF',['../namespace_robohat__config.html#ab12f52428e55225130ea7a9436b47223',1,'Robohat_config']]],
-  ['i2c6_5fdef_2',['I2C6_DEF',['../namespace_robohat__config.html#a1fc3568fcb51c2e758f7c978ac5392b5',1,'Robohat_config']]],
-  ['imu_5fdef_3',['IMU_DEF',['../namespace_robohat__config.html#a8eb4e5d22045700f8e771a3501fa0f0c',1,'Robohat_config']]],
-  ['imu_5flis3mdl_5fi2c_5fdef_4',['IMU_LIS3MDL_I2C_DEF',['../namespace_robohat__config.html#ab21b719a84eb029598c7095d68e23ec3',1,'Robohat_config']]],
-  ['imu_5flsm6ds33_5fi2c_5fdef_5',['IMU_LSM6DS33_I2C_DEF',['../namespace_robohat__config.html#a29657116b2f821721d73a4a8c65d4695',1,'Robohat_config']]],
-  ['init_5fbeep_5fpermitted_6',['INIT_BEEP_PERMITTED',['../namespace_robohat__config.html#a7edd28e09e6bc80f113a11d4d6bbb72c',1,'Robohat_config']]]
+  ['i2c1_5fdef_0',['I2C1_DEF',['../namespace_robohat_config.html#a9c569b507fe3ac5f78ffcab92c22e608',1,'RobohatConfig']]],
+  ['i2c5_5fdef_1',['I2C5_DEF',['../namespace_robohat_config.html#a1f9e981772e191b1ca73bdc2f52b2eb7',1,'RobohatConfig']]],
+  ['i2c6_5fdef_2',['I2C6_DEF',['../namespace_robohat_config.html#a42b587cbdf8211d25751a165f637fc51',1,'RobohatConfig']]],
+  ['imu_5fdef_3',['IMU_DEF',['../namespace_robohat_config.html#aa34e1b2a8a05dc048d4d29a84d709c62',1,'RobohatConfig']]],
+  ['imu_5flis3mdl_5fi2c_5fdef_4',['IMU_LIS3MDL_I2C_DEF',['../namespace_robohat_config.html#a6eaef023c026345bd3aa6f68bfd28a44',1,'RobohatConfig']]],
+  ['imu_5flsm6ds33_5fi2c_5fdef_5',['IMU_LSM6DS33_I2C_DEF',['../namespace_robohat_config.html#ac6dd20b9d37cc24c62e7fc30f6a21319',1,'RobohatConfig']]],
+  ['init_5fbeep_5fpermitted_6',['INIT_BEEP_PERMITTED',['../namespace_robohat_config.html#aeb4ea568ddd38e9954b2903e36d7dec9',1,'RobohatConfig']]]
 ];

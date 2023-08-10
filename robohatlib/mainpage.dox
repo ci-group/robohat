@@ -6,6 +6,8 @@
 
 \image html robohat.png
 
+For hardware description, see 'Robohardware.docx'
+
 The electronics of Robohat consits out mutiple boards, and is build arround a RaspberryPi 4. On this Raspberry a 'Topboard' is connected (as a hat) which is in its turn connencted to the rest of the baords.
 A user can control the electronics with a library written in python called 'Robohat library'
 
@@ -52,7 +54,7 @@ The LED will flash mutiple times, when the Accu capacity to low, but still measu
 Power on
 The Robohat can only be turned on when the accu has enough capacity. To power on, the user has to press the power-on switch. When the switch is pressed the LED will blink 3 times. After the blinking period,
 the LED will flash mutiple times. The user should release the power switch before the flashen stops. Nothing will happen, when the user releases the button after flashing is finished. This is done, to prevent
-exedently turning on the Robohat.
+accidentally turning on the Robohat.
 
 Turning off the power has to be done the same way (pressing the button (and holding it while the LED is blinking, and releasing it while the LED flashing)
 Note. A hard power-shutdown can destroy disk-data. Use the shutdown API-function of the Robohat library, or type

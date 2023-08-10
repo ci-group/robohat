@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['buzzer_5fdef_0',['BUZZER_DEF',['../namespace_robohat__config.html#a98a67b4d4544e499bd160b58c5c5bce5',1,'Robohat_config']]]
+  ['buzzer_5fdef_0',['BUZZER_DEF',['../namespace_robohat_config.html#a03b343e49eb1d119d3c8ac3b415ff919',1,'RobohatConfig']]]
 ];

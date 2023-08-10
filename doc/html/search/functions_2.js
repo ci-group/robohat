@@ -7,5 +7,7 @@ var searchData=
   ['do_5fbuzzer_5fslowwoop_4',['do_buzzer_slowwoop',['../class_robohat_1_1_robohat.html#a4ef2ead085066683f530065d814cf869',1,'Robohat::Robohat']]],
   ['do_5fi2c_5fscan_5',['do_i2c_scan',['../class_robohat_1_1_robohat.html#adf73b607c16b48e0c2e66245b3ab6a16',1,'Robohat::Robohat']]],
   ['do_5fimu_5ftest_6',['do_imu_test',['../class_robohat_1_1_robohat.html#a759feeef927161c00b4367dc39b20282',1,'Robohat::Robohat']]],
-  ['do_5fsystem_5fshutdown_7',['do_system_shutdown',['../class_robohat_1_1_robohat.html#a5406da6594dac33aebf351a0905ea0e5',1,'Robohat::Robohat']]]
+  ['do_5fservo_5ffit_5fformula_5freadout_5fvs_5fangle_5fmultiple_5fservos_7',['do_servo_fit_formula_readout_vs_angle_multiple_servos',['../class_robohat_1_1_robohat.html#a4495833e374f2566110c267401f4c9c5',1,'Robohat::Robohat']]],
+  ['do_5fservo_5ffit_5fformula_5freadout_5fvs_5fangle_5fsingle_5fservo_8',['do_servo_fit_formula_readout_vs_angle_single_servo',['../class_robohat_1_1_robohat.html#a18505cbd88f4c18daeb3e4b811b02a7e',1,'Robohat::Robohat']]],
+  ['do_5fsystem_5fshutdown_9',['do_system_shutdown',['../class_robohat_1_1_robohat.html#a5406da6594dac33aebf351a0905ea0e5',1,'Robohat::Robohat']]]
 ];

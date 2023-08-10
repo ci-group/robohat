@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['power_5fshutdown_5fgpo_5fdef_0',['POWER_SHUTDOWN_GPO_DEF',['../namespace_robohat__config.html#a1d2f1ab2e68ecdc270c51c13d3cc9d9e',1,'Robohat_config']]],
-  ['pwmplug_5fp3_1',['PWMPLUG_P3',['../namespace_robohat__constants.html#af7b07695aa75f946ed3c5b86b0b7ceb4',1,'Robohat_constants']]],
-  ['pwmplug_5fp4_2',['PWMPLUG_P4',['../namespace_robohat__constants.html#a3da90c5c49a431ed5836dc99f93f1b54',1,'Robohat_constants']]]
+  ['power_5fshutdown_5fgpo_5fdef_0',['POWER_SHUTDOWN_GPO_DEF',['../namespace_robohat_config.html#add9d75dd27cb0cefbbde532df45aeb1b',1,'RobohatConfig']]],
+  ['pwmplug_5fp3_1',['PWMPLUG_P3',['../namespace_robohat_constants.html#ae7175fdaa1fbcd523eab26b4233c0a86',1,'RobohatConstants']]],
+  ['pwmplug_5fp4_2',['PWMPLUG_P4',['../namespace_robohat_constants.html#ad22c986caf7e4af88bd9dcc26e3f2a3d',1,'RobohatConstants']]]
 ];
