@@ -6,7 +6,7 @@ except ImportError:
     raise
 
 
-class VU_I2CDevice:
+class I2CDevice:
     """!
     I2C device
     """

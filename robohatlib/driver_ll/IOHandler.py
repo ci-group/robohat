@@ -1,37 +1,37 @@
 #!/usr/bin/python3
 from __future__ import annotations
 
-try:
-    from robohatlib.driver_ll.GPO_LL_Driver import GPO_LL_Driver
-    from robohatlib.driver_ll.GPI_LL_Driver import GPI_LL_Driver
-    from robohatlib.driver_ll.GPOPWM_LL_Driver import GPOPWM_LL_Driver
-    from robohatlib.driver_ll.GPI_LL_Interrupt import GPI_LL_Interrupt
+#try:
+from robohatlib.driver_ll.GPO_LL_Driver import GPO_LL_Driver
+from robohatlib.driver_ll.GPI_LL_Driver import GPI_LL_Driver
+from robohatlib.driver_ll.GPOPWM_LL_Driver import GPOPWM_LL_Driver
+from robohatlib.driver_ll.GPI_LL_Interrupt import GPI_LL_Interrupt
 
-    from robohatlib.driver_ll.definitions.GPIDef import GPIDef
-    from robohatlib.driver_ll.definitions.GPODef import GPODef
-    from robohatlib.driver_ll.definitions.GPOPWMDef import GPOPWMDef
-    from robohatlib.driver_ll.definitions.GPIInterruptDef import GPIInterruptDef
+from robohatlib.driver_ll.definitions.GPIDef import GPIDef
+from robohatlib.driver_ll.definitions.GPODef import GPODef
+from robohatlib.driver_ll.definitions.GPOPWMDef import GPOPWMDef
+from robohatlib.driver_ll.definitions.GPIInterruptDef import GPIInterruptDef
 
-    from robohatlib.driver_ll.i2c.I2CDevice import I2CDevice
-    from robohatlib.driver_ll.i2c.I2CDeviceDef import I2CDeviceDef
-    from robohatlib.driver_ll.i2c.I2CBus import I2CBus
-    from robohatlib.driver_ll.i2c.I2CHandler import I2CHandler
+from robohatlib.driver_ll.i2c.I2CDevice import I2CDevice
+from robohatlib.driver_ll.i2c.I2CDeviceDef import I2CDeviceDef
+from robohatlib.driver_ll.i2c.I2CBus import I2CBus
+from robohatlib.driver_ll.i2c.I2CHandler import I2CHandler
 
-    from robohatlib.driver_ll.spi.SPIDevice import SPIDevice
-    from robohatlib.driver_ll.spi.SPIDeviceDef import SPIDeviceDef
+from robohatlib.driver_ll.spi.SPIDevice import SPIDevice
+from robohatlib.driver_ll.spi.SPIDeviceDef import SPIDeviceDef
 
-    from robohatlib.drivers.LedDriver import LedDriver
-    from robohatlib.driver_ll.definitions.LedDef import LedDef
-    from robohatlib.drivers.BuzzerDriver import BuzzerDriver
-    from robohatlib.hal.definitions.BuzzerDef import BuzzerDef
+from robohatlib.drivers.LedDriver import LedDriver
+from robohatlib.driver_ll.definitions.LedDef import LedDef
+from robohatlib.drivers.BuzzerDriver import BuzzerDriver
+from robohatlib.hal.definitions.BuzzerDef import BuzzerDef
 
-    from robohatlib.helpers.RoboUtil import RoboUtil
-    from robohatlib import RobohatConfig
-    from robohatlib import RobohatConstants
-    from robohatlib.driver_ll.datastructs.IOStatus import IOStatus
+from robohatlib.helpers.RoboUtil import RoboUtil
+from robohatlib import RobohatConfig
+from robohatlib import RobohatConstants
+from robohatlib.driver_ll.datastructs.IOStatus import IOStatus
 
-except ImportError:
-     raise ImportError("Failed to import needed dependencies for the IOHandler class")
+#except ImportError:
+#     raise ImportError("Failed to import needed dependencies for the IOHandler class")
 
 try:
     import spidev

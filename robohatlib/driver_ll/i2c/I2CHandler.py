@@ -6,6 +6,7 @@ except ImportError:
 
 try:
     from robohatlib.driver_ll.i2c.SMBUS import SMBUS
+
 except ImportError:
     raise ImportError("SMBus not found.")
 
@@ -13,7 +14,7 @@ except ImportError:
 # --------------------------------------------------------------------------------------
 # --------------------------------------------------------------------------------------
 
-class VU_I2CHandler:
+class I2CHandler:
     def __init__(self, _bus_nr: int):
         """!
         Constructor
