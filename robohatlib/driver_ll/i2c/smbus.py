@@ -56,16 +56,20 @@ I2C_SMBUS_BLOCK_MAX = 32
 # --------------------------------------------------------------------------------------
 # --------------------------------------------------------------------------------------
 
-
-# Create an interface that mimics the Python SMBus API.
-class VU_SMBUS:
+class SMBUS:
+    """!
+    Class which is the bridge between i2c and the linux hardware
+    """
     def __init__(self, _bus_nr: int):
-        """
+        """!
+        Constructor
+
+        @param _bus_nr: bus nr off the i2C. note... bus nr should be present in device.txt in boo of rpi
         Constructor if this SMBbus
         @param _bus_nr:
         """
-        self.__device = None
 
+        self.__device = None
         self.__open(_bus_nr)
 
     #--------------------------------------------------------------------------------------
@@ -73,7 +77,9 @@ class VU_SMBUS:
     #--------------------------------------------------------------------------------------
 
     def __del__(self):
-        """
+        """!
+        Descructor
+
         Destructor if this SMBbus
         """
         self.__close()
@@ -83,8 +89,9 @@ class VU_SMBUS:
     #--------------------------------------------------------------------------------------
 
     def __open(self, _bus_nr: int) -> None:
-        """
+        """!
         Open the SMBbus
+        @param _bus_nr the bus nr of the used I2C
         @return: None
         """
 
@@ -99,7 +106,7 @@ class VU_SMBUS:
     #--------------------------------------------------------------------------------------
 
     def __close(self) -> None:
-        """
+        """!
         Close the SMBbus
         @return: None
         """
@@ -117,6 +124,7 @@ class VU_SMBUS:
         Sets the i2C slave address. If OK, it returns True
 
         @param _slave_address: Address of the address i2c slave-device
+        @param _force. Used linux call with the force parameter
         @return: bool
         """
         if self.__device is None:
