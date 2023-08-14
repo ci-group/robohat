@@ -336,7 +336,8 @@ class Robohat:
         """!
         Set new formula parameters for voltage angle conversion by setting the servo at angle of 20 and 160
         and readout the voltage of the ADC
-        @param _servo_nr: wanted servo nr
+        @param _min_range: ange minial
+        @param __max_range: angle maximal
         @return: None
         """
 
@@ -366,10 +367,15 @@ class Robohat:
         for servo_nr in range(0, len(pre_angles)):
             pos = pre_angles[servo_nr]
             if pos is not -1:
-                a = (_max_range - _min_range) / (voltage_max[servo_nr] - voltages_min[servo_nr])
-                b = _min_range - (a * voltages_min[servo_nr])
-                print("Servo: " + str(servo_nr) + " formula is: " + str(a) + "x + " + str(b) + " created out of: (" + str(voltages_min[servo_nr]) + "," + str(_min_range) + "),(" + str(voltage_max[servo_nr]) + "," + str(_max_range) + ")")
-                self.servo_set_new_readout_vs_angle_formula(servo_nr, a, b)
+                voltage_range_servo = voltage_max[servo_nr] - voltages_min[servo_nr]
+
+                if voltage_range_servo != 0:
+                    a = (_max_range - _min_range) / voltage_range_servo
+                    b = _min_range - (a * voltages_min[servo_nr])
+                    print("Servo: " + str(servo_nr) + " formula is: " + str(a) + "x + " + str(b) + " created out of: (" + str(voltages_min[servo_nr]) + "," + str(_min_range) + "),(" + str(voltage_max[servo_nr]) + "," + str(_max_range) + ")")
+                    self.servo_set_new_readout_vs_angle_formula(servo_nr, a, b)
+                else:
+                    print("Voltage range is 0, divide by zero")
 
         sleep(2)
         default_degree = 90
