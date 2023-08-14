@@ -159,20 +159,20 @@ class PCA9685:
         @raises ValueError: set_pwm_freq: freq out of range
         """
         if _freq < 40 or _freq > 1000:
-            raise ValueError('set_pwm_freq: freq out of range')
+            print('set_pwm_freq: freq out of range')
+        else:
+            scale_val = 25000000.0               # 25MHz
+            scale_val = scale_val / 4096.0        # 12-bit
+            scale_val = scale_val / float(_freq)
+            scale_val = scale_val - 1
+            pre_scale = math.floor(scale_val + 0.5)
+            pre_scale = pre_scale + float(_calibration)
 
-        scale_val = 25000000.0               # 25MHz
-        scale_val = scale_val / 4096.0        # 12-bit
-        scale_val = scale_val / float(_freq)
-        scale_val = scale_val - 1
-        pre_scale = math.floor(scale_val + 0.5)
-        pre_scale = pre_scale + float(_calibration)
+            self.__freq = _freq
 
-        self.__freq = _freq
-
-        self.sleep()
-        self.__write(PRE_SCALE_ADDRESS, int(pre_scale))
-        self.wake()
+            self.sleep()
+            self.__write(PRE_SCALE_ADDRESS, int(pre_scale))
+            self.wake()
 
     # --------------------------------------------------------------------------------------
 
