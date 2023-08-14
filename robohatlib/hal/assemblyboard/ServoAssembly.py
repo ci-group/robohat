@@ -118,6 +118,24 @@ class ServoAssembly:
             self.__servo_board.exit_program()
     #--------------------------------------------------------------------------------------
 
+    def set_servo_direct_mode(self, _mode:bool, _delay:float = 0.0001) -> None:
+        """!
+        Sets if the servos are periodically updated, or direct
+        @param _mode: True, direct mode activated
+        @param _delay, delay in update mode
+        @return: None
+        """
+        self.__servo_board.set_servo_direct_mode(_mode, _delay)
+
+    #--------------------------------------------------------------------------------------
+
+    def get_servo_is_direct_mode(self) -> bool:
+        """!
+        @return: if servo is NOT updated periodically
+        """
+        return self.__servo_board.get_servo_is_direct_mode()
+    #--------------------------------------------------------------------------------------
+
     def set_servo_single_angle(self, _servo_nr: int, _angle: float) -> None:
         """!
         Set the angle servo in degree

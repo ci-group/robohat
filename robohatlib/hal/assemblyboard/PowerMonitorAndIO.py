@@ -32,20 +32,20 @@ class PowerMonitorAndIO:
     """
     #--------------------------------------------------------------------------------------
 
-    def __init__(self, _iohandler:IOHandler, _io_expander_def:IOExpanderDef, _sw_io_expander:int, _name_of_assembly:str = "" ):
+    def __init__(self, _iohandler:IOHandler, _power_io_expander_def:IOExpanderDef, _sw_io_expander:int, _name_of_assembly:str = ""):
         """!
         Constructor of PowerMonitorAndIO
         @param _iohandler: the IO handler, connection to all the IO
-        @param _io_expander_def: definition of this IO expander
+        @param _power_io_expander_def: definition of this IO expander
         @param _sw_io_expander: offset of i2c base address
         @param _name_of_assembly: name of this assembly
         """
-        i2c_device_definition = _io_expander_def.get_i2c_device_definition()
+        i2c_device_definition = _power_io_expander_def.get_i2c_device_definition()
+
         newname = i2c_device_definition.get_basename() + "_" + _name_of_assembly
-
         i2c_device_definition.set_name(newname)
-        i2c_device_definition.set_i2c_offset_address(_sw_io_expander)
 
+        i2c_device_definition.set_i2c_offset_address(_sw_io_expander)
         i2c_device = _iohandler.get_i2c_device(i2c_device_definition)
 
         self.__interrupt = None
@@ -53,15 +53,15 @@ class PowerMonitorAndIO:
         self.__user_int_callback = None
 
         if i2c_device is not None:
-            if _io_expander_def.get_callbackholder() is not None:
-                self.__interrupt_type = _io_expander_def.get_callbackholder().get_interrupt_type()
-                gpi_interrupt_definition = GPIInterruptDef(_io_expander_def.get_name(),
-                                                           _io_expander_def.get_gpio_pin(),
-                                                           _io_expander_def.get_callbackholder().get_interrupt_type(),
-                                                           _io_expander_def.get_callbackholder())
+            if _power_io_expander_def.get_callbackholder() is not None:
+                self.__interrupt_type = _power_io_expander_def.get_callbackholder().get_interrupt_type()
+                gpi_interrupt_definition = GPIInterruptDef(_power_io_expander_def.get_name(),
+                                                           _power_io_expander_def.get_gpio_pin(),
+                                                           _power_io_expander_def.get_callbackholder().get_interrupt_type(),
+                                                           _power_io_expander_def.get_callbackholder())
                 self.__interrupt = _iohandler.register_interrupt(gpi_interrupt_definition)
 
-            self.__expander = MCP23008(i2c_device, _io_expander_def)
+            self.__expander = MCP23008(i2c_device, _power_io_expander_def)
         else:
             self.__expander = None
 

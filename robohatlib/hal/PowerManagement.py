@@ -12,7 +12,7 @@ try:
     from robohatlib.hal.datastructure.AccuStatus import AccuStatus
 
 except ImportError:
-    print("Failed to import needed dependencies for the Robohat class")
+    print("Failed to import needed dependencies for the PowerManagement class")
     raise
 
 

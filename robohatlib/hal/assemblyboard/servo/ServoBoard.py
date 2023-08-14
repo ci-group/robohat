@@ -17,7 +17,9 @@ try:
     from robohatlib.driver_ll.i2c.I2CDevice import I2CDevice
     from robohatlib.driver_ll.spi.SPIDevice import SPIDevice
     from robohatlib.hal.assemblyboard.servo.ServoData import ServoData
+    from robohatlib.hal.assemblyboard.servo.ServoDriver import ServoDriver
 except ImportError:
+
     print("Failed to resolve dependencies for Servoboard")
     raise
 
@@ -30,6 +32,7 @@ class ServoBoard:
         self.__name = _name
         self.__pwm = PCA9685(_i2c_device_servo)
         self.__servo_adc = MAX11137(_spi_device_servo_adc)
+        self.__servoDriver = ServoDriver(self)
 
     #--------------------------------------------------------------------------------------
     #--------------------------------------------------------------------------------------
@@ -50,6 +53,8 @@ class ServoBoard:
         should_be_time = self._get_current_times_depending_current_angle()
 
         self.__pwm.init_pca9685(should_be_time)
+        self.__servoDriver.start_driver()
+
 
     #--------------------------------------------------------------------------------------
     #--------------------------------------------------------------------------------------
@@ -85,22 +90,93 @@ class ServoBoard:
         Cleans up, when user want to shut down. Sets PWM to sleep
         @return: None
         """
+        self.__servoDriver.stop_driver()
         self.sleep()
+
+
+    #--------------------------------------------------------------------------------------
+    #--------------------------------------------------------------------------------------
+
+    def set_servo_direct_mode(self, _mode:bool, _delay:float = 0.0001) -> None:
+        """!
+        Sets if the servos are periodically updated, or direct
+        @param _mode: True, direct mode activated
+        @param _delay, delay in update mode
+        @return: None
+        """
+        self.__servoDriver.set_direct_mode(_mode)
+        self.__servoDriver.set_delay(_delay)
+
+    # --------------------------------------------------------------------------------------
+    # --------------------------------------------------------------------------------------
+
+    def get_servo_is_direct_mode(self) -> bool:
+        """!
+        @return: if servo is NOT updated periodically
+        """
+
+        return self.__servoDriver.get_is_direct_mode()
+    # --------------------------------------------------------------------------------------
+    # --------------------------------------------------------------------------------------
+
+    def update_servo_data(self, _wanted_angles: []) -> None:
+        """!
+        This is the return call of tge ServoDriver. Pushes the angles directly in the PWM chip
+        @return: None
+        """
+        wanted_time_array = [0] * 16
+
+        for i in range(0, 16):
+            wanted_time_array[i] = self.__servo_datas_array[i].convert_angle_to_time(_wanted_angles[i])
+        self.__pwm.set_on_time_all_channels(wanted_time_array)
 
     #--------------------------------------------------------------------------------------
     #--------------------------------------------------------------------------------------
 
     def set_servo_single_angle(self, _servo_nr: int, _angle: float) -> None:
-        if _servo_nr >= 0 and _servo_nr < 16:
-            servo_data:ServoData = self.__servo_datas_array[_servo_nr]
+        """!
+        Set the wanted angle of a servo
+        @param _servo_nr: the servo nr (0 until 15)
+        @param _angle: the wanted angle
+        """
 
-            if _angle >= servo_data.get_min_angle() or _angle <= servo_data.get_max_angle():
-                wanted_time = servo_data.convert_angle_to_time(_angle)
-                self.__pwm.set_on_time_channel(_servo_nr, wanted_time)
-            else:
-                print("Error, requested angle is not valid: min: " + str(servo_data.get_min_angle()) + " max: " + str(servo_data.get_max_angle()) )
-        else:
+        if _servo_nr < 0 or _servo_nr > 15:
             print("Error, requested servo number is not valid, should be 0 till 15")
+            return
+
+        servo_data: ServoData = self.__servo_datas_array[_servo_nr]
+        if _angle < servo_data.get_min_angle() or _angle > servo_data.get_max_angle():
+            print("Error, requested angle: " + str(_angle) + " is not valid: min: " + str(servo_data.get_min_angle()) + " max: " + str( servo_data.get_max_angle()))
+            return
+
+        self.__servoDriver.set_servo_single_angle(_servo_nr, _angle)
+
+    #--------------------------------------------------------------------------------------
+
+    def set_servo_multiple_angles(self, _wanted_angles: []) -> None:
+        """!
+        Sets all the angle of the servos
+        @param _wanted_angles:  (should be an array of 16, servo 1 is array pos 0)
+        @return: None
+        """
+
+        length: int = len(_wanted_angles)
+        if length > 16:
+            print("Error, servo array can't br bigger than 16")
+            return
+
+        for servo_nr in range(0, length):
+            servo_data: ServoData = self.__servo_datas_array[servo_nr]
+            wanted_angle:float = _wanted_angles[servo_nr]
+
+            if wanted_angle < servo_data.get_min_angle() or wanted_angle > servo_data.get_max_angle():
+                print("Error, requested angle: " + str(wanted_angle) + " is not valid: min: " + str(servo_data.get_min_angle()) + " max: " + str(servo_data.get_max_angle()))
+                return
+
+        self.__servoDriver.set_servo_multiple_angles(_wanted_angles)
+
+    #--------------------------------------------------------------------------------------
+    #--------------------------------------------------------------------------------------
     #--------------------------------------------------------------------------------------
 
     def get_servo_single_angle(self, _servo_nr: int) -> float:
@@ -123,21 +199,6 @@ class ServoBoard:
             return -1
 
     #--------------------------------------------------------------------------------------
-    #--------------------------------------------------------------------------------------
-
-    def set_servo_multiple_angles(self, _wanted_angles: []) -> None:
-        """!
-        Sets all the angle of the servos
-        @param _wanted_angles:  (should be an array of 16, servo 1 is array pos 0)
-        @return: None
-        """
-
-        wanted_time_array = [0] * 16
-        for i in range(0, 16):
-            wanted_time_array[i] = self.__servo_datas_array[i].convert_angle_to_time(_wanted_angles[i])
-        self.__pwm.set_on_time_all_channels(wanted_time_array)
-
-    #--------------------------------------------------------------------------------------
 
     def get_servo_multiple_angles(self) -> []:
         """!
@@ -156,6 +217,7 @@ class ServoBoard:
 
     #--------------------------------------------------------------------------------------
     #--------------------------------------------------------------------------------------
+    #--------------------------------------------------------------------------------------
 
     def get_servo_adc_single_channel(self, _servo_nr: int) -> float:
         """!
@@ -171,7 +233,6 @@ class ServoBoard:
             return -1
 
     #--------------------------------------------------------------------------------------
-
 
     def _get_current_times_depending_current_angle(self) -> []:
         current_angles = self.get_servo_multiple_angles()

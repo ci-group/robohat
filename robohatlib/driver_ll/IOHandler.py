@@ -443,21 +443,21 @@ class IOHandler:
         @return: I2C_Bus
         @raises: Exception
         """
-        if _i2c_bus_nr is 1:
+        if _i2c_bus_nr == 1:
             def_i = RobohatConfig.I2C1_DEF
             i2c_handler_1 = self.__allocate_i2c_handler(def_i.get_i2c_bus_nr(), def_i.get_scl_pin(), def_i.get_sda_pin(), def_i.get_frequency())
             i2c_bus_1 = I2CBus(_i2c_bus_nr, i2c_handler_1)
             self.__available_i2c_busses.append(i2c_bus_1)
             return i2c_bus_1
 
-        elif _i2c_bus_nr is 5:
+        elif _i2c_bus_nr == 5:
             def_i = RobohatConfig.I2C5_DEF
             i2c_handler_5 = self.__allocate_i2c_handler(def_i.get_i2c_bus_nr(), def_i.get_scl_pin(), def_i.get_sda_pin(), def_i.get_frequency())
             i2c_bus_5 = I2CBus(_i2c_bus_nr, i2c_handler_5)
             self.__available_i2c_busses.append(i2c_bus_5)
             return i2c_bus_5
 
-        elif _i2c_bus_nr is 6:
+        elif _i2c_bus_nr == 6:
             def_i = RobohatConfig.I2C6_DEF
             i2c_handler_6 = self.__allocate_i2c_handler(def_i.get_i2c_bus_nr(), def_i.get_scl_pin(), def_i.get_sda_pin(), def_i.get_frequency())
             i2c_bus_6 = I2CBus(_i2c_bus_nr, i2c_handler_6)

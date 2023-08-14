@@ -1,6 +1,8 @@
 #!/usr/bin/env python
 from __future__ import absolute_import, division, print_function, unicode_literals
 
+import time
+
 try:
     import spidev
 except ImportError:
@@ -8,6 +10,7 @@ except ImportError:
 
 try:
     from robohatlib.driver_ll.spi.SPIDevice import SPIDevice
+    from time import sleep
 except ImportError:
     raise ImportError("failed to resolve all dependencies for MAX11137")
 
@@ -166,6 +169,8 @@ class MAX11137:
 
             #4-7-23
             # instead of using the channel auto increment, just read the whole array... was a bug
+
+
             value_array = self.get_readout_adc_multiple_channels()
             return value_array[_servo_nr]
         else:
@@ -196,6 +201,9 @@ class MAX11137:
         adc_result_voltage = [-1.0] * 16  # allocates and fills alle elements of array with 0
         adc_result_voltage[channel_raw_int] = voltage_float
 
+        time.sleep(0.0001)
+
+
         for  i  in range(0,16):
             adc_mode_control = 0b0000000000000000
             adc_mode_control = self.__update_register_value(adc_mode_control, SCAN_BITS_NA, SCAN_BITS_NA)
@@ -205,6 +213,8 @@ class MAX11137:
             channel_raw_int = int(count_adc >> 12)
             voltage_float = float((ADC_REF_VOLTAGE / ADC_MAX_COUNT) * value_raw_int) + 0.02
             adc_result_voltage[channel_raw_int] = voltage_float
+
+            time.sleep(0.0001)
 
         return adc_result_voltage
 

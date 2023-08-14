@@ -69,7 +69,6 @@ class SPIDevice:
         @return:
         """
 
-
         if self.__spi_bus is None:
             return 0
 

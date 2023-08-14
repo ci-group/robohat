@@ -29,23 +29,23 @@ General settings
 DEBUG = True                                       # by changing this value to TRUE, more debug msg will be printed on the console
 DEBUG_I2C = False
 
-"""!
-Accu settings
-"""
 
+"""!
+Alarm to user settings
+"""
 ALARM_PERMITTED = True                              # sound an alarm when a system alert is present, such as to low accu capacity
 ALARM_TIMEOUT_IN_SEC = 300                          # timeout between alarm
 INIT_BEEP_PERMITTED = False                         # beep when started if True
 
-
+"""!
+Accu settings
+"""
 ACCU_INTERVAL_TIME_IN_SECONDS = 1                   # time between accu monitoring
 
 ACCU_VOLTAGE_TO_LOW_THRESHOLD = 11.06               # threshold. below this value, the accu voltage is too low
 ACCU_VOLTAGE_TO_HIGH_THRESHOLD = 13.00              # threshold, above this value, the accu voltage is too high
-ACCU_WARNING_PERCENTAGE_2 = 20
-ACCU_WARNING_PERCENTAGE_1 = 15
-
-
+ACCU_WARNING_PERCENTAGE_2 = 20                      # threshold, warning to user at this point
+ACCU_WARNING_PERCENTAGE_1 = 15                      # threshold, warning to user at this point
 ACCU_VOLTAGE_ADC_FORMULA_A = 4.85533606358714       # part A of formula, form adc voltage to actual accu voltage (y = Ax + B)
 ACCU_VOLTAGE_ADC_FORMULA_B = -0.512839675475041     # part B of formula, form adc voltage to actual accu voltage (y = Ax + B)
 ACCU_LOG_DISPLAY_WHEN_TO_LOW = False                # keep on logging when accu voltage is too low
@@ -84,7 +84,7 @@ Device settings
 POWER_SHUTDOWN_GPO_DEF = GPODef("shutdown", 27)                                 # definition of the shutdown GPIO pin, The pin which send the signal to the power monitor PCB
 
 BUZZER_DEF = BuzzerDef("buzzer", 18, 1000, 50)                                  # definition for the buzzer, GPIO nr, initial frequency and initial duty cycle
-SERIAL_DEF = SerialDef("debug_port", 1)                                         # definition for the serial port. (todo) AT THIS MOMENT NOT IMPLEMENTED, we are using the normal console
+SERIAL_DEF = SerialDef("debug_port", 1)                                         # definition for the serial port. not used?
 
 LED_RED_GPO_DEF = LedDef("led_red", 5)                                          # definition of the RED LED (which is a part of the multicolor LED), the GPIO nr
 LED_GREEN_GPO_DEF = LedDef("led_green", 6)                                      # definition of the GREEN LED (which is a part of the multicolor LED), the GPIO nr
@@ -141,7 +141,7 @@ SERVOASSEMBLY_INTERRUPT_SETTINGS = [
 SERVOASSEMBLY_EXPANDER_DEF = IOExpanderDef("power_monitor_expander",
                                            SERVOASSEMBLY_I2C_DEF,
                                            SERVOASSEMBLY_INTERRUPT_GPI,
-                                           SERVOASSEMBLY_INTERRUPT_SETTINGS)        # io expander definition of a assembly board
+                                           SERVOASSEMBLY_INTERRUPT_SETTINGS)        # io expander definition of an assembly board
 
 """!
 I2C bus definitions 

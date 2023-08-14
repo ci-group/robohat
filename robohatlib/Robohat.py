@@ -1,5 +1,7 @@
 from __future__ import annotations
 
+import time
+
 try:
     from robohatlib import RobohatConfig
     from robohatlib import RobohatConstants
@@ -94,18 +96,18 @@ class Robohat:
         self.__imu = IMU(self.__io_handler, RobohatConfig.IMU_DEF)
 
         #-------------------------------------Expander
-        hat_io_expander_def = RobohatConfig.TOPBOARD_IO_EXPANDER_DEF
+        topboard_io_expander_def = RobohatConfig.TOPBOARD_IO_EXPANDER_DEF
 
         # at the default interrupt definition there are 2 callback added. one for the trigger, the second for the interrupt reset
-        hat_io_expander_callbackholder = InterruptCallbackHolder("hat_IO_expander_callback_holder",
+        topboard_io_expander_callbackholder = InterruptCallbackHolder("topboard_IO_expander_callback_holder",
                                                                  None,  # the callback routine has to be set by the user
                                                                  self.__topboard_io_expander_int_reset_routine,
                                                                  InterruptTypes.INT_BOTH,
                                                                  250)
 
-        hat_io_expander_def.set_callbackholder(hat_io_expander_callbackholder)
+        topboard_io_expander_def.set_callbackholder(topboard_io_expander_callbackholder)
 
-        self.__topboard_io_expander = IOExpander(self.__io_handler, hat_io_expander_def, _switch_top_board)
+        self.__topboard_io_expander = IOExpander(self.__io_handler, topboard_io_expander_def, _switch_top_board)
         self.__topboard_adc = TopboardADC(self.__io_handler, RobohatConfig.TOPBOARD_ADC_I2C_DEF)
 
         self.__power_management = PowerManagement(self.__io_handler,
@@ -148,9 +150,9 @@ class Robohat:
         if self.__servo_assembly_1 is None and self.__servo_assembly_2 is None:
             print("Error, no assembly-boards are available")
         elif self.__servo_assembly_1 is None:
-            print("Warning, did not found assembly board 1, assembly board should be available")
+            print("Warning, did not found assembly board 1")
         elif self.__servo_assembly_2 is None:
-            print("Warning, did not found assembly board 2, assembly board should be available")
+            print("Warning, did not found assembly board 2")
 
     # --------------------------------------------------------------------------------------
 
@@ -337,11 +339,15 @@ class Robohat:
         Set new formula parameters for voltage angle conversion by setting the servo at angle of 20 and 160
         and readout the voltage of the ADC
         @param _min_range: ange minial
-        @param __max_range: angle maximal
+        @param _max_range: angle maximal
         @return: None
         """
 
+
         pre_angles = self.get_servo_multiple_angles()
+        previous_direct_mode:bool = self.get_servo_is_direct_mode()
+
+        self.set_servo_direct_mode(False)
 
         print("Setting servos to min: " + str(_min_range) + "°" )
         self.set_servo_multiple_angles(
@@ -350,7 +356,9 @@ class Robohat:
                 _min_range, _min_range, _min_range, _min_range, _min_range, _min_range, _min_range, _min_range, _min_range, _min_range, _min_range, _min_range, _min_range, _min_range, _min_range, _min_range
             ])
 
-        sleep(2)
+        #sleep(2)
+        sleep(10)
+
         voltages_min = self.get_servo_adc_multiple_channels()
         sleep(0.1)
         print("Setting servos to max: " + str(_max_range) + "°")
@@ -360,13 +368,16 @@ class Robohat:
                 _max_range, _max_range, _max_range, _max_range, _max_range, _max_range, _max_range, _max_range, _max_range, _max_range, _max_range, _max_range, _max_range, _max_range, _max_range, _max_range
             ])
 
-        sleep(2)
+        #sleep(2)
+        sleep(15)
+
+
         voltage_max = self.get_servo_adc_multiple_channels()
         sleep(0.1)
 
         for servo_nr in range(0, len(pre_angles)):
             pos = pre_angles[servo_nr]
-            if pos is not -1:
+            if pos != -1:
                 voltage_range_servo = voltage_max[servo_nr] - voltages_min[servo_nr]
 
                 if voltage_range_servo != 0:
@@ -377,7 +388,9 @@ class Robohat:
                 else:
                     print("Voltage range is 0, divide by zero")
 
-        sleep(2)
+        #sleep(2)
+        sleep(15)
+
         default_degree = 90
         print("Setting all servos to " + str(default_degree) + " °")
         self.set_servo_multiple_angles(
@@ -385,6 +398,35 @@ class Robohat:
                 default_degree, default_degree, default_degree, default_degree, default_degree, default_degree, default_degree, default_degree, default_degree, default_degree, default_degree, default_degree, default_degree, default_degree, default_degree, default_degree,
                 default_degree, default_degree, default_degree, default_degree, default_degree, default_degree, default_degree, default_degree, default_degree, default_degree, default_degree, default_degree, default_degree, default_degree, default_degree, default_degree
             ])
+
+        self.set_servo_direct_mode(previous_direct_mode)
+
+    # ----------------------------------
+
+    def set_servo_direct_mode(self, _mode:bool, _delay:float = 0.0001) -> None:
+        """!
+        Sets if the servos are periodically updated, or direct
+        @param _mode: True, direct mode activated
+        @param _delay, delay in update mode
+        @return: None
+        """
+        if self.__servo_assembly_1 is not None:
+            self.__servo_assembly_1.set_servo_direct_mode(_mode, _delay)
+        if self.__servo_assembly_2 is not None:
+            self.__servo_assembly_2.set_servo_direct_mode(_mode, _delay)
+
+    # ----------------------------------
+
+    def get_servo_is_direct_mode(self) -> bool:
+        """!
+        @return: if servo is NOT updated periodically
+        """
+        if self.__servo_assembly_1 is not None:
+            return self.__servo_assembly_1.get_servo_is_direct_mode()
+        if self.__servo_assembly_2 is not None:
+            self.__servo_assembly_2.get_servo_is_direct_mode()
+
+        return True
 
 #----------------------------------
 
