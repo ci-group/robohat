@@ -105,6 +105,7 @@ class SerTestClass:
         print("7 topboard OUTPUT test ")
         print("8 assembly boards OUTPUT test ")
         print("l for led test ")
+        print("v show voltages of all servo adcs")
 
         print("\n")
         print("x for exit")
@@ -122,6 +123,8 @@ class SerTestClass:
         """
         if _command == "1":
             self.servo_show_connected()
+        elif _command == "v":
+            self.servo_show_adc()
         elif _command == "2":
             self.servo_calibrate()
         elif _command == "3":
@@ -164,6 +167,16 @@ class SerTestClass:
 
         if servo_counter == 0:
             print("No servos are found")
+
+    # --------------------------------------------------------------------------------------
+    # --------------------------------------------------------------------------------------
+    # --------------------------------------------------------------------------------------
+
+    def servo_show_adc(self) -> None:
+        voltages = self.__robohat.get_servo_adc_multiple_channels()
+        for servo_nr in range(0, len(voltages)):
+            voltage = voltages[servo_nr]
+            print("Servo " + str(servo_nr) + " V")
 
     # --------------------------------------------------------------------------------------
     # --------------------------------------------------------------------------------------
