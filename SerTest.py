@@ -12,9 +12,8 @@ try:
     from robohatlib.hal.datastructure.ExpanderStatus import ExpanderStatus
     from robohatlib.driver_ll.datastructs.IOStatus import IOStatus
 
-    from testlib.Walk import Walk
-
     from testlib import TestConfig
+
     import sys
     import os
     import time
@@ -44,6 +43,9 @@ class SerTestClass:
     """
 
     def __init__(self):
+        """!
+        Constructor of this test class
+        """
         print("################################################")
         print("Starting robohat servo test routine")
         self.__running = True
@@ -56,7 +58,6 @@ class SerTestClass:
                             TestConfig.SERVOBOARD_2_DATAS_ARRAY)
 
         self.__robohat.do_buzzer_beep()
-
 
         self.__i_am_super_user = False
 
@@ -78,23 +79,27 @@ class SerTestClass:
     # --------------------------------------------------------------------------------------
 
     def start(self) -> None:
-        self.ser_test_help()
+        """!
+        Starts the infinite loop which scans the keyboard
+        @return: None
+        """
+        self.__ser_test_help()
 
         while self.__running is True:
-
             inp = input()
-            self.process_commands(inp)
+            self.__process_commands(inp)
 
     # --------------------------------------------------------------------------------------
     # --------------------------------------------------------------------------------------
     # --------------------------------------------------------------------------------------
 
     # noinspection PyMethodMayBeStatic
-    def ser_test_help(self) -> None:
+    def __ser_test_help(self) -> None:
         """!
         Will print available commands
         @return: None
         """
+
         print("\n")
         print("1 show all connected servos")
         print("2 calibrate servos")
@@ -106,6 +111,7 @@ class SerTestClass:
         print("8 assembly boards OUTPUT test ")
         print("l for led test ")
         print("v show voltages of all servo adcs")
+        print("t toggle ADC update mode between DIRECT or PERIODICALLY")
 
         print("\n")
         print("x for exit")
@@ -115,47 +121,46 @@ class SerTestClass:
     # --------------------------------------------------------------------------------------
     # --------------------------------------------------------------------------------------
 
-    def process_commands(self, _command:str) -> None:
+    def __process_commands(self, _command:str) -> None:
         """!
         Will handle console request
         @param _command: console input
         @return: None
         """
         if _command == "1":
-            self.servo_show_connected()
+            self.__servo_show_connected()
         elif _command == "v":
-            self.servo_show_adc()
+            self.__servo_show_adc_voltages()
         elif _command == "2":
-            self.servo_calibrate()
+            self.__servo_calibrate()
         elif _command == "3":
-            self.servo_read_angle()
+            self.__servo_read_angle()
         elif _command == "4":
-            self.servo_move(self.__limit_min)
+            self.__servo_move(self.__limit_min)
         elif _command == "5":
-            self.servo_move(90.0)
+            self.__servo_move(90.0)
         elif _command == "6":
-            self.servo_move(self.__limit_max)
+            self.__servo_move(self.__limit_max)
         elif _command == "7":
-            self.topboard_running_light()
+            self.__topboard_running_light()
         elif _command == "8":
-            self.assembly_boards_running_light()
-
-
-
+            self.__assembly_boards_running_light()
 
         elif _command == "l":
-            self.led_test()
+            self.__led_test()
+        elif _command == "t":
+            self.__toggle_direct_update_mode()
     # --------------------------------------------------------------------------------------
         elif _command == "x":
             self.exit_program()
         else:
-            self.ser_test_help()
+            self.__ser_test_help()
 
     # --------------------------------------------------------------------------------------
     # --------------------------------------------------------------------------------------
     # --------------------------------------------------------------------------------------
 
-    def servo_show_connected(self) -> None:
+    def __servo_show_connected(self) -> None:
         angles = self.__robohat.get_servo_multiple_angles()
 
         servo_counter = 0
@@ -172,7 +177,11 @@ class SerTestClass:
     # --------------------------------------------------------------------------------------
     # --------------------------------------------------------------------------------------
 
-    def servo_show_adc(self) -> None:
+    def __servo_show_adc_voltages(self) -> None:
+        """!
+        Shows the servo adc voltages
+        @return: None
+        """
         voltages = self.__robohat.get_servo_adc_multiple_channels()
         for servo_nr in range(0, len(voltages)):
             voltage = voltages[servo_nr]
@@ -182,7 +191,7 @@ class SerTestClass:
     # --------------------------------------------------------------------------------------
     # --------------------------------------------------------------------------------------
 
-    def servo_calibrate(self) -> None:
+    def __servo_calibrate(self) -> None:
         """!
         Will calibrate the adc of servo 0
         @return: None
@@ -193,7 +202,7 @@ class SerTestClass:
     # --------------------------------------------------------------------------------------
     # --------------------------------------------------------------------------------------
 
-    def servo_read_angle(self) -> None:
+    def __servo_read_angle(self) -> None:
         """!
         Will read the angle of servo 0
         @return: None
@@ -212,7 +221,7 @@ class SerTestClass:
     # --------------------------------------------------------------------------------------
     # --------------------------------------------------------------------------------------
 
-    def servo_move(self, _degree: float) -> None:
+    def __servo_move(self, _degree: float) -> None:
         """!
         Will read the angle of servo 0
         @paramL _degree wanted degree of servo
@@ -225,13 +234,35 @@ class SerTestClass:
             _degree, _degree, _degree, _degree, _degree, _degree, _degree, _degree, _degree, _degree, _degree, _degree,_degree, _degree, _degree, _degree
             ])
 
+
         print("Angles of the servos should be: " + str(_degree) + "°")
 
     # --------------------------------------------------------------------------------------
     # --------------------------------------------------------------------------------------
     # --------------------------------------------------------------------------------------
 
-    def topboard_running_light(self) -> None:
+    def __toggle_direct_update_mode(self) -> None:
+        """!
+        Toggles the servo update mode
+        @return: None
+        """
+        mode = self.__robohat.get_servo_is_direct_mode()
+        if mode is False:
+            print("setting mode to DIRECT")
+            self.__robohat.set_servo_direct_mode(True)
+        else:
+            print("setting mode to PERIODICALLY")
+            self.__robohat.set_servo_direct_mode(False)
+
+    # --------------------------------------------------------------------------------------
+    # --------------------------------------------------------------------------------------
+    # --------------------------------------------------------------------------------------
+
+    def __topboard_running_light(self) -> None:
+        """!
+        Sets the IO of the topboard, in sequence. When leds are attached you will get a running light
+        @return: None
+        """
         print("Starting topboard OUTPUT test")
 
         for pin_nr_dir in range(8):
@@ -260,7 +291,12 @@ class SerTestClass:
     # --------------------------------------------------------------------------------------
     # --------------------------------------------------------------------------------------
 
-    def assembly_boards_running_light(self) -> None:
+    def __assembly_boards_running_light(self) -> None:
+        """
+        Sets the IO of the attached assembly boards, in sequence. When leds are attached you will get a running light
+        @return: None
+        """
+
         print("Starting assembly boards OUTPUT test")
 
         for pin_nr_dir in range(4,7):
@@ -306,7 +342,12 @@ class SerTestClass:
     # --------------------------------------------------------------------------------------
     # --------------------------------------------------------------------------------------
 
-    def led_test(self) -> None:
+    def __led_test(self) -> None:
+        """!
+        Do a LED test
+        @return: None
+        """
+
         print("Starting LED test")
         self.__robohat.set_led_color(Color.RED)
         print("LED: RED")
@@ -327,12 +368,12 @@ class SerTestClass:
     # --------------------------------------------------------------------------------------
     # --------------------------------------------------------------------------------------
 
-
     def exit_program(self) -> None:
         """!
         Should exit this program
         @return: None
         """
+
         print("Exiting this program")
         self.__robohat.exit_program()
         self.__running = False
