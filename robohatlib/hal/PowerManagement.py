@@ -280,7 +280,7 @@ class PowerManagement:
     # --------------------------------------------------------------------------------------
     # --------------------------------------------------------------------------------------
     # --------------------------------------------------------------------------------------
-
+    # noinspection PyMethodMayBeStatic
     def __calculate_percentage_from_voltage(self, _accu_voltage: float) -> float:
         """!
         Calculates voltage of accu, to accu capacity, derived from array in Robohat_config
@@ -302,14 +302,16 @@ class PowerManagement:
 
             diff_voltage = voltage_high - voltage_low
             diff_perc = RobohatConfig.ACCU_VOLTAGE_TO_PERCENTAGE_ARRAY[index + 1] [1] - RobohatConfig.ACCU_VOLTAGE_TO_PERCENTAGE_ARRAY[index] [1]
-            perc_per_volt = diff_perc / diff_voltage
 
-            if voltage_low <= _accu_voltage <= voltage_high:
-                remainder_volt = voltage_high - _accu_voltage
-                remainder_perc = remainder_volt * perc_per_volt
+            if diff_voltage != 0:
+                perc_per_volt = diff_perc / diff_voltage
 
-                percentage = RobohatConfig.ACCU_VOLTAGE_TO_PERCENTAGE_ARRAY[index] [1] + remainder_perc
-                return percentage
+                if voltage_low <= _accu_voltage <= voltage_high:
+                    remainder_volt = voltage_high - _accu_voltage
+                    remainder_perc = remainder_volt * perc_per_volt
+
+                    percentage = RobohatConfig.ACCU_VOLTAGE_TO_PERCENTAGE_ARRAY[index] [1] + remainder_perc
+                    return percentage
 
         return 0
 
