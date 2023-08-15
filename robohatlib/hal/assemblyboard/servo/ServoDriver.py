@@ -6,7 +6,7 @@ try:
     from enum import IntEnum
 
 except ImportError:
-    print("Failed to import needed dependencies for the WalkDriver class")
+    print("Failed to import needed dependencies for the ServoDriver class")
     raise
 
     # --------------------------------------------------------------------------------------
@@ -14,12 +14,15 @@ except ImportError:
     # --------------------------------------------------------------------------------------
 
 class ServoDriver:
+    """!
+    Will update the angles of the servo direct, ir periodically
+    """
 
     def __init__(self, _servoboard):
         """!
          Constructor
         """
-        print("Constructor of SerTestDriver")
+        print("Constructor of ServoDriver")
         self.__servoboard = _servoboard
 
         self.__running = False
@@ -72,9 +75,21 @@ class ServoDriver:
 
         self.__direct_mode = _mode
 
+        # be sure that the settings are in sync
+        if self.__direct_mode is True:       # if direct_mode is false, timed update
+            for servo_index in range(0, len(self.__preset_servo_positions)):
+                self.__current_servo_positions [servo_index] = self.__preset_servo_positions[servo_index]
+
+            self.__servoboard.update_servo_data(self.__preset_servo_positions)
+
     # --------------------------------------------------------------------------------------
 
     def get_is_direct_mode(self) -> bool:
+        """!
+        Returns True if the driver is in direct mode
+        @return: bool
+        """
+
         return self.__direct_mode
 
     # --------------------------------------------------------------------------------------
@@ -94,6 +109,11 @@ class ServoDriver:
     # --------------------------------------------------------------------------------------
 
     def run(self):
+        """!
+        The actual timed update routne
+        @return: None
+        """
+
         while self.__running is True:
             if self.__direct_mode is False:
                 for servo_nr in range(0, 16):
@@ -104,18 +124,26 @@ class ServoDriver:
                         self.__current_servo_positions[servo_nr] = self.__current_servo_positions[servo_nr] + 1
 
                 self.__servoboard.update_servo_data(self.__current_servo_positions)
-                time.sleep(0.001)  # wait 1 mS
-            else:   # direct mode
-                time.sleep(1)  # wait 1 S
+                time.sleep(self.__delay_between_actions)                # wait (1 mS)
+            else:                                                       # direct mode
+                time.sleep(1)                                           # wait 1 S
 
     # --------------------------------------------------------------------------------------
     # --------------------------------------------------------------------------------------
     # --------------------------------------------------------------------------------------
 
     def set_servo_single_angle(self, _servo_index: int, _wanted_angle: float) -> None:
+        """
+        Set wanted servo angle (single servo)
+        @param _servo_index: the servo
+        @param _wanted_angle the angle
+        @return: None
+        """
+
         self.__preset_servo_positions[_servo_index] = _wanted_angle
 
         if self.__direct_mode is True:      # if direct_mode is false, timed update
+            self.__current_servo_positions[_servo_index] = self.__preset_servo_positions[_servo_index]
             self.__servoboard.update_servo_data(self.__preset_servo_positions)
 
     # --------------------------------------------------------------------------------------
@@ -123,18 +151,44 @@ class ServoDriver:
     # --------------------------------------------------------------------------------------
 
     def set_servo_multiple_angles(self, _wanted_angles_array: []) -> None:
+        """
+        Set wanted servo angles (all)
+        @param _wanted_angles_array:
+        @return: None
+        """
         for servo_index in range(0, len(_wanted_angles_array)):
             self.__preset_servo_positions[servo_index] = _wanted_angles_array[servo_index]
 
         if self.__direct_mode is True:       # if direct_mode is false, timed update
+            for servo_index in range(0, len(_wanted_angles_array)):
+                self.__current_servo_positions [servo_index] = self.__preset_servo_positions[servo_index]
+
             self.__servoboard.update_servo_data(self.__preset_servo_positions)
 
+
     # --------------------------------------------------------------------------------------
     # --------------------------------------------------------------------------------------
     # --------------------------------------------------------------------------------------
 
-    def __get_servo_preset_value(self, _servo_index: int) -> float:
-        return self.__preset_servo_positions[_servo_index]
+    def get_servo_is_single_servo_wanted_angle(self, _servo_index:int) -> bool:
+        """!
+        Returns true if (previous) wanted angle the same as the angle of the servo
+
+        @param _servo_index: The sero index
+        @return: bool
+        """
+
+        angle_preset = self.__preset_servo_positions[_servo_index]
+
+        angle_low = self.__current_servo_positions[_servo_index] - 1
+        angle_high = self.__current_servo_positions[_servo_index] + 1
+
+        #print(str(angle_low ) + " < " + str(angle_preset) + " < " + str(angle_high) )
+
+        if angle_preset >= angle_low and angle_preset <= angle_high:
+            return True
+        else:
+            return False
 
     # --------------------------------------------------------------------------------------
     # --------------------------------------------------------------------------------------
