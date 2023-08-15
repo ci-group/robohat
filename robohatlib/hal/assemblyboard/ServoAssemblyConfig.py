@@ -1,3 +1,9 @@
+try:
+    from robohatlib.PwmPlug import PwmPlug
+except ImportError:
+    print("Failed to import all dependencies for ServoAssemblyConfig")
+    raise
+
 
 class ServoAssemblyConfig:
     # --------------------------------------------------------------------------------------
@@ -8,7 +14,7 @@ class ServoAssemblyConfig:
     These settings are needed to get the hardware working. There can multiple assemblies connected at the RPi
     """
 
-    def __init__(self, _name:str, _sw1_pwm_address:int, _sw2_power_good_address:int, _cs_adc_angle_readout:int):
+    def __init__(self, _name:str, _sw1_pwm_address:int, _sw2_power_good_address:int, _cs_adc_angle_readout:PwmPlug):
         """!
         Constructor of this definition
         @param _name: name of the assembly
@@ -51,7 +57,7 @@ class ServoAssemblyConfig:
 
     # --------------------------------------------------------------------------------------
 
-    def get_cs_adc_angle_readout(self) -> int:
+    def get_cs_adc_angle_readout(self) -> PwmPlug:
         """!
         Value of cs of SPI of the Servo PCB, determined by the flat-cable
         @return: cs

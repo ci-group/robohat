@@ -4,6 +4,7 @@ from __future__ import absolute_import, division, print_function, unicode_litera
 try:
     from robohatlib.Robohat import Robohat
     from robohatlib import RobohatConstants
+    from robohatlib.PwmPlug import PwmPlug
     from robohatlib import RobohatConfig
     from robohatlib.hal.assemblyboard.ServoAssemblyConfig import ServoAssemblyConfig
     from robohatlib.hal.assemblyboard.servo.ServoData import ServoData
@@ -19,7 +20,7 @@ try:
     import time
 
 except ImportError:
-    print("Failed to import Robohat, or failed to import all dependencies")
+    print("Failed to import all dependencies for SerTestClass")
     raise
 
 # --------------------------------------------------------------------------------------
@@ -185,7 +186,7 @@ class SerTestClass:
         voltages = self.__robohat.get_servo_adc_multiple_channels()
         for servo_nr in range(0, len(voltages)):
             voltage = voltages[servo_nr]
-            print("Servo " + str(servo_nr) + " V")
+            print("Servo " + str(servo_nr) + ": " + str(voltage) + " V")
 
     # --------------------------------------------------------------------------------------
     # --------------------------------------------------------------------------------------
@@ -301,41 +302,41 @@ class SerTestClass:
         print("Starting assembly boards OUTPUT test")
 
         for pin_nr_dir in range(4,7):
-            if self.__robohat.get_assemblyboard_is_connected(RobohatConstants.PWMPLUG_P3) is True:
-                self.__robohat.set_servo_io_expander_direction(RobohatConstants.PWMPLUG_P3, pin_nr_dir, ExpanderDir.OUTPUT)
-            if self.__robohat.get_assemblyboard_is_connected(RobohatConstants.PWMPLUG_P4) is True:
-                self.__robohat.set_servo_io_expander_direction(RobohatConstants.PWMPLUG_P4, pin_nr_dir, ExpanderDir.OUTPUT)
+            if self.__robohat.get_assemblyboard_is_connected(PwmPlug.PWMPLUG_P3) is True:
+                self.__robohat.set_servo_io_expander_direction(PwmPlug.PWMPLUG_P3, pin_nr_dir, ExpanderDir.OUTPUT)
+            if self.__robohat.get_assemblyboard_is_connected(PwmPlug.PWMPLUG_P4) is True:
+                self.__robohat.set_servo_io_expander_direction(PwmPlug.PWMPLUG_P4, pin_nr_dir, ExpanderDir.OUTPUT)
 
         pin_high_nr = 4
         for loop_counter in range(3):
 
             for led_counter in range(4,7):
                 for pin_nr in range(4,7):
-                    if self.__robohat.get_assemblyboard_is_connected(RobohatConstants.PWMPLUG_P3) is True:
-                        self.__robohat.set_servo_io_expander_output(RobohatConstants.PWMPLUG_P3, pin_nr, ExpanderStatus.LOW)
-                    if self.__robohat.get_assemblyboard_is_connected(RobohatConstants.PWMPLUG_P4) is True:
-                        self.__robohat.set_servo_io_expander_output(RobohatConstants.PWMPLUG_P4, pin_nr, ExpanderStatus.LOW)
+                    if self.__robohat.get_assemblyboard_is_connected(PwmPlug.PWMPLUG_P3) is True:
+                        self.__robohat.set_servo_io_expander_output(PwmPlug.PWMPLUG_P3, pin_nr, ExpanderStatus.LOW)
+                    if self.__robohat.get_assemblyboard_is_connected(PwmPlug.PWMPLUG_P4) is True:
+                        self.__robohat.set_servo_io_expander_output(PwmPlug.PWMPLUG_P4, pin_nr, ExpanderStatus.LOW)
 
-                if self.__robohat.get_assemblyboard_is_connected(RobohatConstants.PWMPLUG_P3) is True:
-                    self.__robohat.set_servo_io_expander_output(RobohatConstants.PWMPLUG_P3, pin_high_nr, ExpanderStatus.HIGH)
-                if self.__robohat.get_assemblyboard_is_connected(RobohatConstants.PWMPLUG_P4) is True:
-                    self.__robohat.set_servo_io_expander_output(RobohatConstants.PWMPLUG_P4, pin_high_nr, ExpanderStatus.HIGH)
+                if self.__robohat.get_assemblyboard_is_connected(PwmPlug.PWMPLUG_P3) is True:
+                    self.__robohat.set_servo_io_expander_output(PwmPlug.PWMPLUG_P3, pin_high_nr, ExpanderStatus.HIGH)
+                if self.__robohat.get_assemblyboard_is_connected(PwmPlug.PWMPLUG_P4) is True:
+                    self.__robohat.set_servo_io_expander_output(PwmPlug.PWMPLUG_P4, pin_high_nr, ExpanderStatus.HIGH)
 
                 pin_high_nr = pin_high_nr + 1
                 if pin_high_nr >= 7:
                     pin_high_nr = 4
 
-                if self.__robohat.get_assemblyboard_is_connected(RobohatConstants.PWMPLUG_P3) is True:
+                if self.__robohat.get_assemblyboard_is_connected(PwmPlug.PWMPLUG_P3) is True:
                     print("Plug P3: --> " + str(loop_counter) + " LED GP:" + str(led_counter) )
-                if self.__robohat.get_assemblyboard_is_connected(RobohatConstants.PWMPLUG_P4) is True:
+                if self.__robohat.get_assemblyboard_is_connected(PwmPlug.PWMPLUG_P4) is True:
                     print("Plug P4: --> " + str(loop_counter) + " LED GP:" + str(led_counter) )
                 time.sleep(1)
 
         for pin_nr in range(4,7):
-            if self.__robohat.get_assemblyboard_is_connected(RobohatConstants.PWMPLUG_P3) is True:
-                self.__robohat.set_servo_io_expander_output(RobohatConstants.PWMPLUG_P3, pin_nr, ExpanderStatus.LOW)
-            if self.__robohat.get_assemblyboard_is_connected(RobohatConstants.PWMPLUG_P4) is True:
-                self.__robohat.set_servo_io_expander_output(RobohatConstants.PWMPLUG_P4, pin_nr, ExpanderStatus.LOW)
+            if self.__robohat.get_assemblyboard_is_connected(PwmPlug.PWMPLUG_P3) is True:
+                self.__robohat.set_servo_io_expander_output(PwmPlug.PWMPLUG_P3, pin_nr, ExpanderStatus.LOW)
+            if self.__robohat.get_assemblyboard_is_connected(PwmPlug.PWMPLUG_P4) is True:
+                self.__robohat.set_servo_io_expander_output(PwmPlug.PWMPLUG_P4, pin_nr, ExpanderStatus.LOW)
 
         print("Ready assembly boards OUTPUT test")
 

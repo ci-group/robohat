@@ -1,4 +1,9 @@
+try:
+    from robohatlib.PwmPlug import PwmPlug
 
+except ImportError:
+    print("Failed to import RoboUtil, or failed to import all dependencies")
+    raise
 
 class RoboUtil:
     """!
@@ -58,6 +63,26 @@ class RoboUtil:
 
         if _silent is False:
             print(_txt)
+
+    # --------------------------------------------------------------------------------------
+    # --------------------------------------------------------------------------------------
+    # --------------------------------------------------------------------------------------
+
+    @staticmethod
+    def get_pwmplug_by_int(_id:int):
+        if _id == 1:
+            return PwmPlug.PWMPLUG_P4
+        else:
+            return PwmPlug.PWMPLUG_P3
+
+    # --------------------------------------------------------------------------------------
+
+    @staticmethod
+    def get_pwm_cs_by_pwmplug(_plug:PwmPlug):
+        if _plug == PwmPlug.PWMPLUG_P4:
+            return 1
+        else:
+            return 0
 
     # --------------------------------------------------------------------------------------
     # --------------------------------------------------------------------------------------

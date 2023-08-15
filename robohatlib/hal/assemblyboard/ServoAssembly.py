@@ -6,6 +6,8 @@ try:
     from robohatlib.driver_ll.definitions.GPIInterruptDef import GPIInterruptDef
     from robohatlib.hal.assemblyboard.ServoAssemblyConfig import ServoAssemblyConfig
     from robohatlib import RobohatConfig
+    from robohatlib.helpers.RoboUtil import RoboUtil
+    from robohatlib.PwmPlug import PwmPlug
     from robohatlib.driver_ll.IOHandler import IOHandler
     from robohatlib.driver_ll.definitions.InterruptCallbackHolder import InterruptCallbackHolder
     from robohatlib.driver_ll.constants.InterruptTypes import InterruptTypes
@@ -46,7 +48,9 @@ class ServoAssembly:
             print("Found: " + _servo_config.get_name())
             i2c_device_pwm = _io_handler.get_i2c_device(i2c_def_pwm)
 
-            spi_def_adc = SPIDeviceDef("adc_" + _servo_config.get_name(), _spi_bus_nr, _servo_config.get_cs_adc_angle_readout())
+            spi_cs:int = RoboUtil.get_pwm_cs_by_pwmplug(_servo_config.get_cs_adc_angle_readout())
+
+            spi_def_adc = SPIDeviceDef("adc_" + _servo_config.get_name(), _spi_bus_nr, spi_cs)
             spi_device_adc = _io_handler.get_spi_device(spi_def_adc)
 
             if i2c_device_pwm is not None and spi_device_adc is not None:
@@ -279,7 +283,7 @@ class ServoAssembly:
 
     # --------------------------------------------------------------------------------------
 
-    def get_cs_adc_angle_readout(self) -> int:
+    def get_cs_adc_angle_readout(self) -> PwmPlug:
         return self.__servo_config.get_cs_adc_angle_readout()
 
     # --------------------------------------------------------------------------------------
