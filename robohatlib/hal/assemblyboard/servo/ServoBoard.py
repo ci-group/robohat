@@ -133,6 +133,23 @@ class ServoBoard:
     #--------------------------------------------------------------------------------------
     #--------------------------------------------------------------------------------------
 
+    def get_servo_is_single_servo_wanted_angle(self, _servo_nr: int) -> bool:
+        """!
+        Returns true if (previous) wanted angle the same as the angle of the servo
+
+        @param _servo_nr: The sero index
+        @return: bool
+        """
+
+        if _servo_nr < 0 or _servo_nr > 15:
+            print("Error, requested servo number is not valid, should be 0 till 15")
+            return False
+
+        return self.__servoDriver.get_servo_is_single_servo_wanted_angle(_servo_nr)
+
+    #--------------------------------------------------------------------------------------
+    #--------------------------------------------------------------------------------------
+
     def set_servo_single_angle(self, _servo_nr: int, _angle: float) -> None:
         """!
         Set the wanted angle of a servo

@@ -1,7 +1,5 @@
 from __future__ import annotations
 
-import time
-
 try:
     from robohatlib import RobohatConfig
     from robohatlib import RobohatConstants
@@ -35,7 +33,6 @@ try:
     from robohatlib.driver_ll.datastructs.IOStatus import IOStatus
 
     from time import sleep
-
     from typing import Tuple
 
 except ImportError:
@@ -356,8 +353,8 @@ class Robohat:
                 _min_range, _min_range, _min_range, _min_range, _min_range, _min_range, _min_range, _min_range, _min_range, _min_range, _min_range, _min_range, _min_range, _min_range, _min_range, _min_range
             ])
 
-        #sleep(2)
-        sleep(10)
+        self.do_wait_until_servos_are_wanted_angles(0, 31, 15)
+        sleep(2)
 
         voltages_min = self.get_servo_adc_multiple_channels()
         sleep(0.1)
@@ -368,9 +365,8 @@ class Robohat:
                 _max_range, _max_range, _max_range, _max_range, _max_range, _max_range, _max_range, _max_range, _max_range, _max_range, _max_range, _max_range, _max_range, _max_range, _max_range, _max_range
             ])
 
-        #sleep(2)
-        sleep(15)
-
+        self.do_wait_until_servos_are_wanted_angles(0, 31, 15)
+        sleep(2)
 
         voltage_max = self.get_servo_adc_multiple_channels()
         sleep(0.1)
@@ -388,8 +384,8 @@ class Robohat:
                 else:
                     print("Voltage range is 0, divide by zero")
 
-        #sleep(2)
-        sleep(15)
+        self.do_wait_until_servos_are_wanted_angles(0, 31, 15)
+        sleep(2)
 
         default_degree = 90
         print("Setting all servos to " + str(default_degree) + " °")
@@ -399,6 +395,8 @@ class Robohat:
                 default_degree, default_degree, default_degree, default_degree, default_degree, default_degree, default_degree, default_degree, default_degree, default_degree, default_degree, default_degree, default_degree, default_degree, default_degree, default_degree
             ])
 
+        self.do_wait_until_servos_are_wanted_angles(0, 31, 15)
+        sleep(2)
         self.set_servo_direct_mode(previous_direct_mode)
 
     # ----------------------------------
@@ -444,6 +442,7 @@ class Robohat:
             servo_nr = self.__get_servo_nr_depending_assembly(_servo_nr)
             assemble_board.servo_set_new_readout_vs_angle_formula(servo_nr, _formula_a, _formula_b)
 
+    # ----------------------------------
 
     def get_servo_is_connected(self, _servo_nr: int) -> bool:
         """!
@@ -490,7 +489,90 @@ class Robohat:
                 return True
         return False
 
+    # ----------------------------------
+
+    def get_servo_is_single_servo_wanted_angle(self, _servo_nr: int) -> bool:
+        """!
+        Returns true if (previous) wanted angle is the same as the current angle of the servo
+
+        @param _servo_nr: The wanted servo id
+        @return: bool
+        """
+
+        servo_assembly = self.__get_servo_assembly_depending_servo_nr(_servo_nr)    # the assembly depending on servo_nr
+        if servo_assembly is not None:
+            servo_nr = self.__get_servo_nr_depending_assembly(_servo_nr)            # servo nr of the servo of the assembly
+            if servo_nr is not None:
+                return servo_assembly.get_servo_is_single_servo_wanted_angle(servo_nr)
+
+        return False
+
+    # ----------------------------------
+
+    def do_wait_until_servo_is_wanted_angle(self, _servo_nr: int, _time_in_seconds_until_escape=15):
+        """!
+        Wait until current angles are the same as the wanted angles
+
+        @param _servo_nr:The wanted servo id
+        @param _time_in_seconds_until_escape: Time to prevent endless loop
+        @return: None
+        """
+        counter_seconds = 0
+        counter_100ms = 0
+
+        while self.get_servo_is_single_servo_wanted_angle(_servo_nr) is False:
+            sleep(0.1)
+            counter_100ms = counter_100ms + 1
+            if counter_100ms == 10:
+                counter_seconds = counter_seconds + 1
+                counter_100ms = 0
+
+            if counter_seconds >= _time_in_seconds_until_escape:
+                break
     # --------------------------------------------------------------------------------------
+
+    def get_servo_are_multiple_servos_wanted_angles(self, _start_servo_index: int, _stop_servo_index: int) -> bool:
+        """!
+        Returns true if (previous) wanted angles are the same as the actual angles of the servos
+
+        @param _start_servo_index: The first servo of the pool of servos
+        @param _stop_servo_index: The last servo of the pool of servos
+        @return: bool
+        """
+
+        return_value:bool = True
+
+        for servo_nr in range(_start_servo_index,(_stop_servo_index+1)):
+            return_value = return_value and self.get_servo_is_single_servo_wanted_angle(servo_nr)
+
+        return return_value
+
+    # --------------------------------------------------------------------------------------
+
+    def do_wait_until_servos_are_wanted_angles(self, _start_servo_index: int, _stop_servo_index: int, _time_in_seconds_until_escape = 15):
+        """!
+        Wait until current angles are the same as the wanted angles
+
+        @param _start_servo_index: The first servo of the pool of servos
+        @param _stop_servo_index: The last servo of the pool of servos
+        @param _time_in_seconds_until_escape: Time to prevent endless loop
+        @return: None
+        """
+        counter_seconds = 0
+        counter_100ms = 0
+
+        while self.get_servo_are_multiple_servos_wanted_angles(0, 31) is False:
+            sleep(0.1)
+            counter_100ms = counter_100ms + 1
+            if counter_100ms == 10:
+                counter_seconds = counter_seconds + 1
+                counter_100ms = 0
+
+            if counter_seconds >= _time_in_seconds_until_escape:
+                break
+
+    # --------------------------------------------------------------------------------------
+
     def get_servo_adc_single_channel(self, _servo_nr: int) -> float:
         """!
         Get angle of connected servo in degree or -1 when an error occurs
@@ -507,6 +589,7 @@ class Robohat:
             if servo_nr is not None:
                 return servo_assembly.get_servo_adc_single_channel(servo_nr)
         return -1
+
     # --------------------------------------------------------------------------------------
 
     def get_servo_adc_multiple_channels(self) -> []:
