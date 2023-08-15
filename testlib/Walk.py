@@ -79,7 +79,7 @@ class Walk:
         """
         self.__robohat = _robohat
 
-        self.__walk_driver = WalkDriver(_robohat)
+        self.__robohat.set_servo_direct_mode(False)
 
         self.__set_servo_preset_value(WalkServoID.LEFT_FRONT_LEG, LEG_FRONT_NEUTRAL)
         self.__set_servo_preset_value(WalkServoID.RIGHT_FRONT_LEG, LEG_FRONT_NEUTRAL)
@@ -101,11 +101,6 @@ class Walk:
         """
 
         print("Started walking")
-
-        current_angles = self.__robohat.get_servo_multiple_angles()
-        self.__walk_driver.start_walking(current_angles)
-
-
         print ("1")
         self._side_right_neutral()
         self._side_left_neutral()
@@ -140,7 +135,6 @@ class Walk:
         @return: None
         """
 
-        self.__walk_driver.stop_walking()
         self.__running = False
         print("Stopped walking")
 
@@ -189,14 +183,16 @@ class Walk:
     # --------------------------------------------------------------------------------------
 
     def __set_servo_preset_value(self, _servo_id:WalkServoID, _pos:float) -> None:
-        self.__walk_driver.set_servo_preset_value(_servo_id, _pos)
+        servo_nr: int = int(_servo_id)
+        self.__robohat.set_servo_single_angle(servo_nr, _pos)
 
     # --------------------------------------------------------------------------------------
     # --------------------------------------------------------------------------------------
     # --------------------------------------------------------------------------------------
 
     def __get_servo_is_wanted_angle(self, _servo_id:WalkServoID) -> bool:
-        return self.__walk_driver.get_servo_is_wanted_angle(_servo_id)
+        servo_nr: int = int(_servo_id)
+        return self.__robohat.get_servo_is_single_servo_wanted_angle(servo_nr)
 
     # --------------------------------------------------------------------------------------
     # --------------------------------------------------------------------------------------
