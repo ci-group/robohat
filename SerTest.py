@@ -111,7 +111,7 @@ class SerTestClass:
         print("8 assembly boards OUTPUT test ")
         print("l for led test ")
         print("v show voltages of all servo adcs")
-        print("t toggle ADC update mode between DIRECT or PERIODICALLY")
+        print("t toggle SERVO update mode between DIRECT or PERIODICALLY")
 
         print("\n")
         print("x for exit")
@@ -248,10 +248,10 @@ class SerTestClass:
         """
         mode = self.__robohat.get_servo_is_direct_mode()
         if mode is False:
-            print("setting mode to DIRECT")
+            print("setting SERVO update mode to DIRECT")
             self.__robohat.set_servo_direct_mode(True)
         else:
-            print("setting mode to PERIODICALLY")
+            print("setting SERVO update mode to PERIODICALLY")
             self.__robohat.set_servo_direct_mode(False)
 
     # --------------------------------------------------------------------------------------
