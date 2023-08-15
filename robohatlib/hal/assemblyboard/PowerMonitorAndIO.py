@@ -93,7 +93,6 @@ class PowerMonitorAndIO:
         if self.__expander is not None:
             self.__expander.exit_program()
 
-
     # --------------------------------------------------------------------------------------
 
     def is_power_good(self, _power_channel: int) -> bool:
@@ -209,7 +208,7 @@ class PowerMonitorAndIO:
 
     def reset_interrupt(self, _io_nr:int) -> None:
         """!
-        @param _io_nr:
+        @param _io_nr: IO which is responsible for the interrupt
         @return: None
         """
         self.__expander.reset_interrupts()
@@ -224,19 +223,6 @@ class PowerMonitorAndIO:
         """
         self.__signaling_device = _signaling_device
 
-    #--------------------------------------------------------------------------------------
-
-    def power_monitor_and_io_int_reset_routine(self, _gpi_nr: int) -> None:
-        """!
-        This routine will be called to reset the interrupt handler of the MCP23008
-        @param _gpi_nr: IO nr of the caller
-        @return: None
-        """
-        if self.__interrupt is not None:
-            self.__interrupt.remove_event_detection()
-
-        timer = threading.Timer(10, self.__reset_timer_callback)
-        timer.start()
 
     #--------------------------------------------------------------------------------------
 
@@ -304,6 +290,8 @@ class PowerMonitorAndIO:
         Will check the io 0 un till 3 to detect the Power-fail of the DC/DC
         Also will go to the user callback
 
+        Is called by ServoAssembly::__io_power_monitor_and_io_int_callback
+
         @param _gpi_nr (int) mr of the callback gpio pin
         @return None
         """
@@ -325,8 +313,24 @@ class PowerMonitorAndIO:
         if self.__user_int_callback is not None:
             self.__user_int_callback(_gpi_nr)
 
-    #-------------------------------------------------------------------------------------
+    #--------------------------------------------------------------------------------------
 
+    def power_monitor_and_io_int_reset_routine(self, _gpi_nr: int) -> None:
+        """!
+        This routine will be called to reset the interrupt handler of the MCP23008
+        Is called by ServoAssembly::__io_power_monitor_and_io_int_reset_routine
+
+        @param _gpi_nr: IO nr of the caller
+        @return: None
+        """
+        if self.__interrupt is not None:
+            self.__interrupt.remove_event_detection()
+
+        timer = threading.Timer(10, self.__reset_timer_callback)
+        timer.start()
+
+
+    #-------------------------------------------------------------------------------------
 
     def __reset_timer_callback(self) -> None:
         """!
