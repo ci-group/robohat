@@ -1,0 +1,345 @@
+/**
+\page hardware Hardware description
+
+For the software description of the Robohat, see \ref software<BR>
+
+<h1>Robohat hardware description</h1>
+
+\image html robohat_small.png
+
+The Robohat is Robot which is a modular design. The basis of the design is the brain. The brain consist of PCBs and batteries.<BR>
+Attached to the brain are limbs, which are coupled with joints. These joins are driven by servos. By driving those joint, the Robot should be able to walk.
+
+<hr style="width:100%;text-align:left;margin-left:0">
+<h2>Raspberry PI 4</h2>
+
+For the processing power the Robohat uses a Raspberry PI 4<BR>
+
+\image html RPI4.jpg Raspberry PI 4
+
+The Raspberry (RPi for short) has multiple connections. Most connection can be used.
+
+<B>Connectors aren't avaible for users are:</B>
+
+. The I/O-header. The I/O-header isn't accessible, because its connected to the Topboard.<BR>
+. The USB-C power-plug. The USB-C power-plug of the RPi may NOT be used. The power delivery for the RPi is done by the Topboard (see section below).
+Connecting both the USB-C power-plug and the Topboard can result in weird behaviour of the RPi.<BR>
+
+
+<BR>
+<hr style="width:100%;text-align:left;margin-left:0">
+<h2>Topboard</h2>
+
+The Topboard is the connection between the Raspberry Pi and the rest of the system.
+\image html topboard.png the top-side of the Topboard
+
+On the Topboard itself, a buzzer, an I/O-expander, ADC, serial console, and an I2C-interface are available.<BR>
+
+<b>Address of the Topboard</b><BR>
+The Topboard has a dipswitch (on the backside) to sets it address (topboard_switch_value). The default value is 7.<BR>
+Actually the switch sets the I2C address of the I/O-expander on the Topboard. If for somehow the address of the I/O-expander has a conflict of a other I2C-device (on I2C bus 1) the address can be changed by this switch.
+
+\image html topboard_back.png the back-side of the Topboard
+\image html topboard_dipswitch.png address settings of the topboard and its value
+
+
+<h3>User available connections on the top-side of the Topboard</h3>
+
+<B> I/O pins</B><BR>
+The Topboard has 8 I/O pins, which can be accessed by the I/O header (J2) of the topboard<BR>
+
+pinning of the I/O header:<BR>
+1  + 3V3<BR>
+2  GPIO 0<BR>
+3  GPIO 1<BR>
+4  GPIO 2<BR>
+5  GPIO 3<BR>
+6  GPIO 4<BR>
+7  GPIO 5<BR>
+8  GPIO 6<BR>
+9  GPIO 7<BR>
+10 GND<BR>
+
+<B>ADC</B><BR>
+3 ADC channels are available on the Topboard, which can be accessed by tge ADC header of the topboard<BR>
+
+pinning of the ADC header:<BR>
+1 + 3V3<BR>
+2 ADC Channel 0<BR>
+3 ADC Channel 1<BR>
+4 ADC Channel 2<BR>
+5 scaled battery voltage. <B>DO NOT USE</B> It's actually ADC Channel 3, which is used to monitor the battery capacity.<BR>
+6 GND<BR>
+
+<B>Console</B><BR>
+To monitor the RPi a console connection can be used. <BR>
+The default settings of the console port is: 115200 baud, 8N1<BR>
+
+Cable 'TTL-232R-Rpi' can be used (RS 767-6200) <BR>
+
+pinning of the Console connector:<BR>
+1 GND (black of the 'TTL-232R-Rpi' cable)<BR>
+2 TXD (data out of the RPi) (yellow of the 'TTL-232R-Rpi' cable)<BR>
+3 RXD (data in of the RPi)  (orange of the 'TTL-232R-Rpi' cable)<BR>
+
+<B>Spare I2C</B><BR>
+I2C bus 5 is avaible for the user.<BR>
+
+pinning of the I2C connector:<BR>
+1 GND<BR>
+2 SDA<BR>
+3 SCL<BR>
+4 + 3V3<BR>
+
+
+<h3>Other connections on the top side of the Topboard</h3>
+
+Other connections on the top-side of the Topboard are present, but not user available.
+
+The first one is the power-connector to power the Topboard and the RPi This connector is connected to a PWR-board.
+Two other 16 pole headers are avaible (P3 and P4) to connect a Servo-assembly by a flat-cable
+
+The last connection of the top-side of the Topboard is the IMU connector. The IMU located on the top-lid of the housing is connected to this connector by a 5 pole cable.
+
+\image html topboard_connections.png connections on the top-side of the Topboard
+
+<BR>
+<BR>
+
+<h3>Connections on the back-side of the Topboard</h3>
+
+There aren't any user available connections off the back-side of the Topboard
+
+<BR>
+
+The LED (which goes to the top-lid of the housing) is connected to the 5 pole connector.
+The 2 pole connector is connected to the first Powerboard.
+
+\image html topboard_back_connections.png connections off the back-side of the Topboard
+
+<hr style="width:100%;text-align:left;margin-left:0">
+
+<h2>Servos</h2>
+
+The robohat has limbs to move. These limbs are connected by joints. Those joints are driven by servos.
+
+\image html servo.png a servo
+
+In our prototype we use the <a href="DSS-M15.pdf" target="_blank"><b>DSS-M15</b></a> as servo. This servo is modified to have an angle readout.<BR>
+
+Other servos can be used. But be sure to use the correct parameters while initializing the Robohatlib.<BR>
+The servos are driven by 6.8 volts.<BR>
+The default PWM frequency is 50 Hz<BR>
+
+\image html servo_joint.png a servo in a joint of the Robohat
+
+The maximum amount of servos the user can connect to the Robohat hardware is 32 (but can be limited to the power consumption of te servos).<BR>
+These servos will be driven by the Servo-assemblies. For how to connect a servo to the Robohat, see 'Servo-assembly'
+
+<hr style="width:100%;text-align:left;margin-left:0">
+
+<h2>Servo-assembly</h2>
+
+A Servo assembly is the connection between the servos and the rest of the Robohat.
+
+\image html servo_assembly.png front side of a servo-assembly
+
+The Robohat can hold 2 Servo assemblies.
+
+A Servo-assembly consists of 2 boards (the PWM-board and the ADC-board) sandwiched together. A Servo-assembly, powers, drives and reads-out the attached servos.<BR>
+Besides handling all the servo stuff, it has an I/O-expander which the user can use.<BR>
+
+<b>Address of the Assemblyboard</b><BR>
+
+At the back of a Servo-assembly (at the PWM board) are 2 dip-switches present. Onto these switches an address of the Servo-assembly must be selected. To keep it simple, set the address of switch SW1 the same as the switch SW2.<BR>
+The default value is of assembly-board connected to plug P3 of the Topboard is 0.<BR>
+The default value is of assembly-board connected to plug P4 of the Topboard is 1.<BR>
+
+Note. The 2 dip-switches addressed and position of the flat-cable are used int the Robohatlib::ServoAssemblyConfig
+Note. Be sure if you use 2 Servo-assemblies, that the addresses of the assembly boards are different.<BR>
+
+\image html servo_assembly_back.jpg back side of a servo-assembly
+\image html assemblyboards_dipswitch.png address settings of a assembly-board and its value
+
+
+<b>Connection of the Assemblyboard</b><BR>
+\image html servo_assembly_connections.png
+
+The assembly-board is connected with a flat-cable to the Topboard at connector P3 or P4.
+
+The power is connected to the power connector, which goes from the Powerboard.
+
+<b>I/O connector</b>
+The assembly-board has also a I/O connector.
+
+I/O connector<BR>
+1 + 5V<BR>
+2 IO_4<BR>
+3 IO_5<BR>
+4 IO_6<BR>
+5 GND<BR>
+
+
+<b>Connecting the servos</b>
+
+The Servo assembly handles the power distribution of the servos. Each Servo assembly has to 16 servo channels. Those servo-channels are grouped in 4 groups.<BR>
+Each group has its own powersupply. The current of each power supply is limited to 5 Ampère. <BR>
+If the servos in a group take too much power, the groups power-supply will limit the current. This will stall the attached servos of that group.<BR>
+
+Power limitation can be prevented to distribute the servos evenly on all the available servo-channels.<BR>
+The drawn current of a servo is proportional with its delivered torque. So do not put high torque servos in the same group, and will result in strange movement of the servos.<BR>
+
+you can place a servo to another group to even the power distribution.
+
+The Servo groups are:
+
+<BR>
+<TABLE class="par">
+<TR><TH>Servo group</TH><TH colspan = "4">Servos channel</TH></TR>
+<TR><TD>1</TD><TD>0</TD><TD>4</TD><TD>8</TD><TD>12</TD></TR>
+<TR><TD>2</TD><TD>1</TD><TD>5</TD><TD>9</TD><TD>13</TD></TR>
+<TR><TD>3</TD><TD>2</TD><TD>6</TD><TD>10</TD><TD>14</TD></TR>
+<TR><TD>4</TD><TD>3</TD><TD>7</TD><TD>11</TD><TD>15</TD></TR>
+</TABLE>
+<BR>
+
+\image html side_servo_assembly.jpg a connected servo to a servo-assembly
+
+As can be seen on the picture, the BROWN wire of the servo hast to be on the side of the PCB with the yellow power connector.
+
+pinning servo<BR>
+BROWN                       gnd<BR>
+RED                         PWM-signal<BR>
+ORANGE                      power<BR>
+WHITE (but can differ!)     pos-measure-signal<BR>
+<BR>
+
+
+
+
+
+
+
+
+
+
+<hr style="width:100%;text-align:left;margin-left:0">
+<h2>Powerboard</h2>
+
+The powerboard is the power distributor and the supervisor of the battery.<BR>
+
+\image html powerboard.png the Powerboard
+
+The battery can deliver a huge amount of power (so be careful, \ref precautions).
+To keep it save and prevent wrong usage of the battery, each battery has its own powerboard.
+
+If needed, he Robohat has room for 2 batteries. But 1 battery should be enough.<BR> When using 2 batteries, 2 Powerboard are needed.
+
+<b>Connections of the front-side of the Powerboard</b>
+The Powerboard has no connections available for the user
+
+\image html powerboard_connections.png connections of the Powerboard
+
+At the top-side there a multiple connectors, which handles the power delivery for the Robohat. Handle them with care.
+
+. Battery. At this connector the battery has to be connected.
+. Topboard. This connection will power the Topboard.
+. Assembly connectors. The 2 other connectors are to power the Servo assemblies
+
+There are also 2 LEDS present. A red one, for the status, and a green one to see if the power is turned on. (See power-on)
+
+<b>Connections of the backside-side of the Powerboard</b>
+
+At the back-side are the connectors for turning he Robohat on and off.
+
+\image html powerboard_back_connections.png connections of the Powerboard
+
+. 3 pole power connector. This has to be connected to the Power-switch-board
+. 2 pole (in de the middle) This has to be connected to the Topboard if it is the first assembly-board. When it is the second assembly-board, it has to be connected to the first assembly-board.
+. 2 pole servo-assembly. Connect this to the second assembly-board (if available)
+
+<B>Connecting the battery</B>
+Always be sure, you connect a battery with enough capacity.
+When the battery has enough capacity, the red status-LED will blink two times.<BR>
+When the capacity of the battery is to low, the red status-LED will flash multiple times.
+When the battery is completely dead nothing will happen.
+
+<b>Turning on the Robohat</b>
+
+User Power on<BR>
+The Robohat can only be turned on when the accu has enough capacity. To power on, the user has to press the switch of the switch-board.<BR>
+When the switch is pressed the red status-LED will blink 3 times. When the blinking period ends, the red status-LED will flash multiple times. The user should release the power switch before the flashes stops.<BR>
+Nothing will happen, when the user releases the button before flashing starts or after flashing is finished. This window of releasing the button is done, to prevent accidentally turning on the Robohat.
+When the power is on, the green power-LED will be illuminated.
+
+User Powering off<BR>
+Powering down should be done by the shutdown API-function of the Robohat library
+The user can also shut down the OS (by 'sudo shutdown now' in the console), and turn off the power by pressing switch the sane way as turning the Robohat on.
+(When the switch is pressed the red status-LED will blink 3 times. When the blinking period ends, the red status-LED will flash multiple times. The user should release the power switch before the flashes stops).
+
+Note. When powering down, before shutting down the OS. , can destroy disk-data,
+
+Battery low capacity shutdown<BR>
+The Powerboard will shut down the power, when the battery capacity goes below a threshold (2%). Before shutting down the power, the red status LED will flash for 1 minute. The user can not interrupt this powering-down mode.
+This hardware feature is implemented to save the battery. The battery can be damaged d if used below a capacity of 1%
+
+When using the Robohat lib, the user will get a warning when the battery capacity goes down below 20% and goes down below 10%.
+When the Robohat lib detects a capacity below 5%, an auto shutdown will be performed to save the accu. This will be a graceful shutdown. The power will go down when the OS is also shutdown (this is the
+best solution to preserve the SD-card)
+
+While the accu is in standby, the LED will periodically flash (interval of 6 seconds)
+
+Fuse<BR>
+The Powerboard has a fuse. Make sure you know the cause, why the fuse is blown, before replacing it. This fuse is rate at 20A, so an accidentally blown of the fuse won't happen.
+
+Fuse rating: 20A
+
+
+
+<hr style="width:100%;text-align:left;margin-left:0">
+<h2>IMU</h2>
+\image html IMU.png IMU
+
+The Robohat has also a 'Inertial Measurement Unit' (IMU for short). With the IMU, the Robohat can track its movements.
+It can determine its position to read out the X,Y and Z magnetic fields direction. Also, it can measure the  acceleration in X, Y en Z direction. It has also a build in Gyroscope.
+The IMU is connected to the PI through the Topboard. Is accessed by its own API-calls. The IMU should be auto-detected. Nothing is selectable at the IMU.
+
+
+<hr style="width:100%;text-align:left;margin-left:0">
+
+<h1>Overview of the connections</h1>
+
+<h2>Connection scheme</h2>
+Below is a picture how the Robohat PCBs are connected together. The Second assembly is not mandatory. There is no need for the second accu, and the second PWM management board, if the second assembly board is not connected.
+
+\image html connection_scheme.png Connection scheme
+
+<BR>
+
+<h2>Connection table</h2>
+
+<TABLE class="par">
+
+<TR><TH>ID</TH><TH>Connection name                    </TH><TH>from                         </TH><TH>from connector</TH><TH>to                    </TH><TH>to connector  </TH><TH>type of cable </TH>
+<TR><TD> 1</TD><TD>battery connection                 </TD><TD>battery                      </TD><TD>-	           </TD><TD>pwm management board  </TD><TD>P1            </TD><TD>cable attached to battery</TD></TR>
+<TR><TD> 2</TD><TD>topboard power connection          </TD><TD>pwm management board 1	    </TD><TD>J5            </TD><TD>topboard	          </TD><TD>P5            </TD><TD>2 wire connection with 2 (small) yellow connectors</TD></TR>
+<TR><TD> 3</TD><TD>servo assembly power connection    </TD><TD>pwm management board  (1 + 2)</TD><TD>-             </TD><TD>servo assembly (1 + 2)</TD><TD>P1            </TD><TD>2 wire connection with 2 (big) yellow connectors</TD></TR>
+<TR><TD> 4</TD><TD>servo assembly control connection 1</TD><TD>topboard plug                </TD><TD>P3            </TD><TD>servo assembly 1	  </TD><TD>P3            </TD><TD>flat cable</TD></TR>
+<TR><TD> 5</TD><TD>servo assembly control connection 2</TD><TD>topboard plug                </TD><TD>P4            </TD><TD>servo assembly 2	  </TD><TD>P3            </TD><TD>16 pole flat cable with 2 black headers</TD></TR>
+<TR><TD> 6</TD><TD>IMU connection	                  </TD><TD>topboard                     </TD><TD>P1            </TD><TD>IMU	                  </TD><TD>-             </TD><TD>5 pole flat-cable with 2 white plugs ( 30 cm)</TD></TR>
+<TR><TD> 7</TD><TD>LED connection	                  </TD><TD>topboard                     </TD><TD>RGB-LED       </TD><TD>LED / Switch board	  </TD><TD>P2            </TD><TD>5 pole flat-cable with 2 white plugs (30 cm)</TD></TR>
+<TR><TD> 8</TD><TD>PWR button connection	          </TD><TD>LED / Switch board           </TD><TD>P1            </TD><TD>pwm management board 1</TD><TD>P3            </TD><TD>3 pole flat-cable with 2 white plugs (20 cm)</TD></TR>
+<TR><TD> 9</TD><TD>Pass through PWR connection	      </TD><TD>LED / Switch board           </TD><TD>P3            </TD><TD>pwm management board 2</TD><TD>POWER-BUTTON  </TD><TD>3 pole flat-cable with 2 white plugs (30 cm)</TD></TR>
+<TR><TD>10</TD><TD>Shutdown connection	              </TD><TD>pwm management board 1       </TD><TD>PI SHUTDOWN #1</TD><TD>topboard	          </TD><TD>PWR-DOWN      </TD><TD>2 pole flat-cable with 2 white plugs (30 cm)</TD></TR>
+<TR><TD>11</TD><TD>Pass through shutdown connection   </TD><TD>pwm management board 1       </TD><TD>PI SHUTDOWN #2</TD><TD>pwm management board 2</TD><TD>PI SHUTDOWN #1</TD><TD>2 pole flat-cable with 2 white plugs (30 cm)</TD></TR>
+</TABLE>
+
+
+
+
+
+
+
+
+
+*/

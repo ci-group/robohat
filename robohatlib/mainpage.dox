@@ -1,276 +1,45 @@
 /**
 \mainpage Main page
 
-
+<BR>
 <h1>Robohat</h1>
 
 \image html robohat.png
 
-For hardware description, see 'Robohardware.docx'
-
-The electronics of Robohat consits out mutiple boards, and is build arround a RaspberryPi 4. On this Raspberry a 'Topboard' is connected (as a hat) which is in its turn connencted to the rest of the baords.
-A user can control the electronics with a library written in python called 'Robohat library'
-
-<h2>Topboard</h2>
-\image html topboard.png
-
-
-The Topboard is the connection between the RaspberryPi and the rest of the system.
-On the Topboard itself a buzzer, and an IO expander available. These can be accesed by the Topboard API calls.
-
-<h2>IMU</h2>
-\image html IMU.png
-
-The IMU is connected to the PI through the Topboard. Is accessed by its OWM API-calls. At IMU nothing is selectedable and should be auto detected at startup of the Robohat library.
-
-
-<h2>Servo assembly</h2>
-The servo assembly consists of 2 boards (the PWM board and the ADC board) sandwitched together. The servo assembly powers, drives and readsout the attached servos. A Servo aseembly is connected by a flat-cable onto the Topboard (onto plug P3 or plug P4)
-At the back of the Servo assembly (at the PWM board) are 2 dip-swiches mounted. Onto this swiches an address of the servo assembly can be selected. Be sure if you use 2 servo assemblies (or in the future more), that the addreses should NOT be the same.
-To keep it simple, set the address of switch SW1 the same as the switch SW2.
-
-The Servo assembly handles the power distrubution of the servo. The servos are grouped. Each goup has its own powersupplie. If servos in a group take to much power to handle, you can swap a servo with an other group to even the power distrubtion.
-The Servo groups are
 
 <BR>
-<TABLE style="width:200px">
-<TR><TH style="text-align: left">Servo group</TH><TH style="text-align: left" colspan = "4">Servos</TH></TR>
-<TR><TD>1</TD><TD>1</TD><TD>5</TD><TD>9</TD><TD>13</TD></TR>
-<TR><TD>2</TD><TD>2</TD><TD>6</TD><TD>10</TD><TD>14</TD></TR>
-<TR><TD>3</TD><TD>3</TD><TD>7</TD><TD>11</TD><TD>15</TD></TR>
-<TR><TD>4</TD><TD>4</TD><TD>8</TD><TD>12</TD><TD>16</TD></TR>
-</TABLE>
-
-
-<h2>Powerboard</h2>
-\image html powerboard.png
-
-The accu can deliver a huge amount of power. To keep it save and prevent wrong useage of the accu, each accu has its own powerboard.
-
-So the powerboard is the power distrutor and the supervisor of the Accu.
-First an accu with enough capacity has to be connected. When the accu has enough capacity, a LED will blink two times.
-The LED will flash mutiple times, when the Accu capacity to low, but still measureble. When the accu is complety dead nothing will happen.
-
-Power on
-The Robohat can only be turned on when the accu has enough capacity. To power on, the user has to press the power-on switch. When the switch is pressed the LED will blink 3 times. After the blinking period,
-the LED will flash mutiple times. The user should release the power switch before the flashen stops. Nothing will happen, when the user releases the button after flashing is finished. This is done, to prevent
-accidentally turning on the Robohat.
-
-Turning off the power has to be done the same way (pressing the button (and holding it while the LED is blinking, and releasing it while the LED flashing)
-Note. A hard power-shutdown can destroy disk-data. Use the shutdown API-function of the Robohat library, or type
-/code
-sudo shutdown now
-/endcode
-in the console of the Raspberry
-
-When the Robohat is turned on, and the capacity goes below a threshold (2%) the LED will flash, and the power will eventualy will shutdown. Because the accu capacity is too low, the user isn'able to turn the power on again.
-The auto shutdown will be performed to save the accu. The accu will be destroyed if used below a capacity of 1%
-
-Note: A gracefull shutdown (shut-downing the OS of the Raspberry) will be performed when the Robohat library is beeing used and the capacity of the accu goed below 5%. This is more preferable. The disk-data could be destroyed with an sudden power-shutdown.
-
-While the accu is in standby, the led will periodly flash (interval of 6 seconds)
-
-
-
-
-
-<h1>Robohat library</h1>
-
-Version: 0.0.2
-
-Robohat library is an library to access IO of the Robohat project written in Python
-
-
-<h2>Robohatlib test</h1>
-The Robohat library comes with a testroutine wich consists of 2 files
-
-test.py
-<BR>
-test_config.py
-<BR>
-
-These files should be placed in the directory where the 'robohatlib' is placed
-
-To execute the test:
-
-\code
-cd ~/robohat
-python3 test.py
-\endcode <I>example to execute the test python module. Can be placed in a batch file</I>
-
-When starting the test program (which initialises the Robohatlib) a summery of the IO will be printed on the console. The user will be notified when a IO devices will fail.
-
-By typing help (+ [RETURN] ) a list with commandos will be displayed.
-
-<BR>
-<BR>
-<BR>
-
-<h2>Using Robohatlib</h1>
-
-<BR>
-The Startpoint of the RoboHat Library is the Robohat class. After contructing the Robohat class, the 'init' function (of the Robohat class) has to be executed. The rest of the Robohat class consist of functions which can be used to access the Robohat hardware.
-
-<BR>
-
-
-A little example of using the Robohat library
-
-\code
-    robohat = Robohat(main_config.servoassembly_1_config, main_config.servoassembly_2_config, main_config.TOPBOARD_IOEXANDER_SW)
-    robohat.scan_i2c_bus()
-    robohat.init(main_config.SERVOBOARD_1_DATAS_ARRAY, main_config.SERVOBOARD_2_DATAS_ARRAY)
-
-    robohat.set_led_color(Color.GREEN)
-
-    for i in range(1,1800, 1):
-        angle = i / 10.0
-        robohat.set_servo_multiple_angles([angle, angle, angle, angle, angle, angle, angle, angle, angle, angle, angle, angle, angle, angle, angle, angle, angle, angle, angle, angle, angle, angle, angle, angle, angle, angle, angle, angle, angle, angle, angle, angle])
-        print("-->" + str(robohat.get_servo_single_angle(1)) + " °")
-        time.sleep(1)
-
-    robohat.set_led_color(Color.RED)
-    for i in range(1800,1, -1):
-        angle = i / 10.0
-        robohat.set_servo_multiple_angles([angle, angle, angle, angle, angle, angle, angle, angle, angle, angle, angle, angle, angle, angle, angle, angle, angle, angle, angle, angle, angle, angle, angle, angle, angle, angle, angle, angle, angle, angle, angle, angle])
-        print("-->" + str(robohat.get_servo_single_angle(1)) + " °")
-        time.sleep(1)
-
-\endcode <I>example sourcecode</I>
-
-
-
-<h1>Robohat constructor</h1>
-
-<BR>
-The Robohat constructor, consist out of 3 parameters, 2 ServoAssemblyConfigs and a Switch value
-<BR>
-
-\code
-robohat = Robohat(SERVOASSEMBLY_1_CONFIG, SERVOASSEMBLY_2_CONFIG, TOPBOARD_IO_SWITCH)
-\endcode <I>Robohat constructor</I>
-
 <TABLE class="par">
-<TR><TH>SERVOASSEMBLY_1_CONFIG</TH>                     <TH>configuration of first servo assembly (ServoAssemblyConfig) </TH> </TR>
-<TR><TH>SERVOASSEMBLY_2_CONFIG</TH>                     <TH>configuration of second servo assembly (ServoAssemblyConfig) </TH> </TR>
-<TR><TH>TOPBOARD_IO_EXPANDER_SW</TH>                    <TH>IO Expander switch value (int) </TH> </TR>
+<TR><TD>ProjectID:  </TD><TD>2022-2823-01</TD>                                              </TR>
+<TR><TD>ProjectName:</TD><TD>RaspberryRobohat_2</TD>                                        </TR>
+<TR><TD>Contact:    </TD><TD>A. Denker,M. Molenaar, N. Althuisius</TD>                      </TR>
+<TR><TD>E-mail:	    </TD><TD>a.denker@vu.nl,  m.molenaar@vu.nl,  n.althuisius@vu.nl</TD>    </TR>
 </TABLE>
 
 <BR>
-The servo assembly is the PCB to which the servos are connected
-\image html servo_assembly.jpg the servo assembly PCB
 
-<h1>ServoAssemblyConfig</h1>
+\image html vu_logo.png
 
-A ServoAssemblyConfig is the configuration for a ServoAssembly board, which consist out of 4 parameters.
+<BR>
+<BR>
+<BR>
 
-\code
-servoassembly_1_config = ServoAssemblyConfig(SERVOASSEMBLY_1_NAME, SERVOASSEMBLY_1_SW1_PWM_ADDRESS,SERVOASSEMBLY_1_SW2_POWER_GOOD_ADDRESS, SERVOASSEMBLY_1_PWMPLUG)
-\endcode <I>ServoAssemblyConfig constructor</I>
 
+<B>Change log</B>
+<BR>
 <TABLE class="par">
-<TR><TH>SERVOASSEMBLY_1_NAME</TH>                   <TH>for your own reference </TH> </TR>
-<TR><TH>SERVOASSEMBLY_1_SW1_PWM_ADDRESS</TH>        <TH>SW1, switch value for the PWM address (a switch on the assembly bord, default 0 or 1)  </TH> </TR>
-<TR><TH>SERVOASSEMBLY_1_SW2_POWER_GOOD_ADDRESS</TH> <TH>SW2, switch value for the POWER GOOD address (a switch on the assembly bord, default 0 or 1, but the same as SW1) </TH> </TR>
-<TR><TH>SERVOASSEMBLY_1_PWMPLUG</TH>                <TH>flatcable connected to P3 or P4 of the topboard</TH> </TR>
+<tr><th>Who</th><th>When</th><th>What</th></tr>
+<TR><TD>..</TD><TD>..</TD><TD>..</TD></TR>
+<TR><TD>..</TD><TD>..</TD><TD>..</TD></TR>
 </TABLE>
 
-
-\image html assemblyboards_dipswitch.png settings of the switch on a servo assembly and its value
-
-<B>note.</B>
 <BR>
-One assembly-board should always be connected to connector P3 of the topboard. The second assembly board is not mandantory, which can be connected to P4 of the topboard. <BR>
-When an assembly-board is connected at connecter P3 of the topboard, the ID of the assembly-board will be 0. <BR>
-When an assembly-board is connected at connector P4 of the topboard, the ID of the assembly-board will be 1. <BR>
-
-
-
 <BR>
 
-<h1>IO Expander switch value</h1>
-
-The last parameter of the robohat constructor, is the 'topboard_io_switch' value. The default value is 7.<BR>
-This value determines the The I2C-address of the IOexpander (MCP23008) of the topboard.<BR>
-The IO-pins can be accessed by plug J2 of the topboard<BR>
-
-\image html topboard_bottom.jpg the bottom of the topboard
-\image html topboard_dipswitch.png settings of the switch on the topboard and its value
-
+<B>Read the precautions for using the Robohat, see \ref precautions </B><BR>
 <BR>
-
-<h1>I2C-scan</h1>
-After the constructor, an I2C-scan can be done by issuing :
-<BR>
-
-\code
-robohat.scan_i2c_bus()
-\endcode <I>Scanning for i2c-devices</I>
-
-<BR>
-This is not mandatory, but easy for debugging
-<BR>
-
-<h1>robohat.init</h1>
-Before we have some action, we have to initialize the robohat class<BR>
-This will also give the parameters to each servo.<BR>
-<BR>
-
-\code
-robohat.init(main_config.SERVOBOARD_1_DATAS_ARRAY, main_config.SERVOBOARD_2_DATAS_ARRAY)
-\endcode <I>initializing robohat</I>
-
-<BR>
-    The parameters consist of 2 arrays of ServoData
-
-\code
-SERVOBOARD_1_DATAS_ARRAY = [
-                 ServoData(1, 500, 2500, 180, 0, 72.2058435743876, -22.8429203374794),
-                 ...
-                 ...
-\endcode <I>section of the servoboard config array</I>
-
-<h1>ServoData</h1>
-
-<TABLE class="par">
-<TR><TH>SERVO_NR</TH>                   <TH>servo nr of connected servo </TH> </TR>
-<TR><TH>MIN_TIME</TH>                   <TH>time of minimal angle of the servo in uS (example: 500 uS)  </TH> </TR>
-<TR><TH>MAX_TIME</TH>                   <TH>time of maximal angle of the servo in uS (example: 2500 uS)  </TH> </TR>
-<TR><TH>RUNNING_DEGREE</TH>             <TH>range of the servo (example: 180)  </TH> </TR>
-<TR><TH>OFFSET_DEGREE</TH>              <TH>offset of the angle (nearly always: 0)  </TH> </TR>
-<TR><TH>FORMULA_A</TH>                  <TH>first parameter of formula, servo measure-voltage to angle   </TH> </TR>
-<TR><TH>FORMULA_B</TH>                  <TH>second parameter of formula, servo measure-voltage to angle  </TH> </TR>
-</TABLE>
-
-\image html graph_voltage_to_angle.png servo voltage to angle
-
-After initialisation the servos position can be altered
-
-
-<h1>Interrupts</h1>
-The Robohat library can generated 3 interrupts. The first one is the interrupt of the Topboard IO-expander. Both Assembly boards can also generate a interrupt.
-
-<h2>Topboard interrupt</h2>
-When an I/O pin of the Topboard IO expander is set as an intput, it can generate an interrupt. To catch this interrupt, a callback function has to be set with the function 'set_topboard_io_expander_int_callback( _the_
-function)' of the Robohat library.
-This callback function has accept an integer as parameter. This parameter is set to tell the callback function which IO pin has cause the triggering of the interrupt.
-
-<h2>Assemblyboard interrupt</h2>
-Both assembly board has a IO exapnder which is used to detect if the power delivery for the servos is working correctly. To detect a power failer only 4 IO pins of the expander are used. IO pin 4,5 and 6 can be used by a user.
-When these pins a configured as an input, in can generate an interrupt.
-To catch this interrupt, a callback function has to be set with the function 'set_topboard_io_expander_int_callback( _the_
-function)' of the Robohat library.
-This callback function has accept an integer as parameter. This parameter is set to tell the callback function which IO pin has cause the triggering of the interrupt.
-
-
-<h1>set the servos angles</h1>
-
-with the function 'set_servos_angles' you set the angle of all the servos. The array has to be have a size of 16 or 32 elements. When the size is 16 elements, only the first 16 servos will be addressed. When the array has 32 elements, all of the  servos will be addressed.
-
-/code
-        robohat.set_servos_angles([angle, angle, angle, angle, angle, angle, angle, angle, angle, angle, angle, angle, angle, angle, angle, angle])
-/endcode  <I>Setting the servos to an angle</I>
-
-
+<B>Hardware description of the Robohat, see \ref hardware </B><BR>
+<B>Software description of the Robohat, see \ref software </B><BR>
 
 */
+
+
