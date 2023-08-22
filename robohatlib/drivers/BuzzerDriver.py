@@ -65,11 +65,10 @@ class BuzzerDriver:
         """!
          Beeps the buzzer at a requested frequency, has to be released or set to 0
 
-
          @param _beep_freq wanted frequency in Hz
          @return None
          """
-        if _beep_freq is 0:
+        if _beep_freq == 0:
             self.buzzer_release()
         else:
             self.__pwm_ll_driver.do_single_freq(_beep_freq)

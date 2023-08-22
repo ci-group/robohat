@@ -10,7 +10,7 @@ do not alter
 
 
 
-ROBOHAT_LIB_VERSION_STR = "0.1.1"                    # version nr of library
+ROBOHAT_LIB_VERSION_STR = "0.2.0"                    # version nr of library
 ROBOHAT_BUILD_DATE_STR = "15-aug-2023"               # build date of library YYMMDD
 
 

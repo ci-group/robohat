@@ -257,7 +257,7 @@ class ServoBoard:
         should_be_time = [0] * 16
         for i in range(0, 16):
             angle = current_angles[i]
-            if angle is -1:
+            if angle == -1:
                 angle = 90
             should_be_time[i] = self.__servo_datas_array[i].convert_angle_to_time(angle)
 

@@ -148,7 +148,7 @@ class PowerMonitorAndIO:
         if self.__expander is not None:
             if self.__check_if_expander_io_is_available(_io_nr) is True:
                value = self.__expander.get_pin_direction(_io_nr)
-               if value is 0:
+               if value == 0:
                    return ExpanderDir.OUTPUT
                else:
                    return ExpanderDir.INPUT
@@ -201,7 +201,7 @@ class PowerMonitorAndIO:
             if self.__check_if_expander_io_is_available(_io_nr) is True:
                 if self.get_io_expander_direction(_io_nr) == ExpanderDir.INPUT:
                     value = self.__expander.get_pin_data(_io_nr)
-                    if value is 0:
+                    if value == 0:
                         return ExpanderStatus.LOW
                     else:
                         return ExpanderStatus.HIGH
@@ -302,16 +302,16 @@ class PowerMonitorAndIO:
         """
 
         interrupt_stats = self.__expander.read_interrupt_status()
-        if RoboUtil.check_bit(interrupt_stats, 0) is 1:
+        if RoboUtil.check_bit(interrupt_stats, 0) == 1:
             print("Major error: power fail DC/DC 1")
             self.__do_signaling_device()
-        if RoboUtil.check_bit(interrupt_stats, 1) is 1:
+        if RoboUtil.check_bit(interrupt_stats, 1) == 1:
             print("Major error: power fail DC/DC 2")
             self.__do_signaling_device()
-        if RoboUtil.check_bit(interrupt_stats, 2) is 1:
+        if RoboUtil.check_bit(interrupt_stats, 2) == 1:
             print("Major error: power fail DC/DC 3")
             self.__do_signaling_device()
-        if RoboUtil.check_bit(interrupt_stats, 3) is 1:
+        if RoboUtil.check_bit(interrupt_stats, 3) == 1:
             print("Major error: power fail DC/DC 4")
             self.__do_signaling_device()
 
