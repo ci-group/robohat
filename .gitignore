@@ -10,5 +10,6 @@
 /robohatlib/hal/definitions/__pycache__/
 /doc/
 __pycache__
-/images/
 /.gitattributes
+/_doc
+/robohatlib/Document1.txt
