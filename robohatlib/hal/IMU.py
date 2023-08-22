@@ -17,6 +17,12 @@ class IMU:
     """
 
     def __init__(self, _io_handler: IOHandler, _imu_def: IMUDef):
+        """!
+        Constructor of this class
+        @param _io_handler: Connections to our hardware
+        @param _imu_def: Definition of this class
+        """
+
         lis3mdl_i2c_def = _imu_def.get_lis3mdl_i2c_device_def()
         i2c_device_lis3ml = _io_handler.get_i2c_device(lis3mdl_i2c_def)
 
@@ -67,7 +73,7 @@ class IMU:
 
     def do_imu_test(self) -> None:
         """!
-        Does a test
+        Does a small test
         @return: None
         """
         if self.__lis3ml is None and self.__lsm6ds33 is None:

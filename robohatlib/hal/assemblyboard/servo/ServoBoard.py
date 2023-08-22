@@ -43,10 +43,6 @@ class ServoBoard:
         @return: None
         """
 
-        # self.__servo_datas_array = _servo_datas_array
-        # self.__pwm.init_pca9685()
-        # self.__servo_adc.init_adc()
-
         self.__servo_datas_array = _servo_datas_array
         self.__servo_adc.init_adc()
 

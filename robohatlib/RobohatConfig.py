@@ -57,6 +57,7 @@ ACCU_VOLTAGE_TO_PERCENTAGE_ARRAY =  [
                                     [9.82,	1],
                                     [10.83,	5],
                                     [11.06,	10],
+
                                     [11.12,	15],
                                     [11.18,	20],
                                     [11.24,	25],
@@ -119,6 +120,8 @@ TOPBOARD_IO_EXPANDER_DEF = IOExpanderDef("topboard_io_expander",
                                          TOPBOARD_IO_EXPANDER_INTERRUPT_SETTINGS) # io expander definition of the topboard
 
 # -------------------
+
+SERVO_DEFAULT_PWM_FREQ = 50
 """!
 Servo assembly board settings
 """

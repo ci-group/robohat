@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 """!
-This file consists of the Constants of the Robohat lib
+This file consists of the Constants for the Robohat lib
 do not alter
 """
 

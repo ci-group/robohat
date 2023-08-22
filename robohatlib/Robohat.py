@@ -341,6 +341,9 @@ class Robohat:
         @return: None
         """
 
+        avail_servos = self.__get_servos_start_stop_depending_available_assembly_board()
+        first_servo = avail_servos[0]
+        last_servo = avail_servos[1]
 
         pre_angles = self.get_servo_multiple_angles()
         previous_direct_mode:bool = self.get_servo_is_direct_mode()
@@ -354,7 +357,7 @@ class Robohat:
                 _min_range, _min_range, _min_range, _min_range, _min_range, _min_range, _min_range, _min_range, _min_range, _min_range, _min_range, _min_range, _min_range, _min_range, _min_range, _min_range
             ])
 
-        self.do_wait_until_servos_are_wanted_angles(0, 31, 15)
+        self.do_wait_until_servos_are_wanted_angles(first_servo, last_servo, 15)
         sleep(2)
 
         voltages_min = self.get_servo_adc_multiple_channels()
@@ -366,7 +369,7 @@ class Robohat:
                 _max_range, _max_range, _max_range, _max_range, _max_range, _max_range, _max_range, _max_range, _max_range, _max_range, _max_range, _max_range, _max_range, _max_range, _max_range, _max_range
             ])
 
-        self.do_wait_until_servos_are_wanted_angles(0, 31, 15)
+        self.do_wait_until_servos_are_wanted_angles(first_servo, last_servo, 15)
         sleep(2)
 
         voltage_max = self.get_servo_adc_multiple_channels()
@@ -385,7 +388,7 @@ class Robohat:
                 else:
                     print("Voltage range is 0, divide by zero")
 
-        self.do_wait_until_servos_are_wanted_angles(0, 31, 15)
+        self.do_wait_until_servos_are_wanted_angles(first_servo, last_servo, 15)
         sleep(2)
 
         default_degree = 90
@@ -396,7 +399,7 @@ class Robohat:
                 default_degree, default_degree, default_degree, default_degree, default_degree, default_degree, default_degree, default_degree, default_degree, default_degree, default_degree, default_degree, default_degree, default_degree, default_degree, default_degree
             ])
 
-        self.do_wait_until_servos_are_wanted_angles(0, 31, 15)
+        self.do_wait_until_servos_are_wanted_angles(first_servo, last_servo, 15)
         sleep(2)
         self.set_servo_direct_mode(previous_direct_mode)
 
@@ -532,37 +535,37 @@ class Robohat:
                 break
     # --------------------------------------------------------------------------------------
 
-    def get_servo_are_multiple_servos_wanted_angles(self, _start_servo_index: int, _stop_servo_index: int) -> bool:
+    def get_servo_are_multiple_servos_wanted_angles(self, _first_servo: int, _last_servo: int) -> bool:
         """!
         Returns true if (previous) wanted angles are the same as the actual angles of the servos
 
-        @param _start_servo_index: The first servo of the pool of servos
-        @param _stop_servo_index: The last servo of the pool of servos
+        @param _first_servo: The first servo of the pool of servos
+        @param _last_servo: The last servo of the pool of servos
         @return: bool
         """
 
         return_value:bool = True
 
-        for servo_nr in range(_start_servo_index,(_stop_servo_index+1)):
+        for servo_nr in range(_first_servo, (_last_servo + 1)):
             return_value = return_value and self.get_servo_is_single_servo_wanted_angle(servo_nr)
 
         return return_value
 
     # --------------------------------------------------------------------------------------
 
-    def do_wait_until_servos_are_wanted_angles(self, _start_servo_index: int, _stop_servo_index: int, _time_in_seconds_until_escape = 15):
+    def do_wait_until_servos_are_wanted_angles(self, _first_servo: int, _last_servo: int, _time_in_seconds_until_escape = 15):
         """!
         Wait until current angles are the same as the wanted angles
 
-        @param _start_servo_index: The first servo of the pool of servos
-        @param _stop_servo_index: The last servo of the pool of servos
+        @param _first_servo: The first servo of the pool of servos
+        @param _last_servo: The last servo of the pool of servos
         @param _time_in_seconds_until_escape: Time to prevent endless loop
         @return: None
         """
         counter_seconds = 0
         counter_100ms = 0
 
-        while self.get_servo_are_multiple_servos_wanted_angles(0, 31) is False:
+        while self.get_servo_are_multiple_servos_wanted_angles(_first_servo, _last_servo) is False:
             sleep(0.1)
             counter_100ms = counter_100ms + 1
             if counter_100ms == 10:
@@ -1147,5 +1150,29 @@ class Robohat:
         """
         if self.__servo_assembly_2 is not None:
             self.__servo_assembly_2.set_io_expander_int_callback_function(_callback)
+
+    # ------------------------------------------------------------------------------------
+
+    def __get_servos_start_stop_depending_available_assembly_board(self) -> Tuple[int, int]:
+        """!
+        Gets the first and last servo depending on the availability of the assembly boards
+
+        @return: Tuple with first_servo, last_servo
+        """
+
+        if self.get_assemblyboard_is_connected(PwmPlug.PWMPLUG_P3) is True and self.get_assemblyboard_is_connected(PwmPlug.PWMPLUG_P4) is True:
+            first_servo = 0
+            second_servo = 31
+        elif self.get_assemblyboard_is_connected(PwmPlug.PWMPLUG_P3) is True and self.get_assemblyboard_is_connected(PwmPlug.PWMPLUG_P4) is False:
+            first_servo = 0
+            second_servo = 15
+        elif self.get_assemblyboard_is_connected(PwmPlug.PWMPLUG_P3) is False and self.get_assemblyboard_is_connected(PwmPlug.PWMPLUG_P4) is True:
+            first_servo = 16
+            second_servo = 31
+        else:
+            first_servo = -1
+            second_servo = -1
+
+        return first_servo, second_servo
 
     # ------------------------------------------------------------------------------------

@@ -5,6 +5,7 @@ try:
     from robohatlib.helpers.RoboUtil import RoboUtil
     from robohatlib.driver_ll.i2c.I2CDevice import I2CDevice
     from robohatlib.RobohatConfig import DEBUG
+    from robohatlib.RobohatConfig import SERVO_DEFAULT_PWM_FREQ
 except ImportError:
     print("Failed to resolve dependencies for the PCA9685")
     raise
@@ -70,7 +71,7 @@ class PCA9685:
         self.__do_idle()
         self.__do_invert_and_set_driver_to_pushpull()
 
-        self.__set_pwm_freq(50)
+        self.__set_pwm_freq(SERVO_DEFAULT_PWM_FREQ)
         #if _should_be_time is not None:
 
         self.sleep()

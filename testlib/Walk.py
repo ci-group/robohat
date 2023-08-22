@@ -6,7 +6,6 @@ try:
     from enum import Enum
     from enum import IntEnum
 
-    from testlib.WalkDriver import WalkDriver
     from testlib.WalkServoID import WalkServoID
 
 except ImportError:
