@@ -6,11 +6,13 @@ A. Denker (a.denker@vu.nl)
 
 Driver of PCA9685.
 PCA9685 is a 12 bit, 16 channel PWM driver controlled by I2C
+
+Needed is the connected I2C-bus
+@init _should_be_time can be given. When absent he time will be the default time
 """
 
-import math
-
 try:
+    import math
     from robohatlib.helpers.RoboUtil import RoboUtil
     from robohatlib.driver_ll.i2c.I2CDevice import I2CDevice
     from robohatlib.RobohatConfig import DEBUG
@@ -63,7 +65,7 @@ class PCA9685:
 
     # --------------------------------------------------------------------------------------
 
-    def init_pca9685(self, _should_be_time) -> None:
+    def init_pca9685(self, _should_be_time = None) -> None:
         """!
         Initializes PCA9685 and set time of the current angles
         @return None:
@@ -75,7 +77,10 @@ class PCA9685:
         self.__set_pwm_freq(SERVO_DEFAULT_PWM_FREQ)
 
         self.sleep()
-        self.set_on_time_all_channels(_should_be_time)
+
+        if _should_be_time is not None:
+            self.set_on_time_all_channels(_should_be_time)
+
         self.wake()
     # --------------------------------------------------------------------------------------
     def set_on_time_channel(self, _channel: int, _time_wanted_us: float) -> None:
@@ -99,20 +104,22 @@ class PCA9685:
     # --------------------------------------------------------------------------------------
     def set_on_time_all_channels(self, _wanted_times_us: []) -> None:
         """!
-        @param _wanted_times_us: a array of 16, with the the times
+        @param _wanted_times_us: a array of 16, with the times
         @return: None
         """
-        data_to_send = bytes([LED0_ON_L_ADDRESS])
-        for i in range(0, 16):
-            actual_ticks_on = self.__convert_time_us_to_tick(_wanted_times_us[i])
-            on_ticks = 0
-            off_ticks = 4095 - actual_ticks_on - on_ticks
 
-            on_tick_bytes = on_ticks.to_bytes(2, 'little')
-            off_tick_bytes = off_ticks.to_bytes(2, 'little')
+        if _wanted_times_us is not None:
+            data_to_send = bytes([LED0_ON_L_ADDRESS])
+            for i in range(0, 16):
+                actual_ticks_on = self.__convert_time_us_to_tick(_wanted_times_us[i])
+                on_ticks = 0
+                off_ticks = 4095 - actual_ticks_on - on_ticks
 
-            data_to_send = data_to_send + bytes([on_tick_bytes[0], on_tick_bytes[1], off_tick_bytes[0], off_tick_bytes[1]])
-            self.__i2c_device.i2c_write_bytes(data_to_send)
+                on_tick_bytes = on_ticks.to_bytes(2, 'little')
+                off_tick_bytes = off_ticks.to_bytes(2, 'little')
+
+                data_to_send = data_to_send + bytes([on_tick_bytes[0], on_tick_bytes[1], off_tick_bytes[0], off_tick_bytes[1]])
+                self.__i2c_device.i2c_write_bytes(data_to_send)
 
     # --------------------------------------------------------------------------------------
     def sleep(self) -> None:

@@ -5,6 +5,8 @@ Electronica-Beta-VU
 A. Denker (a.denker@vu.nl)
 
 Driver for a buzzer
+
+Needed is the connected PWM_LL_DRIVER
 """
 
 try:

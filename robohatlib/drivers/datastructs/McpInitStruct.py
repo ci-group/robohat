@@ -7,9 +7,13 @@ A. Denker (a.denker@vu.nl)
 Data struct to attach properties to an io pin of an IO expander (MCP 23008)
 """
 
+try:
+    from robohatlib.driver_ll.constants.InterruptTypes import InterruptTypes
+    from robohatlib.driver_ll.constants.GpioDirection import GpioDirection
+except ImportError:
+    print("Failed to resolve dependencies for McpInitStruct")
+    raise
 
-from robohatlib.driver_ll.constants.InterruptTypes import InterruptTypes
-from robohatlib.driver_ll.constants.GpioDirection import GpioDirection
 
 class McpInitStruct:
 

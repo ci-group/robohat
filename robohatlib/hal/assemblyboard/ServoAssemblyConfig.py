@@ -6,7 +6,7 @@ A. Denker (a.denker@vu.nl)
 """
 
 try:
-    from robohatlib.PwmPlug import PwmPlug
+    from robohatlib.hal.assemblyboard.PwmPlug import PwmPlug
 except ImportError:
     print("Failed to import all dependencies for ServoAssemblyConfig")
     raise

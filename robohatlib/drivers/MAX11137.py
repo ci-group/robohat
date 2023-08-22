@@ -6,11 +6,11 @@ A. Denker (a.denker@vu.nl)
 
 Driver for MAX11137
 The MAX11137 is a 12 bit, 16 channel ADC controlled by SPI
+
+Needed is the connected SPI-bus
 """
 
 from __future__ import absolute_import, division, print_function, unicode_literals
-
-import time
 
 try:
     import spidev
@@ -23,8 +23,6 @@ try:
 except ImportError:
     raise ImportError("failed to resolve all dependencies for MAX11137")
 
-#--------------------------------------------------------------------------------------
-#RETURN
 #--------------------------------------------------------------------------------------
 
 CHANNEL_MSB  = 0
@@ -103,7 +101,6 @@ ADC_MAX_COUNT = 4095  # max count, (12 bit = 4095
 #--------------------------------------------------------------------------------------
 
 class MAX11137:
-
 
     # --------------------------------------------------------------------------------------
     def __init__(self, _spi_device: SPIDevice):
@@ -210,7 +207,7 @@ class MAX11137:
         adc_result_voltage = [-1.0] * 16  # allocates and fills alle elements of array with 0
         adc_result_voltage[channel_raw_int] = voltage_float
 
-        time.sleep(0.0001)
+        sleep(0.0001)
 
 
         for  i  in range(0,16):
@@ -223,7 +220,7 @@ class MAX11137:
             voltage_float = float((ADC_REF_VOLTAGE / ADC_MAX_COUNT) * value_raw_int) + 0.02
             adc_result_voltage[channel_raw_int] = voltage_float
 
-            time.sleep(0.0001)
+            sleep(0.0001)
 
         return adc_result_voltage
 
@@ -256,7 +253,6 @@ class MAX11137:
         @param _bit_value
         @return:
         """
-
 
         return_value = _previous_value | (_bit_value << _bit_pos)
         return return_value

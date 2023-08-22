@@ -8,6 +8,8 @@ LIS3MDL driver
 LIS3MDL is a 3D magnetic sensor controlled by I2C
 
 This chip resides on the IMU of the Robohat
+
+Needed is the connected I2C-bus
 """
 
 
@@ -35,8 +37,6 @@ INT_THS_H = 0x33
 
 _GAUSS_TO_UT = 100
 
-
-
 try:
     import time
     from typing import Tuple
@@ -44,10 +44,6 @@ try:
     from robohatlib.helpers.RoboUtil import RoboUtil
 except ImportError:
     raise ImportError("Failed to import needed dependencies for the LIS3MDL class")
-
-
-
-
 
 
 #   Full-scale (G), Gain@16-bit (LSB/Gauss)
@@ -86,6 +82,7 @@ class LIS3MDL:
     # --------------------------------------------------------------------------------------
     # --------------------------------------------------------------------------------------
     # --------------------------------------------------------------------------------------
+
     def init_LIS3MDL(self) -> None:
         """!
         Init if LIS3MDL
@@ -101,7 +98,7 @@ class LIS3MDL:
     # --------------------------------------------------------------------------------------
 
     def set_gain(self, _selected_gain_array: []) -> None:
-        """
+        """!
         Set the gain register
         @param _selected_gain_array:
         @return: None

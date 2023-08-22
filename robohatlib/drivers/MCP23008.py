@@ -6,6 +6,9 @@ A. Denker (a.denker@vu.nl)
 
 Driver for the MCP23008
 The MCP23008 is a 8 bit I/O expander controlled by I2C
+
+Needed is the connected I2C-bus
+An interrupt definition is not mandatory, but when the definition is not present the interrupt will be disabled
 """
 
 try:

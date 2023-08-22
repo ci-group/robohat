@@ -67,8 +67,8 @@ class Robohat:
         """!
         The Robohat base class initializer.
 
-        Checks if dip switches have no conflict
         Initializes all the IO
+        Checks if the IO have no conflict (due wrong settings of the addresses)
 
         @param _servo_assembly_1_config config of servo assembly 1
         @param _servo_assembly_2_config config of servo assembly 2
@@ -1127,8 +1127,8 @@ class Robohat:
         """
         return RobohatConstants.ROBOHAT_BUILD_DATE_STR
 
+    # End Library functions ---------------------------------------------------------------------------------
     # ------------------------------------------------------------------------------------
-
     def get_buzzer(self) -> Buzzer:
         """!
         Return the buzzer device for signaling purposes
@@ -1136,15 +1136,13 @@ class Robohat:
         """
         return self.__buzzer
 
-    # End Library functions ---------------------------------------------------------------------------------
-
     # ------------------------------------------------------------------------------------
     # ------------------------------------------------------------------------------------
     # ------------------------------------------------------------------------------------
 
     def set_assemblyboard_1_io_expander_int_callback(self, _callback) -> None:
         """!
-        Set a new function which will be executed when the io-expander of the assembly board 1 is triggerd
+        Set a (new) function which will be executed when the io-expander of the assembly board 1 is triggerd
         @param _callback: callback function
         @return: None
         """
@@ -1153,7 +1151,7 @@ class Robohat:
 
     def set_assemblyboard_2_io_expander_int_callback(self, _callback) -> None:
         """!
-        Set a new function which will be executed when the io-expander of the assembly board 2 is triggerd
+        Set a (new) function which will be executed when the io-expander of the assembly board 2 is triggerd
         @param _callback: callback function
         @return: None
         """
@@ -1184,4 +1182,5 @@ class Robohat:
 
         return first_servo, second_servo
 
-    # ------------------------------------------------------------------------------------
+
+

@@ -5,6 +5,8 @@ Electronica-Beta-VU
 A. Denker (a.denker@vu.nl)
 
 This is a driver for a LED
+
+Needed is the connected GPO_LL_DRIVER
 """
 try:
     from robohatlib.driver_ll.constants.GPOStat import GPOStat
@@ -12,10 +14,6 @@ try:
 except ImportError:
     raise ImportError("Failed to import needed dependencies for the LedDriver class")
 
-
-"""!
-LED driver
-"""
 
 class LedDriver:
     def __init__(self,  _gpo_ll_driver: GPO_LL_Driver):

@@ -8,6 +8,8 @@ LSM6DS33 driver
 The LSM6DS33 is a 3D accelerometer and 3D gyroscope controlled by I2C
 
 This chip resides on the IMU of the Robohat
+
+Needed is the connected I2C-bus
 """
 
 
@@ -263,18 +265,12 @@ SLV3_CONFIG = 0x20
 DATAWRITE_SLV0 = 0x21
 STATUS_MASTER = 0x22
 
-#define DS33_WHO_ID    0x69
-#define DSO_WHO_ID    0x6C
-
-
 try:
     import time
     from typing import Tuple
     from robohatlib.driver_ll.i2c.I2CDevice import I2CDevice
 except ImportError:
      raise ImportError("Failed to import needed dependencies for the LSM6DS33 class")
-
-# I2CDevice
 
 class LSM6DS33:
 
@@ -293,7 +289,7 @@ class LSM6DS33:
     # --------------------------------------------------------------------------------------
     def __init__(self, _i2c_device: I2CDevice):
         """!
-
+        Constructor of the LSM6DS33
         @param _i2c_device:
         """
         self.__i2c_device = _i2c_device
@@ -301,8 +297,8 @@ class LSM6DS33:
     # --------------------------------------------------------------------------------------
     def init_LSM6DS33(self) -> None:
         """!
-
-        @return:
+        Initializes the LSM6DS33
+        @return: None
         """
 
         # clear all
@@ -316,10 +312,10 @@ class LSM6DS33:
         self.__i2c_device.i2c_write_register_byte(CTRL1_XL, 0b10000100)            # 0x80 = 0b10000000// ODR = 1000 (1.66 kHz (high performance)); FS_XL = 00 (+/-2 g full scale)
 
         # Gyro
-        self.__i2c_device.i2c_write_register_byte(CTRL2_G, 0b10001000)            # 0x80 = 0b010000000 // ODR = 1000 (1.66 kHz (high performance)); FS_G = 00 (245 dps for DS33, 250 dps for DSO)
+        self.__i2c_device.i2c_write_register_byte(CTRL2_G, 0b10001000)              # 0x80 = 0b010000000 // ODR = 1000 (1.66 kHz (high performance)); FS_G = 00 (245 dps for DS33, 250 dps for DSO)
 
         # Common
-        self.__i2c_device.i2c_write_register_byte(CTRL3_C, 0x04)             # 0x04 = 0b00000100 // IF_INC = 1 (automatically increment register address)
+        self.__i2c_device.i2c_write_register_byte(CTRL3_C, 0x04)                    # 0x04 = 0b00000100 // IF_INC = 1 (automatically increment register address)
 
     # --------------------------------------------------------------------------------------
     # --------------------------------------------------------------------------------------

@@ -7,6 +7,7 @@ A. Denker (a.denker@vu.nl)
 Driver for the MAX11607
 The MAX11607 is an ADC, 4 channel, 10 bit controlled by I2C
 
+Needed is the connected I2C-bus
 """
 
 try:
