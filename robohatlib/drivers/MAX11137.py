@@ -1,4 +1,10 @@
-#!/usr/bin/env python
+"""!
+Robohatlib (2022-2823-01)
+Copyright © 2023 Vrije Universiteit Amsterdam
+Electronica-Beta-VU
+A. Denker (a.denker@vu.nl)
+"""
+
 from __future__ import absolute_import, division, print_function, unicode_literals
 
 import time

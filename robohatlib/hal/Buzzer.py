@@ -1,3 +1,10 @@
+"""!
+Robohatlib (2022-2823-01)
+Copyright © 2023 Vrije Universiteit Amsterdam
+Electronica-Beta-VU
+A. Denker (a.denker@vu.nl)
+"""
+
 try:
     from robohatlib.RobohatConfig import ALARM_PERMITTED, ALARM_TIMEOUT_IN_SEC, INIT_BEEP_PERMITTED
     from robohatlib.hal.definitions.BuzzerDef import BuzzerDef

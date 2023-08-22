@@ -1,3 +1,10 @@
+"""!
+Robohatlib (2022-2823-01)
+Copyright © 2023 Vrije Universiteit Amsterdam
+Electronica-Beta-VU
+A. Denker (a.denker@vu.nl)
+"""
+
 class SPIDeviceDef:
     def __init__(self, _name, _spi_bus_nr, _spi_cs_nr, _max_speed_hz = 8000000, _mode = 0b11):
         self.__name = _name

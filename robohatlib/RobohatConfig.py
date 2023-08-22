@@ -1,4 +1,13 @@
-#!/usr/bin/env python
+"""!
+Robohatlib (2022-2823-01)
+Copyright © 2023 Vrije Universiteit Amsterdam
+Electronica-Beta-VU
+A. Denker (a.denker@vu.nl)
+
+Configuration for the Robohat lib. These settings aren't ment to be altered by the app programmer
+do not alter
+"""
+
 
 try:
     from robohatlib.driver_ll.i2c.I2CDeviceDef import I2CDeviceDef
@@ -17,10 +26,7 @@ try:
 except ImportError:
     raise ImportError("Failed to import needed dependencies for the RobohatConfig")
 
-"""!
-Configuration for the Robohat lib. These settings aren't ment to be altered by the app programmer
-do not alter
-"""
+
 
 
 """!

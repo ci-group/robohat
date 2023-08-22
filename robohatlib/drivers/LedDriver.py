@@ -1,6 +1,9 @@
-#!/usr/bin/python3
-
-
+"""!
+Robohatlib (2022-2823-01)
+Copyright © 2023 Vrije Universiteit Amsterdam
+Electronica-Beta-VU
+A. Denker (a.denker@vu.nl)
+"""
 try:
     from robohatlib.driver_ll.constants.GPOStat import GPOStat
     from robohatlib.driver_ll.GPO_LL_Driver import GPO_LL_Driver
