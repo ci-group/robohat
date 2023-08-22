@@ -5,6 +5,7 @@ try:
     from robohatlib.Robohat import Robohat
     from robohatlib import RobohatConstants
     from robohatlib.PwmPlug import PwmPlug
+    from robohatlib.helpers.RoboUtil import RoboUtil
     from robohatlib.hal.assemblyboard.ServoAssemblyConfig import ServoAssemblyConfig
     from robohatlib.hal.assemblyboard.servo.ServoData import ServoData
     from robohatlib.hal.datastructure.Color import Color
@@ -67,7 +68,7 @@ class Example:
 
         self.__robohat = Robohat(TestConfig.servoassembly_1_config,
                                  TestConfig.servoassembly_2_config,
-                                 TestConfig.TOPBOARD_IO_EXPANDER_SW)
+                                 TestConfig.TOPBOARD_ID_SWITCH)
 
         # self.robohat.set_system_alarm_permitted(False)
 
@@ -278,28 +279,32 @@ class Example:
                 io_command = data_in_array[3]
                 if io_command == "dir":
                     board_nr = int(data_in_array[4])
+                    pwm_plug = RoboUtil.get_pwmplug_by_int(board_nr)
+
                     pin_nr = int(data_in_array[5])
                     value = data_in_array[6]
                     if value == "OUT" or value == "out":
-                        stat = self.__robohat.set_servo_io_expander_direction(board_nr, pin_nr, ExpanderDir.OUTPUT)
+                        stat = self.__robohat.set_servo_io_expander_direction(pwm_plug, pin_nr, ExpanderDir.OUTPUT)
                         if stat == IOStatus.IO_OK:
                             print("Direction set to output")
                     elif value == "IN" or value == "in":
-                        stat = self.__robohat.set_servo_io_expander_direction(board_nr, pin_nr, ExpanderDir.INPUT)
+                        stat = self.__robohat.set_servo_io_expander_direction(pwm_plug, pin_nr, ExpanderDir.INPUT)
                         if stat == IOStatus.IO_OK:
                             print("Direction set to input")
                     else:
                         print("Syntax error setting direction")
                 elif io_command == "output":
                     board_nr = int(data_in_array[4])
+                    pwm_plug = RoboUtil.get_pwmplug_by_int(board_nr)
+
                     pin_nr = int(data_in_array[5])
                     value = data_in_array[6]
                     if value == "HIGH" or value == "high":
-                        stat = self.__robohat.set_servo_io_expander_output(board_nr, pin_nr, ExpanderStatus.HIGH)
+                        stat = self.__robohat.set_servo_io_expander_output(pwm_plug, pin_nr, ExpanderStatus.HIGH)
                         if stat == IOStatus.IO_OK:
                             print("Pin set to HIGH")
                     elif value == "LOW" or value == "low":
-                        stat = self.__robohat.set_servo_io_expander_output(board_nr, pin_nr, ExpanderStatus.LOW)
+                        stat = self.__robohat.set_servo_io_expander_output(pwm_plug, pin_nr, ExpanderStatus.LOW)
                         if stat == IOStatus.IO_OK:
                             print("Pin set to LOW")
                     else:
@@ -424,13 +429,17 @@ class Example:
                 io_command = data_in_array[3]
                 if io_command == "dir":
                     board_nr = int(data_in_array[4])
+                    pwm_plug = RoboUtil.get_pwmplug_by_int(board_nr)
+
                     pin_nr = int(data_in_array[5])
-                    value = self.__robohat.get_servo_io_expander_direction(board_nr, pin_nr)
+                    value = self.__robohat.get_servo_io_expander_direction(pwm_plug, pin_nr)
                     print(value)
                 elif io_command == "input":
                     board_nr = int(data_in_array[4])
+                    pwm_plug = RoboUtil.get_pwmplug_by_int(board_nr)
+
                     pin_nr = int(data_in_array[5])
-                    value = self.__robohat.get_servo_io_expander_input(board_nr, pin_nr)
+                    value = self.__robohat.get_servo_io_expander_input(pwm_plug, pin_nr)
                     print(value)
                 else:
                     print("syntax error, get servo io ")

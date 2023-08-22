@@ -53,7 +53,7 @@ class SerTestClass:
 
         self.__robohat = Robohat(TestConfig.servoassembly_1_config,
                                  TestConfig.servoassembly_2_config,
-                                 TestConfig.TOPBOARD_IO_EXPANDER_SW)
+                                 TestConfig.TOPBOARD_ID_SWITCH)
 
         self.__robohat.init(TestConfig.SERVOBOARD_1_DATAS_ARRAY,
                             TestConfig.SERVOBOARD_2_DATAS_ARRAY)

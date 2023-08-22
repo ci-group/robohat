@@ -50,7 +50,7 @@ servoassembly_1_config = ServoAssemblyConfig(SERVOASSEMBLY_1_NAME,
 SERVOASSEMBLY_2_NAME = "servoassembly_2"                    # just a name for own reference
 SERVOASSEMBLY_2_SW1_PWM_ADDRESS = 1                         # sw1 value of the servo assembly
 SERVOASSEMBLY_2_SW2_POWER_GOOD_ADDRESS = 1                  # sw2 value of the servo assembly
-SERVOASSEMBLY_2_PWMPLUG = PwmPlug.PWMPLUG_P4      # connected port of the tophat board, is actual the cs of the SPI bus
+SERVOASSEMBLY_2_PWMPLUG = PwmPlug.PWMPLUG_P4                # connected port of the tophat board, is actual the cs of the SPI bus
 
 
 
@@ -80,6 +80,6 @@ servoassembly_2_config = ServoAssemblyConfig(SERVOASSEMBLY_2_NAME,
 
 #--------------------
 
-TOPBOARD_IO_EXPANDER_SW = 7         # switch value of the dip switch onto the topboard. Default value is 7
+TOPBOARD_ID_SWITCH = 7         # switch value of the dip switch onto the topboard. Default value is 7
 
 #--------------------
