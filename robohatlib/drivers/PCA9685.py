@@ -3,6 +3,9 @@ Robohatlib (2022-2823-01)
 Copyright © 2023 Vrije Universiteit Amsterdam
 Electronica-Beta-VU
 A. Denker (a.denker@vu.nl)
+
+Driver of PCA9685.
+PCA9685 is a 12 bit, 16 channel PWM driver controlled by I2C
 """
 
 import math
@@ -45,14 +48,6 @@ MODE2_OUTDRV_BITNR =    2  # output type
 MODE2_OUTNE1_BITNR =    0  # output mode when not enabled
 
 
-"""!
-PWM driver 
-
-~OE ie via een jumper       input pca
-INT_i2C gpio4               output pca, input cpu
-bus i2c-1
-"""
-
 class PCA9685:
 
     # --------------------------------------------------------------------------------------
@@ -78,7 +73,6 @@ class PCA9685:
         self.__do_invert_and_set_driver_to_pushpull()
 
         self.__set_pwm_freq(SERVO_DEFAULT_PWM_FREQ)
-        #if _should_be_time is not None:
 
         self.sleep()
         self.set_on_time_all_channels(_should_be_time)
@@ -105,8 +99,7 @@ class PCA9685:
     # --------------------------------------------------------------------------------------
     def set_on_time_all_channels(self, _wanted_times_us: []) -> None:
         """!
-
-        @param _wanted_times_us:
+        @param _wanted_times_us: a array of 16, with the the times
         @return: None
         """
         data_to_send = bytes([LED0_ON_L_ADDRESS])
@@ -184,11 +177,23 @@ class PCA9685:
     # --------------------------------------------------------------------------------------
 
     def __convert_time_us_to_tick(self, _time_wanted_us: float) -> int:
+        """!
+        Convert time in uS to tick needed for the register of the PCA9685
+        @param _time_wanted_us:  time in uS
+        @return: ticks
+        """
         time_per_tick = ((1.0 / self.__freq) / 4095.0) * 1000000
         actual_ticks = int(_time_wanted_us / time_per_tick)
         return actual_ticks
 
-    def __do_invert_and_set_driver_to_pushpull(self):
+    # --------------------------------------------------------------------------------------
+
+    def __do_invert_and_set_driver_to_pushpull(self) -> None:
+        """!
+        Set the driver to pushpull mode, and invert the outputs
+        @return None
+        """
+
         old_mode = self.__read(MODE2_ADDRESS)
         new_mode = old_mode | (1 << MODE2_INVRT_BITNR)
         new_mode = new_mode | (1 << MODE2_OUTDRV_BITNR)
@@ -196,19 +201,25 @@ class PCA9685:
 
     # --------------------------------------------------------------------------------------
     def __do_idle(self) -> None:
+        """!
+         @return None
+        """
         self.__write(0x00, 0x00)
 
     # --------------------------------------------------------------------------------------
     def __write(self, reg, value) -> None:
+        """!
+        @param reg: wanted register
+        @param value:  value to put into register
+        @return: None
+        """
         self.__i2c_device.i2c_write_register_byte(reg, value)
-        #self.__i2c_device.i2c_write_bytes(bytes([reg, value]))
 
     # --------------------------------------------------------------------------------------
     def __read(self, reg):
         """!
-
-        @param reg:
-        @return:
+        @param reg: wanted register
+        @return: register value
         """
 
         return_value_array = bytearray(2)

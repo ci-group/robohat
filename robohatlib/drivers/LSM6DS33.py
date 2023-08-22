@@ -4,7 +4,10 @@ Copyright © 2023 Vrije Universiteit Amsterdam
 Electronica-Beta-VU
 A. Denker (a.denker@vu.nl)
 
-Lsm6ds33 driver
+LSM6DS33 driver
+The LSM6DS33 is a 3D accelerometer and 3D gyroscope controlled by I2C
+
+This chip resides on the IMU of the Robohat
 """
 
 

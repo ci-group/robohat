@@ -3,6 +3,10 @@ Robohatlib (2022-2823-01)
 Copyright © 2023 Vrije Universiteit Amsterdam
 Electronica-Beta-VU
 A. Denker (a.denker@vu.nl)
+
+Driver for the MAX11607
+The MAX11607 is an ADC, 4 channel, 10 bit controlled by I2C
+
 """
 
 try:
@@ -12,10 +16,6 @@ except ImportError:
     raise
 
 class MAX11607:
-    """!
-    ADC, 4 channel, 10 bit I2C
-    """
-
     # --------------------------------------------------------------------------------------
     def __init__(self, _i2c_device:I2CDevice):
         """!

@@ -3,6 +3,8 @@ Robohatlib (2022-2823-01)
 Copyright © 2023 Vrije Universiteit Amsterdam
 Electronica-Beta-VU
 A. Denker (a.denker@vu.nl)
+
+This is a driver for a LED
 """
 try:
     from robohatlib.driver_ll.constants.GPOStat import GPOStat
@@ -18,8 +20,8 @@ LED driver
 class LedDriver:
     def __init__(self,  _gpo_ll_driver: GPO_LL_Driver):
         """!
-
-        @param _gpo_ll_driver:
+        Constructor of the LED driver
+        @param _gpo_ll_driver: connected _gpo_ll_driver
         """
         self.__gpo_ll_driver = _gpo_ll_driver
         self.__color_active = False
@@ -76,12 +78,12 @@ class LedDriver:
 
     # --------------------------------------------------------------------------------------
     def __set_status_led_to_vars(self):
-        self.__gpo_ll_driver.set_status(self.__return_gpioval_depending_boolean(self.__color_active))
+        self.__gpo_ll_driver.set_status(self.__return_gpio_value_depending_boolean(self.__color_active))
 
     # --------------------------------------------------------------------------------------
     # noinspection PyMethodMayBeStatic
-    def __return_gpioval_depending_boolean(self, _booleanval):
-        if _booleanval is False:
+    def __return_gpio_value_depending_boolean(self, _value: bool) -> GPOStat:
+        if _value is False:
             return GPOStat.GPO_LOW
         else:
             return GPOStat.GPO_HIGH

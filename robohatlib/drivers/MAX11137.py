@@ -3,6 +3,9 @@ Robohatlib (2022-2823-01)
 Copyright © 2023 Vrije Universiteit Amsterdam
 Electronica-Beta-VU
 A. Denker (a.denker@vu.nl)
+
+Driver for MAX11137
+The MAX11137 is a 12 bit, 16 channel ADC controlled by SPI
 """
 
 from __future__ import absolute_import, division, print_function, unicode_literals

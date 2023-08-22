@@ -4,7 +4,10 @@ Copyright © 2023 Vrije Universiteit Amsterdam
 Electronica-Beta-VU
 A. Denker (a.denker@vu.nl)
 
-Lis3MDL driver
+LIS3MDL driver
+LIS3MDL is a 3D magnetic sensor controlled by I2C
+
+This chip resides on the IMU of the Robohat
 """
 
 

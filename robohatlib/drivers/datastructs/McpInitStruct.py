@@ -3,16 +3,13 @@ Robohatlib (2022-2823-01)
 Copyright © 2023 Vrije Universiteit Amsterdam
 Electronica-Beta-VU
 A. Denker (a.denker@vu.nl)
+
+Data struct to attach properties to an io pin of an IO expander (MCP 23008)
 """
 
 
 from robohatlib.driver_ll.constants.InterruptTypes import InterruptTypes
 from robohatlib.driver_ll.constants.GpioDirection import GpioDirection
-
-
-"""!
-Data struct to attach properties to an io pin of an IO expander (MCP 23008)
-"""
 
 class McpInitStruct:
 

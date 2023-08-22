@@ -3,6 +3,9 @@ Robohatlib (2022-2823-01)
 Copyright © 2023 Vrije Universiteit Amsterdam
 Electronica-Beta-VU
 A. Denker (a.denker@vu.nl)
+
+Driver for the MCP23008
+The MCP23008 is a 8 bit I/O expander controlled by I2C
 """
 
 try:
@@ -27,12 +30,6 @@ INT_CAP_ADDRESS =       0x08
 GPIO_ADDRESS =          0x09
 
 INT_POL_BIT_NR =        1
-
-"""!
-MCP23008 driver
-"""
-
-
 
 class MCP23008:
     """!
@@ -102,21 +99,22 @@ class MCP23008:
 
     # --------------------------------------------------------------------------------------
     def set_pin_direction(self, _io_nr:int, _direction) -> None:
-        if DEBUG is True:
-            print("Setting pin direction: " + str(_io_nr) + " " + str(_io_nr) )
         """!
-        set the direction of a I/O pins. 1 to a pin is input.
-        @param _direction
-        @param _io_nr:
+        set the direction of a I/O pin.
+        @param _direction The direction 0 or 1:  1 to a pin is input, 0 is output.
+        @param _io_nr: I/O pin nr: 0 - 7
         @return: None
         """
+
+        if DEBUG is True:
+            print("Setting pin direction: " + str(_io_nr) + " " + str(_io_nr) )
         self.__set_pin(IO_DIR_ADDRESS, _io_nr, _direction)
 
     def get_pin_direction(self, _io_nr: int):
         """!
         Get the direction of a I/O pins. 1 to a pin is input.
-        @param _io_nr:
-        @return: None
+        @param _io_nr: I/O pin nr: 0 - 7
+        @return: int, pin direction
         """
         return self.__get_pin(IO_DIR_ADDRESS, _io_nr)
 
@@ -134,7 +132,7 @@ class MCP23008:
         @return: None
         """
         return self.__get_port(IO_DIR_ADDRESS)
-
+    # --------------------------------------------------------------------------------------
     def set_pin_pullup(self, _io_nr:int, _bool_value) -> None:
         """!
         Set pull up of a pin
