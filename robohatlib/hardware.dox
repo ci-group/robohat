@@ -25,7 +25,6 @@ The Raspberry (RPi for short) has multiple connections. Most connection can be u
 . The USB-C power-plug. The USB-C power-plug of the RPi may NOT be used. The power delivery for the RPi is done by the Topboard (see section below).
 Connecting both the USB-C power-plug and the Topboard can result in weird behaviour of the RPi.<BR>
 
-
 <BR>
 <hr style="width:100%;text-align:left;margin-left:0">
 <h2>Topboard</h2>
@@ -41,7 +40,6 @@ Actually the switch sets the I2C address of the I/O-expander on the Topboard. If
 
 \image html topboard_back.png the back-side of the Topboard
 \image html topboard_dipswitch.png address settings of the topboard and its value
-
 
 <h3>User available connections on the top-side of the Topboard</h3>
 
@@ -90,7 +88,6 @@ pinning of the I2C connector:<BR>
 2 SDA<BR>
 3 SCL<BR>
 4 + 3V3<BR>
-
 
 <h3>Other connections on the top side of the Topboard</h3>
 
@@ -179,7 +176,6 @@ I/O connector<BR>
 4 IO_6<BR>
 5 GND<BR>
 
-
 <b>Connecting the servos</b>
 
 The Servo assembly handles the power distribution of the servos. Each Servo assembly has to 16 servo channels. Those servo-channels are grouped in 4 groups.<BR>
@@ -213,15 +209,6 @@ RED                         PWM-signal<BR>
 ORANGE                      power<BR>
 WHITE (but can differ!)     pos-measure-signal<BR>
 <BR>
-
-
-
-
-
-
-
-
-
 
 <hr style="width:100%;text-align:left;margin-left:0">
 <h2>Powerboard</h2>
@@ -294,8 +281,6 @@ The Powerboard has a fuse. Make sure you know the cause, why the fuse is blown, 
 
 Fuse rating: 20A
 
-
-
 <hr style="width:100%;text-align:left;margin-left:0">
 <h2>IMU</h2>
 \image html IMU.png IMU
@@ -303,7 +288,6 @@ Fuse rating: 20A
 The Robohat has also a 'Inertial Measurement Unit' (IMU for short). With the IMU, the Robohat can track its movements.
 It can determine its position to read out the X,Y and Z magnetic fields direction. Also, it can measure the  acceleration in X, Y en Z direction. It has also a build in Gyroscope.
 The IMU is connected to the PI through the Topboard. Is accessed by its own API-calls. The IMU should be auto-detected. Nothing is selectable at the IMU.
-
 
 <hr style="width:100%;text-align:left;margin-left:0">
 
@@ -333,13 +317,5 @@ Below is a picture how the Robohat PCBs are connected together. The Second assem
 <TR><TD>10</TD><TD>Shutdown connection	              </TD><TD>pwm management board 1       </TD><TD>PI SHUTDOWN #1</TD><TD>topboard	          </TD><TD>PWR-DOWN      </TD><TD>2 pole flat-cable with 2 white plugs (30 cm)</TD></TR>
 <TR><TD>11</TD><TD>Pass through shutdown connection   </TD><TD>pwm management board 1       </TD><TD>PI SHUTDOWN #2</TD><TD>pwm management board 2</TD><TD>PI SHUTDOWN #1</TD><TD>2 pole flat-cable with 2 white plugs (30 cm)</TD></TR>
 </TABLE>
-
-
-
-
-
-
-
-
 
 */

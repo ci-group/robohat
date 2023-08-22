@@ -173,7 +173,6 @@ When these pins a configured as an input, in can generate an interrupt.
 To catch this interrupt, a callback function has to be set with the function 'set_topboard_io_expander_int_callback( _the_function)' of the Robohat library.
 This callback function has an integer as parameter. This parameter is set to tell the callback function which IO pin has cause the triggering of the interrupt.
 
-
 <hr style="width:100%;text-align:left;margin-left:0">
 <h2>Robohatlib test applications </h2>
 
@@ -219,7 +218,6 @@ python SerTest.py
 When starting the SerTest application (which initialises the Robohatlib) a summary of the IO will be printed on the console. The user will be notified when a IO device fails.
 
 A menu will appear. By section a menu entry, a function will be executed.
-
 
 <BR>
 <BR>

@@ -6,7 +6,6 @@
 
 \image html robohat.png
 
-
 <BR>
 <TABLE class="par">
 <TR><TD>ProjectID:  </TD><TD>2022-2823-01</TD>                                              </TR>
@@ -21,8 +20,6 @@
 
 <BR>
 <BR>
-<BR>
-
 
 <B>Change log</B>
 <BR>
@@ -31,8 +28,6 @@
 <TR><TD>..</TD><TD>..</TD><TD>..</TD></TR>
 <TR><TD>..</TD><TD>..</TD><TD>..</TD></TR>
 </TABLE>
-
-<BR>
 <BR>
 
 <B>Read the precautions for using the Robohat, see \ref precautions </B><BR>
