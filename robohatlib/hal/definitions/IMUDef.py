@@ -5,11 +5,20 @@ Electronica-Beta-VU
 A. Denker (a.denker@vu.nl)
 """
 
-from robohatlib.driver_ll.i2c.I2CDeviceDef import I2CDeviceDef
+try:
+    from robohatlib.driver_ll.i2c.I2CDeviceDef import I2CDeviceDef
+except ImportError:
+    raise ImportError("Failed to import needed dependencies for IMUDef")
 
 class IMUDef:
+    """!
+    Definition of a IMU
+    """
+
     def __init__(self, _name, _lis3mdl_i2c_device_def, _lsm6ds33_i2c_device_def):
         """!
+        Constructor of IMUDef
+
         @param _name:  name of this definition
         @param _lis3mdl_i2c_device_def: The definition for th LIS3MDL
         @param _lsm6ds33_i2c_device_def: The definition for th LMS6D33

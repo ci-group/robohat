@@ -3,6 +3,8 @@ Robohatlib (2022-2823-01)
 Copyright © 2023 Vrije Universiteit Amsterdam
 Electronica-Beta-VU
 A. Denker (a.denker@vu.nl)
+
+Just an configuration as needed, and used in the test routines
 """
 
 try:
@@ -14,17 +16,13 @@ except ImportError:
     print("Failed to import all dependencies for TestConfig")
     raise
 
+INITIAL_VOLT_TO_ANGLE_FORMULA_A =  68.50117096018737                    # parameter A of the formula servo voltage to angle (y = Ax + B)
+INITIAL_VOLT_TO_ANGLE_FORMULA_B =  -15.294412847106067                  # parameter B of the formula servo voltage to angle (y = Ax + B)
 
-#INITIAL_VOLT_TO_ANGLE_FORMULA_A = 73.00                             # part A of the formula servo voltage to angle (y = Ax + B)
-#INITIAL_VOLT_TO_ANGLE_FORMULA_B = -12.45                            # part B of the formula servo voltage to angle (y = Ax + B)
-
-INITIAL_VOLT_TO_ANGLE_FORMULA_A =  68.50117096018737
-INITIAL_VOLT_TO_ANGLE_FORMULA_B =  -15.294412847106067
-
-SERVOASSEMBLY_1_NAME = "servoassembly_1"                    # just a name for own reference
-SERVOASSEMBLY_1_SW1_PWM_ADDRESS = 0                         # sw1 value of the servo assembly
-SERVOASSEMBLY_1_SW2_POWER_GOOD_ADDRESS = 0                  # sw2 value of the servo assembly
-SERVOASSEMBLY_1_PWM_PLUG = PwmPlug.PWMPLUG_P3     # connected port of the tophat board, is actual the cs of the SPI bus
+SERVOASSEMBLY_1_NAME = "servoassembly_1"                                # just a name for own reference
+SERVOASSEMBLY_1_SW1_PWM_ADDRESS = 0                                     # sw1 value of the servo assembly
+SERVOASSEMBLY_1_SW2_POWER_GOOD_ADDRESS = 0                              # sw2 value of the servo assembly
+SERVOASSEMBLY_1_PWM_PLUG = PwmPlug.PWMPLUG_P3                           # connected port of the tophat board, is actual the cs of the SPI bus
 
 SERVOBOARD_1_DATAS_ARRAY = [
                     ServoData( 0, 500, 2500, 180, 0, INITIAL_VOLT_TO_ANGLE_FORMULA_A, INITIAL_VOLT_TO_ANGLE_FORMULA_B),
@@ -45,7 +43,7 @@ SERVOBOARD_1_DATAS_ARRAY = [
                     ServoData(15, 500, 2500, 180, 0, INITIAL_VOLT_TO_ANGLE_FORMULA_A, INITIAL_VOLT_TO_ANGLE_FORMULA_B),
                     ]                                       # array with servo settings : servo nr, min time us, max time us, max range degree, degree offset, formula A, formula B
 
-servoassembly_1_config = ServoAssemblyConfig(SERVOASSEMBLY_1_NAME,
+SERVOASSEMBLY_1_CONFIG = ServoAssemblyConfig(SERVOASSEMBLY_1_NAME,
                                              SERVOASSEMBLY_1_SW1_PWM_ADDRESS,
                                              SERVOASSEMBLY_1_SW2_POWER_GOOD_ADDRESS,
                                              SERVOASSEMBLY_1_PWM_PLUG)
@@ -78,7 +76,7 @@ SERVOBOARD_2_DATAS_ARRAY = [
                     ServoData(15, 500, 2500, 180, 0, INITIAL_VOLT_TO_ANGLE_FORMULA_A, INITIAL_VOLT_TO_ANGLE_FORMULA_B),
                     ]                       # array with servo settings :           servo nr, min time us, max time us, max range degree, degree offset, formula A, formula B
 
-servoassembly_2_config = ServoAssemblyConfig(SERVOASSEMBLY_2_NAME,
+SERVOASSEMBLY_2_CONFIG = ServoAssemblyConfig(SERVOASSEMBLY_2_NAME,
                                              SERVOASSEMBLY_2_SW1_PWM_ADDRESS,
                                              SERVOASSEMBLY_2_SW2_POWER_GOOD_ADDRESS,
                                              SERVOASSEMBLY_2_PWMPLUG)

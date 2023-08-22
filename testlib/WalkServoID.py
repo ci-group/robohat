@@ -3,6 +3,9 @@ Robohatlib (2022-2823-01)
 Copyright © 2023 Vrije Universiteit Amsterdam
 Electronica-Beta-VU
 A. Denker (a.denker@vu.nl)
+
+A enum to which is used in the Walk test routine
+
 """
 
 try:

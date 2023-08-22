@@ -70,9 +70,9 @@ class Robohat:
         Initializes all the IO
         Checks if the IO have no conflict (due wrong settings of the addresses)
 
-        @param _servo_assembly_1_config config of servo assembly 1
-        @param _servo_assembly_2_config config of servo assembly 2
-        @param _switch_top_board dip-switch settings og the top board (board mounted on RPi), default 7
+        @param _servo_assembly_1_config config of servo assembly 1, see TestConfig.SERVOASSEMBLY_1_CONFIG as example
+        @param _servo_assembly_2_config config of servo assembly 2, see TestConfig.SERVOASSEMBLY_2_CONFIG as example
+        @param _switch_top_board dip-switch settings of the Topboard (board mounted on RPi), default 7. See the Hardware description for its address
         """
 
         print("\n")
@@ -105,9 +105,9 @@ class Robohat:
         #-------------------------------------Expander
         topboard_io_expander_def = RobohatConfig.TOPBOARD_IO_EXPANDER_DEF
 
-        # at the default interrupt definition there are 2 callback added. one for the trigger, the second for the interrupt reset
+        # at the default interrupt definition there are 2 callback added. the first for the trigger callback, the second for the interrupt reset callback
         topboard_io_expander_callbackholder = InterruptCallbackHolder("topboard_IO_expander_callback_holder",
-                                                                 None,  # the callback routine has to be set by the user
+                                                                 None,                          # the callback routine has to be set by the user. User can set it by 'InterruptCallbackHolder.set_callback_function' function if None
                                                                  self.__topboard_io_expander_int_reset_routine,
                                                                  InterruptTypes.INT_BOTH,
                                                                  250)
@@ -135,7 +135,7 @@ class Robohat:
             else:
                 self.__servo_assembly_1 = None              # if not available make None, so class is not accessible
         else:
-            self.__servo_assembly_1 = None  # if not available make None, so class is not accessible
+            self.__servo_assembly_1 = None                  # if not available make None, so class is not accessible
 
 # --------------------------------------------------------
         if _servo_assembly_2_config is not None:
@@ -167,7 +167,7 @@ class Robohat:
         """!
         Initializes the Robohat
 
-        Mandatory
+        Mandatory. This function has to be called after creating the Robohat class
 
         @param _servo_board_1_datas_array, servo data array 1
         @param _servo_board_2_datas_array, servo data array 2
@@ -198,6 +198,7 @@ class Robohat:
     def exit_program(self) -> None:
         """!
         Exit the program. Will shut down all the software processes and the hardware
+        Should be used when exiting your application
         @return: None
         """
         if self.__servo_assembly_1 is not None:
@@ -222,7 +223,7 @@ class Robohat:
     def do_i2c_scan(self) -> None:
         """!
         Scans all the available I2C busses on the Robohat hardware
-        Displays the found I2C devices onto console
+        Displays the found I2C devices onto the console
         @return None
         """
 

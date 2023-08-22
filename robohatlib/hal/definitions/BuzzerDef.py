@@ -6,13 +6,13 @@ A. Denker (a.denker@vu.nl)
 """
 
 class BuzzerDef:
-    """
-    This class will give you control over a Buzzer
+    """!
+    Definition of a Buzzer
     """
 
     def __init__(self, _name, _gpo_pin_nr, _freq = 1000, _dutycycle = 50) -> None:
         """!
-        Init the parameters for this buzzer class.
+        Constructor of this buzzer class.
 
         @param _name: Unique name
         @param _gpo_pin_nr: GPIO pin nr connected to the buzzer.

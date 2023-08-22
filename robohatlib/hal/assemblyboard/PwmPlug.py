@@ -7,7 +7,10 @@ A. Denker (a.denker@vu.nl)
 PWM plug enum
 """
 
-from enum import Enum
+try:
+    from enum import Enum
+except ImportError:
+    raise ImportError("Failed to import needed dependencies for ExpanderStatus")
 
 class PwmPlug(Enum):
     PWMPLUG_P3 = 0

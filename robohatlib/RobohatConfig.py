@@ -27,8 +27,6 @@ except ImportError:
     raise ImportError("Failed to import needed dependencies for the RobohatConfig")
 
 
-
-
 """!
 General settings
 """
@@ -52,12 +50,12 @@ ACCU_VOLTAGE_TO_LOW_THRESHOLD = 11.06               # threshold. below this valu
 ACCU_VOLTAGE_TO_HIGH_THRESHOLD = 13.00              # threshold, above this value, the accu voltage is too high
 ACCU_WARNING_PERCENTAGE_2 = 20                      # threshold, warning to user at this point
 ACCU_WARNING_PERCENTAGE_1 = 15                      # threshold, warning to user at this point
-ACCU_VOLTAGE_ADC_FORMULA_A = 4.85533606358714       # part A of formula, form adc voltage to actual accu voltage (y = Ax + B)
-ACCU_VOLTAGE_ADC_FORMULA_B = -0.512839675475041     # part B of formula, form adc voltage to actual accu voltage (y = Ax + B)
+ACCU_VOLTAGE_ADC_FORMULA_A = 4.85533606358714       # parameter A of formula, form adc voltage to actual accu voltage (y = Ax + B)
+ACCU_VOLTAGE_ADC_FORMULA_B = -0.512839675475041     # parameter B of formula, form adc voltage to actual accu voltage (y = Ax + B)
 ACCU_LOG_DISPLAY_WHEN_TO_LOW = False                # keep on logging when accu voltage is too low
 ACCU_LOG_DISPLAY_WHEN_TO_HIGH = False               # keep on logging when accu voltage is too high
 
-# accu voltage to accu percentage array... depending on accu used
+# accu voltage to accu percentage array... depending on accu    voltage, percentage
 ACCU_VOLTAGE_TO_PERCENTAGE_ARRAY =  [
                                     [9.6,	0],
                                     [9.82,	1],

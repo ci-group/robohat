@@ -3,6 +3,7 @@ Robohatlib (2022-2823-01)
 Copyright © 2023 Vrije Universiteit Amsterdam
 Electronica-Beta-VU
 A. Denker (a.denker@vu.nl)
+
 """
 
 from __future__ import absolute_import, division, print_function, unicode_literals
@@ -57,8 +58,8 @@ class SerTestClass:
         print("Starting robohat servo test routine")
         self.__running = True
 
-        self.__robohat = Robohat(TestConfig.servoassembly_1_config,
-                                 TestConfig.servoassembly_2_config,
+        self.__robohat = Robohat(TestConfig.SERVOASSEMBLY_1_CONFIG,
+                                 TestConfig.SERVOASSEMBLY_2_CONFIG,
                                  TestConfig.TOPBOARD_ID_SWITCH)
 
         self.__robohat.init(TestConfig.SERVOBOARD_1_DATAS_ARRAY,

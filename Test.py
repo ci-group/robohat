@@ -73,8 +73,8 @@ class Example:
         print("Starting robohat test routine")
         self.__running = True
 
-        self.__robohat = Robohat(TestConfig.servoassembly_1_config,
-                                 TestConfig.servoassembly_2_config,
+        self.__robohat = Robohat(TestConfig.SERVOASSEMBLY_1_CONFIG,
+                                 TestConfig.SERVOASSEMBLY_2_CONFIG,
                                  TestConfig.TOPBOARD_ID_SWITCH)
 
         # self.robohat.set_system_alarm_permitted(False)
