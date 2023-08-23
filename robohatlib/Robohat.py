@@ -1086,6 +1086,21 @@ class Robohat:
         Sends shutdown signal to power module, cleans-up IO, shutdowns the RPi
         @return None
         """
+
+        if self.__servo_assembly_1 is not None:
+            self.__servo_assembly_1.exit_program()
+
+        if self.__servo_assembly_2 is not None:
+            self.__servo_assembly_2.exit_program()
+
+        self.__serial.exit_program()
+        self.__imu.exit_program()
+        self.__topboard_io_expander.exit_program()
+        self.__topboard_adc.exit_program()
+
+        self.__led.exit_program()
+        self.__buzzer.exit_program()
+
         self.__power_management.shutdown_power()
 
     # ------------------------------------------------------------------------------------
