@@ -11,18 +11,18 @@ For the hardware description of the Robohat, see \ref hardware<BR>
 
 \image html robohat_small.png
 
-The Robohatlib is a piece of software written in Pyton, to be able to access the hardware. Some PCB-boards on the Robohat hardware, have user selectable addresses. Before using the Robohatlib, the user should know these addresses.
+The Robohatlib is a piece of software written in Pyton, to be able to access the hardware. Some PCB-boards on the Robohat hardware, have user selectable addresses.
+Before using the Robohatlib, the user should know these addresses. For the hardware description see \ref hardware
 
 Boards with an address are the Topboard and the Servo-assemblies.
 
-<BR>
+<hr style="width:100%;text-align:left;margin-left:0">
 
 <h1>Using Robohatlib</h1>
 
-The Startpoint of the RoboHat Library is the Robohat class. After constructing the Robohat class, the 'init' function (of the Robohat class) has to be executed. The rest of the Robohat class consist of functions which can be used to access the Robohat hardware.
-<BR>
+The Startpoint of the RoboHat Library is the Robohat class. After constructing the Robohat class, the '\link  Robohat::Robohat::init init \endlink' function (of the Robohat class) has to be executed. The rest of the Robohat class consist of functions which can be used to access the Robohat hardware.
 
-A example of using the Robohat library
+<h2>An example of using the Robohat library</h2>
 
 \code
 # creation of the Robohat class (mandatory)
@@ -48,16 +48,14 @@ for i in range(1,1800, 1):
 
 \endcode <I>example sourcecode, which moves the angle of the servos</I>
 
-<hr style="width:100%;text-align:left;margin-left:0">
-
 <h2>Robohat constructor</h2>
 
 The Robohat constructor, consist out of 3 parameters, 2 ServoAssemblyConfigs (for Servo-assembly board 1 and Servo-assembly board 2) and the switch value of the Topboard.<BR>
 
 \code
 robohat = Robohat(SERVOASSEMBLY_1_CONFIG, SERVOASSEMBLY_2_CONFIG, TOPBOARD_IO_SWITCH)
-\endcode <I>Robohat constructor</I>
-
+\endcode
+<BR>
 <TABLE class="par">
 <TR><TH>SERVOASSEMBLY_1_CONFIG</TH>                     <TH>configuration of first servo assembly (ServoAssemblyConfig) </TH> </TR>
 <TR><TH>SERVOASSEMBLY_2_CONFIG</TH>                     <TH>configuration of second servo assembly (ServoAssemblyConfig) </TH> </TR>
@@ -67,17 +65,17 @@ robohat = Robohat(SERVOASSEMBLY_1_CONFIG, SERVOASSEMBLY_2_CONFIG, TOPBOARD_IO_SW
 
 <h3>ServoAssemblyConfig</h3>
 
-A ServoAssemblyConfig is the configuration for a ServoAssembly board, which consist out of 4 parameters.
+A ServoAssemblyConfig is the configuration for a Servo assembly board, which consist out of 4 parameters and is needed by the Robohat constructor.
 
 \code
 servoassembly_1_config = ServoAssemblyConfig(SERVOASSEMBLY_1_NAME, SERVOASSEMBLY_1_SW1_PWM_ADDRESS,SERVOASSEMBLY_1_SW2_POWER_GOOD_ADDRESS, SERVOASSEMBLY_1_PWMPLUG)
-\endcode <I>ServoAssemblyConfig constructor</I>
-
+\endcode
+<BR>
 <TABLE class="par">
 <TR><TH>SERVOASSEMBLY_1_NAME</TH>                   <TH>a name for your own reference </TH> </TR>
-<TR><TH>SERVOASSEMBLY_1_SW1_PWM_ADDRESS</TH>        <TH>SW1, switch value for the PWM address (a switch on the assembly board, default 0 or 1)  </TH> </TR>
-<TR><TH>SERVOASSEMBLY_1_SW2_POWER_GOOD_ADDRESS</TH> <TH>SW2, switch value for the POWER GOOD address (a switch on the assembly bord, default 0 or 1, but the same as SW1) </TH> </TR>
-<TR><TH>SERVOASSEMBLY_1_PWMPLUG</TH>                <TH>flat-cable connected to P3 or P4 of the Topboard</TH> </TR>
+<TR><TH>SERVOASSEMBLY_1_SW1_PWM_ADDRESS</TH>        <TH>SW1, switch value of the 'PWM' address (a switch on the assembly board, default 0 or 1)  </TH> </TR>
+<TR><TH>SERVOASSEMBLY_1_SW2_POWER_GOOD_ADDRESS</TH> <TH>SW2, switch value if the 'POWER GOOD' address (a switch on the assembly bord, default 0 or 1, but the same as SW1) </TH> </TR>
+<TR><TH>SERVOASSEMBLY_1_PWMPLUG</TH>                <TH>flat-cable connected to plug P3 or plug P4 of the Topboard</TH> </TR>
 </TABLE>
 <I>Parameters of ServoAssemblyConfig</I>
 
@@ -91,14 +89,14 @@ This value determines the I2C-address of the IO-expander (MCP23008) of the Topbo
 
 note. see the \ref hardware of the Topboard. for the switch value
 
-<h2>robohat.init</h2>
-Before we have some action, we have to initialize the robohat class<BR>
-This will also give the parameters to each servo.<BR>
+<h2>robohat.init function</h2>
+Before we have some action, we have to initialize the robohat class. So using this function is mandatory<BR>
+This function will give all the attached servos its parameters, and it will initialize the rest of the hardware.<BR>
 <BR>
 
 \code
 robohat.init(main_config.SERVOBOARD_1_DATAS_ARRAY, main_config.SERVOBOARD_2_DATAS_ARRAY)
-\endcode <I>initializing robohat</I>
+\endcode
 
 <BR>
 The parameters consist of 2 arrays of ServoData
@@ -124,11 +122,13 @@ SERVOBOARD_1_DATAS_ARRAY = [
 <I>Parameters of ServoData</I>
 
 See for the MIN_TIME, MAX_TIME and RUNNING_DEGREE the datasheet of the used servo.
+In our prototype we use the <a href="DSS-M15.pdf" target="_blank"><b>DSS-M15</b></a> as servo.
 
-The internal conversion of measure-voltage to degree, is in the Robohat done by a linear formula.<BR>
+The internal conversion of measured-voltage (out of the servo) to degree, is in the Robohatlib done by a linear formula.<BR>
+Because each servo has its own linear formula parameters, each servo cam be calibrated to get the best readout results.<BR>
 FORMULA_A is the first parameter of the formula, and FORMULA_B is the second parameter of the formula.
 
-\image html graph_voltage_to_angle.png servo voltage to angle
+\image html graph_voltage_to_angle.png servo readout-voltage to angle
 
 
 <BR>
@@ -144,18 +144,56 @@ With those values read, the Robohatlib will calculate the formula parameters.
 The calculated values will be used (until a restart of the Robohatlib) and will be displayed on the console. To make the new parameter values permanent, use the parameter values in the ServoData.
 
 limit_min is the starting angle of the servo and limit_max the angle which the servo stops.
+Make sure that the given limits are physically possible. The movement of a limb can be out of reach.
 
 After initialisation of the Robohat class, a device scan will be performed and displayed onto the console.
 The Robohatlib is now ready to be used.
 
+<hr style="width:100%;text-align:left;margin-left:0">
+<h2>Setting the servos angles</h2>
 
-<h3>set the servos angles</h3>
-
-with the function 'set_servos_angles' you set the angle of all the servos. The array has to be a size of 16 or 32 elements. When the size is 16 elements, only the first 16 servos will be addressed. When the array has 32 elements, all the servos will be addressed.
+with the function '\link  Robohat::Robohat::set_servos_angles set_servos_angles \endlink'  you set the angle of all the servos. The array has to be a size of 16 or 32 elements. When the size is 16 elements, only the first 16 servos will be addressed. When the array has 32 elements, all the servos will be addressed.
 
 \code
 robohat.set_servos_angles([angle, angle, angle, angle, angle, angle, angle, angle, angle, angle, angle, angle, angle, angle, angle, angle])
 \endcode  <I>Setting the servos to an angle</I>
+
+when only 1 servo has to be moved, use the function '\link  Robohat::Robohat::set_servo_single_angle set_servo_single_angle \endlink'
+
+\code
+robohat.set_servo_single_angle(5, 90.0)
+\endcode  <I>Setting servo 5 to an angle of 90°</I>
+
+
+There are 2 modes to move the servos. Direct mode, and delayed mode.
+
+The function to user to change the mode is \link  Robohat::Robohat::set_servo_direct_mode set_servo_direct_mode \endlink'
+
+When using the direct mode, the value of the angle is directly set, resulting in a direct movement. Because the movement is instant, (the movement will be fast), the needed force is high.
+A higher force results in a high current. The powersupply of the Robohat could limit the current, resulting in a strange movement of the servos
+See /reg hardware to distribute the servos in groups to even the current.
+
+Higher forces causes also more stress on the joints of the Robohat.
+
+To limit these problems, the servo steering could be set to delay mode.
+
+\code
+set_servo_direct_mode(False, 0.0001)
+\endcode  <I>Setting the servo steering to delay mode, with an update time of 1mS </I>
+
+
+
+<hr style="width:100%;text-align:left;margin-left:0">
+
+<h2>Shutdown</h2>
+
+When to user wants to turn off the Robohat, a proper shutdown has to be performed. Shutting down only the power, could cause corruption of the SD card.
+
+By using the function '\link Robohat::Robohat::do_system_shutdown do_system_shutdown \endlink'
+all hardware will be stopped to an idle state. The OS will be nicely shut-downed closing all its resources, and after a minute the power will go off.
+
+Turning on, must be done by pressing the button as described in /ref hardware
+
 
 <hr style="width:100%;text-align:left;margin-left:0">
 

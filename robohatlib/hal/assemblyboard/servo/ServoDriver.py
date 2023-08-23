@@ -116,7 +116,7 @@ class ServoDriver:
 
     def run(self):
         """!
-        The actual timed update routne
+        The actual timed update routine
         @return: None
         """
 

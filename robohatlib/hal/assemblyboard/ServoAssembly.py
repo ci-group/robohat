@@ -133,7 +133,7 @@ class ServoAssembly:
         """!
         Sets if the servos are periodically updated, or direct
         @param _mode: True, direct mode activated
-        @param _delay, delay in update mode
+        @param _delay, delay in update mode is seconds
         @return: None
         """
         self.__servo_board.set_servo_direct_mode(_mode, _delay)

@@ -1,24 +1,23 @@
 /**
 \mainpage Main page
 
-<BR>
 <h1>Robohat</h1>
 
-\image html robohat.png
-
-<BR>
+<B>Project info</B>
 <TABLE class="par">
 <TR><TD>ProjectID:  </TD><TD>2022-2823-01</TD>                                              </TR>
-<TR><TD>ProjectName:</TD><TD>RaspberryRobohat_2</TD>                                        </TR>
+<TR><TD>ProjectName:</TD><TD>Robohatlib</TD>                                                </TR>
+<TR><TD>Version:    </TD><TD>0.2.0</TD>                                                     </TR>
 <TR><TD>Contact:    </TD><TD>A. Denker,M. Molenaar, N. Althuisius</TD>                      </TR>
 <TR><TD>E-mail:	    </TD><TD>a.denker@vu.nl,  m.molenaar@vu.nl,  n.althuisius@vu.nl</TD>    </TR>
 </TABLE>
-
 <BR>
+\image html robohat_small.png
 
-\image html vu_logo.png
-
+<B>Read the precautions for using the Robohat, see \ref precautions </B><BR>
 <BR>
+<B>Hardware description of the Robohat, see \ref hardware </B><BR>
+<B>Software description of the Robohat, see \ref software </B><BR>
 <BR>
 
 <B>Change log</B>
@@ -30,10 +29,11 @@
 </TABLE>
 <BR>
 
-<B>Read the precautions for using the Robohat, see \ref precautions </B><BR>
+
+
+\image html vu_logo.png
+
 <BR>
-<B>Hardware description of the Robohat, see \ref hardware </B><BR>
-<B>Software description of the Robohat, see \ref software </B><BR>
 
 */
 
