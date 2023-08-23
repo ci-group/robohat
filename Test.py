@@ -501,13 +501,13 @@ class Example:
         elif command == "accu" and len(data_in_array) >= 3:
             sub_command = data_in_array[2]
             if sub_command == "voltage":
-                value = self.__robohat.get_accu_voltage()
+                value = self.__robohat.get_battery_voltage()
                 print("accu voltage is: " + str(value) + " V")
             elif sub_command == "capacity":
-                value = self.__robohat.get_accu_percentage_capacity()
+                value = self.__robohat.get_battery_percentage_capacity()
                 print("accu capacity is: " + str(value) + " %")
             elif sub_command == "status":
-                value = self.__robohat.get_accu_status()
+                value = self.__robohat.get_battery_status()
                 print(value)
             else:
                 print("syntax error")

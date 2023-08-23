@@ -84,7 +84,7 @@ class TopboardADC:
 
     # end, hat adc functions --------------------------------------------------------------------------------------
 
-    def get_voltage_of_accu(self) -> float:
+    def get_voltage_of_battery(self) -> float:
         """!
         Get voltage on pin4, which the accu is connected to
         @return float: voltage of accu or 0.0 when not available

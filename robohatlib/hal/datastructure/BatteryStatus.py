@@ -12,7 +12,7 @@ try:
 except ImportError:
     raise ImportError("Failed to import needed dependencies for ExpanderStatus")
 
-class AccuStatus(Enum):
+class BatteryStatus(Enum):
     UNKNOWN = 0
     TOO_LOW = 1
     OK = 2
