@@ -111,6 +111,10 @@ class LedMulticolor:
             self.__led_driver_blue.set_status_led(True)
             self.__last_color = _color
             self.__led_on_status = True
+        elif _color is Color.OFF:
+            self.turn_led_off()
+        elif _color is Color.ON:
+            self.turn_led_on()
         else:
             print("Unknown led color !!")
 
