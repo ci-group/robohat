@@ -3,9 +3,12 @@
 
 <h1>Robohat</h1>
 
-Version: 0.1.1
+Version: 0.2.0
 
 For the hardware description of the Robohat, see \ref hardware<BR>
+
+<hr style="width:100%;text-align:left;margin-left:0">
+<hr style="width:100%;text-align:left;margin-left:0">
 
 <h1>Robohat software description</h1>
 
@@ -55,7 +58,7 @@ The Robohat constructor, consist out of 3 parameters, 2 ServoAssemblyConfigs (fo
 \code
 robohat = Robohat(SERVOASSEMBLY_1_CONFIG, SERVOASSEMBLY_2_CONFIG, TOPBOARD_IO_SWITCH)
 \endcode
-<BR>
+
 <TABLE class="par">
 <TR><TH>SERVOASSEMBLY_1_CONFIG</TH>                     <TH>configuration of first servo assembly (ServoAssemblyConfig) </TH> </TR>
 <TR><TH>SERVOASSEMBLY_2_CONFIG</TH>                     <TH>configuration of second servo assembly (ServoAssemblyConfig) </TH> </TR>
@@ -149,6 +152,7 @@ Make sure that the given limits are physically possible. The movement of a limb 
 After initialisation of the Robohat class, a device scan will be performed and displayed onto the console.
 The Robohatlib is now ready to be used.
 
+<hr style="width:100%;text-align:left;margin-left:0">
 <hr style="width:100%;text-align:left;margin-left:0">
 <h2>Servos</h2>
 
@@ -301,10 +305,11 @@ There is also a function which generates a sound until the sound is stopped
 
 The function: '\link Robohat::Robohat::do_buzzer_freq do_buzzer_freq \endlink', gives a sound at a given frequency, until it has turned off with '\link Robohat::Robohat::do_buzzer_release do_buzzer_release \endlink'
 
+<hr style="width:100%;text-align:left;margin-left:0">
 <h2>Miscellaneous</h2>
 There are a lot more functions present in the Robohatlib. Take a look at the Robohat class for the full function list.
 
-
+<hr style="width:100%;text-align:left;margin-left:0">
 <hr style="width:100%;text-align:left;margin-left:0">
 <h2>Robohatlib test applications </h2>
 
