@@ -69,6 +69,8 @@ pinning of the ADC header:<BR>
 5 scaled battery voltage. <B>DO NOT USE</B> It's actually ADC Channel 3, which is used to monitor the battery capacity.<BR>
 6 GND<BR>
 
+Do not measure above 3 volts. This could damage the ADC.
+
 <B>Console</B><BR>
 To monitor the RPi a console connection can be used. <BR>
 The default settings of the console port is: 115200 baud, 8N1<BR>
