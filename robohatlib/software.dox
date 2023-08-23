@@ -304,7 +304,7 @@ The function: '\link Robohat::Robohat::do_buzzer_freq do_buzzer_freq \endlink', 
 <h2>Miscellaneous</h2>
 There are a lot more functions present in the Robohatlib. Take a look at the Robohat class for the full function list.
 
-<hr style="width:100%;text-align:left;margin-left:0">
+
 <hr style="width:100%;text-align:left;margin-left:0">
 <h2>Robohatlib test applications </h2>
 
