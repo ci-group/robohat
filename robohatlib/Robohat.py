@@ -32,7 +32,7 @@ try:
     from robohatlib.hal.datastructure.ExpanderDirection import ExpanderDir
     from robohatlib.hal.datastructure.ExpanderStatus import ExpanderStatus
     from robohatlib.hal.datastructure.Color import Color
-    from robohatlib.hal.datastructure.AccuStatus import AccuStatus
+    from robohatlib.hal.datastructure.BatteryStatus import BatteryStatus
 
     from robohatlib.hal.assemblyboard.ServoAssembly import ServoAssembly
     from robohatlib.hal.TopboardADC import TopboardADC
@@ -569,7 +569,7 @@ class Robohat:
 
         @param _first_servo: The first servo of the pool of servos
         @param _last_servo: The last servo of the pool of servos
-        @param _time_in_seconds_until_escape: Time to prevent endless loop
+        @param _time_in_seconds_until_escape: Maximum time before ending the wait loop, to prevent endless loop. Default 15 seconds
         @return: None
         """
         counter_seconds = 0
@@ -920,7 +920,7 @@ class Robohat:
     def get_topboard_adc_single_channel(self, _channel_nr: int) -> float:
         """!
         Get analog value of a channel from the Topboard adc
-        Requested channels can be 0 - 3 (channel 3 is the derivative of the accu voltage)
+        Requested channels can be 0 - 3 (channel 3 is the derivative of the battery voltage)
 
         @param _channel_nr Wanted channel nr. (Starts at 0)
         @return analog voltage
@@ -1053,30 +1053,30 @@ class Robohat:
 
     # end IMU functions ------------------------------------------------------------------------------------
     # begin Power management functions ---------------------------------------------------------------------
-    def get_accu_percentage_capacity(self) -> int:
+    def get_battery_percentage_capacity(self) -> int:
         """!
-        Get capacity of accu in percentage
+        Get capacity of battery in percentage
 
-        @return: percentage
+        @return: percentage of the battery
         """
-        return self.__power_management.get_accu_percentage_capacity()
+        return self.__power_management.get_battery_percentage_capacity()
 
-    def get_accu_voltage(self) -> float:
+    def get_battery_voltage(self) -> float:
         """!
-        Get voltage of accu
+        Get voltage of battery
 
-        @return: voltage of accu
+        @return: voltage of battery
         """
 
-        return self.__power_management.get_accu_voltage()
+        return self.__power_management.get_battery_voltage()
 
-    def get_accu_status(self) -> AccuStatus:
+    def get_battery_status(self) -> BatteryStatus:
         """!
-        Returns True if accu capacity is OK
+        Returns True if battery capacity is OK
 
-        @return True is accu capacity is OK
+        @return True is battery capacity is OK
         """
-        return self.__power_management.get_accu_status()
+        return self.__power_management.get_battery_status()
 
     # end Power management functions -------------------------------------------------------------------------
     # begin System functions ---------------------------------------------------------------------------------
