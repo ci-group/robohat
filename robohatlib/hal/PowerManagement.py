@@ -16,7 +16,7 @@ try:
     from robohatlib.driver_ll.definitions.GPODef import GPODef
     from robohatlib.hal.TopboardADC import TopboardADC
     from robohatlib.driver_ll.IOHandler import IOHandler
-    from robohatlib.hal.datastructure.AccuStatus import AccuStatus
+    from robohatlib.hal.datastructure.BatteryStatus import BatteryStatus
 
 except ImportError:
     print("Failed to import needed dependencies for the PowerManagement class")
@@ -33,7 +33,7 @@ ACCU_CHECK_SIZE_OF_WINDOW = 5
 class PowerManagement:
 
     """!
-    Class to measure the accu capacity
+    Class to measure the battery capacity
     """
 
     def __init__(self, _io_handler: IOHandler, _adc_hat: TopboardADC, _shutdown_gpo_def: GPODef):
@@ -48,10 +48,10 @@ class PowerManagement:
         self.__shutdown_gpo = _io_handler.get_gpo(_shutdown_gpo_def)
 
         self.__timerIsRunning = False
-        self.__accu_percentage_capacity = 0
-        self.__accu_voltage = 0
-        self.__accu_status = AccuStatus.UNKNOWN
-        self.__raw_accu_voltages_array = [12.6] * ACCU_CHECK_SIZE_OF_WINDOW     # fills array with default value: 12.6
+        self.__battery_percentage_capacity = 0
+        self.__battery_voltage = 0
+        self.__battery_status = BatteryStatus.UNKNOWN
+        self.__raw_battery_voltages_array = [12.6] * ACCU_CHECK_SIZE_OF_WINDOW     # fills array with default value: 12.6
 
         self.__signaling_device = None
         self.__shutdown_in_progress = False
@@ -95,7 +95,7 @@ class PowerManagement:
 
     def __start_timer_power_management(self) -> None:
         """!
-        Starts the timer to check the accu voltage
+        Starts the timer to check the battery voltage
 
         @return: None
         """
@@ -110,13 +110,13 @@ class PowerManagement:
     def __stop_timer_power_management(self, do_msg: bool = True) -> None:
         """!
 
-        Stops monitoring the accu capacity
+        Stops monitoring the battery capacity
         @return: None
         """
         self.__timerIsRunning = False
 
         if do_msg is True:
-            print("Warning: accu monitor disabled")
+            print("Warning: battery monitor disabled")
 
     # --------------------------------------------------------------------------------------
     # --------------------------------------------------------------------------------------
@@ -124,16 +124,16 @@ class PowerManagement:
 
     def timer_callback(self) -> None:
         """!
-        The actual timer function. Retrieves the voltage of the accu and puts it in the fiter function. Restarts the timer.
+        The actual timer function. Retrieves the voltage of the battery and puts it in the fiter function. Restarts the timer.
         Timer will not restart when ADC is not available
 
         @return: None
         """
 
-        adc_accu_voltage = self.__adc_hat.get_voltage_of_accu()
+        adc_battery_voltage = self.__adc_hat.get_voltage_of_battery()
 
-        calculated_accu_voltage = (adc_accu_voltage * RobohatConfig.ACCU_VOLTAGE_ADC_FORMULA_A) + RobohatConfig.ACCU_VOLTAGE_ADC_FORMULA_B
-        self.__insert_power_voltage(calculated_accu_voltage)
+        calculated_battery_voltage = (adc_battery_voltage * RobohatConfig.ACCU_VOLTAGE_ADC_FORMULA_A) + RobohatConfig.ACCU_VOLTAGE_ADC_FORMULA_B
+        self.__insert_power_voltage(calculated_battery_voltage)
         self.__start_timer_power_management()
 
     # --------------------------------------------------------------------------------------
@@ -152,155 +152,153 @@ class PowerManagement:
     # --------------------------------------------------------------------------------------
     # --------------------------------------------------------------------------------------
 
-    def get_accu_percentage_capacity(self) -> int:
+    def get_battery_percentage_capacity(self) -> int:
         """!
-        Gets percentage of accu capacity in %
+        Gets percentage of battery capacity in %
 
-        @return: (int) accu percentage
+        @return: (int) battery percentage
         """
-        return self.__accu_percentage_capacity
+        return self.__battery_percentage_capacity
 
     # --------------------------------------------------------------------------------------
     # --------------------------------------------------------------------------------------
     # --------------------------------------------------------------------------------------
 
-    def get_accu_voltage(self) -> float:
+    def get_battery_voltage(self) -> float:
         """!
-        Get voltage of accu
+        Get voltage of battery
 
-        @return: accu voltage
+        @return: battery voltage
         """
-        return self.__accu_voltage
+        return self.__battery_voltage
 
     # --------------------------------------------------------------------------------------
     # --------------------------------------------------------------------------------------
     # --------------------------------------------------------------------------------------
 
-    def get_accu_status(self) -> AccuStatus:
+    def get_battery_status(self) -> BatteryStatus:
         """!
-        Returns status ot the accu depending on thresholds,  'ACCU_VOLTAGE_TO_LOW_THRESHOLD' and 'ACCU_VOLTAGE_TO_HIGH_THRESHOLD'
+        Returns status ot the battery depending on thresholds,  'ACCU_VOLTAGE_TO_LOW_THRESHOLD' and 'ACCU_VOLTAGE_TO_HIGH_THRESHOLD'
 
-        @return: AccuStatus
+        @return: BatteryStatus
         """
-        return self.__accu_status
+        return self.__battery_status
 
     # --------------------------------------------------------------------------------------
     # --------------------------------------------------------------------------------------
     # --------------------------------------------------------------------------------------
 
-    def __insert_power_voltage(self, _raw_accu_voltage: float) -> None:
+    def __insert_power_voltage(self, _raw_battery_voltage: float) -> None:
         """!
         Puts the voltage in a median filter.
-        Checks if accu voltage (out of the filter) is below the threshold (ACCU_VOLTAGE_TO_LOW_THRESHOLD).
+        Checks if battery voltage (out of the filter) is below the threshold (ACCU_VOLTAGE_TO_LOW_THRESHOLD).
         When the voltage is 'too low' an alarm and a message will appear
 
-        @param _raw_accu_voltage: accu voltage in volt
+        @param _raw_battery_voltage: battery voltage in volt
         @return: None
         """
 
 
         # shift new value in array
         for index in range(1, ACCU_CHECK_SIZE_OF_WINDOW, 1):
-            self.__raw_accu_voltages_array[index - 1] = self.__raw_accu_voltages_array[index]
+            self.__raw_battery_voltages_array[index - 1] = self.__raw_battery_voltages_array[index]
 
-        self.__raw_accu_voltages_array[ACCU_CHECK_SIZE_OF_WINDOW - 1] = _raw_accu_voltage
+        self.__raw_battery_voltages_array[ACCU_CHECK_SIZE_OF_WINDOW - 1] = _raw_battery_voltage
 
         self.__counter_prevent_startup_power_fail += 1
         if self.__counter_prevent_startup_power_fail < ACCU_CHECK_SIZE_OF_WINDOW:
             return
 
         self.__counter_prevent_startup_power_fail = ACCU_CHECK_SIZE_OF_WINDOW    # prevent overrun
-        self.__accu_voltage = statistics.median(map(float, self.__raw_accu_voltages_array)) # create median
+        self.__battery_voltage = statistics.median(map(float, self.__raw_battery_voltages_array)) # create median
 
-        # print("voltage: " + str(self.__accu_voltage ) )
-
-        if self.__accu_voltage > 0.5:
-            self.__accu_percentage_capacity = self.__calculate_percentage_from_voltage(self.__accu_voltage)
+        if self.__battery_voltage > 0.5:
+            self.__battery_percentage_capacity = self.__calculate_percentage_from_voltage(self.__battery_voltage)
 
 #----------------------------- check to low, if so, do shutdown !!!
-            if self.__accu_voltage < RobohatConfig.ACCU_VOLTAGE_TO_LOW_THRESHOLD:
-                self.__accu_status = AccuStatus.TOO_LOW
+            if self.__battery_voltage < RobohatConfig.ACCU_VOLTAGE_TO_LOW_THRESHOLD:
+                self.__battery_status = BatteryStatus.TOO_LOW
 
                 if self.__signaling_device is not None:
-                    self.__signaling_device.signal_system_alarm("Accu voltage too low")
+                    self.__signaling_device.signal_system_alarm("Battery voltage too low")
 
                 if self.__to_low_already_displayed is False:
-                    print("accu capacity to low, only {0:3.2f} %".format(self.__accu_percentage_capacity))
+                    print("Battery capacity to low, only {0:3.2f} %".format(self.__battery_percentage_capacity))
                     self.__to_low_already_displayed = True
                     self.shutdown_power()
  # --------------------------------- check if to high, if so do warning. Reset when threshold is met
-            elif self.__accu_voltage > RobohatConfig.ACCU_VOLTAGE_TO_HIGH_THRESHOLD:
-                self.__accu_status = AccuStatus.TOO_HIGH
+            elif self.__battery_voltage > RobohatConfig.ACCU_VOLTAGE_TO_HIGH_THRESHOLD:
+                self.__battery_status = BatteryStatus.TOO_HIGH
 
                 if self.__signaling_device is not None:
-                    self.__signaling_device.signal_system_alarm("Accu voltage too high")
+                    self.__signaling_device.signal_system_alarm("Battery voltage too high")
 
                 if RobohatConfig.ACCU_LOG_DISPLAY_WHEN_TO_HIGH is True or self.__to_high_already_display is False:
-                    print("Unable to calculate capacity, it's above 100 %")
+                    print("Unable to calculate battery, it's above 100 %")
                     self.__to_high_already_display = True
 
  # check if hysteresis parameters are met when was too high
-            elif self.__accu_status is AccuStatus.TOO_HIGH and \
-                    self.__accu_voltage > RobohatConfig.ACCU_VOLTAGE_TO_LOW_THRESHOLD and \
-                    self.__accu_voltage < RobohatConfig.ACCU_VOLTAGE_TO_HIGH_THRESHOLD - (RobohatConfig.ACCU_VOLTAGE_TO_HIGH_THRESHOLD * 0.02) :
-                self.__accu_status = AccuStatus.OK
+            elif self.__battery_status is BatteryStatus.TOO_HIGH and \
+                    self.__battery_voltage > RobohatConfig.ACCU_VOLTAGE_TO_LOW_THRESHOLD and \
+                    self.__battery_voltage < RobohatConfig.ACCU_VOLTAGE_TO_HIGH_THRESHOLD - (RobohatConfig.ACCU_VOLTAGE_TO_HIGH_THRESHOLD * 0.02) :
+                self.__battery_status = BatteryStatus.OK
 #WARNING 15 present-------------------------------------------------------
-            elif self.__accu_percentage_capacity < RobohatConfig.ACCU_WARNING_PERCENTAGE_1 and self.__accu_status is not AccuStatus.WARNING_1:   # 15
-                self.__accu_status = AccuStatus.WARNING_1
-                print("Accu is getting low on capacity. Only " + str(RobohatConfig.ACCU_WARNING_PERCENTAGE_1) + " %")
+            elif self.__battery_percentage_capacity < RobohatConfig.ACCU_WARNING_PERCENTAGE_1 and self.__battery_status is not BatteryStatus.WARNING_1:   # 15
+                self.__battery_status = BatteryStatus.WARNING_1
+                print("Battery is getting low on capacity. Only " + str(RobohatConfig.ACCU_WARNING_PERCENTAGE_1) + " %")
                 if self.__signaling_device is not None:
-                    self.__signaling_device.signal_system_alarm("Accu is getting low on capacity")
+                    self.__signaling_device.signal_system_alarm("Battery is getting low on capacity")
 
 #WARNING 20 present-------------------------------------------------------
-            elif self.__accu_percentage_capacity < RobohatConfig.ACCU_WARNING_PERCENTAGE_2 and self.__accu_status is not AccuStatus.WARNING_2:            # 20
-                self.__accu_status = AccuStatus.WARNING_2
-                print("Accu is getting low on capacity. Only " + str(RobohatConfig.ACCU_WARNING_PERCENTAGE_2) + " %")
+            elif self.__battery_percentage_capacity < RobohatConfig.ACCU_WARNING_PERCENTAGE_2 and self.__battery_status is not BatteryStatus.WARNING_2:            # 20
+                self.__battery_status = BatteryStatus.WARNING_2
+                print("Battery is getting low on capacity. Only " + str(RobohatConfig.ACCU_WARNING_PERCENTAGE_2) + " %")
                 if self.__signaling_device is not None:
-                    self.__signaling_device.signal_system_alarm("Accu is getting low on capacity")
+                    self.__signaling_device.signal_system_alarm("Battery is getting low on capacity")
 
-            elif self.__accu_status is AccuStatus.UNKNOWN:
-                self.__accu_status = AccuStatus.OK
+            elif self.__battery_status is BatteryStatus.UNKNOWN:
+                self.__battery_status = BatteryStatus.OK
 
         else:
             if self.__battery_check_started is False:
-                self.__accu_percentage_capacity = -1
-                self.__accu_status = AccuStatus.ACCU_NOT_PRESENT
+                self.__battery_percentage_capacity = -1
+                self.__battery_status = BatteryStatus.ACCU_NOT_PRESENT
 
         if self.__battery_check_started is False:
             self.__battery_check_started = True
 
             print("***********************************")
-            print("accu monitor active")
-            print("accu voltage: {0:2.2f} V".format(self.__accu_voltage))
-            print("accu percentage: {0:3.2f} %".format(self.__accu_percentage_capacity))
+            print("Battery monitor active")
+            print("Battery voltage: {0:2.2f} V".format(self.__battery_voltage))
+            print("Battery percentage: {0:3.2f} %".format(self.__battery_percentage_capacity))
 
-            if self.__accu_status is AccuStatus.OK:
-                print("accu is OK")
-            elif self.__accu_status is AccuStatus.TOO_LOW:
-                print("accu has a too low capacity")
-            elif self.__accu_status is AccuStatus.TOO_HIGH:
-                print("accu voltage is to high")
+            if self.__battery_status is BatteryStatus.OK:
+                print("Battery is OK")
+            elif self.__battery_status is BatteryStatus.TOO_LOW:
+                print("Battery has a too low capacity")
+            elif self.__battery_status is BatteryStatus.TOO_HIGH:
+                print("Battery voltage is to high")
             else:
-                print("unknown accu status")
+                print("unknown battery status")
             print("***********************************")
 
     # --------------------------------------------------------------------------------------
     # --------------------------------------------------------------------------------------
     # --------------------------------------------------------------------------------------
     # noinspection PyMethodMayBeStatic
-    def __calculate_percentage_from_voltage(self, _accu_voltage: float) -> float:
+    def __calculate_percentage_from_voltage(self, _battery_voltage: float) -> float:
         """!
-        Calculates voltage of accu, to accu capacity, derived from array in Robohat_config
+        Calculates voltage of battery, to battery capacity, derived from array in Robohat_config
 
-        @param _accu_voltage:
+        @param _battery_voltage:
         @return: percentage of accu
         """
 
         # gets percentage out of list, and interpolates the voltages between the elements of the list
-        if _accu_voltage <= RobohatConfig.ACCU_VOLTAGE_TO_PERCENTAGE_ARRAY[0] [0]:
+        if _battery_voltage <= RobohatConfig.ACCU_VOLTAGE_TO_PERCENTAGE_ARRAY[0] [0]:
             return 0
 
-        if _accu_voltage >= RobohatConfig.ACCU_VOLTAGE_TO_PERCENTAGE_ARRAY[len(RobohatConfig.ACCU_VOLTAGE_TO_PERCENTAGE_ARRAY) - 1] [0]:
+        if _battery_voltage >= RobohatConfig.ACCU_VOLTAGE_TO_PERCENTAGE_ARRAY[len(RobohatConfig.ACCU_VOLTAGE_TO_PERCENTAGE_ARRAY) - 1] [0]:
             return 100
 
         for index in range(0, len(RobohatConfig.ACCU_VOLTAGE_TO_PERCENTAGE_ARRAY) - 1, 1):
@@ -313,8 +311,8 @@ class PowerManagement:
             if diff_voltage != 0:
                 perc_per_volt = diff_perc / diff_voltage
 
-                if voltage_low <= _accu_voltage <= voltage_high:
-                    remainder_volt = voltage_high - _accu_voltage
+                if voltage_low <= _battery_voltage <= voltage_high:
+                    remainder_volt = voltage_high - _battery_voltage
                     remainder_perc = remainder_volt * perc_per_volt
 
                     percentage = RobohatConfig.ACCU_VOLTAGE_TO_PERCENTAGE_ARRAY[index] [1] + remainder_perc
