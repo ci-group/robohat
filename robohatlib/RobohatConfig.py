@@ -37,6 +37,8 @@ DEBUG_I2C = False
 """!
 Alarm to user settings
 """
+TIME_WINDOW_TO_BE_DCDC_SHORT_TO_ALARM = 200
+
 ALARM_PERMITTED = True                              # sound an alarm when a system alert is present, such as to low accu capacity
 ALARM_TIMEOUT_IN_SEC = 300                          # timeout between alarm
 INIT_BEEP_PERMITTED = False                         # beep when started if True

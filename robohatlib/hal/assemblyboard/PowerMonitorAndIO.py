@@ -26,17 +26,12 @@ try:
     from robohatlib.driver_ll.IOHandler import IOHandler
     from robohatlib.driver_ll.datastructs.IOStatus import IOStatus
     from robohatlib.helpers.RoboUtil import RoboUtil
+    from robohatlib.hal.assemblyboard.PowerMonitorTimer import PowerMonitorTimer
 
 except ImportError:
     print("Failed to import dependencies for PowerMonitorAndIO")
     raise
 
-
-MAX_TIME_BETWEEN_INTS_MS = 1000
-MAX_INT_BEFORE_TRIGGER = 2
-
-LOC_ARRAY_TIME = 0
-LOC_ARRAY_NR_OF_ERRORS = 1
 
 class PowerMonitorAndIO:
     """!
@@ -76,6 +71,7 @@ class PowerMonitorAndIO:
                 self.__interrupt = _iohandler.register_interrupt(gpi_interrupt_definition)
 
             self.__expander = MCP23008(i2c_device, _power_io_expander_def)
+            self.__expander.set_interrupt_defaults(0x15)
         else:
             self.__expander = None
 
@@ -83,7 +79,7 @@ class PowerMonitorAndIO:
         self.__reset_timerIsRunning = False
         self.disable_retry_timer_callback = False
 
-        self.__error_timer_array = [ [0, 0], [0,0], [0,0], [0,0] ]
+        self.__time_list = []
 
     #--------------------------------------------------------------------------------------
 
@@ -239,7 +235,6 @@ class PowerMonitorAndIO:
         """
         self.__signaling_device = _signaling_device
 
-
     #--------------------------------------------------------------------------------------
 
     def set_io_expander_int_callback_function(self, _callback) -> None:
@@ -272,23 +267,7 @@ class PowerMonitorAndIO:
 
     #-------------------------------------------------------------------------------------
 
-    def __io_servo_assembly_callback(self, _gpi_nr):
-        """!
-        Alarms the user when an DC/DC converter shuts down
-
-        @param _gpi_nr: mr of the callback gpio pin
-
-        @return None
-        """
-
-        print("_io_servo_assembly_callback by: " + str(_gpi_nr))
-
-        if self.__signaling_device is not None:
-            self.__signaling_device.signal_system_alarm("A DC / DC converter of an servo is shorted !")
-
-    #-------------------------------------------------------------------------------------
-
-    def __do_signaling_device(self) -> None:
+    def do_signaling_device(self) -> None:
         """!
         Will generated a system signal when possible
         @return: None
@@ -297,48 +276,6 @@ class PowerMonitorAndIO:
             self.__signaling_device.signal_system_alarm()
         else:
             print("No signaling device")
-
-    #-------------------------------------------------------------------------------------
-
-    def __check_if_interrupt_and_should_be_notified(self, _data_byte, _bit_nr, _int_bookkeep_array) -> bool:
-        """!
-        Returns true, when there are enough ints in a time period
-        @param _data_byte: data of interrupt array
-        @param _bit_nr: the bit nr
-        @param _int_bookkeep_array: the array to store our book keeeping
-        @return: tur if an int is pending in the period
-        """
-
-        current_time = RoboUtil.get_time_ms()
-        status = RoboUtil.check_bit(_data_byte, _bit_nr)
-
-        if status == 1:                                                                                                                 # we have an interrupt
-            last_time = _int_bookkeep_array[_bit_nr, LOC_ARRAY_TIME]
-            diff_time = current_time - last_time
-
-            nr_off_errors = _int_bookkeep_array[_bit_nr, LOC_ARRAY_NR_OF_ERRORS]
-
-            if diff_time < MAX_TIME_BETWEEN_INTS_MS:                                                                                    # is last error under the time frame
-                _int_bookkeep_array[_bit_nr, LOC_ARRAY_NR_OF_ERRORS] = _int_bookkeep_array[_bit_nr, LOC_ARRAY_NR_OF_ERRORS] + 1         # add new error count
-                if nr_off_errors >= MAX_INT_BEFORE_TRIGGER:                                                                             # we have more than the wanted errors in the time frame
-                    self.__reset_interrupt_array(_bit_nr, _int_bookkeep_array)                                                          # clear bookkeeping
-                    return True                                                                                                         # notify user for error
-                else:                                                                                                                   # error in time frame but not enough errors
-                    return False
-            else:                                                                                                                       # last error was longer ago than the time frame
-                self.__reset_interrupt_array(_bit_nr, _int_bookkeep_array)
-                _int_bookkeep_array[_bit_nr, LOC_ARRAY_NR_OF_ERRORS] = _int_bookkeep_array[_bit_nr, LOC_ARRAY_NR_OF_ERRORS] + 1         # add new error count
-
-        return False
-
-    #-------------------------------------------------------------------------------------
-
-    @staticmethod
-    def __reset_interrupt_array(_bit_nr, _last_time_error_array):
-        current_time = RoboUtil.get_time_ms()
-
-        _last_time_error_array[_bit_nr, LOC_ARRAY_TIME] = current_time       # set last time error to current time
-        _last_time_error_array[_bit_nr, LOC_ARRAY_NR_OF_ERRORS] = 0                  # set current errors to 0
 
     #-------------------------------------------------------------------------------------
 
@@ -355,25 +292,45 @@ class PowerMonitorAndIO:
         """
 
         interrupt_stats = self.__expander.read_interrupt_status()
-        if self.__check_if_interrupt_and_should_be_notified(interrupt_stats, 0, self.__error_timer_array) is True:
-            print("Major error: power fail DC/DC 1")
-            self.__do_signaling_device()
-        if self.__check_if_interrupt_and_should_be_notified(interrupt_stats, 1, self.__error_timer_array) is True:
-            print("Major error: power fail DC/DC 2")
-            self.__do_signaling_device()
-        if self.__check_if_interrupt_and_should_be_notified(interrupt_stats, 2, self.__error_timer_array) is True:
-            print("Major error: power fail DC/DC 3")
-            self.__do_signaling_device()
-        if self.__check_if_interrupt_and_should_be_notified(interrupt_stats, 3, self.__error_timer_array) is True:
-            print("Major error: power fail DC/DC 4")
-            self.__do_signaling_device()
+        if RoboUtil.check_bit(interrupt_stats, 0) == 1:
+            p = self.__createOrUseMonitor(0)
+            p.check()
+        if RoboUtil.check_bit(interrupt_stats, 1) == 1:
+            p = self.__createOrUseMonitor(1)
+            p.check()
+        if RoboUtil.check_bit(interrupt_stats, 2) == 1:
+            p = self.__createOrUseMonitor(2)
+            p.check()
+        if RoboUtil.check_bit(interrupt_stats, 3) == 1:
+            p = self.__createOrUseMonitor(3)
+            p.check()
 
         if self.__user_int_callback is not None:
             self.__user_int_callback(_gpi_nr)
 
     #--------------------------------------------------------------------------------------
 
-    def power_monitor_and_io_int_reset_routine(self, _gpi_nr: int) -> None:
+    def __createOrUseMonitor(self, _id:int) -> PowerMonitorTimer:
+        for p in self.__time_list:
+            if p.get_id() == _id:
+                return p
+
+        p = PowerMonitorTimer(_id, self, self.__expander)
+        self.__time_list.append(p)
+        return p
+
+    #--------------------------------------------------------------------------------------
+
+    def remove_from_list(self, _id:int) -> None:
+        print("clean up " + str(_id))
+        for p in self.__time_list:
+            if p.get_id() == _id:
+                self.__time_list.remove(p)
+                break
+
+    #--------------------------------------------------------------------------------------
+
+    def power_monitor_and_io_int_reset_routine(self, _gpi_nr) -> None:
         """!
         This routine will be called to reset the interrupt handler of the MCP23008
         Is called by ServoAssembly::__io_power_monitor_and_io_int_reset_routine
@@ -381,12 +338,9 @@ class PowerMonitorAndIO:
         @param _gpi_nr: IO nr of the caller
         @return: None
         """
-        if self.__interrupt is not None:
-            self.__interrupt.remove_event_detection()
 
-        timer = threading.Timer(10, self.__reset_timer_callback)
+        timer = threading.Timer(1, self.__reset_timer_callback)
         timer.start()
-
 
     #-------------------------------------------------------------------------------------
 
@@ -401,14 +355,13 @@ class PowerMonitorAndIO:
         if self.disable_retry_timer_callback is True:
             return
 
-        port_value = self.__expander.get_port_data() and 0x7f
-        if port_value > 0:
-            #print("Not able to clear !!!!, power fail is present")
-            timer = threading.Timer(10, self.__reset_timer_callback)
+        port_value = self.__expander.get_port_data() and 0x15       # only the first 4 bits are the interrupt for the power fail
+        if port_value != 0x15:
+            timer = threading.Timer(1, self.__reset_timer_callback)
             timer.start()
         else:
             if self.__expander is not None:
-                 self.__expander.reset_interrupts()
+                self.__expander.reset_interrupts()
 
     #-------------------------------------------------------------------------------------
 
