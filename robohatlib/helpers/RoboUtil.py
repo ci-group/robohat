@@ -5,13 +5,17 @@ Electronica-Beta-VU
 A. Denker (a.denker@vu.nl)
 """
 
-
 try:
     from robohatlib.PwmPlug import PwmPlug
+    import time
 
 except ImportError:
-    print("Failed to import RoboUtil, or failed to import all dependencies")
+    print("Failed to import dependencies for RoboUtil")
     raise
+
+    #-------------------------------------------------------------------------------------
+    #-------------------------------------------------------------------------------------
+    #-------------------------------------------------------------------------------------
 
 class RoboUtil:
     """!
@@ -64,9 +68,9 @@ class RoboUtil:
         """!
         Prints messages to the console depending on the _silent switch
 
-        :param _silent: Switch, True will print the message to console
-        :param _txt: The text to print
-        :return: None
+        @param _silent: Switch, True will print the message to console
+        @param _txt: The text to print
+        @return: None
         """
 
         if _silent is False:
@@ -77,7 +81,12 @@ class RoboUtil:
     # --------------------------------------------------------------------------------------
 
     @staticmethod
-    def get_pwmplug_by_int(_id:int):
+    def get_pwmplug_by_int(_id:int) -> PwmPlug:
+        """!
+        Convert int id to PWMplug enum
+        @param _id: id in int
+        @return: Pwmplug
+        """
         if _id == 1:
             return PwmPlug.PWMPLUG_P4
         else:
@@ -86,7 +95,12 @@ class RoboUtil:
     # --------------------------------------------------------------------------------------
 
     @staticmethod
-    def get_pwm_cs_by_pwmplug(_plug:PwmPlug):
+    def get_pwm_cs_by_pwmplug(_plug:PwmPlug) -> int:
+        """!
+        Convert to PWMplug enum int id
+        @param _plug: PWMplug enum
+        @return: int id
+        """
         if _plug == PwmPlug.PWMPLUG_P4:
             return 1
         else:
@@ -95,3 +109,11 @@ class RoboUtil:
     # --------------------------------------------------------------------------------------
     # --------------------------------------------------------------------------------------
     # --------------------------------------------------------------------------------------
+
+    @staticmethod
+    def get_time_ms() -> int:
+        """!
+        Returns current epoch time in milli Seconds
+        @return: mS (int)
+        """
+        return int(time.time() * 1000)
