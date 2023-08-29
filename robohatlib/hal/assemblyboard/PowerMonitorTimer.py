@@ -78,7 +78,6 @@ class PowerMonitorTimer:
                 diff_time_current_last_error = current_time - last_error_time
                 if diff_time_current_last_error >= RobohatConfig.TIME_WINDOW_OF_SHORT_PROTECTION_RELEASE_SERVO_POWER:
                     self.__task_loop_is_running = False
-
             time.sleep(0.05)
 
     # --------------------------------------------------------------------------------------

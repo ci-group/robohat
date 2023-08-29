@@ -90,7 +90,7 @@ class Robohat:
                 print("Error, dip-witches in config are in conflict, can't continue.")
                 print("Preferred config is, the first assembly board on 0 and the switch onto the topboard on 7 ")
                 return
-        elif _servo_assembly_1_config is not None and _servo_assembly_2_config is not None:
+        elif _servo_assembly_1_config is None and _servo_assembly_2_config is not None:
             if _switch_top_board is _servo_assembly_2_config.get_sw2_power_good_address():
                 print("Error, dip-witches in config are in conflict, can't continue.")
                 print("Preferred config is, the second assembly board on 1 and the switch onto the topboard on 7 ")
