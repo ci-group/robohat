@@ -7,7 +7,7 @@
 <TABLE class="par">
 <TR><TD>ProjectID:  </TD><TD>2022-2823-01</TD>                                              </TR>
 <TR><TD>ProjectName:</TD><TD>Robohatlib</TD>                                                </TR>
-<TR><TD>Version:    </TD><TD>23-08-2023, v0.2.0</TD>                                          </TR>
+<TR><TD>Version:    </TD><TD>28-08-2023, v0.3.0</TD>                                          </TR>
 <TR><TD>Contact:    </TD><TD>A. Denker,M. Molenaar, N. Althuisius</TD>                      </TR>
 <TR><TD>E-mail:	    </TD><TD>a.denker@vu.nl,  m.molenaar@vu.nl,  n.althuisius@vu.nl</TD>    </TR>
 </TABLE>
@@ -23,9 +23,9 @@
 <B>Change log</B>
 <BR>
 <TABLE class="par">
-<tr><th>Who</th><th>When</th><th>What</th></tr>
-<TR><TD>..</TD><TD>..</TD><TD>..</TD></TR>
-<TR><TD>..</TD><TD>..</TD><TD>..</TD></TR>
+<tr><th>Who     </th><th>Version</th><th>When      </th><th>What                                                </th></tr>
+<TR><TD>A.Denker</TD><TD>0.3.0  </TD><TD>28-08-2023</TD><TD>Changed power-good detection DC/DC converters servos</TD></TR>
+<TR><TD>..      </TD><TD>..     </TD><TD>..        </TD><TD>..                                                  </TD></TR>
 </TABLE>
 <BR>
 

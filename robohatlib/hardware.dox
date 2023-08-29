@@ -1,27 +1,29 @@
 /**
 \page hardware Hardware description
 
-For the software description of the Robohat, see \ref software<BR>
+For the software description of the Robohat, see \ref software
+<BR>
 
 <h1>Robohat hardware description</h1>
 
 \image html robohat_small.png
 
-The Robohat is Robot which is a modular design. The basis of the design is the brain. The brain consist of PCBs and batteries.<BR>
+The Robohat is Robot which has a modular design. The basis of the design is the brain. The brain consist of PCBs and batteries.<BR>
 Attached to the brain are limbs, which are coupled with joints. These joins are driven by servos. By driving those joint, the Robot should be able to walk.
 
 <hr style="width:100%;text-align:left;margin-left:0">
 <h2>Raspberry PI 4</h2>
 
-For the processing power the Robohat uses a Raspberry PI 4<BR>
+For the processing power, the Robohat uses a Raspberry PI 4<BR>
 
 \image html RPI4.jpg Raspberry PI 4
 
 The Raspberry (RPi for short) has multiple connections. Most connection can be used.
 
-<B>Connectors aren't avaible for users are:</B>
+<B>Connectors which aren't avaible for users are:</B>
 
-. The I/O-header. The I/O-header isn't accessible, because its connected to the Topboard.<BR>
+. The I/O-header. The I/O-header isn't accessible, because its connected to the Topboard (see section below)
+.<BR>
 . The USB-C power-plug. The USB-C power-plug of the RPi may NOT be used. The power delivery for the RPi is done by the Topboard (see section below).
 Connecting both the USB-C power-plug and the Topboard can result in weird behaviour of the RPi.<BR>
 
@@ -35,7 +37,7 @@ The Topboard is the connection between the Raspberry Pi and the rest of the syst
 On the Topboard itself, a buzzer, an I/O-expander, ADC, serial console, and an I2C-interface are available.<BR>
 
 <b>Address of the Topboard</b><BR>
-The Topboard has a dipswitch (on the backside) to sets it address (topboard_switch_value). The default value is 7.<BR>
+The Topboard has on the backside a dipswitch to sets it address (topboard_switch_value). The default value is 7.<BR>
 Actually the switch sets the I2C address of the I/O-expander on the Topboard. If for somehow the address of the I/O-expander has a conflict of a other I2C-device (on I2C bus 1) the address can be changed by this switch.
 
 \image html topboard_back.png the back-side of the Topboard
@@ -45,21 +47,23 @@ Actually the switch sets the I2C address of the I/O-expander on the Topboard. If
 
 <B> I/O pins</B><BR>
 The Topboard has 8 I/O pins, which can be accessed by the I/O header (J2) of the topboard<BR>
+The maximum input voltage of the I/O (set as input) may not exceed 3.3 V<BR>
 
 pinning of the I/O header:<BR>
-1  + 3V3<BR>
-2  GPIO 0<BR>
-3  GPIO 1<BR>
-4  GPIO 2<BR>
-5  GPIO 3<BR>
-6  GPIO 4<BR>
-7  GPIO 5<BR>
-8  GPIO 6<BR>
-9  GPIO 7<BR>
+ 1 + 3V3<BR>
+ 2 GPIO 0<BR>
+ 3 GPIO 1<BR>
+ 4 GPIO 2<BR>
+ 5 GPIO 3<BR>
+ 6 GPIO 4<BR>
+ 7 GPIO 5<BR>
+ 8 GPIO 6<BR>
+ 9 GPIO 7<BR>
 10 GND<BR>
 
 <B>ADC</B><BR>
 3 ADC channels are available on the Topboard, which can be accessed by tge ADC header of the topboard<BR>
+Do not measure above 3 volts. This could damage the ADC.
 
 pinning of the ADC header:<BR>
 1 + 3V3<BR>
@@ -69,13 +73,11 @@ pinning of the ADC header:<BR>
 5 scaled battery voltage. <B>DO NOT USE</B> It's actually ADC Channel 3, which is used to monitor the battery capacity.<BR>
 6 GND<BR>
 
-Do not measure above 3 volts. This could damage the ADC.
-
 <B>Console</B><BR>
 To monitor the RPi a console connection can be used. <BR>
 The default settings of the console port is: 115200 baud, 8N1<BR>
 
-Cable 'TTL-232R-Rpi' can be used (RS 767-6200) <BR>
+A cable 'TTL-232R-Rpi' can be used (see RS 767-6200) <BR>
 
 pinning of the Console connector:<BR>
 1 GND (black of the 'TTL-232R-Rpi' cable)<BR>
@@ -83,7 +85,7 @@ pinning of the Console connector:<BR>
 3 RXD (data in of the RPi)  (orange of the 'TTL-232R-Rpi' cable)<BR>
 
 <B>Spare I2C</B><BR>
-I2C bus 5 is avaible for the user.<BR>
+I2C bus 5, is avaible for the user.<BR>
 
 pinning of the I2C connector:<BR>
 1 GND<BR>
@@ -95,8 +97,8 @@ pinning of the I2C connector:<BR>
 
 Other connections on the top-side of the Topboard are present, but not user available.
 
-The first one is the power-connector to power the Topboard and the RPi This connector is connected to a PWR-board.
-Two other 16 pole headers are avaible (P3 and P4) to connect a Servo-assembly by a flat-cable
+The first one is the power-connector to power the Topboard and the RPi This connector is connected to a power-board.
+Two other 16 pole headers are avaible (P3 and P4) to connect a Servo-assemblies by flat-cables
 
 The last connection of the top-side of the Topboard is the IMU connector. The IMU located on the top-lid of the housing is connected to this connector by a 5 pole cable.
 
@@ -112,7 +114,8 @@ There aren't any user available connections off the back-side of the Topboard
 <BR>
 
 The LED (which goes to the top-lid of the housing) is connected to the 5 pole connector.
-The 2 pole connector is connected to the first Powerboard.
+The (main) power-board is connected to the 2 pole connector.
+
 
 \image html topboard_back_connections.png connections off the back-side of the Topboard
 
