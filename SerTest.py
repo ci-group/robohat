@@ -120,6 +120,7 @@ class SerTestClass:
         print("l for led test ")
         print("v show voltages of all servo adcs")
         print("t toggle SERVO update mode between DIRECT or PERIODICALLY")
+        print("b sounds the buzzer")
 
         print("\n")
         print("x for exit")
@@ -158,6 +159,8 @@ class SerTestClass:
             self.__led_test()
         elif _command == "t":
             self.__toggle_direct_update_mode()
+        elif _command == "t":
+            self.__sound_the_buzzer()
     # --------------------------------------------------------------------------------------
         elif _command == "x":
             self.exit_program()
@@ -372,6 +375,17 @@ class SerTestClass:
         time.sleep(1)
         self.__robohat.set_led_color(Color.WHITE)
         print("Ready LED test")
+
+    # --------------------------------------------------------------------------------------
+    # --------------------------------------------------------------------------------------
+    # --------------------------------------------------------------------------------------
+
+    def __sound_the_buzzer(self) -> None:
+        """!
+        Make some sound with the buzzer
+        @return: None
+        """
+        self.__robohat.do_buzzer_random()
 
     # --------------------------------------------------------------------------------------
     # --------------------------------------------------------------------------------------
