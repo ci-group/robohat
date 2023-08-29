@@ -38,7 +38,6 @@ class PowerMonitorAndIO:
     IO expander class based on a MCP23008
     """
 
-
     #--------------------------------------------------------------------------------------
 
     def __init__(self, _iohandler:IOHandler, _power_io_expander_def:IOExpanderDef, _sw_io_expander:int, _name_of_assembly:str = ""):
@@ -79,7 +78,10 @@ class PowerMonitorAndIO:
         self.__reset_timerIsRunning = False
         self.disable_retry_timer_callback = False
 
-        self.__time_list = []
+        self.__timer0 = PowerMonitorTimer(0, self, self.__expander)
+        self.__timer1 = PowerMonitorTimer(1, self, self.__expander)
+        self.__timer2 = PowerMonitorTimer(2, self, self.__expander)
+        self.__timer3 = PowerMonitorTimer(3, self, self.__expander)
 
     #--------------------------------------------------------------------------------------
 
@@ -292,41 +294,18 @@ class PowerMonitorAndIO:
         """
 
         interrupt_stats = self.__expander.read_interrupt_status()
+
         if RoboUtil.check_bit(interrupt_stats, 0) == 1:
-            p = self.__createOrUseMonitor(0)
-            p.check()
+            self.__timer0.start_checking_if_not_already_running()
         if RoboUtil.check_bit(interrupt_stats, 1) == 1:
-            p = self.__createOrUseMonitor(1)
-            p.check()
+            self.__timer1.start_checking_if_not_already_running()
         if RoboUtil.check_bit(interrupt_stats, 2) == 1:
-            p = self.__createOrUseMonitor(2)
-            p.check()
+            self.__timer2.start_checking_if_not_already_running()
         if RoboUtil.check_bit(interrupt_stats, 3) == 1:
-            p = self.__createOrUseMonitor(3)
-            p.check()
+            self.__timer3.start_checking_if_not_already_running()
 
         if self.__user_int_callback is not None:
             self.__user_int_callback(_gpi_nr)
-
-    #--------------------------------------------------------------------------------------
-
-    def __createOrUseMonitor(self, _id:int) -> PowerMonitorTimer:
-        for p in self.__time_list:
-            if p.get_id() == _id:
-                return p
-
-        p = PowerMonitorTimer(_id, self, self.__expander)
-        self.__time_list.append(p)
-        return p
-
-    #--------------------------------------------------------------------------------------
-
-    def remove_from_list(self, _id:int) -> None:
-        print("clean up " + str(_id))
-        for p in self.__time_list:
-            if p.get_id() == _id:
-                self.__time_list.remove(p)
-                break
 
     #--------------------------------------------------------------------------------------
 

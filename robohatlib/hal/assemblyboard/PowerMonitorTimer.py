@@ -18,16 +18,13 @@ except ImportError:
     print("Failed to import dependencies for PowerMonitorHolder")
     raise
 
-
-
-
     #--------------------------------------------------------------------------------------
     #--------------------------------------------------------------------------------------
     #--------------------------------------------------------------------------------------
 
 class PowerMonitorTimer:
     """!
-    This class will monitor the pin which caused the interrupt if a short still occurs
+    This class will monitor if a short still occurs onto the pin which caused the interrupt. If so longer than the time window, send a message to the user
     """
 
     def __init__(self, _id:int, _mother:PowerMonitorAndIO, _expander:MCP23008):
@@ -39,7 +36,8 @@ class PowerMonitorTimer:
         self.__mother = _mother
         self.__expander = _expander
 
-        print("yeay " + str(_id))
+        self.__busy = False
+
     #--------------------------------------------------------------------------------------
 
     def get_id(self) -> int:
@@ -54,30 +52,49 @@ class PowerMonitorTimer:
     # --------------------------------------------------------------------------------------
 
     def task(self):
-        blocking = True
-        start_time = RoboUtil.get_time_ms()
-        last_check = RoboUtil.get_time_ms()
+        """!
+        Our running task which is a separate thread
+        @return: None
 
-        while blocking:
+        Will trigger the alarm when the I/O stays low in the time-window
+        """
+
+        self.__busy = True
+        start_time = RoboUtil.get_time_ms()
+
+        while self.__busy:
             current_time = RoboUtil.get_time_ms()
             diff_time = current_time - start_time
 
             if self.__expander.get_pin_data(self.__id) == 1:        # pin when high, so no short anymore. is in the threshold. so no alarm, get out of this loop
-                blocking = False
+                self.__busy = False
             else:
                 if diff_time >= RobohatConfig.TIME_WINDOW_TO_BE_DCDC_SHORT_TO_ALARM:
-                    blocking = False
-                    self._display_error()
+                    self.__busy = False
+                    self.__trigger_error()
 
             time.sleep(0.1)
 
-        self.__mother.remove_from_list(self.__id)
+    # --------------------------------------------------------------------------------------
+    # --------------------------------------------------------------------------------------
+    # --------------------------------------------------------------------------------------
+
+    def get_is_busy(self) -> bool:
+        """!
+        Return True when the task is Running
+        @return: bool
+        """
+        return self.__busy
 
     # --------------------------------------------------------------------------------------
     # --------------------------------------------------------------------------------------
     # --------------------------------------------------------------------------------------
 
-    def _display_error(self):
+    def __trigger_error(self) -> None:
+        """!
+        Will trigger an error message to the user
+        @return: Nome
+        """
         print("Major error: power fail DC/DC " + str(self.__id))
         self.__mother.do_signaling_device()
 
@@ -85,9 +102,14 @@ class PowerMonitorTimer:
     # --------------------------------------------------------------------------------------
     # --------------------------------------------------------------------------------------
 
-    def check(self) -> None:
-        thread = threading.Thread(target = self.task)
-        thread.start()
+    def start_checking_if_not_already_running(self) -> None:
+        """!
+        Will start the task which checks if the error is still busy
+        @return: None
+        """
+        if self.__busy is False:
+            thread = threading.Thread(target = self.task)
+            thread.start()
 
     # --------------------------------------------------------------------------------------
     # --------------------------------------------------------------------------------------
