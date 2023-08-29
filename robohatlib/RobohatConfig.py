@@ -37,7 +37,7 @@ DEBUG_I2C = False
 """!
 Alarm to user settings
 """
-TIME_WINDOW_TO_BE_DCDC_SHORT_TO_ALARM = 200
+TIME_WINDOW_OF_SHORT_PROTECTION_SERVO_POWER = 200   # time window in mS. When a DC/DC converter has a power-fail, which is longer than this time window, a message goes to the user
 
 ALARM_PERMITTED = True                              # sound an alarm when a system alert is present, such as to low accu capacity
 ALARM_TIMEOUT_IN_SEC = 300                          # timeout between alarm
@@ -63,7 +63,6 @@ ACCU_VOLTAGE_TO_PERCENTAGE_ARRAY =  [
                                     [9.82,	1],
                                     [10.83,	5],
                                     [11.06,	10],
-
                                     [11.12,	15],
                                     [11.18,	20],
                                     [11.24,	25],

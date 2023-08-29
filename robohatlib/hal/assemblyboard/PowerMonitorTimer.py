@@ -69,7 +69,7 @@ class PowerMonitorTimer:
             if self.__expander.get_pin_data(self.__id) == 1:        # pin when high, so no short anymore. is in the threshold. so no alarm, get out of this loop
                 self.__busy = False
             else:
-                if diff_time >= RobohatConfig.TIME_WINDOW_TO_BE_DCDC_SHORT_TO_ALARM:
+                if diff_time >= RobohatConfig.TIME_WINDOW_OF_SHORT_PROTECTION_SERVO_POWER:
                     self.__busy = False
                     self.__trigger_error()
 
