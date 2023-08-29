@@ -34,8 +34,8 @@ except ImportError:
 # --------------------------------------------------------------------------------------
 # --------------------------------------------------------------------------------------
 
-SUPER_USER_MAX_MOVE = 175
-SUPER_USER_MIN_MOVE = 5
+SUPER_USER_MAX_MOVE = 170
+SUPER_USER_MIN_MOVE = 10
 
 NORMAL_USER_MAX_MOVE = 160
 NORMAL_USER_MIN_MOVE = 20
@@ -240,6 +240,8 @@ class SerTestClass:
         @return: None
         """
 
+        time = self.__robohat.get_servo_us_time(_degree)
+
         self.__robohat.set_servo_multiple_angles(
             [
             _degree, _degree, _degree, _degree, _degree, _degree, _degree, _degree, _degree, _degree, _degree, _degree, _degree, _degree, _degree, _degree,
@@ -247,7 +249,7 @@ class SerTestClass:
             ])
 
 
-        print("Angles of the servos should be: " + str(_degree) + "°")
+        print("Angles of the servos should be: " + str(_degree) + "°" + " time: " + str(time) + " uS")
 
     # --------------------------------------------------------------------------------------
     # --------------------------------------------------------------------------------------

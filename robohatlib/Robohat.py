@@ -697,6 +697,22 @@ class Robohat:
 
     # ------------------------------------------------------------------------------------------
 
+    def get_servo_us_time(self, _degree:float, _servo_nr:int=0) -> int:
+        """!
+        Get calculated time which is used to set the servo to the wanted degree
+        @param _degree:
+        @return: time in uS
+        """
+
+        if self.__servo_assembly_1 is not None:
+            return self.__servo_assembly_1.get_servo_us_time(_degree, _servo_nr)
+        elif self.__servo_assembly_2 is not None:
+            return self.__servo_assembly_2.get_servo_us_time(_degree, _servo_nr)
+        else:
+            return 0
+
+    # ------------------------------------------------------------------------------------------
+
     def set_servo_multiple_angles(self, _angles_array: []) -> None:
         """!
         Set the angle of connected servos in degree

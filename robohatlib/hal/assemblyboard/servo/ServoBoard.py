@@ -125,11 +125,26 @@ class ServoBoard:
         This is the return call of tge ServoDriver. Pushes the angles directly in the PWM chip
         @return: None
         """
+
         wanted_time_array = [0] * 16
 
         for i in range(0, 16):
             wanted_time_array[i] = self.__servo_datas_array[i].convert_angle_to_time(_wanted_angles[i])
+
         self.__pwm.set_on_time_all_channels(wanted_time_array)
+
+    #--------------------------------------------------------------------------------------
+    #--------------------------------------------------------------------------------------
+
+    def get_servo_us_time(self, _degree:float, _servo_nr:int=0) -> int:
+        """!
+        Get calculated time which is used to set the servo to the wanted degree
+        @param _servo_nr
+        @param _degree:
+        @return: time in uS
+        """
+
+        return self.__servo_datas_array[_servo_nr].convert_angle_to_time(_degree)
 
     #--------------------------------------------------------------------------------------
     #--------------------------------------------------------------------------------------

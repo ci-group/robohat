@@ -25,10 +25,10 @@ except ImportError:
 # Define registers values from the datasheet
 MODE1_ADDRESS =         0x00
 MODE2_ADDRESS =         0x01
-SUBADR1_ADDRESS =       0x02
-SUBADR2_ADDRESS =       0x03
-SUBADR3_ADDRESS =       0x04
-ALLCALLADR_ADDRESS =    0x05
+SUB_ADR1_ADDRESS =       0x02
+SUB_ADR2_ADDRESS =       0x03
+SUB_ADR3_ADDRESS =       0x04
+ALL_CALL_ADR_ADDRESS =    0x05
 LED0_ON_L_ADDRESS =     0x06
 LED0_ON_H_ADDRESS =     0x07
 LED0_OFF_L_ADDRESS =    0x08
@@ -60,6 +60,7 @@ class PCA9685:
         Constructor
         @param _i2c_device: connection IO
         """
+
         self.__i2c_device = _i2c_device
         self.__i_am_a_sleep = False
 
@@ -89,10 +90,16 @@ class PCA9685:
         @param _time_wanted_us: new time in uS
         @return: None
         """
+
         if _channel >= 0 and _channel < 16:
             actual_ticks_on = self.__convert_time_us_to_tick(_time_wanted_us)
 
-            on_ticks = 0
+            if DEBUG is True:
+                time_per_hz = (1000000 / self.__freq) / 4096.0
+                time_us = actual_ticks_on * time_per_hz
+                print("on reg val: " + str(actual_ticks_on) + " time: " + str(int(time_us)) + " uS")
+
+            on_ticks = 0                                            # default offset value
             off_ticks = 4095 - actual_ticks_on - on_ticks
 
             on_tick_bytes = on_ticks.to_bytes(2, 'little')
@@ -100,7 +107,7 @@ class PCA9685:
 
             self.__i2c_device.i2c_write_bytes(bytes([LED0_ON_L_ADDRESS + (4 * _channel), on_tick_bytes[0], on_tick_bytes[1], off_tick_bytes[0], off_tick_bytes[1]]))
         else:
-            print("Error: channel " + str(_channel) + " in ADC MAX11607 not available")
+            print("Error: channel " + str(_channel) + " in PWM PCA9685 not available")
     # --------------------------------------------------------------------------------------
     def set_on_time_all_channels(self, _wanted_times_us: []) -> None:
         """!
@@ -112,7 +119,13 @@ class PCA9685:
             data_to_send = bytes([LED0_ON_L_ADDRESS])
             for i in range(0, 16):
                 actual_ticks_on = self.__convert_time_us_to_tick(_wanted_times_us[i])
-                on_ticks = 0
+
+                if DEBUG is True:
+                    time_per_hz = (1000000 / self.__freq) / 4096.0
+                    time_us = actual_ticks_on * time_per_hz
+                    print(str(i) + ": on reg val: " + str(actual_ticks_on) + " time: " + str(int(time_us)) + " uS")
+
+                on_ticks = 0                                    # default offset value
                 off_ticks = 4095 - actual_ticks_on - on_ticks
 
                 on_tick_bytes = on_ticks.to_bytes(2, 'little')
@@ -157,12 +170,11 @@ class PCA9685:
         return self.__i_am_a_sleep
 
     #--------------------------------------------------------------------------------------
-    def __set_pwm_freq(self, _freq: int, _calibration: int=-3) -> None:
+    def __set_pwm_freq(self, _freq: int) -> None:
         """!
         Set the PWM frequency
         @param _freq: 40 to 1000
         @type _freq: int
-        @param _calibration: optional integer value to offset oscillator errors. defaults to 0
         @raises ValueError: set_pwm_freq: freq out of range
         """
         if _freq < 40 or _freq > 1000:
@@ -173,7 +185,6 @@ class PCA9685:
             scale_val = scale_val / float(_freq)
             scale_val = scale_val - 1
             pre_scale = math.floor(scale_val + 0.5)
-            pre_scale = pre_scale + float(_calibration)
 
             self.__freq = _freq
 

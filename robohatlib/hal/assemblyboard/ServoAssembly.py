@@ -147,6 +147,17 @@ class ServoAssembly:
         return self.__servo_board.get_servo_is_direct_mode()
     #--------------------------------------------------------------------------------------
 
+    def get_servo_us_time(self, _degree:float, _servo_nr:int=0) -> int:
+        """!
+        Get calculated time which is used to set the servo to the wanted degree
+        @param _degree:
+        @return: time in uS
+        """
+
+        return self.__servo_board.get_servo_us_time(_degree, _servo_nr)
+
+    #--------------------------------------------------------------------------------------
+
     def get_servo_is_single_servo_wanted_angle(self, _servo_nr: int) -> bool:
         """!
         Returns true if (previous) wanted angle the same as the angle of the servo
