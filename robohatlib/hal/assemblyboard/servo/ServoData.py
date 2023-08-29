@@ -19,25 +19,28 @@ class ServoData:
 
     # --------------------------------------------------------------------------------------
 
-    def __init__(self, _servo_nr: int, _min_time: float, _max_time: float, _running_degree: float,
-                 _offset_degree: float, _formula_a: float, _formula_b: float) -> None:
+    def __init__(self, _servo_nr: int, _min_time: float, _max_time: float, _time_offset: float,
+                 _running_degree: float, _offset_degree: float,
+                 _formula_a: float, _formula_b: float) -> None:
         """!
         The ServoData base class initializer.
 
-        @param _servo_nr: servo nr (should be 1-16 on assembly 1 or 17-32 on assembly 2
+        @param _servo_nr: servo nr (should be 1-16 on assembly 1 or 17-32 on assembly 2)
         @param _min_time: PWM time of servo at minimum pos (something like 500 uS)
         @param _max_time: PWM time of servo at maximum pos (something like 2500 uS)
+        @param _time_offset is an offset to correct the pwm controller (should be 0 uS)
         @param _running_degree: Range of degree of servo (something like 180 degree)
         @param _offset_degree: Offset of the servo (should be 0)
         @param _formula_a: First parameter of formula, servo measure-voltage to angle
         @param _formula_b: Second parameter of formula, servo measure-voltage to angle
-
         @return: An instance of the ServoData class
         """
 
         self.__servo_nr = _servo_nr
         self.__min_time = _min_time
         self.__max_time = _max_time
+        self.__time_offset = _time_offset
+
         self.__running_degree = _running_degree
         self.__offset_degree = _offset_degree
         self.__formula_a = _formula_a
@@ -45,6 +48,8 @@ class ServoData:
 
         self.__min_angle = 0
         self.__max_angle = self.__min_angle + self.__running_degree
+
+
     # --------------------------------------------------------------------------------------
 
     def get_min_angle(self) -> float:
@@ -72,7 +77,7 @@ class ServoData:
         """
 
         time = (((self.__max_time - self.__min_time) / self.__running_degree) * (_angle - self.__offset_degree)) + self.__min_time
-        return time
+        return time + self.__time_offset
 
     # --------------------------------------------------------------------------------------
 
@@ -86,7 +91,7 @@ class ServoData:
 
     # --------------------------------------------------------------------------------------
 
-    def set_running_parameters(self, _min_time: float, _max_time: float, _running_degree: float, _offset_degree: float, _formula_a: float, _formula_b: float) -> None:
+    def set_running_parameters(self, _min_time: float, _max_time: float, _running_degree: float, _offset_degree: float, _formula_a: float, _formula_b: float, _time_offset: float = 0) -> None:
         """!
         Sets new parameters to adjust servo time
 
@@ -96,11 +101,14 @@ class ServoData:
         @param _offset_degree: Offset of the servo (should be 0)
         @param _formula_a:  First parameter of formula, servo measure-voltage to angle
         @param _formula_b: Second parameter of formula, servo measure-voltage to angle
+        @param _time_offset is an offset to correct the pwm controller
         @return: None
         """
 
         self.__min_time = _min_time
         self.__max_time = _max_time
+        self.__time_offset = _time_offset
+
         self.__running_degree = _running_degree
         self.__formula_a = _formula_a
         self.__formula_b = _formula_b
@@ -131,7 +139,7 @@ class ServoData:
         """!
         converts voltage (measured by a adc, connected to the servo) to angle in degree
 
-        formula determined by parameters defined in contructor
+        formula determined by parameters defined in constructor
 
         y = ax + b , a = self._formula_a, b = self._formula_b,
         angle = self.__running_degree / (self.__max_degree_voltage_adc - self.__min_degree_voltage_adc ) * (_current_voltage - self.__min_degree_voltage_adc) - self.__offset_degree

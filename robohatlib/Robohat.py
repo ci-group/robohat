@@ -700,7 +700,8 @@ class Robohat:
     def get_servo_us_time(self, _degree:float, _servo_nr:int=0) -> int:
         """!
         Get calculated time which is used to set the servo to the wanted degree
-        @param _degree:
+        @param _degree: wanted angle
+        @param _servo_nr the wanted servo
         @return: time in uS
         """
 

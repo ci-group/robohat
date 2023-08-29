@@ -92,6 +92,7 @@ class PCA9685:
         """
 
         if _channel >= 0 and _channel < 16:
+
             actual_ticks_on = self.__convert_time_us_to_tick(_time_wanted_us)
 
             if DEBUG is True:
@@ -111,14 +112,16 @@ class PCA9685:
     # --------------------------------------------------------------------------------------
     def set_on_time_all_channels(self, _wanted_times_us: []) -> None:
         """!
-        @param _wanted_times_us: a array of 16, with the times
+        @param _wanted_times_us: an array of 16, with the times
         @return: None
         """
 
         if _wanted_times_us is not None:
             data_to_send = bytes([LED0_ON_L_ADDRESS])
             for i in range(0, 16):
-                actual_ticks_on = self.__convert_time_us_to_tick(_wanted_times_us[i])
+
+                wanted_time = _wanted_times_us[i]
+                actual_ticks_on = self.__convert_time_us_to_tick(wanted_time)
 
                 if DEBUG is True:
                     time_per_hz = (1000000 / self.__freq) / 4096.0
