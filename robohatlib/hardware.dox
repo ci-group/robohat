@@ -4,6 +4,9 @@
 For the software description of the Robohat, see \ref software
 <BR>
 
+<hr style="width:100%;text-align:left;margin-left:0">
+<hr style="width:100%;text-align:left;margin-left:0">
+
 <h1>Robohat hardware description</h1>
 
 \image html robohat_small.png
@@ -113,7 +116,7 @@ There aren't any user available connections off the back-side of the Topboard
 
 <BR>
 
-The LED (which goes to the top-lid of the housing) is connected to the 5 pole connector.
+The LED (which goes to the top-lid of the housing) is connected to the 5 pole connector.<BR>
 The (main) power-board is connected to the 2 pole connector.
 
 
@@ -135,7 +138,7 @@ The default PWM frequency is 50 Hz<BR>
 
 \image html servo_joint.png a servo in a joint of the Robohat
 
-The maximum amount of servos the user can connect to the Robohat hardware is 32 (but can be limited to the power consumption of te servos).<BR>
+The maximum amount of servos the user can connect to the Robohat hardware is 32 (but can be limited if the servos consumes much power).<BR>
 These servos will be driven by the Servo-assemblies. For how to connect a servo to the Robohat, see 'Servo-assembly'
 
 <hr style="width:100%;text-align:left;margin-left:0">
@@ -157,8 +160,8 @@ At the back of a Servo-assembly (at the PWM board) are 2 dip-switches present. O
 The default value is of assembly-board connected to plug P3 of the Topboard is 0.<BR>
 The default value is of assembly-board connected to plug P4 of the Topboard is 1.<BR>
 
-Note. The 2 dip-switches addressed and position of the flat-cable are used int the Robohatlib::ServoAssemblyConfig
-Note. Be sure if you use 2 Servo-assemblies, that the addresses of the assembly boards are different.<BR>
+<B>Note</B>. The 2 dip-switches addressed and position of the flat-cable are used int the Robohatlib::ServoAssemblyConfig <BR>
+<B>Note</B>. Be sure if you use 2 Servo-assemblies, that the addresses of the assembly boards are different.<BR>
 
 \image html servo_assembly_back.jpg back side of a servo-assembly
 \image html assemblyboards_dipswitch.png address settings of a assembly-board and its value
@@ -185,15 +188,12 @@ I/O connector<BR>
 
 The Servo assembly handles the power distribution of the servos. Each Servo assembly has to 16 servo channels. Those servo-channels are grouped in 4 groups.<BR>
 Each group has its own powersupply. The current of each power supply is limited to 5 Ampère. <BR>
-If the servos in a group take too much power, the groups power-supply will limit the current. This will stall the attached servos of that group.<BR>
+If the servos in a group take too much power, the groups power-supply will limit the current. This will stall the attached servos of that group, and will result in strange movement of the servos.<BR>
 
 Power limitation can be prevented to distribute the servos evenly on all the available servo-channels.<BR>
-The drawn current of a servo is proportional with its delivered torque. So do not put high torque servos in the same group, and will result in strange movement of the servos.<BR>
-
-you can place a servo to another group to even the power distribution.
+The drawn current of a servo is proportional with its delivered torque. So do not put high torque servos in the same group.
 
 The Servo groups are:
-
 <BR>
 <TABLE class="par">
 <TR><TH>Servo group</TH><TH colspan = "4">Servos channel</TH></TR>
@@ -206,7 +206,7 @@ The Servo groups are:
 
 \image html side_servo_assembly.jpg a connected servo to a servo-assembly
 
-As can be seen on the picture, the BROWN wire of the servo hast to be on the side of the PCB with the yellow power connector.
+As can be seen on the picture, the BROWN wire of the servo has to be on the side of the PCB with the yellow power connector.
 
 pinning servo<BR>
 BROWN                       gnd<BR>
@@ -222,21 +222,22 @@ The powerboard is the power distributor and the supervisor of the battery.<BR>
 
 \image html powerboard.png the Powerboard
 
-The battery can deliver a huge amount of power (so be careful, \ref precautions).
+The battery can deliver a huge amount of power (so be careful, read the \ref precautions).
 To keep it save and prevent wrong usage of the battery, each battery has its own powerboard.
 
 If needed, he Robohat has room for 2 batteries. But 1 battery should be enough.<BR> When using 2 batteries, 2 Powerboard are needed.
 
-<b>Connections of the front-side of the Powerboard</b>
+<b>Connections of the front-side of the Powerboard</b><BR>
+
 The Powerboard has no connections available for the user
 
 \image html powerboard_connections.png connections of the Powerboard
 
-At the top-side there a multiple connectors, which handles the power delivery for the Robohat. Handle them with care.
+At the top-side there a multiple connectors, which handles the power delivery for the Robohat.
 
-. Battery. At this connector the battery has to be connected.
-. Topboard. This connection will power the Topboard.
-. Assembly connectors. The 2 other connectors are to power the Servo assemblies
+. Battery. At this connector the battery has to be connected.<BR>
+. Topboard. This connection will power the Topboard.<BR>
+. Assembly connectors. The 2 other connectors are to power the Servo assemblies. <BR>
 
 There are also 2 LEDS present. A red one, for the status, and a green one to see if the power is turned on. (See power-on)
 
@@ -246,15 +247,16 @@ At the back-side are the connectors for turning he Robohat on and off.
 
 \image html powerboard_back_connections.png connections of the Powerboard
 
-. 3 pole power connector. This has to be connected to the Power-switch-board
-. 2 pole (in de the middle) This has to be connected to the Topboard if it is the first assembly-board. When it is the second assembly-board, it has to be connected to the first assembly-board.
-. 2 pole servo-assembly. Connect this to the second assembly-board (if available)
+. 3 pole power connector. This has to be connected to the Power-switch-board<BR>
+. 2 pole (in de the middle) This has to be connected to the Topboard if it is the first assembly-board. When it is the second assembly-board, it has to be connected to the first assembly-board.<BR>
+. 2 pole servo-assembly. Connect this to the second assembly-board (if available)<BR>
 
-<B>Connecting the battery</B>
-Always be sure, you connect a battery with enough capacity.
+<B>Connecting the battery</B><BR>
+
+Always be sure, you connect a battery with enough capacity.<BR>
 When the battery has enough capacity, the red status-LED will blink two times.<BR>
-When the capacity of the battery is to low, the red status-LED will flash multiple times.
-When the battery is completely dead nothing will happen.
+When the capacity of the battery is to low, the red status-LED will flash multiple times.<BR>
+When the battery is completely dead, nothing will happen.<BR>
 
 <b>Turning on the Robohat</b>
 
@@ -265,34 +267,33 @@ Nothing will happen, when the user releases the button before flashing starts or
 When the power is on, the green power-LED will be illuminated.
 
 User Powering off<BR>
-Powering down should be done by the shutdown API-function of the Robohat library
-The user can also shut down the OS (by 'sudo shutdown now' in the console), and turn off the power by pressing switch the sane way as turning the Robohat on.
+Powering down should be done with the shutdown API-function of the Robohat library.<BR>
+The user can also shut down the OS (by 'sudo shutdown now' in the console), and turn off the power by pressing switch the same way as turning the Robohat on.
 (When the switch is pressed the red status-LED will blink 3 times. When the blinking period ends, the red status-LED will flash multiple times. The user should release the power switch before the flashes stops).
 
-Note. When powering down, before shutting down the OS. , can destroy disk-data,
+<B>Note</B>. Powering down, before shutting down the OS. can result in data loss, or corruption of the SD-card.
 
 Battery low capacity shutdown<BR>
-The Powerboard will shut down the power, when the battery capacity goes below a threshold (2%). Before shutting down the power, the red status LED will flash for 1 minute. The user can not interrupt this powering-down mode.
-This hardware feature is implemented to save the battery. The battery can be damaged d if used below a capacity of 1%
+The Powerboard will automatically shut down the power, when the battery capacity goes below a threshold (2%). Before shutting down the power, the red status LED will flash for 1 minute. The user can not interrupt this powering-down mode.
+Although shutting down the power, before shutting down the os, could result in data loss, this hardware feature is implemented to save the battery. The battery can be damaged if used below a capacity of 1%
 
-When using the Robohat lib, the user will get a warning when the battery capacity goes down below 20% and goes down below 10%.
-When the Robohat lib detects a capacity below 5%, an auto shutdown will be performed to save the accu. This will be a graceful shutdown. The power will go down when the OS is also shutdown (this is the
-best solution to preserve the SD-card)
+When using the Robohat lib, the user will get a first warning when the battery capacity goes below 20 %. A second warning will be presented when the capacity of the battery goes down below 10%.
+When the Robohat lib detects a capacity below 5%, an auto shutdown will be performed to save the accu. This will be a graceful shutdown. The OS will be shut downed before the power is shut downed.
 
-While the accu is in standby, the LED will periodically flash (interval of 6 seconds)
+While the accu is in standby, the LED will periodically flash (interval of 6 seconds) to see the battery is still attached to the Robohat.<BR>
+Its better to unplug the battery and store it in a safe place, when the Robohat os not used.
 
 Fuse<BR>
-The Powerboard has a fuse. Make sure you know the cause, why the fuse is blown, before replacing it. This fuse is rate at 20A, so an accidentally blown of the fuse won't happen.
-
+The Powerboard has a fuse. When this fuse is blown, make sure you know the cause, before replacing it. This fuse is rate at 20A, so an accidentally blown of the fuse won't happen.
 Fuse rating: 20A
 
 <hr style="width:100%;text-align:left;margin-left:0">
 <h2>IMU</h2>
 \image html IMU.png IMU
 
-The Robohat has also a 'Inertial Measurement Unit' (IMU for short). With the IMU, the Robohat can track its movements.
-It can determine its position to read out the X,Y and Z magnetic fields direction. Also, it can measure the  acceleration in X, Y en Z direction. It has also a build in Gyroscope.
-The IMU is connected to the PI through the Topboard. Is accessed by its own API-calls. The IMU should be auto-detected. Nothing is selectable at the IMU.
+The Robohat has also a 'Inertial Measurement Unit' (IMU for short). With the IMU, the Robohat can track its movements.<BR>
+It can determine its position by reading out the X,Y and Z magnetic fields direction. Also, it can measure the acceleration in the X, Y en Z direction. It has also a build in Gyroscope, so the Robohat can know when it turns.<BR>
+The IMU is connected to the PI through the Topboard. The IMU is auto-detected, so no addresses has to be set.
 
 <hr style="width:100%;text-align:left;margin-left:0">
 

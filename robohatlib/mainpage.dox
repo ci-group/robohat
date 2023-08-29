@@ -24,12 +24,11 @@
 <BR>
 <TABLE class="par">
 <tr><th>Who     </th><th>Version</th><th>When      </th><th>What                                                </th></tr>
+<TR><TD>A.Denker</TD><TD>0.3.0  </TD><TD>29-08-2023</TD><TD>Added a time offset for the servos                  </TD></TR>
 <TR><TD>A.Denker</TD><TD>0.3.0  </TD><TD>28-08-2023</TD><TD>Changed power-good detection DC/DC converters servos</TD></TR>
 <TR><TD>..      </TD><TD>..     </TD><TD>..        </TD><TD>..                                                  </TD></TR>
 </TABLE>
 <BR>
-
-
 
 \image html vu_logo.png
 

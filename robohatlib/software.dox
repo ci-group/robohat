@@ -15,7 +15,7 @@ For the hardware description of the Robohat, see \ref hardware
 
 \image html robohat_small.png
 
-The Robohatlib is a piece of software written in Pyton, to be able to access the hardware. Some PCB-boards on the Robohat hardware, have user selectable addresses.
+The Robohatlib is a piece of software written in Pyton, to be able to access the hardware. Some PCB-boards of the Robohat hardware, have user selectable addresses.
 Before using the Robohatlib, the user should know these addresses. For the hardware description see \ref hardware
 
 Boards with an address are the Topboard and the Servo-assemblies.
@@ -30,10 +30,10 @@ The Startpoint of the RoboHat Library is the Robohat class. After constructing t
 
 \code
 # creation of the Robohat class (mandatory)
-robohat = Robohat(main_config.servoassembly_1_config, main_config.servoassembly_2_config, main_config.TOPBOARD_IO_EXPANDER_SW)
+robohat = Robohat(TestConfig.servoassembly_1_config, TestConfig.servoassembly_2_config, TestConfig.TOPBOARD_IO_EXPANDER_SW)
 
 # initialisation of the Robohat class (mandatory)
-robohat.init(main_config.SERVOBOARD_1_DATAS_ARRAY, main_config.SERVOBOARD_2_DATAS_ARRAY)
+robohat.init(TestConfig.SERVOBOARD_1_DATAS_ARRAY, TestConfig.SERVOBOARD_2_DATAS_ARRAY)
 
 # setting the callbacks for interrupt processing (not needed)
 robohat.set_topboard_io_expander_int_callback(self.__test_hat_io_expander_int_callback)
@@ -67,6 +67,8 @@ robohat = Robohat(SERVOASSEMBLY_1_CONFIG, SERVOASSEMBLY_2_CONFIG, TOPBOARD_IO_SW
 </TABLE>
 <I>Parameters of Robohat class</I>
 
+If only 1 Servo assembly is used, the second SERVOASSEMBLY_2_CONFIG parameter can be None but can also be filled with data for a board which can be placed in the future.
+
 <h3>ServoAssemblyConfig</h3>
 
 A ServoAssemblyConfig is the configuration for a Servo assembly board, which consist out of 4 parameters and is needed by the Robohat constructor.
@@ -91,7 +93,7 @@ See the \ref hardware of the Servo-assembly for SW1_PWM_ADDRESS, SW2_POWER_GOOD_
 The last parameter of the robohat constructor, is the 'topboard_switch_value' value. The default value is 7.<BR>
 This value determines the I2C-address of the IO-expander (MCP23008) of the Topboard.<BR>
 
-note. see the \ref hardware of the Topboard. for the switch value
+<B>Note</B>. see the \ref hardware of the Topboard. for the switch value
 
 <h2>robohat.init function</h2>
 Before we have some action, we have to initialize the robohat class. So using this function is mandatory<BR>
@@ -107,7 +109,7 @@ The parameters consist of 2 arrays of ServoData
 
 \code
 SERVOBOARD_1_DATAS_ARRAY = [
-                 ServoData(1, 500, 2500, 180, 0, 72.2058435743876, -22.8429203374794),
+                 ServoData(1, 500, 2500, 0, 180, 0, 72.2058435743876, -22.8429203374794),
                  ...
                  ...
 \endcode <I>section of the servoboard config array</I>
@@ -118,6 +120,7 @@ SERVOBOARD_1_DATAS_ARRAY = [
 <TR><TH>SERVO_NR</TH>                   <TH>servo nr of connected servo </TH> </TR>
 <TR><TH>MIN_TIME</TH>                   <TH>time of minimal angle of the servo in uS (example: 500 uS)  </TH> </TR>
 <TR><TH>MAX_TIME</TH>                   <TH>time of maximal angle of the servo in uS (example: 2500 uS)  </TH> </TR>
+<TR><TH>OFFSET_TIME</TH>                <TH>offset time of the servo in uS (example: 0 uS)  </TH> </TR>
 <TR><TH>RUNNING_DEGREE</TH>             <TH>range of the servo (example: 180)  </TH> </TR>
 <TR><TH>OFFSET_DEGREE</TH>              <TH>offset of the angle (nearly always: 0)  </TH> </TR>
 <TR><TH>FORMULA_A</TH>                  <TH>first parameter of formula, servo measure-voltage to angle   </TH> </TR>
@@ -242,7 +245,8 @@ Use set_assemblyboard_2_io_expander_int_callback, for board 2
 At the Topboard of the Robohat, an ADC and some I/O are available for the user. See \ref hardware
 
 <B>ADC</B>
-The ADC has some functions, which will reply in volts measured. Note the maximal voltage to measure is 3 volts.<BR>
+The ADC has some functions, which will reply in volts measured.<BR>
+<B>Note</B>. The maximal voltage which the ADC can measure is 3 volts.<BR>
 For single channel use: '\link Robohat::Robohat::get_topboard_adc_single_channel get_topboard_adc_single_channel \endlink'
 For all the channels at once use: '\link Robohat::Robohat::get_topboard_adc_multiple_channels get_topboard_adc_multiple_channels \endlink'
 
