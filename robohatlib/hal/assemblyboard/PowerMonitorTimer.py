@@ -36,7 +36,7 @@ class PowerMonitorTimer:
         self.__mother = _mother
         self.__expander = _expander
 
-        self.__busy = False
+        self.__task_loop_is_running = False
 
     #--------------------------------------------------------------------------------------
 
@@ -56,24 +56,30 @@ class PowerMonitorTimer:
         Our running task which is a separate thread
         @return: None
 
-        Will trigger the alarm when the I/O stays low in the time-window
+        Will trigger the alarm when the I/O stays low in the time-window o has a multiple trigger pulses
         """
 
-        self.__busy = True
+        self.__task_loop_is_running = True
         start_time = RoboUtil.get_time_ms()
 
-        while self.__busy:
+        last_error_time = RoboUtil.get_time_ms()
+
+        while self.__task_loop_is_running:
             current_time = RoboUtil.get_time_ms()
-            diff_time = current_time - start_time
 
-            if self.__expander.get_pin_data(self.__id) == 1:        # pin when high, so no short anymore. is in the threshold. so no alarm, get out of this loop
-                self.__busy = False
-            else:
-                if diff_time >= RobohatConfig.TIME_WINDOW_OF_SHORT_PROTECTION_SERVO_POWER:
-                    self.__busy = False
+            if self.__expander.get_pin_data(self.__id) == 0:        # still a short detected
+                last_error_time = RoboUtil.get_time_ms()
+
+                diff_time_current_start = current_time - start_time
+                if diff_time_current_start >= RobohatConfig.TIME_WINDOW_OF_SHORT_PROTECTION_POWER_GOOD_CHECK_SERVO_POWER:
                     self.__trigger_error()
+                    self.__task_loop_is_running = False
+            else:
+                diff_time_current_last_error = current_time - last_error_time
+                if diff_time_current_last_error >= RobohatConfig.TIME_WINDOW_OF_SHORT_PROTECTION_RELEASE_SERVO_POWER:
+                    self.__task_loop_is_running = False
 
-            time.sleep(0.1)
+            time.sleep(0.05)
 
     # --------------------------------------------------------------------------------------
     # --------------------------------------------------------------------------------------
@@ -84,7 +90,7 @@ class PowerMonitorTimer:
         Return True when the task is Running
         @return: bool
         """
-        return self.__busy
+        return self.__task_loop_is_running
 
     # --------------------------------------------------------------------------------------
     # --------------------------------------------------------------------------------------
@@ -107,7 +113,7 @@ class PowerMonitorTimer:
         Will start the task which checks if the error is still busy
         @return: None
         """
-        if self.__busy is False:
+        if self.__task_loop_is_running is False:
             thread = threading.Thread(target = self.task)
             thread.start()
 
