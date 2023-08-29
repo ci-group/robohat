@@ -159,7 +159,7 @@ class SerTestClass:
             self.__led_test()
         elif _command == "t":
             self.__toggle_direct_update_mode()
-        elif _command == "t":
+        elif _command == "b":
             self.__sound_the_buzzer()
     # --------------------------------------------------------------------------------------
         elif _command == "x":
