@@ -277,6 +277,7 @@ class Robohat:
     def set_led_color(self, _color: Color) -> None:
         """!
          Sets the color of the LED and turns the LED on
+         Valid colors are: WHITE, RED, GREEN, BLUE, YELLOW, and PURPLE
 
          @param _color waned color
          @return None
