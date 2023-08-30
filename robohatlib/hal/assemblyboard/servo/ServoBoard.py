@@ -29,7 +29,7 @@ except ImportError:
     raise
 
 class ServoBoard:
-    __servo_datas_array = None
+    __servo_datas_list = None
 
     #--------------------------------------------------------------------------------------
 
@@ -42,13 +42,13 @@ class ServoBoard:
     #--------------------------------------------------------------------------------------
     #--------------------------------------------------------------------------------------
 
-    def init_servo_board(self, _servo_datas_array: []) -> None:
+    def init_servo_board(self, _servo_datas_list: []) -> None:
         """!
-        @param _servo_datas_array:
+        @param _servo_datas_list:
         @return: None
         """
 
-        self.__servo_datas_array = _servo_datas_array
+        self.__servo_datas_list = _servo_datas_list
         self.__servo_adc.init_adc()
 
         should_be_time = self._get_current_times_depending_current_angle()
@@ -69,9 +69,9 @@ class ServoBoard:
         @return: None
         """
 
-        if self.__servo_datas_array is not None:
-            if len(self.__servo_datas_array) >= _servo_nr-1:
-                self.__servo_datas_array[_servo_nr].set_new_readout_vs_angle_formula(_formula_a, _formula_b)
+        if self.__servo_datas_list is not None:
+            if len(self.__servo_datas_list) >= _servo_nr-1:
+                self.__servo_datas_list[_servo_nr].set_new_readout_vs_angle_formula(_formula_a, _formula_b)
 
     #--------------------------------------------------------------------------------------
     #--------------------------------------------------------------------------------------
@@ -129,7 +129,7 @@ class ServoBoard:
         wanted_time_array = [0] * 16
 
         for i in range(0, 16):
-            wanted_time_array[i] = self.__servo_datas_array[i].convert_angle_to_time(_wanted_angles[i])
+            wanted_time_array[i] = self.__servo_datas_list[i].convert_angle_to_time(_wanted_angles[i])
 
         self.__pwm.set_on_time_all_channels(wanted_time_array)
 
@@ -144,7 +144,7 @@ class ServoBoard:
         @return: time in uS
         """
 
-        return self.__servo_datas_array[_servo_nr].convert_angle_to_time(_degree)
+        return self.__servo_datas_list[_servo_nr].convert_angle_to_time(_degree)
 
     #--------------------------------------------------------------------------------------
     #--------------------------------------------------------------------------------------
@@ -177,7 +177,7 @@ class ServoBoard:
             print("Error, requested servo number is not valid, should be 0 till 15")
             return
 
-        servo_data: ServoData = self.__servo_datas_array[_servo_nr]
+        servo_data: ServoData = self.__servo_datas_list[_servo_nr]
         if _angle < servo_data.get_min_angle() or _angle > servo_data.get_max_angle():
             print("Error, requested angle: " + str(_angle) + " is not valid: min: " + str(servo_data.get_min_angle()) + " max: " + str( servo_data.get_max_angle()))
             return
@@ -189,17 +189,17 @@ class ServoBoard:
     def set_servo_multiple_angles(self, _wanted_angles: []) -> None:
         """!
         Sets all the angle of the servos
-        @param _wanted_angles:  (should be an array of 16, servo 1 is array pos 0)
+        @param _wanted_angles:  (should be a list of 16, servo 1 is array pos 0)
         @return: None
         """
 
         length: int = len(_wanted_angles)
         if length > 16:
-            print("Error, servo array can't br bigger than 16")
+            print("Error, servo list can't br bigger than 16")
             return
 
         for servo_nr in range(0, length):
-            servo_data: ServoData = self.__servo_datas_array[servo_nr]
+            servo_data: ServoData = self.__servo_datas_list[servo_nr]
             wanted_angle:float = _wanted_angles[servo_nr]
 
             if wanted_angle < servo_data.get_min_angle() or wanted_angle > servo_data.get_max_angle():
@@ -222,7 +222,7 @@ class ServoBoard:
 
         if _servo_nr >= 0 and _servo_nr < 16:
             voltage_channel = self.get_servo_adc_single_channel(_servo_nr)
-            angle_channel = self.__servo_datas_array[_servo_nr - 1].convert_voltage_to_angle(voltage_channel)
+            angle_channel = self.__servo_datas_list[_servo_nr - 1].convert_voltage_to_angle(voltage_channel)
             if angle_channel < 0:
                 print("Error, requested servo: " + str(_servo_nr) + " readout is not connected")
                 return -1
@@ -235,18 +235,18 @@ class ServoBoard:
 
     def get_servo_multiple_angles(self) -> []:
         """!
-        Gets all the angle of the servos (Returns an array of 16, servo 0 is array pos 0)
-        @return array of degrees
+        Gets all the angle of the servos (Returns a list of 16, servo 0 is array pos 0)
+        @return list of degrees
         """
 
-        angle_array = [0] * 16
+        angle_list = [0] * 16
         for servo_nr in range(0, 16):
             voltage_adc_channel = self.__servo_adc.get_readout_adc_servo_nr(servo_nr)
             if voltage_adc_channel > 0.2:
-                angle_array[servo_nr] = self.__servo_datas_array[servo_nr].convert_voltage_to_angle(voltage_adc_channel)
+                angle_list[servo_nr] = self.__servo_datas_list[servo_nr].convert_voltage_to_angle(voltage_adc_channel)
             else:
-                angle_array[servo_nr] = -1
-        return angle_array
+                angle_list[servo_nr] = -1
+        return angle_list
 
     #--------------------------------------------------------------------------------------
     #--------------------------------------------------------------------------------------
@@ -274,7 +274,7 @@ class ServoBoard:
             angle = current_angles[i]
             if angle == -1:
                 angle = 90
-            should_be_time[i] = self.__servo_datas_array[i].convert_angle_to_time(angle)
+            should_be_time[i] = self.__servo_datas_list[i].convert_angle_to_time(angle)
 
         return should_be_time
 
@@ -282,7 +282,7 @@ class ServoBoard:
 
     def get_servo_adc_multiple_channels(self) -> []:
         """!
-        @return array of voltages of the angle of all the servos in volt Returns 16 elements
+        @return list of voltages of the angle of all the servos in volt Returns 16 elements
         """
         return self.__servo_adc.get_readout_adc_multiple_channels()
 
@@ -319,7 +319,7 @@ class ServoBoard:
         """
 
         if _servo_nr >= 0 and _servo_nr < 16:
-            self.__servo_datas_array[_servo_nr - 1].set_running_parameters(_min_time, _max_time, _running_degree, _offset_degree, _formula_a, _formula_b)
+            self.__servo_datas_list[_servo_nr - 1].set_running_parameters(_min_time, _max_time, _running_degree, _offset_degree, _formula_a, _formula_b)
         else:
             print("Error, requested servo number is not valid, should be 1 till 16")
 

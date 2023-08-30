@@ -58,8 +58,8 @@ ACCU_VOLTAGE_ADC_FORMULA_B = -0.512839675475041     # parameter B of formula, fo
 ACCU_LOG_DISPLAY_WHEN_TO_LOW = False                # keep on logging when accu voltage is too low
 ACCU_LOG_DISPLAY_WHEN_TO_HIGH = False               # keep on logging when accu voltage is too high
 
-# accu voltage to accu percentage array... depending on accu    voltage, percentage
-ACCU_VOLTAGE_TO_PERCENTAGE_ARRAY =  [
+# accu voltage to accu percentage LIST... depending on accu    voltage, percentage
+ACCU_VOLTAGE_TO_PERCENTAGE_LIST =  [
                                     [9.6,	0],
                                     [9.82,	1],
                                     [10.83,	5],

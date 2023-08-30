@@ -60,8 +60,8 @@ class MCP23008:
             int_con_value = 0x00
             def_val_value = 0x00
 
-            interrupt_settings_array = self.__mcp_interrupt_definition.get_interrupt_settings()
-            for interrupt_settings in interrupt_settings_array:
+            interrupt_settings_list = self.__mcp_interrupt_definition.get_interrupt_settings()
+            for interrupt_settings in interrupt_settings_list:
                 bit_nr = interrupt_settings.get_io_nr()
                 if interrupt_settings.get_direction is GpioDirection.GPIO_OUTPUT:
                     io_dir_value = RoboUtil.update_byte(io_dir_value, bit_nr, 0)                                    # direction output

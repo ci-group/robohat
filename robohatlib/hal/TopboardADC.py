@@ -76,7 +76,7 @@ class TopboardADC:
         """!
         Get analog values of all channel from the HAT adc
 
-        @return array of analog voltage or None when not available
+        @return a list of analog voltage or None when not available
         """
         if self.__hat_adc is not None:
             return self.__hat_adc.get_readout_multiple_channels()

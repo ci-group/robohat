@@ -62,8 +62,8 @@ class SerTestClass:
                                  TestConfig.SERVOASSEMBLY_2_CONFIG,
                                  TestConfig.TOPBOARD_ID_SWITCH)
 
-        self.__robohat.init(TestConfig.SERVOBOARD_1_DATAS_ARRAY,
-                            TestConfig.SERVOBOARD_2_DATAS_ARRAY)
+        self.__robohat.init(TestConfig.SERVOBOARD_1_DATAS_LIST,
+                            TestConfig.SERVOBOARD_2_DATAS_LIST)
 
         self.__robohat.do_buzzer_beep()
 

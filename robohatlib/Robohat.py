@@ -163,14 +163,14 @@ class Robohat:
 
     # --------------------------------------------------------------------------------------
 
-    def init(self, _servo_board_1_datas_array: [], _servo_board_2_datas_array: []) -> None:
+    def init(self, _servo_board_1_datas_list: [], _servo_board_2_datas_list: []) -> None:
         """!
         Initializes the Robohat
 
         Mandatory. This function has to be called after creating the Robohat class
 
-        @param _servo_board_1_datas_array, servo data array 1
-        @param _servo_board_2_datas_array, servo data array 2
+        @param _servo_board_1_datas_list, servo data list 1
+        @param _servo_board_2_datas_list, servo data list 2
 
         @return None
         """
@@ -186,10 +186,10 @@ class Robohat:
         self.__power_management.init_power_management()
 
         if self.__servo_assembly_1 is not None:
-            self.__servo_assembly_1.init_servo_assembly(_servo_board_1_datas_array)
+            self.__servo_assembly_1.init_servo_assembly(_servo_board_1_datas_list)
 
         if self.__servo_assembly_2 is not None:
-            self.__servo_assembly_2.init_servo_assembly(_servo_board_1_datas_array)
+            self.__servo_assembly_2.init_servo_assembly(_servo_board_1_datas_list)
 
         self.__io_handler.start_interrupts()
 
@@ -608,8 +608,8 @@ class Robohat:
 
     def get_servo_adc_multiple_channels(self) -> []:
         """!
-        Get voltages of the angle of all the servos. The array consists of 32 elements.
-        @return array of voltages
+        Get voltages of the angle of all the servos. The list consists of 32 elements.
+        @return a list of voltages
         """
 
         return_data = [-1.0] * 32
@@ -675,10 +675,10 @@ class Robohat:
 
     def get_servo_multiple_angles(self) -> []:
         """!
-        Get an array of the angles of all the servos
-        an array of 32 elements will be returned
+        Get a list of the angles of all the servos
+        a list of 32 elements will be returned
 
-        @return angles array
+        @return angles list
         """
 
         return_data = [-1.0] * 32
@@ -714,30 +714,30 @@ class Robohat:
 
     # ------------------------------------------------------------------------------------------
 
-    def set_servo_multiple_angles(self, _angles_array: []) -> None:
+    def set_servo_multiple_angles(self, _angles_list: []) -> None:
         """!
         Set the angle of connected servos in degree
-        Expect an array of angles. The array should have 16 elements (if only assembly 1 is connected) or array should
+        Expect a list of angles. The list should have 16 elements (if only assembly 1 is connected) or list should
         have 32 elements (if both assemblies are connected)
 
-        @param _angles_array, array of the angles
+        @param _angles_list, list of the angles
         @return None
         """
 
         # if Robohat_config.DEBUG is True:
-        #     print(_angles_array)
+        #     print(_angles_list)
 
-        if self.__servo_assembly_1 is not None and len(_angles_array) >= 16:
-            angles_array1 = [0.0] * 16
+        if self.__servo_assembly_1 is not None and len(_angles_list) >= 16:
+            angles_list1 = [0.0] * 16
             for i in range(0, 16):
-                angles_array1[i] = _angles_array[i]
-            self.__servo_assembly_1.set_servo_multiple_angles(angles_array1)
+                angles_list1[i] = _angles_list[i]
+            self.__servo_assembly_1.set_servo_multiple_angles(angles_list1)
 
-        if self.__servo_assembly_2 is not None and len(_angles_array) >= 32:
-            angles_array2 = [0.0] * 16
+        if self.__servo_assembly_2 is not None and len(_angles_list) >= 32:
+            angles_list2 = [0.0] * 16
             for i in range(0, 16):
-                angles_array2[i] = _angles_array[i+16]
-            self.__servo_assembly_2.set_servo_multiple_angles(angles_array2)
+                angles_list2[i] = _angles_list[i + 16]
+            self.__servo_assembly_2.set_servo_multiple_angles(angles_list2)
 
     # ------------------------------------------------------------------------------------------
 
@@ -950,9 +950,9 @@ class Robohat:
     def get_topboard_adc_multiple_channels(self) -> []:
         """!
         Get analog values of the HAT adc
-        Returns an array of 4 elements
+        Returns a list of 4 elements
 
-        @return analog voltage in an array
+        @return analog voltage in a list
         """
         return self.__topboard_adc.get_adc_multiple_channels()
 

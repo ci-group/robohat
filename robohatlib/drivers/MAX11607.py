@@ -28,7 +28,7 @@ class MAX11607:
 
         self.__adc_max_count = 1024
         self.__adc_ref_voltage = 3.3
-        self.__adc_result_voltage = [0.0] * 4  # allocates and fills alle elements of array with 0
+        self.__adc_result_voltage = [0.0] * 4  # allocates and fills alle elements of list with 0
 
 
     # --------------------------------------------------------------------------------------
@@ -75,8 +75,8 @@ class MAX11607:
 
     def get_readout_multiple_channels(self) -> []:
         """!
-        Get analog values of the HAT adc. Array has a size of 4. Array pos 0 is channel AI0
-        @return analog voltage in an array
+        Get analog values of the HAT adc. List has a size of 4. List pos 0 is channel AI0
+        @return analog voltage in a list
         """
 
         adc_code_array = bytearray(8)

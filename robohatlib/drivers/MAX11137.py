@@ -174,7 +174,7 @@ class MAX11137:
             # value = self.__give_result_adc(adc_mode_control)
 
             #4-7-23
-            # instead of using the channel auto increment, just read the whole array... was a bug
+            # instead of using the channel auto increment, just read the whole list... was a bug
 
 
             value_array = self.get_readout_adc_multiple_channels()
@@ -188,7 +188,7 @@ class MAX11137:
     def  get_readout_adc_multiple_channels(self) -> []:
         """!
         Get ADC data
-        @return array voltages of the potentiometer of all the servos in volt
+        @return list voltages of the potentiometer of all the servos in volt
 
         """
         adc_mode_control = 0b0000000000000000
@@ -204,7 +204,7 @@ class MAX11137:
         channel_raw_int = int(count_adc >> 12)
         voltage_float = float((ADC_REF_VOLTAGE / ADC_MAX_COUNT) * value_raw_int)
 
-        adc_result_voltage = [-1.0] * 16  # allocates and fills alle elements of array with 0
+        adc_result_voltage = [-1.0] * 16  # allocates and fills all the elements of the list with 0
         adc_result_voltage[channel_raw_int] = voltage_float
 
         sleep(0.0001)

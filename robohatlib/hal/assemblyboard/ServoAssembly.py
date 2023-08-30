@@ -88,18 +88,18 @@ class ServoAssembly:
     #--------------------------------------------------------------------------------------
     #--------------------------------------------------------------------------------------
 
-    def init_servo_assembly(self, _servo_datas_array: []) -> None:
+    def init_servo_assembly(self, _servo_datas_list: []) -> None:
         """!
         Initializes servo assembly
 
-        @param _servo_datas_array:
+        @param _servo_datas_list:
         @return: none
         """
         if self.__power_monitor_and_io is not None:
             self.__power_monitor_and_io.init_io_expander()
 
         if  self.__servo_board is not None:
-            self.__servo_board.init_servo_board(_servo_datas_array)
+            self.__servo_board.init_servo_board(_servo_datas_list)
 
     #--------------------------------------------------------------------------------------
 
@@ -201,7 +201,7 @@ class ServoAssembly:
         """!
         Set the angle of connected servos in degree
 
-        @param _wanted_angles array of the angles
+        @param _wanted_angles list of the angles
         @return angle of connected servo in degree
         """
         self.__servo_board.set_servo_multiple_angles(_wanted_angles)
@@ -233,7 +233,7 @@ class ServoAssembly:
 
     def get_servo_adc_multiple_channels(self) -> []:
         """!
-        @return voltages of the angle of all the servos in volt. Returns an array of 16 elements
+        @return voltages of the angle of all the servos in volt. Returns a list of 16 elements
         """
         if self.__servo_board is not None:
             return self.__servo_board.get_servo_adc_multiple_channels()

@@ -156,17 +156,17 @@ class ServoDriver:
     # --------------------------------------------------------------------------------------
     # --------------------------------------------------------------------------------------
 
-    def set_servo_multiple_angles(self, _wanted_angles_array: []) -> None:
+    def set_servo_multiple_angles(self, _wanted_angles_list: []) -> None:
         """
         Set wanted servo angles (all)
-        @param _wanted_angles_array:
+        @param _wanted_angles_list:
         @return: None
         """
-        for servo_index in range(0, len(_wanted_angles_array)):
-            self.__preset_servo_positions[servo_index] = _wanted_angles_array[servo_index]
+        for servo_index in range(0, len(_wanted_angles_list)):
+            self.__preset_servo_positions[servo_index] = _wanted_angles_list[servo_index]
 
         if self.__direct_mode is True:       # if direct_mode is false, timed update
-            for servo_index in range(0, len(_wanted_angles_array)):
+            for servo_index in range(0, len(_wanted_angles_list)):
                 self.__current_servo_positions [servo_index] = self.__preset_servo_positions[servo_index]
 
             self.__servoboard.update_servo_data(self.__preset_servo_positions)

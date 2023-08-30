@@ -112,7 +112,7 @@ class PCA9685:
     # --------------------------------------------------------------------------------------
     def set_on_time_all_channels(self, _wanted_times_us: []) -> None:
         """!
-        @param _wanted_times_us: an array of 16, with the times
+        @param _wanted_times_us: a list of 16, with the times
         @return: None
         """
 

@@ -22,7 +22,7 @@ except ImportError:
 class GPI_LL_Interrupt:
     """!
     Common interrupt driver.
-    When fired, will execute callback which are stored in an array
+    When fired, will execute callback which are stored in a list
     """
 
     def __init__(self, _interrupt_definition: GPIInterruptDef):
@@ -146,7 +146,7 @@ class GPI_LL_Interrupt:
 
     def __callback_function(self, _pin_nr) -> None:
         """!
-        The actual interrupt callback, which executes all the callback retrieved from a callbackholder stored in an array
+        The actual interrupt callback, which executes all the callback retrieved from a callbackholder stored in a list
         @return: None
         """
         if len(self.__registered_callback_holders) == 0:

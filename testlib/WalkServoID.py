@@ -18,7 +18,7 @@ except ImportError:
 
 class WalkServoID(IntEnum):
     """!
-    Internal ID. Maps to an array. ID nr should be lower than the size of the array ( < 32 )
+    Internal ID. Maps to a list. ID nr should be lower than the size of the array ( < 32 )
     """
     LEFT_FRONT_LEG = 0
     RIGHT_FRONT_LEG = 1

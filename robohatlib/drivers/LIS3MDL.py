@@ -97,16 +97,16 @@ class LIS3MDL:
     # --------------------------------------------------------------------------------------
     # --------------------------------------------------------------------------------------
 
-    def set_gain(self, _selected_gain_array: []) -> None:
+    def set_gain(self, _selected_gain_list: []) -> None:
         """!
         Set the gain register
-        @param _selected_gain_array:
+        @param _selected_gain_list:
         @return: None
         """
-        ctrl_reg2_value = RoboUtil.update_byte(0x00, CTRL_REG2_GAIN_BITNR, _selected_gain_array[0])
+        ctrl_reg2_value = RoboUtil.update_byte(0x00, CTRL_REG2_GAIN_BITNR, _selected_gain_list[0])
         self.__i2c_device.i2c_write_register_byte(CTRL_REG2, ctrl_reg2_value)
-        self.__full_scale_gaus = _selected_gain_array[1]
-        self.__gain_divider = _selected_gain_array[2]
+        self.__full_scale_gaus = _selected_gain_list[1]
+        self.__gain_divider = _selected_gain_list[2]
 
     # --------------------------------------------------------------------------------------
     # --------------------------------------------------------------------------------------

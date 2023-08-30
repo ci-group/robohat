@@ -79,8 +79,8 @@ class Example:
 
         # self.robohat.set_system_alarm_permitted(False)
 
-        self.__robohat.init(TestConfig.SERVOBOARD_1_DATAS_ARRAY,
-                            TestConfig.SERVOBOARD_2_DATAS_ARRAY)
+        self.__robohat.init(TestConfig.SERVOBOARD_1_DATAS_LIST,
+                            TestConfig.SERVOBOARD_2_DATAS_LIST)
 
         self.__robohat.set_topboard_io_expander_int_callback(self.__test_hat_io_expander_int_callback)
         self.__robohat.set_assemblyboard_1_io_expander_int_callback(self.__test_assemblyboard_1_io_expander_int_callback)
@@ -272,24 +272,24 @@ class Example:
         @return: None
         """
 
-        data_in_array = _data_in.split(" ")
-        command = data_in_array[1]
+        data_in_list = _data_in.split(" ")
+        command = data_in_list[1]
 
-        if command == "servo" and len(data_in_array) >= 3:
-            sub_command = data_in_array[2]
-            if sub_command == "angle" and len(data_in_array) == 5:
-                servo_nr = int(data_in_array[3])
-                angle = float(data_in_array[4])
+        if command == "servo" and len(data_in_list) >= 3:
+            sub_command = data_in_list[2]
+            if sub_command == "angle" and len(data_in_list) == 5:
+                servo_nr = int(data_in_list[3])
+                angle = float(data_in_list[4])
                 self.__robohat.set_servo_single_angle(servo_nr, angle)
                 print("set servo angle " + str(servo_nr) + " " + str(angle) )
             elif sub_command == "io":
-                io_command = data_in_array[3]
+                io_command = data_in_list[3]
                 if io_command == "dir":
-                    board_nr = int(data_in_array[4])
+                    board_nr = int(data_in_list[4])
                     pwm_plug = RoboUtil.get_pwmplug_by_int(board_nr)
 
-                    pin_nr = int(data_in_array[5])
-                    value = data_in_array[6]
+                    pin_nr = int(data_in_list[5])
+                    value = data_in_list[6]
                     if value == "OUT" or value == "out":
                         stat = self.__robohat.set_servo_io_expander_direction(pwm_plug, pin_nr, ExpanderDir.OUTPUT)
                         if stat == IOStatus.IO_OK:
@@ -301,11 +301,11 @@ class Example:
                     else:
                         print("Syntax error setting direction")
                 elif io_command == "output":
-                    board_nr = int(data_in_array[4])
+                    board_nr = int(data_in_list[4])
                     pwm_plug = RoboUtil.get_pwmplug_by_int(board_nr)
 
-                    pin_nr = int(data_in_array[5])
-                    value = data_in_array[6]
+                    pin_nr = int(data_in_list[5])
+                    value = data_in_list[6]
                     if value == "HIGH" or value == "high":
                         stat = self.__robohat.set_servo_io_expander_output(pwm_plug, pin_nr, ExpanderStatus.HIGH)
                         if stat == IOStatus.IO_OK:
@@ -322,12 +322,12 @@ class Example:
                 print("syntax error, set servo command not found")
 # ------------------------------------------------------------------------------
         elif command == "topboard":
-            sub_command = data_in_array[2]
+            sub_command = data_in_list[2]
             if sub_command == "io":
-               io_command = data_in_array[3]
+               io_command = data_in_list[3]
                if io_command == "dir":
-                    pin_nr = int(data_in_array[4])
-                    value = data_in_array[5]
+                    pin_nr = int(data_in_list[4])
+                    value = data_in_list[5]
                     if value == "OUT" or value == "out":
                         stat = self.__robohat.set_topboard_io_expander_direction(pin_nr, ExpanderDir.OUTPUT)
                         if stat == IOStatus.IO_OK:
@@ -340,8 +340,8 @@ class Example:
                         print("Syntax error setting direction pin")
 
                elif io_command == "output":
-                   pin_nr = int(data_in_array[4])
-                   value = data_in_array[5]
+                   pin_nr = int(data_in_list[4])
+                   value = data_in_list[5]
                    if value == "HIGH" or value == "high":
                        stat = self.__robohat.set_topboard_io_expander_output(pin_nr, ExpanderStatus.HIGH)
                        if stat == IOStatus.IO_OK:
@@ -358,7 +358,7 @@ class Example:
                print("syntax error, set topboard command not found")
 # ------------------------------------------------------------------------------
         elif command == "led":
-            sub_command = data_in_array[2].upper()
+            sub_command = data_in_list[2].upper()
             if sub_command == "OFF":
                 self.__robohat.turn_led_off()
             elif sub_command == "ON":
@@ -390,13 +390,13 @@ class Example:
         Will handle console request with commando 'get'
         @return: None
         """
-        data_in_array = _data_in.split(" ")
-        command = data_in_array[1]
+        data_in_list = _data_in.split(" ")
+        command = data_in_list[1]
 # -------------------------------------------------------------------------------
-        if command == "servo" and len(data_in_array) >= 3:
-            sub_command = data_in_array[2]
-            if sub_command == "angle" and len(data_in_array) == 4:
-                parameter_str:str = data_in_array[3]
+        if command == "servo" and len(data_in_list) >= 3:
+            sub_command = data_in_list[2]
+            if sub_command == "angle" and len(data_in_list) == 4:
+                parameter_str:str = data_in_list[3]
                 if parameter_str.isnumeric():
                     servo_nr = int(parameter_str)
                     value = self.__robohat.get_servo_single_angle(servo_nr)
@@ -411,9 +411,9 @@ class Example:
                 else:
                     print("syntax error")
             elif sub_command == "adc":
-                parameter_str: str = data_in_array[3]
+                parameter_str: str = data_in_list[3]
                 if parameter_str.isnumeric():
-                    servo_nr = int(data_in_array[3])
+                    servo_nr = int(data_in_list[3])
                     value = self.__robohat.get_servo_adc_single_channel(servo_nr)
                     if value != -1:
                         print("adc of servo " + str(servo_nr) + " is: " + str(value) + "V" )
@@ -426,26 +426,26 @@ class Example:
                 else:
                     print("syntax error")
             elif sub_command == "connected":
-                servo_nr = int(data_in_array[3])
+                servo_nr = int(data_in_list[3])
                 value = self.__robohat.get_servo_is_connected(servo_nr)
                 if value is True:
                     print("Servo " + str(servo_nr) + " is connected")
                 else:
                     print("Servo " + str(servo_nr) + " NOT is connected")
             elif sub_command == "io":
-                io_command = data_in_array[3]
+                io_command = data_in_list[3]
                 if io_command == "dir":
-                    board_nr = int(data_in_array[4])
+                    board_nr = int(data_in_list[4])
                     pwm_plug = RoboUtil.get_pwmplug_by_int(board_nr)
 
-                    pin_nr = int(data_in_array[5])
+                    pin_nr = int(data_in_list[5])
                     value = self.__robohat.get_servo_io_expander_direction(pwm_plug, pin_nr)
                     print(value)
                 elif io_command == "input":
-                    board_nr = int(data_in_array[4])
+                    board_nr = int(data_in_list[4])
                     pwm_plug = RoboUtil.get_pwmplug_by_int(board_nr)
 
-                    pin_nr = int(data_in_array[5])
+                    pin_nr = int(data_in_list[5])
                     value = self.__robohat.get_servo_io_expander_input(pwm_plug, pin_nr)
                     print(value)
                 else:
@@ -453,10 +453,10 @@ class Example:
             else:
                 print("syntax error, get servo")
 # -------------------------------------------------------------------------------
-        elif command == "topboard" and len(data_in_array) >= 3:
-            sub_command = data_in_array[2]
+        elif command == "topboard" and len(data_in_list) >= 3:
+            sub_command = data_in_list[2]
             if sub_command == "adc":
-                parameter_str: str = data_in_array[3]
+                parameter_str: str = data_in_list[3]
                 if parameter_str.isnumeric():
                     channel_nr = int(parameter_str)
                     value = self.__robohat.get_topboard_adc_single_channel(channel_nr)
@@ -468,13 +468,13 @@ class Example:
                 else:
                     print("syntax error at hat: " + parameter_str )
             elif sub_command == "io":
-                io_command = data_in_array[3]
+                io_command = data_in_list[3]
                 if io_command == "dir":
-                    pin_nr = int(data_in_array[4])
+                    pin_nr = int(data_in_list[4])
                     value = self.__robohat.get_topboard_io_expander_direction(pin_nr)
                     print(value)
                 elif io_command == "input":
-                    pin_nr = int(data_in_array[4])
+                    pin_nr = int(data_in_list[4])
                     value = self.__robohat.get_topboard_io_expander_input(pin_nr)
                     print(value)
                 else:
@@ -489,8 +489,8 @@ class Example:
             else:
                 print(value)
 # -------------------------------------------------------------------------------
-        elif command == "lib" and len(data_in_array) >= 3:
-            sub_command = data_in_array[2]
+        elif command == "lib" and len(data_in_list) >= 3:
+            sub_command = data_in_list[2]
             if sub_command == "builddate":
                 print("build date of Robohat lib is: " + self.__robohat.get_lib_build_date())
             elif sub_command == "version":
@@ -498,8 +498,8 @@ class Example:
             else:
                 print("syntax error")
 # -------------------------------------------------------------------------------
-        elif command == "accu" and len(data_in_array) >= 3:
-            sub_command = data_in_array[2]
+        elif command == "accu" and len(data_in_list) >= 3:
+            sub_command = data_in_list[2]
             if sub_command == "voltage":
                 value = self.__robohat.get_battery_voltage()
                 print("accu voltage is: " + str(value) + " V")
@@ -512,8 +512,8 @@ class Example:
             else:
                 print("syntax error")
 # -------------------------------------------------------------------------------
-        elif command == "imu" and len(data_in_array) >= 3:
-            sub_command = data_in_array[2]
+        elif command == "imu" and len(data_in_list) >= 3:
+            sub_command = data_in_list[2]
             if sub_command == "magnetic":
                 value = self.__robohat.get_imu_magnetic_fields()
                 if value is not None:
@@ -546,18 +546,18 @@ class Example:
         Will handle console request with commando 'do'
         @return: None
         """
-        data_in_array = _data_in.split(" ")
+        data_in_list = _data_in.split(" ")
 
-        command = data_in_array[1]
+        command = data_in_list[1]
         if command == "i2c":
-            sub_command = data_in_array[2]
+            sub_command = data_in_list[2]
             if sub_command == "scan":
                 self.__robohat.do_i2c_scan()
             else:
                 print("syntax error do i2c")
 # -------------------------------------------------------
         elif command == "buzzer":
-            sub_command = data_in_array[2]
+            sub_command = data_in_list[2]
             if sub_command == "random":
                 self.__robohat.do_buzzer_random()
             elif sub_command == "slowwoop":
@@ -565,7 +565,7 @@ class Example:
             elif sub_command == "beep":
                 self.__robohat.do_buzzer_beep()
             elif sub_command == "freq":
-                freq_str = data_in_array[3]
+                freq_str = data_in_list[3]
                 if freq_str.isnumeric():
                     freq = int(freq_str)
                     self.__robohat.do_buzzer_freq(freq)
@@ -575,11 +575,11 @@ class Example:
                 print("syntax error do buzzer")
 # -------------------------------------------------------
         elif command == "servo":
-            sub_command = data_in_array[2]
+            sub_command = data_in_list[2]
             if sub_command == "scan":
                 self.do_scan_servos()
-            elif sub_command == "fit" and len(data_in_array) >= 4:
-                servo_nr = int(data_in_array[3])
+            elif sub_command == "fit" and len(data_in_list) >= 4:
+                servo_nr = int(data_in_list[3])
                 self.servo_fit(servo_nr)
 
 

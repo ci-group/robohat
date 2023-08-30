@@ -51,7 +51,7 @@ class PowerManagement:
         self.__battery_percentage_capacity = 0
         self.__battery_voltage = 0
         self.__battery_status = BatteryStatus.UNKNOWN
-        self.__raw_battery_voltages_array = [12.6] * ACCU_CHECK_SIZE_OF_WINDOW     # fills array with default value: 12.6
+        self.__raw_battery_voltages_list = [12.6] * ACCU_CHECK_SIZE_OF_WINDOW     # fills a list with default value: 12.6
 
         self.__signaling_device = None
         self.__shutdown_in_progress = False
@@ -201,16 +201,16 @@ class PowerManagement:
 
         # shift new value in array
         for index in range(1, ACCU_CHECK_SIZE_OF_WINDOW, 1):
-            self.__raw_battery_voltages_array[index - 1] = self.__raw_battery_voltages_array[index]
+            self.__raw_battery_voltages_list[index - 1] = self.__raw_battery_voltages_list[index]
 
-        self.__raw_battery_voltages_array[ACCU_CHECK_SIZE_OF_WINDOW - 1] = _raw_battery_voltage
+        self.__raw_battery_voltages_list[ACCU_CHECK_SIZE_OF_WINDOW - 1] = _raw_battery_voltage
 
         self.__counter_prevent_startup_power_fail += 1
         if self.__counter_prevent_startup_power_fail < ACCU_CHECK_SIZE_OF_WINDOW:
             return
 
         self.__counter_prevent_startup_power_fail = ACCU_CHECK_SIZE_OF_WINDOW    # prevent overrun
-        self.__battery_voltage = statistics.median(map(float, self.__raw_battery_voltages_array)) # create median
+        self.__battery_voltage = statistics.median(map(float, self.__raw_battery_voltages_list)) # create median
 
         if self.__battery_voltage > 0.5:
             self.__battery_percentage_capacity = self.__calculate_percentage_from_voltage(self.__battery_voltage)
@@ -288,25 +288,25 @@ class PowerManagement:
     # noinspection PyMethodMayBeStatic
     def __calculate_percentage_from_voltage(self, _battery_voltage: float) -> float:
         """!
-        Calculates voltage of battery, to battery capacity, derived from array in Robohat_config
+        Calculates voltage of battery, to battery capacity, derived from a list in Robohat_config
 
         @param _battery_voltage:
         @return: percentage of accu
         """
 
         # gets percentage out of list, and interpolates the voltages between the elements of the list
-        if _battery_voltage <= RobohatConfig.ACCU_VOLTAGE_TO_PERCENTAGE_ARRAY[0] [0]:
+        if _battery_voltage <= RobohatConfig.ACCU_VOLTAGE_TO_PERCENTAGE_LIST[0] [0]:
             return 0
 
-        if _battery_voltage >= RobohatConfig.ACCU_VOLTAGE_TO_PERCENTAGE_ARRAY[len(RobohatConfig.ACCU_VOLTAGE_TO_PERCENTAGE_ARRAY) - 1] [0]:
+        if _battery_voltage >= RobohatConfig.ACCU_VOLTAGE_TO_PERCENTAGE_LIST[len(RobohatConfig.ACCU_VOLTAGE_TO_PERCENTAGE_LIST) - 1] [0]:
             return 100
 
-        for index in range(0, len(RobohatConfig.ACCU_VOLTAGE_TO_PERCENTAGE_ARRAY) - 1, 1):
-            voltage_low = RobohatConfig.ACCU_VOLTAGE_TO_PERCENTAGE_ARRAY[index] [0]
-            voltage_high = RobohatConfig.ACCU_VOLTAGE_TO_PERCENTAGE_ARRAY[index + 1] [0]
+        for index in range(0, len(RobohatConfig.ACCU_VOLTAGE_TO_PERCENTAGE_LIST) - 1, 1):
+            voltage_low = RobohatConfig.ACCU_VOLTAGE_TO_PERCENTAGE_LIST[index] [0]
+            voltage_high = RobohatConfig.ACCU_VOLTAGE_TO_PERCENTAGE_LIST[index + 1] [0]
 
             diff_voltage = voltage_high - voltage_low
-            diff_perc = RobohatConfig.ACCU_VOLTAGE_TO_PERCENTAGE_ARRAY[index + 1] [1] - RobohatConfig.ACCU_VOLTAGE_TO_PERCENTAGE_ARRAY[index] [1]
+            diff_perc = RobohatConfig.ACCU_VOLTAGE_TO_PERCENTAGE_LIST[index + 1] [1] - RobohatConfig.ACCU_VOLTAGE_TO_PERCENTAGE_LIST[index] [1]
 
             if diff_voltage != 0:
                 perc_per_volt = diff_perc / diff_voltage
@@ -315,7 +315,7 @@ class PowerManagement:
                     remainder_volt = voltage_high - _battery_voltage
                     remainder_perc = remainder_volt * perc_per_volt
 
-                    percentage = RobohatConfig.ACCU_VOLTAGE_TO_PERCENTAGE_ARRAY[index] [1] + remainder_perc
+                    percentage = RobohatConfig.ACCU_VOLTAGE_TO_PERCENTAGE_LIST[index] [1] + remainder_perc
                     return percentage
 
         return 0
