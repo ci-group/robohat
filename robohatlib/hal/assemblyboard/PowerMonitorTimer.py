@@ -27,12 +27,13 @@ class PowerMonitorTimer:
     This class will monitor if a short still occurs onto the pin which caused the interrupt. If so longer than the time window, send a message to the user
     """
 
-    def __init__(self, _id:int, _mother:PowerMonitorAndIO, _expander:MCP23008):
+    def __init__(self, _dc_dc_id:int, _mother:PowerMonitorAndIO, _expander:MCP23008, _name_of_assembly:str = ""):
         """!
         Constructor of this dataholder
-        @param _id: id of this class
+        @param _dc_dc_id: id of this class
         """
-        self.__id = _id
+        self.__dc_dc_id = _dc_dc_id
+        self.__name_of_assembly = _name_of_assembly
         self.__mother = _mother
         self.__expander = _expander
 
@@ -45,7 +46,7 @@ class PowerMonitorTimer:
         Returns ID of this dataholder
         @return:
         """
-        return self.__id
+        return self.__dc_dc_id
 
     # --------------------------------------------------------------------------------------
     # --------------------------------------------------------------------------------------
@@ -67,7 +68,7 @@ class PowerMonitorTimer:
         while self.__task_loop_is_running:
             current_time = RoboUtil.get_time_ms()
 
-            if self.__expander.get_pin_data(self.__id) == 0:        # still a short detected
+            if self.__expander.get_pin_data(self.__dc_dc_id) == 0:        # still a short detected
                 last_error_time = RoboUtil.get_time_ms()
 
                 diff_time_current_start = current_time - start_time
@@ -78,6 +79,7 @@ class PowerMonitorTimer:
                 diff_time_current_last_error = current_time - last_error_time
                 if diff_time_current_last_error >= RobohatConfig.TIME_WINDOW_OF_SHORT_PROTECTION_RELEASE_SERVO_POWER:
                     self.__task_loop_is_running = False
+
             time.sleep(0.05)
 
     # --------------------------------------------------------------------------------------
@@ -100,7 +102,11 @@ class PowerMonitorTimer:
         Will trigger an error message to the user
         @return: Nome
         """
-        print("Major error: power fail DC/DC " + str(self.__id))
+
+        servo_id_min = self.__dc_dc_id * 4
+        servo_id_max = servo_id_min + 3
+
+        print("Major error: power fail DC/DC servo: " + str(servo_id_min) + " until " + str (servo_id_max) + " of: " + self.__name_of_assembly)
         self.__mother.do_signaling_device()
 
     # --------------------------------------------------------------------------------------

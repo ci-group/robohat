@@ -38,7 +38,7 @@ DEBUG_I2C = False
 Alarm to user settings
 """
 TIME_WINDOW_OF_SHORT_PROTECTION_POWER_GOOD_CHECK_SERVO_POWER = 1000     # time window in mS. When a DC/DC converter has a power-fail, which is longer than this time window, a message goes to the user
-TIME_WINDOW_OF_SHORT_PROTECTION_RELEASE_SERVO_POWER = 400               # time in window, exit if no power-fault detected
+TIME_WINDOW_OF_SHORT_PROTECTION_RELEASE_SERVO_POWER = 500               # time in window, exit if no power-fault detected
 
 ALARM_PERMITTED = True                              # sound an alarm when a system alert is present, such as to low accu capacity
 ALARM_TIMEOUT_IN_SEC = 300                          # timeout between alarm

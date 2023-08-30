@@ -78,10 +78,10 @@ class PowerMonitorAndIO:
         self.__reset_timerIsRunning = False
         self.disable_retry_timer_callback = False
 
-        self.__timer0 = PowerMonitorTimer(0, self, self.__expander)
-        self.__timer1 = PowerMonitorTimer(1, self, self.__expander)
-        self.__timer2 = PowerMonitorTimer(2, self, self.__expander)
-        self.__timer3 = PowerMonitorTimer(3, self, self.__expander)
+        self.__timer0 = PowerMonitorTimer(0, self, self.__expander, _name_of_assembly)
+        self.__timer1 = PowerMonitorTimer(1, self, self.__expander, _name_of_assembly)
+        self.__timer2 = PowerMonitorTimer(2, self, self.__expander, _name_of_assembly)
+        self.__timer3 = PowerMonitorTimer(3, self, self.__expander, _name_of_assembly)
 
     #--------------------------------------------------------------------------------------
 
