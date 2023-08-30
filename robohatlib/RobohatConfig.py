@@ -30,7 +30,7 @@ except ImportError:
 """!
 General settings
 """
-DEBUG = True                                       # by changing this value to TRUE, more debug msg will be printed on the console
+DEBUG = False                                       # by changing this value to TRUE, more debug msg will be printed on the console
 DEBUG_I2C = False
 
 
