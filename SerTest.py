@@ -240,7 +240,7 @@ class SerTestClass:
         @return: None
         """
 
-        time = self.__robohat.get_servo_us_time(_degree)
+        time_to_servo = self.__robohat.get_servo_us_time(_degree)
 
         self.__robohat.set_servo_multiple_angles(
             [
@@ -249,7 +249,7 @@ class SerTestClass:
             ])
 
 
-        print("Angles of the servos should be: " + str(_degree) + "°" + " time: " + str(time) + " uS")
+        print("Angles of the servos should be: " + str(_degree) + "°" + " time: " + str(int(time_to_servo)) + " uS")
 
     # --------------------------------------------------------------------------------------
     # --------------------------------------------------------------------------------------
