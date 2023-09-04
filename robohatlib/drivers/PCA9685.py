@@ -17,6 +17,7 @@ try:
     from robohatlib.driver_ll.i2c.I2CDevice import I2CDevice
     from robohatlib.RobohatConfig import DEBUG
     from robohatlib.RobohatConfig import SERVO_DEFAULT_PWM_FREQ
+    from time import sleep
 except ImportError:
     print("Failed to resolve dependencies for the PCA9685")
     raise
@@ -25,10 +26,10 @@ except ImportError:
 # Define registers values from the datasheet
 MODE1_ADDRESS =         0x00
 MODE2_ADDRESS =         0x01
-SUB_ADR1_ADDRESS =       0x02
-SUB_ADR2_ADDRESS =       0x03
-SUB_ADR3_ADDRESS =       0x04
-ALL_CALL_ADR_ADDRESS =    0x05
+SUB_ADR1_ADDRESS =      0x02
+SUB_ADR2_ADDRESS =      0x03
+SUB_ADR3_ADDRESS =      0x04
+ALL_CALL_ADR_ADDRESS =  0x05
 LED0_ON_L_ADDRESS =     0x06
 LED0_ON_H_ADDRESS =     0x07
 LED0_OFF_L_ADDRESS =    0x08
@@ -40,9 +41,10 @@ ALL_LED_OFF_H_ADDRESS = 0xFD
 PRE_SCALE_ADDRESS =     0xFE
 
 # Define mode bits
-MODE1_EXTCLK_BITNR =    6  # use external clock
+MODE_1_RESTART_BITNR =  7  # restart bit
+MODE1_EXT_CLK_BITNR =   6  # use external clock
 MODE1_SLEEP_BITNR =     4  # sleep mode
-MODE1_ALLCALL_BITNR =   0  # all call address
+MODE1_ALL_CALL_BITNR =  0  # all call address
 
 MODE2_INVRT_BITNR =     4  # invert output
 MODE2_OCH_BITNR =       3  # output type
@@ -91,24 +93,30 @@ class PCA9685:
         @return: None
         """
 
-        if _channel >= 0 and _channel < 16:
-
-            actual_ticks_on = self.__convert_time_us_to_tick(_time_wanted_us)
-
-            if DEBUG is True:
-                time_per_hz = (1000000 / self.__freq) / 4096.0
-                time_us = actual_ticks_on * time_per_hz
-                print("on reg val: " + str(actual_ticks_on) + " time: " + str(int(time_us)) + " uS")
-
-            on_ticks = 0                                            # default offset value
-            off_ticks = 4095 - actual_ticks_on - on_ticks
-
-            on_tick_bytes = on_ticks.to_bytes(2, 'little')
-            off_tick_bytes = off_ticks.to_bytes(2, 'little')
-
-            self.__i2c_device.i2c_write_bytes(bytes([LED0_ON_L_ADDRESS + (4 * _channel), on_tick_bytes[0], on_tick_bytes[1], off_tick_bytes[0], off_tick_bytes[1]]))
+        if self.__i_am_a_sleep is True:
+            print("Can't set new servo value. Servos are sleeping")
         else:
-            print("Error: channel " + str(_channel) + " in PWM PCA9685 not available")
+            if _channel >= 0 and _channel < 16:
+                actual_ticks_on = self.__convert_time_us_to_tick(_time_wanted_us)
+
+                if DEBUG is True:
+                    time_per_hz = (1000000 / self.__freq) / 4096.0
+                    time_us = actual_ticks_on * time_per_hz
+                    print("on reg val: " + str(actual_ticks_on) + " time: " + str(int(time_us)) + " uS")
+
+                on_ticks = 0                                            # default offset value
+                off_ticks = 4095 - actual_ticks_on - on_ticks
+
+                on_tick_bytes = on_ticks.to_bytes(2, 'little')
+                off_tick_bytes = off_ticks.to_bytes(2, 'little')
+
+                self.__i2c_device.i2c_write_bytes(bytes([LED0_ON_L_ADDRESS + (4 * _channel), on_tick_bytes[0], on_tick_bytes[1], off_tick_bytes[0], off_tick_bytes[1]]))
+
+                if DEBUG is True:
+                    print("set_on_time_channel: " + str(_channel) + " " + str(on_ticks))
+
+            else:
+                print("Error: channel " + str(_channel) + " in PWM PCA9685 not available")
     # --------------------------------------------------------------------------------------
     def set_on_time_all_channels(self, _wanted_times_us: []) -> None:
         """!
@@ -116,26 +124,29 @@ class PCA9685:
         @return: None
         """
 
-        if _wanted_times_us is not None:
-            data_to_send = bytes([LED0_ON_L_ADDRESS])
-            for i in range(0, 16):
+        if self.__i_am_a_sleep is True:
+            print("Can't set new servo value. Servos are sleeping")
+        else:
+            if _wanted_times_us is not None:
+                data_to_send = bytes([LED0_ON_L_ADDRESS])
+                for i in range(0, 16):
 
-                wanted_time = _wanted_times_us[i]
-                actual_ticks_on = self.__convert_time_us_to_tick(wanted_time)
+                    wanted_time = _wanted_times_us[i]
+                    actual_ticks_on = self.__convert_time_us_to_tick(wanted_time)
 
-                if DEBUG is True:
-                    time_per_hz = (1000000 / self.__freq) / 4096.0
-                    time_us = actual_ticks_on * time_per_hz
-                    print(str(i) + ": on reg val: " + str(actual_ticks_on) + " time: " + str(int(time_us)) + " uS")
+                    if DEBUG is True:
+                        time_per_hz = (1000000 / self.__freq) / 4096.0
+                        time_us = actual_ticks_on * time_per_hz
+                        print(str(i) + ": on reg val: " + str(actual_ticks_on) + " time: " + str(int(time_us)) + " uS")
 
-                on_ticks = 0                                    # default offset value
-                off_ticks = 4095 - actual_ticks_on - on_ticks
+                    on_ticks = 0                                    # default offset value
+                    off_ticks = 4095 - actual_ticks_on - on_ticks
 
-                on_tick_bytes = on_ticks.to_bytes(2, 'little')
-                off_tick_bytes = off_ticks.to_bytes(2, 'little')
+                    on_tick_bytes = on_ticks.to_bytes(2, 'little')
+                    off_tick_bytes = off_ticks.to_bytes(2, 'little')
 
-                data_to_send = data_to_send + bytes([on_tick_bytes[0], on_tick_bytes[1], off_tick_bytes[0], off_tick_bytes[1]])
-                self.__i2c_device.i2c_write_bytes(data_to_send)
+                    data_to_send = data_to_send + bytes([on_tick_bytes[0], on_tick_bytes[1], off_tick_bytes[0], off_tick_bytes[1]])
+                    self.__i2c_device.i2c_write_bytes(data_to_send)
 
     # --------------------------------------------------------------------------------------
     def sleep(self) -> None:
@@ -143,10 +154,14 @@ class PCA9685:
         Put the device into a sleep state
         @return: None
         """
+
         old_mode = self.__read(MODE1_ADDRESS)
         new_mode = old_mode | (1 << MODE1_SLEEP_BITNR)
         self.__write(MODE1_ADDRESS, new_mode)
         self.__i_am_a_sleep = True
+
+        if DEBUG is True:
+            print("Sleep im PCA9685")
 
     # --------------------------------------------------------------------------------------
     def wake(self) -> None:
