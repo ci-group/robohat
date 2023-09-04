@@ -1,0 +1,304 @@
+\chapter{Software}
+\hypertarget{_software}{}\label{_software}\index{Software@{Software}}
+\doxysection*{\doxylink{namespace_robohat}{Robohat}}
+
+
+
+{\bfseries{This is the \doxylink{namespace_robohat}{Robohat} API description. For hardware description, see \textquotesingle{}Robohardware.\+docx\textquotesingle{} }}
+
+Here is a small summary of the hardware before the actual software description.
+
+The electronics of \doxylink{namespace_robohat}{Robohat} consists of multiple boards. It\textquotesingle{}s build around a Raspberry\+Pi 4 (for the compute power). On this Raspberry a \textquotesingle{}Topboard\textquotesingle{} is connected (mounted as a hat) which is in its turn, connected to the rest of the boards. A user can control the electronics with a library written in python called \textquotesingle{}\doxylink{namespace_robohat}{Robohat} library\textquotesingle{}
+
+\doxysubsection*{Topboard}
+
+
+
+The Topboard is the connection between the Raspberry\+Pi and the rest of the system. On the Topboard itself, a buzzer, and an IO-\/expander available. The buzzer and the IO-\/expander can be accessed by the Topboard API calls.
+
+\doxysubsection*{Servos}
+
+
+
+The most imported parts of the \doxylink{namespace_robohat}{Robohat} are the Servos. The Servos are the moving parts of the \doxylink{namespace_robohat}{Robohat} The maximum amount of servos the user can connect to the \doxylink{namespace_robohat}{Robohat} hardware is 32 See for the connection of the Servos the document \textquotesingle{}Robohardware.\+docx\textquotesingle{}
+
+These servos are connected at a Servo-\/assembly
+
+\doxysubsection*{Servo-\/assembly}
+
+
+
+The Servo-\/assembly consists of 2 boards (the PWM-\/board and the ADC-\/board) sandwiched together. A Servo-\/assembly, powers, drives and readout the attached servos. A Servo-\/assembly is connected by a flat-\/cable onto the Topboard (onto plug P3 or plug P4) At the back of a Servo-\/assembly (at the PWM board) are 2 dip-\/switches mounted. Onto these switches an address of the Servo-\/assembly can be selected. Be sure if you use 2 Servo-\/assemblies (or in the future more), that the addresses should NOT be the same. To keep it simple, set the address of switch SW1 the same as the switch SW2.
+
+The Servo assembly handles the power distribution of the servo. The servos are grouped. Each group has its own powersupply. If servos in a group take too much power to handle, you can place a servo to another group to even the power distribution. See the hardware description for more information.
+
+The Servo groups are
+
+~\newline
+ \tabulinesep=1mm
+\begin{longtabu}spread 0pt [c]{*{5}{|X[-1]}|}
+\hline
+\cellcolor{\tableheadbgcolor}\textbf{ Servo group}&\multicolumn{4}{l|}{\cellcolor{\tableheadbgcolor}\textbf{ Servos }}\\\cline{1-5}
+\endfirsthead
+\hline
+\endfoot
+\hline
+\cellcolor{\tableheadbgcolor}\textbf{ Servo group}&\multicolumn{4}{l|}{\cellcolor{\tableheadbgcolor}\textbf{ Servos }}\\\cline{1-5}
+\endhead
+1&1&5&9&13 \\\cline{1-5}
+2&2&6&10&14 \\\cline{1-5}
+3&3&7&11&15 \\\cline{1-5}
+4&4&8&12&16 \\\cline{1-5}
+\end{longtabu}
+
+
+\doxysubsection*{Powerboard}
+
+
+
+The accu can deliver a huge amount of power. To keep it save and prevent wrong usage of the accu, each accu has its own powerboard.
+
+So the powerboard is the power distributor and the supervisor of the Accu. First an accu with enough capacity has to be connected. When the accu has enough capacity, a LED will blink two times. The LED will flash multiple times, when the Accu capacity to low, but still measurable. When the accu is completely dead nothing will happen.
+
+Power on The \doxylink{namespace_robohat}{Robohat} can only be turned on when the accu has enough capacity. To power on, the user has to press the power-\/on switch. When the switch is pressed the LED will blink 3 times. After the blinking period, the LED will flash multiple times. The user should release the power switch before the flashes stops. Nothing will happen, when the user releases the button after flashing is finished. This is done, to prevent accidentally turning on the \doxylink{namespace_robohat}{Robohat}.
+
+Turning off the power has to be done the same way (pressing the button (and holding it while the LED is blinking, and releasing it while the LED flashing) Note. A hard power-\/shutdown can destroy disk-\/data. Use the shutdown API-\/function of the \doxylink{namespace_robohat}{Robohat} library, or type /code sudo shutdown now /endcode in the console of the Raspberry
+
+The Powerboard will shut down the power, when the battery capacity goes below a threshold (2\%). Before shutting down the power, the LED will flash for 1 minute. The user can not interrupt the powering-\/down mode. This hardware feature is implemented to save the battery. The battery can be damaged d if used below a capacity of 1\%
+
+When using the \doxylink{namespace_robohat}{Robohat} lib, the user will get a warning when the battery capacity goes down below 20\% and goes down below 10\%. When the \doxylink{namespace_robohat}{Robohat} lib detects a capacity below 5\%, an auto shutdown will be performed to save the accu. This will be a graceful shutdown. The power will go down when the OS is also shutdown (this is the best solution to preserve the SD-\/card)
+
+While the accu is in standby, the LED will periodically flash (interval of 6 seconds)
+
+\doxysubsection*{IMU}
+
+
+
+The \doxylink{namespace_robohat}{Robohat} has also a \textquotesingle{}Inertial Measurement Unit\textquotesingle{} (IMU for short). With the IMU, the \doxylink{namespace_robohat}{Robohat} can track its movements. It can determine its position to read out the X,Y and Z magnetic fields direction. Also it can measure the acceleration in X, Y en Z direction. It has also a build in Gyroscope. The IMU is connected to the PI through the Topboard. Is accessed by its own API-\/calls. The IMU should be auto-\/detected. Nothing is selectable at the IMU.
+
+\doxysection*{\doxylink{namespace_robohat}{Robohat} library}
+
+Version\+: 0.\+1.\+1
+
+\doxylink{namespace_robohat}{Robohat} library is a library to access IO of the \doxylink{namespace_robohat}{Robohat} project written in Python
+
+\doxysubsection*{Robohatlib test}
+
+The \doxylink{namespace_robohat}{Robohat} library comes with a test-\/routine which consists of 2 files
+
+Test.\+py ( located at the root of the project ) ~\newline
+ Test\+Config.\+py ( located in the testlib directory ) ~\newline
+
+
+These files should be placed in the directory where the \textquotesingle{}robohatlib\textquotesingle{} is placed
+
+To execute the test\+:
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{cd\ \string~/robohat}
+\DoxyCodeLine{python\ Test.py}
+
+\end{DoxyCode}
+ {\itshape example to execute the test python module. The commands can be placed in a batch file (see a batch ile called test, in the root directory of the project)}
+
+When starting the test program (which initialises the Robohatlib) a summary of the IO will be printed on the console. The user will be notified when a IO devices will fail.
+
+By typing help (+ \mbox{[}RETURN\mbox{]} ) a list with commandos will be displayed.
+
+~\newline
+ ~\newline
+ ~\newline
+
+
+\doxysubsection*{Using Robohatlib}
+
+~\newline
+ The Startpoint of the Robo\+Hat Library is the \doxylink{namespace_robohat}{Robohat} class. After constructing the \doxylink{namespace_robohat}{Robohat} class, the \textquotesingle{}init\textquotesingle{} function (of the \doxylink{namespace_robohat}{Robohat} class) has to be executed. The rest of the \doxylink{namespace_robohat}{Robohat} class consist of functions which can be used to access the \doxylink{namespace_robohat}{Robohat} hardware.
+
+~\newline
+
+
+A little example of using the \doxylink{namespace_robohat}{Robohat} library
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{preprocessor}{\#\ creation\ of\ the\ Robohat\ class\ (mandatory)}}
+\DoxyCodeLine{robohat\ =\ \mbox{\hyperlink{namespace_robohat}{Robohat}}(main\_config.servoassembly\_1\_config,\ main\_config.servoassembly\_2\_config,\ main\_config.TOPBOARD\_IO\_EXPANDER\_SW)}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{preprocessor}{\#\ initialisation\ of\ the\ Robohat\ class\ (mandatory)}}
+\DoxyCodeLine{robohat.init(main\_config.SERVOBOARD\_1\_DATAS\_ARRAY,\ main\_config.SERVOBOARD\_2\_DATAS\_ARRAY)}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{preprocessor}{\#\ setting\ the\ callbacks\ for\ interrupt\ processing\ (not\ needed)}}
+\DoxyCodeLine{robohat.set\_topboard\_io\_expander\_int\_callback(self.\_\_test\_hat\_io\_expander\_int\_callback)}
+\DoxyCodeLine{robohat.set\_assemblyboard\_1\_io\_expander\_int\_callback(self.\_\_test\_assemblyboard\_1\_io\_expander\_int\_callback)}
+\DoxyCodeLine{robohat.set\_assemblyboard\_2\_io\_expander\_int\_callback(self.\_\_test\_assemblyboard\_2\_io\_expander\_int\_callback)}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{preprocessor}{\#\ setting\ the\ color\ of\ the\ LED}}
+\DoxyCodeLine{robohat.set\_led\_color(Color.GREEN)}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{preprocessor}{\#\ moving\ the\ angles\ of\ the\ servo}}
+\DoxyCodeLine{\textcolor{keywordflow}{for}\ i\ in\ range(1,1800,\ 1):}
+\DoxyCodeLine{\ \ \ \ angle\ =\ i\ /\ 10.0}
+\DoxyCodeLine{\ \ \ \ robohat.set\_servo\_multiple\_angles([angle,\ angle,\ angle,\ angle,\ angle,\ angle,\ angle,\ angle,\ angle,\ angle,\ angle,\ angle,\ angle,\ angle,\ angle,\ angle,\ angle,\ angle,\ angle,\ angle,\ angle,\ angle,\ angle,\ angle,\ angle,\ angle,\ angle,\ angle,\ angle,\ angle,\ angle,\ angle])}
+\DoxyCodeLine{\ \ \ \ print(\textcolor{stringliteral}{"{}-\/-\/>"{}}\ +\ str(robohat.get\_servo\_single\_angle(1))\ +\ \textcolor{stringliteral}{"{}\ {\ucr}"{}})}
+\DoxyCodeLine{\ \ \ \ time.sleep(1)}
+\DoxyCodeLine{}
+\DoxyCodeLine{\#\ setting\ the\ color\ of\ the\ LED}
+\DoxyCodeLine{robohat.set\_led\_color(Color.RED)}
+\DoxyCodeLine{}
+\DoxyCodeLine{\#\ moving\ the\ angles\ of\ the\ servos}
+\DoxyCodeLine{for\ i\ in\ range(1800,1,\ -\/1):}
+\DoxyCodeLine{\ \ \ \ angle\ =\ i\ /\ 10.0}
+\DoxyCodeLine{\ \ \ \ robohat.set\_servo\_multiple\_angles([angle,\ angle,\ angle,\ angle,\ angle,\ angle,\ angle,\ angle,\ angle,\ angle,\ angle,\ angle,\ angle,\ angle,\ angle,\ angle,\ angle,\ angle,\ angle,\ angle,\ angle,\ angle,\ angle,\ angle,\ angle,\ angle,\ angle,\ angle,\ angle,\ angle,\ angle,\ angle])}
+\DoxyCodeLine{\ \ \ \ print(\textcolor{stringliteral}{"{}-\/-\/>"{}}\ +\ str(robohat.get\_servo\_single\_angle(1))\ +\ \textcolor{stringliteral}{"{}\ {\ucr}"{}})}
+\DoxyCodeLine{\ \ \ \ time.sleep(1)}
+
+\end{DoxyCode}
+ {\itshape example sourcecode}
+
+\doxysection*{\doxylink{namespace_robohat}{Robohat} constructor}
+
+~\newline
+ The \doxylink{namespace_robohat}{Robohat} constructor, consist out of 3 parameters, 2 Servo\+Assembly\+Configs and a Switch value ~\newline
+
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{robohat\ =\ \mbox{\hyperlink{namespace_robohat}{Robohat}}(SERVOASSEMBLY\_1\_CONFIG,\ SERVOASSEMBLY\_2\_CONFIG,\ TOPBOARD\_IO\_SWITCH)}
+
+\end{DoxyCode}
+ {\itshape \doxylink{namespace_robohat}{Robohat} constructor}
+
+\tabulinesep=1mm
+\begin{longtabu}spread 0pt [c]{*{2}{|X[-1]}|}
+\hline
+\cellcolor{\tableheadbgcolor}\textbf{ SERVOASSEMBLY\+\_\+1\+\_\+\+CONFIG }&\cellcolor{\tableheadbgcolor}\textbf{ configuration of first servo assembly (Servo\+Assembly\+Config)   }\\\cline{1-2}
+\endfirsthead
+\hline
+\endfoot
+\hline
+\cellcolor{\tableheadbgcolor}\textbf{ SERVOASSEMBLY\+\_\+1\+\_\+\+CONFIG }&\cellcolor{\tableheadbgcolor}\textbf{ configuration of first servo assembly (Servo\+Assembly\+Config)   }\\\cline{1-2}
+\endhead
+\cellcolor{\tableheadbgcolor}\textbf{ SERVOASSEMBLY\+\_\+2\+\_\+\+CONFIG }&\cellcolor{\tableheadbgcolor}\textbf{ configuration of second servo assembly (Servo\+Assembly\+Config)   }\\\cline{1-2}
+\cellcolor{\tableheadbgcolor}\textbf{ TOPBOARD\+\_\+\+ID\+\_\+\+SWITCH }&\cellcolor{\tableheadbgcolor}\textbf{ Topboard ID switch value (int)   }\\\cline{1-2}
+\end{longtabu}
+
+
+~\newline
+ The servo assembly is the PCB to which the servos are connected 
+
+\doxysection*{Servo\+Assembly\+Config}
+
+A Servo\+Assembly\+Config is the configuration for a Servo\+Assembly board, which consist out of 4 parameters.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{servoassembly\_1\_config\ =\ ServoAssemblyConfig(SERVOASSEMBLY\_1\_NAME,\ SERVOASSEMBLY\_1\_SW1\_PWM\_ADDRESS,SERVOASSEMBLY\_1\_SW2\_POWER\_GOOD\_ADDRESS,\ SERVOASSEMBLY\_1\_PWMPLUG)}
+
+\end{DoxyCode}
+ {\itshape Servo\+Assembly\+Config constructor}
+
+\tabulinesep=1mm
+\begin{longtabu}spread 0pt [c]{*{2}{|X[-1]}|}
+\hline
+\cellcolor{\tableheadbgcolor}\textbf{ SERVOASSEMBLY\+\_\+1\+\_\+\+NAME }&\cellcolor{\tableheadbgcolor}\textbf{ a name for your own reference   }\\\cline{1-2}
+\endfirsthead
+\hline
+\endfoot
+\hline
+\cellcolor{\tableheadbgcolor}\textbf{ SERVOASSEMBLY\+\_\+1\+\_\+\+NAME }&\cellcolor{\tableheadbgcolor}\textbf{ a name for your own reference   }\\\cline{1-2}
+\endhead
+\cellcolor{\tableheadbgcolor}\textbf{ SERVOASSEMBLY\+\_\+1\+\_\+\+SW1\+\_\+\+PWM\+\_\+\+ADDRESS }&\cellcolor{\tableheadbgcolor}\textbf{ SW1, switch value for the PWM address (a switch on the assembly board, default 0 or 1)   }\\\cline{1-2}
+\cellcolor{\tableheadbgcolor}\textbf{ SERVOASSEMBLY\+\_\+1\+\_\+\+SW2\+\_\+\+POWER\+\_\+\+GOOD\+\_\+\+ADDRESS }&\cellcolor{\tableheadbgcolor}\textbf{ SW2, switch value for the POWER GOOD address (a switch on the assembly bord, default 0 or 1, but the same as SW1)   }\\\cline{1-2}
+\cellcolor{\tableheadbgcolor}\textbf{ SERVOASSEMBLY\+\_\+1\+\_\+\+PWMPLUG }&\cellcolor{\tableheadbgcolor}\textbf{ flat-\/cable connected to P3 or P4 of the topboard  }\\\cline{1-2}
+\end{longtabu}
+
+
+
+
+{\bfseries{note.}} ~\newline
+ One assembly-\/board should always be connected to connector P3 of the topboard. The second assembly board is not mandatory, which can be connected to P4 of the Topboard. ~\newline
+
+
+~\newline
+
+
+\doxysection*{TOPBOARD\+\_\+\+ID\+\_\+\+SWITCH}
+
+The last parameter of the robohat constructor, is the \textquotesingle{}topboard\+\_\+switch\+\_\+value\textquotesingle{} value. The default value is 7.~\newline
+ This value determines the I2\+C-\/address of the IO-\/expander (MCP23008) of the topboard.~\newline
+ The IO-\/pins can be accessed by plug J2 of the topboard~\newline
+
+
+ 
+
+\doxysection*{robohat.\+init}
+
+Before we have some action, we have to initialize the robohat class~\newline
+ This will also give the parameters to each servo.~\newline
+ ~\newline
+
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{robohat.init(main\_config.SERVOBOARD\_1\_DATAS\_ARRAY,\ main\_config.SERVOBOARD\_2\_DATAS\_ARRAY)}
+
+\end{DoxyCode}
+ {\itshape initializing robohat}
+
+~\newline
+ The parameters consist of 2 arrays of Servo\+Data
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{SERVOBOARD\_1\_DATAS\_ARRAY\ =\ [}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ServoData(1,\ 500,\ 2500,\ 180,\ 0,\ 72.2058435743876,\ -\/22.8429203374794),}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ...}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ...}
+
+\end{DoxyCode}
+ {\itshape section of the servoboard config array}
+
+\doxysection*{Servo\+Data}
+
+\tabulinesep=1mm
+\begin{longtabu}spread 0pt [c]{*{2}{|X[-1]}|}
+\hline
+\cellcolor{\tableheadbgcolor}\textbf{ SERVO\+\_\+\+NR }&\cellcolor{\tableheadbgcolor}\textbf{ servo nr of connected servo   }\\\cline{1-2}
+\endfirsthead
+\hline
+\endfoot
+\hline
+\cellcolor{\tableheadbgcolor}\textbf{ SERVO\+\_\+\+NR }&\cellcolor{\tableheadbgcolor}\textbf{ servo nr of connected servo   }\\\cline{1-2}
+\endhead
+\cellcolor{\tableheadbgcolor}\textbf{ MIN\+\_\+\+TIME }&\cellcolor{\tableheadbgcolor}\textbf{ time of minimal angle of the servo in uS (example\+: 500 uS)   }\\\cline{1-2}
+\cellcolor{\tableheadbgcolor}\textbf{ MAX\+\_\+\+TIME }&\cellcolor{\tableheadbgcolor}\textbf{ time of maximal angle of the servo in uS (example\+: 2500 uS)   }\\\cline{1-2}
+\cellcolor{\tableheadbgcolor}\textbf{ RUNNING\+\_\+\+DEGREE }&\cellcolor{\tableheadbgcolor}\textbf{ range of the servo (example\+: 180)   }\\\cline{1-2}
+\cellcolor{\tableheadbgcolor}\textbf{ OFFSET\+\_\+\+DEGREE }&\cellcolor{\tableheadbgcolor}\textbf{ offset of the angle (nearly always\+: 0)   }\\\cline{1-2}
+\cellcolor{\tableheadbgcolor}\textbf{ FORMULA\+\_\+A }&\cellcolor{\tableheadbgcolor}\textbf{ first parameter of formula, servo measure-\/voltage to angle   }\\\cline{1-2}
+\cellcolor{\tableheadbgcolor}\textbf{ FORMULA\+\_\+B }&\cellcolor{\tableheadbgcolor}\textbf{ second parameter of formula, servo measure-\/voltage to angle   }\\\cline{1-2}
+\end{longtabu}
+
+
+
+
+After initialisation the servos position can be altered
+
+\doxysection*{Interrupts}
+
+The \doxylink{namespace_robohat}{Robohat} library can generate 3 interrupts. The first one is the interrupt of the Topboard IO-\/expander. Both Assembly boards can also generate an interrupt.
+
+\doxysubsection*{Topboard interrupt}
+
+When an I/O pin of the Topboard IO expander is set as an intput, it can generate an interrupt. To catch this interrupt, a callback function has to be set with the function \textquotesingle{}set\+\_\+topboard\+\_\+io\+\_\+expander\+\_\+int\+\_\+callback( {\itshape the} function)\textquotesingle{} of the \doxylink{namespace_robohat}{Robohat} library. This callback function has an integer as parameter. This parameter is set to tell the callback function which IO pin has cause the triggering of the interrupt.
+
+\doxysubsection*{Assemblyboard interrupt}
+
+Both assembly board has a IO-\/expander which is used to detect if the power delivery for the servos is working correctly. To detect a power fail, only 4 IO pins of the expander are used. IO pin 4,5 and 6 can be used by a user. When these pins a configured as an input, in can generate an interrupt. To catch this interrupt, a callback function has to be set with the function \textquotesingle{}set\+\_\+topboard\+\_\+io\+\_\+expander\+\_\+int\+\_\+callback( {\itshape the} function)\textquotesingle{} of the \doxylink{namespace_robohat}{Robohat} library. This callback function has an integer as parameter. This parameter is set to tell the callback function which IO pin has cause the triggering of the interrupt.
+
+\doxysection*{set the servos angles}
+
+with the function \textquotesingle{}set\+\_\+servos\+\_\+angles\textquotesingle{} you set the angle of all the servos. The array has to be a size of 16 or 32 elements. When the size is 16 elements, only the first 16 servos will be addressed. When the array has 32 elements, all the servos will be addressed.
+
+/code robohat.\+set\+\_\+servos\+\_\+angles(\mbox{[}angle, angle, angle, angle, angle, angle, angle, angle, angle, angle, angle, angle, angle, angle, angle, angle\mbox{]}) /endcode {\itshape Setting the servos to an angle} 

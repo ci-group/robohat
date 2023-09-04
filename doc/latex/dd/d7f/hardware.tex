@@ -1,0 +1,360 @@
+\chapter{Hardware description}
+\hypertarget{hardware}{}\label{hardware}\index{Hardware description@{Hardware description}}
+For the software description of the \doxylink{namespace_robohat}{Robohat}, see \doxysectlink{software}{Software description}{0} ~\newline
+
+
+\DoxyHorRuler{0}
+ \DoxyHorRuler{0}
+
+
+\doxysection*{\doxylink{namespace_robohat}{Robohat} hardware description}
+
+
+
+The \doxylink{namespace_robohat}{Robohat} is Robot which has a modular design. The basis of the design is the brain. The brain consist of PCBs and batteries.~\newline
+ Attached to the brain are limbs, which are coupled with joints. These joins are driven by servos. By driving those joint, the Robot should be able to walk.
+
+\DoxyHorRuler{0}
+ \doxysubsection*{Raspberry PI 4}
+
+For the processing power, the \doxylink{namespace_robohat}{Robohat} uses a Raspberry PI 4~\newline
+
+
+
+
+The Raspberry (RPi for short) has multiple connections. Most connection can be used.
+
+{\bfseries{Connectors which aren\textquotesingle{}t avaible for users are\+:}}
+
+. The I/\+O-\/header. The I/\+O-\/header isn\textquotesingle{}t accessible, because its connected to the Topboard (see section below) .~\newline
+ . The USB-\/C power-\/plug. The USB-\/C power-\/plug of the RPi may NOT be used. The power delivery for the RPi is done by the Topboard (see section below). Connecting both the USB-\/C power-\/plug and the Topboard can result in weird behaviour of the RPi.~\newline
+
+
+~\newline
+ \DoxyHorRuler{0}
+ \doxysubsection*{Topboard}
+
+The Topboard is the connection between the Raspberry Pi and the rest of the system. 
+
+On the Topboard itself, a buzzer, an I/\+O-\/expander, ADC, serial console, and an I2\+C-\/interface are available.~\newline
+
+
+{\bfseries{Address of the Topboard}}~\newline
+ The Topboard has on the backside a dipswitch to sets it address (topboard\+\_\+switch\+\_\+value). The default value is 7.~\newline
+ Actually the switch sets the I2C address of the I/\+O-\/expander on the Topboard. If for somehow the address of the I/\+O-\/expander has a conflict of a other I2\+C-\/device (on I2C bus 1) the address can be changed by this switch.
+
+ 
+
+\doxysubsubsection*{User available connections on the top-\/side of the Topboard}
+
+{\bfseries{ I/O pins}}~\newline
+ The Topboard has 8 I/O pins, which can be accessed by the I/O header (J2) of the topboard~\newline
+ The maximum input voltage of the I/O (set as input) may not exceed 3.\+3 V~\newline
+
+
+pinning of the I/O header\+:~\newline
+ 1 + 3V3~\newline
+ 2 GPIO 0~\newline
+ 3 GPIO 1~\newline
+ 4 GPIO 2~\newline
+ 5 GPIO 3~\newline
+ 6 GPIO 4~\newline
+ 7 GPIO 5~\newline
+ 8 GPIO 6~\newline
+ 9 GPIO 7~\newline
+ 10 GND~\newline
+
+
+{\bfseries{ADC}}~\newline
+ 3 ADC channels are available on the Topboard, which can be accessed by tge ADC header of the topboard~\newline
+ Do not measure above 3 volts. This could damage the ADC.
+
+pinning of the ADC header\+:~\newline
+ 1 + 3V3~\newline
+ 2 ADC Channel 0~\newline
+ 3 ADC Channel 1~\newline
+ 4 ADC Channel 2~\newline
+ 5 scaled battery voltage. {\bfseries{DO NOT USE}} It\textquotesingle{}s actually ADC Channel 3, which is used to monitor the battery capacity.~\newline
+ 6 GND~\newline
+
+
+{\bfseries{Console}}~\newline
+ To monitor the RPi a console connection can be used. ~\newline
+ The default settings of the console port is\+: 115200 baud, 8N1~\newline
+
+
+A cable \textquotesingle{}TTL-\/232\+R-\/\+Rpi\textquotesingle{} can be used (see RS 767-\/6200) ~\newline
+
+
+pinning of the Console connector\+:~\newline
+ 1 GND (black of the \textquotesingle{}TTL-\/232\+R-\/\+Rpi\textquotesingle{} cable)~\newline
+ 2 TXD (data out of the RPi) (yellow of the \textquotesingle{}TTL-\/232\+R-\/\+Rpi\textquotesingle{} cable)~\newline
+ 3 RXD (data in of the RPi) (orange of the \textquotesingle{}TTL-\/232\+R-\/\+Rpi\textquotesingle{} cable)~\newline
+
+
+{\bfseries{Spare I2C}}~\newline
+ I2C bus 5, is avaible for the user.~\newline
+
+
+pinning of the I2C connector\+:~\newline
+ 1 GND~\newline
+ 2 SDA~\newline
+ 3 SCL~\newline
+ 4 + 3V3~\newline
+
+
+\doxysubsubsection*{Other connections on the top side of the Topboard}
+
+Other connections on the top-\/side of the Topboard are present, but not user available.
+
+The first one is the power-\/connector to power the Topboard and the RPi This connector is connected to a power-\/board. Two other 16 pole headers are avaible (P3 and P4) to connect a Servo-\/assemblies by flat-\/cables
+
+The last connection of the top-\/side of the Topboard is the IMU connector. The IMU located on the top-\/lid of the housing is connected to this connector by a 5 pole cable.
+
+
+
+~\newline
+ ~\newline
+
+
+\doxysubsubsection*{Connections on the back-\/side of the Topboard}
+
+There aren\textquotesingle{}t any user available connections off the back-\/side of the Topboard
+
+~\newline
+
+
+The LED (which goes to the top-\/lid of the housing) is connected to the 5 pole connector.~\newline
+ The (main) power-\/board is connected to the 2 pole connector.
+
+
+
+\DoxyHorRuler{0}
+
+
+\doxysubsection*{Servos}
+
+The robohat has limbs to move. These limbs are connected by joints. Those joints are driven by servos.
+
+
+
+In our prototype we use the \href{DSS-M15.pdf}{\texttt{ {\bfseries{DSS-\/\+M15}}}} as servo. This servo is modified to have an angle readout.~\newline
+
+
+Other servos can be used. But be sure to use the correct parameters while initializing the Robohatlib.~\newline
+ The servos are driven by 6.\+8 volts.~\newline
+ The default PWM frequency is 50 Hz~\newline
+
+
+
+
+The maximum amount of servos the user can connect to the \doxylink{namespace_robohat}{Robohat} hardware is 32 (but can be limited if the servos consumes much power).~\newline
+ These servos will be driven by the Servo-\/assemblies. For how to connect a servo to the \doxylink{namespace_robohat}{Robohat}, see \textquotesingle{}Servo-\/assembly\textquotesingle{}
+
+\DoxyHorRuler{0}
+
+
+\doxysubsection*{Servo-\/assembly}
+
+A Servo assembly is the connection between the servos and the rest of the \doxylink{namespace_robohat}{Robohat}.
+
+
+
+The \doxylink{namespace_robohat}{Robohat} can hold 2 Servo assemblies.
+
+A Servo-\/assembly consists of 2 boards (the PWM-\/board and the ADC-\/board) sandwiched together. A Servo-\/assembly, powers, drives and reads-\/out the attached servos.~\newline
+ Besides handling all the servo stuff, it has an I/\+O-\/expander which the user can use.~\newline
+
+
+{\bfseries{Address of the Assemblyboard}}~\newline
+
+
+At the back of a Servo-\/assembly (at the PWM board) are 2 dip-\/switches present. Onto these switches an address of the Servo-\/assembly must be selected. To keep it simple, set the address of switch SW1 the same as the switch SW2.~\newline
+ The default value is of assembly-\/board connected to plug P3 of the Topboard is 0.~\newline
+ The default value is of assembly-\/board connected to plug P4 of the Topboard is 1.~\newline
+
+
+{\bfseries{Note}}. The 2 dip-\/switches addressed and position of the flat-\/cable are used int the Robohatlib\+::\+Servo\+Assembly\+Config ~\newline
+ {\bfseries{Note}}. Be sure if you use 2 Servo-\/assemblies, that the addresses of the assembly boards are different.~\newline
+
+
+ 
+
+{\bfseries{Connection of the Assemblyboard}}~\newline
+ 
+
+The assembly-\/board is connected with a flat-\/cable to the Topboard at connector P3 or P4.
+
+The power is connected to the power connector, which goes from the Powerboard.
+
+{\bfseries{I/O connector}} The assembly-\/board has also a I/O connector.
+
+I/O connector~\newline
+ 1 + 5V~\newline
+ 2 IO\+\_\+4~\newline
+ 3 IO\+\_\+5~\newline
+ 4 IO\+\_\+6~\newline
+ 5 GND~\newline
+
+
+{\bfseries{Connecting the servos}}
+
+The Servo assembly handles the power distribution of the servos. Each Servo assembly has to 16 servo channels. Those servo-\/channels are grouped in 4 groups.~\newline
+ Each group has its own powersupply. The current of each power supply is limited to 5 Ampère. ~\newline
+ If the servos in a group take too much power, the groups power-\/supply will limit the current. This will stall the attached servos of that group, and will result in strange movement of the servos.~\newline
+
+
+Power limitation can be prevented to distribute the servos evenly on all the available servo-\/channels.~\newline
+ The drawn current of a servo is proportional with its delivered torque. So do not put high torque servos in the same group.
+
+The Servo groups are\+: ~\newline
+ \tabulinesep=1mm
+\begin{longtabu}spread 0pt [c]{*{5}{|X[-1]}|}
+\hline
+\cellcolor{\tableheadbgcolor}\textbf{ Servo group}&\multicolumn{4}{l|}{\cellcolor{\tableheadbgcolor}\textbf{ Servos channel }}\\\cline{1-5}
+\endfirsthead
+\hline
+\endfoot
+\hline
+\cellcolor{\tableheadbgcolor}\textbf{ Servo group}&\multicolumn{4}{l|}{\cellcolor{\tableheadbgcolor}\textbf{ Servos channel }}\\\cline{1-5}
+\endhead
+1&0&4&8&12 \\\cline{1-5}
+2&1&5&9&13 \\\cline{1-5}
+3&2&6&10&14 \\\cline{1-5}
+4&3&7&11&15 \\\cline{1-5}
+\end{longtabu}
+~\newline
+
+
+
+
+As can be seen on the picture, the BROWN wire of the servo has to be on the side of the PCB with the yellow power connector.
+
+pinning servo~\newline
+ BROWN gnd~\newline
+ RED PWM-\/signal~\newline
+ ORANGE power~\newline
+ WHITE (but can differ!) pos-\/measure-\/signal~\newline
+ ~\newline
+
+
+\DoxyHorRuler{0}
+ \doxysubsection*{Powerboard}
+
+The powerboard is the power distributor and the supervisor of the battery.~\newline
+
+
+
+
+The battery can deliver a huge amount of power (so be careful, read the \doxysectlink{precautions}{Precautions}{0}). To keep it save and prevent wrong usage of the battery, each battery has its own powerboard.
+
+If needed, he \doxylink{namespace_robohat}{Robohat} has room for 2 batteries. But 1 battery should be enough.~\newline
+ When using 2 batteries, 2 Powerboard are needed.
+
+{\bfseries{Connections of the front-\/side of the Powerboard}}~\newline
+
+
+The Powerboard has no connections available for the user
+
+
+
+At the top-\/side there a multiple connectors, which handles the power delivery for the \doxylink{namespace_robohat}{Robohat}.
+
+. Battery. At this connector the battery has to be connected.~\newline
+ . Topboard. This connection will power the Topboard.~\newline
+ . Assembly connectors. The 2 other connectors are to power the Servo assemblies. ~\newline
+
+
+There are also 2 LEDS present. A red one, for the status, and a green one to see if the power is turned on. (See power-\/on)
+
+{\bfseries{Connections of the backside-\/side of the Powerboard}}
+
+At the back-\/side are the connectors for turning he \doxylink{namespace_robohat}{Robohat} on and off.
+
+
+
+. 3 pole power connector. This has to be connected to the Power-\/switch-\/board~\newline
+ . 2 pole (in de the middle) This has to be connected to the Topboard if it is the first assembly-\/board. When it is the second assembly-\/board, it has to be connected to the first assembly-\/board.~\newline
+ . 2 pole servo-\/assembly. Connect this to the second assembly-\/board (if available)~\newline
+
+
+{\bfseries{Connecting the battery}}~\newline
+
+
+Always be sure, you connect a battery with enough capacity.~\newline
+ When the battery has enough capacity, the red status-\/\+LED will blink two times.~\newline
+ When the capacity of the battery is to low, the red status-\/\+LED will flash multiple times.~\newline
+ When the battery is completely dead, nothing will happen.~\newline
+
+
+{\bfseries{Turning on the \doxylink{namespace_robohat}{Robohat}}}
+
+User Power on~\newline
+ The \doxylink{namespace_robohat}{Robohat} can only be turned on when the accu has enough capacity. To power on, the user has to press the switch of the switch-\/board.~\newline
+ When the switch is pressed the red status-\/\+LED will blink 3 times. When the blinking period ends, the red status-\/\+LED will flash multiple times. The user should release the power switch before the flashes stops.~\newline
+ Nothing will happen, when the user releases the button before flashing starts or after flashing is finished. This window of releasing the button is done, to prevent accidentally turning on the \doxylink{namespace_robohat}{Robohat}. When the power is on, the green power-\/\+LED will be illuminated.
+
+User Powering off~\newline
+ Powering down should be done with the shutdown API-\/function of the \doxylink{namespace_robohat}{Robohat} library.~\newline
+ The user can also shut down the OS (by \textquotesingle{}sudo shutdown now\textquotesingle{} in the console), and turn off the power by pressing switch the same way as turning the \doxylink{namespace_robohat}{Robohat} on. (When the switch is pressed the red status-\/\+LED will blink 3 times. When the blinking period ends, the red status-\/\+LED will flash multiple times. The user should release the power switch before the flashes stops).
+
+{\bfseries{Note}}. Powering down, before shutting down the OS. can result in data loss, or corruption of the SD-\/card.
+
+Battery low capacity shutdown~\newline
+ The Powerboard will automatically shut down the power, when the battery capacity goes below a threshold (2\%). Before shutting down the power, the red status LED will flash for 1 minute. The user can not interrupt this powering-\/down mode. Although shutting down the power, before shutting down the os, could result in data loss, this hardware feature is implemented to save the battery. The battery can be damaged if used below a capacity of 1\%
+
+When using the \doxylink{namespace_robohat}{Robohat} lib, the user will get a first warning when the battery capacity goes below 20 \%. A second warning will be presented when the capacity of the battery goes down below 10\%. When the \doxylink{namespace_robohat}{Robohat} lib detects a capacity below 5\%, an auto shutdown will be performed to save the accu. This will be a graceful shutdown. The OS will be shut downed before the power is shut downed.
+
+While the accu is in standby, the LED will periodically flash (interval of 6 seconds) to see the battery is still attached to the \doxylink{namespace_robohat}{Robohat}.~\newline
+ Its better to unplug the battery and store it in a safe place, when the \doxylink{namespace_robohat}{Robohat} os not used.
+
+Fuse~\newline
+ The Powerboard has a fuse. When this fuse is blown, make sure you know the cause, before replacing it. This fuse is rate at 20A, so an accidentally blown of the fuse won\textquotesingle{}t happen. Fuse rating\+: 20A
+
+\DoxyHorRuler{0}
+ \doxysubsection*{IMU}
+
+
+
+The \doxylink{namespace_robohat}{Robohat} has also a \textquotesingle{}Inertial Measurement Unit\textquotesingle{} (IMU for short). With the IMU, the \doxylink{namespace_robohat}{Robohat} can track its movements.~\newline
+ It can determine its position by reading out the X,Y and Z magnetic fields direction. Also, it can measure the acceleration in the X, Y en Z direction. It has also a build in Gyroscope, so the \doxylink{namespace_robohat}{Robohat} can know when it turns.~\newline
+ The IMU is connected to the PI through the Topboard. The IMU is auto-\/detected, so no addresses has to be set.
+
+\DoxyHorRuler{0}
+
+
+\doxysection*{Overview of the connections}
+
+\doxysubsection*{Connection scheme}
+
+Below is a picture how the \doxylink{namespace_robohat}{Robohat} PCBs are connected together. The Second assembly is not mandatory. There is no need for the second accu, and the second PWM management board, if the second assembly board is not connected.
+
+
+
+~\newline
+
+
+\doxysubsection*{Connection table}
+
+\tabulinesep=1mm
+\begin{longtabu}spread 0pt [c]{*{7}{|X[-1]}|}
+\hline
+\cellcolor{\tableheadbgcolor}\textbf{ ID}&\cellcolor{\tableheadbgcolor}\textbf{ Connection name }&\cellcolor{\tableheadbgcolor}\textbf{ from }&\cellcolor{\tableheadbgcolor}\textbf{ from connector}&\cellcolor{\tableheadbgcolor}\textbf{ to }&\cellcolor{\tableheadbgcolor}\textbf{ to connector }&\cellcolor{\tableheadbgcolor}\textbf{ type of cable  }\\\cline{1-7}
+\endfirsthead
+\hline
+\endfoot
+\hline
+\cellcolor{\tableheadbgcolor}\textbf{ ID}&\cellcolor{\tableheadbgcolor}\textbf{ Connection name }&\cellcolor{\tableheadbgcolor}\textbf{ from }&\cellcolor{\tableheadbgcolor}\textbf{ from connector}&\cellcolor{\tableheadbgcolor}\textbf{ to }&\cellcolor{\tableheadbgcolor}\textbf{ to connector }&\cellcolor{\tableheadbgcolor}\textbf{ type of cable  }\\\cline{1-7}
+\endhead
+1&battery connection &battery &-\/ &pwm management board &P1 &cable attached to battery \\\cline{1-7}
+2&topboard power connection &pwm management board 1 &J5 &topboard &P5 &2 wire connection with 2 (small) yellow connectors \\\cline{1-7}
+3&servo assembly power connection &pwm management board (1 + 2)&-\/ &servo assembly (1 + 2)&P1 &2 wire connection with 2 (big) yellow connectors \\\cline{1-7}
+4&servo assembly control connection 1&topboard plug &P3 &servo assembly 1 &P3 &flat cable \\\cline{1-7}
+5&servo assembly control connection 2&topboard plug &P4 &servo assembly 2 &P3 &16 pole flat cable with 2 black headers \\\cline{1-7}
+6&IMU connection &topboard &P1 &IMU &-\/ &5 pole flat-\/cable with 2 white plugs ( 30 cm) \\\cline{1-7}
+7&LED connection &topboard &RGB-\/\+LED &LED / Switch board &P2 &5 pole flat-\/cable with 2 white plugs (30 cm) \\\cline{1-7}
+8&PWR button connection &LED / Switch board &P1 &pwm management board 1&P3 &3 pole flat-\/cable with 2 white plugs (20 cm) \\\cline{1-7}
+9&Pass through PWR connection &LED / Switch board &P3 &pwm management board 2&POWER-\/\+BUTTON &3 pole flat-\/cable with 2 white plugs (30 cm) \\\cline{1-7}
+10&Shutdown connection &pwm management board 1 &PI SHUTDOWN \#1&topboard &PWR-\/\+DOWN &2 pole flat-\/cable with 2 white plugs (30 cm) \\\cline{1-7}
+11&Pass through shutdown connection &pwm management board 1 &PI SHUTDOWN \#2&pwm management board 2&PI SHUTDOWN \#1&2 pole flat-\/cable with 2 white plugs (30 cm) \\\cline{1-7}
+\end{longtabu}

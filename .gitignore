@@ -8,6 +8,5 @@
 /robohatlib/driver_ll/constants/__pycache__/
 /robohatlib/driver_ll/i2c/__pycache__/
 /robohatlib/hal/definitions/__pycache__/
-/doc/
 __pycache__
 /.gitattributes
