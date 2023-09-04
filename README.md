@@ -2,4 +2,4 @@
 
 This a library written in Python to access the robohat hardware
 
-version v0.0.2
+version v0.4.0
