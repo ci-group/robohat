@@ -1,6 +1,12 @@
 #!/usr/bin/python3
 
-# beeps for 100 mS
+"""!
+Copyright © 2023 Vrije Universiteit Amsterdam
+Electronica-Beta-VU
+A. Denker (a.denker@vu.nl)
+
+beeps for 100 mS
+"""
 
 import RPi.GPIO as GPIO
 from time import sleep
