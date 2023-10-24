@@ -1,0 +1,22 @@
+[build-system]
+requires = ["poetry-core>=1.6.0"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.poetry]
+name = "robohatlib"
+version = "v0.4.0"
+description = "Robohatlib"
+authors = ["Aart Stuurman <aartstuurman@hotmail.com>"]
+repository = "https://github.com/ci-group/revolve2"
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Typing :: Typed",
+    "Programming Language :: Python :: 3",
+]
+packages = [{ include = "robohatlib" }]
+
+[tool.poetry.dependencies]
+python = "^3.9"
+
+[tool.poetry.extras]
+dev = []
