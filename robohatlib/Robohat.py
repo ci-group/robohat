@@ -12,7 +12,7 @@ from __future__ import annotations
 try:
     from robohatlib import RobohatConfig
     from robohatlib import RobohatConstants
-    from robohatlib.PwmPlug import PwmPlug
+    from robohatlib.hal.assemblyboard.PwmPlug import PwmPlug
 
     from robohatlib.drivers.datastructs.McpInitStruct import McpInitStruct
 
