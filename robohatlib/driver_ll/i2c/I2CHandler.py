@@ -11,7 +11,7 @@ except ImportError:
     threading = None
 
 try:
-    from robohatlib.driver_ll.i2c.SMBUS import SMBUS
+    from robohatlib.driver_ll.i2c.smbus import SMBUS
 
 except ImportError:
     raise ImportError("SMBus not found.")
