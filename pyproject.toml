@@ -21,6 +21,7 @@ packages = [{ include = "robohatlib" }]
 [tool.poetry.dependencies]
 python = "^3.9"
 "RPi.GPIO" = "^0.7.1"
+spidev = "^3.6"
 
 [tool.poetry.extras]
 dev = []

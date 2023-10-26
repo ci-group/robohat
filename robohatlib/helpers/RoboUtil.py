@@ -6,16 +6,17 @@ A. Denker (a.denker@vu.nl)
 """
 
 try:
-    from robohatlib.PwmPlug import PwmPlug
+    from robohatlib.hal.assemblyboard.PwmPlug import PwmPlug
     import time
 
 except ImportError:
     print("Failed to import dependencies for RoboUtil")
     raise
 
-    #-------------------------------------------------------------------------------------
-    #-------------------------------------------------------------------------------------
-    #-------------------------------------------------------------------------------------
+    # -------------------------------------------------------------------------------------
+    # -------------------------------------------------------------------------------------
+    # -------------------------------------------------------------------------------------
+
 
 class RoboUtil:
     """!
@@ -64,7 +65,7 @@ class RoboUtil:
     # --------------------------------------------------------------------------------------
     # --------------------------------------------------------------------------------------
     @staticmethod
-    def print_depending_switch(_silent:bool, _txt:str) -> None:
+    def print_depending_switch(_silent: bool, _txt: str) -> None:
         """!
         Prints messages to the console depending on the _silent switch
 
@@ -81,7 +82,7 @@ class RoboUtil:
     # --------------------------------------------------------------------------------------
 
     @staticmethod
-    def get_pwmplug_by_int(_id:int) -> PwmPlug:
+    def get_pwmplug_by_int(_id: int) -> PwmPlug:
         """!
         Convert int id to PWMplug enum
         @param _id: id in int
@@ -95,7 +96,7 @@ class RoboUtil:
     # --------------------------------------------------------------------------------------
 
     @staticmethod
-    def get_pwm_cs_by_pwmplug(_plug:PwmPlug) -> int:
+    def get_pwm_cs_by_pwmplug(_plug: PwmPlug) -> int:
         """!
         Convert to PWMplug enum int id
         @param _plug: PWMplug enum

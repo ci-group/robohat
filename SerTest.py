@@ -11,7 +11,7 @@ from __future__ import absolute_import, division, print_function, unicode_litera
 try:
     from robohatlib.Robohat import Robohat
     from robohatlib import RobohatConstants
-    from robohatlib.PwmPlug import PwmPlug
+    from robohatlib.hal.assemblyboard.PwmPlug import PwmPlug
     from robohatlib import RobohatConfig
     from robohatlib.hal.assemblyboard.ServoAssemblyConfig import ServoAssemblyConfig
     from robohatlib.hal.assemblyboard.servo.ServoData import ServoData
@@ -42,6 +42,7 @@ NORMAL_USER_MIN_MOVE = 20
 
 # --------------------------------------------------------------------------------------
 
+
 class SerTestClass:
     """!
     Our example class.
@@ -58,12 +59,15 @@ class SerTestClass:
         print("Starting robohat servo test routine")
         self.__running = True
 
-        self.__robohat = Robohat(TestConfig.SERVOASSEMBLY_1_CONFIG,
-                                 TestConfig.SERVOASSEMBLY_2_CONFIG,
-                                 TestConfig.TOPBOARD_ID_SWITCH)
+        self.__robohat = Robohat(
+            TestConfig.SERVOASSEMBLY_1_CONFIG,
+            TestConfig.SERVOASSEMBLY_2_CONFIG,
+            TestConfig.TOPBOARD_ID_SWITCH,
+        )
 
-        self.__robohat.init(TestConfig.SERVOBOARD_1_DATAS_LIST,
-                            TestConfig.SERVOBOARD_2_DATAS_LIST)
+        self.__robohat.init(
+            TestConfig.SERVOBOARD_1_DATAS_LIST, TestConfig.SERVOBOARD_2_DATAS_LIST
+        )
 
         self.__robohat.do_buzzer_beep()
 
@@ -80,7 +84,12 @@ class SerTestClass:
             self.__limit_min = NORMAL_USER_MIN_MOVE
             self.__limit_max = NORMAL_USER_MAX_MOVE
 
-        print("limits are from " + str(self.__limit_min) + " till "+ str(self.__limit_max) )
+        print(
+            "limits are from "
+            + str(self.__limit_min)
+            + " till "
+            + str(self.__limit_max)
+        )
 
     # --------------------------------------------------------------------------------------
     # --------------------------------------------------------------------------------------
@@ -130,7 +139,7 @@ class SerTestClass:
     # --------------------------------------------------------------------------------------
     # --------------------------------------------------------------------------------------
 
-    def __process_commands(self, _command:str) -> None:
+    def __process_commands(self, _command: str) -> None:
         """!
         Will handle console request
         @param _command: console input
@@ -161,7 +170,7 @@ class SerTestClass:
             self.__toggle_direct_update_mode()
         elif _command == "b":
             self.__sound_the_buzzer()
-    # --------------------------------------------------------------------------------------
+        # --------------------------------------------------------------------------------------
         elif _command == "x":
             self.exit_program()
         else:
@@ -208,7 +217,9 @@ class SerTestClass:
         @return: None
         """
         print("Going to calibrate the servos. Please be patient...")
-        self.__robohat.do_servo_fit_formula_readout_vs_angle_multiple_servos(self.__limit_min, self.__limit_max)
+        self.__robohat.do_servo_fit_formula_readout_vs_angle_multiple_servos(
+            self.__limit_min, self.__limit_max
+        )
 
     # --------------------------------------------------------------------------------------
     # --------------------------------------------------------------------------------------
@@ -228,7 +239,6 @@ class SerTestClass:
             else:
                 print("Servo " + str(i) + " position is " + str(pos) + " °")
 
-
     # --------------------------------------------------------------------------------------
     # --------------------------------------------------------------------------------------
     # --------------------------------------------------------------------------------------
@@ -244,12 +254,49 @@ class SerTestClass:
 
         self.__robohat.set_servo_multiple_angles(
             [
-            _degree, _degree, _degree, _degree, _degree, _degree, _degree, _degree, _degree, _degree, _degree, _degree, _degree, _degree, _degree, _degree,
-            _degree, _degree, _degree, _degree, _degree, _degree, _degree, _degree, _degree, _degree, _degree, _degree,_degree, _degree, _degree, _degree
-            ])
+                _degree,
+                _degree,
+                _degree,
+                _degree,
+                _degree,
+                _degree,
+                _degree,
+                _degree,
+                _degree,
+                _degree,
+                _degree,
+                _degree,
+                _degree,
+                _degree,
+                _degree,
+                _degree,
+                _degree,
+                _degree,
+                _degree,
+                _degree,
+                _degree,
+                _degree,
+                _degree,
+                _degree,
+                _degree,
+                _degree,
+                _degree,
+                _degree,
+                _degree,
+                _degree,
+                _degree,
+                _degree,
+            ]
+        )
 
-
-        print("Angles of the servos should be: " + str(_degree) + "°" + " time: " + str(int(time_to_servo)) + " uS")
+        print(
+            "Angles of the servos should be: "
+            + str(_degree)
+            + "°"
+            + " time: "
+            + str(int(time_to_servo))
+            + " uS"
+        )
 
     # --------------------------------------------------------------------------------------
     # --------------------------------------------------------------------------------------
@@ -280,20 +327,26 @@ class SerTestClass:
         print("Starting topboard OUTPUT test")
 
         for pin_nr_dir in range(8):
-            self.__robohat.set_topboard_io_expander_direction(pin_nr_dir, ExpanderDir.OUTPUT)
+            self.__robohat.set_topboard_io_expander_direction(
+                pin_nr_dir, ExpanderDir.OUTPUT
+            )
 
         pin_high_nr = 0
         for loop_counter in range(3):
             for led_counter in range(8):
                 for pin_nr in range(8):
-                    self.__robohat.set_topboard_io_expander_output(pin_nr, ExpanderStatus.LOW)
+                    self.__robohat.set_topboard_io_expander_output(
+                        pin_nr, ExpanderStatus.LOW
+                    )
 
-                self.__robohat.set_topboard_io_expander_output(pin_high_nr, ExpanderStatus.HIGH)
+                self.__robohat.set_topboard_io_expander_output(
+                    pin_high_nr, ExpanderStatus.HIGH
+                )
                 pin_high_nr = pin_high_nr + 1
                 if pin_high_nr >= 8:
                     pin_high_nr = 0
 
-                print("--> " + str(loop_counter) + " LED GP:" + str(led_counter) )
+                print("--> " + str(loop_counter) + " LED GP:" + str(led_counter))
                 time.sleep(1)
 
         for pin_nr in range(8):
@@ -313,42 +366,101 @@ class SerTestClass:
 
         print("Starting assembly boards OUTPUT test")
 
-        for pin_nr_dir in range(4,7):
-            if self.__robohat.get_assemblyboard_is_connected(PwmPlug.PWMPLUG_P3) is True:
-                self.__robohat.set_servo_io_expander_direction(PwmPlug.PWMPLUG_P3, pin_nr_dir, ExpanderDir.OUTPUT)
-            if self.__robohat.get_assemblyboard_is_connected(PwmPlug.PWMPLUG_P4) is True:
-                self.__robohat.set_servo_io_expander_direction(PwmPlug.PWMPLUG_P4, pin_nr_dir, ExpanderDir.OUTPUT)
+        for pin_nr_dir in range(4, 7):
+            if (
+                self.__robohat.get_assemblyboard_is_connected(PwmPlug.PWMPLUG_P3)
+                is True
+            ):
+                self.__robohat.set_servo_io_expander_direction(
+                    PwmPlug.PWMPLUG_P3, pin_nr_dir, ExpanderDir.OUTPUT
+                )
+            if (
+                self.__robohat.get_assemblyboard_is_connected(PwmPlug.PWMPLUG_P4)
+                is True
+            ):
+                self.__robohat.set_servo_io_expander_direction(
+                    PwmPlug.PWMPLUG_P4, pin_nr_dir, ExpanderDir.OUTPUT
+                )
 
         pin_high_nr = 4
         for loop_counter in range(3):
+            for led_counter in range(4, 7):
+                for pin_nr in range(4, 7):
+                    if (
+                        self.__robohat.get_assemblyboard_is_connected(
+                            PwmPlug.PWMPLUG_P3
+                        )
+                        is True
+                    ):
+                        self.__robohat.set_servo_io_expander_output(
+                            PwmPlug.PWMPLUG_P3, pin_nr, ExpanderStatus.LOW
+                        )
+                    if (
+                        self.__robohat.get_assemblyboard_is_connected(
+                            PwmPlug.PWMPLUG_P4
+                        )
+                        is True
+                    ):
+                        self.__robohat.set_servo_io_expander_output(
+                            PwmPlug.PWMPLUG_P4, pin_nr, ExpanderStatus.LOW
+                        )
 
-            for led_counter in range(4,7):
-                for pin_nr in range(4,7):
-                    if self.__robohat.get_assemblyboard_is_connected(PwmPlug.PWMPLUG_P3) is True:
-                        self.__robohat.set_servo_io_expander_output(PwmPlug.PWMPLUG_P3, pin_nr, ExpanderStatus.LOW)
-                    if self.__robohat.get_assemblyboard_is_connected(PwmPlug.PWMPLUG_P4) is True:
-                        self.__robohat.set_servo_io_expander_output(PwmPlug.PWMPLUG_P4, pin_nr, ExpanderStatus.LOW)
-
-                if self.__robohat.get_assemblyboard_is_connected(PwmPlug.PWMPLUG_P3) is True:
-                    self.__robohat.set_servo_io_expander_output(PwmPlug.PWMPLUG_P3, pin_high_nr, ExpanderStatus.HIGH)
-                if self.__robohat.get_assemblyboard_is_connected(PwmPlug.PWMPLUG_P4) is True:
-                    self.__robohat.set_servo_io_expander_output(PwmPlug.PWMPLUG_P4, pin_high_nr, ExpanderStatus.HIGH)
+                if (
+                    self.__robohat.get_assemblyboard_is_connected(PwmPlug.PWMPLUG_P3)
+                    is True
+                ):
+                    self.__robohat.set_servo_io_expander_output(
+                        PwmPlug.PWMPLUG_P3, pin_high_nr, ExpanderStatus.HIGH
+                    )
+                if (
+                    self.__robohat.get_assemblyboard_is_connected(PwmPlug.PWMPLUG_P4)
+                    is True
+                ):
+                    self.__robohat.set_servo_io_expander_output(
+                        PwmPlug.PWMPLUG_P4, pin_high_nr, ExpanderStatus.HIGH
+                    )
 
                 pin_high_nr = pin_high_nr + 1
                 if pin_high_nr >= 7:
                     pin_high_nr = 4
 
-                if self.__robohat.get_assemblyboard_is_connected(PwmPlug.PWMPLUG_P3) is True:
-                    print("Plug P3: --> " + str(loop_counter) + " LED GP:" + str(led_counter) )
-                if self.__robohat.get_assemblyboard_is_connected(PwmPlug.PWMPLUG_P4) is True:
-                    print("Plug P4: --> " + str(loop_counter) + " LED GP:" + str(led_counter) )
+                if (
+                    self.__robohat.get_assemblyboard_is_connected(PwmPlug.PWMPLUG_P3)
+                    is True
+                ):
+                    print(
+                        "Plug P3: --> "
+                        + str(loop_counter)
+                        + " LED GP:"
+                        + str(led_counter)
+                    )
+                if (
+                    self.__robohat.get_assemblyboard_is_connected(PwmPlug.PWMPLUG_P4)
+                    is True
+                ):
+                    print(
+                        "Plug P4: --> "
+                        + str(loop_counter)
+                        + " LED GP:"
+                        + str(led_counter)
+                    )
                 time.sleep(1)
 
-        for pin_nr in range(4,7):
-            if self.__robohat.get_assemblyboard_is_connected(PwmPlug.PWMPLUG_P3) is True:
-                self.__robohat.set_servo_io_expander_output(PwmPlug.PWMPLUG_P3, pin_nr, ExpanderStatus.LOW)
-            if self.__robohat.get_assemblyboard_is_connected(PwmPlug.PWMPLUG_P4) is True:
-                self.__robohat.set_servo_io_expander_output(PwmPlug.PWMPLUG_P4, pin_nr, ExpanderStatus.LOW)
+        for pin_nr in range(4, 7):
+            if (
+                self.__robohat.get_assemblyboard_is_connected(PwmPlug.PWMPLUG_P3)
+                is True
+            ):
+                self.__robohat.set_servo_io_expander_output(
+                    PwmPlug.PWMPLUG_P3, pin_nr, ExpanderStatus.LOW
+                )
+            if (
+                self.__robohat.get_assemblyboard_is_connected(PwmPlug.PWMPLUG_P4)
+                is True
+            ):
+                self.__robohat.set_servo_io_expander_output(
+                    PwmPlug.PWMPLUG_P4, pin_nr, ExpanderStatus.LOW
+                )
 
         print("Ready assembly boards OUTPUT test")
 
@@ -408,6 +520,7 @@ class SerTestClass:
         # --------------------------------------------------------------------------------------
         # --------------------------------------------------------------------------------------
 
+
 def main():
     """!
     Start of our servo test program
@@ -419,7 +532,7 @@ def main():
         ser_test.start()  # starts the example
 
     except KeyboardInterrupt:  # catch 'CTR-C to get a graceful exit'
-        print('Interrupted')
+        print("Interrupted")
         try:
             sys.exit(130)
         except SystemExit:
@@ -433,4 +546,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-

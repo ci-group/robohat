@@ -14,9 +14,11 @@ try:
     from robohatlib.hal.assemblyboard.ServoAssemblyConfig import ServoAssemblyConfig
     from robohatlib import RobohatConfig
     from robohatlib.helpers.RoboUtil import RoboUtil
-    from robohatlib.PwmPlug import PwmPlug
+    from robohatlib.hal.assemblyboard.PwmPlug import PwmPlug
     from robohatlib.driver_ll.IOHandler import IOHandler
-    from robohatlib.driver_ll.definitions.InterruptCallbackHolder import InterruptCallbackHolder
+    from robohatlib.driver_ll.definitions.InterruptCallbackHolder import (
+        InterruptCallbackHolder,
+    )
     from robohatlib.driver_ll.constants.InterruptTypes import InterruptTypes
     from robohatlib.hal.datastructure.ExpanderDirection import ExpanderDir
     from robohatlib.hal.datastructure.ExpanderStatus import ExpanderStatus
@@ -31,13 +33,18 @@ except ImportError:
     raise
 
 
-
 BASE_ADDRESS_MCP23008 = 0x20
 BASE_ADDRESS_PCA9685 = 0x40
 
-class ServoAssembly:
 
-    def __init__(self, _io_handler: IOHandler, _servo_config: ServoAssemblyConfig, _i2c_bus_nr: int, _spi_bus_nr: int):
+class ServoAssembly:
+    def __init__(
+        self,
+        _io_handler: IOHandler,
+        _servo_config: ServoAssemblyConfig,
+        _i2c_bus_nr: int,
+        _spi_bus_nr: int,
+    ):
         """!
         @param _io_handler the IO handler, connection to all the IO
         @param _servo_config configuration of this ServoAssembly
@@ -49,32 +56,58 @@ class ServoAssembly:
 
         self.__servo_config = _servo_config
 
-        #----------------------------
-        i2c_def_pwm = I2CDeviceDef("pwm_" + _servo_config.get_name(), _i2c_bus_nr, BASE_ADDRESS_PCA9685, _servo_config.get_sw1_pwm_address())
-        if _io_handler.is_i2c_device_detected(i2c_def_pwm) is True:                     # check if the PWM controllers is present on the I2C bus, if not, no assemblyboard
+        # ----------------------------
+        i2c_def_pwm = I2CDeviceDef(
+            "pwm_" + _servo_config.get_name(),
+            _i2c_bus_nr,
+            BASE_ADDRESS_PCA9685,
+            _servo_config.get_sw1_pwm_address(),
+        )
+        if (
+            _io_handler.is_i2c_device_detected(i2c_def_pwm) is True
+        ):  # check if the PWM controllers is present on the I2C bus, if not, no assemblyboard
             print("Found: " + _servo_config.get_name())
             i2c_device_pwm = _io_handler.get_i2c_device(i2c_def_pwm)
 
-            spi_cs:int = RoboUtil.get_pwm_cs_by_pwmplug(_servo_config.get_cs_adc_angle_readout())
+            spi_cs: int = RoboUtil.get_pwm_cs_by_pwmplug(
+                _servo_config.get_cs_adc_angle_readout()
+            )
 
-            spi_def_adc = SPIDeviceDef("adc_" + _servo_config.get_name(), _spi_bus_nr, spi_cs)
+            spi_def_adc = SPIDeviceDef(
+                "adc_" + _servo_config.get_name(), _spi_bus_nr, spi_cs
+            )
             spi_device_adc = _io_handler.get_spi_device(spi_def_adc)
 
             if i2c_device_pwm is not None and spi_device_adc is not None:
-                self.__servo_board = ServoBoard("servoboard_" + _servo_config.get_name(), i2c_device_pwm, spi_device_adc)
+                self.__servo_board = ServoBoard(
+                    "servoboard_" + _servo_config.get_name(),
+                    i2c_device_pwm,
+                    spi_device_adc,
+                )
 
                 servo_assembly_expander_def = RobohatConfig.SERVOASSEMBLY_EXPANDER_DEF
-                callbackholder = InterruptCallbackHolder("expander_callback_holder", self.__io_power_monitor_and_io_int_callback, self.__io_power_monitor_and_io_int_reset_routine, InterruptTypes.INT_FALLING, 250)
+                callbackholder = InterruptCallbackHolder(
+                    "expander_callback_holder",
+                    self.__io_power_monitor_and_io_int_callback,
+                    self.__io_power_monitor_and_io_int_reset_routine,
+                    InterruptTypes.INT_FALLING,
+                    250,
+                )
                 servo_assembly_expander_def.set_callbackholder(callbackholder)
 
-                self.__power_monitor_and_io = PowerMonitorAndIO(_io_handler, servo_assembly_expander_def, _servo_config.get_sw2_power_good_address(), _servo_config.get_name())
+                self.__power_monitor_and_io = PowerMonitorAndIO(
+                    _io_handler,
+                    servo_assembly_expander_def,
+                    _servo_config.get_sw2_power_good_address(),
+                    _servo_config.get_name(),
+                )
             else:
                 self.__servo_board = None
         else:
             self.__servo_board = None
 
-    #--------------------------------------------------------------------------------------
-    #--------------------------------------------------------------------------------------
+    # --------------------------------------------------------------------------------------
+    # --------------------------------------------------------------------------------------
 
     def is_board_avaible(self) -> bool:
         """!
@@ -85,8 +118,8 @@ class ServoAssembly:
             return False
         return True
 
-    #--------------------------------------------------------------------------------------
-    #--------------------------------------------------------------------------------------
+    # --------------------------------------------------------------------------------------
+    # --------------------------------------------------------------------------------------
 
     def init_servo_assembly(self, _servo_datas_list: []) -> None:
         """!
@@ -98,12 +131,14 @@ class ServoAssembly:
         if self.__power_monitor_and_io is not None:
             self.__power_monitor_and_io.init_io_expander()
 
-        if  self.__servo_board is not None:
+        if self.__servo_board is not None:
             self.__servo_board.init_servo_board(_servo_datas_list)
 
-    #--------------------------------------------------------------------------------------
+    # --------------------------------------------------------------------------------------
 
-    def servo_set_new_readout_vs_angle_formula(self, _servo_nr, _formula_a, _formula_b) -> None:
+    def servo_set_new_readout_vs_angle_formula(
+        self, _servo_nr, _formula_a, _formula_b
+    ) -> None:
         """!
         Set new formula parameters for voltage angle conversion
         @param _servo_nr: wanted servo nr
@@ -113,9 +148,11 @@ class ServoAssembly:
         """
 
         if self.__servo_board is not None:
-            self.__servo_board.set_new_readout_vs_angle_formula(_servo_nr, _formula_a, _formula_b)
+            self.__servo_board.set_new_readout_vs_angle_formula(
+                _servo_nr, _formula_a, _formula_b
+            )
 
-    #--------------------------------------------------------------------------------------
+    # --------------------------------------------------------------------------------------
 
     def exit_program(self) -> None:
         """!
@@ -125,11 +162,12 @@ class ServoAssembly:
         if self.__power_monitor_and_io is not None:
             self.__power_monitor_and_io.exit_program()
 
-        if  self.__servo_board is not None:
+        if self.__servo_board is not None:
             self.__servo_board.exit_program()
-    #--------------------------------------------------------------------------------------
 
-    def set_servo_direct_mode(self, _mode:bool, _delay:float = 0.0001) -> None:
+    # --------------------------------------------------------------------------------------
+
+    def set_servo_direct_mode(self, _mode: bool, _delay: float = 0.0001) -> None:
         """!
         Sets if the servos are periodically updated, or direct
         @param _mode: True, direct mode activated
@@ -138,16 +176,17 @@ class ServoAssembly:
         """
         self.__servo_board.set_servo_direct_mode(_mode, _delay)
 
-    #--------------------------------------------------------------------------------------
+    # --------------------------------------------------------------------------------------
 
     def get_servo_is_direct_mode(self) -> bool:
         """!
         @return: if servo is NOT updated periodically
         """
         return self.__servo_board.get_servo_is_direct_mode()
-    #--------------------------------------------------------------------------------------
 
-    def get_servo_us_time(self, _degree:float, _servo_nr:int=0) -> int:
+    # --------------------------------------------------------------------------------------
+
+    def get_servo_us_time(self, _degree: float, _servo_nr: int = 0) -> int:
         """!
         Get calculated time which is used to set the servo to the wanted degree
         @param _degree:
@@ -156,7 +195,7 @@ class ServoAssembly:
 
         return self.__servo_board.get_servo_us_time(_degree, _servo_nr)
 
-    #--------------------------------------------------------------------------------------
+    # --------------------------------------------------------------------------------------
 
     def get_servo_is_single_servo_wanted_angle(self, _servo_nr: int) -> bool:
         """!
@@ -168,8 +207,7 @@ class ServoAssembly:
 
         return self.__servo_board.get_servo_is_single_servo_wanted_angle(_servo_nr)
 
-    #--------------------------------------------------------------------------------------
-
+    # --------------------------------------------------------------------------------------
 
     def set_servo_single_angle(self, _servo_nr: int, _angle: float) -> None:
         """!
@@ -289,10 +327,11 @@ class ServoAssembly:
 
     def get_name(self) -> str:
         return self.__servo_config.get_name()
+
     # --------------------------------------------------------------------------------------
 
     def get_sw1_pwm_address(self) -> int:
-        return  self.__servo_config.get_sw1_pwm_address()
+        return self.__servo_config.get_sw1_pwm_address()
 
     # --------------------------------------------------------------------------------------
 
@@ -316,7 +355,9 @@ class ServoAssembly:
             self.__power_monitor_and_io.add_signaling_device(_signaling_device)
 
     # --------------------------------------------------------------------------------------
-    def set_servo_io_expander_direction(self, _io_nr: int, _direction: ExpanderDir) -> IOStatus:
+    def set_servo_io_expander_direction(
+        self, _io_nr: int, _direction: ExpanderDir
+    ) -> IOStatus:
         """!
         Set the direction of the IO pin
 
@@ -326,9 +367,12 @@ class ServoAssembly:
         """
 
         if self.__power_monitor_and_io is not None:
-            return self.__power_monitor_and_io.set_io_expander_direction(_io_nr, _direction)
+            return self.__power_monitor_and_io.set_io_expander_direction(
+                _io_nr, _direction
+            )
         else:
             return IOStatus.IO_FAILED
+
     # --------------------------------------------------------------------------------------
 
     def get_servo_io_expander_direction(self, _io_nr: int) -> ExpanderDir:
@@ -342,9 +386,12 @@ class ServoAssembly:
             return self.__power_monitor_and_io.get_io_expander_direction(_io_nr)
         else:
             return ExpanderDir.INVALID
+
     # --------------------------------------------------------------------------------------
 
-    def set_servo_io_expander_output(self, _io_nr: int, _value: ExpanderStatus) -> IOStatus:
+    def set_servo_io_expander_output(
+        self, _io_nr: int, _value: ExpanderStatus
+    ) -> IOStatus:
         """!
         Set the output onto the desired value
         @param _io_nr: wanted io nr
@@ -364,7 +411,7 @@ class ServoAssembly:
         else:
             return ExpanderStatus.INVALID
 
-# --------------------------------------------------------------------------------------
+    # --------------------------------------------------------------------------------------
 
     def set_io_expander_int_callback_function(self, _callback) -> None:
         """!
@@ -374,8 +421,8 @@ class ServoAssembly:
         if self.__power_monitor_and_io is not None:
             self.__power_monitor_and_io.set_io_expander_int_callback_function(_callback)
 
-    #--------------------------------------------------------------------------------------
-    #--------------------------------------------------------------------------------------
+    # --------------------------------------------------------------------------------------
+    # --------------------------------------------------------------------------------------
 
     def __io_power_monitor_and_io_int_callback(self, _gpio: int) -> None:
         """!
@@ -384,9 +431,9 @@ class ServoAssembly:
         @return: None
         """
         if self.__power_monitor_and_io is not None:
-           self.__power_monitor_and_io.power_monitor_and_io_int_callback(_gpio)
+            self.__power_monitor_and_io.power_monitor_and_io_int_callback(_gpio)
 
-    #--------------------------------------------------------------------------------------
+    # --------------------------------------------------------------------------------------
 
     def __io_power_monitor_and_io_int_reset_routine(self, _gpio: int) -> None:
         """!
@@ -395,4 +442,4 @@ class ServoAssembly:
         @return: None
         """
         if self.__power_monitor_and_io is not None:
-           self.__power_monitor_and_io.power_monitor_and_io_int_reset_routine(_gpio)
+            self.__power_monitor_and_io.power_monitor_and_io_int_reset_routine(_gpio)
