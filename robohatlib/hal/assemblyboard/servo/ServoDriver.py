@@ -132,7 +132,11 @@ class ServoDriver:
                 self.__servoboard.update_servo_data(self.__current_servo_positions)
                 time.sleep(self.__delay_between_actions)                # wait (1 mS)
             else:                                                       # direct mode
-                time.sleep(1)                                           # wait 1 S
+                for servo_nr in range(0, 16):
+                    self.__current_servo_positions[servo_nr] = self.__preset_servo_positions[servo_nr]
+
+                self.__servoboard.update_servo_data(self.__current_servo_positions)
+                time.sleep(self.__delay_between_actions)  # wait (1 mS)
 
     # --------------------------------------------------------------------------------------
     # --------------------------------------------------------------------------------------
@@ -148,9 +152,9 @@ class ServoDriver:
 
         self.__preset_servo_positions[_servo_index] = _wanted_angle
 
-        if self.__direct_mode is True:      # if direct_mode is false, timed update
-            self.__current_servo_positions[_servo_index] = self.__preset_servo_positions[_servo_index]
-            self.__servoboard.update_servo_data(self.__preset_servo_positions)
+        #if self.__direct_mode is True:      # if direct_mode is false, timed update
+        #    self.__current_servo_positions[_servo_index] = self.__preset_servo_positions[_servo_index]
+        #    self.__servoboard.update_servo_data(self.__preset_servo_positions)
 
     # --------------------------------------------------------------------------------------
     # --------------------------------------------------------------------------------------
@@ -168,7 +172,6 @@ class ServoDriver:
         if self.__direct_mode is True:       # if direct_mode is false, timed update
             for servo_index in range(0, len(_wanted_angles_list)):
                 self.__current_servo_positions [servo_index] = self.__preset_servo_positions[servo_index]
-
             self.__servoboard.update_servo_data(self.__preset_servo_positions)
 
 
