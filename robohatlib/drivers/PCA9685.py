@@ -240,7 +240,7 @@ class PCA9685:
         """!
          @return None
         """
-        self.__write(0x00, 0x00)
+        self.__write(MODE1_ADDRESS, 0x00)
 
     # --------------------------------------------------------------------------------------
     def __write(self, reg, value) -> None:
