@@ -1,0 +1,6 @@
+shutdown_hook.run is an installers which installs a service, which turns of the power when issuing the shutdown command.
+
+Copy the shutdown_hook.run to a known directory
+
+Make the installer executable by  'sudo chmod _x shutdown_hook.run'
+start the installer by 'sudo ./shutdown_hook.run'
