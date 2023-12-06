@@ -7,8 +7,8 @@ if test "n" = n; then
     umask 077
 fi
 
-CRCsum="2340435969"
-MD5="050c62d0bfd1104fb338600c5f416339"
+CRCsum="3617113172"
+MD5="021b4c3eb5cb281104fb53a063648947"
 SHA="0000000000000000000000000000000000000000000000000000000000000000"
 SIGNATURE=""
 TMPROOT=${TMPDIR:=/tmp}
@@ -17,23 +17,23 @@ export USER_PWD
 ARCHIVE_DIR=`dirname "$0"`
 export ARCHIVE_DIR
 
-label="Install shutdown hook to powerdown the Robohat"
+label="Robohat installer"
 script="./install.sh"
 scriptargs=""
 cleanup_script=""
 licensetxt=""
 helpheader=""
 targetdir="tmp"
-filesizes="962"
-totalsize="962"
-keep="y"
+filesizes="2284"
+totalsize="2284"
+keep="n"
 nooverwrite="n"
 quiet="n"
 accept="n"
 nodiskspace="n"
 export_conf="n"
 decrypt_cmd=""
-skip="715"
+skip="714"
 
 print_cmd_arg=""
 if type printf > /dev/null; then
@@ -376,13 +376,12 @@ do
 	if test x"n" != x""; then
 	    echo Encryption: n
 	fi
-	echo Date of packaging: Wed Aug 16 00:28:29 BST 2023
+	echo Date of packaging: Wed Aug 16 11:28:37 BST 2023
 	echo Built with Makeself version 2.5.0
 	echo Build command was: "makeself-2.5.0/makeself.sh \\
-    \"--notemp\" \\
-    \"tmp/\" \\
-    \"./shutdown_hook.run\" \\
-    \"Install shutdown hook to powerdown the Robohat\" \\
+    \"tmp\" \\
+    \"robo_install.run\" \\
+    \"Robohat installer\" \\
     \"./install.sh\""
 	if test x"$script" != x; then
 	    echo Script run after extraction:
@@ -394,7 +393,7 @@ do
 	if test x"n" = xy; then
 		echo "Root permissions required for extraction"
 	fi
-	if test x"y" = xy; then
+	if test x"n" = xy; then
 	    echo "directory $targetdir is permanent"
 	else
 	    echo "$targetdir will be removed after extraction"
@@ -407,7 +406,7 @@ do
 	echo SCRIPTARGS=\"$scriptargs\"
     echo CLEANUPSCRIPT=\"$cleanup_script\"
 	echo archdirname=\"tmp\"
-	echo KEEP=y
+	echo KEEP=n
 	echo NOOVERWRITE=n
 	echo COMPRESS=gzip
 	echo filesizes=\"$filesizes\"
@@ -713,8 +712,14 @@ if test x"$keep" = xn; then
     rm -rf "$tmpdir"
 fi
 eval $finish; exit $res
-‹ 
-ÜdíX]oÛ6õ3Åíj{«eÉ–­ƒÖ´K,ˆÑ´ÈC²tmq•H¤ê¸Ø)YíÅ	0 †ñ -êø~—‡¤½!eRÅyîÉ¬óDğ5¢(2mM|»5FÁ¨„á4òı0Š‚ŒGÁ´~ç¨töB‡"ø‚?Ä{ìı6™ïí/”±ÌÁ$ãĞ=å”­`[ ³J¥|Í ãüK—º„gp/{4…AÕ‡øpó3¨ÆÆ<ÇX"ˆŠµ†PÀšªd•ònÃ¼¥
-‚¹Dë—'¼4îbŠ),i‡a%ä0çIœ›xÆ_¡äk|¹ôÊæIqÇÛ¡µ™èJß§YşÏã/¸u‹·˜T*^ähùK²‚§ğãí‰¡Äãd+²›û$Š¯4A“tû5¥¢{ •-cˆ*ÊTX¤ÛÖ6|©k\™9jMZæv¢rHc,8ÌyœŞG@fãïŞÆ×–?‰fæ±*W¢€Xj&<Ù+×ºvæıçğê$)xYRÒqøàÙ…û„ú?ÃƒúúÓZÿ§ÑÔŸD¡Ñÿp:ı?’şiªl£2ÎÆ„¼€b)aÉ¾ÅåkˆYªµc«!í– •2ºÊjæD¿O8K¥Ş#Š’k½ù0§Şéüìb	¦%KÁP´@Ø2d®µt¡}p-[‹êÛ·ÏÆô‚Ÿ˜~Îõ§é™•@dVÏ”,ò
-­Ñ”6Ä¶+"„˜´d©u,Œ4ÉŞ¯±ŞzúßûµTc¯~xsrŞ¿ãWe¯éu‡wñéãî{+F›b1v¢>À±ó8äÉNl‡cBÔ™Ö=ó«s+d=…ş–à™bW=ıX?d1[áÛJmN6I½‰áÕsÒó½à ©ı±T¼ìµÁñJ••ºgŞŸ¾ïïpî‰ß.®vI÷EÍÙ!İ3»&…Iÿ1vcRãÿ¬ÿû»ùÑõß…Q«ÿÁx¢ï	æaäôÿ¸şÄ¨º!oQ&‚–Šr6k‚ëË¦$nÈÇM‰3ÎPf\‘XÄ”ı²T(Şé3üL‰
-É;}X®™³z3±úx9{èø{}Ö\nÈUÌ¦o6³¢ÊTº =mq…Ê±şŸê€G×ÿØ¬ÿÉxäOÇ“QTŸÿ‚È­ÿ#Şÿ÷oÿæò¹­‹öÎwÌ©TƒßùBÂŸ€z;/ağt.8WÛëıPŸ4ºÖûgÍ‡.ÑúJHÜºwpppppppppppppppppppø§ø“3Â (  
+‹ Õ¤ÜdíXmoÛ8îgıŠÙf±±ïbÙ’ßrw0©mlĞ iÚ‚À $ÚâFµ$ÇÅşø›¡¤XNÜöîCs8¬	$²ÈáÌ3Ã™áŒÜn(³…XºæÁ¼úN£‡c4ĞÓ{Í'!¾¾òƒÑØóÆı!Òy}ß¾‚Ş«…6L!%ù5ºo­WÊ<>ÿOÆü"¤Rq¹2ÓÀ²D¶*e4šsç bcòv»*_¸BVNƒ>ƒ+W2åHdŒÈ–R¶‘æ,4ñ{rXYHŒX"ÌÚ…+Î!Ù°@Şã*Š¸a"Ñ2CZ™¦<3 °–,¹LB.BSÈŞÍÎÏì6†¬H¼ÖlÁ_£B£TÌibâms41‰K¹B¤`$°èw<~@J‡,sáZsÈ¥F ²¬H\  ¨®–	™a)¹¹X€çÙ‘µVÆ—ÌnAR‚0…FşÒ"Œ!*âÊ9¨ÅÌ¾0oÔ˜Qb?™22ß¤12¥¹m¥$ÙÍÌj” ÅgîÂ›õ£y„•H8DBç	[jK©È
+üMà,KyP,\ÍW"2ñÄó{Ûó1·€Ç~ïÙ™‘õk)d†L’#Yc!­5±5RÀé(daòÂT'gµ™ÇÒäI±|v„muÎC±aétôĞ21ò´ª–Tß´+¶K%´hõFä_á½a©(*Ë`öñÌ…$-…~‡¤E$$¬¤ºÃAn³óĞ"Ã)¬2a¤j[Vº)ô”‰ÿL¶ÈĞ£˜¦ã[b¬ĞÁ8ª!fä`òÅàYÈ HXv‡<‰şEaRŞ9(tn%Rj3lK¤ ÚÅÅÉ¯ÎÌ}iB·ü#Ldxgƒˆ©Ô…q¯çï>[WÇ¹Ê×Ğpu¾PüÉqÏºÇõ##M™‚HÚPAu‘;ÏX€~KlÊ$„êÇLE+¦j•YˆŒLÎĞ'Âç(e"Ñä›9Mïõ«Î½nm¹íT‘u˜L{
+eZ'M‹L„6º$…,€–,s!;BÑs‹lâw,wÌCƒâ˜„D‘¨t«ˆËTkña€`¦!u#AtñàL·&î^ÌÎO‰Õi‰¶t¾V"Y„áœEó Lıãş°ı¨µ¥¨”>)0} >!Z´iƒ£JÂe†G1í”Ï9Ã}ór±Œ˜ÿ˜Ñìê¬vH<»òÇsv•2³Ësø8ÀÇşlˆ(gcÕûpĞ¹Kuç¾9){˜7r‘.Cé²Èğô`4è˜íìE@~8àk)g&´DNÏ3]Şmo‡‰3!&úy=A\nÂtp»Ác\•iY‘÷úXÂ@PˆÄtÌoï¦gp}õ†³Qxñp…®Tf¼1ÒcY$¥eÅS”U$x¡„k˜}šúÍjW…@E>-î.]«É¨.[BÓ¦CN4­‹<—ÊÔ™¸Şî:Ò,³àä­SÆÀ¼`Š,¶1~eˆN`2Ö dn†ÇÍĞ ô*µÁÚÅÛ—"\®´=‚2û<Jid€ş‰	–O¶frBq¹Ctzr|DÔ6tÄ&½Æk˜4½HCíĞ¥Í½Í#k2éùôÂï÷zÇğöâì=´zş¸mãOf6'™•„‹éÉ?FÇCZıùç.ıkÃÅ§óÊµ»Ï;ÂàÖsŞß	`øÀÙùuÉ¸k1üæy£ŞNfSZëÚÛ"†¥ÏŸ{»…Œá˜H(ÅœùÓMæ||T÷ç~ßyµåávÑF¦«ãïÙÿ‡Ã/õŞx4ÄşoØxı±íÿ|ßÿ½Hÿ÷C7Y7`:vÆÏJ‡Àû†²JÆyD	FPŞ©ÓÌ%#f˜úTæbç‘pF÷¯İxè8xùü 7ğcKDĞ)Ú0Üş‹¶fà(]$¶ŞUÅãVdf/a]Dò°¤|ÀëÜsx¢ùÖNRãP¢Â<'¡[(İÅ
+•%¤Ğáâ\®¸ÂÖÍÍ×å2Iô¾¹€l´Ú°ÙÁEÇ…‰ä*ÃxÙæÒXxÊ¥Áæœº†6àaa(¡7…1^Êğ÷‡',ºŒnMäö†_ıw\˜\›šìàÚ œJ¼!çÊÖ xõÏH(èrvõZFÕóK–«víØÑ”úVVı;…nÙÖW;|Ëm¡I bX\eÅ©TİEPÿÏ`t:¨º³ÃFÅ
+Ê‹ªÎ²Pß|HkZ>‡Íü3Âs4&±/ò£² ´jò4'3b½,Uå¸*…Z >xıc+_aŒ]´_ÃO?Aë:;BŒ“`¸¼‡ÎB8[ù¿áCÿ›ïŞ 7²ßÿFãQo8¶ßÿş`Ÿÿ_(ÿSJ°)fmb™Ù:3à</³½‡]~zU~æÒ¼
+¶*P ËHˆÅ2¶”C\GÏ4¦ÿÔöèn®­¶±C §³P2#R…NPPM®P†Ä@ŠÏŸ©oÆ[ƒ:gìVæ	ş•3CgIßİ3#'H
+Ş˜ğGSC¬§ÆãŒmƒ
+…™nıÂğVi?ÎS7Ô²/o¦çí}‘·jHGV÷ıõ‡íõÆ&Iƒbõhšz|IRS±-‚ˆšÚìYñ{k3f_íÛ4fÙ’Ï
+³®ñ
+o‰ÎI«çz_ ª7k#óV®ü‚·ÃïÎŞ¾koÑì²Ä¯ï?mí0…¥Ù"Úa‹R\©Â°ı-ê’%¿rıÿôÚ{ñüßóã:ÿ{ı!Õÿø²¯ÿ_dÜ\gÂÜ:3®C%ì·×IíssUºÄ­óaó‰Ì¸¥q.yÊDvBµÿ)–ç£
+îœb…xEÙeb/“ÆœÌ'_);›ªß¸u>1úìùf=I‹ÄˆNé"Ç%7û¯/ÿßëÀ7ã¿?¶ı¿ßõ‡¾íÿŞxÿ/ØÿoºÿMsUùEİÎoú¥DhÓù]ş×y?à°ì1ª€uÿf+ÃFÏOãi­ùµ.ûg÷û±û±û±ßcü‹‡Ì (  
