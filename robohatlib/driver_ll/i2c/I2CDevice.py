@@ -7,6 +7,7 @@ A. Denker (a.denker@vu.nl)
 
 try:
     from robohatlib.driver_ll.i2c.I2CHandler import I2CHandler
+    import time
 except ImportError:
     print("Failed to import I2CDevice")
     raise
@@ -116,6 +117,7 @@ class I2CDevice:
             finally:
                 self.__i2c_handler.unlock()
 
+
     # --------------------------------------------------------------------------------------
     # --------------------------------------------------------------------------------------
     # --------------------------------------------------------------------------------------
@@ -123,7 +125,7 @@ class I2CDevice:
     def get_device_name(self) -> str:
         """!
         Get device_name
-        :return: str
+        @return: str
         """
         return self.__device_name
 

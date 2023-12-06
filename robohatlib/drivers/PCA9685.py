@@ -82,7 +82,7 @@ class PCA9685:
         self.sleep()
 
         if _should_be_time is not None:
-            self.set_on_time_all_channels(_should_be_time)
+            self.set_on_time_all_channels(_should_be_time, False)
 
         self.wake()
     # --------------------------------------------------------------------------------------
@@ -93,7 +93,7 @@ class PCA9685:
         @return: None
         """
 
-        if self.__i_am_a_sleep is True:
+        if self.is_sleeping() is True:
             print("Can't set new servo value. Servos are sleeping")
         else:
             if _channel >= 0 and _channel < 16:
@@ -118,13 +118,14 @@ class PCA9685:
             else:
                 print("Error: channel " + str(_channel) + " in PWM PCA9685 not available")
     # --------------------------------------------------------------------------------------
-    def set_on_time_all_channels(self, _wanted_times_us: []) -> None:
+    def set_on_time_all_channels(self, _wanted_times_us: [], _warn_if_sleeping: bool = True) -> None:
         """!
+        @param _warn_if_sleeping: warns if set to true, if servos are sleeping
         @param _wanted_times_us: a list of 16, with the times
         @return: None
         """
 
-        if self.__i_am_a_sleep is True:
+        if self.is_sleeping() and _warn_if_sleeping is True:
             print("Can't set new servo value. Servos are sleeping")
         else:
             if _wanted_times_us is not None:
@@ -185,6 +186,8 @@ class PCA9685:
         #     return True
         # else:
         #     return False
+        #
+        #
         return self.__i_am_a_sleep
 
     #--------------------------------------------------------------------------------------
@@ -264,6 +267,5 @@ class PCA9685:
         return return_value_array[0]
 
     # --------------------------------------------------------------------------------------
-
 
 

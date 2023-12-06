@@ -7,6 +7,8 @@ A. Denker (a.denker@vu.nl)
 
 try:
     import threading
+    import time
+
 except ImportError:
     threading = None
 
@@ -138,6 +140,7 @@ class I2CHandler:
         Release lock
         @return: None
         """
+        time.sleep(0.01)
 
         if self._locked:
             self._locked = False

@@ -32,6 +32,7 @@ class ServoDriver:
         self.__servoboard = _servoboard
 
         self.__running = False
+        self.__i_am_a_sleep = False
         self.__direct_mode = True
         self.__delay_between_actions = 0.001
         self.__preset_servo_positions = [90.0] * 16
@@ -121,7 +122,9 @@ class ServoDriver:
         """
 
         while self.__running is True:
-            if self.__direct_mode is False:
+            if self.__i_am_a_sleep is True:
+                time.sleep(0.1)  # wait (100 mS)
+            elif self.__direct_mode is False:
                 for servo_nr in range(0, 16):
                     diff = self.__preset_servo_positions[servo_nr] - self.__current_servo_positions[servo_nr]
                     if diff < 0:
@@ -138,6 +141,23 @@ class ServoDriver:
 
                 self.__servoboard.update_servo_data(self.__current_servo_positions)
                 time.sleep(self.__delay_between_actions)  # wait (1 mS)
+
+
+    def sleep(self) -> None:
+        """!
+        Put the device into a sleep state
+        @return: None
+        """
+        self.__i_am_a_sleep = True
+
+    #--------------------------------------------------------------------------------------
+
+    def wake(self) -> None:
+        """!
+        Wakes up device
+        @return: None
+        """
+        self.__i_am_a_sleep = False
 
     # --------------------------------------------------------------------------------------
     # --------------------------------------------------------------------------------------
@@ -175,7 +195,6 @@ class ServoDriver:
             for servo_index in range(0, len(_wanted_angles_list)):
                 self.__current_servo_positions [servo_index] = self.__preset_servo_positions[servo_index]
             self.__servoboard.update_servo_data(self.__preset_servo_positions)
-
 
     # --------------------------------------------------------------------------------------
     # --------------------------------------------------------------------------------------
