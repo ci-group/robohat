@@ -1,6 +1,9 @@
-shutdown_hook.run is an installers which installs a service, which turns of the power when issuing the shutdown command.
+robo_install.run is an installer which installs a needed service and alters the boot config file.
 
-Copy the shutdown_hook.run to a known directory
+The service will turn off the power when issuing the bash 'shutdown' command.
+The altered config file will enable the needed I2C busses
 
-Make the installer executable by  'sudo chmod _x shutdown_hook.run'
-start the installer by 'sudo ./shutdown_hook.run'
+Copy the robo_install.run to a known directory
+
+Make the installer executable by  'sudo chmod _x robo_install.run'
+start the installer by 'sudo ./robo_install.run'
