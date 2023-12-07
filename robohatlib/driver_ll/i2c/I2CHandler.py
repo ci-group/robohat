@@ -7,7 +7,7 @@ A. Denker (a.denker@vu.nl)
 
 try:
     import threading
-    import time
+    import asyncio
 
 except ImportError:
     threading = None
@@ -30,8 +30,9 @@ class I2CHandler:
         """
 
         self._i2c_bus = SMBUS(_bus_nr)
-        self._locked = False
         self._lock = threading.RLock()
+
+        self._sw_lock = False
 
     # --------------------------------------------------------------------------------------
     # --------------------------------------------------------------------------------------
@@ -119,17 +120,16 @@ class I2CHandler:
     # --------------------------------------------------------------------------------------
     # --------------------------------------------------------------------------------------
 
-    def try_lock(self) -> bool:
+    async def wait_until_unlocked(self) -> bool:
         """!
-        Acquire lock and return FALSE if denied
-        @return: status of the LOCK
+        Wait until unlocked, and will acquire new lock
+        @return: status of the LOCK.
         """
 
-        if self._locked:
-            return False
-        else:
-            self._locked = True
-            return True
+        while self._sw_lock is True:
+            await asyncio.sleep(0.001)
+
+        self._sw_lock = True
 
     # --------------------------------------------------------------------------------------
     # --------------------------------------------------------------------------------------
@@ -140,12 +140,8 @@ class I2CHandler:
         Release lock
         @return: None
         """
-        time.sleep(0.01)
 
-        if self._locked:
-            self._locked = False
-        else:
-            raise ValueError("Not locked")
+        self._sw_lock = False
 
     # --------------------------------------------------------------------------------------
     # --------------------------------------------------------------------------------------

@@ -13,6 +13,7 @@ try:
     from robohatlib.hal.assemblyboard import PowerMonitorAndIO
     from robohatlib.drivers.MCP23008 import MCP23008
     from robohatlib import RobohatConfig
+    import asyncio
 
 except ImportError:
     print("Failed to import dependencies for PowerMonitorHolder")
@@ -52,7 +53,7 @@ class PowerMonitorTimer:
     # --------------------------------------------------------------------------------------
     # --------------------------------------------------------------------------------------
 
-    def task(self):
+    async def task(self):
         """!
         Our running task which is a separate thread
         @return: None
@@ -80,7 +81,7 @@ class PowerMonitorTimer:
                 if diff_time_current_last_error >= RobohatConfig.TIME_WINDOW_OF_SHORT_PROTECTION_RELEASE_SERVO_POWER:
                     self.__task_loop_is_running = False
 
-            time.sleep(0.05)
+            await asyncio.sleep(0.05)
 
     # --------------------------------------------------------------------------------------
     # --------------------------------------------------------------------------------------

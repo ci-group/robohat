@@ -79,7 +79,7 @@ class PCA9685:
 
         self.__set_pwm_freq(SERVO_DEFAULT_PWM_FREQ)
 
-        self.sleep()
+        self.put_to_sleep()
 
         if _should_be_time is not None:
             self.set_on_time_all_channels(_should_be_time, False)
@@ -150,14 +150,14 @@ class PCA9685:
                     self.__i2c_device.i2c_write_bytes(data_to_send)
 
     # --------------------------------------------------------------------------------------
-    def sleep(self) -> None:
+    def put_to_sleep(self) -> None:
         """!
         Put the device into a sleep state
         @return: None
         """
 
         old_mode = self.__read(MODE1_ADDRESS)
-        new_mode = old_mode | (1 << MODE1_SLEEP_BITNR)
+        new_mode = (oldmode & 0x7F) | 0x10   @old_mode | (1 << MODE1_SLEEP_BITNR)
         self.__write(MODE1_ADDRESS, new_mode)
         self.__i_am_a_sleep = True
 
@@ -165,7 +165,7 @@ class PCA9685:
             print("Sleep im PCA9685")
 
     # --------------------------------------------------------------------------------------
-    def wake(self) -> None:
+    def wake_up(self) -> None:
         """!
         Wake the device from its sleep state
         @return: None

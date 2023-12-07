@@ -337,23 +337,23 @@ class ServoBoard:
     #--------------------------------------------------------------------------------------
     #--------------------------------------------------------------------------------------
 
-    def sleep(self) -> None:
+    def put_to_sleep(self) -> None:
         """!
         Put the device into a sleep state
         @return: None
         """
-        self.__servoDriver.sleep()
-        self.__pwm.sleep()
+        self.__servoDriver.put_to_sleep()
+        self.__pwm.put_to_sleep()
 
     #--------------------------------------------------------------------------------------
 
-    def wake(self) -> None:
+    def wake_up(self) -> None:
         """!
         Wakes up device
         @return: None
         """
-        self.__pwm.wake()
-        self.__servoDriver.wake()
+        self.__pwm.wake_up()
+        self.__servoDriver.wake_up()
 
     #--------------------------------------------------------------------------------------
 

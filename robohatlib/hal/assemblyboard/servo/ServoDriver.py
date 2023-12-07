@@ -6,10 +6,10 @@ A. Denker (a.denker@vu.nl)
 """
 
 try:
-    import time
     import threading
     from enum import Enum
     from enum import IntEnum
+    import asyncio
 
 except ImportError:
     print("Failed to import needed dependencies for the ServoDriver class")
@@ -115,7 +115,7 @@ class ServoDriver:
     # --------------------------------------------------------------------------------------
     # --------------------------------------------------------------------------------------
 
-    def run(self):
+    async def run(self):
         """!
         The actual timed update routine
         @return: None
@@ -123,7 +123,7 @@ class ServoDriver:
 
         while self.__running is True:
             if self.__i_am_a_sleep is True:
-                time.sleep(0.1)  # wait (100 mS)
+                await asyncio.sleep(0.1)  # wait (100 mS)
             elif self.__direct_mode is False:
                 for servo_nr in range(0, 16):
                     diff = self.__preset_servo_positions[servo_nr] - self.__current_servo_positions[servo_nr]
@@ -133,17 +133,19 @@ class ServoDriver:
                         self.__current_servo_positions[servo_nr] = self.__current_servo_positions[servo_nr] + 1
 
                 self.__servoboard.update_servo_data(self.__current_servo_positions)
-                time.sleep(self.__delay_between_actions)                # wait (1 mS)
+                await asyncio.sleep(self.__delay_between_actions)                # wait (1 mS)
             else:                                                       # direct mode
                 # update current array with wanted values
                 for servo_nr in range(0, 16):
                     self.__current_servo_positions[servo_nr] = self.__preset_servo_positions[servo_nr]
 
                 self.__servoboard.update_servo_data(self.__current_servo_positions)
-                time.sleep(self.__delay_between_actions)  # wait (1 mS)
+                await asyncio.sleep(self.__delay_between_actions)  # wait (1 mS)
 
 
-    def sleep(self) -> None:
+    #--------------------------------------------------------------------------------------
+
+    def put_to_sleep(self) -> None:
         """!
         Put the device into a sleep state
         @return: None
@@ -152,7 +154,7 @@ class ServoDriver:
 
     #--------------------------------------------------------------------------------------
 
-    def wake(self) -> None:
+    def wake_up(self) -> None:
         """!
         Wakes up device
         @return: None
@@ -194,7 +196,7 @@ class ServoDriver:
         if self.__direct_mode is True:       # if direct_mode is false, timed update
             for servo_index in range(0, len(_wanted_angles_list)):
                 self.__current_servo_positions [servo_index] = self.__preset_servo_positions[servo_index]
-            self.__servoboard.update_servo_data(self.__preset_servo_positions)
+            ##self.__servoboard.update_servo_data(self.__preset_servo_positions)                        # should be updated by thread
 
     # --------------------------------------------------------------------------------------
     # --------------------------------------------------------------------------------------

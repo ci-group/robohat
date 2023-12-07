@@ -47,6 +47,10 @@ class PowerManagement:
         self.__adc_hat = _adc_hat
         self.__shutdown_gpo = _io_handler.get_gpo(_shutdown_gpo_def)
 
+
+
+
+
         self.__timerIsRunning = False
         self.__battery_percentage_capacity = 0
         self.__battery_voltage = 0
@@ -349,6 +353,7 @@ class PowerManagement:
 
         print("Going to power down in 1 minute")
 
+        #removed 7-12-23
         self.__shutdown_gpo.set_high()
         sleep(5)                            # hold the GPIO pin for 5 seconds (shorter time will not shut down the accu management board
         self.__shutdown_gpo.set_low()

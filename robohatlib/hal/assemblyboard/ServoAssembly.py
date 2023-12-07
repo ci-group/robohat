@@ -302,14 +302,14 @@ class ServoAssembly:
 
     # --------------------------------------------------------------------------------------
 
-    def wake(self) -> None:
+    def wake_up(self) -> None:
         """!
         Wake the device from its sleep state
 
         @return None
         """
         if self.__servo_board is not None:
-            self.__servo_board.wake()
+            self.__servo_board.wake_up()
 
     # --------------------------------------------------------------------------------------
 

@@ -12,7 +12,6 @@ except ImportError:
     print("Failed to import I2CDevice")
     raise
 
-
 class I2CDevice:
     """!
     I2C device
@@ -52,11 +51,12 @@ class I2CDevice:
         @return: None
         """
 
-        while not self.__i2c_handler.try_lock():
-            try:
-                self.__i2c_handler.write_bytes(self.__i2c_device_address, _value_bytes)
-            finally:
-                self.__i2c_handler.unlock()
+        self.__i2c_handler.wait_until_unlocked()
+
+        try:
+            self.__i2c_handler.write_bytes(self.__i2c_device_address, _value_bytes)
+        finally:
+            self.__i2c_handler.unlock()
 
     # --------------------------------------------------------------------------------------
     # --------------------------------------------------------------------------------------
@@ -68,11 +68,13 @@ class I2CDevice:
         @return: byte
         """
         return_value_array = bytearray(1)
-        while not self.__i2c_handler.try_lock():
-            try:
-                self.__i2c_handler.write_to_then_read_from(self.__i2c_device_address, bytes([_register]), return_value_array)
-            finally:
-                self.__i2c_handler.unlock()
+
+        self.__i2c_handler.wait_until_unlocked()
+
+        try:
+            self.__i2c_handler.write_to_then_read_from(self.__i2c_device_address, bytes([_register]), return_value_array)
+        finally:
+            self.__i2c_handler.unlock()
 
         return return_value_array[0]
 
@@ -97,11 +99,12 @@ class I2CDevice:
         @param _bytes_out: buffer to store data read from i2c device
         @return: None
         """
-        while not self.__i2c_handler.try_lock():
-            try:
-                self.__i2c_handler.read_from_into(self.__i2c_device_address, _bytes_out)
-            finally:
-                self.__i2c_handler.unlock()
+        self.__i2c_handler.wait_until_unlocked()
+
+        try:
+            self.__i2c_handler.read_from_into(self.__i2c_device_address, _bytes_out)
+        finally:
+            self.__i2c_handler.unlock()
 
     # --------------------------------------------------------------------------------------
     #OK
@@ -111,12 +114,12 @@ class I2CDevice:
         @param _bytes_out: buffer to store data read from i2c device
         @return: None
         """
-        while not self.__i2c_handler.try_lock():
-            try:
-                self.__i2c_handler.write_to_then_read_from(self.__i2c_device_address, _bytes_to, _bytes_out)
-            finally:
-                self.__i2c_handler.unlock()
+        self.__i2c_handler.wait_until_unlocked()
 
+        try:
+            self.__i2c_handler.write_to_then_read_from(self.__i2c_device_address, _bytes_to, _bytes_out)
+        finally:
+            self.__i2c_handler.unlock()
 
     # --------------------------------------------------------------------------------------
     # --------------------------------------------------------------------------------------

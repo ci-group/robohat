@@ -742,31 +742,31 @@ class Robohat:
 
     # ------------------------------------------------------------------------------------------
 
-    def put_servo_to_sleep(self) -> None:
+    def put_to_sleep(self) -> None:
         """!
         Puts servos to sleep. Note servos will be powered down
         @return: None
         """
 
         if self.__servo_assembly_1 is not None:
-            self.__servo_assembly_1.sleep()
+            self.__servo_assembly_1.put_to_sleep()
 
         if self.__servo_assembly_2 is not None:
-            self.__servo_assembly_2.sleep()
+            self.__servo_assembly_2.put_to_sleep()
 
     # ------------------------------------------------------------------------------------------
 
-    def wakeup_servo(self) -> None:
+    def wake_up(self) -> None:
         """!
         Wakes up the servos
         @return: None
         """
 
         if self.__servo_assembly_1 is not None:
-            self.__servo_assembly_1.wake()
+            self.__servo_assembly_1.wake_up()
 
         if self.__servo_assembly_2 is not None:
-            self.__servo_assembly_2.wake()
+            self.__servo_assembly_2.wake_up()
 
     # ------------------------------------------------------------------------------------------
 
