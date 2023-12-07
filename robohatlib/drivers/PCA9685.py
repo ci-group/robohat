@@ -156,10 +156,11 @@ class PCA9685:
         @return: None
         """
 
+        self.__i_am_a_sleep = True      # other thread is locked
+
         old_mode = self.__read(MODE1_ADDRESS)
         new_mode = (oldmode & 0x7F) | 0x10   @old_mode | (1 << MODE1_SLEEP_BITNR)
         self.__write(MODE1_ADDRESS, new_mode)
-        self.__i_am_a_sleep = True
 
         if DEBUG is True:
             print("Sleep im PCA9685")
@@ -170,6 +171,8 @@ class PCA9685:
         Wake the device from its sleep state
         @return: None
         """
+        self.__do_invert_and_set_driver_to_pushpull()
+
         self.__write(MODE1_ADDRESS, 0x0000)
         new_mode = 0x00a0
         self.__write(MODE1_ADDRESS, new_mode)
@@ -227,6 +230,18 @@ class PCA9685:
 
     # --------------------------------------------------------------------------------------
 
+    def __do_normal_and_set_driver_to_pullup(self) -> None:
+        """!
+        Set the driver to pushpull mode, and invert the outputs
+        @return None
+        """
+
+        old_mode = self.__read(MODE2_ADDRESS)
+        new_mode = old_mode & ~(1 << MODE2_INVRT_BITNR)
+        new_mode = new_mode & ~(1 << MODE2_OUTDRV_BITNR)
+        self.__write(MODE2_ADDRESS, new_mode)
+
+    # --------------------------------------------------------------------------------------
     def __do_invert_and_set_driver_to_pushpull(self) -> None:
         """!
         Set the driver to pushpull mode, and invert the outputs
