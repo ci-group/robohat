@@ -107,7 +107,7 @@ class Robohat:
 
         # at the default interrupt definition there are 2 callback added. the first for the trigger callback, the second for the interrupt reset callback
         topboard_io_expander_callbackholder = InterruptCallbackHolder("topboard_IO_expander_callback_holder",
-                                                                 self.__topboard_io_expander_int_callback,                          # was none.... the callback routine has to be set by the user. User can set it by 'InterruptCallbackHolder.set_callback_function' function if None
+                                                                 None, #self.__topboard_io_expander_int_callback,       # should be power-off pin, or the callback routine has to be set by the user. User can set it by 'InterruptCallbackHolder.set_callback_function' function if None
                                                                  self.__topboard_io_expander_int_reset_routine,
                                                                  InterruptTypes.INT_BOTH,
                                                                  250)
