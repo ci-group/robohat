@@ -107,7 +107,7 @@ class Robohat:
 
         # at the default interrupt definition there are 2 callback added. the first for the trigger callback, the second for the interrupt reset callback
         topboard_io_expander_callbackholder = InterruptCallbackHolder("topboard_IO_expander_callback_holder",
-                                                                 None,                          # the callback routine has to be set by the user. User can set it by 'InterruptCallbackHolder.set_callback_function' function if None
+                                                                 self.__topboard_io_expander_int_callback,                          # was none.... the callback routine has to be set by the user. User can set it by 'InterruptCallbackHolder.set_callback_function' function if None
                                                                  self.__topboard_io_expander_int_reset_routine,
                                                                  InterruptTypes.INT_BOTH,
                                                                  250)
@@ -1216,5 +1216,26 @@ class Robohat:
 
         return first_servo, second_servo
 
+    # ------------------------------------------------------------------------------------
 
+    #todo, should be tested first
+    def __topboard_io_expander_int_callback(self, _gpio: int) -> None:
+        """!
+        Callback of interrupt service routine. This routine will be called when the IO expander interrupt fires
+        @param _gpio: The GPIO nr which caused the interrupt. (Just for information purpose)
+        @return: None
 
+        Should call shutdown_pin_triggered, when 1 sec after triggering still is high, and  2 sec after trigger is low
+        """
+
+        # if _gpio is POWER_SHUTDOWN_PIN_IO_TOPBOARD:      # first pin
+        #     if self.__topboard_io_expander.get_io_expander_input(POWER_SHUTDOWN_PIN_IO_TOPBOARD) is True:
+        #         time.sleep(1)
+        #         if self.__topboard_io_expander.get_io_expander_input(POWER_SHUTDOWN_PIN_IO_TOPBOARD) is True:
+        #             time.sleep(1)
+        #             if self.__topboard_io_expander.get_io_expander_input(POWER_SHUTDOWN_PIN_IO_TOPBOARD) is False:
+        #                 time.sleep(1)
+        #                 if self.__power_management is not None:
+        #                     self.__power_management.shutdown_pin_triggered()
+
+    # ------------------------------------------------------------------------------------

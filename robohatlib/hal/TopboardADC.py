@@ -94,5 +94,3 @@ class TopboardADC:
             return self.__hat_adc.get_readout_single_channel(CHANNEL_ACCU_VOLTAGE)
         return 0.0
 
-
-

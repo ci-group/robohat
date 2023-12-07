@@ -166,3 +166,4 @@ SPI0_DEF = SPIBusDef("spi_bus_0", 0, 11, 10, 9)                                 
 SPI1_DEF = SPIBusDef("spi_bus_1", 1, 21, 20, 19)                                    # definition for spi-bus 2: name, bus-nr, clk, mosi, miso
 SPI2_DEF = SPIBusDef("spi_bus_2", 2, 42, 41, 40)                                    # definition for spi-bus 2: name, bus-nr, clk, mosi, miso
 
+POWER_SHUTDOWN_PIN_IO_TOPBOARD = 0
