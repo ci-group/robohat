@@ -7,7 +7,6 @@ A. Denker (a.denker@vu.nl)
 
 try:
     import threading
-    #import asyncio
     import time
 
 except ImportError:
@@ -31,38 +30,7 @@ class I2CHandler:
         """
 
         self._i2c_bus = SMBUS(_bus_nr)
-        self._lock = threading.RLock()
-
-        self._sw_lock = False
-
-    # --------------------------------------------------------------------------------------
-    # --------------------------------------------------------------------------------------
-
-    def __enter__(self):
-        """!
-        Will enter when class is used
-        Locks the I2C bus when using i
-        """
-        if threading is not None:
-            self._lock.acquire()
-        return self
-
-    # --------------------------------------------------------------------------------------
-    # --------------------------------------------------------------------------------------
-
-    def __exit__(self, exc_type, exc_value, traceback):
-        """!
-        Will enter when function is left
-        Releasing the I2C bus when leaving it
-
-        @param exc_type: ?
-        @param exc_value: ?
-        @param traceback: ?
-        @return: ?
-        """
-        if threading is not None:
-            self._lock.release()
-            del self._i2c_bus
+        self._lock = threading.Lock()
 
     # --------------------------------------------------------------------------------------
     # --------------------------------------------------------------------------------------
@@ -127,10 +95,7 @@ class I2CHandler:
         @return: status of the LOCK.
         """
 
-        while self._sw_lock is True:
-            time.sleep(0.001)
-
-        self._sw_lock = True
+        self._lock.acquire()
 
     # --------------------------------------------------------------------------------------
     # --------------------------------------------------------------------------------------
@@ -142,7 +107,7 @@ class I2CHandler:
         @return: None
         """
 
-        self._sw_lock = False
+        self._lock.release()
 
     # --------------------------------------------------------------------------------------
     # --------------------------------------------------------------------------------------
