@@ -167,3 +167,7 @@ SPI1_DEF = SPIBusDef("spi_bus_1", 1, 21, 20, 19)                                
 SPI2_DEF = SPIBusDef("spi_bus_2", 2, 42, 41, 40)                                    # definition for spi-bus 2: name, bus-nr, clk, mosi, miso
 
 POWER_SHUTDOWN_PIN_IO_TOPBOARD = 0
+
+DEFAULT_SERVO_UPDATE_VALUE = 1
+DEFAULT_DELAY_BETWEEN_ACTION = 0.001
+INITIAL_POS_OF_SERVOS = 90.0

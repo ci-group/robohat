@@ -84,7 +84,7 @@ class PCA9685:
         if _should_be_time is not None:
             self.set_on_time_all_channels(_should_be_time, False)
 
-        self.wake()
+        self.wake_up()
     # --------------------------------------------------------------------------------------
     def set_on_time_channel(self, _channel: int, _time_wanted_us: float) -> None:
         """!
@@ -159,7 +159,7 @@ class PCA9685:
         self.__i_am_a_sleep = True      # other thread is locked
 
         old_mode = self.__read(MODE1_ADDRESS)
-        new_mode = (oldmode & 0x7F) | 0x10   @old_mode | (1 << MODE1_SLEEP_BITNR)
+        new_mode = (old_mode & 0x7F) | 0x10   # old_mode | (1 << MODE1_SLEEP_BITNR)
         self.__write(MODE1_ADDRESS, new_mode)
 
         if DEBUG is True:
@@ -212,9 +212,9 @@ class PCA9685:
 
             self.__freq = _freq
 
-            self.sleep()
+            self.put_to_sleep()
             self.__write(PRE_SCALE_ADDRESS, int(pre_scale))
-            self.wake()
+            self.wake_up()
 
     # --------------------------------------------------------------------------------------
 

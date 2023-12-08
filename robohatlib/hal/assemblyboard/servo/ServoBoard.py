@@ -23,6 +23,8 @@ try:
     from robohatlib.driver_ll.spi.SPIDevice import SPIDevice
     from robohatlib.hal.assemblyboard.servo.ServoData import ServoData
     from robohatlib.hal.assemblyboard.servo.ServoDriver import ServoDriver
+    from robohatlib import RobohatConfig
+
 except ImportError:
 
     print("Failed to resolve dependencies for Servoboard")
@@ -92,13 +94,13 @@ class ServoBoard:
         @return: None
         """
         self.__servoDriver.stop_driver()
-        self.sleep()
+        self.put_to_sleep()
 
 
     #--------------------------------------------------------------------------------------
     #--------------------------------------------------------------------------------------
 
-    def set_servo_direct_mode(self, _mode:bool, _delay:float = 0.0001) -> None:
+    def set_servo_direct_mode(self, _mode:bool, _delay:float = RobohatConfig.DEFAULT_DELAY_BETWEEN_ACTION) -> None:
         """!
         Sets if the servos are periodically updated, or direct
         @param _mode: True, direct mode activated
@@ -247,6 +249,17 @@ class ServoBoard:
             else:
                 angle_list[servo_nr] = -1
         return angle_list
+
+    #--------------------------------------------------------------------------------------
+    #--------------------------------------------------------------------------------------
+    #--------------------------------------------------------------------------------------
+
+    def set_update_value(self, _update_value: int) -> None:
+        """!
+        Set value which is used to add or subtract from current pos
+        """
+        if self.__servoDriver is not None:
+            self.__servoDriver.set_update_value(_update_value)
 
     #--------------------------------------------------------------------------------------
     #--------------------------------------------------------------------------------------

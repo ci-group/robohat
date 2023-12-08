@@ -9,7 +9,9 @@ try:
     import threading
     from enum import Enum
     from enum import IntEnum
-    import asyncio
+    #import asyncio
+    from robohatlib import RobohatConfig
+    import time
 
 except ImportError:
     print("Failed to import needed dependencies for the ServoDriver class")
@@ -34,9 +36,10 @@ class ServoDriver:
         self.__running = False
         self.__i_am_a_sleep = False
         self.__direct_mode = True
-        self.__delay_between_actions = 0.001
-        self.__preset_servo_positions = [90.0] * 16
-        self.__current_servo_positions = [90.0] * 16
+        self.__delay_between_actions = RobohatConfig.DEFAULT_DELAY_BETWEEN_ACTION
+        self.__preset_servo_positions = [RobohatConfig.INITIAL_POS_OF_SERVOS] * 16
+        self.__current_servo_positions = [RobohatConfig.INITIAL_POS_OF_SERVOS] * 16
+        self.__update_value = RobohatConfig.DEFAULT_SERVO_UPDATE_VALUE
 
     # --------------------------------------------------------------------------------------
     # --------------------------------------------------------------------------------------
@@ -115,33 +118,55 @@ class ServoDriver:
     # --------------------------------------------------------------------------------------
     # --------------------------------------------------------------------------------------
 
-    async def run(self):
+    def set_update_value(self, _update_value: int) -> None:
+        """!
+        Set value which is used to add or subtract from current pos
+        """
+        self.__update_value = _update_value
+
+    # --------------------------------------------------------------------------------------
+    # --------------------------------------------------------------------------------------
+    # --------------------------------------------------------------------------------------
+
+
+    def run(self):
         """!
         The actual timed update routine
+        When sleeping just a peridic loop
+
+        When in Time mode (not direct) will update __current_servo_positions with self.__update_value (ot 1) until __preset_servo_positions[servo_nr]
+        In Direct mode __current_servo_positions = __preset_servo_positions[servo_nr]
+
         @return: None
         """
 
         while self.__running is True:
             if self.__i_am_a_sleep is True:
-                await asyncio.sleep(0.1)  # wait (100 mS)
+                time.sleep(0.1)                                # wait (100 mS)
             elif self.__direct_mode is False:
                 for servo_nr in range(0, 16):
                     diff = self.__preset_servo_positions[servo_nr] - self.__current_servo_positions[servo_nr]
-                    if diff < 0:
-                        self.__current_servo_positions[servo_nr] = self.__current_servo_positions[servo_nr] - 1
-                    elif diff > 0:
-                        self.__current_servo_positions[servo_nr] = self.__current_servo_positions[servo_nr] + 1
+                    if abs(diff) > self.__update_value:
+                        if diff < 0:
+                            self.__current_servo_positions[servo_nr] = self.__current_servo_positions[servo_nr] - self.__update_value
+                        elif diff > 0:
+                            self.__current_servo_positions[servo_nr] = self.__current_servo_positions[servo_nr] + self.__update_value
+                    else:   # old way to prevent over or undershoot
+                        if diff < 0:
+                            self.__current_servo_positions[servo_nr] = self.__current_servo_positions[servo_nr] - 1
+                        elif diff > 0:
+                            self.__current_servo_positions[servo_nr] = self.__current_servo_positions[servo_nr] + 1
+
 
                 self.__servoboard.update_servo_data(self.__current_servo_positions)
-                await asyncio.sleep(self.__delay_between_actions)                # wait (1 mS)
+                time.sleep(self.__delay_between_actions)       # wait
             else:                                                       # direct mode
                 # update current array with wanted values
                 for servo_nr in range(0, 16):
                     self.__current_servo_positions[servo_nr] = self.__preset_servo_positions[servo_nr]
 
                 self.__servoboard.update_servo_data(self.__current_servo_positions)
-                await asyncio.sleep(self.__delay_between_actions)  # wait (1 mS)
-
+                time.sleep(self.__delay_between_actions)       # wait
 
     #--------------------------------------------------------------------------------------
 

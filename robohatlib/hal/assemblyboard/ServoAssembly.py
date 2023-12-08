@@ -291,14 +291,23 @@ class ServoAssembly:
 
     # --------------------------------------------------------------------------------------
 
-    def sleep(self) -> None:
+    def set_update_value(self, _update_value: int) -> None:
+        """!
+        Set value which is used to add or subtract from current pos
+        """
+        if self.__servo_board is not None:
+            self.__servo_board.set_update_value(_update_value)
+
+    # --------------------------------------------------------------------------------------
+
+    def put_to_sleep(self) -> None:
         """!
         Put the device into a sleep state
 
         @return None
         """
         if self.__servo_board is not None:
-            self.__servo_board.sleep()
+            self.__servo_board.put_to_sleep()
 
     # --------------------------------------------------------------------------------------
 

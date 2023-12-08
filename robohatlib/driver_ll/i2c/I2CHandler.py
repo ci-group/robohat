@@ -7,7 +7,8 @@ A. Denker (a.denker@vu.nl)
 
 try:
     import threading
-    import asyncio
+    #import asyncio
+    import time
 
 except ImportError:
     threading = None
@@ -120,14 +121,14 @@ class I2CHandler:
     # --------------------------------------------------------------------------------------
     # --------------------------------------------------------------------------------------
 
-    async def wait_until_unlocked(self) -> bool:
+    def wait_until_unlocked(self) -> bool:
         """!
         Wait until unlocked, and will acquire new lock
         @return: status of the LOCK.
         """
 
         while self._sw_lock is True:
-            await asyncio.sleep(0.001)
+            time.sleep(0.001)
 
         self._sw_lock = True
 

@@ -59,9 +59,13 @@ class Robohat:
     """
     __servo_assembly_1 = None
     __servo_assembly_2 = None
-
+    __shadow_update_value = RobohatConfig.DEFAULT_DELAY_BETWEEN_ACTION
     # --------------------------------------------------------------------------------------
     # constructor Robohat
+
+    # --------------------------------------------------------------------------------------
+    # --------------------------------------------------------------------------------------
+    # --------------------------------------------------------------------------------------
 
     def __init__(self, _servo_assembly_1_config: ServoAssemblyConfig, _servo_assembly_2_config: ServoAssemblyConfig, _switch_top_board: int = 7):
         """!
@@ -161,6 +165,10 @@ class Robohat:
         elif self.__servo_assembly_2 is None:
             print("Warning, did not found assembly board 2")
 
+        self.set_update_value(RobohatConfig.DEFAULT_DELAY_BETWEEN_ACTION)
+
+    # --------------------------------------------------------------------------------------
+    # --------------------------------------------------------------------------------------
     # --------------------------------------------------------------------------------------
 
     def init(self, _servo_board_1_datas_list: [], _servo_board_2_datas_list: []) -> None:
@@ -194,6 +202,8 @@ class Robohat:
         self.__io_handler.start_interrupts()
 
     # --------------------------------------------------------------------------------------
+    # --------------------------------------------------------------------------------------
+    # --------------------------------------------------------------------------------------
 
     def exit_program(self) -> None:
         """!
@@ -218,7 +228,9 @@ class Robohat:
 
         self.__io_handler.exit_program()
 
-
+    # --------------------------------------------------------------------------------------
+    # --------------------------------------------------------------------------------------
+    # --------------------------------------------------------------------------------------
     # begin I2C functions ---------------------------------------------------------------------------------
     def do_i2c_scan(self) -> None:
         """!
@@ -427,7 +439,6 @@ class Robohat:
             self.__servo_assembly_1.set_servo_direct_mode(_mode, _delay)
         if self.__servo_assembly_2 is not None:
             self.__servo_assembly_2.set_servo_direct_mode(_mode, _delay)
-
     # ----------------------------------
 
     def get_servo_is_direct_mode(self) -> bool:
@@ -740,9 +751,33 @@ class Robohat:
                 angles_list2[i] = _angles_list[i + 16]
             self.__servo_assembly_2.set_servo_multiple_angles(angles_list2)
 
-    # ------------------------------------------------------------------------------------------
+    # --------------------------------------------------------------------------------------
+    # --------------------------------------------------------------------------------------
+    # --------------------------------------------------------------------------------------
 
-    def put_to_sleep(self) -> None:
+    def set_update_value(self, _update_value: int) -> None:
+        """!
+        Set value which is used to add or subtract from current pos
+        """
+        if self.__servo_assembly_1 is not None:
+            self.__servo_assembly_1.set_update_value(_update_value)
+        if self.__servo_assembly_2 is not None:
+            self.__servo_assembly_2.set_update_value(_update_value)
+        self.__shadow_update_value = _update_value
+
+    # --------------------------------------------------------------------------------------
+
+    def get_update_value(self) -> int:
+        """!
+        get value which is used to add or subtract from current pos
+        """
+        return self.__shadow_update_value
+
+    # --------------------------------------------------------------------------------------
+    # --------------------------------------------------------------------------------------
+    # --------------------------------------------------------------------------------------
+
+    def put_servo_to_sleep(self) -> None:
         """!
         Puts servos to sleep. Note servos will be powered down
         @return: None
@@ -756,7 +791,7 @@ class Robohat:
 
     # ------------------------------------------------------------------------------------------
 
-    def wake_up(self) -> None:
+    def wakeup_servo(self) -> None:
         """!
         Wakes up the servos
         @return: None
