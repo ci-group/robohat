@@ -9,7 +9,7 @@ try:
     import threading
     from enum import Enum
     from enum import IntEnum
-    #import asyncio
+    # import asyncio
     from robohatlib import RobohatConfig
     import time
 
@@ -58,7 +58,6 @@ class ServoDriver:
 
         self.__running = True
         thread = threading.Thread(target=self.run, args=())
-        thread.daemon = True  # Daemonize thread
         thread.start()  # Start the execution
 
     # --------------------------------------------------------------------------------------
@@ -128,11 +127,10 @@ class ServoDriver:
     # --------------------------------------------------------------------------------------
     # --------------------------------------------------------------------------------------
 
-
     def run(self):
         """!
         The actual timed update routine
-        When sleeping just a peridic loop
+        When sleeping just a periodic loop
 
         When in Time mode (not direct) will update __current_servo_positions with self.__update_value (ot 1) until __preset_servo_positions[servo_nr]
         In Direct mode __current_servo_positions = __preset_servo_positions[servo_nr]
@@ -156,7 +154,6 @@ class ServoDriver:
                             self.__current_servo_positions[servo_nr] = self.__current_servo_positions[servo_nr] - 1
                         elif diff > 0:
                             self.__current_servo_positions[servo_nr] = self.__current_servo_positions[servo_nr] + 1
-
 
                 self.__servoboard.update_servo_data(self.__current_servo_positions)
                 time.sleep(self.__delay_between_actions)       # wait

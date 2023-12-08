@@ -62,9 +62,7 @@ class PowerMonitorTimer:
         Will trigger the alarm when the I/O stays low in the time-window o has a multiple trigger pulses
         """
 
-        self.__task_loop_is_running = True
         start_time = RoboUtil.get_time_ms()
-
         last_error_time = RoboUtil.get_time_ms()
 
         while self.__task_loop_is_running:
@@ -121,6 +119,7 @@ class PowerMonitorTimer:
         @return: None
         """
         if self.__task_loop_is_running is False:
+            self.__task_loop_is_running = True
             thread = threading.Thread(target = self.task)
             thread.start()
 
