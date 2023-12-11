@@ -3,7 +3,7 @@ requires = ["poetry-core>=1.6.0"]
 build-backend = "poetry.core.masonry.api"
 
 [tool.poetry]
-name = "robohatlib"
+name = "revolve2-robohat"
 version = "v0.4.0"
 description = "Robohatlib"
 authors = [
