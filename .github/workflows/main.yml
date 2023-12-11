@@ -1,10 +1,9 @@
 name: Build
 
-# on:
-#   push:
-#     tags:
-#       - '*'  # Will run when any tag is pushed
-on: [push, pull_request]
+on:
+  push:
+    tags:
+      - '*'  # Will run when any tag is pushed
 
 jobs:
   build_wheels:
