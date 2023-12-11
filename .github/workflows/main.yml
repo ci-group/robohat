@@ -17,7 +17,7 @@ jobs:
         with:
           python-version: 3.11
       - name: Build wheels
-        run: pip wheel --no-deps
+        run: pip wheel --no-deps .
       - uses: actions/upload-artifact@v3
         with:
           name: dist
