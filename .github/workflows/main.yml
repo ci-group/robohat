@@ -1,9 +1,10 @@
 name: Build
 
-on:
-  push:
-    tags:
-      - '*'  # Will run when any tag is pushed
+# on:
+#   push:
+#     tags:
+#       - '*'  # Will run when any tag is pushed
+on: [push, pull_request]
 
 jobs:
   build_wheels:
@@ -16,7 +17,7 @@ jobs:
         with:
           python-version: 3.11
       - name: Build wheels
-        run: pip wheel --no-deps .
+        run: pip wheel --no-deps . -w dist
       - uses: actions/upload-artifact@v3
         with:
           name: dist
