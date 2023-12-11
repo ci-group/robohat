@@ -20,7 +20,7 @@ jobs:
       - uses: actions/upload-artifact@v3
         with:
           name: dist
-          path: ./dist/**/*.whl
+          path: ./dist/*.whl
 
   pypi-publish:
     name: Upload release to PyPI
