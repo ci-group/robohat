@@ -51,6 +51,7 @@ class ServoDriver:
         @param _current_servo_positions:
         @return: None
         """
+
         # set default value. if none, default is already 90 degree, see constructor
         if _current_servo_positions is not None:
             for i in range(0, len(_current_servo_positions)):

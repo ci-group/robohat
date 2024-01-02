@@ -80,7 +80,7 @@ class Robohat:
         """
 
         print("\n")
-        print("Starting Robohat lib: " + RobohatConstants.ROBOHAT_LIB_VERSION_STR + " (" + RobohatConstants.ROBOHAT_BUILD_DATE_STR + ") \n")
+        print("Robohat lib: " + RobohatConstants.ROBOHAT_LIB_VERSION_STR + " (" + RobohatConstants.ROBOHAT_BUILD_DATE_STR + ") \n")
 
         if _servo_assembly_1_config is not None and _servo_assembly_2_config is not None:
             if _switch_top_board is _servo_assembly_1_config.get_sw2_power_good_address() or \

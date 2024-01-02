@@ -217,9 +217,7 @@ class SerTestClass:
         @return: None
         """
         print("Going to calibrate the servos. Please be patient...")
-        self.__robohat.do_servo_fit_formula_readout_vs_angle_multiple_servos(
-            self.__limit_min, self.__limit_max
-        )
+        self.__robohat.do_servo_fit_formula_readout_vs_angle_multiple_servos(self.__limit_min, self.__limit_max)
 
     # --------------------------------------------------------------------------------------
     # --------------------------------------------------------------------------------------
