@@ -205,6 +205,46 @@ class Robohat:
     # --------------------------------------------------------------------------------------
     # --------------------------------------------------------------------------------------
 
+    def update_servo_data_direct(self, _wanted_angles: []) -> None:
+        """!
+        Drives the servos directly.
+
+        @param _wanted_angles array with positions
+        """
+
+        wanted_angles_servo1_array = [90] * 16
+        wanted_angles_servo2_array = [90] * 16
+
+        for i in range(0, len(_wanted_angles)):
+            if i < 16:
+                wanted_angles_servo1_array[i] = _wanted_angles[i]
+            else:
+                wanted_angles_servo2_array[i-16] = _wanted_angles[i]
+
+        if self.__servo_assembly_1 is not None:
+            self.__servo_assembly_1.update_servo_data_direct(wanted_angles_servo1_array)
+
+        if self.__servo_assembly_2 is not None:
+            self.__servo_assembly_2.update_servo_data_direct(wanted_angles_servo2_array)
+
+    # --------------------------------------------------------------------------------------
+    # --------------------------------------------------------------------------------------
+    # --------------------------------------------------------------------------------------
+
+    def stop_servo_drivers(self) -> None:
+        """!
+        Stops the servo drivers
+        """
+        if self.__servo_assembly_1 is not None:
+            self.__servo_assembly_1.stop_servo_driver()
+
+        if self.__servo_assembly_2 is not None:
+            self.__servo_assembly_2.stop_servo_driver()
+
+    # --------------------------------------------------------------------------------------
+    # --------------------------------------------------------------------------------------
+    # --------------------------------------------------------------------------------------
+
     def exit_program(self) -> None:
         """!
         Exit the program. Will shut down all the software processes and the hardware
