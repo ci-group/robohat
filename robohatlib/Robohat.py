@@ -59,7 +59,7 @@ class Robohat:
     """
     __servo_assembly_1 = None
     __servo_assembly_2 = None
-    __shadow_update_value = RobohatConfig.DEFAULT_DELAY_BETWEEN_ACTION
+    __shadow_update_value = RobohatConfig.DEFAULT_SERVO_UPDATE_VALUE
     # --------------------------------------------------------------------------------------
     # constructor Robohat
 
@@ -165,7 +165,7 @@ class Robohat:
         elif self.__servo_assembly_2 is None:
             print("Warning, did not found assembly board 2")
 
-        self.set_update_value(RobohatConfig.DEFAULT_DELAY_BETWEEN_ACTION)
+        self.set_update_value(RobohatConfig.DEFAULT_SERVO_UPDATE_VALUE)
 
     # --------------------------------------------------------------------------------------
     # --------------------------------------------------------------------------------------
