@@ -88,7 +88,8 @@ ACCU_VOLTAGE_TO_PERCENTAGE_LIST =  [
 Device settings
 """
 
-POWER_SHUTDOWN_GPO_DEF = GPODef("shutdown", 27)                                 # definition of the shutdown GPIO pin, The pin which send the signal to the power monitor PCB
+#POWER_SHUTDOWN_GPO_DEF = GPODef("shutdown", 27)                                 # definition of the shutdown GPIO pin, The pin which send the signal to the power monitor PCB
+POWER_SHUTDOWN_GPI = 27
 
 BUZZER_DEF = BuzzerDef("buzzer", 18, 1000, 50)                                  # definition for the buzzer, GPIO nr, initial frequency and initial duty cycle
 SERIAL_DEF = SerialDef("debug_port", 1)                                         # definition for the serial port. not used?

@@ -578,19 +578,19 @@ class IOHandler:
         @return: GPI_LL_Interrupt or None (None is for future use)
         """
 
-        #print("checking interrupt: " + _gpi_interrupt_definition.get_name() )
+        print("checking interrupt: " + _gpi_interrupt_definition.get_name() )
 
         if len(self.__registered_gpi_ll_interrupts) == 0:
             interrupt = GPI_LL_Interrupt(_gpi_interrupt_definition)
             if interrupt is None:
                 return None
             self.__registered_gpi_ll_interrupts.append(interrupt)
-            #print("claimed first: interrupt " + _gpi_interrupt_definition.get_name() )
+            print("claimed first: interrupt " + _gpi_interrupt_definition.get_name() )
             return interrupt
 
         for interrupt in self.__registered_gpi_ll_interrupts:
             if interrupt.get_gpio_pin() is _gpi_interrupt_definition.get_gpio_pin():
-                #print("already claimed: interrupt " + str(interrupt.get_gpio_pin()) + " for: " + interrupt.get_name() )
+                print("already claimed: interrupt " + str(interrupt.get_gpio_pin()) + " for: " + interrupt.get_name() )
                 interrupt.add_callbackholder(_gpi_interrupt_definition.get_callbackholder())
                 return interrupt
 
@@ -599,7 +599,7 @@ class IOHandler:
             return None
 
         self.__registered_gpi_ll_interrupts.append(interrupt)
-        #print("new claimed: interrupt " + _gpi_interrupt_definition.get_name())
+        print("new claimed: interrupt " + _gpi_interrupt_definition.get_name())
         return interrupt
 
     #--------------------------------------------------------------------------------------

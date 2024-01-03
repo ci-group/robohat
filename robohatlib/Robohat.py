@@ -123,7 +123,7 @@ class Robohat:
 
         self.__power_management = PowerManagement(self.__io_handler,
                                                   self.__topboard_adc,
-                                                  RobohatConfig.POWER_SHUTDOWN_GPO_DEF)
+                                                  RobohatConfig.POWER_SHUTDOWN_GPI)
 
         self.__power_management.add_signaling_device(self.__buzzer)
 

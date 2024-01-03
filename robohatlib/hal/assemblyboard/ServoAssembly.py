@@ -16,9 +16,7 @@ try:
     from robohatlib.helpers.RoboUtil import RoboUtil
     from robohatlib.hal.assemblyboard.PwmPlug import PwmPlug
     from robohatlib.driver_ll.IOHandler import IOHandler
-    from robohatlib.driver_ll.definitions.InterruptCallbackHolder import (
-        InterruptCallbackHolder,
-    )
+    from robohatlib.driver_ll.definitions.InterruptCallbackHolder import InterruptCallbackHolder
     from robohatlib.driver_ll.constants.InterruptTypes import InterruptTypes
     from robohatlib.hal.datastructure.ExpanderDirection import ExpanderDir
     from robohatlib.hal.datastructure.ExpanderStatus import ExpanderStatus

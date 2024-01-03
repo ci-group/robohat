@@ -14,6 +14,9 @@ try:
     from time import sleep
     from robohatlib import RobohatConfig
     from robohatlib.driver_ll.definitions.GPODef import GPODef
+    from robohatlib.driver_ll.definitions.GPIInterruptDef import GPIInterruptDef
+    from robohatlib.driver_ll.constants.InterruptTypes import InterruptTypes
+    from robohatlib.driver_ll.definitions.InterruptCallbackHolder import InterruptCallbackHolder
     from robohatlib.hal.TopboardADC import TopboardADC
     from robohatlib.driver_ll.IOHandler import IOHandler
     from robohatlib.hal.datastructure.BatteryStatus import BatteryStatus
@@ -36,7 +39,7 @@ class PowerManagement:
     Class to measure the battery capacity
     """
 
-    def __init__(self, _io_handler: IOHandler, _adc_hat: TopboardADC, _shutdown_gpo_def: GPODef):
+    def __init__(self, _io_handler: IOHandler, _adc_hat: TopboardADC, _shutdown_gpi: int):
         """!
         @param _io_handler: the IO handler
         @param _adc_hat:  ADC on the top-board
@@ -45,10 +48,7 @@ class PowerManagement:
         """
         self.__io_handler = _io_handler
         self.__adc_hat = _adc_hat
-        self.__shutdown_gpo = _io_handler.get_gpo(_shutdown_gpo_def)
-
-
-
+        #self.__shutdown_gpo = _io_handler.get_gpo(_shutdown_gpo_def)
 
 
         self.__timerIsRunning = False
@@ -64,6 +64,11 @@ class PowerManagement:
         self.__battery_check_started = False
         self.__to_low_already_displayed = False
         self.__to_high_already_display = False
+
+        power_down_callbackholder = InterruptCallbackHolder("power_down_callback_holder", self.__shutdown_int_callback,self.__shutdown_int_reset_routine, InterruptTypes.INT_FALLING,250)
+
+        self.__gpi_interrupt_definition = GPIInterruptDef("power_down_pin", _shutdown_gpi, InterruptTypes.INT_FALLING, power_down_callbackholder)
+        _io_handler.register_interrupt(self.__gpi_interrupt_definition)
 
     # --------------------------------------------------------------------------------------
     # --------------------------------------------------------------------------------------
@@ -351,12 +356,12 @@ class PowerManagement:
         if self.__shutdown_in_progress is True:
             return
 
-        print("Going to power down in 1 minute")
+        print("Logging off and going to power down...")
 
-        #removed 7-12-23
-        self.__shutdown_gpo.set_high()
-        sleep(5)                            # hold the GPIO pin for 5 seconds (shorter time will not shut down the accu management board
-        self.__shutdown_gpo.set_low()
+        #removed 7-12-23.. was used in output mode..
+        # self.__shutdown_gpo.set_high()
+        # sleep(5)                            # hold the GPIO pin for 5 seconds (shorter time will not shut down the accu management board
+        # self.__shutdown_gpo.set_low()
 
         self.__io_handler.io_shutdown()
         os.system("sudo shutdown -h now")       # actual system call to shut down the RPi
@@ -371,16 +376,20 @@ class PowerManagement:
     # --------------------------------------------------------------------------------------
     # --------------------------------------------------------------------------------------
 
-    def shutdown_pin_triggered(self) -> None:
+    def __shutdown_int_callback(self, _gpio: int) -> None:
         """!
-        Is called when IO pin 0 from io_expander is changed
-        Will perform shutdown
+        Callback of interrupt service routine. This routine will be called when the IO expander interrupt fires
+        @param _gpio: The GPIO nr which caused the interrupt. (Just for information purpose)
+        @return: None
+        """
+        self.shutdown_power()              # actual shutdown
+
+    # --------------------------------------------------------------------------------------
+
+    def __shutdown_int_reset_routine(self, _gpio: int) -> None:
+        """!
+        Callback after the interrupt service routine is handled, to reset the interrupt and restart the check
+        @param _gpio: The GPIO nr which caused the interrupt. (Just for information purpose)
+        @return: None
         """
 
-        print("Shutdown is triggered...")
-        #self.shutdown_power()              // disabled, the trigger is nog tested
-
-
-    # --------------------------------------------------------------------------------------
-    # --------------------------------------------------------------------------------------
-    # --------------------------------------------------------------------------------------
