@@ -1,0 +1,3 @@
+echo "Test"
+cd ~/robohat/
+python3 Test.py
