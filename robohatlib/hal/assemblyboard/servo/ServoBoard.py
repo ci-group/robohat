@@ -56,7 +56,7 @@ class ServoBoard:
         should_be_time = self._get_current_times_depending_current_angle()
 
         self.__pwm.init_pca9685(should_be_time)
-        self.__servoDriver.start_driver()
+        # self.__servoDriver.start_driver()         9-1-2024 do not autostart
 
 
     #--------------------------------------------------------------------------------------
@@ -92,7 +92,7 @@ class ServoBoard:
         """!
         Stops auto update driver
         """
-        self.__servoDriver.stop_driver()
+        self.__servoDriver.stop_driver()      # not needed anymore
 
     #--------------------------------------------------------------------------------------
     #--------------------------------------------------------------------------------------
@@ -102,7 +102,7 @@ class ServoBoard:
         Cleans up, when user want to shut down. Sets PWM to sleep
         @return: None
         """
-        self.__servoDriver.stop_driver()
+        self.__servoDriver.stop_driver()        # not needed anymore
         self.put_to_sleep()
 
 
