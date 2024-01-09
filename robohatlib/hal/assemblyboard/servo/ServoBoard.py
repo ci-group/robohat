@@ -249,15 +249,26 @@ class ServoBoard:
         Gets all the angle of the servos (Returns a list of 16, servo 0 is array pos 0)
         @return list of degrees
         """
-
         angle_list = [0] * 16
+
+        voltage_adc_channels = self.__servo_adc.get_readout_adc_multiple_channels()
         for servo_nr in range(0, 16):
-            voltage_adc_channel = self.__servo_adc.get_readout_adc_servo_nr(servo_nr)
+            voltage_adc_channel = voltage_adc_channels[servo_nr]
             if voltage_adc_channel > 0.2:
                 angle_list[servo_nr] = self.__servo_datas_list[servo_nr].convert_voltage_to_angle(voltage_adc_channel)
             else:
                 angle_list[servo_nr] = -1
+
         return angle_list
+
+        # angle_list = [0] * 16
+        # for servo_nr in range(0, 16):
+        #     voltage_adc_channel = self.__servo_adc.get_readout_adc_servo_nr(servo_nr)
+        #     if voltage_adc_channel > 0.2:
+        #         angle_list[servo_nr] = self.__servo_datas_list[servo_nr].convert_voltage_to_angle(voltage_adc_channel)
+        #     else:
+        #         angle_list[servo_nr] = -1
+        # return angle_list
 
     #--------------------------------------------------------------------------------------
     #--------------------------------------------------------------------------------------
