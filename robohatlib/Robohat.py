@@ -231,6 +231,18 @@ class Robohat:
     # --------------------------------------------------------------------------------------
     # --------------------------------------------------------------------------------------
 
+    def start_servo_drivers(self) -> None:
+        """!
+        Start the servo drivers
+        """
+        if self.__servo_assembly_1 is not None:
+            self.__servo_assembly_1.start_servo_driver()
+
+        if self.__servo_assembly_2 is not None:
+            self.__servo_assembly_2.start_servo_driver()
+
+
+
     def stop_servo_drivers(self) -> None:
         """!
         Stops the servo drivers

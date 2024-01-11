@@ -160,6 +160,14 @@ class ServoAssembly:
     # --------------------------------------------------------------------------------------
     # --------------------------------------------------------------------------------------
 
+    def start_servo_driver(self) -> None:
+        """!
+        Starts the servo driver
+        """
+        if self.__servo_board is not None:
+            self.__servo_board.start_servo_driver()
+
+
     def stop_servo_driver(self) -> None:
         """!
         Stops the servo driver

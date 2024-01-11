@@ -56,8 +56,6 @@ class ServoBoard:
         should_be_time = self._get_current_times_depending_current_angle()
 
         self.__pwm.init_pca9685(should_be_time)
-        # self.__servoDriver.start_driver()         9-1-2024 do not autostart
-
 
     #--------------------------------------------------------------------------------------
     #--------------------------------------------------------------------------------------
@@ -87,6 +85,12 @@ class ServoBoard:
 
     #--------------------------------------------------------------------------------------
     #--------------------------------------------------------------------------------------
+
+    def start_servo_driver(self) -> None:
+        """!
+        Starts auto update driver
+        """
+        self.__servoDriver.start_driver()
 
     def stop_servo_driver(self) -> None:
         """!

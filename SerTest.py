@@ -59,19 +59,12 @@ class SerTestClass:
         print("Starting robohat servo test routine")
         self.__running = True
 
-        self.__robohat = Robohat(
-            TestConfig.SERVOASSEMBLY_1_CONFIG,
-            TestConfig.SERVOASSEMBLY_2_CONFIG,
-            TestConfig.TOPBOARD_ID_SWITCH,
-        )
-
-        self.__robohat.init(
-            TestConfig.SERVOBOARD_1_DATAS_LIST, TestConfig.SERVOBOARD_2_DATAS_LIST
-        )
-
+        self.__robohat = Robohat(TestConfig.SERVOASSEMBLY_1_CONFIG, TestConfig.SERVOASSEMBLY_2_CONFIG, TestConfig.TOPBOARD_ID_SWITCH)
+        self.__robohat.init(TestConfig.SERVOBOARD_1_DATAS_LIST, TestConfig.SERVOBOARD_2_DATAS_LIST)
         self.__robohat.do_buzzer_beep()
-
         self.__i_am_super_user = False
+
+        self.__robohat.start_servo_drivers()
 
         print("\n")
 
@@ -84,12 +77,7 @@ class SerTestClass:
             self.__limit_min = NORMAL_USER_MIN_MOVE
             self.__limit_max = NORMAL_USER_MAX_MOVE
 
-        print(
-            "limits are from "
-            + str(self.__limit_min)
-            + " till "
-            + str(self.__limit_max)
-        )
+        print("limits are from " + str(self.__limit_min) + " till " + str(self.__limit_max) )
 
     # --------------------------------------------------------------------------------------
     # --------------------------------------------------------------------------------------

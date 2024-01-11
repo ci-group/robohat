@@ -81,10 +81,13 @@ class Example:
 
         # self.robohat.set_system_alarm_permitted(False)
 
+
         self.__robohat.init( TestConfig.SERVOBOARD_1_DATAS_LIST, TestConfig.SERVOBOARD_2_DATAS_LIST )
         self.__robohat.set_topboard_io_expander_int_callback( self.__test_hat_io_expander_int_callback  )
         self.__robohat.set_assemblyboard_1_io_expander_int_callback( self.__test_assemblyboard_1_io_expander_int_callback )
         self.__robohat.set_assemblyboard_2_io_expander_int_callback( self.__test_assemblyboard_2_io_expander_int_callback )
+
+        self.__robohat.start_servo_drivers()
 
     # --------------------------------------------------------------------------------------
     # --------------------------------------------------------------------------------------
