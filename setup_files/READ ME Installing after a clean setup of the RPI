@@ -1,9 +1,1 @@
-robo_install.run is an installer which installs a needed service and alters the boot config file.
-
-The service will turn off the power when issuing the bash 'shutdown' command.
-The altered config file will enable the needed I2C busses
-
-Copy the robo_install.run to a known directory
-
-Make the installer executable by  'sudo chmod _x robo_install.run'
-start the installer by 'sudo ./robo_install.run'
+replace the /boot/config.txt with this config.txt to enable the I2C ports
