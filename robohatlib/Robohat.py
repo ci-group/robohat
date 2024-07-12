@@ -45,6 +45,7 @@ try:
     from time import sleep
     from typing import Tuple
 
+
 except ImportError:
     print("Failed to import needed dependencies for the Robohat class")
     raise
@@ -81,6 +82,16 @@ class Robohat:
 
         print("\n")
         print("Robohat lib: " + RobohatConstants.ROBOHAT_LIB_VERSION_STR + " (" + RobohatConstants.ROBOHAT_BUILD_DATE_STR + ") \n")
+        
+        rpi_model:str = self.__detect_model()
+        version_of_gpio: str = IOHandler.get_version_of_GPIO()
+        print(rpi_model + ", with GPIO lib version: "+ version_of_gpio + "\n")
+        if self.__checkiflibsarecompatiblewith_rpi_model(rpi_model, version_of_gpio) is False:
+            print("Unrecoverable error.\nOs image in conjunction with RPi model, is not compatible with Robohatlib. Use other RPi model\nor update GPIO lib by issuing the following commands:\n\n"
+                  "sudo apt remove python3-rpi.gpio\n"
+                  "sudo apt install python3-rpi-lgpio \n")
+            print("\n")
+            exit()
 
         if _servo_assembly_1_config is not None and _servo_assembly_2_config is not None:
             if _switch_top_board is _servo_assembly_1_config.get_sw2_power_good_address() or \
@@ -1325,4 +1336,29 @@ class Robohat:
         #                 if self.__power_management is not None:
         #                     self.__power_management.shutdown_pin_triggered()
 
+    # ------------------------------------------------------------------------------------
+    """!
+    Gives a string of the model of the RPi model
+    @return: str
+    """
+    def __detect_model(self) -> str:
+        with open('/proc/device-tree/model') as f:
+            model = f.read()
+        return model
+
+    # ------------------------------------------------------------------------------------
+    """!
+    Check if GPio lib is compatible with RPi board
+    as of verion (2024-05-29) of the RPi OS the defaul;t GPIO lib is version 0.7.1a4 which doesn't work on a RPi 5
+    
+    Return false when lib is not compatible with model 5
+    @return: bool
+    """
+
+    def __checkiflibsarecompatiblewith_rpi_model(self, rpi_model:str, gpio_version:str) -> bool:
+        if "Raspberry Pi 5" in rpi_model:
+            if "0.7.1" in gpio_version:
+                return False
+
+        return True
     # ------------------------------------------------------------------------------------
