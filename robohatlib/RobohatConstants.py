@@ -8,8 +8,8 @@ This file consists of the Constants for the Robohat lib
 do not alter
 """
 
-ROBOHAT_LIB_VERSION_STR = "0.4.4"                    # version nr of library
-ROBOHAT_BUILD_DATE_STR = "2-jan-2024"               # build date of library YYMMDD
+ROBOHAT_LIB_VERSION_STR = "0.4.5"                    # version nr of library
+ROBOHAT_BUILD_DATE_STR = "12-sep-2024"               # build date of library YYMMDD
 
 
 """
