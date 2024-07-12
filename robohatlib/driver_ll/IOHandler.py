@@ -263,6 +263,7 @@ class IOHandler:
                     print("SPI device already claimed!!: SPI-bus: " + spi_bus_nr + " cs:" + str(spi_cs))
                     return _device_in_list
 
+        print("Trying to open SPI bus: " + str(_spi_device_def.get_spi_bus_nr()) + ", cs: " + str(_spi_device_def.get_spi_cs_nr()))
         spi_bus = spidev.SpiDev()
         spi_bus.open(_spi_device_def.get_spi_bus_nr(), _spi_device_def.get_spi_cs_nr())    #_spi_bus_nr, _spi_cs_nr)
         spi_bus.max_speed_hz = _spi_device_def.get_spi_max_speed()

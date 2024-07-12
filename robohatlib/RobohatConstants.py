@@ -13,6 +13,7 @@ ROBOHAT_BUILD_DATE_STR = "12-sep-2024"               # build date of library YYM
 
 
 """
+0.5.0 check for RPi board and lib version
 0.4.4 DEFAULT_DELAY_BETWEEN_ACTION mismatch between DEFAULT_SERVO_UPDATE_VALUE
 
 0.4.0 was from 30-aug-2023
