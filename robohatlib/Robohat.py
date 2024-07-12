@@ -42,6 +42,8 @@ try:
 
     from robohatlib.driver_ll.datastructs.IOStatus import IOStatus
 
+    from robohatlib.helpers.RoboUtil import RoboUtil
+
     from time import sleep
     from typing import Tuple
 
@@ -86,7 +88,7 @@ class Robohat:
         rpi_model:str = self.__detect_model()
         version_of_gpio: str = IOHandler.get_version_of_GPIO()
         print(rpi_model + ", with GPIO lib version: "+ version_of_gpio + "\n")
-        if self.__checkiflibsarecompatiblewith_rpi_model(rpi_model, version_of_gpio) is False:
+        if self.__check_if_libs_are_compatible_with_rpi_model(rpi_model, version_of_gpio) is False:
             print("Unrecoverable error.\nOs image in conjunction with RPi model, is not compatible with Robohatlib. Use other RPi model\nor update GPIO lib by issuing the following commands:\n\n"
                   "sudo apt remove python3-rpi.gpio\n"
                   "sudo apt install python3-rpi-lgpio \n")
@@ -1355,10 +1357,11 @@ class Robohat:
     @return: bool
     """
 
-    def __checkiflibsarecompatiblewith_rpi_model(self, rpi_model:str, gpio_version:str) -> bool:
+    def __check_if_libs_are_compatible_with_rpi_model(self, rpi_model:str, gpio_version:str) -> bool:
         if "Raspberry Pi 5" in rpi_model:
-            if "0.7.1" in gpio_version:
-                return False
+            is_newer:bool = RoboUtil.version_compare_newer(gpio_version, "0.7.2")
+            if is_newer is True:
+                return True
 
-        return True
+        return False
     # ------------------------------------------------------------------------------------

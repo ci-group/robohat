@@ -118,3 +118,79 @@ class RoboUtil:
         @return: mS (int)
         """
         return int(time.time() * 1000)
+
+    # --------------------------------------------------------------------------------------
+    # --------------------------------------------------------------------------------------
+    # --------------------------------------------------------------------------------------
+
+    @staticmethod
+    def find_alpha(test_str:str) -> int:
+        """!
+        Gives first alpha char index
+        @return: int
+        """
+        alphabets = "abcdefghijklmnopqrstuvwxyz"
+        res = 0
+        for i in test_str:
+            if i in alphabets:
+                res = test_str.index(i)
+                break
+        return res
+
+    # --------------------------------------------------------------------------------------
+    # --------------------------------------------------------------------------------------
+    # --------------------------------------------------------------------------------------
+
+    @staticmethod
+    def remove_alpha_from_str(version:str) -> str:
+        """!
+        Remove alpha chars from string (cutoff)
+        @return: str
+        """
+        index_alpha = RoboUtil.find_alpha(version)
+        if index_alpha is not 0:
+            return version[0:index_alpha]
+        else:
+            return version
+
+    # --------------------------------------------------------------------------------------
+    # --------------------------------------------------------------------------------------
+    # --------------------------------------------------------------------------------------
+    @staticmethod
+    def version_compare_newer(v1:str, v2:str) -> bool:
+        """!
+        Method to compare if v2 is newer or the same as 1
+        @return: bool
+        """
+
+        arr1 = []
+        arr2 = []
+
+        arr1_all:str =  v1.split('.')
+        for x in arr1_all:
+            arr1.append(RoboUtil.remove_alpha_from_str(x))
+
+        arr2_all:str =  v2.split('.')
+        for x in arr2_all:
+            arr2.append(RoboUtil.remove_alpha_from_str(x))
+
+        n = len(arr1)
+        m = len(arr2)
+
+        if n > m:
+            for i in range(m, n):
+                arr2.append(0)
+        elif m > n:
+            for i in range(n, m):
+                arr1.append(0)
+
+        for i in range(len(arr1)):
+            if arr1[i] < arr2[i]:
+                return False
+
+        return True
+
+
+    # --------------------------------------------------------------------------------------
+    # --------------------------------------------------------------------------------------
+    # --------------------------------------------------------------------------------------
