@@ -11,6 +11,7 @@ try:
     from robohatlib.Robohat import Robohat
     from robohatlib import RobohatConstants
     from robohatlib.hal.assemblyboard.PwmPlug import PwmPlug
+    from robohatlib.hal.Camera import Camera
     from robohatlib.helpers.RoboUtil import RoboUtil
     from robohatlib.hal.assemblyboard.ServoAssemblyConfig import ServoAssemblyConfig
     from robohatlib.hal.assemblyboard.servo.ServoData import ServoData
@@ -294,112 +295,50 @@ class Example:
         """
 
         print("Available commands are:\n")
-        print(
-            "shutdown                                            powers the system down"
-        )
+        print("shutdown                                            powers the system down")
         print("exit                                                exit the program")
         print("help                                                prints this text")
-        print(
-            "set servo angle [servo nr] [angle]                  moves servo to the desired angle"
-        )
-        print(
-            "get servo angle [servo nr]                          get servo angle of the desired angle"
-        )
-        print(
-            "get servo angle all                                 get all the servo angels"
-        )
-        print(
-            "get servo adc [servo nr]                            get servo position adc value"
-        )
-        print(
-            "get servo adc all                                   get all the servo position adc values"
-        )
-        print(
-            "get servo connected [servo nr]                      shows if servo is connected"
-        )
-        print(
-            "put servos to sleep                                 puts all servos asleep"
-        )
-        print(
-            "set servo io dir [board nr] [pin nr] [in|out]       set the direction of an io pin of a servo board [0|1]"
-        )
-        print(
-            "get servo io dir [board nr] [pin nr]                get the direction of an io pin of a servo board [0|1]"
-        )
-        print(
-            "set servo io output [board nr] [pin nr] [low|high]  set the pin value of an io pin of a servo board [0|1]"
-        )
-        print(
-            "get servo io input [board nr] [pin nr]              get the pin value of an io pin of a servo board [0|1]"
-        )
-        print(
-            "do servo scan                                       displays all servos connected"
-        )
-        print(
-            "do servo fit [servo nr]                             fits angle with voltage readout servo"
-        )
+        print("set servo angle [servo nr] [angle]                  moves servo to the desired angle")
+        print("get servo angle [servo nr]                          get servo angle of the desired angle")
+        print("get servo angle all                                 get all the servo angels")
+        print("get servo adc [servo nr]                            get servo position adc value")
+        print("get servo adc all                                   get all the servo position adc values")
+        print("get servo connected [servo nr]                      shows if servo is connected")
+        print("put servos to sleep                                 puts all servos asleep")
+        print("set servo io dir [board nr] [pin nr] [in|out]       set the direction of an io pin of a servo board [0|1]")
+        print("get servo io dir [board nr] [pin nr]                get the direction of an io pin of a servo board [0|1]")
+        print("set servo io output [board nr] [pin nr] [low|high]  set the pin value of an io pin of a servo board [0|1]")
+        print("get servo io input [board nr] [pin nr]              get the pin value of an io pin of a servo board [0|1]")
+        print("do servo scan                                       displays all servos connected")
+        print("do servo fit [servo nr]                             fits angle with voltage readout servo")
         print("wake up servos                                      wakes all servo up")
-        print(
-            "are servos sleeping                                 shows information if servos are sleeping"
-        )
-        print(
-            "set led [color]                                     turn on led with its color [WHITE|RED|GREEN|BLUE|YELLOW|PURPLE|ON|OFF"
-        )
-        print(
-            "get led                                             displays the color of the led, or status ON | OFF"
-        )
-        print(
-            "get lib builddate                                   displays date when library was build"
-        )
-        print(
-            "get lib version                                     displays version of the library"
-        )
-        print(
-            "get topboard adc [channel]                          get topboard adc value (channel 3 is divided accu voltage"
-        )
-        print(
-            "get topboard adc all                                get all the topboard adc values"
-        )
-        print(
-            "set topboard io dir [pin nr] [in|out]               set the direction of an io pin on the topboard"
-        )
-        print(
-            "get topboard io dir [pin nr]                        get the direction of an io pin on the topboard"
-        )
-        print(
-            "set topboard io output [pin nr] [low|high]          set the pin value of an io pin on the topboard"
-        )
-        print(
-            "get topboard io input [pin nr]                      get the pin value of an io pin on the topboard"
-        )
+        print("are servos sleeping                                 shows information if servos are sleeping")
+        print("set led [color]                                     turn on led with its color [WHITE|RED|GREEN|BLUE|YELLOW|PURPLE|ON|OFF")
+        print("get led                                             displays the color of the led, or status ON | OFF")
+        print("get lib builddate                                   displays date when library was build")
+        print("get lib version                                     displays version of the library")
+        print("get topboard adc [channel]                          get topboard adc value (channel 3 is divided accu voltage")
+        print("get topboard adc all                                get all the topboard adc values")
+        print("set topboard io dir [pin nr] [in|out]               set the direction of an io pin on the topboard")
+        print("get topboard io dir [pin nr]                        get the direction of an io pin on the topboard")
+        print("set topboard io output [pin nr] [low|high]          set the pin value of an io pin on the topboard")
+        print("get topboard io input [pin nr]                      get the pin value of an io pin on the topboard")
         print("get accu voltage                                    get voltage of accu")
-        print(
-            "get accu capacity                                   get capacity of accu"
-        )
+        print("get accu capacity                                   get capacity of accu")
         print("get accu status                                     get status of accu")
         print("get imu magnetic                                    get magnetic values")
-        print(
-            "get imu acceleration                                get acceleration values"
-        )
+        print("get imu acceleration                                get acceleration values")
         print("get imu gyro                                        get gyro values")
         print("do i2c scan                                         scans the i2c bus")
-        print(
-            "do buzzer random                                    generate a random sound"
-        )
-        print(
-            "do buzzer slowwoop                                  generate a slowwoop sound"
-        )
+        print("do buzzer random                                    generate a random sound")
+        print("do buzzer slowwoop                                  generate a slowwoop sound")
         print("do buzzer beep                                      generate a beep")
-        print(
-            "do buzzer freq [frequency]                          generates a sound with requested frequency"
-        )
-        print(
-            "do buzzer stop                                      stop the generation of sound"
-        )
+        print("do buzzer freq [frequency]                          generates a sound with requested frequency")
+        print("do buzzer stop                                      stop the generation of sound")
         print("do test                                             will start a test")
-        print(
-            "do walk                                             the robot start to walk"
-        )
+        print( "do walk                                             the robot start to walk")
+        print("do camera test                                      test the camera")
+        print("do camera array                                     print camera array")
 
     # --------------------------------------------------------------------------------------
     # --------------------------------------------------------------------------------------
@@ -756,6 +695,15 @@ class Example:
                 servo_nr = int(data_in_list[3])
                 self.servo_fit(servo_nr)
 
+        elif command == "camera":
+            sub_command = data_in_list[2]
+            if sub_command == "test":
+                self.__test_the_camera()
+            elif sub_command == "array":
+                self.__print_array_camera()
+
+
+
         # -------------------------------------------------------
 
         elif command == "test":
@@ -870,6 +818,33 @@ class Example:
     # --------------------------------------------------------------------------------------
     # --------------------------------------------------------------------------------------
 
+    def __test_the_camera(self) -> None:
+        """!
+        Test the camera
+        @return: None
+        """
+        self.__robohat.test_camera()
+
+    # --------------------------------------------------------------------------------------
+    # --------------------------------------------------------------------------------------
+    # --------------------------------------------------------------------------------------
+
+    def __print_array_camera(self) -> None:
+        """!
+        Print data array from the camera
+        @return: None
+        """
+        cam : Camera = self.__robohat.get_camera()
+        if cam is not None:
+             if cam.is_cam_available() is True:
+                print("Going to print am array of a capture of camera")
+                print(cam.get_capture_array())
+        else:
+            print("Camera not available")
+
+    # --------------------------------------------------------------------------------------
+    # --------------------------------------------------------------------------------------
+    # --------------------------------------------------------------------------------------
 
 if __name__ == "__main__":
     main()
