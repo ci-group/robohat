@@ -1,21 +1,21 @@
 \chapter{Software description}
 \hypertarget{software}{}\label{software}\index{Software description@{Software description}}
-\doxysection*{\doxylink{namespace_robohat}{Robohat}}
+\doxysection*{Robohat}
 
-Version\+: 0.\+4.\+0
+Version\+: 0.\+6.\+0
 
-For the hardware description of the \doxylink{namespace_robohat}{Robohat}, see \doxysectlink{hardware}{Hardware description}{0} ~\newline
+For the hardware description of the Robohat, see \doxysectlink{hardware}{Hardware description}{0} ~\newline
 
 
 \DoxyHorRuler{0}
  \DoxyHorRuler{0}
 
 
-\doxysection*{\doxylink{namespace_robohat}{Robohat} software description}
+\doxysection*{Robohat software description}
 
 
 
-The Robohatlib is a piece of software written in Pyton, to be able to access the hardware. Some PCB-\/boards of the \doxylink{namespace_robohat}{Robohat} hardware, have user selectable addresses. Before using the Robohatlib, the user should know these addresses. For the hardware description see \doxysectlink{hardware}{Hardware description}{0}
+The Robohatlib is a piece of software written in Pyton, to be able to access the hardware. Some PCB-\/boards of the Robohat hardware, have user selectable addresses. Before using the Robohatlib, the user should know these addresses. For the hardware description see \doxysectlink{hardware}{Hardware description}{0}
 
 Boards with an address are the Topboard and the Servo-\/assemblies.
 
@@ -24,14 +24,14 @@ Boards with an address are the Topboard and the Servo-\/assemblies.
 
 \doxysection*{Using Robohatlib}
 
-The Startpoint of the Robo\+Hat Library is the \doxylink{namespace_robohat}{Robohat} class. After constructing the \doxylink{namespace_robohat}{Robohat} class, the \textquotesingle{}\doxylink{class_robohat_1_1_robohat_a93a812dd50020e71d2205fa6614890b6}{init }\textquotesingle{} function (of the \doxylink{namespace_robohat}{Robohat} class) has to be executed. The rest of the \doxylink{namespace_robohat}{Robohat} class consist of functions which can be used to access the \doxylink{namespace_robohat}{Robohat} hardware.
+The Startpoint of the Robo\+Hat Library is the Robohat class. After constructing the Robohat class, the \textquotesingle{}\doxylink{}{init }\textquotesingle{} function (of the Robohat class) has to be executed. The rest of the Robohat class consist of functions which can be used to access the Robohat hardware.
 
-\doxysubsection*{An example of using the \doxylink{namespace_robohat}{Robohat} library}
+\doxysubsection*{An example of using the Robohat library}
 
 
 \begin{DoxyCode}{0}
 \DoxyCodeLine{\textcolor{preprocessor}{\#\ creation\ of\ the\ Robohat\ class\ (mandatory)}}
-\DoxyCodeLine{robohat\ =\ \mbox{\hyperlink{namespace_robohat}{Robohat}}(TestConfig.servoassembly\_1\_config,\ TestConfig.servoassembly\_2\_config,\ TestConfig.TOPBOARD\_IO\_EXPANDER\_SW)}
+\DoxyCodeLine{robohat\ =\ Robohat(TestConfig.servoassembly\_1\_config,\ TestConfig.servoassembly\_2\_config,\ TestConfig.TOPBOARD\_IO\_EXPANDER\_SW)}
 \DoxyCodeLine{}
 \DoxyCodeLine{\textcolor{preprocessor}{\#\ initialisation\ of\ the\ Robohat\ class\ (mandatory)}}
 \DoxyCodeLine{robohat.init(TestConfig.SERVOBOARD\_1\_DATAS\_LIST,\ TestConfig.SERVOBOARD\_2\_DATAS\_LIST)}
@@ -54,14 +54,14 @@ The Startpoint of the Robo\+Hat Library is the \doxylink{namespace_robohat}{Robo
 \end{DoxyCode}
  {\itshape example sourcecode, which moves the angle of the servos}
 
-\doxysubsection*{\doxylink{namespace_robohat}{Robohat} constructor}
+\doxysubsection*{Robohat constructor}
 
-The \doxylink{namespace_robohat}{Robohat} constructor, consist out of 3 parameters, 2 Servo\+Assembly\+Configs (for Servo-\/assembly board 1 and Servo-\/assembly board 2) and the switch value of the Topboard.~\newline
+The Robohat constructor, consist out of 3 parameters, 2 Servo\+Assembly\+Configs (for Servo-\/assembly board 1 and Servo-\/assembly board 2) and the switch value of the Topboard.~\newline
 
 
 
 \begin{DoxyCode}{0}
-\DoxyCodeLine{robohat\ =\ \mbox{\hyperlink{namespace_robohat}{Robohat}}(SERVOASSEMBLY\_1\_CONFIG,\ SERVOASSEMBLY\_2\_CONFIG,\ TOPBOARD\_IO\_SWITCH)}
+\DoxyCodeLine{robohat\ =\ Robohat(SERVOASSEMBLY\_1\_CONFIG,\ SERVOASSEMBLY\_2\_CONFIG,\ TOPBOARD\_IO\_SWITCH)}
 
 \end{DoxyCode}
  {\itshape The parameters consist of 2 Servo\+Assembly\+Config and 1 switch value}
@@ -79,13 +79,13 @@ The \doxylink{namespace_robohat}{Robohat} constructor, consist out of 3 paramete
 \cellcolor{\tableheadbgcolor}\textbf{ SERVOASSEMBLY\+\_\+2\+\_\+\+CONFIG }&\cellcolor{\tableheadbgcolor}\textbf{ configuration of second servo assembly (Servo\+Assembly\+Config)   }\\\cline{1-2}
 \cellcolor{\tableheadbgcolor}\textbf{ TOPBOARD\+\_\+\+ID\+\_\+\+SWITCH }&\cellcolor{\tableheadbgcolor}\textbf{ Topboard ID switch value (int)   }\\\cline{1-2}
 \end{longtabu}
-{\itshape Parameters of \doxylink{namespace_robohat}{Robohat} class}
+{\itshape Parameters of Robohat class}
 
 If only 1 Servo assembly is used, the second SERVOASSEMBLY\+\_\+2\+\_\+\+CONFIG parameter can be None but can also be filled with data for a board which can be placed in the future.
 
 \doxysubsubsection*{Servo\+Assembly\+Config}
 
-A Servo\+Assembly\+Config is the configuration for a Servo assembly board, which consist out of 4 parameters and is needed by the \doxylink{namespace_robohat}{Robohat} constructor.
+A Servo\+Assembly\+Config is the configuration for a Servo assembly board, which consist out of 4 parameters and is needed by the Robohat constructor.
 
 
 \begin{DoxyCode}{0}
@@ -205,18 +205,18 @@ This function will set all the servos at a minimum angle, readout the analog val
 
 The calculated values will be used (until a restart of the Robohatlib) and will be displayed on the console. To make the new parameter values permanent, use the parameter values in the Servo\+Data.
 
-After initialisation of the \doxylink{namespace_robohat}{Robohat} class, a device scan will be performed and displayed onto the console. The Robohatlib is now ready to be used.
+After initialisation of the Robohat class, a device scan will be performed and displayed onto the console. The Robohatlib is now ready to be used.
 
 \DoxyHorRuler{0}
  \DoxyHorRuler{0}
  \doxysubsection*{Servos}
 
-The maximum servos attached to the \doxylink{namespace_robohat}{Robohat} can be 32 or 16, depending on how much assembly boards are present. See \doxysectlink{hardware}{Hardware description}{0}.
+The maximum servos attached to the Robohat can be 32 or 16, depending on how much assembly boards are present. See \doxysectlink{hardware}{Hardware description}{0}.
 
-To test if a servo is attached use the function \textquotesingle{}\doxylink{class_robohat_1_1_robohat_a39b197d94ef1d53960865bd5756642c8}{get\+\_\+servo\+\_\+is\+\_\+connected }\textquotesingle{}.
+To test if a servo is attached use the function \textquotesingle{}\doxylink{}{get\+\_\+servo\+\_\+is\+\_\+connected }\textquotesingle{}.
 
 {\bfseries{multiple servo movement}}~\newline
- With the function \textquotesingle{}\doxylink{class_robohat_1_1_robohat_acdd5ab2c00c12dca8afba0c4a848d62b}{set\+\_\+servo\+\_\+multiple\+\_\+angles }\textquotesingle{} you set the angle of all the servos. The list has to be a size of 16 or 32 elements. When the size is 16 elements, only the first 16 servos will be addressed. When the list has 32 elements, all the servos will be addressed. If a servo isn\textquotesingle{}t available, the value written to this register is discarded.
+ With the function \textquotesingle{}\doxylink{}{set\+\_\+servo\+\_\+multiple\+\_\+angles }\textquotesingle{} you set the angle of all the servos. The list has to be a size of 16 or 32 elements. When the size is 16 elements, only the first 16 servos will be addressed. When the list has 32 elements, all the servos will be addressed. If a servo isn\textquotesingle{}t available, the value written to this register is discarded.
 
 
 \begin{DoxyCode}{0}
@@ -225,7 +225,7 @@ To test if a servo is attached use the function \textquotesingle{}\doxylink{clas
 \end{DoxyCode}
  {\itshape Setting multiple servos to an angle}
 
-{\bfseries{single servo movement}} when only 1 servo has to be moved, use the function \textquotesingle{}\doxylink{class_robohat_1_1_robohat_ab45b37a6bde413f1a5fd8afb8253cb54}{set\+\_\+servo\+\_\+single\+\_\+angle }\textquotesingle{}
+{\bfseries{single servo movement}} when only 1 servo has to be moved, use the function \textquotesingle{}\doxylink{}{set\+\_\+servo\+\_\+single\+\_\+angle }\textquotesingle{}
 
 
 \begin{DoxyCode}{0}
@@ -236,19 +236,19 @@ To test if a servo is attached use the function \textquotesingle{}\doxylink{clas
 
 When the servo isn\textquotesingle{}t available, the value written to this register is discarded. To get more accurate reading, the user can calibrate the servos. The auto calibration is described at above, at the robohat.\+init function section.
 
-To read out a servo angle, use its counter part\+: \doxylink{class_robohat_1_1_robohat_a2f4162ec1ae859e03781e652f87ddf95}{get\+\_\+servo\+\_\+single\+\_\+angle }\textquotesingle{}
+To read out a servo angle, use its counter part\+: \doxylink{}{get\+\_\+servo\+\_\+single\+\_\+angle }\textquotesingle{}
 
-To check if the servo is at the wanted angle, use \doxylink{class_robohat_1_1_robohat_a126e0c1bb8210abaa88e370a91248338}{get\+\_\+servo\+\_\+is\+\_\+single\+\_\+servo\+\_\+wanted\+\_\+angle }\textquotesingle{}
+To check if the servo is at the wanted angle, use \doxylink{}{get\+\_\+servo\+\_\+is\+\_\+single\+\_\+servo\+\_\+wanted\+\_\+angle }\textquotesingle{}
 
-The user can also use a blocking function\+: \doxylink{class_robohat_1_1_robohat_a736b6f7e904a928e84d61ad8fe35fdf2}{do\+\_\+wait\+\_\+until\+\_\+servo\+\_\+is\+\_\+wanted\+\_\+angle }\textquotesingle{} to wait until the servo reached the angle.
+The user can also use a blocking function\+: \doxylink{}{do\+\_\+wait\+\_\+until\+\_\+servo\+\_\+is\+\_\+wanted\+\_\+angle }\textquotesingle{} to wait until the servo reached the angle.
 
 {\bfseries{Update modes}} There are 2 modes to move the servos. Direct mode, and delayed mode.
 
-The function to user to change the mode is \doxylink{class_robohat_1_1_robohat_a05309a6b93a91d76aef587a011bf7a26}{set\+\_\+servo\+\_\+direct\+\_\+mode }\textquotesingle{}
+The function to user to change the mode is \doxylink{}{set\+\_\+servo\+\_\+direct\+\_\+mode }\textquotesingle{}
 
-When using the direct mode, the value of the angle is directly set, resulting in a direct movement. Because the movement is instant, (the movement will be fast), the needed force is high. A higher force results in a high current. The powersupply of the \doxylink{namespace_robohat}{Robohat} could limit the current, resulting in a strange movement of the servos See \doxysectlink{hardware}{Hardware description}{0} to distribute the servos in groups to even the current.
+When using the direct mode, the value of the angle is directly set, resulting in a direct movement. Because the movement is instant, (the movement will be fast), the needed force is high. A higher force results in a high current. The powersupply of the Robohat could limit the current, resulting in a strange movement of the servos See \doxysectlink{hardware}{Hardware description}{0} to distribute the servos in groups to even the current.
 
-Higher forces causes also more stress on the joints of the \doxylink{namespace_robohat}{Robohat}.
+Higher forces causes also more stress on the joints of the Robohat.
 
 To limit these problems, the servo steering could be set to delay mode.
 
@@ -259,16 +259,16 @@ To limit these problems, the servo steering could be set to delay mode.
 \end{DoxyCode}
  {\itshape Setting the servo steering to delay mode, with an update time of 1mS }
 
-The readout which update mode is used \doxylink{class_robohat_1_1_robohat_acfdd4f98452f6cd53119a668167105e8}{get\+\_\+servo\+\_\+is\+\_\+direct\+\_\+mode }\textquotesingle{}
+The readout which update mode is used \doxylink{}{get\+\_\+servo\+\_\+is\+\_\+direct\+\_\+mode }\textquotesingle{}
 
 \DoxyHorRuler{0}
 
 
 \doxysubsection*{Shutdown the robohat}
 
-When to user wants to turn off the \doxylink{namespace_robohat}{Robohat}, a proper shutdown has to be performed. Shutting down only the power, could cause corruption of the SD card.
+When to user wants to turn off the Robohat, a proper shutdown has to be performed. Shutting down only the power, could cause corruption of the SD card.
 
-By using the function \textquotesingle{}\doxylink{class_robohat_1_1_robohat_a5406da6594dac33aebf351a0905ea0e5}{do\+\_\+system\+\_\+shutdown }\textquotesingle{} all hardware will be stopped to an idle state. The OS will be nicely shut-\/downed closing all its resources, and after a minute the power will go off.
+By using the function \textquotesingle{}\doxylink{}{do\+\_\+system\+\_\+shutdown }\textquotesingle{} all hardware will be stopped to an idle state. The OS will be nicely shut-\/downed closing all its resources, and after a minute the power will go off.
 
 Turning on, must be done by pressing the button as described in /ref hardware
 
@@ -277,35 +277,35 @@ Turning on, must be done by pressing the button as described in /ref hardware
 
 \doxysubsection*{Interrupts}
 
-The \doxylink{namespace_robohat}{Robohat} library can generate 3 interrupts. The first one is the interrupt of the Topboard IO-\/expander, the 2 other interrupts can be generated by the Servo-\/assembly-\/boards.
+The Robohat library can generate 3 interrupts. The first one is the interrupt of the Topboard IO-\/expander, the 2 other interrupts can be generated by the Servo-\/assembly-\/boards.
 
 \doxyparagraph*{Topboard interrupt}
 
-When an I/O pin of the Topboard IO expander is set as an intput, it can generate an interrupt. To catch this interrupt, a callback function has to be set with the function \textquotesingle{}set\+\_\+topboard\+\_\+io\+\_\+expander\+\_\+int\+\_\+callback( {\itshape the} function)\textquotesingle{} of the \doxylink{namespace_robohat}{Robohat} library. This callback function has an integer as parameter. This parameter is set to tell the callback function which IO pin has cause the triggering of the interrupt.
+When an I/O pin of the Topboard IO expander is set as an intput, it can generate an interrupt. To catch this interrupt, a callback function has to be set with the function \textquotesingle{}set\+\_\+topboard\+\_\+io\+\_\+expander\+\_\+int\+\_\+callback( {\itshape the} function)\textquotesingle{} of the Robohat library. This callback function has an integer as parameter. This parameter is set to tell the callback function which IO pin has cause the triggering of the interrupt.
 
 \doxyparagraph*{Assemblyboard interrupt}
 
-Both assembly board has a IO-\/expander which is used to detect if the power delivery for the servos is working correctly. To detect a power fail, only 4 IO pins of the expander are used. IO pin 4,5 and 6 can be used by a user. When these pins a configured as an input, in can generate an interrupt. To catch this interrupt, a callback function has to be set (for board 1) with the function \textquotesingle{}set\+\_\+assemblyboard\+\_\+1\+\_\+io\+\_\+expander\+\_\+int\+\_\+callback( \+\_\+the\+\_\+function)\textquotesingle{} of the \doxylink{namespace_robohat}{Robohat} library. This callback function has an integer as parameter. This parameter is set to tell the callback function which IO pin has cause the triggering of the interrupt.
+Both assembly board has a IO-\/expander which is used to detect if the power delivery for the servos is working correctly. To detect a power fail, only 4 IO pins of the expander are used. IO pin 4,5 and 6 can be used by a user. When these pins a configured as an input, in can generate an interrupt. To catch this interrupt, a callback function has to be set (for board 1) with the function \textquotesingle{}set\+\_\+assemblyboard\+\_\+1\+\_\+io\+\_\+expander\+\_\+int\+\_\+callback( \+\_\+the\+\_\+function)\textquotesingle{} of the Robohat library. This callback function has an integer as parameter. This parameter is set to tell the callback function which IO pin has cause the triggering of the interrupt.
 
 Use set\+\_\+assemblyboard\+\_\+2\+\_\+io\+\_\+expander\+\_\+int\+\_\+callback, for board 2
 
 \DoxyHorRuler{0}
  \doxysubsection*{Topboard functions}
 
-At the Topboard of the \doxylink{namespace_robohat}{Robohat}, an ADC and some I/O are available for the user. See \doxysectlink{hardware}{Hardware description}{0}
+At the Topboard of the Robohat, an ADC and some I/O are available for the user. See \doxysectlink{hardware}{Hardware description}{0}
 
 {\bfseries{ADC}} The ADC has some functions, which will reply in volts measured.~\newline
  {\bfseries{Note}}. The maximal voltage which the ADC can measure is 3 volts.~\newline
- For single channel use\+: \textquotesingle{}\doxylink{class_robohat_1_1_robohat_af86a031ba23fc4e455dd6de5faeaee88}{get\+\_\+topboard\+\_\+adc\+\_\+single\+\_\+channel }\textquotesingle{} For all the channels at once use\+: \textquotesingle{}\doxylink{class_robohat_1_1_robohat_a8f8adbc89f0d3887630c0a6ad16ae384}{get\+\_\+topboard\+\_\+adc\+\_\+multiple\+\_\+channels }\textquotesingle{}
+ For single channel use\+: \textquotesingle{}\doxylink{}{get\+\_\+topboard\+\_\+adc\+\_\+single\+\_\+channel }\textquotesingle{} For all the channels at once use\+: \textquotesingle{}\doxylink{}{get\+\_\+topboard\+\_\+adc\+\_\+multiple\+\_\+channels }\textquotesingle{}
 
 {\bfseries{I/O}}
 
-There is also I/O pims avaible. To set the function of a pin, use\+: \textquotesingle{}\doxylink{class_robohat_1_1_robohat_a90c0b9397755090e60c167a3c06a9e43}{set\+\_\+topboard\+\_\+io\+\_\+expander\+\_\+direction }\textquotesingle{} ~\newline
- When the pin is set an output, the output can set by \textquotesingle{}\doxylink{class_robohat_1_1_robohat_a90b3164ba85f9da0bdf34e3df35cecf1}{set\+\_\+topboard\+\_\+io\+\_\+expander\+\_\+output }\textquotesingle{} ~\newline
+There is also I/O pims avaible. To set the function of a pin, use\+: \textquotesingle{}\doxylink{}{set\+\_\+topboard\+\_\+io\+\_\+expander\+\_\+direction }\textquotesingle{} ~\newline
+ When the pin is set an output, the output can set by \textquotesingle{}\doxylink{}{set\+\_\+topboard\+\_\+io\+\_\+expander\+\_\+output }\textquotesingle{} ~\newline
 
 
-When set a pin is set as input, the status can be read by \textquotesingle{}\doxylink{class_robohat_1_1_robohat_a7fd577a7cc4d8f0686e62877c3767823}{set\+\_\+topboard\+\_\+io\+\_\+expander\+\_\+output }\textquotesingle{} ~\newline
- At the pin an interrupt can be used. Do to so, a callback function has to be attached by\+: \textquotesingle{}\doxylink{class_robohat_1_1_robohat_a90b3164ba85f9da0bdf34e3df35cecf1}{set\+\_\+topboard\+\_\+io\+\_\+expander\+\_\+int\+\_\+callback }\textquotesingle{}~\newline
+When set a pin is set as input, the status can be read by \textquotesingle{}\doxylink{}{set\+\_\+topboard\+\_\+io\+\_\+expander\+\_\+output }\textquotesingle{} ~\newline
+ At the pin an interrupt can be used. Do to so, a callback function has to be attached by\+: \textquotesingle{}\doxylink{}{set\+\_\+topboard\+\_\+io\+\_\+expander\+\_\+int\+\_\+callback }\textquotesingle{}~\newline
 
 
 For the connections of the ADC or I/O see \doxysectlink{hardware}{Hardware description}{0}
@@ -313,57 +313,57 @@ For the connections of the ADC or I/O see \doxysectlink{hardware}{Hardware descr
 \DoxyHorRuler{0}
  \doxysubsection*{IMU}
 
-An inertial measurement unit is present. This unit can be used to determine the position and direction of the movement of the \doxylink{namespace_robohat}{Robohat}.
+An inertial measurement unit is present. This unit can be used to determine the position and direction of the movement of the Robohat.
 
-At this moment only raw values are avaible\+: \textquotesingle{}\doxylink{class_robohat_1_1_robohat_aa6e5018b69784bc0292039d280bc9627}{get\+\_\+imu\+\_\+magnetic\+\_\+fields }\textquotesingle{} for the detection of movement in X, Y, and Z direction~\newline
- \textquotesingle{}\doxylink{class_robohat_1_1_robohat_a6b620b62f2e21a8807c2e3d1919c084a}{get\+\_\+imu\+\_\+acceleration }\textquotesingle{} for the detection of acceleration in X, Y, and Z direction~\newline
- \textquotesingle{}\doxylink{class_robohat_1_1_robohat_a67460ccacef977079262d98d0fe7bf90}{get\+\_\+imu\+\_\+gyro }\textquotesingle{} for the detection of rotation in X, Y, and Z direction~\newline
+At this moment only raw values are avaible\+: \textquotesingle{}\doxylink{}{get\+\_\+imu\+\_\+magnetic\+\_\+fields }\textquotesingle{} for the detection of movement in X, Y, and Z direction~\newline
+ \textquotesingle{}\doxylink{}{get\+\_\+imu\+\_\+acceleration }\textquotesingle{} for the detection of acceleration in X, Y, and Z direction~\newline
+ \textquotesingle{}\doxylink{}{get\+\_\+imu\+\_\+gyro }\textquotesingle{} for the detection of rotation in X, Y, and Z direction~\newline
 
 
 \DoxyHorRuler{0}
  \doxysubsection*{Battery}
 
-When the capacity if battery falls below a threshold, the user will be notified (by an alarm and a message to the console). When the capacity is wat too low, the \doxylink{namespace_robohat}{Robohat} will be shutdown (to save the battery).
+When the capacity if battery falls below a threshold, the user will be notified (by an alarm and a message to the console). When the capacity is wat too low, the Robohat will be shutdown (to save the battery).
 
-If the user want to know the battery capacity, the user can use the function\+: \textquotesingle{}\doxylink{class_robohat_1_1_robohat_a23269df3660ed87cbb8eb7228bfd99fb}{get\+\_\+battery\+\_\+percentage\+\_\+capacity }\textquotesingle{}
+If the user want to know the battery capacity, the user can use the function\+: \textquotesingle{}\doxylink{}{get\+\_\+battery\+\_\+percentage\+\_\+capacity }\textquotesingle{}
 
 \DoxyHorRuler{0}
  \doxysubsection*{Color LED}
 
-At the top of the \doxylink{namespace_robohat}{Robohat} a LED is mounted. This LED with be illuminating white when the Robohatlib is initialized.
+At the top of the Robohat a LED is mounted. This LED with be illuminating white when the Robohatlib is initialized.
 
-By using the function \textquotesingle{}\doxylink{class_robohat_1_1_robohat_a9dd9c22a883391d5161ec5410e6e2dee}{set\+\_\+led\+\_\+color }\textquotesingle{} you can set the LED to WHITE, RED, GREEN, BLUE, YELLOW, and PURPLE. This function will also turn on the LED.
+By using the function \textquotesingle{}\doxylink{}{set\+\_\+led\+\_\+color }\textquotesingle{} you can set the LED to WHITE, RED, GREEN, BLUE, YELLOW, and PURPLE. This function will also turn on the LED.
 
-The user can turn off the LED by the function \textquotesingle{}\doxylink{class_robohat_1_1_robohat_ad20f33d920985552b372f52dc7761177}{turn\+\_\+led\+\_\+off }\textquotesingle{}.
+The user can turn off the LED by the function \textquotesingle{}\doxylink{}{turn\+\_\+led\+\_\+off }\textquotesingle{}.
 
-If the user to turn on the LED again, the user should use \textquotesingle{}\doxylink{class_robohat_1_1_robohat_a7e97193aaffde3a33961dbef937b0d07}{turn\+\_\+led\+\_\+on }\textquotesingle{}. The color off the LED, will be the color last used.
+If the user to turn on the LED again, the user should use \textquotesingle{}\doxylink{}{turn\+\_\+led\+\_\+on }\textquotesingle{}. The color off the LED, will be the color last used.
 
 The user can also use OFF or ON with the function set\+\_\+led\+\_\+color. This will turn the LED off or on.
 
-When the user want to know which color the LED currently is, the function \textquotesingle{}\doxylink{class_robohat_1_1_robohat_ab81e0022b843be3d7637ba1d9d1fbb69}{get\+\_\+led\+\_\+color }\textquotesingle{} should be used
+When the user want to know which color the LED currently is, the function \textquotesingle{}\doxylink{}{get\+\_\+led\+\_\+color }\textquotesingle{} should be used
 
 \DoxyHorRuler{0}
  \doxysubsection*{Buzzer}
 
-The \doxylink{namespace_robohat}{Robohat} is equipped with an buzzer.
+The Robohat is equipped with an buzzer.
 
-There are multiple function the user can use, to create a sound such as\+: \textquotesingle{}\doxylink{class_robohat_1_1_robohat_aa6739066050468f18c513ed7c277f1a3}{do\+\_\+buzzer\+\_\+random }\textquotesingle{} \textquotesingle{}\doxylink{class_robohat_1_1_robohat_a4ef2ead085066683f530065d814cf869}{do\+\_\+buzzer\+\_\+slowwoop }\textquotesingle{} \textquotesingle{}\doxylink{class_robohat_1_1_robohat_ac6e7e67d4e264ab9c6b66cd413efd864}{do\+\_\+buzzer\+\_\+beep }\textquotesingle{}~\newline
+There are multiple function the user can use, to create a sound such as\+: \textquotesingle{}\doxylink{}{do\+\_\+buzzer\+\_\+random }\textquotesingle{} \textquotesingle{}\doxylink{}{do\+\_\+buzzer\+\_\+slowwoop }\textquotesingle{} \textquotesingle{}\doxylink{}{do\+\_\+buzzer\+\_\+beep }\textquotesingle{}~\newline
  The duration of the sound is limited
 
 There is also a function which generates a sound until the sound is stopped
 
-The function\+: \textquotesingle{}\doxylink{class_robohat_1_1_robohat_ac404c660d3289c975d53e3883f42c967}{do\+\_\+buzzer\+\_\+freq }\textquotesingle{}, gives a sound at a given frequency, until it has turned off with \textquotesingle{}\doxylink{class_robohat_1_1_robohat_a6b4e421c4bd1c3d7dedc90b4b83201e0}{do\+\_\+buzzer\+\_\+release }\textquotesingle{}
+The function\+: \textquotesingle{}\doxylink{}{do\+\_\+buzzer\+\_\+freq }\textquotesingle{}, gives a sound at a given frequency, until it has turned off with \textquotesingle{}\doxylink{}{do\+\_\+buzzer\+\_\+release }\textquotesingle{}
 
 \DoxyHorRuler{0}
  \doxysubsection*{Miscellaneous}
 
-There are a lot more functions present in the Robohatlib. Take a look at the \doxylink{namespace_robohat}{Robohat} class for the full function list.
+There are a lot more functions present in the Robohatlib. Take a look at the Robohat class for the full function list.
 
 \DoxyHorRuler{0}
  \DoxyHorRuler{0}
  \doxysubsection*{Robohatlib test applications }
 
-The \doxylink{namespace_robohat}{Robohat} library comes with 2 test-\/applications.
+The Robohat library comes with 2 test-\/applications.
 
 \DoxyHorRuler{0}
 

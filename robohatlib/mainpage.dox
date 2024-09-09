@@ -24,6 +24,10 @@
 <BR>
 <TABLE class="par">
 <tr><th>Who     </th><th>Version</th><th>When      </th><th>What                                                </th></tr>
+
+
+<TR><TD>A.Denker</TD><TD>0.6.0  </TD><TD>09-09-2024</TD><TD>Added Camera api</TD></TR>
+<TR><TD>A.Denker</TD><TD>0.5.0  </TD><TD>01-08-2024</TD><TD>Checks RPi board and lib versiopns</TD></TR>
 <TR><TD>A.Denker</TD><TD>0.4.0  </TD><TD>30-08-2023</TD><TD>Refactoring arrays to lists</TD></TR>
 <TR><TD>A.Denker</TD><TD>0.3.0  </TD><TD>29-08-2023</TD><TD>Added a time offset for the servos                  </TD></TR>
 <TR><TD>A.Denker</TD><TD>0.3.0  </TD><TD>28-08-2023</TD><TD>Changed power-good detection DC/DC converters servos</TD></TR>

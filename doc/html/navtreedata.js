@@ -52,7 +52,8 @@ var NAVTREE =
 
 var NAVTREEINDEX =
 [
-"annotated.html"
+"annotated.html",
+"db/d3d/namespacerobohatlib_1_1_robohat_config.html#adb520ee0c3378adc6b8441fff8df06f5"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';

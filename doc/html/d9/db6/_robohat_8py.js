@@ -1,4 +1,4 @@
 var _robohat_8py =
 [
-    [ "Robohat.Robohat", "d3/d60/class_robohat_1_1_robohat.html", "d3/d60/class_robohat_1_1_robohat" ]
+    [ "robohatlib.Robohat.Robohat", "d9/df9/classrobohatlib_1_1_robohat_1_1_robohat.html", "d9/df9/classrobohatlib_1_1_robohat_1_1_robohat" ]
 ];

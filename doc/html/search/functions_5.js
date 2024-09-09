@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['init_0',['init',['../d3/d60/class_robohat_1_1_robohat.html#a93a812dd50020e71d2205fa6614890b6',1,'Robohat::Robohat']]]
+  ['init_0',['init',['../d9/df9/classrobohatlib_1_1_robohat_1_1_robohat.html#a1c86033282d36263e7121df45f00e02b',1,'robohatlib::Robohat::Robohat']]]
 ];

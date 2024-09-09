@@ -1,16 +1,16 @@
 var searchData=
 [
-  ['accu_5finterval_5ftime_5fin_5fseconds_0',['ACCU_INTERVAL_TIME_IN_SECONDS',['../dd/d25/namespace_robohat_config.html#aa90d674eb09915b67fd60ed6054105a4',1,'RobohatConfig']]],
-  ['accu_5flog_5fdisplay_5fwhen_5fto_5fhigh_1',['ACCU_LOG_DISPLAY_WHEN_TO_HIGH',['../dd/d25/namespace_robohat_config.html#a3012b91ef82705b1961775a6a835b28f',1,'RobohatConfig']]],
-  ['accu_5flog_5fdisplay_5fwhen_5fto_5flow_2',['ACCU_LOG_DISPLAY_WHEN_TO_LOW',['../dd/d25/namespace_robohat_config.html#a8beb43d1452c2805453246a529ac0cfc',1,'RobohatConfig']]],
-  ['accu_5fvoltage_5fadc_5fformula_5fa_3',['ACCU_VOLTAGE_ADC_FORMULA_A',['../dd/d25/namespace_robohat_config.html#a56df2b0bd71ca8d4b07d0e489bf25f54',1,'RobohatConfig']]],
-  ['accu_5fvoltage_5fadc_5fformula_5fb_4',['ACCU_VOLTAGE_ADC_FORMULA_B',['../dd/d25/namespace_robohat_config.html#adb11cf7ad26b90f38ddfc944ef3b8e2b',1,'RobohatConfig']]],
-  ['accu_5fvoltage_5fto_5fhigh_5fthreshold_5',['ACCU_VOLTAGE_TO_HIGH_THRESHOLD',['../dd/d25/namespace_robohat_config.html#a6b9c8385bb0a6ca2fbe569a77e447c04',1,'RobohatConfig']]],
-  ['accu_5fvoltage_5fto_5flow_5fthreshold_6',['ACCU_VOLTAGE_TO_LOW_THRESHOLD',['../dd/d25/namespace_robohat_config.html#afb06ec6637d3753426359d5a296a4b03',1,'RobohatConfig']]],
-  ['accu_5fvoltage_5fto_5fpercentage_5flist_7',['ACCU_VOLTAGE_TO_PERCENTAGE_LIST',['../dd/d25/namespace_robohat_config.html#a9f45fa78f32a640d9fc82e5c3a6fc2dd',1,'RobohatConfig']]],
-  ['accu_5fwarning_5fpercentage_5f1_8',['ACCU_WARNING_PERCENTAGE_1',['../dd/d25/namespace_robohat_config.html#a9ff031c125e65a4fdee84b377f9dc0f7',1,'RobohatConfig']]],
-  ['accu_5fwarning_5fpercentage_5f2_9',['ACCU_WARNING_PERCENTAGE_2',['../dd/d25/namespace_robohat_config.html#a10a2bf7a707d26126a6111c4fae0cd47',1,'RobohatConfig']]],
-  ['alarm_5fpermitted_10',['ALARM_PERMITTED',['../dd/d25/namespace_robohat_config.html#a921b4eee229ab6bce8264cbe1d017779',1,'RobohatConfig']]],
-  ['alarm_5ftimeout_5fin_5fsec_11',['ALARM_TIMEOUT_IN_SEC',['../dd/d25/namespace_robohat_config.html#ada75599fe7710290d89b3c3a40a831b2',1,'RobohatConfig']]],
-  ['are_5fservos_5fsleeping_12',['are_servos_sleeping',['../d3/d60/class_robohat_1_1_robohat.html#ac8c98160d4565f35a504dc1f1db134a6',1,'Robohat::Robohat']]]
+  ['accu_5finterval_5ftime_5fin_5fseconds_0',['ACCU_INTERVAL_TIME_IN_SECONDS',['../db/d3d/namespacerobohatlib_1_1_robohat_config.html#ab9272c4d1a91c378c4b10c7fda62e2ec',1,'robohatlib::RobohatConfig']]],
+  ['accu_5flog_5fdisplay_5fwhen_5fto_5fhigh_1',['ACCU_LOG_DISPLAY_WHEN_TO_HIGH',['../db/d3d/namespacerobohatlib_1_1_robohat_config.html#a348d690e19a3eaad757d568fb504f640',1,'robohatlib::RobohatConfig']]],
+  ['accu_5flog_5fdisplay_5fwhen_5fto_5flow_2',['ACCU_LOG_DISPLAY_WHEN_TO_LOW',['../db/d3d/namespacerobohatlib_1_1_robohat_config.html#a6a4053481cdc8f1b1fea5ba23d1ca61d',1,'robohatlib::RobohatConfig']]],
+  ['accu_5fvoltage_5fadc_5fformula_5fa_3',['ACCU_VOLTAGE_ADC_FORMULA_A',['../db/d3d/namespacerobohatlib_1_1_robohat_config.html#aa394e3cadabef0423f63ce756569e353',1,'robohatlib::RobohatConfig']]],
+  ['accu_5fvoltage_5fadc_5fformula_5fb_4',['ACCU_VOLTAGE_ADC_FORMULA_B',['../db/d3d/namespacerobohatlib_1_1_robohat_config.html#abbe217c9999068a3d1ac6fef3bec6f5a',1,'robohatlib::RobohatConfig']]],
+  ['accu_5fvoltage_5fto_5fhigh_5fthreshold_5',['ACCU_VOLTAGE_TO_HIGH_THRESHOLD',['../db/d3d/namespacerobohatlib_1_1_robohat_config.html#a544643bb56b6f0f31227e23f3019416a',1,'robohatlib::RobohatConfig']]],
+  ['accu_5fvoltage_5fto_5flow_5fthreshold_6',['ACCU_VOLTAGE_TO_LOW_THRESHOLD',['../db/d3d/namespacerobohatlib_1_1_robohat_config.html#ad7779dfa075444f5f941eff2afc1a862',1,'robohatlib::RobohatConfig']]],
+  ['accu_5fvoltage_5fto_5fpercentage_5flist_7',['ACCU_VOLTAGE_TO_PERCENTAGE_LIST',['../db/d3d/namespacerobohatlib_1_1_robohat_config.html#a274c983036abd00e77cc01f45efd65f0',1,'robohatlib::RobohatConfig']]],
+  ['accu_5fwarning_5fpercentage_5f1_8',['ACCU_WARNING_PERCENTAGE_1',['../db/d3d/namespacerobohatlib_1_1_robohat_config.html#a43dc6a63b55dde595980763a80008d76',1,'robohatlib::RobohatConfig']]],
+  ['accu_5fwarning_5fpercentage_5f2_9',['ACCU_WARNING_PERCENTAGE_2',['../db/d3d/namespacerobohatlib_1_1_robohat_config.html#a261e299dc6c74e45b597608f4ca885fd',1,'robohatlib::RobohatConfig']]],
+  ['alarm_5fpermitted_10',['ALARM_PERMITTED',['../db/d3d/namespacerobohatlib_1_1_robohat_config.html#a551b23b65d5f805c5d907ec53237691f',1,'robohatlib::RobohatConfig']]],
+  ['alarm_5ftimeout_5fin_5fsec_11',['ALARM_TIMEOUT_IN_SEC',['../db/d3d/namespacerobohatlib_1_1_robohat_config.html#a3452b7601a088514680e38955ac81c30',1,'robohatlib::RobohatConfig']]],
+  ['are_5fservos_5fsleeping_12',['are_servos_sleeping',['../d9/df9/classrobohatlib_1_1_robohat_1_1_robohat.html#a6bdbf66d3f9d40093185abe1e18cc179',1,'robohatlib::Robohat::Robohat']]]
 ];

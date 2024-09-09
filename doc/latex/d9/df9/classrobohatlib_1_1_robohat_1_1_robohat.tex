@@ -1,0 +1,1512 @@
+\doxysection{robohatlib.\+Robohat.\+Robohat Class Reference}
+\hypertarget{classrobohatlib_1_1_robohat_1_1_robohat}{}\label{classrobohatlib_1_1_robohat_1_1_robohat}\index{robohatlib.Robohat.Robohat@{robohatlib.Robohat.Robohat}}
+
+
+Top class of Robohat library.  
+
+
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classrobohatlib_1_1_robohat_1_1_robohat_af141942da53defcd08eb3eeaf0ccffe4}{\+\_\+\+\_\+init\+\_\+\+\_\+}} (self, Servo\+Assembly\+Config \+\_\+servo\+\_\+assembly\+\_\+1\+\_\+config, Servo\+Assembly\+Config \+\_\+servo\+\_\+assembly\+\_\+2\+\_\+config, int \+\_\+switch\+\_\+top\+\_\+board=7)
+\begin{DoxyCompactList}\small\item\em The Robohat base class initializer. \end{DoxyCompactList}\item 
+None \mbox{\hyperlink{classrobohatlib_1_1_robohat_1_1_robohat_a1c86033282d36263e7121df45f00e02b}{init}} (self, \mbox{[}$\,$\mbox{]} \+\_\+servo\+\_\+board\+\_\+1\+\_\+datas\+\_\+list, \mbox{[}$\,$\mbox{]} \+\_\+servo\+\_\+board\+\_\+2\+\_\+datas\+\_\+list)
+\begin{DoxyCompactList}\small\item\em Initializes the Robohat. \end{DoxyCompactList}\item 
+None \mbox{\hyperlink{classrobohatlib_1_1_robohat_1_1_robohat_af3229522f16681b57ca0cea14a8a6fb6}{update\+\_\+servo\+\_\+data\+\_\+direct}} (self, \mbox{[}$\,$\mbox{]} \+\_\+wanted\+\_\+angles)
+\begin{DoxyCompactList}\small\item\em Drives the servos directly. \end{DoxyCompactList}\item 
+None \mbox{\hyperlink{classrobohatlib_1_1_robohat_1_1_robohat_ae9fa133f55219455c5ede1adbbeecb75}{start\+\_\+servo\+\_\+drivers}} (self)
+\begin{DoxyCompactList}\small\item\em Start the servo drivers. \end{DoxyCompactList}\item 
+None \mbox{\hyperlink{classrobohatlib_1_1_robohat_1_1_robohat_ab33abf6c9e3d98571c24cee7b97bbece}{stop\+\_\+servo\+\_\+drivers}} (self)
+\begin{DoxyCompactList}\small\item\em Stops the servo drivers. \end{DoxyCompactList}\item 
+None \mbox{\hyperlink{classrobohatlib_1_1_robohat_1_1_robohat_ab0aae20a0b4bf8d0ae50f1ec57f7ae6a}{exit\+\_\+program}} (self)
+\begin{DoxyCompactList}\small\item\em Exit the program. \end{DoxyCompactList}\item 
+None \mbox{\hyperlink{classrobohatlib_1_1_robohat_1_1_robohat_a7c8ee8ee5628a69ce9df967f71250c4a}{do\+\_\+i2c\+\_\+scan}} (self)
+\begin{DoxyCompactList}\small\item\em Scans all the available I2C busses on the Robohat hardware Displays the found I2C devices onto the console. \end{DoxyCompactList}\item 
+None \mbox{\hyperlink{classrobohatlib_1_1_robohat_1_1_robohat_af837280d0293d4df63003b88cb40a286}{do\+\_\+buzzer\+\_\+random}} (self)
+\begin{DoxyCompactList}\small\item\em Generates a random sound. \end{DoxyCompactList}\item 
+None \mbox{\hyperlink{classrobohatlib_1_1_robohat_1_1_robohat_a0aac38c32f6592d5a21623213fdfa4d2}{do\+\_\+buzzer\+\_\+slowwoop}} (self)
+\begin{DoxyCompactList}\small\item\em Generates a sound from 2000Hz to 50Hz. \end{DoxyCompactList}\item 
+None \mbox{\hyperlink{classrobohatlib_1_1_robohat_1_1_robohat_ab1f74f3f1b2aed9ce7ad2239864f430f}{do\+\_\+buzzer\+\_\+beep}} (self)
+\begin{DoxyCompactList}\small\item\em Short beep of the buzzer. \end{DoxyCompactList}\item 
+None \mbox{\hyperlink{classrobohatlib_1_1_robohat_1_1_robohat_a8c5e7f7d807c9028b8b2706a1a4bc9f2}{do\+\_\+buzzer\+\_\+freq}} (self, int \+\_\+freq)
+\begin{DoxyCompactList}\small\item\em Beeps the buzzer at a requested frequency. \end{DoxyCompactList}\item 
+None \mbox{\hyperlink{classrobohatlib_1_1_robohat_1_1_robohat_a809548b350cd4f64159b77e9d392d38d}{do\+\_\+buzzer\+\_\+release}} (self)
+\begin{DoxyCompactList}\small\item\em Stops the buzzer from making sound. \end{DoxyCompactList}\item 
+None \mbox{\hyperlink{classrobohatlib_1_1_robohat_1_1_robohat_a63bed7a38cf3f03aa4eb8284191899f5}{set\+\_\+led\+\_\+color}} (self, Color \+\_\+color)
+\begin{DoxyCompactList}\small\item\em Sets the color of the LED and turns the LED on Valid colors are\+: WHITE, RED, GREEN, BLUE, YELLOW, and PURPLE. \end{DoxyCompactList}\item 
+None \mbox{\hyperlink{classrobohatlib_1_1_robohat_1_1_robohat_a1d23e2adb30d38bc8a57eefce9317bd6}{turn\+\_\+led\+\_\+off}} (self)
+\begin{DoxyCompactList}\small\item\em Turns led off, last color will be stored. \end{DoxyCompactList}\item 
+None \mbox{\hyperlink{classrobohatlib_1_1_robohat_1_1_robohat_a0ef4f3224c34f280dced9122dc3b552e}{turn\+\_\+led\+\_\+on}} (self)
+\begin{DoxyCompactList}\small\item\em Turns led on, with last known color. \end{DoxyCompactList}\item 
+Color \mbox{\hyperlink{classrobohatlib_1_1_robohat_1_1_robohat_a51ac33b01b20be2bee9289afbc32b378}{get\+\_\+led\+\_\+color}} (self)
+\begin{DoxyCompactList}\small\item\em Get current color of the LED. \end{DoxyCompactList}\item 
+None \mbox{\hyperlink{classrobohatlib_1_1_robohat_1_1_robohat_a29aaef6ca75ec998a98f1bc99f71cfbf}{do\+\_\+servo\+\_\+fit\+\_\+formula\+\_\+readout\+\_\+vs\+\_\+angle\+\_\+single\+\_\+servo}} (self, int \+\_\+servo\+\_\+nr)
+\begin{DoxyCompactList}\small\item\em Set new formula parameters for voltage angle conversion by setting the servo at angle of 20 and 160 and readout the voltage of the ADC. \end{DoxyCompactList}\item 
+None \mbox{\hyperlink{classrobohatlib_1_1_robohat_1_1_robohat_a4c3886080b44d23d85550faf55832bd8}{do\+\_\+servo\+\_\+fit\+\_\+formula\+\_\+readout\+\_\+vs\+\_\+angle\+\_\+multiple\+\_\+servos}} (self, \+\_\+min\+\_\+range, \+\_\+max\+\_\+range)
+\begin{DoxyCompactList}\small\item\em Set new formula parameters for voltage angle conversion by setting the servo at angle of 20 and 160 and readout the voltage of the ADC. \end{DoxyCompactList}\item 
+None \mbox{\hyperlink{classrobohatlib_1_1_robohat_1_1_robohat_a9d04d23aeb23153a9b8c21e985415309}{set\+\_\+servo\+\_\+direct\+\_\+mode}} (self, bool \+\_\+mode, float \+\_\+delay=0.\+0001)
+\begin{DoxyCompactList}\small\item\em Sets if the servos are periodically updated, or direct. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classrobohatlib_1_1_robohat_1_1_robohat_a933ad0700f2ae4b5b43b6e3e0325a2c9}{get\+\_\+servo\+\_\+is\+\_\+direct\+\_\+mode}} (self)
+\item 
+None \mbox{\hyperlink{classrobohatlib_1_1_robohat_1_1_robohat_acd039c394de20107f164a73b24f2b589}{servo\+\_\+set\+\_\+new\+\_\+readout\+\_\+vs\+\_\+angle\+\_\+formula}} (self, \+\_\+servo\+\_\+nr, \+\_\+formula\+\_\+a, \+\_\+formula\+\_\+b)
+\begin{DoxyCompactList}\small\item\em Set new formula parameters for voltage angle conversion. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classrobohatlib_1_1_robohat_1_1_robohat_a64ac840480bd160593fccd29d851e030}{get\+\_\+servo\+\_\+is\+\_\+connected}} (self, int \+\_\+servo\+\_\+nr)
+\begin{DoxyCompactList}\small\item\em Checks if servo is connected. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classrobohatlib_1_1_robohat_1_1_robohat_a1b460806a8050e5e6b935b79eb4f1661}{get\+\_\+assemblyboard\+\_\+is\+\_\+connected}} (self, Pwm\+Plug \+\_\+board\+\_\+id)
+\begin{DoxyCompactList}\small\item\em Check is an assemblyboard is available. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classrobohatlib_1_1_robohat_1_1_robohat_aa1d21e77bdb3e30d6bcea80fa846b27e}{get\+\_\+servo\+\_\+is\+\_\+single\+\_\+servo\+\_\+wanted\+\_\+angle}} (self, int \+\_\+servo\+\_\+nr)
+\begin{DoxyCompactList}\small\item\em Returns true if (previous) wanted angle is the same as the current angle of the servo. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classrobohatlib_1_1_robohat_1_1_robohat_a0342bdc510b63fa38aeb384d35366fbb}{do\+\_\+wait\+\_\+until\+\_\+servo\+\_\+is\+\_\+wanted\+\_\+angle}} (self, int \+\_\+servo\+\_\+nr, \+\_\+time\+\_\+in\+\_\+seconds\+\_\+until\+\_\+escape=15)
+\begin{DoxyCompactList}\small\item\em Wait until current angles are the same as the wanted angles. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classrobohatlib_1_1_robohat_1_1_robohat_a2c4c236db214487fdc1a78e2dfcd84d6}{get\+\_\+servo\+\_\+are\+\_\+multiple\+\_\+servos\+\_\+wanted\+\_\+angles}} (self, int \+\_\+first\+\_\+servo, int \+\_\+last\+\_\+servo)
+\begin{DoxyCompactList}\small\item\em Returns true if (previous) wanted angles are the same as the actual angles of the servos. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classrobohatlib_1_1_robohat_1_1_robohat_a3162d236d4c2e2ce42693d6aad90549e}{do\+\_\+wait\+\_\+until\+\_\+servos\+\_\+are\+\_\+wanted\+\_\+angles}} (self, int \+\_\+first\+\_\+servo, int \+\_\+last\+\_\+servo, \+\_\+time\+\_\+in\+\_\+seconds\+\_\+until\+\_\+escape=15)
+\begin{DoxyCompactList}\small\item\em Wait until current angles are the same as the wanted angles. \end{DoxyCompactList}\item 
+float \mbox{\hyperlink{classrobohatlib_1_1_robohat_1_1_robohat_aed308d94d23ac8d64daa3c7121fb9bd0}{get\+\_\+servo\+\_\+adc\+\_\+single\+\_\+channel}} (self, int \+\_\+servo\+\_\+nr)
+\begin{DoxyCompactList}\small\item\em Get angle of connected servo in degree or -\/1 when an error occurs Servos 0 -\/ 15 are connected to assembly board 0 (PWMPLUG 3) and servos 15 -\/ 31 are connected to assembly board 1 (PWMPLUG 4) \end{DoxyCompactList}\item 
+\mbox{[}$\,$\mbox{]} \mbox{\hyperlink{classrobohatlib_1_1_robohat_1_1_robohat_a8b0a6e1ce4ed0bcc1681c911a951f912}{get\+\_\+servo\+\_\+adc\+\_\+multiple\+\_\+channels}} (self)
+\begin{DoxyCompactList}\small\item\em Get voltages of the angle of all the servos. \end{DoxyCompactList}\item 
+float \mbox{\hyperlink{classrobohatlib_1_1_robohat_1_1_robohat_a2b1a307ecab7bbe38f92aaec5fd68eba}{get\+\_\+servo\+\_\+single\+\_\+angle}} (self, int \+\_\+servo\+\_\+nr)
+\begin{DoxyCompactList}\small\item\em Get angle of connected servo in degree or -\/1 when an error occurs Servos 0 -\/ 15 are connected to assembly board 0 (PWMPLUG 3) and servos 15 -\/ 31 are connected to assembly board 1 (PWMPLUG 4) \end{DoxyCompactList}\item 
+None \mbox{\hyperlink{classrobohatlib_1_1_robohat_1_1_robohat_acf5cf8b0569aefd2d2f66a37c1ee2902}{set\+\_\+servo\+\_\+single\+\_\+angle}} (self, int \+\_\+servo\+\_\+nr, float \+\_\+angle)
+\begin{DoxyCompactList}\small\item\em Set the angle of connected servo in degree, does nothing when not avaible Servos 0 -\/ 15 are connected to assembly board 0 (PWMPLUG 3) and servos 15 -\/ 31 are connected to assembly board 1 (PWMPLUG 4) \end{DoxyCompactList}\item 
+\mbox{[}$\,$\mbox{]} \mbox{\hyperlink{classrobohatlib_1_1_robohat_1_1_robohat_aa814a7fbc5e8b67f404086fc2e17efb0}{get\+\_\+servo\+\_\+multiple\+\_\+angles}} (self)
+\begin{DoxyCompactList}\small\item\em Get a list of the angles of all the servos a list of 32 elements will be returned. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{classrobohatlib_1_1_robohat_1_1_robohat_a2307263a06562ad8657b92f6b9ec09c5}{get\+\_\+servo\+\_\+us\+\_\+time}} (self, float \+\_\+degree, int \+\_\+servo\+\_\+nr=0)
+\begin{DoxyCompactList}\small\item\em Get calculated time which is used to set the servo to the wanted degree. \end{DoxyCompactList}\item 
+None \mbox{\hyperlink{classrobohatlib_1_1_robohat_1_1_robohat_a7ac45157f9c9d54fa813997d3fc84f07}{set\+\_\+servo\+\_\+multiple\+\_\+angles}} (self, \mbox{[}$\,$\mbox{]} \+\_\+angles\+\_\+list)
+\begin{DoxyCompactList}\small\item\em Set the angle of connected servos in degree Expect a list of angles. \end{DoxyCompactList}\item 
+None \mbox{\hyperlink{classrobohatlib_1_1_robohat_1_1_robohat_a4db8b53bef13bb0c651a8ac79a951322}{set\+\_\+update\+\_\+value}} (self, int \+\_\+update\+\_\+value)
+\begin{DoxyCompactList}\small\item\em Set value which is used to add or subtract from current pos. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{classrobohatlib_1_1_robohat_1_1_robohat_aad236983e188f812d1f7291ed8f4ab27}{get\+\_\+update\+\_\+value}} (self)
+\begin{DoxyCompactList}\small\item\em get value which is used to add or subtract from current pos \end{DoxyCompactList}\item 
+None \mbox{\hyperlink{classrobohatlib_1_1_robohat_1_1_robohat_a7732d2e3bd777b3fb3d1c0bcf41faa68}{put\+\_\+servo\+\_\+to\+\_\+sleep}} (self)
+\begin{DoxyCompactList}\small\item\em Puts servos to sleep. \end{DoxyCompactList}\item 
+None \mbox{\hyperlink{classrobohatlib_1_1_robohat_1_1_robohat_a253463fbe5968c2b5820961a08d0038b}{wakeup\+\_\+servo}} (self)
+\begin{DoxyCompactList}\small\item\em Wakes up the servos. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classrobohatlib_1_1_robohat_1_1_robohat_a6bdbf66d3f9d40093185abe1e18cc179}{are\+\_\+servos\+\_\+sleeping}} (self)
+\item 
+IOStatus \mbox{\hyperlink{classrobohatlib_1_1_robohat_1_1_robohat_ad34930428697759563813ebf49e37370}{set\+\_\+servo\+\_\+io\+\_\+expander\+\_\+direction}} (self, Pwm\+Plug \+\_\+board\+\_\+id, int \+\_\+pin\+\_\+nr, Expander\+Dir \+\_\+dir)
+\begin{DoxyCompactList}\small\item\em Set the direction of the IO pin on a servo board. \end{DoxyCompactList}\item 
+Expander\+Dir \mbox{\hyperlink{classrobohatlib_1_1_robohat_1_1_robohat_adc542cdd00c4dd5343b75dfa945c1dc0}{get\+\_\+servo\+\_\+io\+\_\+expander\+\_\+direction}} (self, Pwm\+Plug \+\_\+board\+\_\+id, int \+\_\+pin\+\_\+nr)
+\begin{DoxyCompactList}\small\item\em Set the direction of the IO pin on a servo board. \end{DoxyCompactList}\item 
+IOStatus \mbox{\hyperlink{classrobohatlib_1_1_robohat_1_1_robohat_ae5013adb3bc83a059953cabdb9617092}{set\+\_\+servo\+\_\+io\+\_\+expander\+\_\+output}} (self, Pwm\+Plug \+\_\+board\+\_\+id, int \+\_\+pin\+\_\+nr, Expander\+Status \+\_\+value)
+\begin{DoxyCompactList}\small\item\em Set the value of the IO pin on a servo board. \end{DoxyCompactList}\item 
+Expander\+Status \mbox{\hyperlink{classrobohatlib_1_1_robohat_1_1_robohat_af4d1693b72062ff93ff715dede3e34d6}{get\+\_\+servo\+\_\+io\+\_\+expander\+\_\+input}} (self, Pwm\+Plug \+\_\+board\+\_\+id, int \+\_\+pin\+\_\+nr)
+\begin{DoxyCompactList}\small\item\em Get the value of the IO pin on a servo board. \end{DoxyCompactList}\item 
+float \mbox{\hyperlink{classrobohatlib_1_1_robohat_1_1_robohat_a3574ab1719b0c8efaf0ed3becd955ce3}{get\+\_\+topboard\+\_\+adc\+\_\+single\+\_\+channel}} (self, int \+\_\+channel\+\_\+nr)
+\begin{DoxyCompactList}\small\item\em Get analog value of a channel from the Topboard adc Requested channels can be 0 -\/ 3 (channel 3 is the derivative of the battery voltage) \end{DoxyCompactList}\item 
+\mbox{[}$\,$\mbox{]} \mbox{\hyperlink{classrobohatlib_1_1_robohat_1_1_robohat_ace9c8a1f9f3a86ecf15b692a209406cb}{get\+\_\+topboard\+\_\+adc\+\_\+multiple\+\_\+channels}} (self)
+\begin{DoxyCompactList}\small\item\em Get analog values of the HAT adc Returns a list of 4 elements. \end{DoxyCompactList}\item 
+IOStatus \mbox{\hyperlink{classrobohatlib_1_1_robohat_1_1_robohat_ab84919c9ad6a1925d9b5b309ea7c350d}{set\+\_\+topboard\+\_\+io\+\_\+expander\+\_\+direction}} (self, int \+\_\+io\+\_\+nr, Expander\+Dir \+\_\+direction)
+\begin{DoxyCompactList}\small\item\em Set the direction of an io pin of the IO expander. \end{DoxyCompactList}\item 
+Expander\+Dir \mbox{\hyperlink{classrobohatlib_1_1_robohat_1_1_robohat_a74372e3cfa3a4ccff7aef124047a3600}{get\+\_\+topboard\+\_\+io\+\_\+expander\+\_\+direction}} (self, int \+\_\+io\+\_\+nr)
+\begin{DoxyCompactList}\small\item\em Get the direction of an io pin of the IO expander. \end{DoxyCompactList}\item 
+IOStatus \mbox{\hyperlink{classrobohatlib_1_1_robohat_1_1_robohat_ab1853d2c8210916e948c36777d382ba9}{set\+\_\+topboard\+\_\+io\+\_\+expander\+\_\+output}} (self, int \+\_\+io\+\_\+nr, Expander\+Status \+\_\+status)
+\begin{DoxyCompactList}\small\item\em Set the output status of an io pin of the IO expander. \end{DoxyCompactList}\item 
+Expander\+Status \mbox{\hyperlink{classrobohatlib_1_1_robohat_1_1_robohat_a8b077646f09054525b0093675cc903ff}{get\+\_\+topboard\+\_\+io\+\_\+expander\+\_\+input}} (self, int \+\_\+io\+\_\+nr)
+\begin{DoxyCompactList}\small\item\em get the input status of an io pin of the IO expander Note. \end{DoxyCompactList}\item 
+None \mbox{\hyperlink{classrobohatlib_1_1_robohat_1_1_robohat_a9875bc3ff39808ebc5ac8b9fde1ac67a}{set\+\_\+topboard\+\_\+io\+\_\+expander\+\_\+int\+\_\+callback}} (self, \+\_\+callback)
+\begin{DoxyCompactList}\small\item\em Set a new function which will be executed when the topboard-\/io-\/expander is triggerd. \end{DoxyCompactList}\item 
+None \mbox{\hyperlink{classrobohatlib_1_1_robohat_1_1_robohat_a1a631ab3e03061f2da5c68a3be6895a3}{set\+\_\+topboard\+\_\+io\+\_\+expander\+\_\+int\+\_\+release\+\_\+function}} (self, \+\_\+callback)
+\begin{DoxyCompactList}\small\item\em Set a new function which will be executed after the interrupt callback function is executed. \end{DoxyCompactList}\item 
+Tuple\mbox{[}float, float, float\mbox{]}\texorpdfstring{$\vert$}{|}None \mbox{\hyperlink{classrobohatlib_1_1_robohat_1_1_robohat_a338d1bf6dddbcd349f236f4691fd5ca4}{get\+\_\+imu\+\_\+magnetic\+\_\+fields}} (self)
+\begin{DoxyCompactList}\small\item\em Get the magnetic fields. \end{DoxyCompactList}\item 
+Tuple\mbox{[}float, float, float\mbox{]}\texorpdfstring{$\vert$}{|}None \mbox{\hyperlink{classrobohatlib_1_1_robohat_1_1_robohat_ac99dfde286acd0972568e108b87ebabe}{get\+\_\+imu\+\_\+acceleration}} (self)
+\begin{DoxyCompactList}\small\item\em Get the acceleration of the Robohat. \end{DoxyCompactList}\item 
+Tuple\mbox{[}float, float, float\mbox{]}\texorpdfstring{$\vert$}{|}None \mbox{\hyperlink{classrobohatlib_1_1_robohat_1_1_robohat_acd59cdc9f751dfc7d987845ad1d7429d}{get\+\_\+imu\+\_\+gyro}} (self)
+\begin{DoxyCompactList}\small\item\em Get the values of the Gyro. \end{DoxyCompactList}\item 
+None \mbox{\hyperlink{classrobohatlib_1_1_robohat_1_1_robohat_ae8281360acd4a39aaa836cc0b5842941}{do\+\_\+imu\+\_\+test}} (self)
+\begin{DoxyCompactList}\small\item\em Just a IMU test. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{classrobohatlib_1_1_robohat_1_1_robohat_a7c1bb4c466897f793340039f515b8079}{get\+\_\+battery\+\_\+percentage\+\_\+capacity}} (self)
+\begin{DoxyCompactList}\small\item\em Get capacity of battery in percentage. \end{DoxyCompactList}\item 
+float \mbox{\hyperlink{classrobohatlib_1_1_robohat_1_1_robohat_a379b64f5ee3313b1d0851c64b98c9acf}{get\+\_\+battery\+\_\+voltage}} (self)
+\begin{DoxyCompactList}\small\item\em Get voltage of battery. \end{DoxyCompactList}\item 
+Battery\+Status \mbox{\hyperlink{classrobohatlib_1_1_robohat_1_1_robohat_acdc4457bc57b52072cae9b8f1285ebac}{get\+\_\+battery\+\_\+status}} (self)
+\begin{DoxyCompactList}\small\item\em Returns True if battery capacity is OK. \end{DoxyCompactList}\item 
+None \mbox{\hyperlink{classrobohatlib_1_1_robohat_1_1_robohat_a86b261923a8cbfc7fb0ab09c340f6589}{do\+\_\+system\+\_\+shutdown}} (self)
+\begin{DoxyCompactList}\small\item\em Sends shutdown signal to power module, cleans-\/up IO, shutdowns the RPi. \end{DoxyCompactList}\item 
+None \mbox{\hyperlink{classrobohatlib_1_1_robohat_1_1_robohat_a1108210f376182e0cc47ea9dd9bd937d}{set\+\_\+system\+\_\+alarm\+\_\+permitted}} (self, bool \+\_\+state)
+\begin{DoxyCompactList}\small\item\em Overrides the system alarm switch. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classrobohatlib_1_1_robohat_1_1_robohat_ad88d780b864c31c89af76eb3feaece8f}{get\+\_\+system\+\_\+alarm\+\_\+permitted}} (self)
+\begin{DoxyCompactList}\small\item\em Get the system alarm switch. \end{DoxyCompactList}\item 
+str \mbox{\hyperlink{classrobohatlib_1_1_robohat_1_1_robohat_a50f2af3b0138a92ff2dbb75137fb7925}{get\+\_\+lib\+\_\+version}} (self)
+\begin{DoxyCompactList}\small\item\em Get version number of library. \end{DoxyCompactList}\item 
+str \mbox{\hyperlink{classrobohatlib_1_1_robohat_1_1_robohat_acbe807a186c9113a60a5132ae72d1452}{get\+\_\+lib\+\_\+build\+\_\+date}} (self)
+\begin{DoxyCompactList}\small\item\em Get the build date of library. \end{DoxyCompactList}\item 
+Buzzer \mbox{\hyperlink{classrobohatlib_1_1_robohat_1_1_robohat_af7a9ea85e5ce7821a50b4e9ff8287677}{get\+\_\+buzzer}} (self)
+\begin{DoxyCompactList}\small\item\em Return the buzzer device for signaling purposes. \end{DoxyCompactList}\item 
+Camera \mbox{\hyperlink{classrobohatlib_1_1_robohat_1_1_robohat_acdb65decc3b3f49c53899730a8a8c810}{get\+\_\+camera}} (self)
+\begin{DoxyCompactList}\small\item\em Returns the camera instance. \end{DoxyCompactList}\item 
+None \mbox{\hyperlink{classrobohatlib_1_1_robohat_1_1_robohat_a00c558b22ff671d88045daaf67ebf11d}{test\+\_\+camera}} (self)
+\item 
+None \mbox{\hyperlink{classrobohatlib_1_1_robohat_1_1_robohat_a6e6bd743b6365d747e1b40a7271446a6}{set\+\_\+assemblyboard\+\_\+1\+\_\+io\+\_\+expander\+\_\+int\+\_\+callback}} (self, \+\_\+callback)
+\begin{DoxyCompactList}\small\item\em Set a (new) function which will be executed when the io-\/expander of the assembly board 1 is triggerd. \end{DoxyCompactList}\item 
+None \mbox{\hyperlink{classrobohatlib_1_1_robohat_1_1_robohat_a9f0048f8d20922986150e21e14b62018}{set\+\_\+assemblyboard\+\_\+2\+\_\+io\+\_\+expander\+\_\+int\+\_\+callback}} (self, \+\_\+callback)
+\begin{DoxyCompactList}\small\item\em Set a (new) function which will be executed when the io-\/expander of the assembly board 2 is triggerd. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Top class of Robohat library. 
+
+The complete Robohat-\/hardware is only accessible by accessing this class. This is the connection between the user program and the hardware 
+
+Definition at line \mbox{\hyperlink{_robohat_8py_source_l00060}{60}} of file \mbox{\hyperlink{_robohat_8py_source}{Robohat.\+py}}.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classrobohatlib_1_1_robohat_1_1_robohat_af141942da53defcd08eb3eeaf0ccffe4}\label{classrobohatlib_1_1_robohat_1_1_robohat_af141942da53defcd08eb3eeaf0ccffe4} 
+\index{robohatlib.Robohat.Robohat@{robohatlib.Robohat.Robohat}!\_\_init\_\_@{\_\_init\_\_}}
+\index{\_\_init\_\_@{\_\_init\_\_}!robohatlib.Robohat.Robohat@{robohatlib.Robohat.Robohat}}
+\doxysubsubsection{\texorpdfstring{\_\_init\_\_()}{\_\_init\_\_()}}
+{\footnotesize\ttfamily robohatlib.\+Robohat.\+Robohat.\+\_\+\+\_\+init\+\_\+\+\_\+ (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{Servo\+Assembly\+Config}]{\+\_\+servo\+\_\+assembly\+\_\+1\+\_\+config,  }\item[{Servo\+Assembly\+Config}]{\+\_\+servo\+\_\+assembly\+\_\+2\+\_\+config,  }\item[{int }]{\+\_\+switch\+\_\+top\+\_\+board = {\ttfamily 7} }\end{DoxyParamCaption})}
+
+
+
+The Robohat base class initializer. 
+
+Initializes all the IO Checks if the IO have no conflict (due wrong settings of the addresses)
+
+
+\begin{DoxyParams}{Parameters}
+{\em \+\_\+servo\+\_\+assembly\+\_\+1\+\_\+config} & config of servo assembly 1, see Test\+Config.\+SERVOASSEMBLY\+\_\+1\+\_\+\+CONFIG as example \\
+\hline
+{\em \+\_\+servo\+\_\+assembly\+\_\+2\+\_\+config} & config of servo assembly 2, see Test\+Config.\+SERVOASSEMBLY\+\_\+2\+\_\+\+CONFIG as example \\
+\hline
+{\em \+\_\+switch\+\_\+top\+\_\+board} & dip-\/switch settings of the Topboard (board mounted on RPi), default 7. See the Hardware description for its address \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line \mbox{\hyperlink{_robohat_8py_source_l00075}{75}} of file \mbox{\hyperlink{_robohat_8py_source}{Robohat.\+py}}.
+
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classrobohatlib_1_1_robohat_1_1_robohat_a6bdbf66d3f9d40093185abe1e18cc179}\label{classrobohatlib_1_1_robohat_1_1_robohat_a6bdbf66d3f9d40093185abe1e18cc179} 
+\index{robohatlib.Robohat.Robohat@{robohatlib.Robohat.Robohat}!are\_servos\_sleeping@{are\_servos\_sleeping}}
+\index{are\_servos\_sleeping@{are\_servos\_sleeping}!robohatlib.Robohat.Robohat@{robohatlib.Robohat.Robohat}}
+\doxysubsubsection{\texorpdfstring{are\_servos\_sleeping()}{are\_servos\_sleeping()}}
+{\footnotesize\ttfamily  bool robohatlib.\+Robohat.\+Robohat.\+are\+\_\+servos\+\_\+sleeping (\begin{DoxyParamCaption}\item[{}]{self }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Get if Servos are sleeping
+@return: True when servos are sleeping
+\end{DoxyVerb}
+ 
+
+Definition at line \mbox{\hyperlink{_robohat_8py_source_l00881}{881}} of file \mbox{\hyperlink{_robohat_8py_source}{Robohat.\+py}}.
+
+\Hypertarget{classrobohatlib_1_1_robohat_1_1_robohat_ab1f74f3f1b2aed9ce7ad2239864f430f}\label{classrobohatlib_1_1_robohat_1_1_robohat_ab1f74f3f1b2aed9ce7ad2239864f430f} 
+\index{robohatlib.Robohat.Robohat@{robohatlib.Robohat.Robohat}!do\_buzzer\_beep@{do\_buzzer\_beep}}
+\index{do\_buzzer\_beep@{do\_buzzer\_beep}!robohatlib.Robohat.Robohat@{robohatlib.Robohat.Robohat}}
+\doxysubsubsection{\texorpdfstring{do\_buzzer\_beep()}{do\_buzzer\_beep()}}
+{\footnotesize\ttfamily  None robohatlib.\+Robohat.\+Robohat.\+do\+\_\+buzzer\+\_\+beep (\begin{DoxyParamCaption}\item[{}]{self }\end{DoxyParamCaption})}
+
+
+
+Short beep of the buzzer. 
+
+\begin{DoxyReturn}{Returns}
+None 
+\end{DoxyReturn}
+
+
+Definition at line \mbox{\hyperlink{_robohat_8py_source_l00336}{336}} of file \mbox{\hyperlink{_robohat_8py_source}{Robohat.\+py}}.
+
+\Hypertarget{classrobohatlib_1_1_robohat_1_1_robohat_a8c5e7f7d807c9028b8b2706a1a4bc9f2}\label{classrobohatlib_1_1_robohat_1_1_robohat_a8c5e7f7d807c9028b8b2706a1a4bc9f2} 
+\index{robohatlib.Robohat.Robohat@{robohatlib.Robohat.Robohat}!do\_buzzer\_freq@{do\_buzzer\_freq}}
+\index{do\_buzzer\_freq@{do\_buzzer\_freq}!robohatlib.Robohat.Robohat@{robohatlib.Robohat.Robohat}}
+\doxysubsubsection{\texorpdfstring{do\_buzzer\_freq()}{do\_buzzer\_freq()}}
+{\footnotesize\ttfamily  None robohatlib.\+Robohat.\+Robohat.\+do\+\_\+buzzer\+\_\+freq (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{int}]{\+\_\+freq }\end{DoxyParamCaption})}
+
+
+
+Beeps the buzzer at a requested frequency. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em \+\_\+freq} & wanted frequency in Hz \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+None 
+\end{DoxyReturn}
+
+
+Definition at line \mbox{\hyperlink{_robohat_8py_source_l00344}{344}} of file \mbox{\hyperlink{_robohat_8py_source}{Robohat.\+py}}.
+
+\Hypertarget{classrobohatlib_1_1_robohat_1_1_robohat_af837280d0293d4df63003b88cb40a286}\label{classrobohatlib_1_1_robohat_1_1_robohat_af837280d0293d4df63003b88cb40a286} 
+\index{robohatlib.Robohat.Robohat@{robohatlib.Robohat.Robohat}!do\_buzzer\_random@{do\_buzzer\_random}}
+\index{do\_buzzer\_random@{do\_buzzer\_random}!robohatlib.Robohat.Robohat@{robohatlib.Robohat.Robohat}}
+\doxysubsubsection{\texorpdfstring{do\_buzzer\_random()}{do\_buzzer\_random()}}
+{\footnotesize\ttfamily  None robohatlib.\+Robohat.\+Robohat.\+do\+\_\+buzzer\+\_\+random (\begin{DoxyParamCaption}\item[{}]{self }\end{DoxyParamCaption})}
+
+
+
+Generates a random sound. 
+
+\begin{DoxyReturn}{Returns}
+None 
+\end{DoxyReturn}
+
+
+Definition at line \mbox{\hyperlink{_robohat_8py_source_l00319}{319}} of file \mbox{\hyperlink{_robohat_8py_source}{Robohat.\+py}}.
+
+\Hypertarget{classrobohatlib_1_1_robohat_1_1_robohat_a809548b350cd4f64159b77e9d392d38d}\label{classrobohatlib_1_1_robohat_1_1_robohat_a809548b350cd4f64159b77e9d392d38d} 
+\index{robohatlib.Robohat.Robohat@{robohatlib.Robohat.Robohat}!do\_buzzer\_release@{do\_buzzer\_release}}
+\index{do\_buzzer\_release@{do\_buzzer\_release}!robohatlib.Robohat.Robohat@{robohatlib.Robohat.Robohat}}
+\doxysubsubsection{\texorpdfstring{do\_buzzer\_release()}{do\_buzzer\_release()}}
+{\footnotesize\ttfamily  None robohatlib.\+Robohat.\+Robohat.\+do\+\_\+buzzer\+\_\+release (\begin{DoxyParamCaption}\item[{}]{self }\end{DoxyParamCaption})}
+
+
+
+Stops the buzzer from making sound. 
+
+\begin{DoxyReturn}{Returns}
+\+: None 
+\end{DoxyReturn}
+
+
+Definition at line \mbox{\hyperlink{_robohat_8py_source_l00353}{353}} of file \mbox{\hyperlink{_robohat_8py_source}{Robohat.\+py}}.
+
+\Hypertarget{classrobohatlib_1_1_robohat_1_1_robohat_a0aac38c32f6592d5a21623213fdfa4d2}\label{classrobohatlib_1_1_robohat_1_1_robohat_a0aac38c32f6592d5a21623213fdfa4d2} 
+\index{robohatlib.Robohat.Robohat@{robohatlib.Robohat.Robohat}!do\_buzzer\_slowwoop@{do\_buzzer\_slowwoop}}
+\index{do\_buzzer\_slowwoop@{do\_buzzer\_slowwoop}!robohatlib.Robohat.Robohat@{robohatlib.Robohat.Robohat}}
+\doxysubsubsection{\texorpdfstring{do\_buzzer\_slowwoop()}{do\_buzzer\_slowwoop()}}
+{\footnotesize\ttfamily  None robohatlib.\+Robohat.\+Robohat.\+do\+\_\+buzzer\+\_\+slowwoop (\begin{DoxyParamCaption}\item[{}]{self }\end{DoxyParamCaption})}
+
+
+
+Generates a sound from 2000Hz to 50Hz. 
+
+\begin{DoxyReturn}{Returns}
+None 
+\end{DoxyReturn}
+
+
+Definition at line \mbox{\hyperlink{_robohat_8py_source_l00327}{327}} of file \mbox{\hyperlink{_robohat_8py_source}{Robohat.\+py}}.
+
+\Hypertarget{classrobohatlib_1_1_robohat_1_1_robohat_a7c8ee8ee5628a69ce9df967f71250c4a}\label{classrobohatlib_1_1_robohat_1_1_robohat_a7c8ee8ee5628a69ce9df967f71250c4a} 
+\index{robohatlib.Robohat.Robohat@{robohatlib.Robohat.Robohat}!do\_i2c\_scan@{do\_i2c\_scan}}
+\index{do\_i2c\_scan@{do\_i2c\_scan}!robohatlib.Robohat.Robohat@{robohatlib.Robohat.Robohat}}
+\doxysubsubsection{\texorpdfstring{do\_i2c\_scan()}{do\_i2c\_scan()}}
+{\footnotesize\ttfamily  None robohatlib.\+Robohat.\+Robohat.\+do\+\_\+i2c\+\_\+scan (\begin{DoxyParamCaption}\item[{}]{self }\end{DoxyParamCaption})}
+
+
+
+Scans all the available I2C busses on the Robohat hardware Displays the found I2C devices onto the console. 
+
+\begin{DoxyReturn}{Returns}
+None 
+\end{DoxyReturn}
+
+
+Definition at line \mbox{\hyperlink{_robohat_8py_source_l00308}{308}} of file \mbox{\hyperlink{_robohat_8py_source}{Robohat.\+py}}.
+
+\Hypertarget{classrobohatlib_1_1_robohat_1_1_robohat_ae8281360acd4a39aaa836cc0b5842941}\label{classrobohatlib_1_1_robohat_1_1_robohat_ae8281360acd4a39aaa836cc0b5842941} 
+\index{robohatlib.Robohat.Robohat@{robohatlib.Robohat.Robohat}!do\_imu\_test@{do\_imu\_test}}
+\index{do\_imu\_test@{do\_imu\_test}!robohatlib.Robohat.Robohat@{robohatlib.Robohat.Robohat}}
+\doxysubsubsection{\texorpdfstring{do\_imu\_test()}{do\_imu\_test()}}
+{\footnotesize\ttfamily  None robohatlib.\+Robohat.\+Robohat.\+do\+\_\+imu\+\_\+test (\begin{DoxyParamCaption}\item[{}]{self }\end{DoxyParamCaption})}
+
+
+
+Just a IMU test. 
+
+\begin{DoxyReturn}{Returns}
+None 
+\end{DoxyReturn}
+
+
+Definition at line \mbox{\hyperlink{_robohat_8py_source_l01171}{1171}} of file \mbox{\hyperlink{_robohat_8py_source}{Robohat.\+py}}.
+
+\Hypertarget{classrobohatlib_1_1_robohat_1_1_robohat_a4c3886080b44d23d85550faf55832bd8}\label{classrobohatlib_1_1_robohat_1_1_robohat_a4c3886080b44d23d85550faf55832bd8} 
+\index{robohatlib.Robohat.Robohat@{robohatlib.Robohat.Robohat}!do\_servo\_fit\_formula\_readout\_vs\_angle\_multiple\_servos@{do\_servo\_fit\_formula\_readout\_vs\_angle\_multiple\_servos}}
+\index{do\_servo\_fit\_formula\_readout\_vs\_angle\_multiple\_servos@{do\_servo\_fit\_formula\_readout\_vs\_angle\_multiple\_servos}!robohatlib.Robohat.Robohat@{robohatlib.Robohat.Robohat}}
+\doxysubsubsection{\texorpdfstring{do\_servo\_fit\_formula\_readout\_vs\_angle\_multiple\_servos()}{do\_servo\_fit\_formula\_readout\_vs\_angle\_multiple\_servos()}}
+{\footnotesize\ttfamily  None robohatlib.\+Robohat.\+Robohat.\+do\+\_\+servo\+\_\+fit\+\_\+formula\+\_\+readout\+\_\+vs\+\_\+angle\+\_\+multiple\+\_\+servos (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{}]{\+\_\+min\+\_\+range,  }\item[{}]{\+\_\+max\+\_\+range }\end{DoxyParamCaption})}
+
+
+
+Set new formula parameters for voltage angle conversion by setting the servo at angle of 20 and 160 and readout the voltage of the ADC. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em \+\_\+min\+\_\+range} & ange minial \\
+\hline
+{\em \+\_\+max\+\_\+range} & angle maximal \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+\+: None 
+\end{DoxyReturn}
+
+
+Definition at line \mbox{\hyperlink{_robohat_8py_source_l00431}{431}} of file \mbox{\hyperlink{_robohat_8py_source}{Robohat.\+py}}.
+
+\Hypertarget{classrobohatlib_1_1_robohat_1_1_robohat_a29aaef6ca75ec998a98f1bc99f71cfbf}\label{classrobohatlib_1_1_robohat_1_1_robohat_a29aaef6ca75ec998a98f1bc99f71cfbf} 
+\index{robohatlib.Robohat.Robohat@{robohatlib.Robohat.Robohat}!do\_servo\_fit\_formula\_readout\_vs\_angle\_single\_servo@{do\_servo\_fit\_formula\_readout\_vs\_angle\_single\_servo}}
+\index{do\_servo\_fit\_formula\_readout\_vs\_angle\_single\_servo@{do\_servo\_fit\_formula\_readout\_vs\_angle\_single\_servo}!robohatlib.Robohat.Robohat@{robohatlib.Robohat.Robohat}}
+\doxysubsubsection{\texorpdfstring{do\_servo\_fit\_formula\_readout\_vs\_angle\_single\_servo()}{do\_servo\_fit\_formula\_readout\_vs\_angle\_single\_servo()}}
+{\footnotesize\ttfamily  None robohatlib.\+Robohat.\+Robohat.\+do\+\_\+servo\+\_\+fit\+\_\+formula\+\_\+readout\+\_\+vs\+\_\+angle\+\_\+single\+\_\+servo (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{int}]{\+\_\+servo\+\_\+nr }\end{DoxyParamCaption})}
+
+
+
+Set new formula parameters for voltage angle conversion by setting the servo at angle of 20 and 160 and readout the voltage of the ADC. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em \+\_\+servo\+\_\+nr} & wanted servo nr \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+\+: None 
+\end{DoxyReturn}
+
+
+Definition at line \mbox{\hyperlink{_robohat_8py_source_l00399}{399}} of file \mbox{\hyperlink{_robohat_8py_source}{Robohat.\+py}}.
+
+\Hypertarget{classrobohatlib_1_1_robohat_1_1_robohat_a86b261923a8cbfc7fb0ab09c340f6589}\label{classrobohatlib_1_1_robohat_1_1_robohat_a86b261923a8cbfc7fb0ab09c340f6589} 
+\index{robohatlib.Robohat.Robohat@{robohatlib.Robohat.Robohat}!do\_system\_shutdown@{do\_system\_shutdown}}
+\index{do\_system\_shutdown@{do\_system\_shutdown}!robohatlib.Robohat.Robohat@{robohatlib.Robohat.Robohat}}
+\doxysubsubsection{\texorpdfstring{do\_system\_shutdown()}{do\_system\_shutdown()}}
+{\footnotesize\ttfamily  None robohatlib.\+Robohat.\+Robohat.\+do\+\_\+system\+\_\+shutdown (\begin{DoxyParamCaption}\item[{}]{self }\end{DoxyParamCaption})}
+
+
+
+Sends shutdown signal to power module, cleans-\/up IO, shutdowns the RPi. 
+
+\begin{DoxyReturn}{Returns}
+None 
+\end{DoxyReturn}
+
+
+Definition at line \mbox{\hyperlink{_robohat_8py_source_l01210}{1210}} of file \mbox{\hyperlink{_robohat_8py_source}{Robohat.\+py}}.
+
+\Hypertarget{classrobohatlib_1_1_robohat_1_1_robohat_a0342bdc510b63fa38aeb384d35366fbb}\label{classrobohatlib_1_1_robohat_1_1_robohat_a0342bdc510b63fa38aeb384d35366fbb} 
+\index{robohatlib.Robohat.Robohat@{robohatlib.Robohat.Robohat}!do\_wait\_until\_servo\_is\_wanted\_angle@{do\_wait\_until\_servo\_is\_wanted\_angle}}
+\index{do\_wait\_until\_servo\_is\_wanted\_angle@{do\_wait\_until\_servo\_is\_wanted\_angle}!robohatlib.Robohat.Robohat@{robohatlib.Robohat.Robohat}}
+\doxysubsubsection{\texorpdfstring{do\_wait\_until\_servo\_is\_wanted\_angle()}{do\_wait\_until\_servo\_is\_wanted\_angle()}}
+{\footnotesize\ttfamily robohatlib.\+Robohat.\+Robohat.\+do\+\_\+wait\+\_\+until\+\_\+servo\+\_\+is\+\_\+wanted\+\_\+angle (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{int}]{\+\_\+servo\+\_\+nr,  }\item[{}]{\+\_\+time\+\_\+in\+\_\+seconds\+\_\+until\+\_\+escape = {\ttfamily 15} }\end{DoxyParamCaption})}
+
+
+
+Wait until current angles are the same as the wanted angles. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em \+\_\+servo\+\_\+nr\+:\+The} & wanted servo id \\
+\hline
+{\em \+\_\+time\+\_\+in\+\_\+seconds\+\_\+until\+\_\+escape} & Time to prevent endless loop \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+\+: None 
+\end{DoxyReturn}
+
+
+Definition at line \mbox{\hyperlink{_robohat_8py_source_l00611}{611}} of file \mbox{\hyperlink{_robohat_8py_source}{Robohat.\+py}}.
+
+\Hypertarget{classrobohatlib_1_1_robohat_1_1_robohat_a3162d236d4c2e2ce42693d6aad90549e}\label{classrobohatlib_1_1_robohat_1_1_robohat_a3162d236d4c2e2ce42693d6aad90549e} 
+\index{robohatlib.Robohat.Robohat@{robohatlib.Robohat.Robohat}!do\_wait\_until\_servos\_are\_wanted\_angles@{do\_wait\_until\_servos\_are\_wanted\_angles}}
+\index{do\_wait\_until\_servos\_are\_wanted\_angles@{do\_wait\_until\_servos\_are\_wanted\_angles}!robohatlib.Robohat.Robohat@{robohatlib.Robohat.Robohat}}
+\doxysubsubsection{\texorpdfstring{do\_wait\_until\_servos\_are\_wanted\_angles()}{do\_wait\_until\_servos\_are\_wanted\_angles()}}
+{\footnotesize\ttfamily robohatlib.\+Robohat.\+Robohat.\+do\+\_\+wait\+\_\+until\+\_\+servos\+\_\+are\+\_\+wanted\+\_\+angles (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{int}]{\+\_\+first\+\_\+servo,  }\item[{int}]{\+\_\+last\+\_\+servo,  }\item[{}]{\+\_\+time\+\_\+in\+\_\+seconds\+\_\+until\+\_\+escape = {\ttfamily 15} }\end{DoxyParamCaption})}
+
+
+
+Wait until current angles are the same as the wanted angles. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em \+\_\+first\+\_\+servo} & The first servo of the pool of servos \\
+\hline
+{\em \+\_\+last\+\_\+servo} & The last servo of the pool of servos \\
+\hline
+{\em \+\_\+time\+\_\+in\+\_\+seconds\+\_\+until\+\_\+escape} & Maximum time before ending the wait loop, to prevent endless loop. Default 15 seconds \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+\+: None 
+\end{DoxyReturn}
+
+
+Definition at line \mbox{\hyperlink{_robohat_8py_source_l00651}{651}} of file \mbox{\hyperlink{_robohat_8py_source}{Robohat.\+py}}.
+
+\Hypertarget{classrobohatlib_1_1_robohat_1_1_robohat_ab0aae20a0b4bf8d0ae50f1ec57f7ae6a}\label{classrobohatlib_1_1_robohat_1_1_robohat_ab0aae20a0b4bf8d0ae50f1ec57f7ae6a} 
+\index{robohatlib.Robohat.Robohat@{robohatlib.Robohat.Robohat}!exit\_program@{exit\_program}}
+\index{exit\_program@{exit\_program}!robohatlib.Robohat.Robohat@{robohatlib.Robohat.Robohat}}
+\doxysubsubsection{\texorpdfstring{exit\_program()}{exit\_program()}}
+{\footnotesize\ttfamily  None robohatlib.\+Robohat.\+Robohat.\+exit\+\_\+program (\begin{DoxyParamCaption}\item[{}]{self }\end{DoxyParamCaption})}
+
+
+
+Exit the program. 
+
+Will shut down all the software processes and the hardware Should be used when exiting your application \begin{DoxyReturn}{Returns}
+\+: None 
+\end{DoxyReturn}
+
+
+Definition at line \mbox{\hyperlink{_robohat_8py_source_l00281}{281}} of file \mbox{\hyperlink{_robohat_8py_source}{Robohat.\+py}}.
+
+\Hypertarget{classrobohatlib_1_1_robohat_1_1_robohat_a1b460806a8050e5e6b935b79eb4f1661}\label{classrobohatlib_1_1_robohat_1_1_robohat_a1b460806a8050e5e6b935b79eb4f1661} 
+\index{robohatlib.Robohat.Robohat@{robohatlib.Robohat.Robohat}!get\_assemblyboard\_is\_connected@{get\_assemblyboard\_is\_connected}}
+\index{get\_assemblyboard\_is\_connected@{get\_assemblyboard\_is\_connected}!robohatlib.Robohat.Robohat@{robohatlib.Robohat.Robohat}}
+\doxysubsubsection{\texorpdfstring{get\_assemblyboard\_is\_connected()}{get\_assemblyboard\_is\_connected()}}
+{\footnotesize\ttfamily  bool robohatlib.\+Robohat.\+Robohat.\+get\+\_\+assemblyboard\+\_\+is\+\_\+connected (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{Pwm\+Plug}]{\+\_\+board\+\_\+id }\end{DoxyParamCaption})}
+
+
+
+Check is an assemblyboard is available. 
+
+Returns true when available 
+\begin{DoxyParams}{Parameters}
+{\em \+\_\+board\+\_\+id} & id of requested assemblyboard. Use Robohat\+\_\+constants.\+PWMPLUG\+\_\+\+P3 or Robohat\+\_\+constants.\+PWMPLUG\+\_\+\+P4 \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+\+: bool 
+\end{DoxyReturn}
+
+
+Definition at line \mbox{\hyperlink{_robohat_8py_source_l00576}{576}} of file \mbox{\hyperlink{_robohat_8py_source}{Robohat.\+py}}.
+
+\Hypertarget{classrobohatlib_1_1_robohat_1_1_robohat_a7c1bb4c466897f793340039f515b8079}\label{classrobohatlib_1_1_robohat_1_1_robohat_a7c1bb4c466897f793340039f515b8079} 
+\index{robohatlib.Robohat.Robohat@{robohatlib.Robohat.Robohat}!get\_battery\_percentage\_capacity@{get\_battery\_percentage\_capacity}}
+\index{get\_battery\_percentage\_capacity@{get\_battery\_percentage\_capacity}!robohatlib.Robohat.Robohat@{robohatlib.Robohat.Robohat}}
+\doxysubsubsection{\texorpdfstring{get\_battery\_percentage\_capacity()}{get\_battery\_percentage\_capacity()}}
+{\footnotesize\ttfamily  int robohatlib.\+Robohat.\+Robohat.\+get\+\_\+battery\+\_\+percentage\+\_\+capacity (\begin{DoxyParamCaption}\item[{}]{self }\end{DoxyParamCaption})}
+
+
+
+Get capacity of battery in percentage. 
+
+\begin{DoxyReturn}{Returns}
+\+: percentage of the battery 
+\end{DoxyReturn}
+
+
+Definition at line \mbox{\hyperlink{_robohat_8py_source_l01182}{1182}} of file \mbox{\hyperlink{_robohat_8py_source}{Robohat.\+py}}.
+
+\Hypertarget{classrobohatlib_1_1_robohat_1_1_robohat_acdc4457bc57b52072cae9b8f1285ebac}\label{classrobohatlib_1_1_robohat_1_1_robohat_acdc4457bc57b52072cae9b8f1285ebac} 
+\index{robohatlib.Robohat.Robohat@{robohatlib.Robohat.Robohat}!get\_battery\_status@{get\_battery\_status}}
+\index{get\_battery\_status@{get\_battery\_status}!robohatlib.Robohat.Robohat@{robohatlib.Robohat.Robohat}}
+\doxysubsubsection{\texorpdfstring{get\_battery\_status()}{get\_battery\_status()}}
+{\footnotesize\ttfamily  Battery\+Status robohatlib.\+Robohat.\+Robohat.\+get\+\_\+battery\+\_\+status (\begin{DoxyParamCaption}\item[{}]{self }\end{DoxyParamCaption})}
+
+
+
+Returns True if battery capacity is OK. 
+
+\begin{DoxyReturn}{Returns}
+True is battery capacity is OK 
+\end{DoxyReturn}
+
+
+Definition at line \mbox{\hyperlink{_robohat_8py_source_l01199}{1199}} of file \mbox{\hyperlink{_robohat_8py_source}{Robohat.\+py}}.
+
+\Hypertarget{classrobohatlib_1_1_robohat_1_1_robohat_a379b64f5ee3313b1d0851c64b98c9acf}\label{classrobohatlib_1_1_robohat_1_1_robohat_a379b64f5ee3313b1d0851c64b98c9acf} 
+\index{robohatlib.Robohat.Robohat@{robohatlib.Robohat.Robohat}!get\_battery\_voltage@{get\_battery\_voltage}}
+\index{get\_battery\_voltage@{get\_battery\_voltage}!robohatlib.Robohat.Robohat@{robohatlib.Robohat.Robohat}}
+\doxysubsubsection{\texorpdfstring{get\_battery\_voltage()}{get\_battery\_voltage()}}
+{\footnotesize\ttfamily  float robohatlib.\+Robohat.\+Robohat.\+get\+\_\+battery\+\_\+voltage (\begin{DoxyParamCaption}\item[{}]{self }\end{DoxyParamCaption})}
+
+
+
+Get voltage of battery. 
+
+\begin{DoxyReturn}{Returns}
+\+: voltage of battery 
+\end{DoxyReturn}
+
+
+Definition at line \mbox{\hyperlink{_robohat_8py_source_l01190}{1190}} of file \mbox{\hyperlink{_robohat_8py_source}{Robohat.\+py}}.
+
+\Hypertarget{classrobohatlib_1_1_robohat_1_1_robohat_af7a9ea85e5ce7821a50b4e9ff8287677}\label{classrobohatlib_1_1_robohat_1_1_robohat_af7a9ea85e5ce7821a50b4e9ff8287677} 
+\index{robohatlib.Robohat.Robohat@{robohatlib.Robohat.Robohat}!get\_buzzer@{get\_buzzer}}
+\index{get\_buzzer@{get\_buzzer}!robohatlib.Robohat.Robohat@{robohatlib.Robohat.Robohat}}
+\doxysubsubsection{\texorpdfstring{get\_buzzer()}{get\_buzzer()}}
+{\footnotesize\ttfamily  Buzzer robohatlib.\+Robohat.\+Robohat.\+get\+\_\+buzzer (\begin{DoxyParamCaption}\item[{}]{self }\end{DoxyParamCaption})}
+
+
+
+Return the buzzer device for signaling purposes. 
+
+\begin{DoxyReturn}{Returns}
+Buzzer device 
+\end{DoxyReturn}
+
+
+Definition at line \mbox{\hyperlink{_robohat_8py_source_l01274}{1274}} of file \mbox{\hyperlink{_robohat_8py_source}{Robohat.\+py}}.
+
+\Hypertarget{classrobohatlib_1_1_robohat_1_1_robohat_acdb65decc3b3f49c53899730a8a8c810}\label{classrobohatlib_1_1_robohat_1_1_robohat_acdb65decc3b3f49c53899730a8a8c810} 
+\index{robohatlib.Robohat.Robohat@{robohatlib.Robohat.Robohat}!get\_camera@{get\_camera}}
+\index{get\_camera@{get\_camera}!robohatlib.Robohat.Robohat@{robohatlib.Robohat.Robohat}}
+\doxysubsubsection{\texorpdfstring{get\_camera()}{get\_camera()}}
+{\footnotesize\ttfamily  Camera robohatlib.\+Robohat.\+Robohat.\+get\+\_\+camera (\begin{DoxyParamCaption}\item[{}]{self }\end{DoxyParamCaption})}
+
+
+
+Returns the camera instance. 
+
+
+
+Definition at line \mbox{\hyperlink{_robohat_8py_source_l01285}{1285}} of file \mbox{\hyperlink{_robohat_8py_source}{Robohat.\+py}}.
+
+\Hypertarget{classrobohatlib_1_1_robohat_1_1_robohat_ac99dfde286acd0972568e108b87ebabe}\label{classrobohatlib_1_1_robohat_1_1_robohat_ac99dfde286acd0972568e108b87ebabe} 
+\index{robohatlib.Robohat.Robohat@{robohatlib.Robohat.Robohat}!get\_imu\_acceleration@{get\_imu\_acceleration}}
+\index{get\_imu\_acceleration@{get\_imu\_acceleration}!robohatlib.Robohat.Robohat@{robohatlib.Robohat.Robohat}}
+\doxysubsubsection{\texorpdfstring{get\_imu\_acceleration()}{get\_imu\_acceleration()}}
+{\footnotesize\ttfamily  Tuple\mbox{[}float, float, float\mbox{]} \texorpdfstring{$\vert$}{|} None robohatlib.\+Robohat.\+Robohat.\+get\+\_\+imu\+\_\+acceleration (\begin{DoxyParamCaption}\item[{}]{self }\end{DoxyParamCaption})}
+
+
+
+Get the acceleration of the Robohat. 
+
+\begin{DoxyReturn}{Returns}
+a tuple of the guro values x,y,z or None when not available 
+\end{DoxyReturn}
+
+
+Definition at line \mbox{\hyperlink{_robohat_8py_source_l01155}{1155}} of file \mbox{\hyperlink{_robohat_8py_source}{Robohat.\+py}}.
+
+\Hypertarget{classrobohatlib_1_1_robohat_1_1_robohat_acd59cdc9f751dfc7d987845ad1d7429d}\label{classrobohatlib_1_1_robohat_1_1_robohat_acd59cdc9f751dfc7d987845ad1d7429d} 
+\index{robohatlib.Robohat.Robohat@{robohatlib.Robohat.Robohat}!get\_imu\_gyro@{get\_imu\_gyro}}
+\index{get\_imu\_gyro@{get\_imu\_gyro}!robohatlib.Robohat.Robohat@{robohatlib.Robohat.Robohat}}
+\doxysubsubsection{\texorpdfstring{get\_imu\_gyro()}{get\_imu\_gyro()}}
+{\footnotesize\ttfamily  Tuple\mbox{[}float, float, float\mbox{]} \texorpdfstring{$\vert$}{|} None robohatlib.\+Robohat.\+Robohat.\+get\+\_\+imu\+\_\+gyro (\begin{DoxyParamCaption}\item[{}]{self }\end{DoxyParamCaption})}
+
+
+
+Get the values of the Gyro. 
+
+\begin{DoxyReturn}{Returns}
+a tuple of the guro values x,y,z or None when not available 
+\end{DoxyReturn}
+
+
+Definition at line \mbox{\hyperlink{_robohat_8py_source_l01163}{1163}} of file \mbox{\hyperlink{_robohat_8py_source}{Robohat.\+py}}.
+
+\Hypertarget{classrobohatlib_1_1_robohat_1_1_robohat_a338d1bf6dddbcd349f236f4691fd5ca4}\label{classrobohatlib_1_1_robohat_1_1_robohat_a338d1bf6dddbcd349f236f4691fd5ca4} 
+\index{robohatlib.Robohat.Robohat@{robohatlib.Robohat.Robohat}!get\_imu\_magnetic\_fields@{get\_imu\_magnetic\_fields}}
+\index{get\_imu\_magnetic\_fields@{get\_imu\_magnetic\_fields}!robohatlib.Robohat.Robohat@{robohatlib.Robohat.Robohat}}
+\doxysubsubsection{\texorpdfstring{get\_imu\_magnetic\_fields()}{get\_imu\_magnetic\_fields()}}
+{\footnotesize\ttfamily  Tuple\mbox{[}float, float, float\mbox{]} \texorpdfstring{$\vert$}{|} None robohatlib.\+Robohat.\+Robohat.\+get\+\_\+imu\+\_\+magnetic\+\_\+fields (\begin{DoxyParamCaption}\item[{}]{self }\end{DoxyParamCaption})}
+
+
+
+Get the magnetic fields. 
+
+\begin{DoxyReturn}{Returns}
+a tuple of the magnetic fields values x,y,z or None when not available 
+\end{DoxyReturn}
+
+
+Definition at line \mbox{\hyperlink{_robohat_8py_source_l01147}{1147}} of file \mbox{\hyperlink{_robohat_8py_source}{Robohat.\+py}}.
+
+\Hypertarget{classrobohatlib_1_1_robohat_1_1_robohat_a51ac33b01b20be2bee9289afbc32b378}\label{classrobohatlib_1_1_robohat_1_1_robohat_a51ac33b01b20be2bee9289afbc32b378} 
+\index{robohatlib.Robohat.Robohat@{robohatlib.Robohat.Robohat}!get\_led\_color@{get\_led\_color}}
+\index{get\_led\_color@{get\_led\_color}!robohatlib.Robohat.Robohat@{robohatlib.Robohat.Robohat}}
+\doxysubsubsection{\texorpdfstring{get\_led\_color()}{get\_led\_color()}}
+{\footnotesize\ttfamily  Color robohatlib.\+Robohat.\+Robohat.\+get\+\_\+led\+\_\+color (\begin{DoxyParamCaption}\item[{}]{self }\end{DoxyParamCaption})}
+
+
+
+Get current color of the LED. 
+
+\begin{DoxyReturn}{Returns}
+\+: Color 
+\end{DoxyReturn}
+
+
+Definition at line \mbox{\hyperlink{_robohat_8py_source_l00388}{388}} of file \mbox{\hyperlink{_robohat_8py_source}{Robohat.\+py}}.
+
+\Hypertarget{classrobohatlib_1_1_robohat_1_1_robohat_acbe807a186c9113a60a5132ae72d1452}\label{classrobohatlib_1_1_robohat_1_1_robohat_acbe807a186c9113a60a5132ae72d1452} 
+\index{robohatlib.Robohat.Robohat@{robohatlib.Robohat.Robohat}!get\_lib\_build\_date@{get\_lib\_build\_date}}
+\index{get\_lib\_build\_date@{get\_lib\_build\_date}!robohatlib.Robohat.Robohat@{robohatlib.Robohat.Robohat}}
+\doxysubsubsection{\texorpdfstring{get\_lib\_build\_date()}{get\_lib\_build\_date()}}
+{\footnotesize\ttfamily  str robohatlib.\+Robohat.\+Robohat.\+get\+\_\+lib\+\_\+build\+\_\+date (\begin{DoxyParamCaption}\item[{}]{self }\end{DoxyParamCaption})}
+
+
+
+Get the build date of library. 
+
+\begin{DoxyReturn}{Returns}
+str, version build date of library, such as 20231225 
+\end{DoxyReturn}
+
+
+Definition at line \mbox{\hyperlink{_robohat_8py_source_l01264}{1264}} of file \mbox{\hyperlink{_robohat_8py_source}{Robohat.\+py}}.
+
+\Hypertarget{classrobohatlib_1_1_robohat_1_1_robohat_a50f2af3b0138a92ff2dbb75137fb7925}\label{classrobohatlib_1_1_robohat_1_1_robohat_a50f2af3b0138a92ff2dbb75137fb7925} 
+\index{robohatlib.Robohat.Robohat@{robohatlib.Robohat.Robohat}!get\_lib\_version@{get\_lib\_version}}
+\index{get\_lib\_version@{get\_lib\_version}!robohatlib.Robohat.Robohat@{robohatlib.Robohat.Robohat}}
+\doxysubsubsection{\texorpdfstring{get\_lib\_version()}{get\_lib\_version()}}
+{\footnotesize\ttfamily  str robohatlib.\+Robohat.\+Robohat.\+get\+\_\+lib\+\_\+version (\begin{DoxyParamCaption}\item[{}]{self }\end{DoxyParamCaption})}
+
+
+
+Get version number of library. 
+
+\begin{DoxyReturn}{Returns}
+str, version number of library, such as 1.\+0.\+1 
+\end{DoxyReturn}
+
+
+Definition at line \mbox{\hyperlink{_robohat_8py_source_l01253}{1253}} of file \mbox{\hyperlink{_robohat_8py_source}{Robohat.\+py}}.
+
+\Hypertarget{classrobohatlib_1_1_robohat_1_1_robohat_a8b0a6e1ce4ed0bcc1681c911a951f912}\label{classrobohatlib_1_1_robohat_1_1_robohat_a8b0a6e1ce4ed0bcc1681c911a951f912} 
+\index{robohatlib.Robohat.Robohat@{robohatlib.Robohat.Robohat}!get\_servo\_adc\_multiple\_channels@{get\_servo\_adc\_multiple\_channels}}
+\index{get\_servo\_adc\_multiple\_channels@{get\_servo\_adc\_multiple\_channels}!robohatlib.Robohat.Robohat@{robohatlib.Robohat.Robohat}}
+\doxysubsubsection{\texorpdfstring{get\_servo\_adc\_multiple\_channels()}{get\_servo\_adc\_multiple\_channels()}}
+{\footnotesize\ttfamily  \mbox{[}$\,$\mbox{]} robohatlib.\+Robohat.\+Robohat.\+get\+\_\+servo\+\_\+adc\+\_\+multiple\+\_\+channels (\begin{DoxyParamCaption}\item[{}]{self }\end{DoxyParamCaption})}
+
+
+
+Get voltages of the angle of all the servos. 
+
+The list consists of 32 elements. \begin{DoxyReturn}{Returns}
+a list of voltages 
+\end{DoxyReturn}
+
+
+Definition at line \mbox{\hyperlink{_robohat_8py_source_l00694}{694}} of file \mbox{\hyperlink{_robohat_8py_source}{Robohat.\+py}}.
+
+\Hypertarget{classrobohatlib_1_1_robohat_1_1_robohat_aed308d94d23ac8d64daa3c7121fb9bd0}\label{classrobohatlib_1_1_robohat_1_1_robohat_aed308d94d23ac8d64daa3c7121fb9bd0} 
+\index{robohatlib.Robohat.Robohat@{robohatlib.Robohat.Robohat}!get\_servo\_adc\_single\_channel@{get\_servo\_adc\_single\_channel}}
+\index{get\_servo\_adc\_single\_channel@{get\_servo\_adc\_single\_channel}!robohatlib.Robohat.Robohat@{robohatlib.Robohat.Robohat}}
+\doxysubsubsection{\texorpdfstring{get\_servo\_adc\_single\_channel()}{get\_servo\_adc\_single\_channel()}}
+{\footnotesize\ttfamily  float robohatlib.\+Robohat.\+Robohat.\+get\+\_\+servo\+\_\+adc\+\_\+single\+\_\+channel (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{int}]{\+\_\+servo\+\_\+nr }\end{DoxyParamCaption})}
+
+
+
+Get angle of connected servo in degree or -\/1 when an error occurs Servos 0 -\/ 15 are connected to assembly board 0 (PWMPLUG 3) and servos 15 -\/ 31 are connected to assembly board 1 (PWMPLUG 4) 
+
+
+\begin{DoxyParams}{Parameters}
+{\em \+\_\+servo\+\_\+nr} & The servo nr wanted, the servo nr 0 -\/ 31 \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+angle or -\/1 
+\end{DoxyReturn}
+
+
+Definition at line \mbox{\hyperlink{_robohat_8py_source_l00675}{675}} of file \mbox{\hyperlink{_robohat_8py_source}{Robohat.\+py}}.
+
+\Hypertarget{classrobohatlib_1_1_robohat_1_1_robohat_a2c4c236db214487fdc1a78e2dfcd84d6}\label{classrobohatlib_1_1_robohat_1_1_robohat_a2c4c236db214487fdc1a78e2dfcd84d6} 
+\index{robohatlib.Robohat.Robohat@{robohatlib.Robohat.Robohat}!get\_servo\_are\_multiple\_servos\_wanted\_angles@{get\_servo\_are\_multiple\_servos\_wanted\_angles}}
+\index{get\_servo\_are\_multiple\_servos\_wanted\_angles@{get\_servo\_are\_multiple\_servos\_wanted\_angles}!robohatlib.Robohat.Robohat@{robohatlib.Robohat.Robohat}}
+\doxysubsubsection{\texorpdfstring{get\_servo\_are\_multiple\_servos\_wanted\_angles()}{get\_servo\_are\_multiple\_servos\_wanted\_angles()}}
+{\footnotesize\ttfamily  bool robohatlib.\+Robohat.\+Robohat.\+get\+\_\+servo\+\_\+are\+\_\+multiple\+\_\+servos\+\_\+wanted\+\_\+angles (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{int}]{\+\_\+first\+\_\+servo,  }\item[{int}]{\+\_\+last\+\_\+servo }\end{DoxyParamCaption})}
+
+
+
+Returns true if (previous) wanted angles are the same as the actual angles of the servos. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em \+\_\+first\+\_\+servo} & The first servo of the pool of servos \\
+\hline
+{\em \+\_\+last\+\_\+servo} & The last servo of the pool of servos \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+\+: bool 
+\end{DoxyReturn}
+
+
+Definition at line \mbox{\hyperlink{_robohat_8py_source_l00633}{633}} of file \mbox{\hyperlink{_robohat_8py_source}{Robohat.\+py}}.
+
+\Hypertarget{classrobohatlib_1_1_robohat_1_1_robohat_adc542cdd00c4dd5343b75dfa945c1dc0}\label{classrobohatlib_1_1_robohat_1_1_robohat_adc542cdd00c4dd5343b75dfa945c1dc0} 
+\index{robohatlib.Robohat.Robohat@{robohatlib.Robohat.Robohat}!get\_servo\_io\_expander\_direction@{get\_servo\_io\_expander\_direction}}
+\index{get\_servo\_io\_expander\_direction@{get\_servo\_io\_expander\_direction}!robohatlib.Robohat.Robohat@{robohatlib.Robohat.Robohat}}
+\doxysubsubsection{\texorpdfstring{get\_servo\_io\_expander\_direction()}{get\_servo\_io\_expander\_direction()}}
+{\footnotesize\ttfamily  Expander\+Dir robohatlib.\+Robohat.\+Robohat.\+get\+\_\+servo\+\_\+io\+\_\+expander\+\_\+direction (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{Pwm\+Plug}]{\+\_\+board\+\_\+id,  }\item[{int}]{\+\_\+pin\+\_\+nr }\end{DoxyParamCaption})}
+
+
+
+Set the direction of the IO pin on a servo board. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em \+\_\+board\+\_\+id} & id of requested assemblyboard \\
+\hline
+{\em \+\_\+pin\+\_\+nr} & pin nr \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Expander\+Dir\+: 
+\end{DoxyReturn}
+
+
+Definition at line \mbox{\hyperlink{_robohat_8py_source_l00925}{925}} of file \mbox{\hyperlink{_robohat_8py_source}{Robohat.\+py}}.
+
+\Hypertarget{classrobohatlib_1_1_robohat_1_1_robohat_af4d1693b72062ff93ff715dede3e34d6}\label{classrobohatlib_1_1_robohat_1_1_robohat_af4d1693b72062ff93ff715dede3e34d6} 
+\index{robohatlib.Robohat.Robohat@{robohatlib.Robohat.Robohat}!get\_servo\_io\_expander\_input@{get\_servo\_io\_expander\_input}}
+\index{get\_servo\_io\_expander\_input@{get\_servo\_io\_expander\_input}!robohatlib.Robohat.Robohat@{robohatlib.Robohat.Robohat}}
+\doxysubsubsection{\texorpdfstring{get\_servo\_io\_expander\_input()}{get\_servo\_io\_expander\_input()}}
+{\footnotesize\ttfamily  Expander\+Status robohatlib.\+Robohat.\+Robohat.\+get\+\_\+servo\+\_\+io\+\_\+expander\+\_\+input (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{Pwm\+Plug}]{\+\_\+board\+\_\+id,  }\item[{int}]{\+\_\+pin\+\_\+nr }\end{DoxyParamCaption})}
+
+
+
+Get the value of the IO pin on a servo board. 
+
+Note, io pin should be an output 
+\begin{DoxyParams}{Parameters}
+{\em \+\_\+board\+\_\+id} & board nr \\
+\hline
+{\em \+\_\+pin\+\_\+nr} & pin nr \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+None\+: 
+\end{DoxyReturn}
+
+
+Definition at line \mbox{\hyperlink{_robohat_8py_source_l00976}{976}} of file \mbox{\hyperlink{_robohat_8py_source}{Robohat.\+py}}.
+
+\Hypertarget{classrobohatlib_1_1_robohat_1_1_robohat_a64ac840480bd160593fccd29d851e030}\label{classrobohatlib_1_1_robohat_1_1_robohat_a64ac840480bd160593fccd29d851e030} 
+\index{robohatlib.Robohat.Robohat@{robohatlib.Robohat.Robohat}!get\_servo\_is\_connected@{get\_servo\_is\_connected}}
+\index{get\_servo\_is\_connected@{get\_servo\_is\_connected}!robohatlib.Robohat.Robohat@{robohatlib.Robohat.Robohat}}
+\doxysubsubsection{\texorpdfstring{get\_servo\_is\_connected()}{get\_servo\_is\_connected()}}
+{\footnotesize\ttfamily  bool robohatlib.\+Robohat.\+Robohat.\+get\+\_\+servo\+\_\+is\+\_\+connected (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{int}]{\+\_\+servo\+\_\+nr }\end{DoxyParamCaption})}
+
+
+
+Checks if servo is connected. 
+
+Returns False when not connected. Servos 0 -\/ 15 are connected to assembly board 0 (PWMPLUG 3) and servos 15 -\/ 31 are connected to assembly board 1 (PWMPLUG 4)
+
+
+\begin{DoxyParams}{Parameters}
+{\em \+\_\+servo\+\_\+nr} & The servo nr 0 -\/ 31 \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+\+: Returns False when not connected 
+\end{DoxyReturn}
+
+
+Definition at line \mbox{\hyperlink{_robohat_8py_source_l00546}{546}} of file \mbox{\hyperlink{_robohat_8py_source}{Robohat.\+py}}.
+
+\Hypertarget{classrobohatlib_1_1_robohat_1_1_robohat_a933ad0700f2ae4b5b43b6e3e0325a2c9}\label{classrobohatlib_1_1_robohat_1_1_robohat_a933ad0700f2ae4b5b43b6e3e0325a2c9} 
+\index{robohatlib.Robohat.Robohat@{robohatlib.Robohat.Robohat}!get\_servo\_is\_direct\_mode@{get\_servo\_is\_direct\_mode}}
+\index{get\_servo\_is\_direct\_mode@{get\_servo\_is\_direct\_mode}!robohatlib.Robohat.Robohat@{robohatlib.Robohat.Robohat}}
+\doxysubsubsection{\texorpdfstring{get\_servo\_is\_direct\_mode()}{get\_servo\_is\_direct\_mode()}}
+{\footnotesize\ttfamily  bool robohatlib.\+Robohat.\+Robohat.\+get\+\_\+servo\+\_\+is\+\_\+direct\+\_\+mode (\begin{DoxyParamCaption}\item[{}]{self }\end{DoxyParamCaption})}
+
+\begin{DoxyReturn}{Returns}
+\+: if servo is NOT updated periodically 
+\end{DoxyReturn}
+
+
+Definition at line \mbox{\hyperlink{_robohat_8py_source_l00517}{517}} of file \mbox{\hyperlink{_robohat_8py_source}{Robohat.\+py}}.
+
+\Hypertarget{classrobohatlib_1_1_robohat_1_1_robohat_aa1d21e77bdb3e30d6bcea80fa846b27e}\label{classrobohatlib_1_1_robohat_1_1_robohat_aa1d21e77bdb3e30d6bcea80fa846b27e} 
+\index{robohatlib.Robohat.Robohat@{robohatlib.Robohat.Robohat}!get\_servo\_is\_single\_servo\_wanted\_angle@{get\_servo\_is\_single\_servo\_wanted\_angle}}
+\index{get\_servo\_is\_single\_servo\_wanted\_angle@{get\_servo\_is\_single\_servo\_wanted\_angle}!robohatlib.Robohat.Robohat@{robohatlib.Robohat.Robohat}}
+\doxysubsubsection{\texorpdfstring{get\_servo\_is\_single\_servo\_wanted\_angle()}{get\_servo\_is\_single\_servo\_wanted\_angle()}}
+{\footnotesize\ttfamily  bool robohatlib.\+Robohat.\+Robohat.\+get\+\_\+servo\+\_\+is\+\_\+single\+\_\+servo\+\_\+wanted\+\_\+angle (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{int}]{\+\_\+servo\+\_\+nr }\end{DoxyParamCaption})}
+
+
+
+Returns true if (previous) wanted angle is the same as the current angle of the servo. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em \+\_\+servo\+\_\+nr} & The wanted servo id \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+\+: bool 
+\end{DoxyReturn}
+
+
+Definition at line \mbox{\hyperlink{_robohat_8py_source_l00593}{593}} of file \mbox{\hyperlink{_robohat_8py_source}{Robohat.\+py}}.
+
+\Hypertarget{classrobohatlib_1_1_robohat_1_1_robohat_aa814a7fbc5e8b67f404086fc2e17efb0}\label{classrobohatlib_1_1_robohat_1_1_robohat_aa814a7fbc5e8b67f404086fc2e17efb0} 
+\index{robohatlib.Robohat.Robohat@{robohatlib.Robohat.Robohat}!get\_servo\_multiple\_angles@{get\_servo\_multiple\_angles}}
+\index{get\_servo\_multiple\_angles@{get\_servo\_multiple\_angles}!robohatlib.Robohat.Robohat@{robohatlib.Robohat.Robohat}}
+\doxysubsubsection{\texorpdfstring{get\_servo\_multiple\_angles()}{get\_servo\_multiple\_angles()}}
+{\footnotesize\ttfamily  \mbox{[}$\,$\mbox{]} robohatlib.\+Robohat.\+Robohat.\+get\+\_\+servo\+\_\+multiple\+\_\+angles (\begin{DoxyParamCaption}\item[{}]{self }\end{DoxyParamCaption})}
+
+
+
+Get a list of the angles of all the servos a list of 32 elements will be returned. 
+
+\begin{DoxyReturn}{Returns}
+angles list 
+\end{DoxyReturn}
+
+
+Definition at line \mbox{\hyperlink{_robohat_8py_source_l00761}{761}} of file \mbox{\hyperlink{_robohat_8py_source}{Robohat.\+py}}.
+
+\Hypertarget{classrobohatlib_1_1_robohat_1_1_robohat_a2b1a307ecab7bbe38f92aaec5fd68eba}\label{classrobohatlib_1_1_robohat_1_1_robohat_a2b1a307ecab7bbe38f92aaec5fd68eba} 
+\index{robohatlib.Robohat.Robohat@{robohatlib.Robohat.Robohat}!get\_servo\_single\_angle@{get\_servo\_single\_angle}}
+\index{get\_servo\_single\_angle@{get\_servo\_single\_angle}!robohatlib.Robohat.Robohat@{robohatlib.Robohat.Robohat}}
+\doxysubsubsection{\texorpdfstring{get\_servo\_single\_angle()}{get\_servo\_single\_angle()}}
+{\footnotesize\ttfamily  float robohatlib.\+Robohat.\+Robohat.\+get\+\_\+servo\+\_\+single\+\_\+angle (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{int}]{\+\_\+servo\+\_\+nr }\end{DoxyParamCaption})}
+
+
+
+Get angle of connected servo in degree or -\/1 when an error occurs Servos 0 -\/ 15 are connected to assembly board 0 (PWMPLUG 3) and servos 15 -\/ 31 are connected to assembly board 1 (PWMPLUG 4) 
+
+
+\begin{DoxyParams}{Parameters}
+{\em \+\_\+servo\+\_\+nr} & The servo nr wanted (0 -\/ 31) \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+angle or -\/1 
+\end{DoxyReturn}
+
+
+Definition at line \mbox{\hyperlink{_robohat_8py_source_l00718}{718}} of file \mbox{\hyperlink{_robohat_8py_source}{Robohat.\+py}}.
+
+\Hypertarget{classrobohatlib_1_1_robohat_1_1_robohat_a2307263a06562ad8657b92f6b9ec09c5}\label{classrobohatlib_1_1_robohat_1_1_robohat_a2307263a06562ad8657b92f6b9ec09c5} 
+\index{robohatlib.Robohat.Robohat@{robohatlib.Robohat.Robohat}!get\_servo\_us\_time@{get\_servo\_us\_time}}
+\index{get\_servo\_us\_time@{get\_servo\_us\_time}!robohatlib.Robohat.Robohat@{robohatlib.Robohat.Robohat}}
+\doxysubsubsection{\texorpdfstring{get\_servo\_us\_time()}{get\_servo\_us\_time()}}
+{\footnotesize\ttfamily  int robohatlib.\+Robohat.\+Robohat.\+get\+\_\+servo\+\_\+us\+\_\+time (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{float}]{\+\_\+degree,  }\item[{int}]{\+\_\+servo\+\_\+nr = {\ttfamily 0} }\end{DoxyParamCaption})}
+
+
+
+Get calculated time which is used to set the servo to the wanted degree. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em \+\_\+degree} & wanted angle \\
+\hline
+{\em \+\_\+servo\+\_\+nr} & the wanted servo \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+\+: time in uS 
+\end{DoxyReturn}
+
+
+Definition at line \mbox{\hyperlink{_robohat_8py_source_l00785}{785}} of file \mbox{\hyperlink{_robohat_8py_source}{Robohat.\+py}}.
+
+\Hypertarget{classrobohatlib_1_1_robohat_1_1_robohat_ad88d780b864c31c89af76eb3feaece8f}\label{classrobohatlib_1_1_robohat_1_1_robohat_ad88d780b864c31c89af76eb3feaece8f} 
+\index{robohatlib.Robohat.Robohat@{robohatlib.Robohat.Robohat}!get\_system\_alarm\_permitted@{get\_system\_alarm\_permitted}}
+\index{get\_system\_alarm\_permitted@{get\_system\_alarm\_permitted}!robohatlib.Robohat.Robohat@{robohatlib.Robohat.Robohat}}
+\doxysubsubsection{\texorpdfstring{get\_system\_alarm\_permitted()}{get\_system\_alarm\_permitted()}}
+{\footnotesize\ttfamily  bool robohatlib.\+Robohat.\+Robohat.\+get\+\_\+system\+\_\+alarm\+\_\+permitted (\begin{DoxyParamCaption}\item[{}]{self }\end{DoxyParamCaption})}
+
+
+
+Get the system alarm switch. 
+
+If false, no sound alarm will be given \begin{DoxyReturn}{Returns}
+\+: None 
+\end{DoxyReturn}
+
+
+Definition at line \mbox{\hyperlink{_robohat_8py_source_l01242}{1242}} of file \mbox{\hyperlink{_robohat_8py_source}{Robohat.\+py}}.
+
+\Hypertarget{classrobohatlib_1_1_robohat_1_1_robohat_ace9c8a1f9f3a86ecf15b692a209406cb}\label{classrobohatlib_1_1_robohat_1_1_robohat_ace9c8a1f9f3a86ecf15b692a209406cb} 
+\index{robohatlib.Robohat.Robohat@{robohatlib.Robohat.Robohat}!get\_topboard\_adc\_multiple\_channels@{get\_topboard\_adc\_multiple\_channels}}
+\index{get\_topboard\_adc\_multiple\_channels@{get\_topboard\_adc\_multiple\_channels}!robohatlib.Robohat.Robohat@{robohatlib.Robohat.Robohat}}
+\doxysubsubsection{\texorpdfstring{get\_topboard\_adc\_multiple\_channels()}{get\_topboard\_adc\_multiple\_channels()}}
+{\footnotesize\ttfamily  \mbox{[}$\,$\mbox{]} robohatlib.\+Robohat.\+Robohat.\+get\+\_\+topboard\+\_\+adc\+\_\+multiple\+\_\+channels (\begin{DoxyParamCaption}\item[{}]{self }\end{DoxyParamCaption})}
+
+
+
+Get analog values of the HAT adc Returns a list of 4 elements. 
+
+\begin{DoxyReturn}{Returns}
+analog voltage in a list 
+\end{DoxyReturn}
+
+
+Definition at line \mbox{\hyperlink{_robohat_8py_source_l01059}{1059}} of file \mbox{\hyperlink{_robohat_8py_source}{Robohat.\+py}}.
+
+\Hypertarget{classrobohatlib_1_1_robohat_1_1_robohat_a3574ab1719b0c8efaf0ed3becd955ce3}\label{classrobohatlib_1_1_robohat_1_1_robohat_a3574ab1719b0c8efaf0ed3becd955ce3} 
+\index{robohatlib.Robohat.Robohat@{robohatlib.Robohat.Robohat}!get\_topboard\_adc\_single\_channel@{get\_topboard\_adc\_single\_channel}}
+\index{get\_topboard\_adc\_single\_channel@{get\_topboard\_adc\_single\_channel}!robohatlib.Robohat.Robohat@{robohatlib.Robohat.Robohat}}
+\doxysubsubsection{\texorpdfstring{get\_topboard\_adc\_single\_channel()}{get\_topboard\_adc\_single\_channel()}}
+{\footnotesize\ttfamily  float robohatlib.\+Robohat.\+Robohat.\+get\+\_\+topboard\+\_\+adc\+\_\+single\+\_\+channel (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{int}]{\+\_\+channel\+\_\+nr }\end{DoxyParamCaption})}
+
+
+
+Get analog value of a channel from the Topboard adc Requested channels can be 0 -\/ 3 (channel 3 is the derivative of the battery voltage) 
+
+
+\begin{DoxyParams}{Parameters}
+{\em \+\_\+channel\+\_\+nr} & Wanted channel nr. (Starts at 0) \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+analog voltage 
+\end{DoxyReturn}
+
+
+Definition at line \mbox{\hyperlink{_robohat_8py_source_l01046}{1046}} of file \mbox{\hyperlink{_robohat_8py_source}{Robohat.\+py}}.
+
+\Hypertarget{classrobohatlib_1_1_robohat_1_1_robohat_a74372e3cfa3a4ccff7aef124047a3600}\label{classrobohatlib_1_1_robohat_1_1_robohat_a74372e3cfa3a4ccff7aef124047a3600} 
+\index{robohatlib.Robohat.Robohat@{robohatlib.Robohat.Robohat}!get\_topboard\_io\_expander\_direction@{get\_topboard\_io\_expander\_direction}}
+\index{get\_topboard\_io\_expander\_direction@{get\_topboard\_io\_expander\_direction}!robohatlib.Robohat.Robohat@{robohatlib.Robohat.Robohat}}
+\doxysubsubsection{\texorpdfstring{get\_topboard\_io\_expander\_direction()}{get\_topboard\_io\_expander\_direction()}}
+{\footnotesize\ttfamily  Expander\+Dir robohatlib.\+Robohat.\+Robohat.\+get\+\_\+topboard\+\_\+io\+\_\+expander\+\_\+direction (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{int}]{\+\_\+io\+\_\+nr }\end{DoxyParamCaption})}
+
+
+
+Get the direction of an io pin of the IO expander. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em \+\_\+io\+\_\+nr} & io nr\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Expander\+Dir 
+\end{DoxyReturn}
+
+
+Definition at line \mbox{\hyperlink{_robohat_8py_source_l01083}{1083}} of file \mbox{\hyperlink{_robohat_8py_source}{Robohat.\+py}}.
+
+\Hypertarget{classrobohatlib_1_1_robohat_1_1_robohat_a8b077646f09054525b0093675cc903ff}\label{classrobohatlib_1_1_robohat_1_1_robohat_a8b077646f09054525b0093675cc903ff} 
+\index{robohatlib.Robohat.Robohat@{robohatlib.Robohat.Robohat}!get\_topboard\_io\_expander\_input@{get\_topboard\_io\_expander\_input}}
+\index{get\_topboard\_io\_expander\_input@{get\_topboard\_io\_expander\_input}!robohatlib.Robohat.Robohat@{robohatlib.Robohat.Robohat}}
+\doxysubsubsection{\texorpdfstring{get\_topboard\_io\_expander\_input()}{get\_topboard\_io\_expander\_input()}}
+{\footnotesize\ttfamily  Expander\+Status robohatlib.\+Robohat.\+Robohat.\+get\+\_\+topboard\+\_\+io\+\_\+expander\+\_\+input (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{int}]{\+\_\+io\+\_\+nr }\end{DoxyParamCaption})}
+
+
+
+get the input status of an io pin of the IO expander Note. 
+
+direction of the pin must be an Input
+
+
+\begin{DoxyParams}{Parameters}
+{\em \+\_\+io\+\_\+nr} & io nr \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Expander\+Status 
+\end{DoxyReturn}
+
+
+Definition at line \mbox{\hyperlink{_robohat_8py_source_l01107}{1107}} of file \mbox{\hyperlink{_robohat_8py_source}{Robohat.\+py}}.
+
+\Hypertarget{classrobohatlib_1_1_robohat_1_1_robohat_aad236983e188f812d1f7291ed8f4ab27}\label{classrobohatlib_1_1_robohat_1_1_robohat_aad236983e188f812d1f7291ed8f4ab27} 
+\index{robohatlib.Robohat.Robohat@{robohatlib.Robohat.Robohat}!get\_update\_value@{get\_update\_value}}
+\index{get\_update\_value@{get\_update\_value}!robohatlib.Robohat.Robohat@{robohatlib.Robohat.Robohat}}
+\doxysubsubsection{\texorpdfstring{get\_update\_value()}{get\_update\_value()}}
+{\footnotesize\ttfamily  int robohatlib.\+Robohat.\+Robohat.\+get\+\_\+update\+\_\+value (\begin{DoxyParamCaption}\item[{}]{self }\end{DoxyParamCaption})}
+
+
+
+get value which is used to add or subtract from current pos 
+
+
+
+Definition at line \mbox{\hyperlink{_robohat_8py_source_l00843}{843}} of file \mbox{\hyperlink{_robohat_8py_source}{Robohat.\+py}}.
+
+\Hypertarget{classrobohatlib_1_1_robohat_1_1_robohat_a1c86033282d36263e7121df45f00e02b}\label{classrobohatlib_1_1_robohat_1_1_robohat_a1c86033282d36263e7121df45f00e02b} 
+\index{robohatlib.Robohat.Robohat@{robohatlib.Robohat.Robohat}!init@{init}}
+\index{init@{init}!robohatlib.Robohat.Robohat@{robohatlib.Robohat.Robohat}}
+\doxysubsubsection{\texorpdfstring{init()}{init()}}
+{\footnotesize\ttfamily  None robohatlib.\+Robohat.\+Robohat.\+init (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{\mbox{[}$\,$\mbox{]}}]{\+\_\+servo\+\_\+board\+\_\+1\+\_\+datas\+\_\+list,  }\item[{\mbox{[}$\,$\mbox{]}}]{\+\_\+servo\+\_\+board\+\_\+2\+\_\+datas\+\_\+list }\end{DoxyParamCaption})}
+
+
+
+Initializes the Robohat. 
+
+Mandatory. This function has to be called after creating the Robohat class
+
+
+\begin{DoxyParams}{Parameters}
+{\em \+\_\+servo\+\_\+board\+\_\+1\+\_\+datas\+\_\+list,servo} & data list 1 \\
+\hline
+{\em \+\_\+servo\+\_\+board\+\_\+2\+\_\+datas\+\_\+list,servo} & data list 2\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+None 
+\end{DoxyReturn}
+
+
+Definition at line \mbox{\hyperlink{_robohat_8py_source_l00194}{194}} of file \mbox{\hyperlink{_robohat_8py_source}{Robohat.\+py}}.
+
+\Hypertarget{classrobohatlib_1_1_robohat_1_1_robohat_a7732d2e3bd777b3fb3d1c0bcf41faa68}\label{classrobohatlib_1_1_robohat_1_1_robohat_a7732d2e3bd777b3fb3d1c0bcf41faa68} 
+\index{robohatlib.Robohat.Robohat@{robohatlib.Robohat.Robohat}!put\_servo\_to\_sleep@{put\_servo\_to\_sleep}}
+\index{put\_servo\_to\_sleep@{put\_servo\_to\_sleep}!robohatlib.Robohat.Robohat@{robohatlib.Robohat.Robohat}}
+\doxysubsubsection{\texorpdfstring{put\_servo\_to\_sleep()}{put\_servo\_to\_sleep()}}
+{\footnotesize\ttfamily  None robohatlib.\+Robohat.\+Robohat.\+put\+\_\+servo\+\_\+to\+\_\+sleep (\begin{DoxyParamCaption}\item[{}]{self }\end{DoxyParamCaption})}
+
+
+
+Puts servos to sleep. 
+
+Note servos will be powered down \begin{DoxyReturn}{Returns}
+\+: None 
+\end{DoxyReturn}
+
+
+Definition at line \mbox{\hyperlink{_robohat_8py_source_l00853}{853}} of file \mbox{\hyperlink{_robohat_8py_source}{Robohat.\+py}}.
+
+\Hypertarget{classrobohatlib_1_1_robohat_1_1_robohat_acd039c394de20107f164a73b24f2b589}\label{classrobohatlib_1_1_robohat_1_1_robohat_acd039c394de20107f164a73b24f2b589} 
+\index{robohatlib.Robohat.Robohat@{robohatlib.Robohat.Robohat}!servo\_set\_new\_readout\_vs\_angle\_formula@{servo\_set\_new\_readout\_vs\_angle\_formula}}
+\index{servo\_set\_new\_readout\_vs\_angle\_formula@{servo\_set\_new\_readout\_vs\_angle\_formula}!robohatlib.Robohat.Robohat@{robohatlib.Robohat.Robohat}}
+\doxysubsubsection{\texorpdfstring{servo\_set\_new\_readout\_vs\_angle\_formula()}{servo\_set\_new\_readout\_vs\_angle\_formula()}}
+{\footnotesize\ttfamily  None robohatlib.\+Robohat.\+Robohat.\+servo\+\_\+set\+\_\+new\+\_\+readout\+\_\+vs\+\_\+angle\+\_\+formula (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{}]{\+\_\+servo\+\_\+nr,  }\item[{}]{\+\_\+formula\+\_\+a,  }\item[{}]{\+\_\+formula\+\_\+b }\end{DoxyParamCaption})}
+
+
+
+Set new formula parameters for voltage angle conversion. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em \+\_\+servo\+\_\+nr} & wanted servo nr \\
+\hline
+{\em \+\_\+formula\+\_\+a} & first part of linear formula \\
+\hline
+{\em \+\_\+formula\+\_\+b} & second part of linear formula \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+\+: None 
+\end{DoxyReturn}
+
+
+Definition at line \mbox{\hyperlink{_robohat_8py_source_l00530}{530}} of file \mbox{\hyperlink{_robohat_8py_source}{Robohat.\+py}}.
+
+\Hypertarget{classrobohatlib_1_1_robohat_1_1_robohat_a6e6bd743b6365d747e1b40a7271446a6}\label{classrobohatlib_1_1_robohat_1_1_robohat_a6e6bd743b6365d747e1b40a7271446a6} 
+\index{robohatlib.Robohat.Robohat@{robohatlib.Robohat.Robohat}!set\_assemblyboard\_1\_io\_expander\_int\_callback@{set\_assemblyboard\_1\_io\_expander\_int\_callback}}
+\index{set\_assemblyboard\_1\_io\_expander\_int\_callback@{set\_assemblyboard\_1\_io\_expander\_int\_callback}!robohatlib.Robohat.Robohat@{robohatlib.Robohat.Robohat}}
+\doxysubsubsection{\texorpdfstring{set\_assemblyboard\_1\_io\_expander\_int\_callback()}{set\_assemblyboard\_1\_io\_expander\_int\_callback()}}
+{\footnotesize\ttfamily  None robohatlib.\+Robohat.\+Robohat.\+set\+\_\+assemblyboard\+\_\+1\+\_\+io\+\_\+expander\+\_\+int\+\_\+callback (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{}]{\+\_\+callback }\end{DoxyParamCaption})}
+
+
+
+Set a (new) function which will be executed when the io-\/expander of the assembly board 1 is triggerd. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em \+\_\+callback} & callback function \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+\+: None 
+\end{DoxyReturn}
+
+
+Definition at line \mbox{\hyperlink{_robohat_8py_source_l01301}{1301}} of file \mbox{\hyperlink{_robohat_8py_source}{Robohat.\+py}}.
+
+\Hypertarget{classrobohatlib_1_1_robohat_1_1_robohat_a9f0048f8d20922986150e21e14b62018}\label{classrobohatlib_1_1_robohat_1_1_robohat_a9f0048f8d20922986150e21e14b62018} 
+\index{robohatlib.Robohat.Robohat@{robohatlib.Robohat.Robohat}!set\_assemblyboard\_2\_io\_expander\_int\_callback@{set\_assemblyboard\_2\_io\_expander\_int\_callback}}
+\index{set\_assemblyboard\_2\_io\_expander\_int\_callback@{set\_assemblyboard\_2\_io\_expander\_int\_callback}!robohatlib.Robohat.Robohat@{robohatlib.Robohat.Robohat}}
+\doxysubsubsection{\texorpdfstring{set\_assemblyboard\_2\_io\_expander\_int\_callback()}{set\_assemblyboard\_2\_io\_expander\_int\_callback()}}
+{\footnotesize\ttfamily  None robohatlib.\+Robohat.\+Robohat.\+set\+\_\+assemblyboard\+\_\+2\+\_\+io\+\_\+expander\+\_\+int\+\_\+callback (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{}]{\+\_\+callback }\end{DoxyParamCaption})}
+
+
+
+Set a (new) function which will be executed when the io-\/expander of the assembly board 2 is triggerd. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em \+\_\+callback} & callback function \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+\+: None 
+\end{DoxyReturn}
+
+
+Definition at line \mbox{\hyperlink{_robohat_8py_source_l01310}{1310}} of file \mbox{\hyperlink{_robohat_8py_source}{Robohat.\+py}}.
+
+\Hypertarget{classrobohatlib_1_1_robohat_1_1_robohat_a63bed7a38cf3f03aa4eb8284191899f5}\label{classrobohatlib_1_1_robohat_1_1_robohat_a63bed7a38cf3f03aa4eb8284191899f5} 
+\index{robohatlib.Robohat.Robohat@{robohatlib.Robohat.Robohat}!set\_led\_color@{set\_led\_color}}
+\index{set\_led\_color@{set\_led\_color}!robohatlib.Robohat.Robohat@{robohatlib.Robohat.Robohat}}
+\doxysubsubsection{\texorpdfstring{set\_led\_color()}{set\_led\_color()}}
+{\footnotesize\ttfamily  None robohatlib.\+Robohat.\+Robohat.\+set\+\_\+led\+\_\+color (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{Color}]{\+\_\+color }\end{DoxyParamCaption})}
+
+
+
+Sets the color of the LED and turns the LED on Valid colors are\+: WHITE, RED, GREEN, BLUE, YELLOW, and PURPLE. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em \+\_\+color} & waned color \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+None 
+\end{DoxyReturn}
+
+
+Definition at line \mbox{\hyperlink{_robohat_8py_source_l00362}{362}} of file \mbox{\hyperlink{_robohat_8py_source}{Robohat.\+py}}.
+
+\Hypertarget{classrobohatlib_1_1_robohat_1_1_robohat_a9d04d23aeb23153a9b8c21e985415309}\label{classrobohatlib_1_1_robohat_1_1_robohat_a9d04d23aeb23153a9b8c21e985415309} 
+\index{robohatlib.Robohat.Robohat@{robohatlib.Robohat.Robohat}!set\_servo\_direct\_mode@{set\_servo\_direct\_mode}}
+\index{set\_servo\_direct\_mode@{set\_servo\_direct\_mode}!robohatlib.Robohat.Robohat@{robohatlib.Robohat.Robohat}}
+\doxysubsubsection{\texorpdfstring{set\_servo\_direct\_mode()}{set\_servo\_direct\_mode()}}
+{\footnotesize\ttfamily  None robohatlib.\+Robohat.\+Robohat.\+set\+\_\+servo\+\_\+direct\+\_\+mode (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{bool}]{\+\_\+mode,  }\item[{float }]{\+\_\+delay = {\ttfamily 0.0001} }\end{DoxyParamCaption})}
+
+
+
+Sets if the servos are periodically updated, or direct. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em \+\_\+mode} & True, direct mode activated \\
+\hline
+{\em \+\_\+delay,delay} & in update mode is seconds \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+\+: None 
+\end{DoxyReturn}
+
+
+Definition at line \mbox{\hyperlink{_robohat_8py_source_l00504}{504}} of file \mbox{\hyperlink{_robohat_8py_source}{Robohat.\+py}}.
+
+\Hypertarget{classrobohatlib_1_1_robohat_1_1_robohat_ad34930428697759563813ebf49e37370}\label{classrobohatlib_1_1_robohat_1_1_robohat_ad34930428697759563813ebf49e37370} 
+\index{robohatlib.Robohat.Robohat@{robohatlib.Robohat.Robohat}!set\_servo\_io\_expander\_direction@{set\_servo\_io\_expander\_direction}}
+\index{set\_servo\_io\_expander\_direction@{set\_servo\_io\_expander\_direction}!robohatlib.Robohat.Robohat@{robohatlib.Robohat.Robohat}}
+\doxysubsubsection{\texorpdfstring{set\_servo\_io\_expander\_direction()}{set\_servo\_io\_expander\_direction()}}
+{\footnotesize\ttfamily  IOStatus robohatlib.\+Robohat.\+Robohat.\+set\+\_\+servo\+\_\+io\+\_\+expander\+\_\+direction (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{Pwm\+Plug}]{\+\_\+board\+\_\+id,  }\item[{int}]{\+\_\+pin\+\_\+nr,  }\item[{Expander\+Dir}]{\+\_\+dir }\end{DoxyParamCaption})}
+
+
+
+Set the direction of the IO pin on a servo board. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em \+\_\+board\+\_\+id} & board nr \\
+\hline
+{\em \+\_\+pin\+\_\+nr} & pin nr \\
+\hline
+{\em \+\_\+dir} & on or out \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+None\+: 
+\end{DoxyReturn}
+
+
+Definition at line \mbox{\hyperlink{_robohat_8py_source_l00898}{898}} of file \mbox{\hyperlink{_robohat_8py_source}{Robohat.\+py}}.
+
+\Hypertarget{classrobohatlib_1_1_robohat_1_1_robohat_ae5013adb3bc83a059953cabdb9617092}\label{classrobohatlib_1_1_robohat_1_1_robohat_ae5013adb3bc83a059953cabdb9617092} 
+\index{robohatlib.Robohat.Robohat@{robohatlib.Robohat.Robohat}!set\_servo\_io\_expander\_output@{set\_servo\_io\_expander\_output}}
+\index{set\_servo\_io\_expander\_output@{set\_servo\_io\_expander\_output}!robohatlib.Robohat.Robohat@{robohatlib.Robohat.Robohat}}
+\doxysubsubsection{\texorpdfstring{set\_servo\_io\_expander\_output()}{set\_servo\_io\_expander\_output()}}
+{\footnotesize\ttfamily  IOStatus robohatlib.\+Robohat.\+Robohat.\+set\+\_\+servo\+\_\+io\+\_\+expander\+\_\+output (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{Pwm\+Plug}]{\+\_\+board\+\_\+id,  }\item[{int}]{\+\_\+pin\+\_\+nr,  }\item[{Expander\+Status}]{\+\_\+value }\end{DoxyParamCaption})}
+
+
+
+Set the value of the IO pin on a servo board. 
+
+Note, io pin should be an output 
+\begin{DoxyParams}{Parameters}
+{\em \+\_\+board\+\_\+id} & id of requested assemblyboard \\
+\hline
+{\em \+\_\+pin\+\_\+nr} & pin nr \\
+\hline
+{\em \+\_\+value} & low or high \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+None\+: 
+\end{DoxyReturn}
+
+
+Definition at line \mbox{\hyperlink{_robohat_8py_source_l00951}{951}} of file \mbox{\hyperlink{_robohat_8py_source}{Robohat.\+py}}.
+
+\Hypertarget{classrobohatlib_1_1_robohat_1_1_robohat_a7ac45157f9c9d54fa813997d3fc84f07}\label{classrobohatlib_1_1_robohat_1_1_robohat_a7ac45157f9c9d54fa813997d3fc84f07} 
+\index{robohatlib.Robohat.Robohat@{robohatlib.Robohat.Robohat}!set\_servo\_multiple\_angles@{set\_servo\_multiple\_angles}}
+\index{set\_servo\_multiple\_angles@{set\_servo\_multiple\_angles}!robohatlib.Robohat.Robohat@{robohatlib.Robohat.Robohat}}
+\doxysubsubsection{\texorpdfstring{set\_servo\_multiple\_angles()}{set\_servo\_multiple\_angles()}}
+{\footnotesize\ttfamily  None robohatlib.\+Robohat.\+Robohat.\+set\+\_\+servo\+\_\+multiple\+\_\+angles (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{\mbox{[}$\,$\mbox{]}}]{\+\_\+angles\+\_\+list }\end{DoxyParamCaption})}
+
+
+
+Set the angle of connected servos in degree Expect a list of angles. 
+
+The list should have 16 elements (if only assembly 1 is connected) or list should have 32 elements (if both assemblies are connected)
+
+
+\begin{DoxyParams}{Parameters}
+{\em \+\_\+angles\+\_\+list,list} & of the angles \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+None 
+\end{DoxyReturn}
+
+
+Definition at line \mbox{\hyperlink{_robohat_8py_source_l00802}{802}} of file \mbox{\hyperlink{_robohat_8py_source}{Robohat.\+py}}.
+
+\Hypertarget{classrobohatlib_1_1_robohat_1_1_robohat_acf5cf8b0569aefd2d2f66a37c1ee2902}\label{classrobohatlib_1_1_robohat_1_1_robohat_acf5cf8b0569aefd2d2f66a37c1ee2902} 
+\index{robohatlib.Robohat.Robohat@{robohatlib.Robohat.Robohat}!set\_servo\_single\_angle@{set\_servo\_single\_angle}}
+\index{set\_servo\_single\_angle@{set\_servo\_single\_angle}!robohatlib.Robohat.Robohat@{robohatlib.Robohat.Robohat}}
+\doxysubsubsection{\texorpdfstring{set\_servo\_single\_angle()}{set\_servo\_single\_angle()}}
+{\footnotesize\ttfamily  None robohatlib.\+Robohat.\+Robohat.\+set\+\_\+servo\+\_\+single\+\_\+angle (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{int}]{\+\_\+servo\+\_\+nr,  }\item[{float}]{\+\_\+angle }\end{DoxyParamCaption})}
+
+
+
+Set the angle of connected servo in degree, does nothing when not avaible Servos 0 -\/ 15 are connected to assembly board 0 (PWMPLUG 3) and servos 15 -\/ 31 are connected to assembly board 1 (PWMPLUG 4) 
+
+
+\begin{DoxyParams}{Parameters}
+{\em \+\_\+servo\+\_\+nr} & The servo nr wanted (0 -\/ 31) \\
+\hline
+{\em \+\_\+angle} & wanted angle\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+None 
+\end{DoxyReturn}
+
+
+Definition at line \mbox{\hyperlink{_robohat_8py_source_l00736}{736}} of file \mbox{\hyperlink{_robohat_8py_source}{Robohat.\+py}}.
+
+\Hypertarget{classrobohatlib_1_1_robohat_1_1_robohat_a1108210f376182e0cc47ea9dd9bd937d}\label{classrobohatlib_1_1_robohat_1_1_robohat_a1108210f376182e0cc47ea9dd9bd937d} 
+\index{robohatlib.Robohat.Robohat@{robohatlib.Robohat.Robohat}!set\_system\_alarm\_permitted@{set\_system\_alarm\_permitted}}
+\index{set\_system\_alarm\_permitted@{set\_system\_alarm\_permitted}!robohatlib.Robohat.Robohat@{robohatlib.Robohat.Robohat}}
+\doxysubsubsection{\texorpdfstring{set\_system\_alarm\_permitted()}{set\_system\_alarm\_permitted()}}
+{\footnotesize\ttfamily  None robohatlib.\+Robohat.\+Robohat.\+set\+\_\+system\+\_\+alarm\+\_\+permitted (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{bool}]{\+\_\+state }\end{DoxyParamCaption})}
+
+
+
+Overrides the system alarm switch. 
+
+If false, no sound alarm will be given 
+\begin{DoxyParams}{Parameters}
+{\em \+\_\+state} & new state of system alarm \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+\+: None 
+\end{DoxyReturn}
+
+
+Definition at line \mbox{\hyperlink{_robohat_8py_source_l01233}{1233}} of file \mbox{\hyperlink{_robohat_8py_source}{Robohat.\+py}}.
+
+\Hypertarget{classrobohatlib_1_1_robohat_1_1_robohat_ab84919c9ad6a1925d9b5b309ea7c350d}\label{classrobohatlib_1_1_robohat_1_1_robohat_ab84919c9ad6a1925d9b5b309ea7c350d} 
+\index{robohatlib.Robohat.Robohat@{robohatlib.Robohat.Robohat}!set\_topboard\_io\_expander\_direction@{set\_topboard\_io\_expander\_direction}}
+\index{set\_topboard\_io\_expander\_direction@{set\_topboard\_io\_expander\_direction}!robohatlib.Robohat.Robohat@{robohatlib.Robohat.Robohat}}
+\doxysubsubsection{\texorpdfstring{set\_topboard\_io\_expander\_direction()}{set\_topboard\_io\_expander\_direction()}}
+{\footnotesize\ttfamily  IOStatus robohatlib.\+Robohat.\+Robohat.\+set\+\_\+topboard\+\_\+io\+\_\+expander\+\_\+direction (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{int}]{\+\_\+io\+\_\+nr,  }\item[{Expander\+Dir}]{\+\_\+direction }\end{DoxyParamCaption})}
+
+
+
+Set the direction of an io pin of the IO expander. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em \+\_\+io\+\_\+nr} & io nr \\
+\hline
+{\em \+\_\+direction} & the direction of the pin.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+IOStatus 
+\end{DoxyReturn}
+
+
+Definition at line \mbox{\hyperlink{_robohat_8py_source_l01071}{1071}} of file \mbox{\hyperlink{_robohat_8py_source}{Robohat.\+py}}.
+
+\Hypertarget{classrobohatlib_1_1_robohat_1_1_robohat_a9875bc3ff39808ebc5ac8b9fde1ac67a}\label{classrobohatlib_1_1_robohat_1_1_robohat_a9875bc3ff39808ebc5ac8b9fde1ac67a} 
+\index{robohatlib.Robohat.Robohat@{robohatlib.Robohat.Robohat}!set\_topboard\_io\_expander\_int\_callback@{set\_topboard\_io\_expander\_int\_callback}}
+\index{set\_topboard\_io\_expander\_int\_callback@{set\_topboard\_io\_expander\_int\_callback}!robohatlib.Robohat.Robohat@{robohatlib.Robohat.Robohat}}
+\doxysubsubsection{\texorpdfstring{set\_topboard\_io\_expander\_int\_callback()}{set\_topboard\_io\_expander\_int\_callback()}}
+{\footnotesize\ttfamily  None robohatlib.\+Robohat.\+Robohat.\+set\+\_\+topboard\+\_\+io\+\_\+expander\+\_\+int\+\_\+callback (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{}]{\+\_\+callback }\end{DoxyParamCaption})}
+
+
+
+Set a new function which will be executed when the topboard-\/io-\/expander is triggerd. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em \+\_\+callback} & the callback function \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+\+: None 
+\end{DoxyReturn}
+
+
+Definition at line \mbox{\hyperlink{_robohat_8py_source_l01117}{1117}} of file \mbox{\hyperlink{_robohat_8py_source}{Robohat.\+py}}.
+
+\Hypertarget{classrobohatlib_1_1_robohat_1_1_robohat_a1a631ab3e03061f2da5c68a3be6895a3}\label{classrobohatlib_1_1_robohat_1_1_robohat_a1a631ab3e03061f2da5c68a3be6895a3} 
+\index{robohatlib.Robohat.Robohat@{robohatlib.Robohat.Robohat}!set\_topboard\_io\_expander\_int\_release\_function@{set\_topboard\_io\_expander\_int\_release\_function}}
+\index{set\_topboard\_io\_expander\_int\_release\_function@{set\_topboard\_io\_expander\_int\_release\_function}!robohatlib.Robohat.Robohat@{robohatlib.Robohat.Robohat}}
+\doxysubsubsection{\texorpdfstring{set\_topboard\_io\_expander\_int\_release\_function()}{set\_topboard\_io\_expander\_int\_release\_function()}}
+{\footnotesize\ttfamily  None robohatlib.\+Robohat.\+Robohat.\+set\+\_\+topboard\+\_\+io\+\_\+expander\+\_\+int\+\_\+release\+\_\+function (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{}]{\+\_\+callback }\end{DoxyParamCaption})}
+
+
+
+Set a new function which will be executed after the interrupt callback function is executed. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em \+\_\+callback} & the callback function \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+\+: None 
+\end{DoxyReturn}
+
+
+Definition at line \mbox{\hyperlink{_robohat_8py_source_l01126}{1126}} of file \mbox{\hyperlink{_robohat_8py_source}{Robohat.\+py}}.
+
+\Hypertarget{classrobohatlib_1_1_robohat_1_1_robohat_ab1853d2c8210916e948c36777d382ba9}\label{classrobohatlib_1_1_robohat_1_1_robohat_ab1853d2c8210916e948c36777d382ba9} 
+\index{robohatlib.Robohat.Robohat@{robohatlib.Robohat.Robohat}!set\_topboard\_io\_expander\_output@{set\_topboard\_io\_expander\_output}}
+\index{set\_topboard\_io\_expander\_output@{set\_topboard\_io\_expander\_output}!robohatlib.Robohat.Robohat@{robohatlib.Robohat.Robohat}}
+\doxysubsubsection{\texorpdfstring{set\_topboard\_io\_expander\_output()}{set\_topboard\_io\_expander\_output()}}
+{\footnotesize\ttfamily  IOStatus robohatlib.\+Robohat.\+Robohat.\+set\+\_\+topboard\+\_\+io\+\_\+expander\+\_\+output (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{int}]{\+\_\+io\+\_\+nr,  }\item[{Expander\+Status}]{\+\_\+status }\end{DoxyParamCaption})}
+
+
+
+Set the output status of an io pin of the IO expander. 
+
+Note. direction of the pin must be an Output
+
+
+\begin{DoxyParams}{Parameters}
+{\em \+\_\+io\+\_\+nr} & io nr \\
+\hline
+{\em \+\_\+status} & the status o the pin\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+None 
+\end{DoxyReturn}
+
+
+Definition at line \mbox{\hyperlink{_robohat_8py_source_l01094}{1094}} of file \mbox{\hyperlink{_robohat_8py_source}{Robohat.\+py}}.
+
+\Hypertarget{classrobohatlib_1_1_robohat_1_1_robohat_a4db8b53bef13bb0c651a8ac79a951322}\label{classrobohatlib_1_1_robohat_1_1_robohat_a4db8b53bef13bb0c651a8ac79a951322} 
+\index{robohatlib.Robohat.Robohat@{robohatlib.Robohat.Robohat}!set\_update\_value@{set\_update\_value}}
+\index{set\_update\_value@{set\_update\_value}!robohatlib.Robohat.Robohat@{robohatlib.Robohat.Robohat}}
+\doxysubsubsection{\texorpdfstring{set\_update\_value()}{set\_update\_value()}}
+{\footnotesize\ttfamily  None robohatlib.\+Robohat.\+Robohat.\+set\+\_\+update\+\_\+value (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{int}]{\+\_\+update\+\_\+value }\end{DoxyParamCaption})}
+
+
+
+Set value which is used to add or subtract from current pos. 
+
+
+
+Definition at line \mbox{\hyperlink{_robohat_8py_source_l00831}{831}} of file \mbox{\hyperlink{_robohat_8py_source}{Robohat.\+py}}.
+
+\Hypertarget{classrobohatlib_1_1_robohat_1_1_robohat_ae9fa133f55219455c5ede1adbbeecb75}\label{classrobohatlib_1_1_robohat_1_1_robohat_ae9fa133f55219455c5ede1adbbeecb75} 
+\index{robohatlib.Robohat.Robohat@{robohatlib.Robohat.Robohat}!start\_servo\_drivers@{start\_servo\_drivers}}
+\index{start\_servo\_drivers@{start\_servo\_drivers}!robohatlib.Robohat.Robohat@{robohatlib.Robohat.Robohat}}
+\doxysubsubsection{\texorpdfstring{start\_servo\_drivers()}{start\_servo\_drivers()}}
+{\footnotesize\ttfamily  None robohatlib.\+Robohat.\+Robohat.\+start\+\_\+servo\+\_\+drivers (\begin{DoxyParamCaption}\item[{}]{self }\end{DoxyParamCaption})}
+
+
+
+Start the servo drivers. 
+
+
+
+Definition at line \mbox{\hyperlink{_robohat_8py_source_l00255}{255}} of file \mbox{\hyperlink{_robohat_8py_source}{Robohat.\+py}}.
+
+\Hypertarget{classrobohatlib_1_1_robohat_1_1_robohat_ab33abf6c9e3d98571c24cee7b97bbece}\label{classrobohatlib_1_1_robohat_1_1_robohat_ab33abf6c9e3d98571c24cee7b97bbece} 
+\index{robohatlib.Robohat.Robohat@{robohatlib.Robohat.Robohat}!stop\_servo\_drivers@{stop\_servo\_drivers}}
+\index{stop\_servo\_drivers@{stop\_servo\_drivers}!robohatlib.Robohat.Robohat@{robohatlib.Robohat.Robohat}}
+\doxysubsubsection{\texorpdfstring{stop\_servo\_drivers()}{stop\_servo\_drivers()}}
+{\footnotesize\ttfamily  None robohatlib.\+Robohat.\+Robohat.\+stop\+\_\+servo\+\_\+drivers (\begin{DoxyParamCaption}\item[{}]{self }\end{DoxyParamCaption})}
+
+
+
+Stops the servo drivers. 
+
+
+
+Definition at line \mbox{\hyperlink{_robohat_8py_source_l00267}{267}} of file \mbox{\hyperlink{_robohat_8py_source}{Robohat.\+py}}.
+
+\Hypertarget{classrobohatlib_1_1_robohat_1_1_robohat_a00c558b22ff671d88045daaf67ebf11d}\label{classrobohatlib_1_1_robohat_1_1_robohat_a00c558b22ff671d88045daaf67ebf11d} 
+\index{robohatlib.Robohat.Robohat@{robohatlib.Robohat.Robohat}!test\_camera@{test\_camera}}
+\index{test\_camera@{test\_camera}!robohatlib.Robohat.Robohat@{robohatlib.Robohat.Robohat}}
+\doxysubsubsection{\texorpdfstring{test\_camera()}{test\_camera()}}
+{\footnotesize\ttfamily  None robohatlib.\+Robohat.\+Robohat.\+test\+\_\+camera (\begin{DoxyParamCaption}\item[{}]{self }\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{_robohat_8py_source_l01291}{1291}} of file \mbox{\hyperlink{_robohat_8py_source}{Robohat.\+py}}.
+
+\Hypertarget{classrobohatlib_1_1_robohat_1_1_robohat_a1d23e2adb30d38bc8a57eefce9317bd6}\label{classrobohatlib_1_1_robohat_1_1_robohat_a1d23e2adb30d38bc8a57eefce9317bd6} 
+\index{robohatlib.Robohat.Robohat@{robohatlib.Robohat.Robohat}!turn\_led\_off@{turn\_led\_off}}
+\index{turn\_led\_off@{turn\_led\_off}!robohatlib.Robohat.Robohat@{robohatlib.Robohat.Robohat}}
+\doxysubsubsection{\texorpdfstring{turn\_led\_off()}{turn\_led\_off()}}
+{\footnotesize\ttfamily  None robohatlib.\+Robohat.\+Robohat.\+turn\+\_\+led\+\_\+off (\begin{DoxyParamCaption}\item[{}]{self }\end{DoxyParamCaption})}
+
+
+
+Turns led off, last color will be stored. 
+
+\begin{DoxyReturn}{Returns}
+None 
+\end{DoxyReturn}
+
+
+Definition at line \mbox{\hyperlink{_robohat_8py_source_l00372}{372}} of file \mbox{\hyperlink{_robohat_8py_source}{Robohat.\+py}}.
+
+\Hypertarget{classrobohatlib_1_1_robohat_1_1_robohat_a0ef4f3224c34f280dced9122dc3b552e}\label{classrobohatlib_1_1_robohat_1_1_robohat_a0ef4f3224c34f280dced9122dc3b552e} 
+\index{robohatlib.Robohat.Robohat@{robohatlib.Robohat.Robohat}!turn\_led\_on@{turn\_led\_on}}
+\index{turn\_led\_on@{turn\_led\_on}!robohatlib.Robohat.Robohat@{robohatlib.Robohat.Robohat}}
+\doxysubsubsection{\texorpdfstring{turn\_led\_on()}{turn\_led\_on()}}
+{\footnotesize\ttfamily  None robohatlib.\+Robohat.\+Robohat.\+turn\+\_\+led\+\_\+on (\begin{DoxyParamCaption}\item[{}]{self }\end{DoxyParamCaption})}
+
+
+
+Turns led on, with last known color. 
+
+default color is WHITE
+
+\begin{DoxyReturn}{Returns}
+None 
+\end{DoxyReturn}
+
+
+Definition at line \mbox{\hyperlink{_robohat_8py_source_l00380}{380}} of file \mbox{\hyperlink{_robohat_8py_source}{Robohat.\+py}}.
+
+\Hypertarget{classrobohatlib_1_1_robohat_1_1_robohat_af3229522f16681b57ca0cea14a8a6fb6}\label{classrobohatlib_1_1_robohat_1_1_robohat_af3229522f16681b57ca0cea14a8a6fb6} 
+\index{robohatlib.Robohat.Robohat@{robohatlib.Robohat.Robohat}!update\_servo\_data\_direct@{update\_servo\_data\_direct}}
+\index{update\_servo\_data\_direct@{update\_servo\_data\_direct}!robohatlib.Robohat.Robohat@{robohatlib.Robohat.Robohat}}
+\doxysubsubsection{\texorpdfstring{update\_servo\_data\_direct()}{update\_servo\_data\_direct()}}
+{\footnotesize\ttfamily  None robohatlib.\+Robohat.\+Robohat.\+update\+\_\+servo\+\_\+data\+\_\+direct (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{\mbox{[}$\,$\mbox{]}}]{\+\_\+wanted\+\_\+angles }\end{DoxyParamCaption})}
+
+
+
+Drives the servos directly. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em \+\_\+wanted\+\_\+angles} & array with positions \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line \mbox{\hyperlink{_robohat_8py_source_l00229}{229}} of file \mbox{\hyperlink{_robohat_8py_source}{Robohat.\+py}}.
+
+\Hypertarget{classrobohatlib_1_1_robohat_1_1_robohat_a253463fbe5968c2b5820961a08d0038b}\label{classrobohatlib_1_1_robohat_1_1_robohat_a253463fbe5968c2b5820961a08d0038b} 
+\index{robohatlib.Robohat.Robohat@{robohatlib.Robohat.Robohat}!wakeup\_servo@{wakeup\_servo}}
+\index{wakeup\_servo@{wakeup\_servo}!robohatlib.Robohat.Robohat@{robohatlib.Robohat.Robohat}}
+\doxysubsubsection{\texorpdfstring{wakeup\_servo()}{wakeup\_servo()}}
+{\footnotesize\ttfamily  None robohatlib.\+Robohat.\+Robohat.\+wakeup\+\_\+servo (\begin{DoxyParamCaption}\item[{}]{self }\end{DoxyParamCaption})}
+
+
+
+Wakes up the servos. 
+
+\begin{DoxyReturn}{Returns}
+\+: None 
+\end{DoxyReturn}
+
+
+Definition at line \mbox{\hyperlink{_robohat_8py_source_l00867}{867}} of file \mbox{\hyperlink{_robohat_8py_source}{Robohat.\+py}}.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+robohatlib/\mbox{\hyperlink{_robohat_8py}{Robohat.\+py}}\end{DoxyCompactItemize}

@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['exit_5fprogram_0',['exit_program',['../d3/d60/class_robohat_1_1_robohat.html#af41039605da368be54e031225af0e6b2',1,'Robohat::Robohat']]]
+  ['exit_5fprogram_0',['exit_program',['../d9/df9/classrobohatlib_1_1_robohat_1_1_robohat.html#ab0aae20a0b4bf8d0ae50f1ec57f7ae6a',1,'robohatlib::Robohat::Robohat']]]
 ];

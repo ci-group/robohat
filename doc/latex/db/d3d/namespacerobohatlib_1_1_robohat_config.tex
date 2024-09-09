@@ -1,0 +1,708 @@
+\doxysection{robohatlib.\+Robohat\+Config Namespace Reference}
+\hypertarget{namespacerobohatlib_1_1_robohat_config}{}\label{namespacerobohatlib_1_1_robohat_config}\index{robohatlib.RobohatConfig@{robohatlib.RobohatConfig}}
+
+
+Robohatlib (2022-\/2823-\/01) Copyright © 2023 Vrije Universiteit Amsterdam Electronica-\/\+Beta-\/\+VU A.  
+
+
+\doxysubsubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+bool \mbox{\hyperlink{namespacerobohatlib_1_1_robohat_config_ac2687c6babf34a1d3783e2734ecde6c9}{DEBUG}} = False
+\item 
+bool \mbox{\hyperlink{namespacerobohatlib_1_1_robohat_config_abad6676e2a1c0115591f2781c4b4aea6}{DEBUG\+\_\+\+I2C}} = False
+\item 
+int \mbox{\hyperlink{namespacerobohatlib_1_1_robohat_config_aa07f34a21239d1d779efed8ddf01a928}{TIME\+\_\+\+WINDOW\+\_\+\+OF\+\_\+\+SHORT\+\_\+\+PROTECTION\+\_\+\+POWER\+\_\+\+GOOD\+\_\+\+CHECK\+\_\+\+SERVO\+\_\+\+POWER}} = 1000
+\item 
+int \mbox{\hyperlink{namespacerobohatlib_1_1_robohat_config_a5bfe3bbc826bfdd940bef45f15864a39}{TIME\+\_\+\+WINDOW\+\_\+\+OF\+\_\+\+SHORT\+\_\+\+PROTECTION\+\_\+\+RELEASE\+\_\+\+SERVO\+\_\+\+POWER}} = 500
+\item 
+bool \mbox{\hyperlink{namespacerobohatlib_1_1_robohat_config_a551b23b65d5f805c5d907ec53237691f}{ALARM\+\_\+\+PERMITTED}} = True
+\item 
+int \mbox{\hyperlink{namespacerobohatlib_1_1_robohat_config_a3452b7601a088514680e38955ac81c30}{ALARM\+\_\+\+TIMEOUT\+\_\+\+IN\+\_\+\+SEC}} = 300
+\item 
+bool \mbox{\hyperlink{namespacerobohatlib_1_1_robohat_config_a5d598377383705211c69b5b736e9ceed}{INIT\+\_\+\+BEEP\+\_\+\+PERMITTED}} = False
+\item 
+int \mbox{\hyperlink{namespacerobohatlib_1_1_robohat_config_ab9272c4d1a91c378c4b10c7fda62e2ec}{ACCU\+\_\+\+INTERVAL\+\_\+\+TIME\+\_\+\+IN\+\_\+\+SECONDS}} = 1
+\item 
+float \mbox{\hyperlink{namespacerobohatlib_1_1_robohat_config_ad7779dfa075444f5f941eff2afc1a862}{ACCU\+\_\+\+VOLTAGE\+\_\+\+TO\+\_\+\+LOW\+\_\+\+THRESHOLD}} = 11.\+06
+\item 
+float \mbox{\hyperlink{namespacerobohatlib_1_1_robohat_config_a544643bb56b6f0f31227e23f3019416a}{ACCU\+\_\+\+VOLTAGE\+\_\+\+TO\+\_\+\+HIGH\+\_\+\+THRESHOLD}} = 13.\+00
+\item 
+int \mbox{\hyperlink{namespacerobohatlib_1_1_robohat_config_a261e299dc6c74e45b597608f4ca885fd}{ACCU\+\_\+\+WARNING\+\_\+\+PERCENTAGE\+\_\+2}} = 20
+\item 
+int \mbox{\hyperlink{namespacerobohatlib_1_1_robohat_config_a43dc6a63b55dde595980763a80008d76}{ACCU\+\_\+\+WARNING\+\_\+\+PERCENTAGE\+\_\+1}} = 15
+\item 
+float \mbox{\hyperlink{namespacerobohatlib_1_1_robohat_config_aa394e3cadabef0423f63ce756569e353}{ACCU\+\_\+\+VOLTAGE\+\_\+\+ADC\+\_\+\+FORMULA\+\_\+A}} = 4.\+85533606358714
+\item 
+float \mbox{\hyperlink{namespacerobohatlib_1_1_robohat_config_abbe217c9999068a3d1ac6fef3bec6f5a}{ACCU\+\_\+\+VOLTAGE\+\_\+\+ADC\+\_\+\+FORMULA\+\_\+B}} = -\/0.\+512839675475041
+\item 
+bool \mbox{\hyperlink{namespacerobohatlib_1_1_robohat_config_a6a4053481cdc8f1b1fea5ba23d1ca61d}{ACCU\+\_\+\+LOG\+\_\+\+DISPLAY\+\_\+\+WHEN\+\_\+\+TO\+\_\+\+LOW}} = False
+\item 
+bool \mbox{\hyperlink{namespacerobohatlib_1_1_robohat_config_a348d690e19a3eaad757d568fb504f640}{ACCU\+\_\+\+LOG\+\_\+\+DISPLAY\+\_\+\+WHEN\+\_\+\+TO\+\_\+\+HIGH}} = False
+\item 
+list \mbox{\hyperlink{namespacerobohatlib_1_1_robohat_config_a274c983036abd00e77cc01f45efd65f0}{ACCU\+\_\+\+VOLTAGE\+\_\+\+TO\+\_\+\+PERCENTAGE\+\_\+\+LIST}}
+\item 
+int \mbox{\hyperlink{namespacerobohatlib_1_1_robohat_config_ae09db1faf28953a5c2d6d07e3191f249}{POWER\+\_\+\+SHUTDOWN\+\_\+\+GPI}} = 27
+\item 
+\mbox{\hyperlink{namespacerobohatlib_1_1_robohat_config_ac13b5bf4ae099ddde7305e9b2c8eedb0}{BUZZER\+\_\+\+DEF}} = Buzzer\+Def(\"{}buzzer\"{}, 18, 1000, 50)
+\item 
+\mbox{\hyperlink{namespacerobohatlib_1_1_robohat_config_ac693e146bc8fc187ff61e35365100e31}{SERIAL\+\_\+\+DEF}} = Serial\+Def(\"{}debug\+\_\+port\"{}, 1)
+\item 
+\mbox{\hyperlink{namespacerobohatlib_1_1_robohat_config_ae90f6bb3982508a026244a68971cbeec}{LED\+\_\+\+RED\+\_\+\+GPO\+\_\+\+DEF}} = Led\+Def(\"{}led\+\_\+red\"{}, 5)
+\item 
+\mbox{\hyperlink{namespacerobohatlib_1_1_robohat_config_af207992aa7827dab957be3a4209fa0e4}{LED\+\_\+\+GREEN\+\_\+\+GPO\+\_\+\+DEF}} = Led\+Def(\"{}led\+\_\+green\"{}, 6)
+\item 
+\mbox{\hyperlink{namespacerobohatlib_1_1_robohat_config_a2ce760205092f2f4fa8484f63afd4a8f}{LED\+\_\+\+BLUE\+\_\+\+GPO\+\_\+\+DEF}} = Led\+Def(\"{}led\+\_\+blue\"{}, 26)
+\item 
+\mbox{\hyperlink{namespacerobohatlib_1_1_robohat_config_a3ad5f84fac7b9d82115a16284970f776}{STATUS\+\_\+\+LED\+\_\+\+DEF}}
+\item 
+\mbox{\hyperlink{namespacerobohatlib_1_1_robohat_config_a7ea89be31ef576cb36aecc791485761d}{IMU\+\_\+\+LIS3\+MDL\+\_\+\+I2\+C\+\_\+\+DEF}} = I2\+CDevice\+Def(\"{}imu\+\_\+lis3mdl\"{}, 5, 0x1e)
+\item 
+\mbox{\hyperlink{namespacerobohatlib_1_1_robohat_config_ab915ff9d39816fb3bad6320332e39665}{IMU\+\_\+\+LSM6\+DS33\+\_\+\+I2\+C\+\_\+\+DEF}} = I2\+CDevice\+Def(\"{}imu\+\_\+lsmds33\"{}, 5, 0x6b)
+\item 
+\mbox{\hyperlink{namespacerobohatlib_1_1_robohat_config_a8a5f0480e12f9f0f18b2500877400c6f}{IMU\+\_\+\+DEF}} = IMUDef(\"{}imu\"{}, \mbox{\hyperlink{namespacerobohatlib_1_1_robohat_config_a7ea89be31ef576cb36aecc791485761d}{IMU\+\_\+\+LIS3\+MDL\+\_\+\+I2\+C\+\_\+\+DEF}}, \mbox{\hyperlink{namespacerobohatlib_1_1_robohat_config_ab915ff9d39816fb3bad6320332e39665}{IMU\+\_\+\+LSM6\+DS33\+\_\+\+I2\+C\+\_\+\+DEF}})
+\item 
+\mbox{\hyperlink{namespacerobohatlib_1_1_robohat_config_ab350cd9daa1341d7beffd05cf99f19fc}{TOPBOARD\+\_\+\+ADC\+\_\+\+I2\+C\+\_\+\+DEF}} = I2\+CDevice\+Def(\"{}topboard\+\_\+adc\"{}, 5, 0x34)
+\item 
+\mbox{\hyperlink{namespacerobohatlib_1_1_robohat_config_a346d0e6378a8217521bca32917f722aa}{TOPBOARD\+\_\+\+IO\+\_\+\+EXPANDER\+\_\+\+I2\+C\+\_\+\+DEF}} = I2\+CDevice\+Def(\"{}topboard\+\_\+io\+\_\+expander\"{}, 1, 0x20)
+\item 
+list \mbox{\hyperlink{namespacerobohatlib_1_1_robohat_config_af58e0fbc3636cf08f3b76bf868194ecc}{TOPBOARD\+\_\+\+IO\+\_\+\+EXPANDER\+\_\+\+INTERRUPT\+\_\+\+SETTINGS}}
+\item 
+int \mbox{\hyperlink{namespacerobohatlib_1_1_robohat_config_ab27ffc9cfc74b59d1e1ebb818de7b99b}{TOPBOARD\+\_\+\+INTERRUPT\+\_\+\+GPI}} = 24
+\item 
+\mbox{\hyperlink{namespacerobohatlib_1_1_robohat_config_a014e43d19c1a50db792dad448beebb5e}{TOPBOARD\+\_\+\+IO\+\_\+\+EXPANDER\+\_\+\+DEF}}
+\item 
+int \mbox{\hyperlink{namespacerobohatlib_1_1_robohat_config_a1da1028280d130758902286d06a9e4e0}{SERVO\+\_\+\+DEFAULT\+\_\+\+PWM\+\_\+\+FREQ}} = 50
+\item 
+int \mbox{\hyperlink{namespacerobohatlib_1_1_robohat_config_adb520ee0c3378adc6b8441fff8df06f5}{SERVOASSEMBLY\+\_\+1\+\_\+\+I2\+C\+\_\+\+BUS}} = 1
+\item 
+int \mbox{\hyperlink{namespacerobohatlib_1_1_robohat_config_ad5817be082e3a7f9f171afba8d884ace}{SERVOASSEMBLY\+\_\+1\+\_\+\+SPI\+\_\+\+BUS}} = 0
+\item 
+int \mbox{\hyperlink{namespacerobohatlib_1_1_robohat_config_ad0e8a1f52a404106d31d9afe571b6434}{SERVOASSEMBLY\+\_\+2\+\_\+\+I2\+C\+\_\+\+BUS}} = 1
+\item 
+int \mbox{\hyperlink{namespacerobohatlib_1_1_robohat_config_a6e50d6bea54b5dc57c874e9f63768a0f}{SERVOASSEMBLY\+\_\+2\+\_\+\+SPI\+\_\+\+BUS}} = 0
+\item 
+int \mbox{\hyperlink{namespacerobohatlib_1_1_robohat_config_a464bf44237858a907ee3ec3154bfb97b}{SERVOASSEMBLY\+\_\+\+INTERRUPT\+\_\+\+GPI}} = 4
+\item 
+\mbox{\hyperlink{namespacerobohatlib_1_1_robohat_config_a55ea4eb3571587dfc4c7e0ca6791306a}{SERVOASSEMBLY\+\_\+\+I2\+C\+\_\+\+DEF}} = I2\+CDevice\+Def(\"{}io\+\_\+expander\"{}, 1, 0x20)
+\item 
+list \mbox{\hyperlink{namespacerobohatlib_1_1_robohat_config_a97168ff59d78204be722ba57ab0ed43c}{SERVOASSEMBLY\+\_\+\+INTERRUPT\+\_\+\+SETTINGS}}
+\item 
+\mbox{\hyperlink{namespacerobohatlib_1_1_robohat_config_a123ee10549c2c891d41094231ec2c5a0}{SERVOASSEMBLY\+\_\+\+EXPANDER\+\_\+\+DEF}}
+\item 
+\mbox{\hyperlink{namespacerobohatlib_1_1_robohat_config_a49146b1fce9604cc1dfacfd215faa3c0}{I2\+C1\+\_\+\+DEF}} = I2\+CBus\+Def(\"{}main\+\_\+i2c\"{}, 1, 3, 2, 100000)
+\item 
+\mbox{\hyperlink{namespacerobohatlib_1_1_robohat_config_ac5b8538e719a495efa8e6d27fb4f75ca}{I2\+C5\+\_\+\+DEF}} = I2\+CBus\+Def(\"{}hat\+\_\+adc\"{}, 5, 13, 12, 100000)
+\item 
+\mbox{\hyperlink{namespacerobohatlib_1_1_robohat_config_a9ad094a5c1ca7777f030604f4323682b}{I2\+C6\+\_\+\+DEF}} = I2\+CBus\+Def(\"{}unknown\"{}, 6, 23, 22, 100000)
+\item 
+\mbox{\hyperlink{namespacerobohatlib_1_1_robohat_config_a71cd02f78cceb1d48fb7b5921a94269c}{SPI0\+\_\+\+DEF}} = SPIBus\+Def(\"{}spi\+\_\+bus\+\_\+0\"{}, 0, 11, 10, 9)
+\item 
+\mbox{\hyperlink{namespacerobohatlib_1_1_robohat_config_a589c7cdea94c6a44daeebd7142328b97}{SPI1\+\_\+\+DEF}} = SPIBus\+Def(\"{}spi\+\_\+bus\+\_\+1\"{}, 1, 21, 20, 19)
+\item 
+\mbox{\hyperlink{namespacerobohatlib_1_1_robohat_config_a162b6fede3d46660ca5a1fc8a6a70c6b}{SPI2\+\_\+\+DEF}} = SPIBus\+Def(\"{}spi\+\_\+bus\+\_\+2\"{}, 2, 42, 41, 40)
+\item 
+int \mbox{\hyperlink{namespacerobohatlib_1_1_robohat_config_af2fe24889e064cb804fc48b995cadd83}{POWER\+\_\+\+SHUTDOWN\+\_\+\+PIN\+\_\+\+IO\+\_\+\+TOPBOARD}} = 0
+\item 
+int \mbox{\hyperlink{namespacerobohatlib_1_1_robohat_config_ad09d57ecb66cd387f97d2af6d15705ab}{DEFAULT\+\_\+\+SERVO\+\_\+\+UPDATE\+\_\+\+VALUE}} = 1
+\item 
+float \mbox{\hyperlink{namespacerobohatlib_1_1_robohat_config_a1029e25f37a8ce563ebb22788d85c6ef}{DEFAULT\+\_\+\+DELAY\+\_\+\+BETWEEN\+\_\+\+ACTION}} = 0.\+001
+\item 
+float \mbox{\hyperlink{namespacerobohatlib_1_1_robohat_config_a9f49f65a1e34f263c50416b343de1607}{INITIAL\+\_\+\+POS\+\_\+\+OF\+\_\+\+SERVOS}} = 90.\+0
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Robohatlib (2022-\/2823-\/01) Copyright © 2023 Vrije Universiteit Amsterdam Electronica-\/\+Beta-\/\+VU A. 
+
+Denker (\href{mailto:a.denker@vu.nl}{\texttt{ a.\+denker@vu.\+nl}})
+
+Configuration for the Robohat lib. These settings aren\textquotesingle{}t ment to be altered by the app programmer do not alter 
+
+\doxysubsection{Variable Documentation}
+\Hypertarget{namespacerobohatlib_1_1_robohat_config_ab9272c4d1a91c378c4b10c7fda62e2ec}\label{namespacerobohatlib_1_1_robohat_config_ab9272c4d1a91c378c4b10c7fda62e2ec} 
+\index{robohatlib.RobohatConfig@{robohatlib.RobohatConfig}!ACCU\_INTERVAL\_TIME\_IN\_SECONDS@{ACCU\_INTERVAL\_TIME\_IN\_SECONDS}}
+\index{ACCU\_INTERVAL\_TIME\_IN\_SECONDS@{ACCU\_INTERVAL\_TIME\_IN\_SECONDS}!robohatlib.RobohatConfig@{robohatlib.RobohatConfig}}
+\doxysubsubsection{\texorpdfstring{ACCU\_INTERVAL\_TIME\_IN\_SECONDS}{ACCU\_INTERVAL\_TIME\_IN\_SECONDS}}
+{\footnotesize\ttfamily int robohatlib.\+Robohat\+Config.\+ACCU\+\_\+\+INTERVAL\+\_\+\+TIME\+\_\+\+IN\+\_\+\+SECONDS = 1}
+
+
+
+Definition at line \mbox{\hyperlink{_robohat_config_8py_source_l00050}{50}} of file \mbox{\hyperlink{_robohat_config_8py_source}{Robohat\+Config.\+py}}.
+
+\Hypertarget{namespacerobohatlib_1_1_robohat_config_a348d690e19a3eaad757d568fb504f640}\label{namespacerobohatlib_1_1_robohat_config_a348d690e19a3eaad757d568fb504f640} 
+\index{robohatlib.RobohatConfig@{robohatlib.RobohatConfig}!ACCU\_LOG\_DISPLAY\_WHEN\_TO\_HIGH@{ACCU\_LOG\_DISPLAY\_WHEN\_TO\_HIGH}}
+\index{ACCU\_LOG\_DISPLAY\_WHEN\_TO\_HIGH@{ACCU\_LOG\_DISPLAY\_WHEN\_TO\_HIGH}!robohatlib.RobohatConfig@{robohatlib.RobohatConfig}}
+\doxysubsubsection{\texorpdfstring{ACCU\_LOG\_DISPLAY\_WHEN\_TO\_HIGH}{ACCU\_LOG\_DISPLAY\_WHEN\_TO\_HIGH}}
+{\footnotesize\ttfamily bool robohatlib.\+Robohat\+Config.\+ACCU\+\_\+\+LOG\+\_\+\+DISPLAY\+\_\+\+WHEN\+\_\+\+TO\+\_\+\+HIGH = False}
+
+
+
+Definition at line \mbox{\hyperlink{_robohat_config_8py_source_l00059}{59}} of file \mbox{\hyperlink{_robohat_config_8py_source}{Robohat\+Config.\+py}}.
+
+\Hypertarget{namespacerobohatlib_1_1_robohat_config_a6a4053481cdc8f1b1fea5ba23d1ca61d}\label{namespacerobohatlib_1_1_robohat_config_a6a4053481cdc8f1b1fea5ba23d1ca61d} 
+\index{robohatlib.RobohatConfig@{robohatlib.RobohatConfig}!ACCU\_LOG\_DISPLAY\_WHEN\_TO\_LOW@{ACCU\_LOG\_DISPLAY\_WHEN\_TO\_LOW}}
+\index{ACCU\_LOG\_DISPLAY\_WHEN\_TO\_LOW@{ACCU\_LOG\_DISPLAY\_WHEN\_TO\_LOW}!robohatlib.RobohatConfig@{robohatlib.RobohatConfig}}
+\doxysubsubsection{\texorpdfstring{ACCU\_LOG\_DISPLAY\_WHEN\_TO\_LOW}{ACCU\_LOG\_DISPLAY\_WHEN\_TO\_LOW}}
+{\footnotesize\ttfamily bool robohatlib.\+Robohat\+Config.\+ACCU\+\_\+\+LOG\+\_\+\+DISPLAY\+\_\+\+WHEN\+\_\+\+TO\+\_\+\+LOW = False}
+
+
+
+Definition at line \mbox{\hyperlink{_robohat_config_8py_source_l00058}{58}} of file \mbox{\hyperlink{_robohat_config_8py_source}{Robohat\+Config.\+py}}.
+
+\Hypertarget{namespacerobohatlib_1_1_robohat_config_aa394e3cadabef0423f63ce756569e353}\label{namespacerobohatlib_1_1_robohat_config_aa394e3cadabef0423f63ce756569e353} 
+\index{robohatlib.RobohatConfig@{robohatlib.RobohatConfig}!ACCU\_VOLTAGE\_ADC\_FORMULA\_A@{ACCU\_VOLTAGE\_ADC\_FORMULA\_A}}
+\index{ACCU\_VOLTAGE\_ADC\_FORMULA\_A@{ACCU\_VOLTAGE\_ADC\_FORMULA\_A}!robohatlib.RobohatConfig@{robohatlib.RobohatConfig}}
+\doxysubsubsection{\texorpdfstring{ACCU\_VOLTAGE\_ADC\_FORMULA\_A}{ACCU\_VOLTAGE\_ADC\_FORMULA\_A}}
+{\footnotesize\ttfamily float robohatlib.\+Robohat\+Config.\+ACCU\+\_\+\+VOLTAGE\+\_\+\+ADC\+\_\+\+FORMULA\+\_\+A = 4.\+85533606358714}
+
+
+
+Definition at line \mbox{\hyperlink{_robohat_config_8py_source_l00056}{56}} of file \mbox{\hyperlink{_robohat_config_8py_source}{Robohat\+Config.\+py}}.
+
+\Hypertarget{namespacerobohatlib_1_1_robohat_config_abbe217c9999068a3d1ac6fef3bec6f5a}\label{namespacerobohatlib_1_1_robohat_config_abbe217c9999068a3d1ac6fef3bec6f5a} 
+\index{robohatlib.RobohatConfig@{robohatlib.RobohatConfig}!ACCU\_VOLTAGE\_ADC\_FORMULA\_B@{ACCU\_VOLTAGE\_ADC\_FORMULA\_B}}
+\index{ACCU\_VOLTAGE\_ADC\_FORMULA\_B@{ACCU\_VOLTAGE\_ADC\_FORMULA\_B}!robohatlib.RobohatConfig@{robohatlib.RobohatConfig}}
+\doxysubsubsection{\texorpdfstring{ACCU\_VOLTAGE\_ADC\_FORMULA\_B}{ACCU\_VOLTAGE\_ADC\_FORMULA\_B}}
+{\footnotesize\ttfamily float robohatlib.\+Robohat\+Config.\+ACCU\+\_\+\+VOLTAGE\+\_\+\+ADC\+\_\+\+FORMULA\+\_\+B = -\/0.\+512839675475041}
+
+
+
+Definition at line \mbox{\hyperlink{_robohat_config_8py_source_l00057}{57}} of file \mbox{\hyperlink{_robohat_config_8py_source}{Robohat\+Config.\+py}}.
+
+\Hypertarget{namespacerobohatlib_1_1_robohat_config_a544643bb56b6f0f31227e23f3019416a}\label{namespacerobohatlib_1_1_robohat_config_a544643bb56b6f0f31227e23f3019416a} 
+\index{robohatlib.RobohatConfig@{robohatlib.RobohatConfig}!ACCU\_VOLTAGE\_TO\_HIGH\_THRESHOLD@{ACCU\_VOLTAGE\_TO\_HIGH\_THRESHOLD}}
+\index{ACCU\_VOLTAGE\_TO\_HIGH\_THRESHOLD@{ACCU\_VOLTAGE\_TO\_HIGH\_THRESHOLD}!robohatlib.RobohatConfig@{robohatlib.RobohatConfig}}
+\doxysubsubsection{\texorpdfstring{ACCU\_VOLTAGE\_TO\_HIGH\_THRESHOLD}{ACCU\_VOLTAGE\_TO\_HIGH\_THRESHOLD}}
+{\footnotesize\ttfamily float robohatlib.\+Robohat\+Config.\+ACCU\+\_\+\+VOLTAGE\+\_\+\+TO\+\_\+\+HIGH\+\_\+\+THRESHOLD = 13.\+00}
+
+
+
+Definition at line \mbox{\hyperlink{_robohat_config_8py_source_l00053}{53}} of file \mbox{\hyperlink{_robohat_config_8py_source}{Robohat\+Config.\+py}}.
+
+\Hypertarget{namespacerobohatlib_1_1_robohat_config_ad7779dfa075444f5f941eff2afc1a862}\label{namespacerobohatlib_1_1_robohat_config_ad7779dfa075444f5f941eff2afc1a862} 
+\index{robohatlib.RobohatConfig@{robohatlib.RobohatConfig}!ACCU\_VOLTAGE\_TO\_LOW\_THRESHOLD@{ACCU\_VOLTAGE\_TO\_LOW\_THRESHOLD}}
+\index{ACCU\_VOLTAGE\_TO\_LOW\_THRESHOLD@{ACCU\_VOLTAGE\_TO\_LOW\_THRESHOLD}!robohatlib.RobohatConfig@{robohatlib.RobohatConfig}}
+\doxysubsubsection{\texorpdfstring{ACCU\_VOLTAGE\_TO\_LOW\_THRESHOLD}{ACCU\_VOLTAGE\_TO\_LOW\_THRESHOLD}}
+{\footnotesize\ttfamily float robohatlib.\+Robohat\+Config.\+ACCU\+\_\+\+VOLTAGE\+\_\+\+TO\+\_\+\+LOW\+\_\+\+THRESHOLD = 11.\+06}
+
+
+
+Definition at line \mbox{\hyperlink{_robohat_config_8py_source_l00052}{52}} of file \mbox{\hyperlink{_robohat_config_8py_source}{Robohat\+Config.\+py}}.
+
+\Hypertarget{namespacerobohatlib_1_1_robohat_config_a274c983036abd00e77cc01f45efd65f0}\label{namespacerobohatlib_1_1_robohat_config_a274c983036abd00e77cc01f45efd65f0} 
+\index{robohatlib.RobohatConfig@{robohatlib.RobohatConfig}!ACCU\_VOLTAGE\_TO\_PERCENTAGE\_LIST@{ACCU\_VOLTAGE\_TO\_PERCENTAGE\_LIST}}
+\index{ACCU\_VOLTAGE\_TO\_PERCENTAGE\_LIST@{ACCU\_VOLTAGE\_TO\_PERCENTAGE\_LIST}!robohatlib.RobohatConfig@{robohatlib.RobohatConfig}}
+\doxysubsubsection{\texorpdfstring{ACCU\_VOLTAGE\_TO\_PERCENTAGE\_LIST}{ACCU\_VOLTAGE\_TO\_PERCENTAGE\_LIST}}
+{\footnotesize\ttfamily list robohatlib.\+Robohat\+Config.\+ACCU\+\_\+\+VOLTAGE\+\_\+\+TO\+\_\+\+PERCENTAGE\+\_\+\+LIST}
+
+{\bfseries Initial value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ =\ \ \ [}
+\DoxyCodeLine{00002\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ [9.6,\ \ \ 0],}
+\DoxyCodeLine{00003\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ [9.82,\ \ 1],}
+\DoxyCodeLine{00004\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ [10.83,\ 5],}
+\DoxyCodeLine{00005\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ [11.06,\ 10],}
+\DoxyCodeLine{00006\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ [11.12,\ 15],}
+\DoxyCodeLine{00007\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ [11.18,\ 20],}
+\DoxyCodeLine{00008\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ [11.24,\ 25],}
+\DoxyCodeLine{00009\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ [11.3,\ \ 30],}
+\DoxyCodeLine{00010\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ [11.36,\ 35],}
+\DoxyCodeLine{00011\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ [11.39,\ 40],}
+\DoxyCodeLine{00012\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ [11.45,\ 45],}
+\DoxyCodeLine{00013\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ [11.51,\ 50],}
+\DoxyCodeLine{00014\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ [11.56,\ 55],}
+\DoxyCodeLine{00015\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ [11.62,\ 60],}
+\DoxyCodeLine{00016\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ [11.74,\ 65],}
+\DoxyCodeLine{00017\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ [11.86,\ 70],}
+\DoxyCodeLine{00018\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ [11.95,\ 75],}
+\DoxyCodeLine{00019\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ [12.07,\ 80],}
+\DoxyCodeLine{00020\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ [12.25,\ 85],}
+\DoxyCodeLine{00021\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ [12.33,\ 90],}
+\DoxyCodeLine{00022\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ [12.5,\ 95],}
+\DoxyCodeLine{00023\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ [12.6,\ 100]}
+\DoxyCodeLine{00024\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ]}
+
+\end{DoxyCode}
+
+
+Definition at line \mbox{\hyperlink{_robohat_config_8py_source_l00062}{62}} of file \mbox{\hyperlink{_robohat_config_8py_source}{Robohat\+Config.\+py}}.
+
+\Hypertarget{namespacerobohatlib_1_1_robohat_config_a43dc6a63b55dde595980763a80008d76}\label{namespacerobohatlib_1_1_robohat_config_a43dc6a63b55dde595980763a80008d76} 
+\index{robohatlib.RobohatConfig@{robohatlib.RobohatConfig}!ACCU\_WARNING\_PERCENTAGE\_1@{ACCU\_WARNING\_PERCENTAGE\_1}}
+\index{ACCU\_WARNING\_PERCENTAGE\_1@{ACCU\_WARNING\_PERCENTAGE\_1}!robohatlib.RobohatConfig@{robohatlib.RobohatConfig}}
+\doxysubsubsection{\texorpdfstring{ACCU\_WARNING\_PERCENTAGE\_1}{ACCU\_WARNING\_PERCENTAGE\_1}}
+{\footnotesize\ttfamily int robohatlib.\+Robohat\+Config.\+ACCU\+\_\+\+WARNING\+\_\+\+PERCENTAGE\+\_\+1 = 15}
+
+
+
+Definition at line \mbox{\hyperlink{_robohat_config_8py_source_l00055}{55}} of file \mbox{\hyperlink{_robohat_config_8py_source}{Robohat\+Config.\+py}}.
+
+\Hypertarget{namespacerobohatlib_1_1_robohat_config_a261e299dc6c74e45b597608f4ca885fd}\label{namespacerobohatlib_1_1_robohat_config_a261e299dc6c74e45b597608f4ca885fd} 
+\index{robohatlib.RobohatConfig@{robohatlib.RobohatConfig}!ACCU\_WARNING\_PERCENTAGE\_2@{ACCU\_WARNING\_PERCENTAGE\_2}}
+\index{ACCU\_WARNING\_PERCENTAGE\_2@{ACCU\_WARNING\_PERCENTAGE\_2}!robohatlib.RobohatConfig@{robohatlib.RobohatConfig}}
+\doxysubsubsection{\texorpdfstring{ACCU\_WARNING\_PERCENTAGE\_2}{ACCU\_WARNING\_PERCENTAGE\_2}}
+{\footnotesize\ttfamily int robohatlib.\+Robohat\+Config.\+ACCU\+\_\+\+WARNING\+\_\+\+PERCENTAGE\+\_\+2 = 20}
+
+
+
+Definition at line \mbox{\hyperlink{_robohat_config_8py_source_l00054}{54}} of file \mbox{\hyperlink{_robohat_config_8py_source}{Robohat\+Config.\+py}}.
+
+\Hypertarget{namespacerobohatlib_1_1_robohat_config_a551b23b65d5f805c5d907ec53237691f}\label{namespacerobohatlib_1_1_robohat_config_a551b23b65d5f805c5d907ec53237691f} 
+\index{robohatlib.RobohatConfig@{robohatlib.RobohatConfig}!ALARM\_PERMITTED@{ALARM\_PERMITTED}}
+\index{ALARM\_PERMITTED@{ALARM\_PERMITTED}!robohatlib.RobohatConfig@{robohatlib.RobohatConfig}}
+\doxysubsubsection{\texorpdfstring{ALARM\_PERMITTED}{ALARM\_PERMITTED}}
+{\footnotesize\ttfamily bool robohatlib.\+Robohat\+Config.\+ALARM\+\_\+\+PERMITTED = True}
+
+
+
+Definition at line \mbox{\hyperlink{_robohat_config_8py_source_l00043}{43}} of file \mbox{\hyperlink{_robohat_config_8py_source}{Robohat\+Config.\+py}}.
+
+\Hypertarget{namespacerobohatlib_1_1_robohat_config_a3452b7601a088514680e38955ac81c30}\label{namespacerobohatlib_1_1_robohat_config_a3452b7601a088514680e38955ac81c30} 
+\index{robohatlib.RobohatConfig@{robohatlib.RobohatConfig}!ALARM\_TIMEOUT\_IN\_SEC@{ALARM\_TIMEOUT\_IN\_SEC}}
+\index{ALARM\_TIMEOUT\_IN\_SEC@{ALARM\_TIMEOUT\_IN\_SEC}!robohatlib.RobohatConfig@{robohatlib.RobohatConfig}}
+\doxysubsubsection{\texorpdfstring{ALARM\_TIMEOUT\_IN\_SEC}{ALARM\_TIMEOUT\_IN\_SEC}}
+{\footnotesize\ttfamily int robohatlib.\+Robohat\+Config.\+ALARM\+\_\+\+TIMEOUT\+\_\+\+IN\+\_\+\+SEC = 300}
+
+
+
+Definition at line \mbox{\hyperlink{_robohat_config_8py_source_l00044}{44}} of file \mbox{\hyperlink{_robohat_config_8py_source}{Robohat\+Config.\+py}}.
+
+\Hypertarget{namespacerobohatlib_1_1_robohat_config_ac13b5bf4ae099ddde7305e9b2c8eedb0}\label{namespacerobohatlib_1_1_robohat_config_ac13b5bf4ae099ddde7305e9b2c8eedb0} 
+\index{robohatlib.RobohatConfig@{robohatlib.RobohatConfig}!BUZZER\_DEF@{BUZZER\_DEF}}
+\index{BUZZER\_DEF@{BUZZER\_DEF}!robohatlib.RobohatConfig@{robohatlib.RobohatConfig}}
+\doxysubsubsection{\texorpdfstring{BUZZER\_DEF}{BUZZER\_DEF}}
+{\footnotesize\ttfamily robohatlib.\+Robohat\+Config.\+BUZZER\+\_\+\+DEF = Buzzer\+Def(\"{}buzzer\"{}, 18, 1000, 50)}
+
+
+
+Definition at line \mbox{\hyperlink{_robohat_config_8py_source_l00094}{94}} of file \mbox{\hyperlink{_robohat_config_8py_source}{Robohat\+Config.\+py}}.
+
+\Hypertarget{namespacerobohatlib_1_1_robohat_config_ac2687c6babf34a1d3783e2734ecde6c9}\label{namespacerobohatlib_1_1_robohat_config_ac2687c6babf34a1d3783e2734ecde6c9} 
+\index{robohatlib.RobohatConfig@{robohatlib.RobohatConfig}!DEBUG@{DEBUG}}
+\index{DEBUG@{DEBUG}!robohatlib.RobohatConfig@{robohatlib.RobohatConfig}}
+\doxysubsubsection{\texorpdfstring{DEBUG}{DEBUG}}
+{\footnotesize\ttfamily bool robohatlib.\+Robohat\+Config.\+DEBUG = False}
+
+
+
+Definition at line \mbox{\hyperlink{_robohat_config_8py_source_l00033}{33}} of file \mbox{\hyperlink{_robohat_config_8py_source}{Robohat\+Config.\+py}}.
+
+\Hypertarget{namespacerobohatlib_1_1_robohat_config_abad6676e2a1c0115591f2781c4b4aea6}\label{namespacerobohatlib_1_1_robohat_config_abad6676e2a1c0115591f2781c4b4aea6} 
+\index{robohatlib.RobohatConfig@{robohatlib.RobohatConfig}!DEBUG\_I2C@{DEBUG\_I2C}}
+\index{DEBUG\_I2C@{DEBUG\_I2C}!robohatlib.RobohatConfig@{robohatlib.RobohatConfig}}
+\doxysubsubsection{\texorpdfstring{DEBUG\_I2C}{DEBUG\_I2C}}
+{\footnotesize\ttfamily bool robohatlib.\+Robohat\+Config.\+DEBUG\+\_\+\+I2C = False}
+
+
+
+Definition at line \mbox{\hyperlink{_robohat_config_8py_source_l00034}{34}} of file \mbox{\hyperlink{_robohat_config_8py_source}{Robohat\+Config.\+py}}.
+
+\Hypertarget{namespacerobohatlib_1_1_robohat_config_a1029e25f37a8ce563ebb22788d85c6ef}\label{namespacerobohatlib_1_1_robohat_config_a1029e25f37a8ce563ebb22788d85c6ef} 
+\index{robohatlib.RobohatConfig@{robohatlib.RobohatConfig}!DEFAULT\_DELAY\_BETWEEN\_ACTION@{DEFAULT\_DELAY\_BETWEEN\_ACTION}}
+\index{DEFAULT\_DELAY\_BETWEEN\_ACTION@{DEFAULT\_DELAY\_BETWEEN\_ACTION}!robohatlib.RobohatConfig@{robohatlib.RobohatConfig}}
+\doxysubsubsection{\texorpdfstring{DEFAULT\_DELAY\_BETWEEN\_ACTION}{DEFAULT\_DELAY\_BETWEEN\_ACTION}}
+{\footnotesize\ttfamily float robohatlib.\+Robohat\+Config.\+DEFAULT\+\_\+\+DELAY\+\_\+\+BETWEEN\+\_\+\+ACTION = 0.\+001}
+
+
+
+Definition at line \mbox{\hyperlink{_robohat_config_8py_source_l00173}{173}} of file \mbox{\hyperlink{_robohat_config_8py_source}{Robohat\+Config.\+py}}.
+
+\Hypertarget{namespacerobohatlib_1_1_robohat_config_ad09d57ecb66cd387f97d2af6d15705ab}\label{namespacerobohatlib_1_1_robohat_config_ad09d57ecb66cd387f97d2af6d15705ab} 
+\index{robohatlib.RobohatConfig@{robohatlib.RobohatConfig}!DEFAULT\_SERVO\_UPDATE\_VALUE@{DEFAULT\_SERVO\_UPDATE\_VALUE}}
+\index{DEFAULT\_SERVO\_UPDATE\_VALUE@{DEFAULT\_SERVO\_UPDATE\_VALUE}!robohatlib.RobohatConfig@{robohatlib.RobohatConfig}}
+\doxysubsubsection{\texorpdfstring{DEFAULT\_SERVO\_UPDATE\_VALUE}{DEFAULT\_SERVO\_UPDATE\_VALUE}}
+{\footnotesize\ttfamily int robohatlib.\+Robohat\+Config.\+DEFAULT\+\_\+\+SERVO\+\_\+\+UPDATE\+\_\+\+VALUE = 1}
+
+
+
+Definition at line \mbox{\hyperlink{_robohat_config_8py_source_l00172}{172}} of file \mbox{\hyperlink{_robohat_config_8py_source}{Robohat\+Config.\+py}}.
+
+\Hypertarget{namespacerobohatlib_1_1_robohat_config_a49146b1fce9604cc1dfacfd215faa3c0}\label{namespacerobohatlib_1_1_robohat_config_a49146b1fce9604cc1dfacfd215faa3c0} 
+\index{robohatlib.RobohatConfig@{robohatlib.RobohatConfig}!I2C1\_DEF@{I2C1\_DEF}}
+\index{I2C1\_DEF@{I2C1\_DEF}!robohatlib.RobohatConfig@{robohatlib.RobohatConfig}}
+\doxysubsubsection{\texorpdfstring{I2C1\_DEF}{I2C1\_DEF}}
+{\footnotesize\ttfamily robohatlib.\+Robohat\+Config.\+I2\+C1\+\_\+\+DEF = I2\+CBus\+Def(\"{}main\+\_\+i2c\"{}, 1, 3, 2, 100000)}
+
+
+
+Definition at line \mbox{\hyperlink{_robohat_config_8py_source_l00159}{159}} of file \mbox{\hyperlink{_robohat_config_8py_source}{Robohat\+Config.\+py}}.
+
+\Hypertarget{namespacerobohatlib_1_1_robohat_config_ac5b8538e719a495efa8e6d27fb4f75ca}\label{namespacerobohatlib_1_1_robohat_config_ac5b8538e719a495efa8e6d27fb4f75ca} 
+\index{robohatlib.RobohatConfig@{robohatlib.RobohatConfig}!I2C5\_DEF@{I2C5\_DEF}}
+\index{I2C5\_DEF@{I2C5\_DEF}!robohatlib.RobohatConfig@{robohatlib.RobohatConfig}}
+\doxysubsubsection{\texorpdfstring{I2C5\_DEF}{I2C5\_DEF}}
+{\footnotesize\ttfamily robohatlib.\+Robohat\+Config.\+I2\+C5\+\_\+\+DEF = I2\+CBus\+Def(\"{}hat\+\_\+adc\"{}, 5, 13, 12, 100000)}
+
+
+
+Definition at line \mbox{\hyperlink{_robohat_config_8py_source_l00160}{160}} of file \mbox{\hyperlink{_robohat_config_8py_source}{Robohat\+Config.\+py}}.
+
+\Hypertarget{namespacerobohatlib_1_1_robohat_config_a9ad094a5c1ca7777f030604f4323682b}\label{namespacerobohatlib_1_1_robohat_config_a9ad094a5c1ca7777f030604f4323682b} 
+\index{robohatlib.RobohatConfig@{robohatlib.RobohatConfig}!I2C6\_DEF@{I2C6\_DEF}}
+\index{I2C6\_DEF@{I2C6\_DEF}!robohatlib.RobohatConfig@{robohatlib.RobohatConfig}}
+\doxysubsubsection{\texorpdfstring{I2C6\_DEF}{I2C6\_DEF}}
+{\footnotesize\ttfamily robohatlib.\+Robohat\+Config.\+I2\+C6\+\_\+\+DEF = I2\+CBus\+Def(\"{}unknown\"{}, 6, 23, 22, 100000)}
+
+
+
+Definition at line \mbox{\hyperlink{_robohat_config_8py_source_l00161}{161}} of file \mbox{\hyperlink{_robohat_config_8py_source}{Robohat\+Config.\+py}}.
+
+\Hypertarget{namespacerobohatlib_1_1_robohat_config_a8a5f0480e12f9f0f18b2500877400c6f}\label{namespacerobohatlib_1_1_robohat_config_a8a5f0480e12f9f0f18b2500877400c6f} 
+\index{robohatlib.RobohatConfig@{robohatlib.RobohatConfig}!IMU\_DEF@{IMU\_DEF}}
+\index{IMU\_DEF@{IMU\_DEF}!robohatlib.RobohatConfig@{robohatlib.RobohatConfig}}
+\doxysubsubsection{\texorpdfstring{IMU\_DEF}{IMU\_DEF}}
+{\footnotesize\ttfamily robohatlib.\+Robohat\+Config.\+IMU\+\_\+\+DEF = IMUDef(\"{}imu\"{}, \mbox{\hyperlink{namespacerobohatlib_1_1_robohat_config_a7ea89be31ef576cb36aecc791485761d}{IMU\+\_\+\+LIS3\+MDL\+\_\+\+I2\+C\+\_\+\+DEF}}, \mbox{\hyperlink{namespacerobohatlib_1_1_robohat_config_ab915ff9d39816fb3bad6320332e39665}{IMU\+\_\+\+LSM6\+DS33\+\_\+\+I2\+C\+\_\+\+DEF}})}
+
+
+
+Definition at line \mbox{\hyperlink{_robohat_config_8py_source_l00107}{107}} of file \mbox{\hyperlink{_robohat_config_8py_source}{Robohat\+Config.\+py}}.
+
+\Hypertarget{namespacerobohatlib_1_1_robohat_config_a7ea89be31ef576cb36aecc791485761d}\label{namespacerobohatlib_1_1_robohat_config_a7ea89be31ef576cb36aecc791485761d} 
+\index{robohatlib.RobohatConfig@{robohatlib.RobohatConfig}!IMU\_LIS3MDL\_I2C\_DEF@{IMU\_LIS3MDL\_I2C\_DEF}}
+\index{IMU\_LIS3MDL\_I2C\_DEF@{IMU\_LIS3MDL\_I2C\_DEF}!robohatlib.RobohatConfig@{robohatlib.RobohatConfig}}
+\doxysubsubsection{\texorpdfstring{IMU\_LIS3MDL\_I2C\_DEF}{IMU\_LIS3MDL\_I2C\_DEF}}
+{\footnotesize\ttfamily robohatlib.\+Robohat\+Config.\+IMU\+\_\+\+LIS3\+MDL\+\_\+\+I2\+C\+\_\+\+DEF = I2\+CDevice\+Def(\"{}imu\+\_\+lis3mdl\"{}, 5, 0x1e)}
+
+
+
+Definition at line \mbox{\hyperlink{_robohat_config_8py_source_l00105}{105}} of file \mbox{\hyperlink{_robohat_config_8py_source}{Robohat\+Config.\+py}}.
+
+\Hypertarget{namespacerobohatlib_1_1_robohat_config_ab915ff9d39816fb3bad6320332e39665}\label{namespacerobohatlib_1_1_robohat_config_ab915ff9d39816fb3bad6320332e39665} 
+\index{robohatlib.RobohatConfig@{robohatlib.RobohatConfig}!IMU\_LSM6DS33\_I2C\_DEF@{IMU\_LSM6DS33\_I2C\_DEF}}
+\index{IMU\_LSM6DS33\_I2C\_DEF@{IMU\_LSM6DS33\_I2C\_DEF}!robohatlib.RobohatConfig@{robohatlib.RobohatConfig}}
+\doxysubsubsection{\texorpdfstring{IMU\_LSM6DS33\_I2C\_DEF}{IMU\_LSM6DS33\_I2C\_DEF}}
+{\footnotesize\ttfamily robohatlib.\+Robohat\+Config.\+IMU\+\_\+\+LSM6\+DS33\+\_\+\+I2\+C\+\_\+\+DEF = I2\+CDevice\+Def(\"{}imu\+\_\+lsmds33\"{}, 5, 0x6b)}
+
+
+
+Definition at line \mbox{\hyperlink{_robohat_config_8py_source_l00106}{106}} of file \mbox{\hyperlink{_robohat_config_8py_source}{Robohat\+Config.\+py}}.
+
+\Hypertarget{namespacerobohatlib_1_1_robohat_config_a5d598377383705211c69b5b736e9ceed}\label{namespacerobohatlib_1_1_robohat_config_a5d598377383705211c69b5b736e9ceed} 
+\index{robohatlib.RobohatConfig@{robohatlib.RobohatConfig}!INIT\_BEEP\_PERMITTED@{INIT\_BEEP\_PERMITTED}}
+\index{INIT\_BEEP\_PERMITTED@{INIT\_BEEP\_PERMITTED}!robohatlib.RobohatConfig@{robohatlib.RobohatConfig}}
+\doxysubsubsection{\texorpdfstring{INIT\_BEEP\_PERMITTED}{INIT\_BEEP\_PERMITTED}}
+{\footnotesize\ttfamily bool robohatlib.\+Robohat\+Config.\+INIT\+\_\+\+BEEP\+\_\+\+PERMITTED = False}
+
+
+
+Definition at line \mbox{\hyperlink{_robohat_config_8py_source_l00045}{45}} of file \mbox{\hyperlink{_robohat_config_8py_source}{Robohat\+Config.\+py}}.
+
+\Hypertarget{namespacerobohatlib_1_1_robohat_config_a9f49f65a1e34f263c50416b343de1607}\label{namespacerobohatlib_1_1_robohat_config_a9f49f65a1e34f263c50416b343de1607} 
+\index{robohatlib.RobohatConfig@{robohatlib.RobohatConfig}!INITIAL\_POS\_OF\_SERVOS@{INITIAL\_POS\_OF\_SERVOS}}
+\index{INITIAL\_POS\_OF\_SERVOS@{INITIAL\_POS\_OF\_SERVOS}!robohatlib.RobohatConfig@{robohatlib.RobohatConfig}}
+\doxysubsubsection{\texorpdfstring{INITIAL\_POS\_OF\_SERVOS}{INITIAL\_POS\_OF\_SERVOS}}
+{\footnotesize\ttfamily float robohatlib.\+Robohat\+Config.\+INITIAL\+\_\+\+POS\+\_\+\+OF\+\_\+\+SERVOS = 90.\+0}
+
+
+
+Definition at line \mbox{\hyperlink{_robohat_config_8py_source_l00174}{174}} of file \mbox{\hyperlink{_robohat_config_8py_source}{Robohat\+Config.\+py}}.
+
+\Hypertarget{namespacerobohatlib_1_1_robohat_config_a2ce760205092f2f4fa8484f63afd4a8f}\label{namespacerobohatlib_1_1_robohat_config_a2ce760205092f2f4fa8484f63afd4a8f} 
+\index{robohatlib.RobohatConfig@{robohatlib.RobohatConfig}!LED\_BLUE\_GPO\_DEF@{LED\_BLUE\_GPO\_DEF}}
+\index{LED\_BLUE\_GPO\_DEF@{LED\_BLUE\_GPO\_DEF}!robohatlib.RobohatConfig@{robohatlib.RobohatConfig}}
+\doxysubsubsection{\texorpdfstring{LED\_BLUE\_GPO\_DEF}{LED\_BLUE\_GPO\_DEF}}
+{\footnotesize\ttfamily robohatlib.\+Robohat\+Config.\+LED\+\_\+\+BLUE\+\_\+\+GPO\+\_\+\+DEF = Led\+Def(\"{}led\+\_\+blue\"{}, 26)}
+
+
+
+Definition at line \mbox{\hyperlink{_robohat_config_8py_source_l00099}{99}} of file \mbox{\hyperlink{_robohat_config_8py_source}{Robohat\+Config.\+py}}.
+
+\Hypertarget{namespacerobohatlib_1_1_robohat_config_af207992aa7827dab957be3a4209fa0e4}\label{namespacerobohatlib_1_1_robohat_config_af207992aa7827dab957be3a4209fa0e4} 
+\index{robohatlib.RobohatConfig@{robohatlib.RobohatConfig}!LED\_GREEN\_GPO\_DEF@{LED\_GREEN\_GPO\_DEF}}
+\index{LED\_GREEN\_GPO\_DEF@{LED\_GREEN\_GPO\_DEF}!robohatlib.RobohatConfig@{robohatlib.RobohatConfig}}
+\doxysubsubsection{\texorpdfstring{LED\_GREEN\_GPO\_DEF}{LED\_GREEN\_GPO\_DEF}}
+{\footnotesize\ttfamily robohatlib.\+Robohat\+Config.\+LED\+\_\+\+GREEN\+\_\+\+GPO\+\_\+\+DEF = Led\+Def(\"{}led\+\_\+green\"{}, 6)}
+
+
+
+Definition at line \mbox{\hyperlink{_robohat_config_8py_source_l00098}{98}} of file \mbox{\hyperlink{_robohat_config_8py_source}{Robohat\+Config.\+py}}.
+
+\Hypertarget{namespacerobohatlib_1_1_robohat_config_ae90f6bb3982508a026244a68971cbeec}\label{namespacerobohatlib_1_1_robohat_config_ae90f6bb3982508a026244a68971cbeec} 
+\index{robohatlib.RobohatConfig@{robohatlib.RobohatConfig}!LED\_RED\_GPO\_DEF@{LED\_RED\_GPO\_DEF}}
+\index{LED\_RED\_GPO\_DEF@{LED\_RED\_GPO\_DEF}!robohatlib.RobohatConfig@{robohatlib.RobohatConfig}}
+\doxysubsubsection{\texorpdfstring{LED\_RED\_GPO\_DEF}{LED\_RED\_GPO\_DEF}}
+{\footnotesize\ttfamily robohatlib.\+Robohat\+Config.\+LED\+\_\+\+RED\+\_\+\+GPO\+\_\+\+DEF = Led\+Def(\"{}led\+\_\+red\"{}, 5)}
+
+
+
+Definition at line \mbox{\hyperlink{_robohat_config_8py_source_l00097}{97}} of file \mbox{\hyperlink{_robohat_config_8py_source}{Robohat\+Config.\+py}}.
+
+\Hypertarget{namespacerobohatlib_1_1_robohat_config_ae09db1faf28953a5c2d6d07e3191f249}\label{namespacerobohatlib_1_1_robohat_config_ae09db1faf28953a5c2d6d07e3191f249} 
+\index{robohatlib.RobohatConfig@{robohatlib.RobohatConfig}!POWER\_SHUTDOWN\_GPI@{POWER\_SHUTDOWN\_GPI}}
+\index{POWER\_SHUTDOWN\_GPI@{POWER\_SHUTDOWN\_GPI}!robohatlib.RobohatConfig@{robohatlib.RobohatConfig}}
+\doxysubsubsection{\texorpdfstring{POWER\_SHUTDOWN\_GPI}{POWER\_SHUTDOWN\_GPI}}
+{\footnotesize\ttfamily int robohatlib.\+Robohat\+Config.\+POWER\+\_\+\+SHUTDOWN\+\_\+\+GPI = 27}
+
+
+
+Definition at line \mbox{\hyperlink{_robohat_config_8py_source_l00092}{92}} of file \mbox{\hyperlink{_robohat_config_8py_source}{Robohat\+Config.\+py}}.
+
+\Hypertarget{namespacerobohatlib_1_1_robohat_config_af2fe24889e064cb804fc48b995cadd83}\label{namespacerobohatlib_1_1_robohat_config_af2fe24889e064cb804fc48b995cadd83} 
+\index{robohatlib.RobohatConfig@{robohatlib.RobohatConfig}!POWER\_SHUTDOWN\_PIN\_IO\_TOPBOARD@{POWER\_SHUTDOWN\_PIN\_IO\_TOPBOARD}}
+\index{POWER\_SHUTDOWN\_PIN\_IO\_TOPBOARD@{POWER\_SHUTDOWN\_PIN\_IO\_TOPBOARD}!robohatlib.RobohatConfig@{robohatlib.RobohatConfig}}
+\doxysubsubsection{\texorpdfstring{POWER\_SHUTDOWN\_PIN\_IO\_TOPBOARD}{POWER\_SHUTDOWN\_PIN\_IO\_TOPBOARD}}
+{\footnotesize\ttfamily int robohatlib.\+Robohat\+Config.\+POWER\+\_\+\+SHUTDOWN\+\_\+\+PIN\+\_\+\+IO\+\_\+\+TOPBOARD = 0}
+
+
+
+Definition at line \mbox{\hyperlink{_robohat_config_8py_source_l00170}{170}} of file \mbox{\hyperlink{_robohat_config_8py_source}{Robohat\+Config.\+py}}.
+
+\Hypertarget{namespacerobohatlib_1_1_robohat_config_ac693e146bc8fc187ff61e35365100e31}\label{namespacerobohatlib_1_1_robohat_config_ac693e146bc8fc187ff61e35365100e31} 
+\index{robohatlib.RobohatConfig@{robohatlib.RobohatConfig}!SERIAL\_DEF@{SERIAL\_DEF}}
+\index{SERIAL\_DEF@{SERIAL\_DEF}!robohatlib.RobohatConfig@{robohatlib.RobohatConfig}}
+\doxysubsubsection{\texorpdfstring{SERIAL\_DEF}{SERIAL\_DEF}}
+{\footnotesize\ttfamily robohatlib.\+Robohat\+Config.\+SERIAL\+\_\+\+DEF = Serial\+Def(\"{}debug\+\_\+port\"{}, 1)}
+
+
+
+Definition at line \mbox{\hyperlink{_robohat_config_8py_source_l00095}{95}} of file \mbox{\hyperlink{_robohat_config_8py_source}{Robohat\+Config.\+py}}.
+
+\Hypertarget{namespacerobohatlib_1_1_robohat_config_a1da1028280d130758902286d06a9e4e0}\label{namespacerobohatlib_1_1_robohat_config_a1da1028280d130758902286d06a9e4e0} 
+\index{robohatlib.RobohatConfig@{robohatlib.RobohatConfig}!SERVO\_DEFAULT\_PWM\_FREQ@{SERVO\_DEFAULT\_PWM\_FREQ}}
+\index{SERVO\_DEFAULT\_PWM\_FREQ@{SERVO\_DEFAULT\_PWM\_FREQ}!robohatlib.RobohatConfig@{robohatlib.RobohatConfig}}
+\doxysubsubsection{\texorpdfstring{SERVO\_DEFAULT\_PWM\_FREQ}{SERVO\_DEFAULT\_PWM\_FREQ}}
+{\footnotesize\ttfamily int robohatlib.\+Robohat\+Config.\+SERVO\+\_\+\+DEFAULT\+\_\+\+PWM\+\_\+\+FREQ = 50}
+
+
+
+Definition at line \mbox{\hyperlink{_robohat_config_8py_source_l00131}{131}} of file \mbox{\hyperlink{_robohat_config_8py_source}{Robohat\+Config.\+py}}.
+
+\Hypertarget{namespacerobohatlib_1_1_robohat_config_adb520ee0c3378adc6b8441fff8df06f5}\label{namespacerobohatlib_1_1_robohat_config_adb520ee0c3378adc6b8441fff8df06f5} 
+\index{robohatlib.RobohatConfig@{robohatlib.RobohatConfig}!SERVOASSEMBLY\_1\_I2C\_BUS@{SERVOASSEMBLY\_1\_I2C\_BUS}}
+\index{SERVOASSEMBLY\_1\_I2C\_BUS@{SERVOASSEMBLY\_1\_I2C\_BUS}!robohatlib.RobohatConfig@{robohatlib.RobohatConfig}}
+\doxysubsubsection{\texorpdfstring{SERVOASSEMBLY\_1\_I2C\_BUS}{SERVOASSEMBLY\_1\_I2C\_BUS}}
+{\footnotesize\ttfamily int robohatlib.\+Robohat\+Config.\+SERVOASSEMBLY\+\_\+1\+\_\+\+I2\+C\+\_\+\+BUS = 1}
+
+
+
+Definition at line \mbox{\hyperlink{_robohat_config_8py_source_l00135}{135}} of file \mbox{\hyperlink{_robohat_config_8py_source}{Robohat\+Config.\+py}}.
+
+\Hypertarget{namespacerobohatlib_1_1_robohat_config_ad5817be082e3a7f9f171afba8d884ace}\label{namespacerobohatlib_1_1_robohat_config_ad5817be082e3a7f9f171afba8d884ace} 
+\index{robohatlib.RobohatConfig@{robohatlib.RobohatConfig}!SERVOASSEMBLY\_1\_SPI\_BUS@{SERVOASSEMBLY\_1\_SPI\_BUS}}
+\index{SERVOASSEMBLY\_1\_SPI\_BUS@{SERVOASSEMBLY\_1\_SPI\_BUS}!robohatlib.RobohatConfig@{robohatlib.RobohatConfig}}
+\doxysubsubsection{\texorpdfstring{SERVOASSEMBLY\_1\_SPI\_BUS}{SERVOASSEMBLY\_1\_SPI\_BUS}}
+{\footnotesize\ttfamily int robohatlib.\+Robohat\+Config.\+SERVOASSEMBLY\+\_\+1\+\_\+\+SPI\+\_\+\+BUS = 0}
+
+
+
+Definition at line \mbox{\hyperlink{_robohat_config_8py_source_l00136}{136}} of file \mbox{\hyperlink{_robohat_config_8py_source}{Robohat\+Config.\+py}}.
+
+\Hypertarget{namespacerobohatlib_1_1_robohat_config_ad0e8a1f52a404106d31d9afe571b6434}\label{namespacerobohatlib_1_1_robohat_config_ad0e8a1f52a404106d31d9afe571b6434} 
+\index{robohatlib.RobohatConfig@{robohatlib.RobohatConfig}!SERVOASSEMBLY\_2\_I2C\_BUS@{SERVOASSEMBLY\_2\_I2C\_BUS}}
+\index{SERVOASSEMBLY\_2\_I2C\_BUS@{SERVOASSEMBLY\_2\_I2C\_BUS}!robohatlib.RobohatConfig@{robohatlib.RobohatConfig}}
+\doxysubsubsection{\texorpdfstring{SERVOASSEMBLY\_2\_I2C\_BUS}{SERVOASSEMBLY\_2\_I2C\_BUS}}
+{\footnotesize\ttfamily int robohatlib.\+Robohat\+Config.\+SERVOASSEMBLY\+\_\+2\+\_\+\+I2\+C\+\_\+\+BUS = 1}
+
+
+
+Definition at line \mbox{\hyperlink{_robohat_config_8py_source_l00138}{138}} of file \mbox{\hyperlink{_robohat_config_8py_source}{Robohat\+Config.\+py}}.
+
+\Hypertarget{namespacerobohatlib_1_1_robohat_config_a6e50d6bea54b5dc57c874e9f63768a0f}\label{namespacerobohatlib_1_1_robohat_config_a6e50d6bea54b5dc57c874e9f63768a0f} 
+\index{robohatlib.RobohatConfig@{robohatlib.RobohatConfig}!SERVOASSEMBLY\_2\_SPI\_BUS@{SERVOASSEMBLY\_2\_SPI\_BUS}}
+\index{SERVOASSEMBLY\_2\_SPI\_BUS@{SERVOASSEMBLY\_2\_SPI\_BUS}!robohatlib.RobohatConfig@{robohatlib.RobohatConfig}}
+\doxysubsubsection{\texorpdfstring{SERVOASSEMBLY\_2\_SPI\_BUS}{SERVOASSEMBLY\_2\_SPI\_BUS}}
+{\footnotesize\ttfamily int robohatlib.\+Robohat\+Config.\+SERVOASSEMBLY\+\_\+2\+\_\+\+SPI\+\_\+\+BUS = 0}
+
+
+
+Definition at line \mbox{\hyperlink{_robohat_config_8py_source_l00139}{139}} of file \mbox{\hyperlink{_robohat_config_8py_source}{Robohat\+Config.\+py}}.
+
+\Hypertarget{namespacerobohatlib_1_1_robohat_config_a123ee10549c2c891d41094231ec2c5a0}\label{namespacerobohatlib_1_1_robohat_config_a123ee10549c2c891d41094231ec2c5a0} 
+\index{robohatlib.RobohatConfig@{robohatlib.RobohatConfig}!SERVOASSEMBLY\_EXPANDER\_DEF@{SERVOASSEMBLY\_EXPANDER\_DEF}}
+\index{SERVOASSEMBLY\_EXPANDER\_DEF@{SERVOASSEMBLY\_EXPANDER\_DEF}!robohatlib.RobohatConfig@{robohatlib.RobohatConfig}}
+\doxysubsubsection{\texorpdfstring{SERVOASSEMBLY\_EXPANDER\_DEF}{SERVOASSEMBLY\_EXPANDER\_DEF}}
+{\footnotesize\ttfamily robohatlib.\+Robohat\+Config.\+SERVOASSEMBLY\+\_\+\+EXPANDER\+\_\+\+DEF}
+
+{\bfseries Initial value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ =\ \ IOExpanderDef(\textcolor{stringliteral}{"{}power\_monitor\_expander"{}},}
+\DoxyCodeLine{00002\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ SERVOASSEMBLY\_I2C\_DEF,}
+\DoxyCodeLine{00003\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ SERVOASSEMBLY\_INTERRUPT\_GPI,}
+\DoxyCodeLine{00004\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ SERVOASSEMBLY\_INTERRUPT\_SETTINGS)}
+
+\end{DoxyCode}
+
+
+Definition at line \mbox{\hyperlink{_robohat_config_8py_source_l00151}{151}} of file \mbox{\hyperlink{_robohat_config_8py_source}{Robohat\+Config.\+py}}.
+
+\Hypertarget{namespacerobohatlib_1_1_robohat_config_a55ea4eb3571587dfc4c7e0ca6791306a}\label{namespacerobohatlib_1_1_robohat_config_a55ea4eb3571587dfc4c7e0ca6791306a} 
+\index{robohatlib.RobohatConfig@{robohatlib.RobohatConfig}!SERVOASSEMBLY\_I2C\_DEF@{SERVOASSEMBLY\_I2C\_DEF}}
+\index{SERVOASSEMBLY\_I2C\_DEF@{SERVOASSEMBLY\_I2C\_DEF}!robohatlib.RobohatConfig@{robohatlib.RobohatConfig}}
+\doxysubsubsection{\texorpdfstring{SERVOASSEMBLY\_I2C\_DEF}{SERVOASSEMBLY\_I2C\_DEF}}
+{\footnotesize\ttfamily robohatlib.\+Robohat\+Config.\+SERVOASSEMBLY\+\_\+\+I2\+C\+\_\+\+DEF = I2\+CDevice\+Def(\"{}io\+\_\+expander\"{}, 1, 0x20)}
+
+
+
+Definition at line \mbox{\hyperlink{_robohat_config_8py_source_l00142}{142}} of file \mbox{\hyperlink{_robohat_config_8py_source}{Robohat\+Config.\+py}}.
+
+\Hypertarget{namespacerobohatlib_1_1_robohat_config_a464bf44237858a907ee3ec3154bfb97b}\label{namespacerobohatlib_1_1_robohat_config_a464bf44237858a907ee3ec3154bfb97b} 
+\index{robohatlib.RobohatConfig@{robohatlib.RobohatConfig}!SERVOASSEMBLY\_INTERRUPT\_GPI@{SERVOASSEMBLY\_INTERRUPT\_GPI}}
+\index{SERVOASSEMBLY\_INTERRUPT\_GPI@{SERVOASSEMBLY\_INTERRUPT\_GPI}!robohatlib.RobohatConfig@{robohatlib.RobohatConfig}}
+\doxysubsubsection{\texorpdfstring{SERVOASSEMBLY\_INTERRUPT\_GPI}{SERVOASSEMBLY\_INTERRUPT\_GPI}}
+{\footnotesize\ttfamily int robohatlib.\+Robohat\+Config.\+SERVOASSEMBLY\+\_\+\+INTERRUPT\+\_\+\+GPI = 4}
+
+
+
+Definition at line \mbox{\hyperlink{_robohat_config_8py_source_l00141}{141}} of file \mbox{\hyperlink{_robohat_config_8py_source}{Robohat\+Config.\+py}}.
+
+\Hypertarget{namespacerobohatlib_1_1_robohat_config_a97168ff59d78204be722ba57ab0ed43c}\label{namespacerobohatlib_1_1_robohat_config_a97168ff59d78204be722ba57ab0ed43c} 
+\index{robohatlib.RobohatConfig@{robohatlib.RobohatConfig}!SERVOASSEMBLY\_INTERRUPT\_SETTINGS@{SERVOASSEMBLY\_INTERRUPT\_SETTINGS}}
+\index{SERVOASSEMBLY\_INTERRUPT\_SETTINGS@{SERVOASSEMBLY\_INTERRUPT\_SETTINGS}!robohatlib.RobohatConfig@{robohatlib.RobohatConfig}}
+\doxysubsubsection{\texorpdfstring{SERVOASSEMBLY\_INTERRUPT\_SETTINGS}{SERVOASSEMBLY\_INTERRUPT\_SETTINGS}}
+{\footnotesize\ttfamily list robohatlib.\+Robohat\+Config.\+SERVOASSEMBLY\+\_\+\+INTERRUPT\+\_\+\+SETTINGS}
+
+{\bfseries Initial value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ =\ \ [}
+\DoxyCodeLine{00002\ \ \ \ \ McpInitStruct(0,\ GpioDirection.GPIO\_INPUT,\ InterruptTypes.INT\_RISING),}
+\DoxyCodeLine{00003\ \ \ \ \ McpInitStruct(1,\ GpioDirection.GPIO\_INPUT,\ InterruptTypes.INT\_RISING),}
+\DoxyCodeLine{00004\ \ \ \ \ McpInitStruct(2,\ GpioDirection.GPIO\_INPUT,\ InterruptTypes.INT\_RISING),}
+\DoxyCodeLine{00005\ \ \ \ \ McpInitStruct(3,\ GpioDirection.GPIO\_INPUT,\ InterruptTypes.INT\_RISING),}
+\DoxyCodeLine{00006\ \ \ \ \ ]}
+
+\end{DoxyCode}
+
+
+Definition at line \mbox{\hyperlink{_robohat_config_8py_source_l00144}{144}} of file \mbox{\hyperlink{_robohat_config_8py_source}{Robohat\+Config.\+py}}.
+
+\Hypertarget{namespacerobohatlib_1_1_robohat_config_a71cd02f78cceb1d48fb7b5921a94269c}\label{namespacerobohatlib_1_1_robohat_config_a71cd02f78cceb1d48fb7b5921a94269c} 
+\index{robohatlib.RobohatConfig@{robohatlib.RobohatConfig}!SPI0\_DEF@{SPI0\_DEF}}
+\index{SPI0\_DEF@{SPI0\_DEF}!robohatlib.RobohatConfig@{robohatlib.RobohatConfig}}
+\doxysubsubsection{\texorpdfstring{SPI0\_DEF}{SPI0\_DEF}}
+{\footnotesize\ttfamily robohatlib.\+Robohat\+Config.\+SPI0\+\_\+\+DEF = SPIBus\+Def(\"{}spi\+\_\+bus\+\_\+0\"{}, 0, 11, 10, 9)}
+
+
+
+Definition at line \mbox{\hyperlink{_robohat_config_8py_source_l00166}{166}} of file \mbox{\hyperlink{_robohat_config_8py_source}{Robohat\+Config.\+py}}.
+
+\Hypertarget{namespacerobohatlib_1_1_robohat_config_a589c7cdea94c6a44daeebd7142328b97}\label{namespacerobohatlib_1_1_robohat_config_a589c7cdea94c6a44daeebd7142328b97} 
+\index{robohatlib.RobohatConfig@{robohatlib.RobohatConfig}!SPI1\_DEF@{SPI1\_DEF}}
+\index{SPI1\_DEF@{SPI1\_DEF}!robohatlib.RobohatConfig@{robohatlib.RobohatConfig}}
+\doxysubsubsection{\texorpdfstring{SPI1\_DEF}{SPI1\_DEF}}
+{\footnotesize\ttfamily robohatlib.\+Robohat\+Config.\+SPI1\+\_\+\+DEF = SPIBus\+Def(\"{}spi\+\_\+bus\+\_\+1\"{}, 1, 21, 20, 19)}
+
+
+
+Definition at line \mbox{\hyperlink{_robohat_config_8py_source_l00167}{167}} of file \mbox{\hyperlink{_robohat_config_8py_source}{Robohat\+Config.\+py}}.
+
+\Hypertarget{namespacerobohatlib_1_1_robohat_config_a162b6fede3d46660ca5a1fc8a6a70c6b}\label{namespacerobohatlib_1_1_robohat_config_a162b6fede3d46660ca5a1fc8a6a70c6b} 
+\index{robohatlib.RobohatConfig@{robohatlib.RobohatConfig}!SPI2\_DEF@{SPI2\_DEF}}
+\index{SPI2\_DEF@{SPI2\_DEF}!robohatlib.RobohatConfig@{robohatlib.RobohatConfig}}
+\doxysubsubsection{\texorpdfstring{SPI2\_DEF}{SPI2\_DEF}}
+{\footnotesize\ttfamily robohatlib.\+Robohat\+Config.\+SPI2\+\_\+\+DEF = SPIBus\+Def(\"{}spi\+\_\+bus\+\_\+2\"{}, 2, 42, 41, 40)}
+
+
+
+Definition at line \mbox{\hyperlink{_robohat_config_8py_source_l00168}{168}} of file \mbox{\hyperlink{_robohat_config_8py_source}{Robohat\+Config.\+py}}.
+
+\Hypertarget{namespacerobohatlib_1_1_robohat_config_a3ad5f84fac7b9d82115a16284970f776}\label{namespacerobohatlib_1_1_robohat_config_a3ad5f84fac7b9d82115a16284970f776} 
+\index{robohatlib.RobohatConfig@{robohatlib.RobohatConfig}!STATUS\_LED\_DEF@{STATUS\_LED\_DEF}}
+\index{STATUS\_LED\_DEF@{STATUS\_LED\_DEF}!robohatlib.RobohatConfig@{robohatlib.RobohatConfig}}
+\doxysubsubsection{\texorpdfstring{STATUS\_LED\_DEF}{STATUS\_LED\_DEF}}
+{\footnotesize\ttfamily robohatlib.\+Robohat\+Config.\+STATUS\+\_\+\+LED\+\_\+\+DEF}
+
+{\bfseries Initial value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ =\ \ MultiColorLedDef(\textcolor{stringliteral}{"{}status\_led"{}},}
+\DoxyCodeLine{00002\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ LED\_RED\_GPO\_DEF,}
+\DoxyCodeLine{00003\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ LED\_GREEN\_GPO\_DEF,}
+\DoxyCodeLine{00004\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ LED\_BLUE\_GPO\_DEF)}
+
+\end{DoxyCode}
+
+
+Definition at line \mbox{\hyperlink{_robohat_config_8py_source_l00100}{100}} of file \mbox{\hyperlink{_robohat_config_8py_source}{Robohat\+Config.\+py}}.
+
+\Hypertarget{namespacerobohatlib_1_1_robohat_config_aa07f34a21239d1d779efed8ddf01a928}\label{namespacerobohatlib_1_1_robohat_config_aa07f34a21239d1d779efed8ddf01a928} 
+\index{robohatlib.RobohatConfig@{robohatlib.RobohatConfig}!TIME\_WINDOW\_OF\_SHORT\_PROTECTION\_POWER\_GOOD\_CHECK\_SERVO\_POWER@{TIME\_WINDOW\_OF\_SHORT\_PROTECTION\_POWER\_GOOD\_CHECK\_SERVO\_POWER}}
+\index{TIME\_WINDOW\_OF\_SHORT\_PROTECTION\_POWER\_GOOD\_CHECK\_SERVO\_POWER@{TIME\_WINDOW\_OF\_SHORT\_PROTECTION\_POWER\_GOOD\_CHECK\_SERVO\_POWER}!robohatlib.RobohatConfig@{robohatlib.RobohatConfig}}
+\doxysubsubsection{\texorpdfstring{TIME\_WINDOW\_OF\_SHORT\_PROTECTION\_POWER\_GOOD\_CHECK\_SERVO\_POWER}{TIME\_WINDOW\_OF\_SHORT\_PROTECTION\_POWER\_GOOD\_CHECK\_SERVO\_POWER}}
+{\footnotesize\ttfamily int robohatlib.\+Robohat\+Config.\+TIME\+\_\+\+WINDOW\+\_\+\+OF\+\_\+\+SHORT\+\_\+\+PROTECTION\+\_\+\+POWER\+\_\+\+GOOD\+\_\+\+CHECK\+\_\+\+SERVO\+\_\+\+POWER = 1000}
+
+
+
+Definition at line \mbox{\hyperlink{_robohat_config_8py_source_l00040}{40}} of file \mbox{\hyperlink{_robohat_config_8py_source}{Robohat\+Config.\+py}}.
+
+\Hypertarget{namespacerobohatlib_1_1_robohat_config_a5bfe3bbc826bfdd940bef45f15864a39}\label{namespacerobohatlib_1_1_robohat_config_a5bfe3bbc826bfdd940bef45f15864a39} 
+\index{robohatlib.RobohatConfig@{robohatlib.RobohatConfig}!TIME\_WINDOW\_OF\_SHORT\_PROTECTION\_RELEASE\_SERVO\_POWER@{TIME\_WINDOW\_OF\_SHORT\_PROTECTION\_RELEASE\_SERVO\_POWER}}
+\index{TIME\_WINDOW\_OF\_SHORT\_PROTECTION\_RELEASE\_SERVO\_POWER@{TIME\_WINDOW\_OF\_SHORT\_PROTECTION\_RELEASE\_SERVO\_POWER}!robohatlib.RobohatConfig@{robohatlib.RobohatConfig}}
+\doxysubsubsection{\texorpdfstring{TIME\_WINDOW\_OF\_SHORT\_PROTECTION\_RELEASE\_SERVO\_POWER}{TIME\_WINDOW\_OF\_SHORT\_PROTECTION\_RELEASE\_SERVO\_POWER}}
+{\footnotesize\ttfamily int robohatlib.\+Robohat\+Config.\+TIME\+\_\+\+WINDOW\+\_\+\+OF\+\_\+\+SHORT\+\_\+\+PROTECTION\+\_\+\+RELEASE\+\_\+\+SERVO\+\_\+\+POWER = 500}
+
+
+
+Definition at line \mbox{\hyperlink{_robohat_config_8py_source_l00041}{41}} of file \mbox{\hyperlink{_robohat_config_8py_source}{Robohat\+Config.\+py}}.
+
+\Hypertarget{namespacerobohatlib_1_1_robohat_config_ab350cd9daa1341d7beffd05cf99f19fc}\label{namespacerobohatlib_1_1_robohat_config_ab350cd9daa1341d7beffd05cf99f19fc} 
+\index{robohatlib.RobohatConfig@{robohatlib.RobohatConfig}!TOPBOARD\_ADC\_I2C\_DEF@{TOPBOARD\_ADC\_I2C\_DEF}}
+\index{TOPBOARD\_ADC\_I2C\_DEF@{TOPBOARD\_ADC\_I2C\_DEF}!robohatlib.RobohatConfig@{robohatlib.RobohatConfig}}
+\doxysubsubsection{\texorpdfstring{TOPBOARD\_ADC\_I2C\_DEF}{TOPBOARD\_ADC\_I2C\_DEF}}
+{\footnotesize\ttfamily robohatlib.\+Robohat\+Config.\+TOPBOARD\+\_\+\+ADC\+\_\+\+I2\+C\+\_\+\+DEF = I2\+CDevice\+Def(\"{}topboard\+\_\+adc\"{}, 5, 0x34)}
+
+
+
+Definition at line \mbox{\hyperlink{_robohat_config_8py_source_l00109}{109}} of file \mbox{\hyperlink{_robohat_config_8py_source}{Robohat\+Config.\+py}}.
+
+\Hypertarget{namespacerobohatlib_1_1_robohat_config_ab27ffc9cfc74b59d1e1ebb818de7b99b}\label{namespacerobohatlib_1_1_robohat_config_ab27ffc9cfc74b59d1e1ebb818de7b99b} 
+\index{robohatlib.RobohatConfig@{robohatlib.RobohatConfig}!TOPBOARD\_INTERRUPT\_GPI@{TOPBOARD\_INTERRUPT\_GPI}}
+\index{TOPBOARD\_INTERRUPT\_GPI@{TOPBOARD\_INTERRUPT\_GPI}!robohatlib.RobohatConfig@{robohatlib.RobohatConfig}}
+\doxysubsubsection{\texorpdfstring{TOPBOARD\_INTERRUPT\_GPI}{TOPBOARD\_INTERRUPT\_GPI}}
+{\footnotesize\ttfamily int robohatlib.\+Robohat\+Config.\+TOPBOARD\+\_\+\+INTERRUPT\+\_\+\+GPI = 24}
+
+
+
+Definition at line \mbox{\hyperlink{_robohat_config_8py_source_l00123}{123}} of file \mbox{\hyperlink{_robohat_config_8py_source}{Robohat\+Config.\+py}}.
+
+\Hypertarget{namespacerobohatlib_1_1_robohat_config_a014e43d19c1a50db792dad448beebb5e}\label{namespacerobohatlib_1_1_robohat_config_a014e43d19c1a50db792dad448beebb5e} 
+\index{robohatlib.RobohatConfig@{robohatlib.RobohatConfig}!TOPBOARD\_IO\_EXPANDER\_DEF@{TOPBOARD\_IO\_EXPANDER\_DEF}}
+\index{TOPBOARD\_IO\_EXPANDER\_DEF@{TOPBOARD\_IO\_EXPANDER\_DEF}!robohatlib.RobohatConfig@{robohatlib.RobohatConfig}}
+\doxysubsubsection{\texorpdfstring{TOPBOARD\_IO\_EXPANDER\_DEF}{TOPBOARD\_IO\_EXPANDER\_DEF}}
+{\footnotesize\ttfamily robohatlib.\+Robohat\+Config.\+TOPBOARD\+\_\+\+IO\+\_\+\+EXPANDER\+\_\+\+DEF}
+
+{\bfseries Initial value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ =\ \ IOExpanderDef(\textcolor{stringliteral}{"{}topboard\_io\_expander"{}},}
+\DoxyCodeLine{00002\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ TOPBOARD\_IO\_EXPANDER\_I2C\_DEF,}
+\DoxyCodeLine{00003\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ TOPBOARD\_INTERRUPT\_GPI,}
+\DoxyCodeLine{00004\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ TOPBOARD\_IO\_EXPANDER\_INTERRUPT\_SETTINGS)}
+
+\end{DoxyCode}
+
+
+Definition at line \mbox{\hyperlink{_robohat_config_8py_source_l00124}{124}} of file \mbox{\hyperlink{_robohat_config_8py_source}{Robohat\+Config.\+py}}.
+
+\Hypertarget{namespacerobohatlib_1_1_robohat_config_a346d0e6378a8217521bca32917f722aa}\label{namespacerobohatlib_1_1_robohat_config_a346d0e6378a8217521bca32917f722aa} 
+\index{robohatlib.RobohatConfig@{robohatlib.RobohatConfig}!TOPBOARD\_IO\_EXPANDER\_I2C\_DEF@{TOPBOARD\_IO\_EXPANDER\_I2C\_DEF}}
+\index{TOPBOARD\_IO\_EXPANDER\_I2C\_DEF@{TOPBOARD\_IO\_EXPANDER\_I2C\_DEF}!robohatlib.RobohatConfig@{robohatlib.RobohatConfig}}
+\doxysubsubsection{\texorpdfstring{TOPBOARD\_IO\_EXPANDER\_I2C\_DEF}{TOPBOARD\_IO\_EXPANDER\_I2C\_DEF}}
+{\footnotesize\ttfamily robohatlib.\+Robohat\+Config.\+TOPBOARD\+\_\+\+IO\+\_\+\+EXPANDER\+\_\+\+I2\+C\+\_\+\+DEF = I2\+CDevice\+Def(\"{}topboard\+\_\+io\+\_\+expander\"{}, 1, 0x20)}
+
+
+
+Definition at line \mbox{\hyperlink{_robohat_config_8py_source_l00110}{110}} of file \mbox{\hyperlink{_robohat_config_8py_source}{Robohat\+Config.\+py}}.
+
+\Hypertarget{namespacerobohatlib_1_1_robohat_config_af58e0fbc3636cf08f3b76bf868194ecc}\label{namespacerobohatlib_1_1_robohat_config_af58e0fbc3636cf08f3b76bf868194ecc} 
+\index{robohatlib.RobohatConfig@{robohatlib.RobohatConfig}!TOPBOARD\_IO\_EXPANDER\_INTERRUPT\_SETTINGS@{TOPBOARD\_IO\_EXPANDER\_INTERRUPT\_SETTINGS}}
+\index{TOPBOARD\_IO\_EXPANDER\_INTERRUPT\_SETTINGS@{TOPBOARD\_IO\_EXPANDER\_INTERRUPT\_SETTINGS}!robohatlib.RobohatConfig@{robohatlib.RobohatConfig}}
+\doxysubsubsection{\texorpdfstring{TOPBOARD\_IO\_EXPANDER\_INTERRUPT\_SETTINGS}{TOPBOARD\_IO\_EXPANDER\_INTERRUPT\_SETTINGS}}
+{\footnotesize\ttfamily list robohatlib.\+Robohat\+Config.\+TOPBOARD\+\_\+\+IO\+\_\+\+EXPANDER\+\_\+\+INTERRUPT\+\_\+\+SETTINGS}
+
+{\bfseries Initial value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ =\ \ [}
+\DoxyCodeLine{00002\ \ \ \ \ McpInitStruct(0,\ GpioDirection.GPIO\_INPUT,\ InterruptTypes.INT\_RISING),}
+\DoxyCodeLine{00003\ \ \ \ \ McpInitStruct(1,\ GpioDirection.GPIO\_INPUT,\ InterruptTypes.INT\_RISING),}
+\DoxyCodeLine{00004\ \ \ \ \ McpInitStruct(2,\ GpioDirection.GPIO\_INPUT,\ InterruptTypes.INT\_RISING),}
+\DoxyCodeLine{00005\ \ \ \ \ McpInitStruct(3,\ GpioDirection.GPIO\_INPUT,\ InterruptTypes.INT\_RISING),}
+\DoxyCodeLine{00006\ \ \ \ \ McpInitStruct(4,\ GpioDirection.GPIO\_INPUT,\ InterruptTypes.INT\_RISING),}
+\DoxyCodeLine{00007\ \ \ \ \ McpInitStruct(5,\ GpioDirection.GPIO\_INPUT,\ InterruptTypes.INT\_RISING),}
+\DoxyCodeLine{00008\ \ \ \ \ McpInitStruct(6,\ GpioDirection.GPIO\_INPUT,\ InterruptTypes.INT\_RISING),}
+\DoxyCodeLine{00009\ \ \ \ \ McpInitStruct(7,\ GpioDirection.GPIO\_INPUT,\ InterruptTypes.INT\_RISING),}
+\DoxyCodeLine{00010\ \ \ \ \ ]}
+
+\end{DoxyCode}
+
+
+Definition at line \mbox{\hyperlink{_robohat_config_8py_source_l00112}{112}} of file \mbox{\hyperlink{_robohat_config_8py_source}{Robohat\+Config.\+py}}.
+

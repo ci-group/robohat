@@ -1,23 +1,23 @@
 \chapter{Hardware description}
 \hypertarget{hardware}{}\label{hardware}\index{Hardware description@{Hardware description}}
-For the software description of the \doxylink{namespace_robohat}{Robohat}, see \doxysectlink{software}{Software description}{0} ~\newline
+For the software description of the Robohat, see \doxysectlink{software}{Software description}{0} ~\newline
 
 
 \DoxyHorRuler{0}
  \DoxyHorRuler{0}
 
 
-\doxysection*{\doxylink{namespace_robohat}{Robohat} hardware description}
+\doxysection*{Robohat hardware description}
 
 
 
-The \doxylink{namespace_robohat}{Robohat} is Robot which has a modular design. The basis of the design is the brain. The brain consist of PCBs and batteries.~\newline
+The Robohat is Robot which has a modular design. The basis of the design is the brain. The brain consist of PCBs and batteries.~\newline
  Attached to the brain are limbs, which are coupled with joints. These joins are driven by servos. By driving those joint, the Robot should be able to walk.
 
 \DoxyHorRuler{0}
  \doxysubsection*{Raspberry PI 4}
 
-For the processing power, the \doxylink{namespace_robohat}{Robohat} uses a Raspberry PI 4~\newline
+For the processing power, the Robohat uses a Raspberry PI 4~\newline
 
 
 
@@ -148,19 +148,19 @@ Other servos can be used. But be sure to use the correct parameters while initia
 
 
 
-The maximum amount of servos the user can connect to the \doxylink{namespace_robohat}{Robohat} hardware is 32 (but can be limited if the servos consumes much power).~\newline
- These servos will be driven by the Servo-\/assemblies. For how to connect a servo to the \doxylink{namespace_robohat}{Robohat}, see \textquotesingle{}Servo-\/assembly\textquotesingle{}
+The maximum amount of servos the user can connect to the Robohat hardware is 32 (but can be limited if the servos consumes much power).~\newline
+ These servos will be driven by the Servo-\/assemblies. For how to connect a servo to the Robohat, see \textquotesingle{}Servo-\/assembly\textquotesingle{}
 
 \DoxyHorRuler{0}
 
 
 \doxysubsection*{Servo-\/assembly}
 
-A Servo assembly is the connection between the servos and the rest of the \doxylink{namespace_robohat}{Robohat}.
+A Servo assembly is the connection between the servos and the rest of the Robohat.
 
 
 
-The \doxylink{namespace_robohat}{Robohat} can hold 2 Servo assemblies.
+The Robohat can hold 2 Servo assemblies.
 
 A Servo-\/assembly consists of 2 boards (the PWM-\/board and the ADC-\/board) sandwiched together. A Servo-\/assembly, powers, drives and reads-\/out the attached servos.~\newline
  Besides handling all the servo stuff, it has an I/\+O-\/expander which the user can use.~\newline
@@ -248,7 +248,7 @@ The powerboard is the power distributor and the supervisor of the battery.~\newl
 
 The battery can deliver a huge amount of power (so be careful, read the \doxysectlink{precautions}{Precautions}{0}). To keep it save and prevent wrong usage of the battery, each battery has its own powerboard.
 
-If needed, he \doxylink{namespace_robohat}{Robohat} has room for 2 batteries. But 1 battery should be enough.~\newline
+If needed, he Robohat has room for 2 batteries. But 1 battery should be enough.~\newline
  When using 2 batteries, 2 Powerboard are needed.
 
 {\bfseries{Connections of the front-\/side of the Powerboard}}~\newline
@@ -258,7 +258,7 @@ The Powerboard has no connections available for the user
 
 
 
-At the top-\/side there a multiple connectors, which handles the power delivery for the \doxylink{namespace_robohat}{Robohat}.
+At the top-\/side there a multiple connectors, which handles the power delivery for the Robohat.
 
 . Battery. At this connector the battery has to be connected.~\newline
  . Topboard. This connection will power the Topboard.~\newline
@@ -269,7 +269,7 @@ There are also 2 LEDS present. A red one, for the status, and a green one to see
 
 {\bfseries{Connections of the backside-\/side of the Powerboard}}
 
-At the back-\/side are the connectors for turning he \doxylink{namespace_robohat}{Robohat} on and off.
+At the back-\/side are the connectors for turning he Robohat on and off.
 
 
 
@@ -287,26 +287,26 @@ Always be sure, you connect a battery with enough capacity.~\newline
  When the battery is completely dead, nothing will happen.~\newline
 
 
-{\bfseries{Turning on the \doxylink{namespace_robohat}{Robohat}}}
+{\bfseries{Turning on the Robohat}}
 
 User Power on~\newline
- The \doxylink{namespace_robohat}{Robohat} can only be turned on when the accu has enough capacity. To power on, the user has to press the switch of the switch-\/board.~\newline
+ The Robohat can only be turned on when the accu has enough capacity. To power on, the user has to press the switch of the switch-\/board.~\newline
  When the switch is pressed the red status-\/\+LED will blink 3 times. When the blinking period ends, the red status-\/\+LED will flash multiple times. The user should release the power switch before the flashes stops.~\newline
- Nothing will happen, when the user releases the button before flashing starts or after flashing is finished. This window of releasing the button is done, to prevent accidentally turning on the \doxylink{namespace_robohat}{Robohat}. When the power is on, the green power-\/\+LED will be illuminated.
+ Nothing will happen, when the user releases the button before flashing starts or after flashing is finished. This window of releasing the button is done, to prevent accidentally turning on the Robohat. When the power is on, the green power-\/\+LED will be illuminated.
 
 User Powering off~\newline
- Powering down should be done with the shutdown API-\/function of the \doxylink{namespace_robohat}{Robohat} library.~\newline
- The user can also shut down the OS (by \textquotesingle{}sudo shutdown now\textquotesingle{} in the console), and turn off the power by pressing switch the same way as turning the \doxylink{namespace_robohat}{Robohat} on. (When the switch is pressed the red status-\/\+LED will blink 3 times. When the blinking period ends, the red status-\/\+LED will flash multiple times. The user should release the power switch before the flashes stops).
+ Powering down should be done with the shutdown API-\/function of the Robohat library.~\newline
+ The user can also shut down the OS (by \textquotesingle{}sudo shutdown now\textquotesingle{} in the console), and turn off the power by pressing switch the same way as turning the Robohat on. (When the switch is pressed the red status-\/\+LED will blink 3 times. When the blinking period ends, the red status-\/\+LED will flash multiple times. The user should release the power switch before the flashes stops).
 
 {\bfseries{Note}}. Powering down, before shutting down the OS. can result in data loss, or corruption of the SD-\/card.
 
 Battery low capacity shutdown~\newline
  The Powerboard will automatically shut down the power, when the battery capacity goes below a threshold (2\%). Before shutting down the power, the red status LED will flash for 1 minute. The user can not interrupt this powering-\/down mode. Although shutting down the power, before shutting down the os, could result in data loss, this hardware feature is implemented to save the battery. The battery can be damaged if used below a capacity of 1\%
 
-When using the \doxylink{namespace_robohat}{Robohat} lib, the user will get a first warning when the battery capacity goes below 20 \%. A second warning will be presented when the capacity of the battery goes down below 10\%. When the \doxylink{namespace_robohat}{Robohat} lib detects a capacity below 5\%, an auto shutdown will be performed to save the accu. This will be a graceful shutdown. The OS will be shut downed before the power is shut downed.
+When using the Robohat lib, the user will get a first warning when the battery capacity goes below 20 \%. A second warning will be presented when the capacity of the battery goes down below 10\%. When the Robohat lib detects a capacity below 5\%, an auto shutdown will be performed to save the accu. This will be a graceful shutdown. The OS will be shut downed before the power is shut downed.
 
-While the accu is in standby, the LED will periodically flash (interval of 6 seconds) to see the battery is still attached to the \doxylink{namespace_robohat}{Robohat}.~\newline
- Its better to unplug the battery and store it in a safe place, when the \doxylink{namespace_robohat}{Robohat} os not used.
+While the accu is in standby, the LED will periodically flash (interval of 6 seconds) to see the battery is still attached to the Robohat.~\newline
+ Its better to unplug the battery and store it in a safe place, when the Robohat os not used.
 
 Fuse~\newline
  The Powerboard has a fuse. When this fuse is blown, make sure you know the cause, before replacing it. This fuse is rate at 20A, so an accidentally blown of the fuse won\textquotesingle{}t happen. Fuse rating\+: 20A
@@ -316,8 +316,8 @@ Fuse~\newline
 
 
 
-The \doxylink{namespace_robohat}{Robohat} has also a \textquotesingle{}Inertial Measurement Unit\textquotesingle{} (IMU for short). With the IMU, the \doxylink{namespace_robohat}{Robohat} can track its movements.~\newline
- It can determine its position by reading out the X,Y and Z magnetic fields direction. Also, it can measure the acceleration in the X, Y en Z direction. It has also a build in Gyroscope, so the \doxylink{namespace_robohat}{Robohat} can know when it turns.~\newline
+The Robohat has also a \textquotesingle{}Inertial Measurement Unit\textquotesingle{} (IMU for short). With the IMU, the Robohat can track its movements.~\newline
+ It can determine its position by reading out the X,Y and Z magnetic fields direction. Also, it can measure the acceleration in the X, Y en Z direction. It has also a build in Gyroscope, so the Robohat can know when it turns.~\newline
  The IMU is connected to the PI through the Topboard. The IMU is auto-\/detected, so no addresses has to be set.
 
 \DoxyHorRuler{0}
@@ -327,7 +327,7 @@ The \doxylink{namespace_robohat}{Robohat} has also a \textquotesingle{}Inertial 
 
 \doxysubsection*{Connection scheme}
 
-Below is a picture how the \doxylink{namespace_robohat}{Robohat} PCBs are connected together. The Second assembly is not mandatory. There is no need for the second accu, and the second PWM management board, if the second assembly board is not connected.
+Below is a picture how the Robohat PCBs are connected together. The Second assembly is not mandatory. There is no need for the second accu, and the second PWM management board, if the second assembly board is not connected.
 
 
 

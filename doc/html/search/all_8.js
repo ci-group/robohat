@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['led_5fblue_5fgpo_5fdef_0',['LED_BLUE_GPO_DEF',['../dd/d25/namespace_robohat_config.html#a386766d5c3d3b0b3954551afc389a947',1,'RobohatConfig']]],
-  ['led_5fgreen_5fgpo_5fdef_1',['LED_GREEN_GPO_DEF',['../dd/d25/namespace_robohat_config.html#a4af6439c318a00bd50e675b98aacc879',1,'RobohatConfig']]],
-  ['led_5fred_5fgpo_5fdef_2',['LED_RED_GPO_DEF',['../dd/d25/namespace_robohat_config.html#a4cf4160720bff43a8a36b1ad1fe70d5a',1,'RobohatConfig']]]
+  ['led_5fblue_5fgpo_5fdef_0',['LED_BLUE_GPO_DEF',['../db/d3d/namespacerobohatlib_1_1_robohat_config.html#a2ce760205092f2f4fa8484f63afd4a8f',1,'robohatlib::RobohatConfig']]],
+  ['led_5fgreen_5fgpo_5fdef_1',['LED_GREEN_GPO_DEF',['../db/d3d/namespacerobohatlib_1_1_robohat_config.html#af207992aa7827dab957be3a4209fa0e4',1,'robohatlib::RobohatConfig']]],
+  ['led_5fred_5fgpo_5fdef_2',['LED_RED_GPO_DEF',['../db/d3d/namespacerobohatlib_1_1_robohat_config.html#ae90f6bb3982508a026244a68971cbeec',1,'robohatlib::RobohatConfig']]]
 ];

@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['wakeup_5fservo_0',['wakeup_servo',['../d3/d60/class_robohat_1_1_robohat.html#afc25fb6e247cd612021d47779b45d0b4',1,'Robohat::Robohat']]]
+  ['update_5fservo_5fdata_5fdirect_0',['update_servo_data_direct',['../d9/df9/classrobohatlib_1_1_robohat_1_1_robohat.html#af3229522f16681b57ca0cea14a8a6fb6',1,'robohatlib::Robohat::Robohat']]]
 ];
