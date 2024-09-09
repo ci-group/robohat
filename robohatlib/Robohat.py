@@ -28,6 +28,8 @@ try:
     from robohatlib.hal.LedMulticolor import LedMulticolor
     from robohatlib.hal.IMU import IMU
     from robohatlib.hal.IOExpander import IOExpander
+    from robohatlib.hal.Camera import Camera
+
 
     from robohatlib.hal.datastructure.ExpanderDirection import ExpanderDir
     from robohatlib.hal.datastructure.ExpanderStatus import ExpanderStatus
@@ -88,12 +90,15 @@ class Robohat:
         rpi_model:str = self.__detect_model()
         version_of_gpio: str = IOHandler.get_version_of_GPIO()
         print(rpi_model + ", with GPIO lib version: "+ version_of_gpio + "\n")
-        if self.__check_if_libs_are_compatible_with_rpi_model(rpi_model, version_of_gpio) is False:
-            print("Unrecoverable error.\nOs image in conjunction with RPi model, is not compatible with Robohatlib. Use other RPi model\nor update GPIO lib by issuing the following commands:\n\n"
-                  "sudo apt remove python3-rpi.gpio\n"
-                  "sudo apt install python3-rpi-lgpio \n")
-            print("\n")
-            exit()
+
+        # was disabled because RPI4 gave also an error
+
+        # if self.__check_if_libs_are_compatible_with_rpi_model(rpi_model, version_of_gpio) is False:
+        #     print("Unrecoverable error.\nOs image in conjunction with RPi model, is not compatible with Robohatlib. Use other RPi model\nor update GPIO lib by issuing the following commands:\n\n"
+        #           "sudo apt remove python3-rpi.gpio\n"
+        #           "sudo apt install python3-rpi-lgpio \n")
+        #     print("\n")
+        #     exit()
 
         if _servo_assembly_1_config is not None and _servo_assembly_2_config is not None:
             if _switch_top_board is _servo_assembly_1_config.get_sw2_power_good_address() or \
@@ -118,6 +123,8 @@ class Robohat:
         self.__buzzer = Buzzer(self.__io_handler, RobohatConfig.BUZZER_DEF)
         self.__led = LedMulticolor(self.__io_handler, RobohatConfig.STATUS_LED_DEF)
         self.__imu = IMU(self.__io_handler, RobohatConfig.IMU_DEF)
+
+        self.__camera = Camera()
 
         #-------------------------------------Expander
         topboard_io_expander_def = RobohatConfig.TOPBOARD_IO_EXPANDER_DEF
@@ -201,6 +208,7 @@ class Robohat:
         self.__buzzer.init_buzzer()
         self.__led.init_led()
         self.__imu.init_imu()
+        self.__camera.init_camera()
 
         self.__topboard_io_expander.init_io_expander()
         self.__topboard_adc.init_topboard_adc()
@@ -1274,6 +1282,22 @@ class Robohat:
     # ------------------------------------------------------------------------------------
     # ------------------------------------------------------------------------------------
 
+    def get_camera(self) -> Camera:
+        """!
+        Returns the camera instance
+        """
+        return self.__camera
+
+    def test_camera(self) -> None:
+        if self.__camera is None:
+            print("Unable to test camera, camera not available")
+        else:
+            self.__camera.test_camera()
+
+    # ------------------------------------------------------------------------------------
+    # ------------------------------------------------------------------------------------
+    # ------------------------------------------------------------------------------------
+
     def set_assemblyboard_1_io_expander_int_callback(self, _callback) -> None:
         """!
         Set a (new) function which will be executed when the io-expander of the assembly board 1 is triggerd
@@ -1355,6 +1379,8 @@ class Robohat:
     
     Return false when lib is not compatible with model 5
     @return: bool
+    
+    Dit not work!!!
     """
 
     def __check_if_libs_are_compatible_with_rpi_model(self, rpi_model:str, gpio_version:str) -> bool:
