@@ -13,7 +13,7 @@ ROBOHAT_BUILD_DATE_STR = "9-sep-2024"                # build date of library YYM
 
 
 """
-0.6.0 added the camera api
+0.6.0 added the camera API
 0.5.0 check for RPi board and lib versions
 0.4.4 DEFAULT_DELAY_BETWEEN_ACTION mismatch between DEFAULT_SERVO_UPDATE_VALUE
 
