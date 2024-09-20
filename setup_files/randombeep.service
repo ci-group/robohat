@@ -1,0 +1,13 @@
+[Unit]
+Description=Random beep at startup
+After=multi-user.target
+
+[Service]
+Type=idle
+User=pi
+ExecStart=/usr/bin/python3 /home/robo/buzz_random.py
+Restart=always
+
+[Install]
+WantedBy=multi-user.target
+
