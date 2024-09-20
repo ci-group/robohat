@@ -148,7 +148,7 @@ class RoboUtil:
         @return: str
         """
         index_alpha = RoboUtil.find_alpha(version)
-        if index_alpha is not 0:
+        if index_alpha != 0:
             return version[0:index_alpha]
         else:
             return version
