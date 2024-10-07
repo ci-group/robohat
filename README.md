@@ -2,7 +2,7 @@
 
 This a library written in Python to access the robohat hardware
 
-version v0.6.1
+version v0.6.2
 
 Install latest Pi OS (https://www.raspberrypi.com/software/) (at this moment bookwork, based on Debian 12)
 
