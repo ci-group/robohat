@@ -12,6 +12,7 @@ try:
 except ImportError:
     raise ImportError("Failed to import needed dependencies for the Camera class, make sure picamera2 is installed")
 
+from numpy.typing import NDArray
     # --------------------------------------------------------------------------------------
 
 class Camera:
@@ -52,7 +53,7 @@ class Camera:
 
     # --------------------------------------------------------------------------------------
 
-    def get_capture_array(self):
+    def get_capture_array(self) -> NDArray[np.uint8]:
         """!
         return numpy arrays of captured data. Makes a copt before leaving
         @return: None or array
