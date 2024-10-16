@@ -41,7 +41,7 @@ class Camera:
             picam2.close()
 
             self.__cam_is_not_available = True                  # cam is available
-        except Exception as e:
+        except (RuntimeError, IndexError) as e:
             print("Error when trying to initialize camera:", e)
             print("No attached camera found")
 
