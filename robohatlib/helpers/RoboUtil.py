@@ -38,8 +38,8 @@ class RoboUtil:
 
         if _wanted_bit_value == 0:
             return _data_byte & ~(1 << _bit_nr)
-        elif _wanted_bit_value == 1:
-            return _data_byte | (1 << _bit_nr)
+        #elif _wanted_bit_value == 1: # removed 4-10-'24
+        return _data_byte | (1 << _bit_nr)
 
     # --------------------------------------------------------------------------------------
     # --------------------------------------------------------------------------------------
