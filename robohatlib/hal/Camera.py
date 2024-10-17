@@ -44,7 +44,7 @@ class Camera:
         except RuntimeError:
             print("No attached camera found")
             print("Is user member of the vide group? ( usermod -a -G video [username] )")
-            
+
         except IndexError:
             print("No attached camera found")
             print("Is user member of the vide group? ( usermod -a -G video [username] )")
@@ -74,7 +74,7 @@ class Camera:
         picam2.start()
         tm.sleep(1)
 
-        array =  picam2.capture_array();
+        array =  picam2.capture_array()
         if array is None:
             print("Error, camera array is none")
             picam2.close()
