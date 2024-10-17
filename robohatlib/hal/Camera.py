@@ -43,7 +43,11 @@ class Camera:
             self.__cam_is_not_available = True                  # cam is available
         except RuntimeError:
             print("No attached camera found")
-
+            print("Is user member of the vide group? ( usermod -a -G video [username] )")
+            
+        except IndexError:
+            print("No attached camera found")
+            print("Is user member of the vide group? ( usermod -a -G video [username] )")
     # --------------------------------------------------------------------------------------
     def init_camera(self) -> None:
         """!
