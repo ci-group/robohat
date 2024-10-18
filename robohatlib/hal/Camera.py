@@ -41,18 +41,11 @@ class Camera:
             picam2.close()
 
             self.__cam_is_not_available = True                  # cam is available
-<<<<<<< HEAD
         except (RuntimeError, IndexError) as e:
             print("Error when trying to initialize camera:", e)
             print("No attached camera found")
             print("Is user member of the vide group? ( usermod -a -G video [username] )")
-=======
->>>>>>> 5d96b25 (Exception updated as request)
 
-        except (RuntimeError, IndexError) as e:                 # cam is not available
-            print("Error when trying to initialize camera:", e)
-            print("No attached camera found")
-            print("Is user member of the video group? ( usermod -a -G video [username] )")
     # --------------------------------------------------------------------------------------
     def init_camera(self) -> None:
         """!
