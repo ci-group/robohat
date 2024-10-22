@@ -4,7 +4,7 @@ build-backend = "poetry.core.masonry.api"
 
 [tool.poetry]
 name = "revolve2-robohat"
-version = "v0.6.2"
+version = "v0.6.3"
 description = "Robohatlib"
 readme = "README.md"
 authors = [
