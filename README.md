@@ -47,6 +47,7 @@ Make the files robo and servo executable
 	sudo chmod +x /home/robo/bin/servo
 	
 Copy SerTest.py into /home/robo/robohat	
+
 Copy Test.py into /home/robo/robohat	
 	
 by entering the command
