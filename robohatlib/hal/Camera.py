@@ -3,6 +3,8 @@ from __future__ import annotations
 try:
     import subprocess
     import time as tm
+    import numpy.typing
+
 except ImportError:
     raise ImportError("Failed to import subprocess or time for the Camera class, make sure picamera2 is installed")
 
