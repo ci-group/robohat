@@ -61,3 +61,7 @@ dtoverlay=i2c5,pins_12_13
 
 # Enables /dev/i2c-6. Used for the external I2C interface.
 dtoverlay=i2c6,pins_22_23
+
+dtoverlay=disable-bt
+enable_uart=1
+#uart_2ndstage=1

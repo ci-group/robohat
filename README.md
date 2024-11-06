@@ -26,16 +26,28 @@ This is to enable the I2C ports which are needed.
 replace the /boot/firmware/config.txt with the the config.txt on this repo in setup_files folder, to enable the I2C ports and the SPI ports
 
 create dir at user robo
+
 	mkdir /home/robo/bin
 	mkdir /home/robo/robohat
 	
 move files robo, servo, buzz_random into /home/robo/bin from thisn bin folder in this repo
 
 add to /home/robo/.bashrc
+
 	export PATH="/home/robo/bin:$PATH"
 	
 	
-copy the dir robohatlib of this repo into the /home/robo/	
+copy the dir robohatlib of this repo into the /home/robo/robohat	
+
+copy the dir testlib of this repo into /home/robo/robohat	
+	
+Make the files robo and servo executable
+
+	sudo chmod +x /home/robo/bin/robo
+	sudo chmod +x /home/robo/bin/servo
+	
+Copy SerTest.py into /home/robo/robohat	
+Copy Test.py into /home/robo/robohat	
 	
 by entering the command
 servo or robo you can test the robo
