@@ -18,7 +18,7 @@ from numpy.typing import NDArray
     # --------------------------------------------------------------------------------------
 
 class Camera:
-    def __init__(self):
+    def __init__(self, cam_res: tuple[int, int] = (160, 120)):
         """!
         Constructor of the Camera class
         """
@@ -30,17 +30,17 @@ class Camera:
             return
 
         try:
-            picam2 = Picamera2()
-            picam2.set_logging(Picamera2.ERROR)
-            camera_config = picam2.create_preview_configuration()
+            self.picam2 = Picamera2()
+            self.picam2.set_logging(Picamera2.ERROR)
 
+            camera_config = self.picam2.create_video_configuration(main={"size": (cam_res[0], cam_res[1])})
             self.__conf: CameraConfiguration = camera_config
 
-            picam2.configure(self.__conf)
-            picam2.start_preview(Preview.NULL)
-            picam2.start()
+            self.picam2.configure(self.__conf)
+            self.picam2.start_preview(Preview.NULL)
+            self.picam2.start()
             tm.sleep(1)
-            picam2.close()
+            # self.picam2.close()
 
             self.__cam_is_not_available = True                  # cam is available
         except (RuntimeError, IndexError) as e:
@@ -64,24 +64,16 @@ class Camera:
         """
 
         if self.is_cam_available() is False:
-            print("No attached camera found")
+            #print("No attached camera found")
             return None
 
-        picam2 = Picamera2()
-        picam2.set_logging(Picamera2.ERROR)
-        picam2.configure(self.__conf)
-        picam2.start_preview(Preview.NULL)
-        picam2.start()
-        tm.sleep(1)
-
-        array =  picam2.capture_array()
+        array =  self.picam2.capture_array()
         if array is None:
             print("Error, camera array is none")
-            picam2.close()
+            self.picam2.close()
             return None
         else:
             new_array = array.copy()
-            picam2.close()
             return new_array
 
     # --------------------------------------------------------------------------------------
