@@ -49,7 +49,7 @@ Accu settings
 """
 ACCU_INTERVAL_TIME_IN_SECONDS = 1                   # time between accu monitoring
 
-ACCU_VOLTAGE_TO_LOW_THRESHOLD = 11.06               # threshold. below this value, the accu voltage is too low
+ACCU_VOLTAGE_TO_LOW_THRESHOLD = 11.24               # threshold. below this value, the accu voltage is too low Was 11.06.. changed as of 25-3
 ACCU_VOLTAGE_TO_HIGH_THRESHOLD = 13.00              # threshold, above this value, the accu voltage is too high
 ACCU_WARNING_PERCENTAGE_2 = 20                      # threshold, warning to user at this point
 ACCU_WARNING_PERCENTAGE_1 = 15                      # threshold, warning to user at this point
