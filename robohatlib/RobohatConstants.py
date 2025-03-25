@@ -8,11 +8,12 @@ This file consists of the Constants for the Robohat lib
 do not alter
 """
 
-ROBOHAT_LIB_VERSION_STR = "0.6.3"                    # version nr of library
-ROBOHAT_BUILD_DATE_STR = "29-sep-2024"                # build date of library YYMMDD
+ROBOHAT_LIB_VERSION_STR = "0.6.4"                    # version nr of library
+ROBOHAT_BUILD_DATE_STR = "25-mrt-2025"                # build date of library YYMMDD
 
 
 """
+0.6.4 changed ACCU_VOLTAGE_TO_LOW_THRESHOLD to 11.24 
 0.6.0 added the camera API
 0.5.0 check for RPi board and lib versions
 0.4.4 DEFAULT_DELAY_BETWEEN_ACTION mismatch between DEFAULT_SERVO_UPDATE_VALUE
