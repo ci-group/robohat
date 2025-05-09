@@ -1,6 +1,8 @@
 # 2022-2823-01.RaspberryRoboHat_2
 
-This a library written in Python to access the robohat hardware
+This a library written in Python to access the robohat hardware.
+
+The more detailed hardware documentation for the RoboHat can be found at: https://ci-group.github.io/robohat/doc/html/index.html
 
 version v0.6.3
 
